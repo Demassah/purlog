@@ -4,17 +4,17 @@
 	
 		newData = function (){
 			$('#dialog').dialog({
-				title: 'Tambah Pengguna',
-				width: 350,
-				height: 275,
+				title: 'Tambah Sub Kategori',
+				width: 380,
+				height: 150,
 				closed: true,
 				cache: false,
-				href: base_url+'pengguna/add',
+				href: base_url+'sub_kategori/add',
 				modal: true
 			});
 			 
 			$('#dialog').dialog('open');
-			url = base_url+'pengguna/save/add';
+			url = base_url+'sub_kategori/save/add';
 		}
 		// end newData
 		
@@ -22,17 +22,17 @@
 			// var row = $('#dg').datagrid('getSelected');
 			// if (row){
 				$('#dialog').dialog({
-					title: 'Edit Pengguna',
-					width: 350,
-					height: 275,
+					title: 'Edit Sub Kategori',
+					width: 380,
+					height: 150,
 					closed: true,
 					cache: false,
-					href: base_url+'pengguna/edit/'+val,
+					href: base_url+'sub_kategori/edit/'+val,
 					modal: true
 				});
 				
 				$('#dialog').dialog('open');  
-				url = base_url+'pengguna/save/edit';
+				url = base_url+'sub_kategori/save/edit';
 			// }
 		}
 		//end editData
@@ -43,7 +43,7 @@
 				if(confirm("Apakah yakin akan menghapus data '" + val + "'?")){
 					var response = '';
 					$.ajax({ type: "GET",
-						 url: base_url+'pengguna/delete/' + val,
+						 url: base_url+'sub_kategori/delete/' + val,
 						 async: false,
 						 success : function(response){
 							var response = eval('('+response+')');
@@ -94,25 +94,17 @@
 		actionbutton = function(value, row, index){
 			var col;
 			//if (row.kd_fakultas != null) {
-				col = '<a href="#" onclick="editData(\''+row. 	user_id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Edit</a>';
-				col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="deleteData(\''+row. 	user_id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
+				col = '<a href="#" onclick="editData(\''+row. 	id_sub_kategori+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Edit</a>';
+				col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="deleteData(\''+row. 	id_sub_kategori+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
 			//}
 			return col;
 		}
 		
 		$(function(){
 			$('#dg').datagrid({
-				url:"<?=base_url()?>pengguna/grid"
+				url:"<?=base_url()?>sub_kategori/grid"
 			});
 		});
-		
-		// filter
-		filter = function(){
-			$('#dg').datagrid('load',{
-				kd_pt : $('#s_kd_pt').val(),
-			});
-			//$('#dg').datagrid('enableFilter');
-		}
 		
 		//# Tombol Bawah
 		$(function(){
@@ -132,7 +124,7 @@
 		
 	});
 </script>
-<table id="dg" title="Kelola Pengguna" data-options="
+<table id="dg" title="Kelola Data Sub Kategori" data-options="
 			rownumbers:true,
 			singleSelect:true,
 			autoRowHeight:false,
@@ -142,11 +134,9 @@
 			">
 	<thead>
 		<tr>
-			<th field="user_id" sortable="true" width="150" hidden="true">ID</th>
-			<th field="user_name" sortable="true" width="150">Username</th>
-			<th field="full_name" sortable="true" width="150">Nama Lengkap</th>
-			<th field="departement_name" sortable="true" width="150">Departemen</th>
-			<th field="level_name" sortable="true" width="150">Level</th>
+			<th field="id_kategori" sortable="true" width="150" hidden="true">ID</th>
+			<th field="nama_kategori" sortable="true" width="150">Kategori</th>
+			<th field="nama_sub_kategori" sortable="true" width="250">Sub Kategori</th>
 			<th field="action" align="center" formatter="actionbutton" width="100">Aksi</th>
 		</tr>
 	</thead>

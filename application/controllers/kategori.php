@@ -1,37 +1,37 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class departement extends CI_Controller {
+class kategori extends CI_Controller {
 	
 	function __construct(){
 		parent::__construct();
-		$this->load->model('mdl_departement');
+		$this->load->model('mdl_kategori');
 		//$this->output->enable_profiler(TRUE);
 	}
 	
 	function index(){
-		$this->load->view('administrator/departement');
+		$this->load->view('master/kategori');
 	}
 	
 	function grid(){
-		$data = $this->mdl_departement->getdata();
-		echo $this->mdl_departement->togrid($data['row_data'], $data['row_count']);
+		$data = $this->mdl_kategori->getdata();
+		echo $this->mdl_kategori->togrid($data['row_data'], $data['row_count']);
 	}
 	
 	function add(){
 		$data['kode'] = '';
-		$data['departement_id'] = '';
-		$data['departement_name'] = '';
+		$data['id_kategori'] = '';
+		$data['nama_kategori'] = '';
 		
-		$this->load->view('administrator/departement_form', $data);
+		$this->load->view('master/kategori_form', $data);
 	}
 	
 	function edit($kode){
-		$r = $this->mdl_departement->getdataedit($kode);
-    $data['departement_name'] = $r->row()->departement_name;
+		$r = $this->mdl_kategori->getdataedit($kode);
+    $data['nama_kategori'] = $r->row()->nama_kategori;
     
 		$data['kode'] = $kode;	
 
-		$this->load->view('administrator/departement_form', $data);
+		$this->load->view('master/kategori_form', $data);
 	}
 	
 	function save($aksi){
@@ -46,7 +46,7 @@ class departement extends CI_Controller {
 		}
 		
 		# rules validasi form
-		$this->form_validation->set_rules("departement_name", 'Nama Departement', 'trim|required|xss_clean');
+		$this->form_validation->set_rules("nama_kategori", 'Nama Kategori', 'trim|required|xss_clean');
 
 
 		# message rules
@@ -57,9 +57,9 @@ class departement extends CI_Controller {
 			$data["pesan_error"] .= trim(validation_errors(' ',' '))==''?'':validation_errors(' ',' ');
 		}else{
 			if($aksi=="add"){ // add
-				$result = $this->mdl_departement->InsertOnDb($data);
+				$result = $this->mdl_kategori->InsertOnDb($data);
 			}else { // edit
-				$result=$this->mdl_departement->UpdateOnDb($data);
+				$result=$this->mdl_kategori->UpdateOnDb($data);
 			}
 		}
 		
@@ -71,7 +71,7 @@ class departement extends CI_Controller {
 	}
 	
 	function delete($kode){
-		$result = $this->mdl_departement->DeleteOnDb($kode);
+		$result = $this->mdl_kategori->DeleteOnDb($kode);
 		if ($result){
 			echo json_encode(array('success'=>true));
 		} else {

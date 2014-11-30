@@ -95,3 +95,20 @@
 .icon-administrator{
 	background:url('icons/menu/adminitrator.png') no-repeat center center;
 }
+
+.icon-master{
+	background:url('icons/menu/master.png') no-repeat center center;
+}
+
+
+.icon-kategori{
+	background:url('icons/menu/kategori.png') no-repeat center center;
+}
+
+.icon-sub_katagori{
+	background:url('icons/menu/sub_kategori.png') no-repeat center center;
+}
+
+.icon-barang{
+	background:url('icons/menu/barang.png') no-repeat center center;
+}
