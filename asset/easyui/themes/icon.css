@@ -80,7 +80,7 @@
 
 -------------------------------------------------------Menu------------------------------------------
 
-.icon-pengguna{
+.icon-user{
 	background:url('icons/menu/pengguna.png') no-repeat center center;
 }
 
@@ -105,7 +105,7 @@
 	background:url('icons/menu/kategori.png') no-repeat center center;
 }
 
-.icon-sub_katagori{
+.icon-subkateg{
 	background:url('icons/menu/sub_kategori.png') no-repeat center center;
 }
 
