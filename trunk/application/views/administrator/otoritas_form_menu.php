@@ -57,6 +57,7 @@
 				case 'edit': $('#dg-menu').datagrid('updateRow',{index:index, row:{edit:(value==true?1:0)}}); break;
 				case 'deleted': $('#dg-menu').datagrid('updateRow',{index:index, row:{deleted:(value==true?1:0)}}); break;
 				case 'print': $('#dg-menu').datagrid('updateRow',{index:index, row:{print:(value==true?1:0)}}); break;
+				case 'import': $('#dg-menu').datagrid('updateRow',{index:index, row:{import:(value==true?1:0)}}); break;
 			}
 		}
 		
@@ -106,6 +107,14 @@
 				return '';
 			}
 		}
+
+		CheckboxImport = function(value,row,index){
+			if(row.print1){
+				return '<input style="margin-top:2px;" type="checkbox" name="checkbox" id="checkbox" onclick="update_value('+index+', \'import\', this.checked)" '+(row.import==true?'checked="checked"':'')+' />';
+			}else{
+				return '';
+			}
+		}
 		
 		// load menu
 		$(function(){ // init
@@ -132,6 +141,7 @@
 				$('#dg-menu').datagrid('updateRow',{index:i, row:{edit:(value==true?1:0)}});
 				$('#dg-menu').datagrid('updateRow',{index:i, row:{deleted:(value==true?1:0)}});
 				$('#dg-menu').datagrid('updateRow',{index:i, row:{print:(value==true?1:0)}});
+				$('#dg-menu').datagrid('updateRow',{index:i, row:{import:(value==true?1:0)}});
 			}
 		}
 		
@@ -173,6 +183,7 @@
 			<th field="edit1" width="50" formatter="CheckboxEdit" align="center">Edit</th>
 			<th field="delete1" width="50" formatter="CheckboxDeleted" align="center">Delete</th>
 			<th field="print1" width="50" formatter="CheckboxPrint" align="center">Print</th>
+			<th field="import1" width="50" formatter="CheckboxImport" align="center">Import</th>
 			
 			<th field="access" width="30" hidden="true">access</th>
 			<th field="add" width="30" hidden="true">add</th>
@@ -180,6 +191,7 @@
 			<th field="edit" width="30" hidden="true">edit</th>
 			<th field="deleted" width="30" hidden="true">delete</th>
 			<th field="print" width="30" hidden="true">print</th>
+			<th field="import" width="30" hidden="true">import</th>
 		</tr>
 	</thead>
 </table>
