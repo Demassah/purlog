@@ -15,8 +15,11 @@
 	<script type="text/javascript" src="<?=base_url();?>asset/easyui/plugins/jquery.datagrid-detailview.js"></script>
 	<script type="text/javascript" src="<?=base_url();?>asset/js/ckeditor/ckeditor.js"></script>
 	
+
+
 </head>
 <body class="easyui-layout">
+<input type="hidden" id="base" value="<?=base_url();?>" />
 	<script>
 		base_url = '<?=base_url();?>';
 		
