@@ -22,7 +22,7 @@
 			// var row = $('#dg').datagrid('getSelected');
 			// if (row){
 				$('#dialog').dialog({
-					title: 'Edit Barang',
+					title: 'Edit ',
 					width: 350,
 					height: 275,
 					closed: true,

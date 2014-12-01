@@ -129,6 +129,7 @@ class mdl_otoritas extends CI_Model {
 			$data['rows'][$i]['edit1'] = strpos($menu->policy, 'EDIT')===false?0:1;
 			$data['rows'][$i]['delete1'] = strpos($menu->policy, 'DELETE')===false?0:1;
 			$data['rows'][$i]['print1'] = strpos($menu->policy, 'PRINT')===false?0:1;
+			$data['rows'][$i]['import1'] = strpos($menu->policy, 'IMPORT')===false?0:1;
 			
 			// get menu access
 			$this->db->where('menu_id', $menu->menu_id);
@@ -144,6 +145,7 @@ class mdl_otoritas extends CI_Model {
 				$data['rows'][$i]['edit'] = strpos($res_level->row()->policy, 'EDIT')===false?0:1;
 				$data['rows'][$i]['deleted'] = strpos($res_level->row()->policy, 'DELETE')===false?0:1;
 				$data['rows'][$i]['print'] = strpos($res_level->row()->policy, 'PRINT')===false?0:1;
+				$data['rows'][$i]['import'] = strpos($res_level->row()->policy, 'IMPORT')===false?0:1;
 			}else{
 				// init policy menu access
 				$data['rows'][$i]['user_access_id'] = 0;
@@ -153,6 +155,7 @@ class mdl_otoritas extends CI_Model {
 				$data['rows'][$i]['edit'] = 0;
 				$data['rows'][$i]['deleted'] = 0;
 				$data['rows'][$i]['print'] = 0;
+				$data['rows'][$i]['import'] = 0;
 			}
 			
 			$i++;
@@ -178,6 +181,7 @@ class mdl_otoritas extends CI_Model {
 			$policy .= $row['edit']==1?'EDIT;':'';
 			$policy .= $row['deleted']==1?'DELETE;':'';
 			$policy .= $row['print']==1?'PRINT;':'';
+			$policy .= $row['import']==1?'IMPORT;':'';
 			
 			$this->db->set('menu_id', $row['menu_id']);
 			$this->db->set('user_level_id', $data['user_level_id']);
