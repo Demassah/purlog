@@ -123,8 +123,28 @@
 						handler:function(){
 							newData();
 						}
-					}
+					},
 					<?}?>
+
+					<?if($this->mdl_auth->CekAkses(array('menu_id'=>8, 'policy'=>'PRINT'))){?>
+					{
+						iconCls:'icon-pdf',
+						text:'Export PDF',
+						handler:function(){
+							window.open('<?=base_url().'#/#'?>');
+						}
+					},
+					<?}?>
+
+					<?if($this->mdl_auth->CekAkses(array('menu_id'=>8, 'policy'=>'IMPORT'))){?>
+					{
+						iconCls:'icon-upload',
+						text:'Import Excel',
+						handler:function(){
+							importDialog();
+						}
+					}
+					<?}?>					
 				]
 			});			
 		});
