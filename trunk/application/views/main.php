@@ -98,7 +98,7 @@
 			
 			// inisialisasi dialog box
 			$('#dialog').dialog({
-				style:{background:'#D4D4D4'}
+				style:{background:'#ffffff'}
 			});
 			
 			// init
@@ -128,7 +128,7 @@
 		}
 		
 	  .fsearch{
-		background:#fafafa;
+		background:#ffffff;
 		border-radius:2px;
 		-moz-border-radius:0px;
 		-webkit-border-radius: 5px;
