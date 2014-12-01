@@ -4,7 +4,7 @@ class picking extends CI_Controller {
 	
 	function __construct(){
 		parent::__construct();
-		//$this->load->model('mdl_kategori');
+		$this->load->model('mdl_kategori');
 		//$this->output->enable_profiler(TRUE);
 	}
 	
