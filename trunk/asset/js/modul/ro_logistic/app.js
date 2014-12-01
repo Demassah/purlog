@@ -10,12 +10,12 @@
 				height: 130,
 				closed: true,
 				cache: false,
-				href: base_url+'kategori/add',
+				href: base_url+'picking/add',
 				modal: true
 			});
 			 
 			$('#dialog').dialog('open');
-			url = base_url+'kategori/save/add';
+			url = base_url+'picking/save/add';
 		}
 		// end newData
 		
@@ -28,12 +28,12 @@
 					height: 130,
 					closed: true,
 					cache: false,
-					href: base_url+'kategori/edit/'+val,
+					href: base_url+'picking/edit/'+val,
 					modal: true
 				});
 				
 				$('#dialog').dialog('open');  
-				url = base_url+'kategori/save/edit';
+				url = base_url+'picking/save/edit';
 			// }
 		}
 		//end editData
@@ -44,7 +44,7 @@
 				if(confirm("Apakah yakin akan menghapus data '" + val + "'?")){
 					var response = '';
 					$.ajax({ type: "GET",
-						 url: base_url+'kategori/delete/' + val,
+						 url: base_url+'picking/delete/' + val,
 						 async: false,
 						 success : function(response){
 							var response = eval('('+response+')');
