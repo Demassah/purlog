@@ -42,8 +42,7 @@ class auth extends CI_Controller {
 				$this->session->set_userdata('user_name', $result->row()->user_name);
 				$this->session->set_userdata('full_name', $result->row()->full_name);
 				$this->session->set_userdata('user_level_id', $result->row()->user_level_id);
-				$this->session->set_userdata('kd_fakultas', $result->row()->kd_fakultas);
-				$this->session->set_userdata('kd_prodi', $result->row()->kd_prodi);
+				$this->session->set_userdata('departement_id', $result->row()->departement_id);
 				$this->session->set_userdata('login', TRUE);
 				redirect('main');
 			}else{
