@@ -1,21 +1,21 @@
 	var url;
 	var base = $('#base').val();
-	var site = base + "kategori/grid";
+	var site = base + "barang/grid";
 	$(document).ready(function(){
 	
 		newData = function (){
 			$('#dialog').dialog({
-				title: 'Tambah Kategori',
+				title: 'Tambah Barang',
 				width: 380,
-				height: 130,
+				height: 240,
 				closed: true,
 				cache: false,
-				href: base_url+'picking/add',
+				href: base_url+'barang/add',
 				modal: true
 			});
 			 
 			$('#dialog').dialog('open');
-			url = base_url+'picking/save/add';
+			url = base_url+'barang/save/add';
 		}
 		// end newData
 		
@@ -23,17 +23,17 @@
 			// var row = $('#dg').datagrid('getSelected');
 			// if (row){
 				$('#dialog').dialog({
-					title: 'Edit Kategori',
+					title: 'Edit Tambah',
 					width: 380,
-					height: 130,
+					height: 240,
 					closed: true,
 					cache: false,
-					href: base_url+'picking/edit/'+val,
+					href: base_url+'barang/edit/'+val,
 					modal: true
 				});
 				
 				$('#dialog').dialog('open');  
-				url = base_url+'picking/save/edit';
+				url = base_url+'barang/save/edit';
 			// }
 		}
 		//end editData
@@ -44,7 +44,7 @@
 				if(confirm("Apakah yakin akan menghapus data '" + val + "'?")){
 					var response = '';
 					$.ajax({ type: "GET",
-						 url: base_url+'picking/delete/' + val,
+						 url: base_url+'barang/delete/' + val,
 						 async: false,
 						 success : function(response){
 							var response = eval('('+response+')');
@@ -95,8 +95,8 @@
 		actionbutton = function(value, row, index){
 			var col;
 			//if (row.kd_fakultas != null) {
-				col = '<a href="#" onclick="editData(\''+row. 	id_kategori+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Edit</a>';
-				col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="deleteData(\''+row. 	id_kategori+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
+				col = '<a href="#" onclick="editData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Edit</a>';
+				col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="deleteData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
 			//}
 			return col;
 		}

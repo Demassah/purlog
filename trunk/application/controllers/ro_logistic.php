@@ -12,10 +12,7 @@ class ro_logistic extends CI_Controller {
 		$this->load->view('ro_logistic/kategori');
 	}
 	
-	function grid(){
-		$data = $this->mdl_kategori->getdata();
-		echo $this->mdl_kategori->togrid($data['row_data'], $data['row_count']);
-	}
+
 	
 	
 	
