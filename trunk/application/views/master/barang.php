@@ -92,7 +92,7 @@
 		//end saveData
 		
 		actionbutton = function(value, row, index){
-			var col;
+			var col='';
 			//if (row.kd_fakultas != null) {
 			<?if($this->mdl_auth->CekAkses(array('menu_id'=>8, 'policy'=>'edit'))){?>
 					col = '<a href="#" onclick="editData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Edit</a>';
