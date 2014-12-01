@@ -1,15 +1,15 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class kategori extends CI_Controller {
+class picking extends CI_Controller {
 	
 	function __construct(){
 		parent::__construct();
-		$this->load->model('mdl_kategori');
+		//$this->load->model('mdl_kategori');
 		//$this->output->enable_profiler(TRUE);
 	}
 	
 	function index(){
-		$this->load->view('master/kategori');
+		$this->load->view('pros/picking');
 	}
 	
 	function grid(){
@@ -22,7 +22,7 @@ class kategori extends CI_Controller {
 		$data['id_kategori'] = '';
 		$data['nama_kategori'] = '';
 		
-		$this->load->view('master/kategori_form', $data);
+		$this->load->view('pros/picking_form', $data);
 	}
 	
 	function edit($kode){
