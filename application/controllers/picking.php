@@ -16,5 +16,9 @@ class picking extends CI_Controller {
 		$data = $this->mdl_picking->getdata();
 		echo $this->mdl_picking->togrid($data['row_data'], $data['row_count']);
 	}
+
+	function detail(){
+		$this->load->view('pros/detail_picking');
+	}
 	
 }
