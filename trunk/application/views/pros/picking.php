@@ -37,6 +37,23 @@
 		}
 		//end editData
 		
+			detailData = function (){
+			$('#dialog').dialog({
+				title: 'Detail Picking',
+				//style:{background:'#d4d4d4'},
+				width: $(window).width() * 0.8,
+				height: $(window).height() * 0.99,
+				closed: true,
+				cache: false,
+				href: base_url+'picking/detail/',
+				modal: true
+			});
+			 
+			$('#dialog').dialog('open');
+			url = base_url+'picking/save';
+		}
+		// end newData
+		
 		deleteData = function (val){
 			// var row = $('#dg').datagrid('getSelected');
 			// if(row){
