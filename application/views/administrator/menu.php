@@ -113,7 +113,7 @@
 		// filter
 		filter = function(){
 			$('#dg').datagrid('load',{
-				kd_pt : $('#s_kd_pt').val(),
+				menu_name : $('#s_menu_name').val(),
 			});
 			//$('#dg').datagrid('enableFilter');
 		}
@@ -138,13 +138,14 @@
 		
 	});
 </script>
-<table id="dg" title="Kelola Pengguna" data-options="
+<table id="dg" title="Kelola Menu" data-options="
 			rownumbers:true,
 			singleSelect:true,
 			autoRowHeight:false,
 			pagination:true,
 			pageSize:30,
 			fit:true,
+			toolbar:'#toolbar',
 			">
 	<thead>
 		<tr>
@@ -162,9 +163,27 @@
 	</thead>
 </table>
 
+<div id="toolbar" style="padding:5px;height:auto">
+	<div style="margin-bottom:5px">
+		
+	</div>
+	<div class="fsearch">
+		<table width="700" border="0">
+		  <tr>
+			<td>Nama Menu</td>
+				<td>: 
+					<input name="s_menu_name" id="s_menu_name" size="25">
+				</td>
+				<td>&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-search">Search</a></td>
+		  </tr>
+		</table>
+	</div>
+</div>
+
 <!-- AREA untuk Form MENU >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
 <div id="dialog-menu" class="easyui-dialog" style="width:400px;height:150px" closed="true" buttons="#dlg-buttons-menu">
 <div id="dlg-buttons-menu">
 	<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveMenu()">Save</a>
 	<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dialog-menu').dialog('close')">Cancel</a>
 </div>
+
