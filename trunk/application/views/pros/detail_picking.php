@@ -64,14 +64,38 @@
     </div>-->
 
      <div id="cc" class="easyui-layout" style="width:600px;height:400px;" fit="false">
-	    <div data-options="region:'north',title:'Alocation',split:true" style="height:100px;">	    	
-	    	<div class="fitem" >
-					<label style="width:100px">Kode Barang </label>: 
-					<input name="kode_barang" size="15" value="">
-				</div>
+	    <div data-options="region:'north',title:'Alocation',split:true" style="height:200px;">	    	
+	    	<table id="dg" title="Picking Request Order Selected List" data-options="
+						rownumbers:true,
+						singleSelect:true,
+						autoRowHeight:false,
+						pagination:true,
+						pageSize:30,
+						fit:true,
+						toolbar:'#toolbar',
+						">
+				<thead>
+					<tr>
+						<th field="user_id" sortable="true" width="150" hidden="true">ID</th>
+						<th field="nama_kategori" sortable="true" width="150">Kategori</th>
+						<th field="nama_sub_kategori" sortable="true" width="150">Sub Kategori</th>
+						<th field="kode_barang" sortable="true" width="150">Kode Barang</th>
+						<th field="nama_barang" sortable="true" width="150">Nama Barang</th>
+						<th field="jumlah" sortable="true" width="150">Jumlah</th>
+						<th field="action" align="center" formatter="actionbutton" width="140">Aksi</th>
+					</tr>
+				</thead>
+				<!--<thead>
+					<tr>
+						<th field="id_kategori" sortable="true" width="150" hidden="true">ID</th>
+						<th field="nama_kategori" sortable="true" width="350">Kategori</th>
+						<th field="action" align="center" formatter="actionbutton" width="100">Aksi</th>
+					</tr>
+				</thead>-->
+			</table>
 	    </div>
 
-	    <div data-options="region:'center',title:'Available'" style="padding:5px;background:#eee;"></div>
+	    <div data-options="region:'center',title:'Available'" style="height:200px;padding:5px;background:#eee;"></div>
 
 	    <div data-options="region:'south',title:'Pending',split:true" style="height:100px;"></div>	    
     </div>
