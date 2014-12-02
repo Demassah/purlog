@@ -9,7 +9,7 @@ class ro_logistic extends CI_Controller {
 	}
 	
 	function index(){
-		$this->load->view('ro_logistic/kategori');
+		$this->load->view('ro_logistic/index');
 	}
 	
 
