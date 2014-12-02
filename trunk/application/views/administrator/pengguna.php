@@ -92,11 +92,14 @@
 		//end saveData
 		
 		actionbutton = function(value, row, index){
-			var col;
-			//if (row.kd_fakultas != null) {
+			var col='';
+			<?if($this->mdl_auth->CekAkses(array('menu_id'=>3, 'policy'=>'EDIT'))){?>
 				col = '<a href="#" onclick="editData(\''+row. 	user_id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Edit</a>';
+			<?}?>
+
+			<?if($this->mdl_auth->CekAkses(array('menu_id'=>3, 'policy'=>'DELETE'))){?>
 				col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="deleteData(\''+row. 	user_id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
-			//}
+			<?}?>
 			return col;
 		}
 		
@@ -119,6 +122,7 @@
 			var pager = $('#dg').datagrid().datagrid('getPager');	// get the pager of datagrid
 			pager.pagination({
 				buttons:[
+				<?if($this->mdl_auth->CekAkses(array('menu_id'=>3, 'policy'=>'ADD'))){?>
 					{
 						iconCls:'icon-add',
 						text:'Tambah Data',
@@ -126,6 +130,7 @@
 							newData();
 						}
 					}
+				<?}?>
 				]
 			});			
 		});
@@ -143,6 +148,7 @@
 	<thead>
 		<tr>
 			<th field="user_id" sortable="true" width="150" hidden="true">ID</th>
+			<th field="nik" sortable="true" width="150">NIK</th>
 			<th field="user_name" sortable="true" width="150">Username</th>
 			<th field="full_name" sortable="true" width="150">Nama Lengkap</th>
 			<th field="departement_name" sortable="true" width="150">Departemen</th>

@@ -102,6 +102,29 @@ class mdl_prosedur extends CI_Model {
 		
 		return $out;
 	}
+
+	function OptionMenuParent($d=""){
+		$value = isset($d['value'])?$d['value']:'';
+		$out = '';
+		
+		$this->db->flush_cache();
+		$this->db->from('sys_menu');
+		$this->db->order_by('menu_name');
+		$this->db->where('url', '#');
+				
+		$res = $this->db->get();
+		
+		foreach($res->result() as $r){
+			if(trim($r->menu_id) == trim($value)){
+				$out .= '<option value="'.$r->menu_id.'" selected="selected">'.$r->menu_name.'</option>';
+			}else{
+				$out .= '<option value="'.$r->menu_id.'">'.$r->menu_name.'</option>';
+			}
+		}
+		
+		return $out;
+	}
+
 }
 
 ?>

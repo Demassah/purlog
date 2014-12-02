@@ -20,6 +20,7 @@ class pengguna extends CI_Controller {
 	function add(){
 		$data['kode'] = '';
 		$data['user_id'] = '';
+		$data['nik'] = '';
     $data['user_name'] = '';
     $data['full_name'] = '';
     $data['passwd'] = '';
@@ -31,7 +32,7 @@ class pengguna extends CI_Controller {
 	
 	function edit($kode){
 		$r = $this->mdl_pengguna->getdataedit($kode);
-		
+		$data['nik'] = $r->row()->nik;
     $data['user_name'] = $r->row()->user_name;
     $data['full_name'] = $r->row()->full_name;
     //$data['passwd'] = $r->row()->passwd;
