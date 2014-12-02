@@ -126,6 +126,23 @@
 		
 	});
 </script>
+<div id="toolbar" style="padding:5px;height:auto">
+	<div style="margin-bottom:5px">		
+	</div>
+	<div class="fsearch">
+		<table width="500" border="0">
+		  <tr>
+			<td>Search</td>
+			<td>: 
+				<input name="#" size="30" value=" ">
+			</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-search">Search</a></td>
+		  </tr>
+		</table>
+	</div>
+</div>
 <table id="dg" title="Kelola Data logistic" data-options="
 			rownumbers:true,
 			singleSelect:true,
