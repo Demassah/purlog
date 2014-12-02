@@ -128,7 +128,7 @@
 		}
 		
 	  .fsearch{
-		background:#ffffff;
+		background:#fafafa;
 		border-radius:2px;
 		-moz-border-radius:0px;
 		-webkit-border-radius: 5px;

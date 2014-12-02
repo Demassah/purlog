@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 01, 2014 at 12:42 AM
+-- Generation Time: Dec 01, 2014 at 10:34 PM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.1
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `ref_barang` (
   `nama_barang` varchar(30) NOT NULL,
   `jumlah` int(5) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `ref_barang`
@@ -41,8 +41,7 @@ CREATE TABLE IF NOT EXISTS `ref_barang` (
 
 INSERT INTO `ref_barang` (`id`, `id_kategori`, `id_sub_kategori`, `kode_barang`, `nama_barang`, `jumlah`) VALUES
 (1, 2, 2, '001', 'Busi', 100),
-(2, 2, 2, '101', 'Asd', 25),
-(4, 3, 4, '43', 'adsl', 23);
+(2, 2, 2, '101', 'Asd', 25);
 
 -- --------------------------------------------------------
 
@@ -95,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `sys_departement` (
   `departement_id` smallint(6) NOT NULL AUTO_INCREMENT,
   `departement_name` varchar(25) NOT NULL,
   PRIMARY KEY (`departement_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `sys_departement`
@@ -126,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `sys_menu` (
   `icon_class` varchar(30) DEFAULT NULL,
   `policy` varchar(50) DEFAULT '',
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=70 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=34 ;
 
 --
 -- Dumping data for table `sys_menu`
@@ -134,36 +133,28 @@ CREATE TABLE IF NOT EXISTS `sys_menu` (
 
 INSERT INTO `sys_menu` (`menu_id`, `menu_group`, `menu_name`, `menu_parent`, `url`, `position`, `hide`, `icon_class`, `policy`) VALUES
 (1, 'Administrator', 'Administrator', 0, '#', 99, 0, 'icon-administrator', 'ACCESS;'),
-(2, 'Administrator', 'Otoritas Menu', 1, 'otoritas', 1, 0, 'icon-otoritas', 'ACCESS;ADD;EDIT;DELETE;'),
-(3, 'Administrator', 'Pengguna', 1, 'pengguna', 2, 0, 'icon-user', 'ACCESS;ADD;EDIT;DELETE;'),
-(4, 'Administrator', 'Departemen', 1, 'departement', 3, 0, 'icon-departement', 'ACCESS;ADD;EDIT;DELETE;'),
+(2, 'Administrator', 'Otoritas Menu', 1, 'otoritas', 2, 0, 'icon-otoritas', 'ACCESS;ADD;EDIT;DETAIL;DELETE;'),
+(3, 'Administrator', 'Pengguna', 1, 'pengguna', 3, 0, 'icon-user', 'ACCESS;ADD;EDIT;DELETE;'),
+(4, 'Administrator', 'Departemen', 1, 'departement', 4, 0, 'icon-departement', 'ACCESS;ADD;EDIT;DELETE;'),
 (5, 'Master Data', 'Master Data', 0, '#', 1, 0, 'icon-master', 'ACCESS;'),
 (6, 'Master Data', 'Kategori', 5, 'kategori', 2, 0, 'icon-kategori', 'ACCESS;ADD;EDIT;DELETE;'),
 (7, 'Master Data', 'Sub Kategori', 5, 'sub_kategori', 3, 0, 'icon-subkateg', 'ACCESS;ADD;EDIT;DELETE;'),
 (8, 'Master Data', 'Barang', 5, 'barang', 4, 0, 'icon-barang', 'ACCESS;ADD;EDIT;DELETE;PRINT;IMPORT;'),
-(9, 'Rancang', 'Rancang', 0, '#', 1, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
-(10, 'Rancang', 'Request Order', 9, '#', 2, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
-(11, 'Rancang', 'Detail RO', 9, '#', 3, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
-(12, 'Rancang', 'Request Order Selected', 9, '#', 4, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
-(13, 'Rancang', 'Detail ROS', 9, '#', 5, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
-(14, 'Rancang', 'Picking ROS', 9, 'picking', 6, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
-(15, 'Rancang', 'Detail PROS', 9, 'detail_picking', 7, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
-(16, 'Rancang', 'Shipment Request Order', 9, '#', 8, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
-(17, 'Rancang', 'SRO Detail', 9, '#', 9, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
-(18, 'Rancang', 'Purchase Request', 9, '#', 10, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
-(19, 'Rancang', 'Detail PR', 9, '#', 11, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
-(20, 'Rancang', 'Quotation Request Selected', 9, '#', 12, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
-(21, 'Rancang', 'Detail QRS', 9, '#', 13, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
-(22, 'Rancang', 'Quotation Request Vendor', 9, '#', 14, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
-(23, 'Rancang', 'Purchase Order', 9, '#', 15, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
-(24, 'Rancang', 'Detail PO', 9, '#', 16, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
-(25, 'Rancang', 'Document Receive', 9, '#', 17, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
-(26, 'Rancang', 'Detail DR', 9, '#', 18, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
-(27, 'Rancang', 'Delivery Order', 9, '#', 19, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
-(28, 'Rancang', 'Detail DO', 9, '#', 20, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
-(29, 'Rancang', 'Berita Acara Pengembalian', 9, '#', 21, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
-(30, 'Rancang', 'Berita Acara Pengembalian Pengiriman', 9, '#', 22, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
-(31, 'Rancang', 'Request Order Logistic', 9, 'ro_logistic', 23, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;');
+(9, 'Transaksi', 'Transaksi', 0, '#', 1, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
+(10, 'Transaksi', 'Request Order', 9, 'request_order', 2, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
+(11, 'Transaksi', 'Request Order Selected', 9, 'request_order_selected', 4, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
+(12, 'Transaksi', 'PROS', 9, 'pros', 5, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
+(13, 'Transaksi', 'Shipment Request Order', 9, 'sro', 6, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
+(14, 'Transaksi', 'Purchase Request', 9, 'pr', 7, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
+(15, 'Transaksi', 'Quotation Request Selected', 9, 'qrs', 8, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
+(16, 'Transaksi', 'Quotation Request Vendor', 9, 'qrv', 9, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
+(17, 'Transaksi', 'Purchase Order', 9, 'po', 10, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
+(18, 'Transaksi', 'Document Receive', 9, 'dr', 17, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
+(19, 'Transaksi', 'Delivery Order', 9, 'do', 11, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
+(20, 'Transaksi', 'Berita Acara Pengembalian', 9, 'bap', 12, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
+(21, 'Transaksi', 'Berita Acara Pengembalian Pengiriman', 9, 'bapp', 13, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
+(22, 'Transaksi', 'Request Order Logistic', 9, 'ro_logistic', 3, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
+(23, 'Administrator', 'Menu', 1, 'menu', 1, 0, NULL, 'ACCESS;ADD;EDIT;DELETE;');
 
 -- --------------------------------------------------------
 
@@ -173,7 +164,7 @@ INSERT INTO `sys_menu` (`menu_id`, `menu_group`, `menu_name`, `menu_parent`, `ur
 
 CREATE TABLE IF NOT EXISTS `sys_user` (
   `user_id` smallint(6) NOT NULL AUTO_INCREMENT,
-  `id_departemen` int(11) NOT NULL,
+  `nik` int(12) NOT NULL,
   `user_name` varchar(50) DEFAULT NULL,
   `full_name` varchar(100) DEFAULT NULL,
   `passwd` varchar(32) DEFAULT NULL,
@@ -186,9 +177,9 @@ CREATE TABLE IF NOT EXISTS `sys_user` (
 -- Dumping data for table `sys_user`
 --
 
-INSERT INTO `sys_user` (`user_id`, `id_departemen`, `user_name`, `full_name`, `passwd`, `departement_id`, `user_level_id`) VALUES
-(1, 0, 'admin', 'administrator', '21232f297a57a5a743894a0e4a801fc3', 1, 1),
-(11, 0, 'iqbal', 'Mochamad Iqbal', 'eedae20fc3c7a6e9c5b1102098771c70', 3, 1);
+INSERT INTO `sys_user` (`user_id`, `nik`, `user_name`, `full_name`, `passwd`, `departement_id`, `user_level_id`) VALUES
+(1, 1111111, 'admin', 'administrator', '21232f297a57a5a743894a0e4a801fc3', 1, 1),
+(11, 1111112, 'iqbal', 'Mochamad Iqbal', 'eedae20fc3c7a6e9c5b1102098771c70', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -202,44 +193,36 @@ CREATE TABLE IF NOT EXISTS `sys_user_access` (
   `user_level_id` smallint(6) NOT NULL DEFAULT '0',
   `policy` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`user_access_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=727 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=746 ;
 
 --
 -- Dumping data for table `sys_user_access`
 --
 
 INSERT INTO `sys_user_access` (`user_access_id`, `menu_id`, `user_level_id`, `policy`) VALUES
-(1, 1, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;'),
-(2, 2, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;'),
-(3, 3, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;'),
-(4, 4, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;'),
-(700, 5, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;'),
-(701, 7, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;'),
-(702, 6, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;'),
-(703, 8, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;'),
-(704, 9, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;'),
-(705, 10, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;'),
-(706, 11, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;'),
-(707, 12, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;'),
-(708, 13, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;'),
-(709, 14, 1, 'ACCESS;DETAIL;'),
-(710, 15, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;'),
-(711, 16, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;'),
-(712, 17, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;'),
-(713, 18, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;'),
-(714, 19, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;'),
-(715, 20, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;'),
-(716, 21, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;'),
-(717, 22, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;'),
-(718, 23, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;'),
-(719, 24, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;'),
-(720, 25, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;'),
-(721, 26, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;'),
-(722, 27, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;'),
-(723, 28, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;'),
-(724, 29, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;'),
-(725, 30, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;'),
-(726, 31, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;');
+(1, 1, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),
+(2, 2, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),
+(3, 3, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),
+(4, 4, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),
+(727, 5, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),
+(728, 6, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),
+(729, 7, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),
+(730, 8, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),
+(731, 9, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),
+(732, 10, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),
+(733, 11, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),
+(734, 12, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),
+(735, 13, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),
+(736, 14, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),
+(737, 15, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),
+(738, 16, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),
+(739, 17, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),
+(740, 18, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),
+(741, 19, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),
+(742, 20, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),
+(743, 21, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),
+(744, 22, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),
+(745, 23, 1, 'ACCESS;ADD;EDIT;DELETE;');
 
 -- --------------------------------------------------------
 
@@ -252,14 +235,15 @@ CREATE TABLE IF NOT EXISTS `sys_user_level` (
   `level_name` varchar(40) DEFAULT NULL,
   `level` smallint(6) DEFAULT NULL,
   PRIMARY KEY (`user_level_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `sys_user_level`
 --
 
 INSERT INTO `sys_user_level` (`user_level_id`, `level_name`, `level`) VALUES
-(1, 'Administrator', 10000);
+(1, 'Administrator', 10000),
+(2, 'Logistic', 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

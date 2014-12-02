@@ -13,15 +13,24 @@ class mdl_menu extends CI_Model {
 		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'menu_name';  
 		$order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
 		$offset = ($page-1)*$limit;
+
+		#get filter
+		$menu_group = isset($_POST['menu_group']) ? strval($_POST['menu_group']) : '';
+		$menu_name = isset($_POST['menu_name']) ? strval($_POST['menu_name']) : '';
 		
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
 			$this->db->select('*');
 			$this->db->from('sys_menu');
+
+			if($menu_name != ''){
+				$this->db->like('menu_name', $menu_name, 'both');
+			}
+		
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
-		
+
 		# get count
 		$tmp['row_count'] = $this->db->get()->num_rows();
 		
