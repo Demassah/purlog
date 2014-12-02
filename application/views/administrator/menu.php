@@ -4,17 +4,17 @@
 	
 		newData = function (){
 			$('#dialog').dialog({
-				title: 'Tambah Departement',
-				width: 380,
-				height: 130,
+				title: 'Tambah Menu',
+				width: 400,
+				height: 300,
 				closed: true,
 				cache: false,
-				href: base_url+'departement/add',
+				href: base_url+'menu/add',
 				modal: true
 			});
 			 
 			$('#dialog').dialog('open');
-			url = base_url+'departement/save/add';
+			url = base_url+'menu/save/add';
 		}
 		// end newData
 		
@@ -22,17 +22,17 @@
 			// var row = $('#dg').datagrid('getSelected');
 			// if (row){
 				$('#dialog').dialog({
-					title: 'Edit Departement',
-					width: 380,
-					height: 130,
+					title: 'Edit Menu',
+					width: 400,
+					height: 300,
 					closed: true,
 					cache: false,
-					href: base_url+'departement/edit/'+val,
+					href: base_url+'menu/edit/'+val,
 					modal: true
 				});
 				
 				$('#dialog').dialog('open');  
-				url = base_url+'departement/save/edit';
+				url = base_url+'menu/save/edit';
 			// }
 		}
 		//end editData
@@ -43,7 +43,7 @@
 				if(confirm("Apakah yakin akan menghapus data '" + val + "'?")){
 					var response = '';
 					$.ajax({ type: "GET",
-						 url: base_url+'departement/delete/' + val,
+						 url: base_url+'menu/delete/' + val,
 						 async: false,
 						 success : function(response){
 							var response = eval('('+response+')');
@@ -93,19 +93,20 @@
 		
 		actionbutton = function(value, row, index){
 			var col='';
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>4, 'policy'=>'EDIT'))){?>
-				col = '<a href="#" onclick="editData(\''+row. 	departement_id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Edit</a>';
-			<?}?>				
+			//if (row.kd_fakultas != null) {
+			<?if($this->mdl_auth->CekAkses(array('menu_id'=>23, 'policy'=>'EDIT'))){?>
+				col = '<a href="#" onclick="editData(\''+row.menu_id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Edit</a>';
+			<?}?>	
 
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>4, 'policy'=>'DELETE'))){?>
-				col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="deleteData(\''+row. 	departement_id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
+			<?if($this->mdl_auth->CekAkses(array('menu_id'=>23, 'policy'=>'DELETE'))){?>
+				col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="deleteData(\''+row.menu_id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
 			<?}?>
 			return col;
 		}
 		
 		$(function(){
 			$('#dg').datagrid({
-				url:"<?=base_url()?>departement/grid"
+				url:"<?=base_url()?>menu/grid"
 			});
 		});
 		
@@ -122,7 +123,7 @@
 			var pager = $('#dg').datagrid().datagrid('getPager');	// get the pager of datagrid
 			pager.pagination({
 				buttons:[
-				<?if($this->mdl_auth->CekAkses(array('menu_id'=>4, 'policy'=>'ADD'))){?>
+				<?if($this->mdl_auth->CekAkses(array('menu_id'=>23, 'policy'=>'ADD'))){?>
 					{
 						iconCls:'icon-add',
 						text:'Tambah Data',
@@ -130,14 +131,14 @@
 							newData();
 						}
 					}
-				<?}?>	
+				<?}?>
 				]
 			});			
 		});
 		
 	});
 </script>
-<table id="dg" title="Kelola Data Departement" data-options="
+<table id="dg" title="Kelola Pengguna" data-options="
 			rownumbers:true,
 			singleSelect:true,
 			autoRowHeight:false,
@@ -147,8 +148,15 @@
 			">
 	<thead>
 		<tr>
-			<th field="departement_id" sortable="true" width="150" hidden="true">ID</th>
-			<th field="departement_name" sortable="true" width="150">Nama Departement</th>
+			<th field="menu_id" sortable="true" width="150" hidden="true">ID</th>
+			<!--<th field="menu_group" sortable="true" width="100">Group Menu</th>-->
+			<th field="menu_name" sortable="true" width="200">Nama Menu</th>
+			<!--<th field="menu_parent" sortable="true" width="80">Menu Parent</th>-->
+			<th field="url" sortable="true" width="120">URL Controller</th>
+			<th field="position" sortable="true" width="80">Position</th>
+			<!--<th field="hide" sortable="true" width="50">hide</th>-->
+			<th field="icon_class" sortable="true" width="100">Icon</th>
+			<th field="policy" sortable="true" width="300">Policy</th>
 			<th field="action" align="center" formatter="actionbutton" width="100">Aksi</th>
 		</tr>
 	</thead>

@@ -9,6 +9,10 @@
 <form id="form1" method="post" style="margin:10px">
 	<input type="hidden" name="kode" id="kode" value="<?=$kode?>">
 	<div class="fitem" >
+		<label style="width:100px">NIK </label>: 
+		<input name="nik" size="20" value="<?=$nik?>">
+	</div>
+	<div class="fitem" >
 		<label style="width:100px">Username </label>: 
 		<input name="user_name" size="30" value="<?=$user_name?>">
 	</div>

@@ -108,12 +108,18 @@
 		//end saveData
 		
 		actionbutton = function(value, row, index){
-			var col;
-			//if (row.kd_fakultas != null) {
+			var col='';
+			<?if($this->mdl_auth->CekAkses(array('menu_id'=>2, 'policy'=>'DETAIL'))){?>			
 				col = '<a href="#" onclick="menu(\''+row.user_level_id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Menu</a>';
+			<?}?>
+
+			<?if($this->mdl_auth->CekAkses(array('menu_id'=>2, 'policy'=>'EDIT'))){?>
 				col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="editData(\''+row.user_level_id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Edit</a>';
+			<?}?>
+
+			<?if($this->mdl_auth->CekAkses(array('menu_id'=>2, 'policy'=>'DELETE'))){?>
 				col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="deleteData(\''+row.user_level_id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
-			//}
+			<?}?>
 			return col;
 		}
 		
@@ -136,6 +142,7 @@
 			var pager = $('#dg').datagrid().datagrid('getPager');	// get the pager of datagrid
 			pager.pagination({
 				buttons:[
+				<?if($this->mdl_auth->CekAkses(array('menu_id'=>2, 'policy'=>'ADD'))){?>
 					{
 						iconCls:'icon-add',
 						text:'Tambah Data',
@@ -143,6 +150,7 @@
 							newData();
 						}
 					}
+				<?}?>
 				]
 			});			
 		});
