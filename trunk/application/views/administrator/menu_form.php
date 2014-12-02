@@ -19,7 +19,7 @@
 	<div class="fitem" >
 		<label style="width:100px">Menu Parent </label>:
 			<select id="menu_parent" name="menu_parent" style="width:200px;">
-					<?=$this->mdl_prosedur->OptionMenuParent(array('value'=>$menu_id));?>
+					<?=$this->mdl_prosedur->OptionMenuParent(array('value'=>$menu_parent));?>
 			</select>
 	</div>
 	<div class="fitem" >

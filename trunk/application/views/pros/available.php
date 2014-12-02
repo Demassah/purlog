@@ -2,54 +2,6 @@
 	
 	var url;
 	$(document).ready(function(){
-
-		available = function (){
-			$('#dialog').dialog({
-				title: 'Available Picking Request Order Selected',
-				width: $(window).width() * 0.8,
-				height: $(window).height() * 0.99,
-				closed: true,
-				cache: false,
-				href: base_url+'pros/available',
-				modal: true
-			});
-			 
-			$('#dialog').dialog('open');
-			url = base_url+'departement/save/add';
-		}
-
-		lock = function (){
-			$('#dialog').dialog({
-				title: 'Lock Picking Request Order Selected',
-				width: $(window).width() * 0.8,
-				height: $(window).height() * 0.99,
-				closed: true,
-				cache: false,
-				href: base_url+'pros/lock',
-				modal: true
-			});
-			 
-			$('#dialog').dialog('open');
-			url = base_url+'departement/save/add';
-		}
-		
-
-		pending = function (){
-			$('#dialog').dialog({
-				title: 'Pending Picking Request Order Selected',
-				width: $(window).width() * 0.8,
-				height: $(window).height() * 0.99,
-				closed: true,
-				cache: false,
-				href: base_url+'pros/pending',
-				modal: true
-			});
-			 
-			$('#dialog').dialog('open');
-			url = base_url+'departement/save/add';
-		}
-		
-		
 		
 		saveData = function(){
 			// get data matakuliah
@@ -242,13 +194,10 @@
 	<div>
 		<table>
 			<tr>
-			<td>&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-add">Alocate All</a></td> 
+			<td>&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-add">Confirm All</a></td> 
 
-			<td>&nbsp;&nbsp;<a href="#" onclick="available()" class="easyui-linkbutton" iconCls="icon-ok">Available</a></td> 
+			<td>&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-login">Lock SRO</a></td> 
 
-			<td>&nbsp;&nbsp;<a href="#" onclick="lock()" class="easyui-linkbutton" iconCls="icon-login">Lock</a></td> 
-			
-			<td>&nbsp;&nbsp;<a href="#" onclick="pending()" class="easyui-linkbutton" iconCls="icon-undo">Pending</a></td> 
 			<td>&nbsp;</td>
 			</tr>
 		</table>

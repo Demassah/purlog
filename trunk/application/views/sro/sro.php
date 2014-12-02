@@ -140,6 +140,7 @@
 			pagination:true,
 			pageSize:30,
 			fit:true,
+			toolbar:'#toolbar',
 			">
 	<thead>
 		<tr>
@@ -152,6 +153,31 @@
 		</tr>
 	</thead>
 </table>
+
+
+<div id="toolbar" style="padding:5px;height:auto">
+	<div style="margin-bottom:5px">		
+	</div>
+	<div class="fsearch">
+		<table width="900" border="0">
+		  <tr>
+		  <td>PROS</td>
+			<td>: 
+				<select id="#" name="#" style="width:200px;">
+					
+				</select>
+			</td>
+			<td>PROS</td>
+			<td>: 
+				<input name="#" size="30" value=" ">
+			</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-add">Add</a></td>
+		  </tr>
+		</table>
+	</div>
+</div>
 
 <!-- AREA untuk Form MENU >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
 <div id="dialog-menu" class="easyui-dialog" style="width:400px;height:150px" closed="true" buttons="#dlg-buttons-menu">

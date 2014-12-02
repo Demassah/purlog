@@ -20,5 +20,17 @@ class pros extends CI_Controller {
 	function detail(){
 		$this->load->view('pros/detail_picking');
 	}
+
+	function available(){
+		$this->load->view('pros/available');
+	}
+
+	function lock(){
+		$this->load->view('pros/lock');
+	}
+
+	function pending(){
+		$this->load->view('pros/pending');
+	}
 	
 }
