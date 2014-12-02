@@ -152,7 +152,7 @@
 			fit:true,
 			">
 	<thead>
-		<tr>
+		<tr>	
 			<th field="user_id" sortable="true" width="150" hidden="true">Name 1</th>
 			<th field="nama_kategori" sortable="true" width="150">Name 2</th>
 			<th field="nama_sub_kategori" sortable="true" width="150">Name 3</th>

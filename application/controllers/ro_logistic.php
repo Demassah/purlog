@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class ro_logistic extends CI_Controller {
+class request_order_logistic extends CI_Controller {
 	
 	function __construct(){
 		parent::__construct();
@@ -9,7 +9,7 @@ class ro_logistic extends CI_Controller {
 	}
 	
 	function index(){
-		$this->load->view('ro_logistic/index');
+		$this->load->view('request_order_logistic/index');
 	}
 
 	function grid(){
@@ -21,7 +21,7 @@ class ro_logistic extends CI_Controller {
 		$data['kode'] = '';
 	
 		
-		$this->load->view('ro_logistic/form', $data);
+		$this->load->view('request_order_logistic/form', $data);
 	}
 	
 	function edit($kode){
@@ -34,7 +34,7 @@ class ro_logistic extends CI_Controller {
     $data['jumlah'] = $r->row()->jumlah;
 		$data['kode'] = $kode;
 		
-		$this->load->view('ro_logistic/form', $data);
+		$this->load->view('request_order_logistic/form', $data);
 	}
 	
 	// function save($aksi){
