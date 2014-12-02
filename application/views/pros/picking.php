@@ -39,12 +39,10 @@
 		
 			detailData = function (){
 			$('#dialog').dialog({
-				title: 'Detail Picking',
+				title: 'Alocation',
 				//style:{background:'#d4d4d4'},
-				//width: $(window).width() * 0.8,
-				//height: $(window).height() * 0.99,
-				width: 625,
-				height: 600,
+				width: $(window).width() * 0.8,
+				height: $(window).height() * 0.99,
 				closed: true,
 				cache: false,
 				href: base_url+'pros/detail/',
@@ -112,19 +110,19 @@
 		
 		actionbutton = function(value, row, index){
 			var col='';
-			//if (row.kd_fakultas != null) {
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'edit'))){?>
-					col = '<a href="#" onclick="editData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Edit</a>';
-			<?}?>
+			//<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'edit'))){?>
+			//		col = '<a href="#" onclick="editData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Edit</a>';
+			//<?}?>
 
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'DELETE'))){?>
-					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="deleteData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
-			<?}?>
+			//<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'DELETE'))){?>
+			//		col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="deleteData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
+			//<?}?>
 
 			<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'DETAIL'))){?>
-					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="detailData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
+					col += '&nbsp;&nbsp; &nbsp;&nbsp;<a href="#" onclick="detailData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
 			<?}?>
-			//}
+			
+					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
 			return col;
 		}
 		
@@ -135,22 +133,22 @@
 		});
 		
 		//# Tombol Bawah
-		$(function(){
-			var pager = $('#dg').datagrid().datagrid('getPager');	// get the pager of datagrid
-			pager.pagination({
-				buttons:[
-					<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'ADD'))){?>
-					{
-						iconCls:'icon-add',
-						text:'Tambah Data',
-						handler:function(){
-							newData();
-						}
-					}
-					<?}?>
-				]
-			});			
-		});
+		//$(function(){
+		//	var pager = $('#dg').datagrid().datagrid('getPager');	// get the pager of datagrid
+		//	pager.pagination({
+		//		buttons:[
+		//			<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'ADD'))){?>
+		//			{
+		//				iconCls:'icon-add',
+		//				text:'Tambah Data',
+		//				handler:function(){
+		//					newData();
+		//				}
+		//			}
+		//			<?}?>
+		//		]
+		//	});			
+		//});
 		
 	});
 </script>
@@ -166,11 +164,14 @@
 	<thead>
 		<tr>
 			<th field="user_id" sortable="true" width="150" hidden="true">ID</th>
-			<th field="nama_kategori" sortable="true" width="150">Kategori</th>
-			<th field="nama_sub_kategori" sortable="true" width="150">Sub Kategori</th>
-			<th field="kode_barang" sortable="true" width="150">Kode Barang</th>
-			<th field="nama_barang" sortable="true" width="150">Nama Barang</th>
-			<th field="jumlah" sortable="true" width="150">Jumlah</th>
+			<th field="nama_kategori" sortable="true" width="120">Request Order</th>
+			<th field="nama_sub_kategori" sortable="true" width="120">Ext Document</th>
+			<th field="kode_barang" sortable="true" width="120">Category Request</th>
+			<th field="nama_barang" sortable="true" width="120">Type Request</th>
+			<th field="nama_barang" sortable="true" width="100">Requestor</th>
+			<th field="nama_barang" sortable="true" width="100">Tgl Buat</th>
+			<th field="nama_barang" sortable="true" width="100">ETD</th>
+			<th field="nama_barang" sortable="true" width="100">Notes</th>
 			<th field="action" align="center" formatter="actionbutton" width="140">Aksi</th>
 		</tr>
 	</thead>
@@ -188,7 +189,7 @@
 	<div class="fsearch">
 		<table width="500" border="0">
 		  <tr>
-			<td>ROS</td>
+			<td>Request Order Selected</td>
 			<td>: 
 				<input name="#" size="30" value=" ">
 			</td>
