@@ -88,6 +88,7 @@
 						<select id="#" name="#" style="width:200px;">
 						</select>
 						&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-ok">Done</a>
+						&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-print">Print</a>
 				</td>
 			</tr>			
 		</table>
