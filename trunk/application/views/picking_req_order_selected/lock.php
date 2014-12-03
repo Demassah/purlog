@@ -148,7 +148,7 @@
 		
 		// load matkul
 		$(function(){ // init
-			$('#dg-nilai').datagrid({url:"<?=base_url()?>nilai/grid_input"});	
+			$('#dg-nilai').datagrid({url:"#"});	
 			//$('#dg').datagrid('enableFilter'); 
 		});	
 		
@@ -194,9 +194,7 @@
 	<div>
 		<table>
 			<tr>
-			<td>&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-add">Confirm All</a></td> 
-
-			<td>&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-login">Lock SRO</a></td> 
+			<td>&nbsp;&nbsp;<a href="#" onclick="SRO()" class="easyui-linkbutton" iconCls="icon-add">Shipment Request Order</a></td> 
 
 			<td>&nbsp;</td>
 			</tr>

@@ -9,12 +9,12 @@
 				height: 150,
 				closed: true,
 				cache: false,
-				href: base_url+'sro/add',
+				href: base_url+'shipment_req_order/add',
 				modal: true
 			});
 			 
 			$('#dialog').dialog('open');
-			url = base_url+'sro/save/add';
+			url = base_url+'shipment_req_order/save/add';
 		}
 		// end newData
 		
@@ -27,12 +27,12 @@
 					height: 150,
 					closed: true,
 					cache: false,
-					href: base_url+'sro/edit/'+val,
+					href: base_url+'shipment_req_order/edit/'+val,
 					modal: true
 				});
 				
 				$('#dialog').dialog('open');  
-				url = base_url+'sro/save/edit';
+				url = base_url+'shipment_req_order/save/edit';
 			// }
 		}
 		//end editData
@@ -43,7 +43,7 @@
 				if(confirm("Apakah yakin akan menghapus data '" + val + "'?")){
 					var response = '';
 					$.ajax({ type: "GET",
-						 url: base_url+'sro/delete/' + val,
+						 url: base_url+'shipment_req_order/delete/' + val,
 						 async: false,
 						 success : function(response){
 							var response = eval('('+response+')');
@@ -74,12 +74,12 @@
 				height: $(window).height() * 0.99,
 				closed: true,
 				cache: false,
-				href: base_url+'sro/detail',
+				href: base_url+'shipment_req_order/detail',
 				modal: true
 			});
 			 
 			$('#dialog').dialog('open');
-			url = base_url+'sro/save/add';
+			url = base_url+'shipment_req_order/save/add';
 		}
 		
 		saveData = function(){
@@ -126,7 +126,7 @@
 		
 		$(function(){
 			$('#dg').datagrid({
-				url:"<?=base_url()?>sro/grid"
+				url:"<?=base_url()?>shipment_req_order/grid"
 			});
 		});
 		

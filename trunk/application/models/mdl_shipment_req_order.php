@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class mdl_sro extends CI_Model {
+class mdl_shipment_req_order extends CI_Model {
     
 	function __construct(){
         parent::__construct();

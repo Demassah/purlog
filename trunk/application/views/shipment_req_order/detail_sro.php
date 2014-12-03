@@ -10,7 +10,7 @@
 				height: $(window).height() * 0.99,
 				closed: true,
 				cache: false,
-				href: base_url+'pros/available',
+				href: base_url+'shipment_req_order/available',
 				modal: true
 			});
 			 
@@ -25,7 +25,7 @@
 				height: $(window).height() * 0.99,
 				closed: true,
 				cache: false,
-				href: base_url+'pros/lock',
+				href: base_url+'shipment_req_order/lock',
 				modal: true
 			});
 			 
@@ -41,7 +41,7 @@
 				height: $(window).height() * 0.99,
 				closed: true,
 				cache: false,
-				href: base_url+'pros/pending',
+				href: base_url+'shipment_req_order/pending',
 				modal: true
 			});
 			 

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class pros extends CI_Controller {
+class picking_req_order_selected extends CI_Controller {
 	
 	function __construct(){
 		parent::__construct();
@@ -9,7 +9,7 @@ class pros extends CI_Controller {
 	}
 	
 	function index(){
-		$this->load->view('pros/picking');
+		$this->load->view('picking_req_order_selected/picking');
 	}
 	
 	function grid(){
@@ -18,19 +18,19 @@ class pros extends CI_Controller {
 	}
 
 	function detail(){
-		$this->load->view('pros/detail_picking');
+		$this->load->view('picking_req_order_selected/detail_picking');
 	}
 
 	function available(){
-		$this->load->view('pros/available');
+		$this->load->view('picking_req_order_selected/available');
 	}
 
 	function lock(){
-		$this->load->view('pros/lock');
+		$this->load->view('picking_req_order_selected/lock');
 	}
 
 	function pending(){
-		$this->load->view('pros/pending');
+		$this->load->view('picking_req_order_selected/pending');
 	}
 	
 }
