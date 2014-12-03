@@ -130,7 +130,7 @@
 		
 		$(function(){
 			$('#dg').datagrid({
-				url:"<?=base_url()?>pros/grid"
+				url:base_url + "pros/grid"
 			});
 		});
 		

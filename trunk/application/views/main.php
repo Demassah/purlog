@@ -15,11 +15,9 @@
 	<script type="text/javascript" src="<?=base_url();?>asset/easyui/plugins/jquery.datagrid-detailview.js"></script>
 	<script type="text/javascript" src="<?=base_url();?>asset/js/ckeditor/ckeditor.js"></script>
 	
-
-
 </head>
 <body class="easyui-layout">
-<input type="hidden" id="base" value="<?=base_url();?>" />
+<input type="hide" value="<?=base_url();?>"/> 
 	<script>
 		base_url = '<?=base_url();?>';
 		
@@ -206,7 +204,7 @@
 	
 	
 	
-	<div data-options="region:'north',border:false" style="height:93px;background:#FFF;background: fixed url(<?=base_url();?>asset/images/header.jpg) no-repeat top left;">
+	<div data-options="region:'north',border:false" style="height:93px;background:#FFF;background: fixed  no-repeat top left;">
 		<!-- bagian atas -->
 		<div id="topheader">
 		<div class="bg">

@@ -42,6 +42,7 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = '192.168.250.18';
+//$db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
 $db['default']['password'] = '';
 $db['default']['database'] = 'purlog';

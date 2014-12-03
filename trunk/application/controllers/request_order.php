@@ -19,11 +19,11 @@ class request_order extends CI_Controller {
 		
 	function add(){
 		$data['kode'] = '';
-	
-		
+		$data['name'] = '';
+		$data['name_kode'] = '';		
 		$this->load->view('request_order/form', $data);
 	}
-	
+
 	function edit($kode){
 		$r = $this->mdl_barang->getdataedit($kode);
 		
@@ -35,6 +35,19 @@ class request_order extends CI_Controller {
 		$data['kode'] = $kode;
 		
 		$this->load->view('request_order/form', $data);
+	}
+
+	function detail($kode){
+		$r = $this->mdl_barang->getdataedit($kode);
+		
+    $data['id_kategori'] = $r->row()->id_kategori;
+    $data['id_sub_kategori'] = $r->row()->id_sub_kategori;
+    $data['kode_barang'] = $r->row()->kode_barang;
+    $data['nama_barang'] = $r->row()->nama_barang;
+    $data['jumlah'] = $r->row()->jumlah;
+		$data['kode'] = $kode;
+		
+		$this->load->view('request_order/detail', $data);
 	}
 	
 	// function save($aksi){
