@@ -4,7 +4,7 @@ class request_order extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
-		//$this->load->model('mdl_kategori');
+		$this->load->model('mdl_barang');
 		//$this->output->enable_profiler(TRUE);
 	}
 	
@@ -13,8 +13,8 @@ class request_order extends CI_Controller {
 	}
 
 	function grid(){
-		$data = $this->mdl_barang->getdata();
-		echo $this->mdl_barang->togrid($data['row_data'], $data['row_count']);
+		// $data = $this->mdl_barang->getdata();
+		// echo $this->mdl_barang->togrid($data['row_data'], $data['row_count']);
 	}
 		
 	function add(){
