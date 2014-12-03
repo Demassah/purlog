@@ -10,7 +10,7 @@
 				height: $(window).height() * 0.99,
 				closed: true,
 				cache: false,
-				href: base_url+'pros/available',
+				href: base_url+'picking_req_order_selected/available',
 				modal: true
 			});
 			 
@@ -25,7 +25,7 @@
 				height: $(window).height() * 0.99,
 				closed: true,
 				cache: false,
-				href: base_url+'pros/lock',
+				href: base_url+'picking_req_order_selected/lock',
 				modal: true
 			});
 			 
@@ -41,7 +41,7 @@
 				height: $(window).height() * 0.99,
 				closed: true,
 				cache: false,
-				href: base_url+'pros/pending',
+				href: base_url+'picking_req_order_selected/pending',
 				modal: true
 			});
 			 
@@ -196,7 +196,7 @@
 		
 		// load matkul
 		$(function(){ // init
-			$('#dg-nilai').datagrid({url:"<?=base_url()?>nilai/grid_input"});	
+			$('#dg-nilai').datagrid({url:"#"});	
 			//$('#dg').datagrid('enableFilter'); 
 		});	
 		

@@ -45,12 +45,12 @@
 				height: $(window).height() * 0.99,
 				closed: true,
 				cache: false,
-				href: base_url+'pros/detail/',
+				href: base_url+'picking_req_order_selected/detail/',
 				modal: true
 			});
 			 
 			$('#dialog').dialog('open');
-			url = base_url+'pros/save';
+			url = base_url+'picking_req_order_selected/save';
 		}
 		// end newData
 		
@@ -128,7 +128,7 @@
 		
 		$(function(){
 			$('#dg').datagrid({
-				url:"<?=base_url()?>pros/grid"
+				url:"<?=base_url()?>picking_req_order_selected/grid"
 			});
 		});
 		

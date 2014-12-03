@@ -1,20 +1,20 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class sro extends CI_Controller {
+class shipment_req_order extends CI_Controller {
 	
 	function __construct(){
 		parent::__construct();
-		$this->load->model('mdl_sro');
+		$this->load->model('mdl_shipment_req_order');
 		//$this->output->enable_profiler(TRUE);
 	}
 	
 	function index(){
-		$this->load->view('sro/sro');
+		$this->load->view('shipment_req_order/sro');
 	}
 	
 	function grid(){
-		$data = $this->mdl_sro->getdata();
-		echo $this->mdl_sro->togrid($data['row_data'], $data['row_count']);
+		$data = $this->mdl_shipment_req_order->getdata();
+		echo $this->mdl_shipment_req_order->togrid($data['row_data'], $data['row_count']);
 	}
 	
 	function add(){
@@ -22,11 +22,11 @@ class sro extends CI_Controller {
 		$data['id_kategori'] = '';
 		$data['nama_kategori'] = '';
 		
-		$this->load->view('sro/sro_form', $data);
+		$this->load->view('shipment_req_order/sro_form', $data);
 	}
 
 	function detail(){		
-		$this->load->view('sro/detail_sro');
+		$this->load->view('shipment_req_order/detail_sro');
 	}
 	
 	function edit($kode){
