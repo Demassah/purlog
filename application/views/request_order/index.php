@@ -1,4 +1,5 @@
-<script>
+<script type="text/javascript" src="<?=base_url('asset/js/modul/ro_logistic/app.js');?>"  charset="utf-8"></script>
+<script type="text/javascript">
 	var url;
 	$(document).ready(function(){
 	
@@ -130,7 +131,7 @@
 		
 		$(function(){
 			$('#dg').datagrid({
-				url:"<?=base_url()?>pros/grid"
+				url:base_url + "pros/grid"
 			});
 		});
 		
@@ -171,7 +172,8 @@
 		</table>
 	</div>
 </div>
-<table id="dg" title="Picking Request Order Selected List" data-options="
+
+<table id="dg" title="Request Order List" data-options="
 			rownumbers:true,
 			singleSelect:true,
 			autoRowHeight:false,
@@ -200,10 +202,11 @@
 	</thead>-->
 </table>
 
-
 <!-- AREA untuk Form MENU >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
 <div id="dialog-menu" class="easyui-dialog" style="width:400px;height:150px" closed="true" buttons="#dlg-buttons-menu">
-<div id="dlg-buttons-menu">
-	<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveMenu()">Save</a>
-	<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dialog-menu').dialog('close')">Cancel</a>
+	<div id="dlg-buttons-menu">
+		<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveMenu()">Save</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dialog-menu').dialog('close')">Cancel</a>
+	</div>
 </div>
+

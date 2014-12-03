@@ -9,7 +9,7 @@
 				height: 130,
 				closed: true,
 				cache: false,
-				href: base_url+'kategori/add',
+				href: base_url + 'kategori/add',
 				modal: true
 			});
 			 
@@ -130,7 +130,7 @@
 		
 		$(function(){
 			$('#dg').datagrid({
-				url:"<?=base_url()?>pros/grid"
+				url:base_url + "pros/grid"
 			});
 		});
 		
