@@ -39,7 +39,7 @@
 		
 			detailData = function (){
 			$('#dialog').dialog({
-				title: 'Alocation',
+				title: 'Detail |Alocation',
 				//style:{background:'#d4d4d4'},
 				width: $(window).width() * 0.8,
 				height: $(window).height() * 0.99,
@@ -118,7 +118,7 @@
 			//		col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="deleteData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
 			//<?}?>
 
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'DETAIL'))){?>
+			<?if($this->mdl_auth->CekAkses(array('menu_id'=>12, 'policy'=>'DETAIL'))){?>
 					col += '&nbsp;&nbsp; &nbsp;&nbsp;<a href="#" onclick="detailData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
 			<?}?>
 			
@@ -128,7 +128,7 @@
 		
 		$(function(){
 			$('#dg').datagrid({
-				url:"<?=base_url()?>picking_req_order_selected/grid"
+				url:base_url+"picking_req_order_selected/grid"
 			});
 		});
 		

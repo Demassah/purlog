@@ -28,59 +28,11 @@ class shipment_req_order extends CI_Controller {
 	function detail(){		
 		$this->load->view('shipment_req_order/detail_sro');
 	}
-	
-	function edit($kode){
-		$r = $this->mdl_kategori->getdataedit($kode);
-    $data['nama_kategori'] = $r->row()->nama_kategori;
-    
-		$data['kode'] = $kode;	
 
-		$this->load->view('master/kategori_form', $data);
+	function checkout(){		
+		$this->load->view('shipment_req_order/checkout');
 	}
 	
-	function save($aksi){
-		# init
-		$status = "";
-		$result = false;
-		$data['pesan_error'] = '';
-		
-		# get post data
-		foreach($_POST as $key => $value){
-			$data[$key] = $value;
-		}
-		
-		# rules validasi form
-		$this->form_validation->set_rules("nama_kategori", 'Nama Kategori', 'trim|required|xss_clean');
-
-
-		# message rules
-		$this->form_validation->set_message('required', 'Field %s harus diisi.');
-
-		$data['pesan_error'] = '';
-		if ($this->form_validation->run() == FALSE){
-			$data["pesan_error"] .= trim(validation_errors(' ',' '))==''?'':validation_errors(' ',' ');
-		}else{
-			if($aksi=="add"){ // add
-				$result = $this->mdl_kategori->InsertOnDb($data);
-			}else { // edit
-				$result=$this->mdl_kategori->UpdateOnDb($data);
-			}
-		}
-		
-		if($result){
-			echo json_encode(array('success'=>true));
-		}else{
-			echo json_encode(array('msg'=>$data['pesan_error']));
-		}
-	}
 	
-	function delete($kode){
-		$result = $this->mdl_kategori->DeleteOnDb($kode);
-		if ($result){
-			echo json_encode(array('success'=>true));
-		} else {
-			echo json_encode(array('msg'=>'Data gagal dihapus'));
-		}
-	}
 	
 }

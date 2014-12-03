@@ -69,7 +69,7 @@
 		
 		detailData = function (){
 			$('#dialog').dialog({
-				title: 'Detail SRO',
+				title: 'List PROS Locked',
 				width: $(window).width() * 0.8,
 				height: $(window).height() * 0.99,
 				closed: true,
@@ -126,7 +126,7 @@
 		
 		$(function(){
 			$('#dg').datagrid({
-				url:"<?=base_url()?>shipment_req_order/grid"
+				url:base_url+"shipment_req_order/grid"
 			});
 		});
 		

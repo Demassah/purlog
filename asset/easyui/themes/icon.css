@@ -37,6 +37,9 @@
 .icon-excel{
 	background:url('icons/document-excel.png') no-repeat center center;
 }
+.icon-detail{
+	background:url('icons/detail.png') no-repeat;
+}
 .icon-login{
 	background:url('icons/lock_open.png') no-repeat;
 }
@@ -78,15 +81,6 @@
 
 
 
--------------------------------------------------------Menu------------------------------------------
-
-.icon-user{
-	background:url('icons/menu/pengguna.png') no-repeat center center;
-}
-
-.icon-departement{
-	background:url('icons/menu/departement.png') no-repeat center center;
-}
 
 .icon-otoritas{
 	background:url('icons/menu/otoritas.png') no-repeat center center;
@@ -100,7 +94,6 @@
 	background:url('icons/menu/master.png') no-repeat center center;
 }
 
-
 .icon-kategori{
 	background:url('icons/menu/kategori.png') no-repeat center center;
 }
@@ -112,3 +105,88 @@
 .icon-barang{
 	background:url('icons/menu/barang.png') no-repeat center center;
 }
+
+.icon-setup{
+	background:url('icons/menu/setup.png') no-repeat center center;
+}
+
+.icon-logistic{
+	background:url('icons/menu/logistic.png') no-repeat center center;
+}
+
+.icon-ro{
+	background:url('icons/menu/ro.png') no-repeat center center;
+}
+
+.icon-rol{
+	background:url('icons/menu/rol.png') no-repeat center center;
+}
+
+.icon-ros{
+	background:url('icons/menu/ros.png') no-repeat center center;
+}
+
+.icon-picking{
+	background:url('icons/menu/picking.png') no-repeat center center;
+}
+
+.icon-shipment{
+	background:url('icons/menu/shipment.png') no-repeat center center;
+}
+
+.icon-delivery{
+	background:url('icons/menu/delivery.png') no-repeat center center;
+}
+
+.icon-purchase{
+	background:url('icons/menu/purchase.png') no-repeat center center;
+}
+
+.icon-pr{
+	background:url('icons/menu/pr.png') no-repeat center center;
+}
+
+.icon-qrs{
+	background:url('icons/menu/qrs.png') no-repeat center center;
+}
+
+.icon-po{
+	background:url('icons/menu/po.png') no-repeat center center;
+}
+
+.icon-bap{
+	background:url('icons/menu/bap.png') no-repeat center center;
+}
+
+.icon-bapp{
+	background:url('icons/menu/bapp.png') no-repeat center center;
+}
+
+.icon-dr{
+	background:url('icons/menu/dr.png') no-repeat center center;
+}
+
+.icon-pr{
+	background:url('icons/menu/pr.png') no-repeat center center;
+}
+
+.icon-user{
+	background:url('icons/menu/user.png') no-repeat center center;
+}
+
+.icon-menu{
+	background:url('icons/menu/menu.png') no-repeat center center;
+}
+
+.icon-departement{
+	background:url('icons/menu/departement.png') no-repeat center center;
+}
+
+
+
+
+
+
+
+
+

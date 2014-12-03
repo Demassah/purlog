@@ -4,12 +4,12 @@
 	
 		newData = function (){
 			$('#dialog').dialog({
-				title: 'Tambah Kategori',
+				title: 'Tambah Delivery Order',
 				width: 380,
 				height: 130,
 				closed: true,
 				cache: false,
-				href: base_url+'kategori/add',
+				href: base_url+'delivery_order/add',
 				modal: true
 			});
 			 
@@ -37,9 +37,9 @@
 		}
 		//end editData
 		
-			detailData = function (){
+			detailDO = function (){
 			$('#dialog').dialog({
-				title: 'Alocation',
+				title: 'Detail Delivery Order',
 				//style:{background:'#d4d4d4'},
 				width: $(window).width() * 0.8,
 				height: $(window).height() * 0.99,
@@ -118,8 +118,8 @@
 			//		col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="deleteData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
 			//<?}?>
 
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'DETAIL'))){?>
-					col += '&nbsp;&nbsp; &nbsp;&nbsp;<a href="#" onclick="detailData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
+			<?if($this->mdl_auth->CekAkses(array('menu_id'=>19, 'policy'=>'DETAIL'))){?>
+					col += '&nbsp;&nbsp; &nbsp;&nbsp;<a href="#" onclick="detailDO(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
 			<?}?>
 			
 					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
@@ -128,27 +128,27 @@
 		
 		$(function(){
 			$('#dg').datagrid({
-				url:base_url+"pros/grid"
+				url:base_url+"delivery_order/grid"
 			});
 		});
 		
 		//# Tombol Bawah
-		//$(function(){
-		//	var pager = $('#dg').datagrid().datagrid('getPager');	// get the pager of datagrid
-		//	pager.pagination({
-		//		buttons:[
-		//			<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'ADD'))){?>
-		//			{
-		//				iconCls:'icon-add',
-		//				text:'Tambah Data',
-		//				handler:function(){
-		//					newData();
-		//				}
-		//			}
-		//			<?}?>
-		//		]
-		//	});			
-		//});
+		$(function(){
+			var pager = $('#dg').datagrid().datagrid('getPager');	// get the pager of datagrid
+			pager.pagination({
+				buttons:[
+				<?if($this->mdl_auth->CekAkses(array('menu_id'=>19, 'policy'=>'ADD'))){?>
+					{
+						iconCls:'icon-add',
+						text:'Tambah Data',
+						handler:function(){
+							newData();
+						}
+					}
+					<?}?>
+				]
+			});			
+		});
 		
 	});
 </script>
@@ -189,7 +189,7 @@
 	<div class="fsearch">
 		<table width="500" border="0">
 		  <tr>
-			<td>Request Order Selected</td>
+			<td>Delivery Order</td>
 			<td>: 
 				<input name="#" size="30" value=" ">
 			</td>

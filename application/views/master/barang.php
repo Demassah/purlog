@@ -5,7 +5,7 @@
 		newData = function (){
 			$('#dialog').dialog({
 				title: 'Tambah Barang',
-				width: 350,
+				width: 400,
 				height: 275,
 				closed: true,
 				cache: false,
@@ -23,7 +23,7 @@
 			// if (row){
 				$('#dialog').dialog({
 					title: 'Edit ',
-					width: 350,
+					width: 400,
 					height: 275,
 					closed: true,
 					cache: false,
