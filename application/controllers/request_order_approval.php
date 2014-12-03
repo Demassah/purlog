@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class request_order extends CI_Controller {
+class request_order_approval extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
@@ -9,7 +9,7 @@ class request_order extends CI_Controller {
 	}
 	
 	function index(){
-		$this->load->view('request_order/index');
+		$this->load->view('request_order_approval/index');
 	}
 
 	function grid(){
@@ -21,7 +21,7 @@ class request_order extends CI_Controller {
 		$data['kode'] = '';
 		$data['name'] = '';
 		$data['name_kode'] = '';		
-		$this->load->view('request_order/form', $data);
+		$this->load->view('request_order_approval/form', $data);
 	}
 
 	function edit($kode){
@@ -34,7 +34,7 @@ class request_order extends CI_Controller {
     $data['jumlah'] = $r->row()->jumlah;
 		$data['kode'] = $kode;
 		
-		$this->load->view('request_order/form', $data);
+		$this->load->view('request_order_approval/form', $data);
 	}
 
 	function detail($kode){
@@ -47,9 +47,13 @@ class request_order extends CI_Controller {
     $data['jumlah'] = $r->row()->jumlah;
 		$data['kode'] = $kode;
 		
-		$this->load->view('request_order/detail', $data);
+		$this->load->view('request_order_approval/detail', $data);
 	}
 	
+	public function option()
+	{
+		$this->load->view('request_order_approval/option', FALSE);
+	}
 	// function save($aksi){
 	// 	# init
 	// 	$status = "";
@@ -98,5 +102,6 @@ class request_order extends CI_Controller {
 	// 	}
 	// }
 }
-/* End of file request_order.php */
-/* Location: ./application/controllers/request_order.php */
+
+/* End of file request_order_approval_approval.php */
+/* Location: ./application/controllers/request_order_approval_approval.php */
