@@ -4,7 +4,7 @@ class sro extends CI_Controller {
 	
 	function __construct(){
 		parent::__construct();
-		//$this->load->model('mdl_kategori');
+		$this->load->model('mdl_sro');
 		//$this->output->enable_profiler(TRUE);
 	}
 	
@@ -13,8 +13,8 @@ class sro extends CI_Controller {
 	}
 	
 	function grid(){
-		//$data = $this->mdl_kategori->getdata();
-		//echo $this->mdl_kategori->togrid($data['row_data'], $data['row_count']);
+		$data = $this->mdl_sro->getdata();
+		echo $this->mdl_sro->togrid($data['row_data'], $data['row_count']);
 	}
 	
 	function add(){
@@ -23,6 +23,10 @@ class sro extends CI_Controller {
 		$data['nama_kategori'] = '';
 		
 		$this->load->view('sro/sro_form', $data);
+	}
+
+	function detail(){		
+		$this->load->view('sro/detail_sro');
 	}
 	
 	function edit($kode){

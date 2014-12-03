@@ -45,7 +45,7 @@
 				height: $(window).height() * 0.99,
 				closed: true,
 				cache: false,
-				href: base_url+'pros/detail/',
+				href: base_url+'delivery_order/detail/',
 				modal: true
 			});
 			 
@@ -128,7 +128,7 @@
 		
 		$(function(){
 			$('#dg').datagrid({
-				url:"<?=base_url()?>pros/grid"
+				url:base_url+"pros/grid"
 			});
 		});
 		

@@ -6,7 +6,7 @@
 			$('#dialog').dialog({
 				title: 'Tambah SRO',
 				width: 380,
-				height: 130,
+				height: 150,
 				closed: true,
 				cache: false,
 				href: base_url+'sro/add',
@@ -24,7 +24,7 @@
 				$('#dialog').dialog({
 					title: 'Edit SRO',
 					width: 380,
-					height: 130,
+					height: 150,
 					closed: true,
 					cache: false,
 					href: base_url+'sro/edit/'+val,
@@ -67,6 +67,21 @@
 		}
 		//end deleteData 
 		
+		detailData = function (){
+			$('#dialog').dialog({
+				title: 'Detail SRO',
+				width: $(window).width() * 0.8,
+				height: $(window).height() * 0.99,
+				closed: true,
+				cache: false,
+				href: base_url+'sro/detail',
+				modal: true
+			});
+			 
+			$('#dialog').dialog('open');
+			url = base_url+'sro/save/add';
+		}
+		
 		saveData = function(){
 			
 			$('#form1').form('submit',{
@@ -92,18 +107,20 @@
 		//end saveData
 		
 		actionbutton = function(value, row, index){
-			var col;
+			var col='';
+			//<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'edit'))){?>
+			//		col = '<a href="#" onclick="editData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Edit</a>';
+			//<?}?>
+
+			//<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'DELETE'))){?>
+			//		col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="deleteData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
+			//<?}?>
+
 			<?if($this->mdl_auth->CekAkses(array('menu_id'=>13, 'policy'=>'DETAIL'))){?>
-				col = '<a href="#" onclick="detailData(\''+row.id_sro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
+					col += '&nbsp;&nbsp; &nbsp;&nbsp;<a href="#" onclick="detailData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
 			<?}?>
-
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>13, 'policy'=>'EDIT'))){?>
-				col = '<a href="#" onclick="editData(\''+row.id_sro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Edit</a>';
-			<?}?>
-
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>13, 'policy'=>'DELETE'))){?>	
-				col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="deleteData(\''+row.id_sro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
-			<?}?>
+			
+					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
 			return col;
 		}
 		
@@ -140,16 +157,20 @@
 			pagination:true,
 			pageSize:30,
 			fit:true,
-			toolbar:'#toolbar',
+			toolbar:'#toolbar'
 			">
 	<thead>
 		<tr>
-			<th field="id_kategori" sortable="true" width="150" hidden="true">ID</th>
-			<th field="#" sortable="true" width="350">SRO 1</th>
-			<th field="#" sortable="true" width="350">SRO 1</th>
-			<th field="#" sortable="true" width="350">SRO 1</th>
-			<th field="#" sortable="true" width="350">SRO 1</th>
-			<th field="action" align="center" formatter="actionbutton" width="100">Aksi</th>
+			<th field="user_id" sortable="true" width="150" hidden="true">ID</th>
+			<th field="nama_kategori" sortable="true" width="120">Request Order</th>
+			<th field="nama_sub_kategori" sortable="true" width="120">Ext Document</th>
+			<th field="kode_barang" sortable="true" width="120">Category Request</th>
+			<th field="nama_barang" sortable="true" width="120">Type Request</th>
+			<th field="nama_barang" sortable="true" width="100">Requestor</th>
+			<th field="nama_barang" sortable="true" width="100">Tgl Buat</th>
+			<th field="nama_barang" sortable="true" width="100">ETD</th>
+			<th field="nama_barang" sortable="true" width="100">Notes</th>
+			<th field="action" align="center" formatter="actionbutton" width="140">Aksi</th>
 		</tr>
 	</thead>
 </table>
@@ -161,19 +182,19 @@
 	<div class="fsearch">
 		<table width="900" border="0">
 		  <tr>
-		  <td>PROS</td>
+		  <!--<td>PROS</td>
 			<td>: 
 				<select id="#" name="#" style="width:200px;">
 					
 				</select>
-			</td>
+			</td>-->
 			<td>PROS</td>
 			<td>: 
 				<input name="#" size="30" value=" ">
 			</td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
-			<td>&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-add">Add</a></td>
+			<td>&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-search">Search</a></td>
 		  </tr>
 		</table>
 	</div>

@@ -11,7 +11,7 @@ class mdl_prosedur extends CI_Model {
 		$out = '';
 		
 		$this->db->flush_cache();
-		$this->db->from('sys_departement');
+		$this->db->from('ref_departement');
 		$this->db->order_by('departement_name');
 		//$this->db->where('status', 'A');
 		

@@ -10,7 +10,7 @@
 				closed: true,
 				cache: false,
 				href: base_url+'kategori/add',
-				modal: true
+				modal: false
 			});
 			 
 			$('#dialog').dialog('open');
@@ -45,7 +45,7 @@
 				height: $(window).height() * 0.99,
 				closed: true,
 				cache: false,
-				href: base_url+'pros/detail/',
+				href: base_url+'delivery_order/detail/',
 				modal: true
 			});
 			 
