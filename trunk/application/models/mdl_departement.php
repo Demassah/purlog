@@ -18,7 +18,7 @@ class mdl_departement extends CI_Model {
 		$this->db->flush_cache();
 		$this->db->start_cache();
 			$this->db->select('*');
-			$this->db->from('sys_departement');
+			$this->db->from('ref_departement');
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
 		
@@ -52,7 +52,7 @@ class mdl_departement extends CI_Model {
 	function getsingledata(){
 		$this->db->flush_cache();
 		$this->db->select('DISTINCT *',false);
-		$this->db->from('sys_departement');		
+		$this->db->from('ref_departement');		
 		
 		return $this->db->get()->row();
 	}
@@ -62,7 +62,7 @@ class mdl_departement extends CI_Model {
 		$this->db->flush_cache();
 		$this->db->set('departement_name', $data['departement_name']);
 		
-		$result = $this->db->insert('sys_departement');
+		$result = $this->db->insert('ref_departement');
 		
 		//return
 		if($result) {
@@ -75,7 +75,7 @@ class mdl_departement extends CI_Model {
 	function getdataedit($kode){
 		$this->db->flush_cache();
 		$this->db->select('*');
-		$this->db->from('sys_departement');
+		$this->db->from('ref_departement');
 		$this->db->where('departement_id', $kode);
 		
 		return $this->db->get();
@@ -88,7 +88,7 @@ class mdl_departement extends CI_Model {
 
 		
 		$this->db->where('departement_id', $data['kode']);
-		$result = $this->db->update('sys_departement');
+		$result = $this->db->update('ref_departement');
 		
 		//return
 		if($result) {
@@ -100,7 +100,7 @@ class mdl_departement extends CI_Model {
 
 	function DeleteOnDb($kode){		
 		$this->db->where('departement_id', $kode);
-		$result = $this->db->delete('sys_departement');
+		$result = $this->db->delete('ref_departement');
 		
 		//return
 		if($result) {
