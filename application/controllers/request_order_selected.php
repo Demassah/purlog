@@ -13,8 +13,8 @@ function __construct(){
 	}
 
 	function grid(){
-		$data = $this->mdl_barang->getdata();
-		echo $this->mdl_barang->togrid($data['row_data'], $data['row_count']);
+		// $data = $this->mdl_barang->getdata();
+		// echo $this->mdl_barang->togrid($data['row_data'], $data['row_count']);
 	}
 		
 	function add(){
