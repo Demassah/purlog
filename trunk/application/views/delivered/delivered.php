@@ -17,8 +17,6 @@
 			$('#dialog').dialog('open');
 			url = base_url+'pros/save';
 		}
-		
-			
 				
 		actionbutton = function(value, row, index){
 			var col='';

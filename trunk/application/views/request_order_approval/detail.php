@@ -21,8 +21,8 @@
     add = function (){
       $('#dialog').dialog({
         title: 'Add Detail Request approval',
-        width: 500,
-        height:300,
+         width: 600,
+        height: 400,
         closed: true,
         cache: false,
         href: base_url+'request_order_approval/add',

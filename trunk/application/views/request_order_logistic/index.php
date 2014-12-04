@@ -140,13 +140,7 @@
 			pager.pagination({
 				buttons:[
 					<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'ADD'))){?>
-					{
-						iconCls:'icon-add',
-						text:'Tambah Data',
-						handler:function(){
-							newData();
-						}
-					}
+					
 					<?}?>
 				]
 			});			
@@ -206,4 +200,5 @@
 <div id="dlg-buttons-menu">
 	<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveMenu()">Save</a>
 	<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dialog-menu').dialog('close')">Cancel</a>
+</div>
 </div>
