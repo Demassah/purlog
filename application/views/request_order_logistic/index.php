@@ -177,11 +177,14 @@
 	<thead>
 		<tr>
 			<th field="user_id" sortable="true" width="150" hidden="true">ID</th>
-			<th field="nama_kategori" sortable="true" width="150">Kategori</th>
-			<th field="nama_sub_kategori" sortable="true" width="150">Sub Kategori</th>
-			<th field="kode_barang" sortable="true" width="150">Kode Barang</th>
-			<th field="nama_barang" sortable="true" width="150">Nama Barang</th>
-			<th field="jumlah" sortable="true" width="150">Jumlah</th>
+			<th field="kode_barang" sortable="true" width="100">ID RO</th>
+			<th field="nama_kategori" sortable="true" width="130">Requestor</th>
+			<th field="nama_sub_kategori" sortable="true" width="120">Departement</th>
+			<th field="kode_barang" sortable="true" width="120">Purpose</th>
+			<th field="nama_barang" sortable="true" width="120">Cat Request</th>
+			<th field="nama_barang" sortable="true" width="100">Ext Document No</th>
+			<th field="nama_barang" sortable="true" width="100">ETD</th>
+			<th field="nama_barang" sortable="true" width="100">Date Create</th>
 			<th field="action" align="center" formatter="actionbutton" width="140">Aksi</th>
 		</tr>
 	</thead>

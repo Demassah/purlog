@@ -1,136 +1,41 @@
 <script>
 	var url;
 	$(document).ready(function(){
-	
-		newData = function (){
-			$('#dialog').dialog({
-				title: 'Tambah Kategori',
-				width: 380,
-				height: 130,
-				closed: true,
-				cache: false,
-				href: base_url + 'kategori/add',
-				modal: true
-			});
-			 
-			$('#dialog').dialog('open');
-			url = base_url+'kategori/save/add';
-		}
-		// end newData
 		
-		editData = function (val){
-			// var row = $('#dg').datagrid('getSelected');
-			// if (row){
-				$('#dialog').dialog({
-					title: 'Edit Kategori',
-					width: 380,
-					height: 130,
-					closed: true,
-					cache: false,
-					href: base_url+'kategori/edit/'+val,
-					modal: true
-				});
-				
-				$('#dialog').dialog('open');  
-				url = base_url+'kategori/save/edit';
-			// }
-		}
-		//end editData
-		
-			detailData = function (){
+			detailROS = function (){
 			$('#dialog').dialog({
 				title: 'Detail Picking',
 				//style:{background:'#d4d4d4'},
 				//width: $(window).width() * 0.8,
 				//height: $(window).height() * 0.99,
-				width: 625,
+				width: 655,
 				height: 600,
 				closed: true,
 				cache: false,
-				href: base_url+'pros/detail/',
+				href: base_url+'request_order_selected/detailROS/',
 				modal: true
 			});
 			 
 			$('#dialog').dialog('open');
 			url = base_url+'pros/save';
 		}
-		// end newData
-		
-		deleteData = function (val){
-			// var row = $('#dg').datagrid('getSelected');
-			// if(row){
-				if(confirm("Apakah yakin akan menghapus data '" + val + "'?")){
-					var response = '';
-					$.ajax({ type: "GET",
-						 url: base_url+'kategori/delete/' + val,
-						 async: false,
-						 success : function(response){
-							var response = eval('('+response+')');
-							if (response.success){
-								$.messager.show({
-									title: 'Success',
-									msg: 'Data Berhasil Dihapus'
-								});
-								// reload and close tab
-								$('#dg').datagrid('reload');
-							} else {
-								$.messager.show({
-									title: 'Error',
-									msg: response.msg
-								});
-							}
-						 }
-					});
-				}
-			// }
-		}
-		//end deleteData 
-		
-		saveData = function(){
-			
-			$('#form1').form('submit',{
-				url: url,
-				onSubmit: function(){
-					return $(this).form('validate');
-				},
-				success: function(result){
-					//alert(result);
-					var result = eval('('+result+')');
-					if (result.success){
-						$('#dialog').dialog('close');		// close the dialog
-						$('#dg').datagrid('reload');		// reload the user data
-					} else {
-						$.messager.show({
-							title: 'Error',
-							msg: result.msg
-						});
-					}
-				}
-			});
-		}
-		//end saveData
+	
 		
 		actionbutton = function(value, row, index){
 			var col='';
-			//if (row.kd_fakultas != null) {
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'edit'))){?>
-					col = '<a href="#" onclick="editData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Edit</a>';
+			<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'DETAIL'))){?>
+					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="detailROS(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
 			<?}?>
 
 			<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'DELETE'))){?>
-					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="deleteData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
-			<?}?>
-
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'DETAIL'))){?>
-					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="detailData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
-			<?}?>
-			//}
+					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="deleteData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
+			<?}?>			
 			return col;
 		}
 		
 		$(function(){
 			$('#dg').datagrid({
-				url:base_url + "pros/grid"
+				url:base_url + "request_order_selected/grid"
 			});
 		});
 		
@@ -183,11 +88,14 @@
 	<thead>
 		<tr>
 			<th field="user_id" sortable="true" width="150" hidden="true">ID</th>
-			<th field="nama_kategori" sortable="true" width="150">Kategori</th>
-			<th field="nama_sub_kategori" sortable="true" width="150">Sub Kategori</th>
-			<th field="kode_barang" sortable="true" width="150">Kode Barang</th>
-			<th field="nama_barang" sortable="true" width="150">Nama Barang</th>
-			<th field="jumlah" sortable="true" width="150">Jumlah</th>
+			<th field="kode_barang" sortable="true" width="100">ID RO</th>
+			<th field="nama_kategori" sortable="true" width="130">Requestor</th>
+			<th field="nama_sub_kategori" sortable="true" width="120">Departement</th>
+			<th field="kode_barang" sortable="true" width="120">Purpose</th>
+			<th field="nama_barang" sortable="true" width="120">Cat Request</th>
+			<th field="nama_barang" sortable="true" width="100">Ext Document No</th>
+			<th field="nama_barang" sortable="true" width="100">ETD</th>
+			<th field="nama_barang" sortable="true" width="100">Date Create</th>
 			<th field="action" align="center" formatter="actionbutton" width="140">Aksi</th>
 		</tr>
 	</thead>

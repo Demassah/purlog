@@ -45,7 +45,9 @@
 				toolbar:'#toolbar',
 				">
 		<thead>
-			<tr>
+			<tr border="1px" style:{background:'#000000'>
+				<th width="150">ID Detail</th>
+				<th width="150">ID RO</th>
 				<th width="150">ID Detail</th>
 				<th width="150">ID RO</th>
 				<th width="150">ID Item</th>
