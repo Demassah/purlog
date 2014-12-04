@@ -18,58 +18,9 @@
 		}
 		// end newData
 		
-		editData = function (val){
-			// var row = $('#dg').datagrid('getSelected');
-			// if (row){
-				$('#dialog').dialog({
-					title: 'Edit SRO',
-					width: 380,
-					height: 150,
-					closed: true,
-					cache: false,
-					href: base_url+'shipment_req_order/edit/'+val,
-					modal: true
-				});
-				
-				$('#dialog').dialog('open');  
-				url = base_url+'shipment_req_order/save/edit';
-			// }
-		}
-		//end editData
-		
-		deleteData = function (val){
-			// var row = $('#dg').datagrid('getSelected');
-			// if(row){
-				if(confirm("Apakah yakin akan menghapus data '" + val + "'?")){
-					var response = '';
-					$.ajax({ type: "GET",
-						 url: base_url+'shipment_req_order/delete/' + val,
-						 async: false,
-						 success : function(response){
-							var response = eval('('+response+')');
-							if (response.success){
-								$.messager.show({
-									title: 'Success',
-									msg: 'Data Berhasil Dihapus'
-								});
-								// reload and close tab
-								$('#dg').datagrid('reload');
-							} else {
-								$.messager.show({
-									title: 'Error',
-									msg: response.msg
-								});
-							}
-						 }
-					});
-				}
-			// }
-		}
-		//end deleteData 
-		
 		detailData = function (){
 			$('#dialog').dialog({
-				title: 'List PROS Locked',
+				title: 'List Detail SRO',
 				width: $(window).width() * 0.8,
 				height: $(window).height() * 0.99,
 				closed: true,
@@ -162,14 +113,15 @@
 	<thead>
 		<tr>
 			<th field="user_id" sortable="true" width="150" hidden="true">ID</th>
-			<th field="nama_kategori" sortable="true" width="120">Request Order</th>
-			<th field="nama_sub_kategori" sortable="true" width="120">Ext Document</th>
-			<th field="kode_barang" sortable="true" width="120">Category Request</th>
-			<th field="nama_barang" sortable="true" width="120">Type Request</th>
-			<th field="nama_barang" sortable="true" width="100">Requestor</th>
-			<th field="nama_barang" sortable="true" width="100">Tgl Buat</th>
+			<th field="nama_barang" sortable="true" width="100">ID SRO</th>
+			<th field="nama_barang" sortable="true" width="100">ID ROS</th>
+			<th field="nama_kategori" sortable="true" width="130">Requestor</th>
+			<th field="nama_sub_kategori" sortable="true" width="120">Departement</th>
+			<th field="kode_barang" sortable="true" width="120">Purpose</th>
+			<th field="nama_barang" sortable="true" width="120">Cat Request</th>
+			<th field="nama_barang" sortable="true" width="100">Ext Document No</th>
 			<th field="nama_barang" sortable="true" width="100">ETD</th>
-			<th field="nama_barang" sortable="true" width="100">Notes</th>
+			<th field="nama_barang" sortable="true" width="100">Date Create</th>
 			<th field="action" align="center" formatter="actionbutton" width="140">Aksi</th>
 		</tr>
 	</thead>
@@ -188,7 +140,7 @@
 					
 				</select>
 			</td>-->
-			<td>PROS</td>
+			<td>ROS</td>
 			<td>: 
 				<input name="#" size="30" value=" ">
 			</td>

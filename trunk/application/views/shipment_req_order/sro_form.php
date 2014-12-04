@@ -2,7 +2,7 @@
 	<input type="hidden" name="kode" id="kode" value=" ">
 	<div class="fitem" >
 		<!--combobox autocomplete-->
-		<label style="width:120px">PROS </label>:
+		<label style="width:120px">ROS </label>:
 			<select id="#" name="#" style="width:200px;">
 			</select>
 	</div>

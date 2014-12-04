@@ -25,6 +25,18 @@ class delivered extends CI_Controller {
 		$this->load->view('delivered/list_sro');
 	}
 
+	function receive(){
+		$this->load->view('delivered/receive');
+	}
+
+	function detail_ros(){
+		$this->load->view('delivered/detail_ros');
+	}
+
+	function sro(){
+		$this->load->view('delivered/sro');
+	}
+
 	function add(){
 		$data['kode'] = '';
 		$data['id_kategori'] = '';

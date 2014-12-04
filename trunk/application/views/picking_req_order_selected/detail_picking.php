@@ -55,22 +55,6 @@
 					col += '&nbsp;&nbsp; &nbsp;&nbsp;<a href="#" onclick="detailData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Alocate</a>';			
 			return col;
 		}
-
-		//# Tombol Bawah
-		$(function(){
-			var pager = $('#dg').datagrid().datagrid('getPager');	// get the pager of datagrid
-			pager.pagination({
-				buttons:[
-					{
-						iconCls:'icon-add',
-						text:'Alocate All',
-						handler:function(){
-							newData();
-						}
-					}				
-				]
-			});			
-		});
 		
 
 		$(function(){ // init
