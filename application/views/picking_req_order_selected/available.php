@@ -90,14 +90,11 @@
 	<thead>
 		<tr>
 			<th data-options="field:'id_krs_detail',width:'100', hidden:true">aa</th>
-			<th field="nama_kategori" sortable="true" width="120">ID Request Order</th>
-			<th field="kode_barang" sortable="true" width="120">ID Ext Document</th>
-			<th field="kode_barang" sortable="true" width="120">ID Barang</th>
-			<th field="nama_sub_kategori" sortable="true" width="120">Nama Barang</th>
-			<th field="kode_barang" sortable="true" width="120">Qty</th>
-			<th field="kode_barang" sortable="true" width="120">Requestor </th>
-			<th field="kode_barang" sortable="true" width="120">Date Create</th>
-			<th field="kode_barang" sortable="true" width="120">Note</th>			
+			<th field="nama_kategori" sortable="true" width="120">ID Detail ROS</th>
+			<th field="kode_barang" sortable="true" width="120">ID ROS</th>
+			<th field="kode_barang" sortable="true" width="120">ID Item</th>
+			<th field="kode_barang" sortable="true" width="80">Qty</th>
+			<th field="kode_barang" sortable="true" width="300">Deskripsi</th>	
 			<th field="action" align="center" formatter="actionAvailable" width="160">Aksi</th>
 			<th field="chk" width="23" formatter="Checkbox">
 				<input style="margin-top:2px;" type="checkbox" name="checkbox" id="checkbox" onclick="update_value('+index+', this.checked, \''+row.id_jadwal+'\')" '+(row.chk==true?'checked="checked"':'')+'/>
