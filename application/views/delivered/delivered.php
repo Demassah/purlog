@@ -1,29 +1,30 @@
 <script>
 	var url;
 	$(document).ready(function(){
-		
-			detailDelivered = function (){
+
+		detail_ros = function (){
 			$('#dialog').dialog({
-				title: 'Detail Barang SRO',
+				title: 'Detail ROS',
 				//style:{background:'#d4d4d4'},
 				width: $(window).width() * 0.8,
 				height: $(window).height() * 0.99,
 				closed: true,
 				cache: false,
-				href: base_url+'delivered/detail/',
+				href: base_url+'delivered/detail_ros/',
 				modal: true
 			});
 			 
 			$('#dialog').dialog('open');
 			url = base_url+'pros/save';
 		}
-		// end newData
 		
+			
+				
 		actionbutton = function(value, row, index){
 			var col='';
 
 			<?if($this->mdl_auth->CekAkses(array('menu_id'=>19, 'policy'=>'DETAIL'))){?>
-					col += '&nbsp;&nbsp; &nbsp;&nbsp;<a href="#" onclick="detailDelivered(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
+					col += '&nbsp;&nbsp; &nbsp;&nbsp;<a href="#" onclick="detail_ros(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
 			<?}?>
 			return col;
 		}
@@ -48,14 +49,13 @@
 	<thead>
 		<tr>
 			<th field="user_id" sortable="true" width="150" hidden="true">ID</th>
-			<th field="nama_kategori" sortable="true" width="120">Request Order</th>
-			<th field="nama_sub_kategori" sortable="true" width="120">Ext Document</th>
-			<th field="kode_barang" sortable="true" width="120">Category Request</th>
-			<th field="nama_barang" sortable="true" width="120">Type Request</th>
-			<th field="nama_barang" sortable="true" width="100">Requestor</th>
-			<th field="nama_barang" sortable="true" width="100">Tgl Buat</th>
+			<th field="nama_kategori" sortable="true" width="130">Requestor</th>
+			<th field="nama_sub_kategori" sortable="true" width="120">Departement</th>
+			<th field="kode_barang" sortable="true" width="120">Purpose</th>
+			<th field="nama_barang" sortable="true" width="120">Cat Request</th>
+			<th field="nama_barang" sortable="true" width="100">Ext Document No</th>
 			<th field="nama_barang" sortable="true" width="100">ETD</th>
-			<th field="nama_barang" sortable="true" width="100">Notes</th>
+			<th field="nama_barang" sortable="true" width="100">Date Create</th>
 			<th field="action" align="center" formatter="actionbutton" width="140">Aksi</th>
 		</tr>
 	</thead>

@@ -25,6 +25,10 @@ class delivery_order extends CI_Controller {
 		$this->load->view('delivery_order/list_sro');
 	}
 
+	function detailSROlist(){
+		$this->load->view('delivery_order/detailSRO_list');
+	}
+
 	function add(){
 		$data['kode'] = '';
 		$data['id_kategori'] = '';

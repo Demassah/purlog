@@ -3,38 +3,42 @@
 	var url;
 	$(document).ready(function(){
 
-		checkout = function (){
+		detail_ros = function (){
 			$('#dialog').dialog({
-				title: 'Checkout',
+				title: 'Detail ROS',
+				//style:{background:'#d4d4d4'},
 				width: $(window).width() * 0.8,
 				height: $(window).height() * 0.99,
 				closed: true,
 				cache: false,
-				href: base_url+'shipment_req_order/checkout',
+				href: base_url+'delivered/detail_ros/',
 				modal: true
 			});
 			 
 			$('#dialog').dialog('open');
-			url = base_url+'departement/save/add';
+			url = base_url+'pros/save';
 		}
 
-		loadingList = function (){
+		detailDelivered = function (){
 			$('#dialog').dialog({
-				title: 'Loading List',
+				title: 'Detail Barang SRO',
+				//style:{background:'#d4d4d4'},
 				width: $(window).width() * 0.8,
 				height: $(window).height() * 0.99,
 				closed: true,
 				cache: false,
-				href: base_url+'shipment_req_order/loadingList',
+				href: base_url+'delivered/detail/',
 				modal: true
 			});
 			 
 			$('#dialog').dialog('open');
-			url = base_url+'departement/save/add';
+			url = base_url+'pros/save';
 		}
-
-		Checkbox = function(value, row, index){
-			return '<input style="margin-top:2px;" type="checkbox" name="checkbox" id="checkbox" onclick="update_value('+index+', this.checked, \''+row.id_jadwal+'\')" '+(row.chk==true?'checked="checked"':'')+'/>';
+				
+		actiondetail = function(value, row, index){
+			var col='';
+					col += '&nbsp;&nbsp; &nbsp;&nbsp;<a href="#" onclick="detailDelivered(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';			
+			return col;
 		}
 		
 
@@ -60,10 +64,8 @@
 			<th field="kode_barang" sortable="true" width="120">ID ROS</th>
 			<th field="kode_barang" sortable="true" width="120">ID Item</th>
 			<th field="kode_barang" sortable="true" width="80">Qty</th>
-			<th field="kode_barang" sortable="true" width="300">Deskripsi</th>		
-			<th field="chk" width="23" formatter="Checkbox">
-				<input style="margin-top:2px;" type="checkbox" name="checkbox" id="checkbox" onclick="update_value('+index+', this.checked, \''+row.id_jadwal+'\')" '+(row.chk==true?'checked="checked"':'')+'/>
-			</th>
+			<th field="kode_barang" sortable="true" width="300">Deskripsi</th>	
+			<th field="action" align="center" formatter="actiondetail" width="140">Aksi</th>
 		</tr>
 	</thead>
 </table>
@@ -72,16 +74,9 @@
 		<table>
 			<tr>
 					<td>
-							&nbsp;&nbsp;<a href="#" onclick="checkout()" class="easyui-linkbutton" iconCls="icon-ok">Checkokut</a>
-							&nbsp;&nbsp;<a href="#" onclick="loadingList()" class="easyui-linkbutton" iconCls="icon-add">Loading List</a>
-					</td>							
-			</tr>
-			<tr> 
-					<td>&nbsp;</td>
+							&nbsp;&nbsp;<a href="#" onclick="detail_ros()" class="easyui-linkbutton" iconCls="icon-ok">Detail ROS</a>
+					</td> 
 			</tr>		
-			<tr> 
-				<td>&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-add">Checkout</a></td>
-			</tr>			
 		</table>
 	</div>
 </div>

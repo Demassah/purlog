@@ -5,7 +5,7 @@
 
 		listSRO = function (){
 			$('#dialog').dialog({
-				title: 'Add Shipment Request Order',
+				title: 'List Shipment Request Order',
 				width: $(window).width() * 0.8,
 				height: $(window).height() * 0.99,
 				closed: true,
@@ -18,19 +18,20 @@
 			url = base_url+'departement/save/add';
 		}
 
-		detailSROlist = function (){
+		detailDO = function (){
 			$('#dialog').dialog({
-				title: 'List Detail SRO',
+				title: 'Detail Delivery Order',
+				//style:{background:'#d4d4d4'},
 				width: $(window).width() * 0.8,
 				height: $(window).height() * 0.99,
 				closed: true,
 				cache: false,
-				href: base_url+'delivery_order/detailSROlist',
+				href: base_url+'delivery_order/detail/',
 				modal: true
 			});
 			 
 			$('#dialog').dialog('open');
-			url = base_url+'departement/save/add';
+			url = base_url+'pros/save';
 		}
 				
 		actiondetail = function(value, row, index){
@@ -63,8 +64,7 @@
 			<th field="kode_barang" sortable="true" width="120">ID ROS</th>
 			<th field="kode_barang" sortable="true" width="120">ID Item</th>
 			<th field="kode_barang" sortable="true" width="80">Qty</th>
-			<th field="kode_barang" sortable="true" width="300">Deskripsi</th>		
-			<th field="action" align="center" formatter="actiondetail" width="140">Aksi</th>
+			<th field="kode_barang" sortable="true" width="300">Deskripsi</th>
 		</tr>
 	</thead>
 </table>
@@ -72,7 +72,10 @@
 	<div>
 		<table>
 			<tr>
-					<td>&nbsp;&nbsp;<a href="#" onclick="listSRO()" class="easyui-linkbutton" iconCls="icon-detail">Add SRO</a></td>					
+					<td>
+							&nbsp;&nbsp;<a href="#" onclick="detailDO()" class="easyui-linkbutton" iconCls="icon-detail">Detail Delivery Order</a>
+							&nbsp;&nbsp;<a href="#" onclick="listSRO()" class="easyui-linkbutton" iconCls="icon-detail">List Shipment Request Order</a>							
+					</td>					
 			</tr>
 			<tr> 
 					<td>&nbsp;</td>
@@ -83,7 +86,6 @@
 
 						<select id="#" name="#" style="width:200px;">
 						</select>
-						&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-ok">Done</a>
 						&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-print">Print</a>
 				</td>
 			</tr>			

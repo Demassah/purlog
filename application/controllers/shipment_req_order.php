@@ -33,6 +33,8 @@ class shipment_req_order extends CI_Controller {
 		$this->load->view('shipment_req_order/checkout');
 	}
 	
-	
+	function loadingList(){		
+		$this->load->view('shipment_req_order/loading_list');
+	}
 	
 }
