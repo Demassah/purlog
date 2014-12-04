@@ -58,7 +58,7 @@
 	
 		newData = function (){
 			$('#dialog').dialog({
-				title: 'Tambah Request Order',
+				title: 'insert Request Order',
 				width: 380,
 				height: 230,
 				closed: true,

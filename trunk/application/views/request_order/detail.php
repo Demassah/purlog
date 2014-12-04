@@ -8,7 +8,7 @@
 			</div>
 			<div class="fitem" >
 				<label style="width:100px">Item Type</label>: 
-				<select id="id_kategori" class="item_type" name="id_kategori" style="width:200px;">
+				<select id="id_kategori" class="item_type" name="id_kategori" style="width:120px;">
 							<?=$this->mdl_prosedur->OptionKategori(array('value'=>$id_kategori));?>
 					</select>	
 			</div>
