@@ -59,15 +59,15 @@
 			$('#dialog').dialog({
 				title: 'Tambah Request Order',
 				width: 380,
-				height: 230,
+				height: 280,
 				closed: true,
 				cache: false,
-				href: base_url+'request_order/add',
+				href: base_url+'request_order_approval/add',
 				modal: true
 			});
 			 
 			$('#dialog').dialog('open');
-			url = base_url+'request_order/save/add';
+			url = base_url+'request_order_approval/save/add';
 		}
 		// end newData
 		
@@ -80,18 +80,18 @@
 					height: 130,
 					closed: true,
 					cache: false,
-					href: base_url+'request_order/edit/'+val,
+					href: base_url+'request_order_approval/edit/'+val,
 					modal: true
 				});
 				
 				$('#dialog').dialog('open');  
-				url = base_url+'request_order/save/edit';
+				url = base_url+'request_order_approval/save/edit';
 			// }
 		}
 		//end editData
 		
 			DetailData = function (val){
-				//$('#detail').load(base_url+'request_order_approval/');
+				//$('#detail').load(base_url+'request_order_approval_approval/');
 			$('#dialog').dialog({
 				title: 'Detail Request Order',
 				//style:{background:'#d4d4d4'},
@@ -101,12 +101,12 @@
 				height: $(window).height() * 0.99,
 				closed: true,
 				cache: false,
-				href: base_url+'request_order_approval/detail/'+val,
+				href: base_url+'request_order_approval_approval/detail/'+val,
 				modal: true
 			});
 			 
 			$('#dialog').dialog('open');
-			url = base_url+'request_order/save';
+			url = base_url+'request_order_approval/save';
 		}
 		// end newData
 		
@@ -165,7 +165,7 @@
 		//end saveData
 		optionbutton = function(value){
 			var col ='';
-			$(col).load(base_url + 'request_order_approval/option');
+			$(col).load(base_url + 'request_order_approval_approval/option');
 			return col;
 		} 
 		
@@ -184,7 +184,7 @@
 		}
 
 		combo = function(value, row, index){
-			return '<select id="" name="id_sub_kategori" ><option value="1">Approve</option> <option value="2">Reject</option></select>';
+			return '<select id="coba" name="id_sub_kategori" ><option value="1">Approve</option> <option value="2">Reject</option></select>';
 			
 		}
 
@@ -194,7 +194,7 @@
 		
 		$(function(){
 			$('#dg').datagrid({
-				url:base_url + "request_order/grid"
+				url:base_url + "request_order_approval/grid"
 			});
 		});
 		
@@ -215,7 +215,6 @@
 				]
 			});			
 		});
-		
 	});
 
  
