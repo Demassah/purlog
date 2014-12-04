@@ -21,7 +21,7 @@ class request_order_approval extends CI_Controller {
 		$data['kode'] = '';
 		$data['name'] = '';
 		$data['name_kode'] = '';		
-		$this->load->view('request_order_approval/form', $data);
+		$this->load->view('request_order_approval/form_add', $data);
 	}
 
 	function edit($kode){
@@ -50,10 +50,7 @@ class request_order_approval extends CI_Controller {
 		$this->load->view('request_order_approval/detail', $data);
 	}
 	
-	public function option()
-	{
-		$this->load->view('request_order_approval/option', FALSE);
-	}
+
 	// function save($aksi){
 	// 	# init
 	// 	$status = "";

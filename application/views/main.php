@@ -14,6 +14,7 @@
 	<script type="text/javascript" src="<?=base_url();?>asset/easyui/plugins/jquery.datagrid-filter.js"></script>
 	<script type="text/javascript" src="<?=base_url();?>asset/easyui/plugins/jquery.datagrid-detailview.js"></script>
 	<script type="text/javascript" src="<?=base_url();?>asset/js/ckeditor/ckeditor.js"></script>
+
 	
 </head>
 <body class="easyui-layout">

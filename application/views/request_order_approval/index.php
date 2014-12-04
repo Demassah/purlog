@@ -95,11 +95,11 @@
 				//style:{background:'#d4d4d4'},
 				//width: $(window).width() * 0.8,
 				//height: $(window).height() * 0.99,
-				width: 625,
-				height: 600,
+					width: $(window).width() * 0.8,
+				height: $(window).height() * 0.99,
 				closed: true,
 				cache: false,
-				href: base_url+'request_order/detail/'+val,
+				href: base_url+'request_order_approval/detail/'+val,
 				modal: true
 			});
 			 
