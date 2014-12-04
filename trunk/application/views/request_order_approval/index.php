@@ -204,13 +204,13 @@
 			pager.pagination({
 				buttons:[
 					<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'ADD'))){?>
-					{
-						iconCls:'icon-add',
-						text:'Tambah Data',
-						handler:function(){
-							newData();
-						}
-					}
+					// {
+					// 	iconCls:'icon-add',
+					// 	text:'Tambah Data',
+					// 	handler:function(){
+					// 		newData();
+					// 	}
+					// }
 					<?}?>
 				]
 			});			
