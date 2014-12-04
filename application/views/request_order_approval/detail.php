@@ -124,14 +124,11 @@
   <thead>
     <tr>
       <th data-options="field:'id_krs_detail',width:'100', hidden:true">aa</th>
-      <th field="nama_kategori" sortable="true" width="120">ID Request Order</th>
-      <th field="kode_barang" sortable="true" width="120">ID Ext Document</th>
-      <th field="kode_barang" sortable="true" width="120">ID Barang</th>
-      <th field="nama_sub_kategori" sortable="true" width="120">Nama Barang</th>
+      <th field="nama_kategori" sortable="true" width="120">ID Detail</th>
+      <th field="kode_barang" sortable="true" width="120">ID RO</th>
+      <th field="kode_barang" sortable="true" width="120">ID Item</th>
       <th field="kode_barang" sortable="true" width="120">Qty</th>
-      <th field="kode_barang" sortable="true" width="120">Requestor </th>
-      <th field="kode_barang" sortable="true" width="120">Date Create</th>
-      <th field="kode_barang" sortable="true" width="120">Note</th>     
+      <th field="kode_barang" sortable="true" width="120">Description</th>   
       <th field="action" align="center" formatter="actiondetail" width="140">Aksi</th>
     </tr>
   </thead>

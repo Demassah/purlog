@@ -101,7 +101,7 @@
 				height: $(window).height() * 0.99,
 				closed: true,
 				cache: false,
-				href: base_url+'request_order_approval_approval/detail/'+val,
+				href: base_url+'request_order_approval/detail/'+val,
 				modal: true
 			});
 			 
@@ -165,7 +165,7 @@
 		//end saveData
 		optionbutton = function(value){
 			var col ='';
-			$(col).load(base_url + 'request_order_approval_approval/option');
+			$(col).load(base_url + 'request_order_approval/option');
 			return col;
 		} 
 		
