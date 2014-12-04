@@ -27,11 +27,14 @@
 	<thead>
 		<tr>
 			<th field="user_id" sortable="true" width="150" hidden="true">ID</th>
-			<th field="nama_kategori" sortable="true" width="150">Kategori</th>
-			<th field="nama_sub_kategori" sortable="true" width="150">Sub Kategori</th>
-			<th field="kode_barang" sortable="true" width="150">Kode Barang</th>
-			<th field="nama_barang" sortable="true" width="150">Nama Barang</th>
-			<th field="jumlah" sortable="true" width="150">Jumlah</th>
+			<th field="id_ro" sortable="true" width="150">Id RO</th>
+			<th field="requestor" sortable="true" width="150">Requestor</th>
+			<th field="department" sortable="true" width="150">Departement</th>
+			<th field="purpose" sortable="true" width="150">Purpose</th>
+			<th field="category_req" sortable="true" width="150">Category Req</th>
+			<th field="ext_doc" sortable="true" width="150">Ext Doc</th>
+			<th field="etd" sortable="true" width="150">ETD</th>
+			<th field="create_date" sortable="true" width="150">Create Date</th>
 			<th field="action" align="center" formatter="actionbutton" width="140">Aksi</th>
 		</tr>
 	</thead>
@@ -60,7 +63,7 @@
 			$('#dialog').dialog({
 				title: 'insert Request Order',
 				width: 380,
-				height: 230,
+				height: 250,
 				closed: true,
 				cache: false,
 				href: base_url+'request_order/add',

@@ -1,28 +1,38 @@
 
-<div id="p" class="easyui-panel" title="Form Detail Item" style="padding:10px;background:#fafafa;" data-options="collapsible:true">
-    <form id="form1" method="post" style="margin:10px">
-			<input type="hidden" name="kode" id="kode" value="<?=$kode?>">
-			<div class="fitem">
-				<label style="width:100px">Id Item</label>:
-				<input name="id_item" id="id_item" size="15" value="">
-			</div>
-			<div class="fitem" >
-				<label style="width:100px">Item Type</label>: 
-				<select id="id_kategori" class="item_type" name="id_kategori" style="width:120px;">
-							<?=$this->mdl_prosedur->OptionKategori(array('value'=>$id_kategori));?>
-					</select>	
-			</div>
-			<div class="fitem">
-				<label style="width:100px">Item Name</label>:
-				<input name="id_item" size="15" id="item_name" value="">
-			</div>
-			<div class="fitem" >
-				<label style="width:100px">Description </label>: 
-				<textarea  name="kode_barang" class="desc"></textarea>
-			</div>
-			<input type='button' name='tambah' class='button' id="tambah" value='Tambah' style="width:100px;">
-		</form>
-</div>
+<form id="form1" method="post" style="margin:10px">
+<!-- 	<input type="hidden" name="kode" id="kode" value="<?=$kode?>"> -->
+	<div class="fitem" >
+		<label style="width:140px">Category </label>: 
+		<select id="purpose" name="id_kategori" style="width:167px;">
+			<option value="">Choose Purpose</option>
+			<?=$this->mdl_prosedur->OptionKategori(array('value'=>$id_kategori));?>
+		</select>	
+	</div>
+	<div class="fitem" >
+		<label style="width:140px">Category </label>: 
+		<select id="id_sub_kategori" name="id_sub_kategori" style="width:167px;">
+			<option value="">Choose Category</option>
+			<?=$this->mdl_prosedur->OptionSubKategori(array('value'=>$id_sub_kategori, 'id_kategori'=>$id_kategori));?>
+		</select>	
+	</div>
+	<div class="fitem" >
+		<label style="width:140px">Id Item </label>: 
+		<select id="id_item" name="id_sub_kategori" style="width:167px;">
+			<option value="">Choose Category</option>
+			<?=$this->mdl_prosedur->OptionSubKategori(array('value'=>$id_sub_kategori, 'id_kategori'=>$id_kategori));?>
+		</select>	
+	</div>
+	<div class="fitem" >
+		<label style="width:140px">Qty </label>: 
+		<input name="kode_barang" size="19" value=" ">
+	</div>
+	<div class="fitem" >
+		<label style="width:140px">Description </label>: 
+		<textarea name="kode_barang" size="19" value=" "></textarea>
+	</div>
+</form>
+
+
 <br />
 <div id="p" class="easyui-panel" title="Table List Item" style="padding:10px;background:#fafafa;" data-options="collapsible:true">
 	<table id="dg" title="Request Order List" data-options="
@@ -36,10 +46,11 @@
 				">
 		<thead>
 			<tr>
+				<th width="150">ID Detail</th>
+				<th width="150">ID RO</th>
 				<th width="150">ID Item</th>
-				<th width="150">Item Type</th>
-				<th width="150">Item Name</th>
-				<th width="150">Description</th>
+				<th width="50">Qty</th>
+				<th width="150">Decsription</th>
 			</tr>
 		</thead>
 		<tbody id="data">
@@ -78,4 +89,20 @@
 			});
 			}
 		});
+</script>
+<script>
+	 $(document).ready(function(){
+		
+		$('#purpose').change(function(){
+			$('#id_sub_kategori').load(base_url+'prosedur/getSubKategoribyKategori/'+$('#purpose').val());
+		});
+		
+	});
+
+	 $(document).ready(function() {
+		$("#id_item").select2();
+		$("#id_sub_kategori").select2();
+		$("#purpose").select2();
+	});
+
 </script>
