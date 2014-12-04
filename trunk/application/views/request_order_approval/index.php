@@ -49,7 +49,7 @@
 		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dialog-menu').dialog('close')">Cancel</a>
 	</div>
 </div>
-
+<div id="detail"></div>
 <script type="text/javascript">
 	var url;
 	$(document).ready(function(){
@@ -90,6 +90,7 @@
 		//end editData
 		
 			DetailData = function (val){
+				//$('#detail').load(base_url+'request_order_approval/');
 			$('#dialog').dialog({
 				title: 'Detail Request Order',
 				//style:{background:'#d4d4d4'},
