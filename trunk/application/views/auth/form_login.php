@@ -35,7 +35,7 @@
 			<section class="main">
 				<form class="form-1" action="<?=base_url()?>auth/login_proses" method="post">
 					<p class="field">
-						<input type="text" name="username" value="<?=$username?>" placeholder="Username atau username">
+						<input type="text" name="username" value="<?=$username?>" placeholder="Username">
 						<i class="icon-user icon-large"></i>
 					</p>
 						<p class="field">

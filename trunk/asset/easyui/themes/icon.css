@@ -186,8 +186,13 @@
 	background:url('icons/print.png') no-repeat;
 }
 
+.icon-approval{
+	background:url('icons/menu/approval.png') no-repeat center center;
+}
 
-
+.icon-delivered{
+	background:url('icons/menu/delivered.png') no-repeat center center;
+}
 
 
 
