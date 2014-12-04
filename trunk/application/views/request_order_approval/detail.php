@@ -10,12 +10,12 @@
         height: $(window).height() * 0.99,
         closed: true,
         cache: false,
-        href: base_url+'picking_req_order_selected/available',
+        href: base_url+'request_order_approval/detail',
         modal: true
       });
        
       $('#dialog').dialog('open');
-      url = base_url+'departement/save/add';
+      url = base_url+'request_order_approval/save/add';
     }
 
     add = function (){
@@ -30,7 +30,7 @@
       });
        
       $('#dialog').dialog('open');
-      url = base_url+'departement/save/add';
+      url = base_url+'request_order_approval/save/add';
     }
 
     app = function (){
