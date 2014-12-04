@@ -101,6 +101,7 @@
 			$('#dialog').dialog({
 				style:{background:'#ffffff'}
 			});
+
 			
 			// init
 			check_login();
@@ -263,7 +264,7 @@
 	</div>
 	
 	<!-- AREA untuk Form Add/EDIT >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
-	<div id="dialog" class="easyui-dialog" style="width:400px;height:150px;" closed="true" buttons="#dlg-buttons">
+<div id="dialog" class="easyui-dialog" style="width:400px;height:150px;" closed="true" buttons="#dlg-buttons">
 	<div id="dialogDetail" class="easyui-dialog" style="width:400px;height:150px" closed="true">
 		
 	</div>
@@ -271,6 +272,8 @@
 		<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveData()">Save</a>
 		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dialog').dialog('close')">Cancel</a>
 	</div>
+</div>
+
 	
 	
 </body>
