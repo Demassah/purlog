@@ -29,7 +29,8 @@
 			<th field="user_id" sortable="true" width="150" hidden="true">ID</th>
 			<th field="kode_barang" sortable="true" width="150">Request Order Number</th>
 			<th field="nama_sub_kategori" sortable="true" width="150">Request Name</th>
-			<th field="approval" align="center" id="option" formatter="optionbutton" width="140">Approval Action</th>
+			<th field="combo" width="150" formatter="combo">Approval Action</th>
+			<th field="text" width="150" formatter="text"> Reason </th>
 			<th field="action" align="center" formatter="actionbutton" width="140">Aksi</th>
 		</tr>
 	</thead>
@@ -181,6 +182,15 @@
 			//}
 			return col;
 		}
+
+		combo = function(value, row, index){
+			return '<select id="" name="id_sub_kategori" ><option value="1">Approve</option> <option value="2">Reject</option></select>';
+			
+		}
+
+		text = function(value, row, index){
+			return '<input name="menu_name" id="reason" size="30" value=" ">';
+		}
 		
 		$(function(){
 			$('#dg').datagrid({
@@ -207,4 +217,6 @@
 		});
 		
 	});
+
+ 
 </script>
