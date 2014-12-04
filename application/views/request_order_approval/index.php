@@ -198,7 +198,7 @@
 			});
 		});
 		
-		
+
 		//# Tombol Bawah
 		$(function(){
 			var pager = $('#dg').datagrid().datagrid('getPager');	// get the pager of datagrid
