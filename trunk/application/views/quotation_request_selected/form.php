@@ -3,7 +3,8 @@
 	<div class="fitem" >
 		<label style="width:140px">Vendor </label>: 
 		<select id="purpose" name="id_kategori" style="width:167px;">
-						<option value="">Choose Purpose</option>			
+						<option value="">Choose Vendor</option>
+						<option value="">Vendor A</option>			
 		</select>	
 	</div>
 	<div class="fitem" >
