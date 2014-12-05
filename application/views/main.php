@@ -99,7 +99,16 @@
 			
 			// inisialisasi dialog box
 			$('#dialog').dialog({
-				style:{background:'#ffffff'}
+				style:{background:'#ffffff'},
+				 autoOpen: false,
+					show: {
+					effect: "blind",
+					duration: 1000
+					},
+					hide: {
+					effect: "explode",
+					duration: 1000
+					}
 			});
 
 			
