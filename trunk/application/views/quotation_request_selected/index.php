@@ -15,7 +15,7 @@
 	</div>
 </div>
 
-<table id="dg" title="Request Order List" data-options="
+<table id="dg" title="Quotation Request Selected" data-options="
 			rownumbers:true,
 			singleSelect:true,
 			autoRowHeight:false,
@@ -27,18 +27,15 @@
 	<thead>
 		<tr>
 			<th field="user_id" sortable="true" width="150" hidden="true">ID</th>
-		</tr>
-		<tr>
-			<th>ID RO</th>
-			<th field="kode_barang" sortable="true" width="100"></th>
-<!-- 			<th field="nama_kategori" sortable="true" width="130">Requestor</th>
-			<th field="nama_sub_kategori" sortable="true" width="120">Departement</th>
-			<th field="kode_barang" sortable="true" width="120">Purpose</th>
-			<th field="nama_barang" sortable="true" width="120">Cat Request</th>
-			<th field="nama_barang" sortable="true" width="100">Ext Document No</th>
-			<th field="nama_barang" sortable="true" width="100">ETD</th>
-			<th field="nama_barang" sortable="true" width="100">Date Create</th>
-			<th field="action" align="center" formatter="actionbutton" width="140">Aksi</th> -->
+			<th field="id_ro" sortable="true" width="150">Id RO</th>
+			<th field="requestor" sortable="true" width="150">Requestor</th>
+			<th field="department" sortable="true" width="150">Departement</th>
+			<th field="purpose" sortable="true" width="150">Purpose</th>
+			<th field="category_req" sortable="true" width="150">Category Req</th>
+			<th field="ext_doc" sortable="true" width="150">Ext Doc</th>
+			<th field="etd" sortable="true" width="150">ETD</th>
+			<th field="create_date" sortable="true" width="150">Create Date</th>
+			<th field="action" align="center" formatter="actionbutton" width="140">Aksi</th>
 		</tr>
 	</thead>
 	<!--<thead>
@@ -57,24 +54,24 @@
 		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dialog-menu').dialog('close')">Cancel</a>
 	</div>
 </div>
-<div id="detail"></div>
+
 <script type="text/javascript">
 	var url;
 	$(document).ready(function(){
 	
 		newData = function (){
 			$('#dialog').dialog({
-				title: 'Tambah Request Order',
+				title: 'Add Quotation Request Selected',
 				width: 380,
-				height: 280,
+				height: 270,
 				closed: true,
 				cache: false,
-				href: base_url+'request_order_approval/add',
+				href: base_url+'quotation_request_selected/add',
 				modal: true
 			});
 			 
 			$('#dialog').dialog('open');
-			url = base_url+'request_order_approval/save/add';
+			url = base_url+'quotation_request_selected/save/add';
 		}
 		// end newData
 		
@@ -82,38 +79,37 @@
 			// var row = $('#dg').datagrid('getSelected');
 			// if (row){
 				$('#dialog').dialog({
-					title: 'Edit Request Order',
+					title: 'Edit Quotation Request Selected',
 					width: 380,
 					height: 130,
 					closed: true,
 					cache: false,
-					href: base_url+'request_order_approval/edit/'+val,
+					href: base_url+'quotation_request_selected/edit/'+val,
 					modal: true
 				});
 				
 				$('#dialog').dialog('open');  
-				url = base_url+'request_order_approval/save/edit';
+				url = base_url+'quotation_request_selected/save/edit';
 			// }
 		}
 		//end editData
 		
 			DetailData = function (val){
-				//$('#detail').load(base_url+'request_order_approval_approval/');
 			$('#dialog').dialog({
-				title: 'Detail Request Order',
+				title: 'Detail Quotation Request Selected',
 				//style:{background:'#d4d4d4'},
 				//width: $(window).width() * 0.8,
 				//height: $(window).height() * 0.99,
-					width: $(window).width() * 0.8,
-				height: $(window).height() * 0.99,
+				width: 625,
+				height: 600,
 				closed: true,
 				cache: false,
-				href: base_url+'request_order_approval/detail/'+val,
+				href: base_url+'quotation_request_selected/detail/'+val,
 				modal: true
 			});
 			 
 			$('#dialog').dialog('open');
-			url = base_url+'request_order_approval/save';
+			url = base_url+'quotation_request_selected/save';
 		}
 		// end newData
 		
@@ -170,60 +166,42 @@
 			});
 		}
 		//end saveData
-		optionbutton = function(value){
-			var col ='';
-			$(col).load(base_url + 'request_order_approval/option');
-			return col;
-		} 
 		
 		actionbutton = function(value, row, index){
 			var col='';
 			//if (row.kd_fakultas != null) {
+
 			<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'DETAIL'))){?>
-					col += '<a href="#" onclick="DetailData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
+					col += '<a href="#" onclick="DetailData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">List QR</a>';
 			<?}?>
 
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'ADD'))){?>
-					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="SendData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
-			<?}?>
 			//}
 			return col;
-		}
-
-		combo = function(value, row, index){
-			return '<select id="coba" name="id_sub_kategori" ><option value="1">Approve</option> <option value="2">Reject</option></select>';
-			
-		}
-
-		text = function(value, row, index){
-			return '<input name="menu_name" id="reason" size="30" value=" ">';
 		}
 		
 		$(function(){
 			$('#dg').datagrid({
-				url:base_url + "request_order_approval/grid"
+				url:base_url + "request_order/grid"
 			});
 		});
 		
-
 		//# Tombol Bawah
 		$(function(){
 			var pager = $('#dg').datagrid().datagrid('getPager');	// get the pager of datagrid
 			pager.pagination({
 				buttons:[
 					<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'ADD'))){?>
-					// {
-					// 	iconCls:'icon-add',
-					// 	text:'Tambah Data',
-					// 	handler:function(){
-					// 		newData();
-					// 	}
-					// }
+					{
+						iconCls:'icon-add',
+						text:'Tambah Data',
+						handler:function(){
+							newData();
+						}
+					}
 					<?}?>
 				]
 			});			
 		});
+		
 	});
-
- 
 </script>
