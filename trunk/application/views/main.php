@@ -282,6 +282,15 @@
 	</div>
 </div>
 
+<div id="detail_dialog" class="easyui-dialog" style="width:400px;height:150px;" closed="true" buttons="#dlg-buttons-detail">
+	<div id="dialogDetail" class="easyui-dialog" style="width:400px;height:150px" closed="true">
+		
+	</div>
+	<div id="dlg-buttons-detail">
+		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#detail_dialog').dialog('close')">Cancel</a>
+	</div>
+</div>
+
 	
 	
 </body>

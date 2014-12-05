@@ -1,6 +1,11 @@
 <script>
 	var url;
 	$(document).ready(function(){
+
+		//detail
+		//$('#konten').panel({
+			//href:base_url+node.attributes.url
+		//});
 	
 		newData = function (){
 			$('#dialog').dialog({
@@ -36,9 +41,19 @@
 			// }
 		}
 		//end editData
+
 		
+		detailData = function (){
+			//detail
+			$('#konten').panel({
+				href:base_url+'picking_req_order_selected/detail'
+			});
+
+		}
+		
+		/*
 			detailData = function (){
-			$('#dialog').dialog({
+			$('#detail_dialog').dialog({
 				title: 'Detail Alocation',
 				//style:{background:'#d4d4d4'},
 				width: $(window).width() * 0.8,
@@ -49,9 +64,9 @@
 				modal: true
 			});
 			 
-			$('#dialog').dialog('open');
+			$('#detail_dialog').dialog('open');
 			url = base_url+'picking_req_order_selected/save';
-		}
+		}*/
 		
 		deleteData = function (val){
 			// var row = $('#dg').datagrid('getSelected');
