@@ -1,0 +1,194 @@
+/*** CSS of Pricing Table ***/
+
+/** Start of General **/
+
+/* Background */
+
+body { background-image:url("images/texture.jpg"); background-position: center top; background-repeat: no-repeat; background-attachment: fixed; position:relative; min-width:1400px; font-family: "Arial"; font-size:18px; }
+
+/** End of General **/
+
+
+/*--------------------------------------------------------------------------------------------------------------*/
+
+/** Pricing Table (You need this. Anything else above is just for background) **/
+
+table {
+	width:1214px;
+	height:520px;
+	border-spacing: 0;
+	margin: 10em auto;
+	font-family: "Arial"; 
+	font-size:18px; 
+}
+
+th{
+	width:304px;
+	height:73px;
+	outline:none;
+	background: #30383b; /* Old browsers */
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzMwMzgzYiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMyNzJmMzIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(top,  #30383b 0%, #272f32 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#30383b), color-stop(100%,#272f32)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #30383b 0%,#272f32 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #30383b 0%,#272f32 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #30383b 0%,#272f32 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #30383b 0%,#272f32 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#30383b', endColorstr='#272f32',GradientType=0 ); /* IE6-8 */
+	color:white;
+	border-top: 1px solid #484d50;
+	border-bottom: 1px solid #000;
+	border-left: 1px solid #000;
+	border-right: 1px solid #484d50;
+
+}
+
+th:first-child{ /* You can enable it or remove it and you will see, what it change :) */
+	background:none;
+	border:none;
+	font-size:0px;
+}
+
+td {
+	width:304px;
+	height:73px;
+	text-align: center;
+	color:#31383b;
+	background: #f0f0f0; /* Old browsers */
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2YwZjBmMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlOWU5ZTkiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(top,  #f0f0f0 0%, #e9e9e9 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f0f0f0), color-stop(100%,#e9e9e9)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #f0f0f0 0%,#e9e9e9 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #f0f0f0 0%,#e9e9e9 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #f0f0f0 0%,#e9e9e9 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #f0f0f0 0%,#e9e9e9 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f0f0', endColorstr='#e9e9e9',GradientType=0 ); /* IE6-8 */
+	border: 1px solid #d9d9d9;
+
+}
+
+tr > td#bgtitle{
+	background: #ec6b59; /* Old browsers */
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VjNmI1OSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNkYzVhNDkiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(top,  #ec6b59 0%, #dc5a49 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ec6b59), color-stop(100%,#dc5a49)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #ec6b59 0%,#dc5a49 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #ec6b59 0%,#dc5a49 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #ec6b59 0%,#dc5a49 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #ec6b59 0%,#dc5a49 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ec6b59', endColorstr='#dc5a49',GradientType=0 ); /* IE6-8 */
+	color:white;
+	border-top: 1px solid #fa7d6c;
+	border-bottom: 1px solid #d35443;
+	border-left: 1px solid #db5a48;
+	border-right: 1px solid #db5a48;
+
+}
+
+tr > td a{
+	color:white;
+	position:relative;
+	padding:10px;
+	width:124px;
+	outline:none;
+	text-decoration:none;
+	background: #ec6b59; /* Old browsers */
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VjNmI1OSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNkYzVhNDkiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(top,  #ec6b59 0%, #dc5a49 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ec6b59), color-stop(100%,#dc5a49)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #ec6b59 0%,#dc5a49 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #ec6b59 0%,#dc5a49 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #ec6b59 0%,#dc5a4;9 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #ec6b59 0%,#dc5a49 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ec6b59', endColorstr='#dc5a49',GradientType=0 ); /* IE6-8 */
+	border: 1px solid white;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+}
+
+tr > td a:active{
+	color:white;
+	position:relative;
+	padding:10px;
+	width:124px;
+	outline:none;
+	background: #dc5a49; /* Old browsers */
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2RjNWE0OSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlYzZiNTkiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(top,  #dc5a49 0%, #ec6b59 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dc5a49), color-stop(100%,#ec6b59)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #dc5a49 0%,#ec6b59 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #dc5a49 0%,#ec6b59 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #dc5a49 0%,#ec6b59 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #dc5a49 0%,#ec6b59 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dc5a49', endColorstr='#ec6b59',GradientType=0 ); /* IE6-8 */
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-top: 1px solid white;
+}
+
+/** End of Pricing Table **/
+
+/*** End of CSS for Pricing Table ***/
+
+/* Credits : This pricing table was created by. Torteen | http://torteen.deviantart.com/ */
+/* Do not delete these credits. It is just one thing what I want leave here. */
+/* Thanks for using my "Pricing Table" and sorry for English ;) */
+
+/*--------------------------------------------------------------------------------------------------------------*/
+
+/*** You can remove this (you don't need it) ***/
+
+/** Start of Social Icons **/
+
+/* SOCIAL ICONS - GENERAL */
+
+.social { 
+list-style:none; width:41px; float:right; right:48px; top:-19px; position:absolute;
+}
+
+.social li { 
+float:left; left:10px; background-repeat:no-repeat; padding:5px;
+}
+
+.social li a { 
+display:block; width:48px; height:48px; margin-right:15px; position:relative; text-decoration:none; outline:none;
+}
+
+.social li a strong { 
+ font-size:13px; margin-top:6px; font-weight:normal; position:absolute; right:64px; top:-1px; color:#fff; padding:3px; z-index:9999; white-space:nowrap; 
+ text-shadow:1px 1px 0 rgba(0, 0, 0, 0.75); background-color:rgba(0, 0, 0, 0.7);
+ -moz-border-radius:3px; -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); -webkit-border-radius:3px; -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); border-radius:3px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+li.deviantart { background-image:url("images/deviantart.png"); }
+
+/* SOCIAL ICONS - CSS3 */
+
+#css3:hover li { opacity:0.2; }
+
+#css3 li { 
+	opacity:0.2; transition-property: 500ms;
+	-webkit-transition-property: opacity; -webkit-transition-duration: 500ms;
+	 -moz-transition-property: opacity; -moz-transition-duration: 500ms; 
+	 -o-transition-property: opacity; -o-transition-duration: 500ms; 
+ }
+#css3 li a strong { 
+	opacity:0; transition-property: 300ms;
+	 -webkit-transition-property: opacity, top; -webkit-transition-duration: 300ms;transition-duration: 300ms; filter: alpha(opacity=0);
+	 -moz-transition-property: opacity, top; -moz-transition-duration: 300ms;
+	  -o-transition-property: opacity, top; -o-transition-duration: 300ms; 
+  }
+
+#css3 li:hover { opacity:1; }
+#css3 li:hover a strong { opacity:1; top:-10px; }
+
+/** End of Social Icons **/
+
+/*** You can remove this (you don't need it) ***/
