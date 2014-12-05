@@ -16,6 +16,19 @@
 			 
 			$('#dialog').dialog('open');
 		}
+
+		add_detail_pr = function (){
+			$('#dialog').dialog({
+				title: 'Add Purchase Request',
+				width: $(window).width() * 0.8,
+				height: $(window).height() * 0.99,
+				closed: true,
+				cache: false,
+				href: base_url+'picking_req_order_selected/add_detail_pr',
+				modal: true
+			});			 
+			$('#dialog').dialog('open');
+		}
 		
 		var editIndex = undefined;
 		endEditing = function(){
@@ -59,9 +72,7 @@
 	<div>
 		<table>
 			<tr>
-					<td>&nbsp;&nbsp;<a href="#" onclick="detail()" class="easyui-linkbutton" iconCls="icon-detail">Detail</a>
-							&nbsp;&nbsp;<a href="#" onclick="available()" class="easyui-linkbutton" iconCls="icon-ok">Picking</a>
-							&nbsp;&nbsp;<a href="#" onclick="lock()" class="easyui-linkbutton" iconCls="icon-login">Lock</a>
+					<td>
 							&nbsp;&nbsp;<a href="#" onclick="purchase()" class="easyui-linkbutton" iconCls="icon-purchase-form">Purchase Request</a>
 					</td> 
 			</tr>
@@ -69,7 +80,7 @@
 					<td>&nbsp;</td>
 			</tr>		
 			<tr>
-					<td> </td> 
+					<td> &nbsp;&nbsp;<a href="#" onclick="add_detail_pr()" class="easyui-linkbutton" iconCls="icon-add">Add Detail PR</a>	</td>   
 			<td>&nbsp;</td>
 			</tr>
 		</table>

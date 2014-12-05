@@ -93,7 +93,7 @@
 
 						<select id="#" name="#" style="width:200px;">
 						</select>
-						&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-add">Add All</a>
+						&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-all">Add All</a>
 				</td>
 			</tr>			
 		</table>

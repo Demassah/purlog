@@ -64,7 +64,7 @@
 			<th field="kode_barang" sortable="true" width="120">ID ROS</th>
 			<th field="kode_barang" sortable="true" width="120">ID Item</th>
 			<th field="kode_barang" sortable="true" width="80">Qty</th>
-			<th field="kode_barang" sortable="true" width="300">Deskripsi</th>	
+			<th field="nama_sub_kategori" sortable="true" width="540">Deskripsi</th>	
 			<th field="action" align="center" formatter="actiondetail" width="140">Aksi</th>
 		</tr>
 	</thead>
@@ -74,7 +74,7 @@
 		<table>
 			<tr>
 					<td>
-							&nbsp;&nbsp;<a href="#" onclick="detail_ros()" class="easyui-linkbutton" iconCls="icon-ok">Detail ROS</a>
+							&nbsp;&nbsp;<a href="#" onclick="detail_ros()" class="easyui-linkbutton" iconCls="icon-detail-form">Detail ROS</a>
 					</td> 
 			</tr>		
 		</table>

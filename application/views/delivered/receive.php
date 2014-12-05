@@ -69,7 +69,7 @@
 		<table>	
 			<tr> 
 				<td>
-						&nbsp;&nbsp;<a href="#" onclick="detailDelivered()" class="easyui-linkbutton" iconCls="icon-detail">Detail Barang SRO</a>
+						&nbsp;&nbsp;<a href="#" onclick="detailDelivered()" class="easyui-linkbutton" iconCls="icon-detail-form">Detail Barang SRO</a>
 				</td>
 			</tr>			
 		</table>

@@ -194,6 +194,30 @@
 	background:url('icons/menu/delivered.png') no-repeat center center;
 }
 
+.icon-purchase-form{
+	background:url('icons/icon/purchase.png') no-repeat;
+}
+
+.icon-all{
+	background:url('icons/icon/add_all.png') no-repeat;
+}
+
+.icon-list{
+	background:url('icons/icon/list.png') no-repeat;
+}
+
+.icon-checkout{
+	background:url('icons/icon/checkout.png') no-repeat;
+}
+
+.icon-loading{
+	background:url('icons/icon/loading.png') no-repeat;
+}
+
+.icon-detail-form{
+	background:url('icons/icon/detail.png') no-repeat;
+}
+
 
 
 

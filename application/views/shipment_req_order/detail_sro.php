@@ -60,7 +60,7 @@
 			<th field="kode_barang" sortable="true" width="120">ID ROS</th>
 			<th field="kode_barang" sortable="true" width="120">ID Item</th>
 			<th field="kode_barang" sortable="true" width="80">Qty</th>
-			<th field="kode_barang" sortable="true" width="300">Deskripsi</th>		
+			<th field="nama_sub_kategori" sortable="true" width="650">Deskripsi</th>		
 			<th field="chk" width="23" formatter="Checkbox">
 				<input style="margin-top:2px;" type="checkbox" name="checkbox" id="checkbox" onclick="update_value('+index+', this.checked, \''+row.id_jadwal+'\')" '+(row.chk==true?'checked="checked"':'')+'/>
 			</th>
@@ -73,14 +73,14 @@
 			<tr>
 					<td>
 							&nbsp;&nbsp;<a href="#" onclick="checkout()" class="easyui-linkbutton" iconCls="icon-ok">Checkokut</a>
-							&nbsp;&nbsp;<a href="#" onclick="loadingList()" class="easyui-linkbutton" iconCls="icon-add">Loading List</a>
+							&nbsp;&nbsp;<a href="#" onclick="loadingList()" class="easyui-linkbutton" iconCls="icon-list">Loading List</a>
 					</td>							
 			</tr>
 			<tr> 
 					<td>&nbsp;</td>
 			</tr>		
 			<tr> 
-				<td>&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-add">Checkout</a></td>
+				<td>&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-checkout">Checkout</a></td>
 			</tr>			
 		</table>
 	</div>

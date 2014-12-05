@@ -26,7 +26,7 @@
 		
 
 		$(function(){ // init
-			$('#dtgrd').datagrid({url:"picking_req_order_selected/grid"});	
+			$('#dtgrd').datagrid({url:"request_order_selected/grid"});	
 			//$('#dg').datagrid('enableFilter'); 
 		});	
 		
@@ -46,22 +46,11 @@
 			<th field="nama_kategori" sortable="true" width="120">ID Detail ROS</th>
 			<th field="kode_barang" sortable="true" width="120">ID ROS</th>
 			<th field="kode_barang" sortable="true" width="120">ID Item</th>
-			<th field="kode_barang" sortable="true" width="120">Qty</th>
-			<th field="nama_sub_kategori" sortable="true" width="600">Deskripsi</th>		
+			<th field="kode_barang" sortable="true" width="80">Qty</th>
+			<th field="kode_barang" sortable="true" width="300">Deskripsi</th>	
 			<!--<th field="action" align="center" formatter="actiondetail" width="140">Aksi</th>-->
 		</tr>
 	</thead>
 </table>
-<div id="toolbar_detail" style="padding:5px;height:auto">
-	<div>
-		<table>
-			<tr>
-					<td>
-							&nbsp;&nbsp;<a href="#" onclick="sro()" class="easyui-linkbutton" iconCls="icon-list">Shipment Request Order</a>
-					</td> 
-			</tr>		
-		</table>
-	</div>
-</div>
 
 

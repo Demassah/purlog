@@ -32,5 +32,17 @@ class picking_req_order_selected extends CI_Controller {
 	function pending(){
 		$this->load->view('picking_req_order_selected/pending');
 	}
+
+	function purchase(){
+		$this->load->view('picking_req_order_selected/purchase');
+	}
+
+	function detail_pr(){
+		$this->load->view('picking_req_order_selected/detail_pr');
+	}
+
+	function add_detail_pr(){
+		$this->load->view('picking_req_order_selected/add_detail_pr');
+	}
 	
 }
