@@ -63,11 +63,7 @@
 			$('#dialog').dialog({
 				title: 'Add Request Order',
 				width: 380,
-<<<<<<< .mine
 				height: 270,
-=======
-				height: 250,
->>>>>>> .r53
 				closed: true,
 				cache: false,
 				href: base_url+'request_order/add',
