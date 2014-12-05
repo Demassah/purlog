@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 03, 2014 at 02:00 AM
+-- Generation Time: Dec 05, 2014 at 01:26 AM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.1
 
@@ -154,19 +154,19 @@ INSERT INTO `sys_menu` (`menu_id`, `menu_group`, `menu_name`, `menu_parent`, `ur
 (11, 'Logistic', 'Request Order Selected', 34, 'request_order_selected', 5, 0, 'icon-ros', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
 (12, 'Logistic', 'Picking Request Order Selected', 34, 'picking_req_order_selected', 6, 0, 'icon-picking', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
 (13, 'Logistic', 'Shipment Request Order', 34, 'shipment_req_order', 7, 0, 'icon-shipment', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
-(14, 'Purchase', 'Purchase Request', 9, 'pr', 7, 0, 'icon-pr', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
-(15, 'Purchase', 'Quotation Request Selected', 9, 'qrs', 8, 0, 'icon-qrs', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
-(17, 'Purchase', 'Purchase Order', 9, 'po', 10, 0, 'icon-po', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
-(18, 'Purchase', 'Document Receive', 9, 'dr', 17, 0, 'icon-dr', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
+(14, 'Purchase', 'Purchase Request', 9, 'purchase_request', 7, 0, 'icon-pr', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
+(15, 'Purchase', 'Quotation Request Selected', 9, 'quotation_request_selected', 8, 0, 'icon-qrs', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
+(17, 'Purchase', 'Purchase Order', 9, 'purchase_order', 10, 0, 'icon-po', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
+(18, 'Purchase', 'Document Receive', 34, 'document_receive', 10, 0, 'icon-dr', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
 (19, 'Logistic', 'Delivery Order', 34, 'delivery_order', 8, 0, 'icon-delivery', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
-(20, 'Purchase', 'Berita Acara Pengembalian', 9, 'bap', 12, 0, 'icon-bap', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
-(21, 'Purchase', 'Berita Acara Pengembalian Pengiriman', 9, 'bapp', 13, 0, 'icon-bapp', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
+(20, 'Purchase', 'Berita Acara Pengembalian', 9, 'berkas_acara_pemeriksaan', 12, 0, 'icon-bap', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
+(21, 'Purchase', 'Berita Acara Pengembalian Pengiriman', 9, 'bap_pengembalian', 13, 0, 'icon-bapp', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
 (22, 'Logistic', 'Request Order Logistic', 34, 'request_order_logistic', 4, 0, 'icon-rol', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
 (23, 'Administrator', 'Menu', 1, 'menu', 1, 0, 'icon-menu', 'ACCESS;ADD;EDIT;DELETE;'),
 (34, 'Logistic', 'Logistic', 0, '#', 3, 0, 'icon-logistic', 'ACCESS;'),
 (36, 'Setup', 'Setup', 0, '#', 1, 0, 'icon-setup', 'ACCESS;'),
-(37, 'Logistic', 'Request Order Approval', 34, 'request_order_approval', 3, 0, '', 'ACCESS;EDIT;DELETE;DETAIL;'),
-(38, 'Logistic', 'Delivered', 34, '#', 9, 0, '', 'ACCESS;DETAIL;');
+(37, 'Logistic', 'Request Order Approval', 34, 'request_order_approval', 3, 0, 'icon-approval', 'ACCESS;EDIT;DELETE;DETAIL;'),
+(38, 'Logistic', 'Delivered', 34, 'delivered', 9, 0, 'icon-delivered', 'ACCESS;DETAIL;');
 
 -- --------------------------------------------------------
 
