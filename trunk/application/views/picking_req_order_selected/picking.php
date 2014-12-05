@@ -52,7 +52,6 @@
 			$('#dialog').dialog('open');
 			url = base_url+'picking_req_order_selected/save';
 		}
-		// end newData
 		
 		deleteData = function (val){
 			// var row = $('#dg').datagrid('getSelected');

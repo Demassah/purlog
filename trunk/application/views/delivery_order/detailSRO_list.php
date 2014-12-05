@@ -64,7 +64,7 @@
 			<th field="kode_barang" sortable="true" width="120">ID ROS</th>
 			<th field="kode_barang" sortable="true" width="120">ID Item</th>
 			<th field="kode_barang" sortable="true" width="80">Qty</th>
-			<th field="kode_barang" sortable="true" width="300">Deskripsi</th>
+			<th field="nama_sub_kategori" sortable="true" width="600">Deskripsi</th>		
 		</tr>
 	</thead>
 </table>

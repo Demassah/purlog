@@ -2,20 +2,6 @@
 	
 	var url;
 	$(document).ready(function(){
-
-		purchase = function (){
-			$('#dialog').dialog({
-				title: 'Purchase Request',
-				width: $(window).width() * 0.8,
-				height: $(window).height() * 0.99,
-				closed: true,
-				cache: false,
-				href: base_url+'picking_req_order_selected/purchase',
-				modal: true
-			});
-			 
-			$('#dialog').dialog('open');
-		}
 		
 		var editIndex = undefined;
 		endEditing = function(){
@@ -55,24 +41,3 @@
 		</tr>
 	</thead>
 </table>
-<div id="toolbar_pending" style="padding:5px;height:auto">
-	<div>
-		<table>
-			<tr>
-					<td>&nbsp;&nbsp;<a href="#" onclick="detail()" class="easyui-linkbutton" iconCls="icon-detail">Detail</a>
-							&nbsp;&nbsp;<a href="#" onclick="available()" class="easyui-linkbutton" iconCls="icon-ok">Picking</a>
-							&nbsp;&nbsp;<a href="#" onclick="lock()" class="easyui-linkbutton" iconCls="icon-login">Lock</a>
-							&nbsp;&nbsp;<a href="#" onclick="purchase()" class="easyui-linkbutton" iconCls="icon-purchase-form">Purchase Request</a>
-					</td> 
-			</tr>
-			<tr> 
-					<td>&nbsp;</td>
-			</tr>		
-			<tr>
-					<td> </td> 
-			<td>&nbsp;</td>
-			</tr>
-		</table>
-	</div>
-</div>
-

@@ -60,8 +60,8 @@
 			<th field="nama_kategori" sortable="true" width="120">ID Detail ROS</th>
 			<th field="kode_barang" sortable="true" width="120">ID ROS</th>
 			<th field="kode_barang" sortable="true" width="120">ID Item</th>
-			<th field="kode_barang" sortable="true" width="80">Qty</th>
-			<th field="kode_barang" sortable="true" width="300">Deskripsi</th>	
+			<th field="kode_barang" sortable="true" width="120">Qty</th>
+			<th field="nama_sub_kategori" sortable="true" width="650">Deskripsi</th>		
 		</tr>
 	</thead>
 </table>
@@ -71,7 +71,7 @@
 			<tr>
 					<td>
 							&nbsp;&nbsp;<a href="#" onclick="detailData()" class="easyui-linkbutton" iconCls="icon-detail">List Detail SRO</a>
-							&nbsp;&nbsp;<a href="#" onclick="checkout()" class="easyui-linkbutton" iconCls="icon-add">Checkout</a>
+							&nbsp;&nbsp;<a href="#" onclick="checkout()" class="easyui-linkbutton" iconCls="icon-checkout">Checkout</a>
 					</td>							
 			</tr>
 			<tr> 
@@ -79,7 +79,7 @@
 			</tr>		
 			<tr> 
 				<td>
-						&nbsp;&nbsp;<a href="#" onclick="loading()" class="easyui-linkbutton" iconCls="icon-add">Loading Sheet</a>
+						&nbsp;&nbsp;<a href="#" onclick="loading()" class="easyui-linkbutton" iconCls="icon-loading">Loading Sheet</a>
 				</td>
 			</tr>			
 		</table>

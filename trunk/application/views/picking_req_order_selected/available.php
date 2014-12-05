@@ -48,6 +48,20 @@
 			$('#dialog').dialog('open');
 			url = base_url+'departement/save/add';
 		}
+
+		purchase = function (){
+			$('#dialog').dialog({
+				title: 'Purchase Request',
+				width: $(window).width() * 0.8,
+				height: $(window).height() * 0.99,
+				closed: true,
+				cache: false,
+				href: base_url+'picking_req_order_selected/purchase',
+				modal: true
+			});
+			 
+			$('#dialog').dialog('open');
+		}
 		
 		var editIndex = undefined;
 		endEditing = function(){
@@ -94,7 +108,7 @@
 			<th field="kode_barang" sortable="true" width="120">ID ROS</th>
 			<th field="kode_barang" sortable="true" width="120">ID Item</th>
 			<th field="kode_barang" sortable="true" width="80">Qty</th>
-			<th field="kode_barang" sortable="true" width="300">Deskripsi</th>	
+			<th field="nama_sub_kategori" sortable="true" width="490">Deskripsi</th>	
 			<th field="action" align="center" formatter="actionAvailable" width="160">Aksi</th>
 			<th field="chk" width="23" formatter="Checkbox">
 				<input style="margin-top:2px;" type="checkbox" name="checkbox" id="checkbox" onclick="update_value('+index+', this.checked, \''+row.id_jadwal+'\')" '+(row.chk==true?'checked="checked"':'')+'/>
@@ -108,15 +122,17 @@
 			<tr>
 					<td>&nbsp;&nbsp;<a href="#" onclick="detail()" class="easyui-linkbutton" iconCls="icon-detail">Detail</a> 
 							&nbsp;&nbsp;<a href="#" onclick="lock()" class="easyui-linkbutton" iconCls="icon-login">Lock</a> 
-							&nbsp;&nbsp;<a href="#" onclick="pending()" class="easyui-linkbutton" iconCls="icon-redo">Pending</a></td> 
+							&nbsp;&nbsp;<a href="#" onclick="pending()" class="easyui-linkbutton" iconCls="icon-redo">Pending</a>
+							&nbsp;&nbsp;<a href="#" onclick="purchase()" class="easyui-linkbutton" iconCls="icon-purchase-form">Purchase Request</a>
+					</td> 
 			</tr>
 			<tr> 
 					<td>&nbsp;</td>
 			</tr>		
 			<tr>
-					<td>&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-add">ReAlocate All</a> 
+					<td>&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-all">ReAlocate All</a> 
 					&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-login">Lock SRO</a>
-					&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-login">Print Picklist</a></td>
+					&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-print">Print Picklist</a></td>
 			<td>&nbsp;</td>
 			</tr>
 		</table>
