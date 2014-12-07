@@ -3,19 +3,12 @@
 	var url;
 	$(document).ready(function(){
 
-		sro = function (){
-			$('#dialog').dialog({
-				title: 'Shipment Request Order',
-				width: $(window).width() * 0.8,
-				height: $(window).height() * 0.99,
-				closed: true,
-				cache: false,
-				href: base_url+'delivered/sro',
-				modal: true
+		kembali = function (){
+			//detail
+			$('#konten').panel({
+				href: base_url+'request_order_selected/index/'
 			});
-			 
-			$('#dialog').dialog('open');
-			url = base_url+'departement/save/add';
+
 		}
 				
 		actiondetail = function(value, row, index){
@@ -29,28 +22,45 @@
 			$('#dtgrd').datagrid({url:"request_order_selected/grid"});	
 			//$('#dg').datagrid('enableFilter'); 
 		});	
+
+			//Bawah
+		$(function(){
+			var pager = $('#dtgrd').datagrid().datagrid('getPager');	// get the pager of datagrid
+			pager.pagination({
+				buttons:[
+					{
+						iconCls:'icon-undo',
+						text:'Kembali',
+						handler:function(){
+							kembali();
+						}
+					}
+				]
+			});			
+		});
 		
 	});
 </script>
 
-<table id="dtgrd" data-options="
+<table id="dtgrd" title="Detail Request Order Selected" data-options="
 			rownumbers:true,
-			singleSelect:false,
+			singleSelect:true,
 			autoRowHeight:false,
+			pagination:true,
+			pageSize:30,
 			fit:true,
-			toolbar:'#toolbar_detail',
-		">		
+			toolbar:'#toolbar',
+			">
 	<thead>
-		<tr>
-			<th data-options="field:'id_krs_detail',width:'100', hidden:true">aa</th>
-			<th field="nama_kategori" sortable="true" width="120">ID Detail ROS</th>
-			<th field="kode_barang" sortable="true" width="120">ID ROS</th>
-			<th field="kode_barang" sortable="true" width="120">ID Item</th>
-			<th field="kode_barang" sortable="true" width="80">Qty</th>
-			<th field="kode_barang" sortable="true" width="300">Deskripsi</th>	
-			<!--<th field="action" align="center" formatter="actiondetail" width="140">Aksi</th>-->
-		</tr>
+		 <tr>
+      <th data-options="field:'id_krs_detail',width:'100', hidden:true">aa</th>
+      <th field="nama_kategori" sortable="true" width="120">ID Detail</th>
+      <th field="kode_barang" sortable="true" width="120">ID RO</th>
+      <th field="kode_barang" sortable="true" width="120">ID Item</th>
+      <th field="kode_barang" sortable="true" width="120">Qty</th>
+      <th field="nama_barang" sortable="true" width="350">Description</th>   
+      <th field="action" align="center" formatter="actiondetail" width="140">Aksi</th>
+    </tr>
 	</thead>
 </table>
-
 

@@ -1,16 +1,21 @@
+<script>
+	// search text combo
+		$(document).ready(function(){
+			$("#DO").select2();
+		});
+</script>
+
 <form id="form1" method="post" style="margin:10px">
 	<input type="hidden" name="kode" id="kode" value=" ">
-	<!--  auto generate 
-	<div class="fitem" >
-		<label style="width:120px">ID Delivery Order</label>:
-		<input name="nama_kategori" size="30" value=" ">
-	</div> -->
-	<!-- combobox -->
 	<div class="fitem" >
 		<label style="width:100px">Courir </label>: 
-		<select id="id_sub_kategori" name="id_sub_kategori" style="width:200px;">
-					
-			</select>	
+			<select id="DO" name=" " style="width:200px;">
+						<option>Pilih</option>
+						<option>Courir 1</option>
+            <option>Courir 2</option>
+            <option>Courir 3</option>	
+            <option>Courir 4</option>              
+				</select>	
 	</div>
 </form>
 	

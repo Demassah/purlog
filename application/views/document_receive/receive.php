@@ -48,18 +48,7 @@
 			<th field="nama_barang" sortable="true" width="100">Ext Document No</th>
 			<th field="nama_barang" sortable="true" width="100">ETD</th>
 			<th field="nama_barang" sortable="true" width="100">Date Create</th>
-			<th field="action" align="center" formatter="text" width="120">Aksi</th>
+			<th field="action" align="center" formatter="text" width="120">Qty</th>
 		</tr>
 	</thead>
 </table>
-<div id="toolbar_detail" style="padding:5px;height:auto">
-	<div>
-		<table>
-			<tr>
-					<td>
-							&nbsp;&nbsp;<a href="#" onclick="detailData()" class="easyui-linkbutton" iconCls="icon-add">Add</a>
-					</td>							
-			</tr>		
-		</table>
-	</div>
-</div>

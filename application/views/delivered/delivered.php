@@ -2,27 +2,22 @@
 	var url;
 	$(document).ready(function(){
 
+		// search text combo
+		$(document).ready(function(){
+			$("#search").select2();
+		});
+
 		detail_ros = function (){
-			$('#dialog').dialog({
-				title: 'Detail ROS',
-				//style:{background:'#d4d4d4'},
-				width: $(window).width() * 0.8,
-				height: $(window).height() * 0.99,
-				closed: true,
-				cache: false,
-				href: base_url+'delivered/detail_ros/',
-				modal: true
+			$('#konten').panel({
+				href:base_url+'delivered/detail_ros'
 			});
-			 
-			$('#dialog').dialog('open');
-			url = base_url+'pros/save';
 		}
-				
+
 		actionbutton = function(value, row, index){
 			var col='';
 
 			<?if($this->mdl_auth->CekAkses(array('menu_id'=>19, 'policy'=>'DETAIL'))){?>
-					col += '&nbsp;&nbsp; &nbsp;&nbsp;<a href="#" onclick="detail_ros(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
+					col += '<a href="#" onclick="detail_ros(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
 			<?}?>
 			return col;
 		}
@@ -35,6 +30,32 @@
 		
 	});
 </script>
+
+<div id="toolbar" style="padding:5px;height:auto">
+	<div style="margin-bottom:5px">		
+	</div>
+	<div class="fsearch">
+		<table width="500" border="0">
+		  <tr>
+			<td>Shipment Request Order</td>
+			<td>: 
+				<select id="search" name=" " style="width:200px;">
+						<option>Pilih</option>
+						<option>Search 1</option>
+            <option>Search 2</option>
+            <option>Search 3</option>	
+            <option>Search 4</option>              
+				</select>	
+			</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-search">Search</a></td>
+		  </tr>
+		</table>
+	</div>
+</div>
+
+
 <table id="dg" title="Picking Request Order Selected List" data-options="
 			rownumbers:true,
 			singleSelect:true,
@@ -54,31 +75,7 @@
 			<th field="nama_barang" sortable="true" width="100">Ext Document No</th>
 			<th field="nama_barang" sortable="true" width="100">ETD</th>
 			<th field="nama_barang" sortable="true" width="100">Date Create</th>
-			<th field="action" align="center" formatter="actionbutton" width="140">Aksi</th>
+			<th field="action" align="center" formatter="actionbutton" width="80">Aksi</th>
 		</tr>
 	</thead>
-	<!--<thead>
-		<tr>
-			<th field="id_kategori" sortable="true" width="150" hidden="true">ID</th>
-			<th field="nama_kategori" sortable="true" width="350">Kategori</th>
-			<th field="action" align="center" formatter="actionbutton" width="100">Aksi</th>
-		</tr>
-	</thead>-->
 </table>
-<div id="toolbar" style="padding:5px;height:auto">
-	<div style="margin-bottom:5px">		
-	</div>
-	<div class="fsearch">
-		<table width="500" border="0">
-		  <tr>
-			<td>Shipment Request Order</td>
-			<td>: 
-				<input name="#" size="30" value=" ">
-			</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-search">Search</a></td>
-		  </tr>
-		</table>
-	</div>
-</div>

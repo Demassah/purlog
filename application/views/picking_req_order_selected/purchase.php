@@ -1,131 +1,117 @@
-<script>
-	
-	var url;
-	$(document).ready(function(){
-		
-		detailData = function (){
-			$('#dialog').dialog({
-				title: 'Detail Alocation',
-				//style:{background:'#d4d4d4'},
-				width: $(window).width() * 0.8,
-				height: $(window).height() * 0.99,
-				closed: true,
-				cache: false,
-				href: base_url+'picking_req_order_selected/detail/',
-				modal: true
-			});
-			 
-			$('#dialog').dialog('open');
-		}
+<script >
+  var url;
+  $(document).ready(function(){
 
-		available = function (){
-			$('#dialog').dialog({
-				title: 'Picking Request Order Selected',
-				width: $(window).width() * 0.8,
-				height: $(window).height() * 0.99,
-				closed: true,
-				cache: false,
-				href: base_url+'picking_req_order_selected/available',
-				modal: true
-			});
-			 
-			$('#dialog').dialog('open');
-			url = base_url+'departement/save/add';
-		}
+      add = function (){
+      $('#detail_dialog').dialog({
+        title: 'Add Request Order',
+        width: $(window).width() * 0.8,
+        height: $(window).height() * 0.99,
+        closed: true,
+        cache: false,
+        href: base_url+'picking_req_order_selected/add_detail_pr',
+        modal: true
+      });
+       
+      $('#detail_dialog').dialog('open');
+      url = base_url+'picking_req_order_selected/save/add_detail_pr';
+    }
+    // end newData
 
-			lock = function (){
-			$('#dialog').dialog({
-				title: 'Lock Picking Request Order Selected',
-				width: $(window).width() * 0.8,
-				height: $(window).height() * 0.99,
-				closed: true,
-				cache: false,
-				href: base_url+'picking_req_order_selected/lock',
-				modal: true
-			});
-			 
-			$('#dialog').dialog('open');
-		}
-		
+    detailData = function (){
+      $('#konten').panel({
+        href: base_url+'picking_req_order_selected/detail',
+      });
+    }
+    
+    available = function (){
+      $('#konten').panel({
+        href: base_url+'picking_req_order_selected/available',
+      });
+    }
 
-		pending = function (){
-			$('#dialog').dialog({
-				title: 'Pending Picking Request Order Selected',
-				width: $(window).width() * 0.8,
-				height: $(window).height() * 0.99,
-				closed: true,
-				cache: false,
-				href: base_url+'picking_req_order_selected/pending',
-				modal: true
-			});
-			 
-			$('#dialog').dialog('open');
-		}
+    lock = function (){
+      $('#konten').panel({
+        href:base_url+'picking_req_order_selected/lock'
+      });
+    }
 
-		detail_pr = function (){
-			$('#dialog').dialog({
-				title: 'Detail Purchase Request',
-				width: $(window).width() * 0.8,
-				height: $(window).height() * 0.99,
-				closed: true,
-				cache: false,
-				href: base_url+'picking_req_order_selected/detail_pr',
-				modal: true
-			});
-			 
-			$('#dialog').dialog('open');
-		}
+    pending = function (){
+      $('#konten').panel({
+        href:base_url+'picking_req_order_selected/pending'
+      });
+    }
 
-		actiondetail = function(value, row, index){
-			var col='';
-					col += '&nbsp;&nbsp; &nbsp;&nbsp;<a href="#" onclick="detail_pr(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';			
-			return col;
-		}
-		
-		$(function(){ // init
-			$('#dtgrd').datagrid({url:"picking_req_order_selected/grid"});			
-	});
+    detail_pr = function (){
+      $('#konten').panel({
+        href:base_url+'picking_req_order_selected/detail_pr'
+      });
+    }
+  
+    actiondetail = function(value, row, index){
+      var col='';
+          col += '<a href="#" onclick="detail_pr(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';     
+      return col;
+    }
+    
+    $(function(){ // init
+      $('#dg').datagrid({url:"picking_req_order_selected/grid"});      
+  });
+
+  //# Tombol Bawah
+    $(function(){
+      var pager = $('#dg').datagrid().datagrid('getPager'); // get the pager of datagrid
+      pager.pagination({
+        buttons:[
+          {
+            iconCls:'icon-add',
+            text:'Create PR',
+            handler:function(){
+              add();
+            }
+          }            
+        ]
+      });     
+    }); 
+
 });
 </script>
 
-<table id="dtgrd" data-options="
-			rownumbers:true,
-			singleSelect:false,
-			autoRowHeight:false,
-			fit:true,
-			toolbar:'#toolbar_pending',
-		">		
-	<thead>
-		<tr>
-			<th data-options="field:'id_krs_detail',width:'100', hidden:true">aa</th>
-			<th field="nama_kategori" sortable="true" width="120">ID Purchase Request</th>
-			<th field="nama_kategori" sortable="true" width="120">ID Detail ROS</th>
-			<th field="kode_barang" sortable="true" width="120">ID ROS</th>
-			<th field="kode_barang" sortable="true" width="120">ID Item</th>
-			<th field="kode_barang" sortable="true" width="80">Qty</th>
-			<th field="nama_sub_kategori" sortable="true" width="475">Deskripsi</th>	
-			<th field="action" align="center" formatter="actiondetail" width="60">Aksi</th>
-		</tr>
-	</thead>
-</table>
-<div id="toolbar_pending" style="padding:5px;height:auto">
-	<div>
-		<table>
-			<tr>
-					<td>&nbsp;&nbsp;<a href="#" onclick="detail()" class="easyui-linkbutton" iconCls="icon-detail">Detail</a>
-							&nbsp;&nbsp;<a href="#" onclick="available()" class="easyui-linkbutton" iconCls="icon-ok">Picking</a>
-							&nbsp;&nbsp;<a href="#" onclick="lock()" class="easyui-linkbutton" iconCls="icon-login">Lock</a>
-							&nbsp;&nbsp;<a href="#" onclick="pending()" class="easyui-linkbutton" iconCls="icon-redo">pending</a>
-					</td> 
-			</tr>
-			<tr> 
-					<td>&nbsp;</td>
-			</tr>		
-			<tr>
-					<td> &nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-add">Create PR</a>	</td> 
-			<td>&nbsp;</td>
-			</tr>
-		</table>
-	</div>
+<div id="toolbar_purchase" style="padding:5px;height:auto">
+  <div class="fsearch">
+    <table>
+      <tr>
+          <td>&nbsp;&nbsp;<a href="#" onclick="detail()" class="easyui-linkbutton" iconCls="icon-detail">Detail</a>
+              &nbsp;&nbsp;<a href="#" onclick="available()" class="easyui-linkbutton" iconCls="icon-ok">Picking</a>
+              &nbsp;&nbsp;<a href="#" onclick="lock()" class="easyui-linkbutton" iconCls="icon-login">Lock</a>
+              &nbsp;&nbsp;<a href="#" onclick="pending()" class="easyui-linkbutton" iconCls="icon-redo">pending</a>
+          </td> 
+      </tr>
+    </table>
+  </div>
 </div>
+
+<table id="dg" title="Purchase Request" data-options="
+      rownumbers:true,
+      singleSelect:true,
+      autoRowHeight:false,
+      pagination:true,
+      pageSize:30,
+      fit:true,
+      toolbar:'#toolbar_purchase',
+    ">    
+  <thead>
+    <tr>
+      <th data-options="field:'id_krs_detail',width:'100', hidden:true">aa</th>
+      <th field="nama_kategori" sortable="true" width="120">ID Purchase Request</th>
+      <th field="nama_kategori" sortable="true" width="120">ID Detail ROS</th>
+      <th field="kode_barang" sortable="true" width="120">ID ROS</th>
+      <th field="kode_barang" sortable="true" width="120">ID Item</th>
+      <th field="kode_barang" sortable="true" width="80">Qty</th>
+      <th field="nama_sub_kategori" sortable="true" width="475">Deskripsi</th>  
+      <th field="action" align="center" formatter="actiondetail" width="60">Aksi</th>
+    </tr>
+  </thead>
+</table>
+
 

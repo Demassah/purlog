@@ -4,33 +4,15 @@
 	$(document).ready(function(){
 
 		detail = function (){
-			$('#dialog').dialog({
-				title: 'List PROS Locked',
-				width: $(window).width() * 0.8,
-				height: $(window).height() * 0.99,
-				closed: true,
-				cache: false,
-				href: base_url+'shipment_req_order/detail',
-				modal: true
+			$('#konten').panel({
+				href:base_url+'shipment_req_order/detail'
 			});
-			 
-			$('#dialog').dialog('open');
-			url = base_url+'departement/save/add';
 		}
 
 		loadingList = function (){
-			$('#dialog').dialog({
-				title: 'Loading List',
-				width: $(window).width() * 0.8,
-				height: $(window).height() * 0.99,
-				closed: true,
-				cache: false,
-				href: base_url+'shipment_req_order/loadingList',
-				modal: true
+			$('#konten').panel({
+				href:base_url+'shipment_req_order/loadingList'
 			});
-			 
-			$('#dialog').dialog('open');
-			url = base_url+'departement/save/add';
 		}
 					
 		actiondetail = function(value, row, index){
@@ -47,13 +29,64 @@
 			$('#dtgrd').datagrid({url:"picking_req_order_selected/grid"});	
 			//$('#dg').datagrid('enableFilter'); 
 		});	
+
+			//# Tombol Bawah
+    $(function(){
+      var pager = $('#dtgrd').datagrid().datagrid('getPager'); // get the pager of datagrid
+      pager.pagination({
+        buttons:[
+          {
+            iconCls:'icon-all',
+            text:'Uncheckout All',
+            handler:function(){
+              a();
+            }
+          },
+          {
+            iconCls:'icon-loading',
+            text:'Loading',
+            handler:function(){
+              b();
+            }
+          },
+          {
+            iconCls:'icon-ok',
+            text:'Done SRO',
+            handler:function(){
+              c();
+            }
+          },
+          {
+            iconCls:'icon-purchase-form',
+            text:'Checking Sheet',
+            handler:function(){
+              d();
+            }
+          }                 
+        ]
+      });     
+    });
 		
 	});
 </script>
 
-<table id="dtgrd" data-options="
+<div id="toolbar_detail" style="padding:5px;height:auto">
+	<div class="fsearch">
+		<table>
+			<tr>
+					<td>
+							&nbsp;&nbsp;<a href="#" onclick="detail()" class="easyui-linkbutton" iconCls="icon-detail">List PROS Locked</a>
+							&nbsp;&nbsp;<a href="#" onclick="loadingList()" class="easyui-linkbutton" iconCls="icon-list">Loading List</a>
+					</td>							
+			</tr>	
+		</table>
+	</div>
+</div>
+
+<table id="dtgrd" title="Checkout" data-options="
 			rownumbers:true,
 			singleSelect:false,
+			pagination:true,
 			autoRowHeight:false,
 			fit:true,
 			toolbar:'#toolbar_detail',
@@ -65,35 +98,13 @@
 			<th field="kode_barang" sortable="true" width="120">ID ROS</th>
 			<th field="kode_barang" sortable="true" width="120">ID Item</th>
 			<th field="kode_barang" sortable="true" width="80">Qty</th>
-			<th field="nama_sub_kategori" sortable="true" width="650">Deskripsi</th>		
+			<th field="nama_sub_kategori" sortable="true" width="600">Deskripsi</th>		
 			<th field="chk" width="23" formatter="Checkbox">
 				<input style="margin-top:2px;" type="checkbox" name="checkbox" id="checkbox" onclick="update_value('+index+', this.checked, \''+row.id_jadwal+'\')" '+(row.chk==true?'checked="checked"':'')+'/>
 			</th>
 		</tr>
 	</thead>
 </table>
-<div id="toolbar_detail" style="padding:5px;height:auto">
-	<div>
-		<table>
-			<tr>
-					<td>
-							&nbsp;&nbsp;<a href="#" onclick="detail()" class="easyui-linkbutton" iconCls="icon-detail">List PROS Locked</a>
-							&nbsp;&nbsp;<a href="#" onclick="loadingList()" class="easyui-linkbutton" iconCls="icon-list">Loading List</a>
-					</td>							
-			</tr>
-			<tr> 
-					<td>&nbsp;</td>
-			</tr>		
-			<tr> 
-				<td>
-						&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-all">Uncheckout All</a>
-						&nbsp;&nbsp;<a href="#" onclick="loading()" class="easyui-linkbutton" iconCls="icon-loading">Loading</a>
-						&nbsp;&nbsp;<a href="#" onclick="loading()" class="easyui-linkbutton" iconCls="icon-ok">Done SRO</a>
-						&nbsp;&nbsp;<a href="#" onclick="loading()" class="easyui-linkbutton" iconCls="icon-purchase-form">Checking Sheet</a>
-				</td>
-			</tr>			
-		</table>
-	</div>
-</div>
+
 
 
