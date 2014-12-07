@@ -3,6 +3,11 @@
 	var url;
 	$(document).ready(function(){
 
+		// search text combo
+		$(document).ready(function(){
+			$("#SRO2").select2();
+		});
+
 		listSRO = function (){
 			$('#dialog').dialog({
 				title: 'List Shipment Request Order',
@@ -19,19 +24,9 @@
 		}
 
 		detailDO = function (){
-			$('#dialog').dialog({
-				title: 'Detail Delivery Order',
-				//style:{background:'#d4d4d4'},
-				width: $(window).width() * 0.8,
-				height: $(window).height() * 0.99,
-				closed: true,
-				cache: false,
-				href: base_url+'delivery_order/detail/',
-				modal: true
+			$('#konten').panel({
+				href: base_url+'delivery_order/detail',
 			});
-			 
-			$('#dialog').dialog('open');
-			url = base_url+'pros/save';
 		}
 				
 		actiondetail = function(value, row, index){
@@ -43,14 +38,43 @@
 		
 
 		$(function(){ // init
-			$('#dtgrd').datagrid({url:"delivery_order/grid"});	
-			//$('#dg').datagrid('enableFilter'); 
+			$('#dg').datagrid({url:"delivery_order/grid"});	
 		});	
 		
 	});
 </script>
 
-<table id="dtgrd" data-options="
+<div id="toolbar_detail" style="padding:5px;height:auto">
+	<div class="fsearch">
+		<table>
+			<tr>
+					<td>
+							&nbsp;&nbsp;<a href="#" onclick="detailDO()" class="easyui-linkbutton" iconCls="icon-detail">Detail Delivery Order</a>
+							&nbsp;&nbsp;<a href="#" onclick="listSRO()" class="easyui-linkbutton" iconCls="icon-detail">List Shipment Request Order</a>							
+					</td>					
+			</tr>
+			<tr> 
+					<td>&nbsp;</td>
+			</tr>		
+			<tr> 
+				<td>
+						<label style="width:120px">SRO </label>:
+
+							<select id="SRO2" name=" " style="width:200px;">
+								<option>Pilih</option>
+								<option>SRO 1</option>
+		            <option>SRO 2</option>
+		            <option>SRO 3</option>	
+		            <option>SRO 4</option>              
+						</select>	
+						&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-print">Print</a>
+				</td>
+			</tr>			
+		</table>
+	</div>
+</div>
+
+<table id="dg" title="Detail SRO List" data-options="
 			rownumbers:true,
 			singleSelect:false,
 			autoRowHeight:false,
@@ -68,29 +92,6 @@
 		</tr>
 	</thead>
 </table>
-<div id="toolbar_detail" style="padding:5px;height:auto">
-	<div>
-		<table>
-			<tr>
-					<td>
-							&nbsp;&nbsp;<a href="#" onclick="detailDO()" class="easyui-linkbutton" iconCls="icon-detail">Detail Delivery Order</a>
-							&nbsp;&nbsp;<a href="#" onclick="listSRO()" class="easyui-linkbutton" iconCls="icon-detail">List Shipment Request Order</a>							
-					</td>					
-			</tr>
-			<tr> 
-					<td>&nbsp;</td>
-			</tr>		
-			<tr> 
-				<td>
-						<label style="width:120px">SRO </label>:
 
-						<select id="#" name="#" style="width:200px;">
-						</select>
-						&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-print">Print</a>
-				</td>
-			</tr>			
-		</table>
-	</div>
-</div>
 
 

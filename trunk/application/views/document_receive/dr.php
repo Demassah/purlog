@@ -3,16 +3,9 @@
 	$(document).ready(function(){
 
 		detail = function (){
-			$('#dialog').dialog({
-				title: 'Detail',
-				width: $(window).width() * 0.8,
-				height: $(window).height() * 0.99,
-				closed: true,
-				cache: false,
-				href: base_url+'document_receive/detail',
-				modal: true
-			});			 
-			$('#dialog').dialog('open');
+			$('#konten').panel({
+				href:base_url+'document_receive/detail'
+			});
 		}
 		
 		actionbutton = function(value, row, index){

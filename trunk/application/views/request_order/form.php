@@ -3,7 +3,11 @@
 	<div class="fitem" >
 		<label style="width:140px">Requestor </label>: 
 		<select id="purpose" name="id_kategori" style="width:167px;">
-						<option value="">Choose Purpose</option>			
+							<option>Pilih Requestor</option>
+							<option>Adi</option>
+              <option>Demassah</option>
+              <option>Iqbal</option>	
+              <option>Tresna</option>              
 		</select>	
 	</div>
 	<div class="fitem" >

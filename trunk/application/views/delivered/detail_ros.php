@@ -4,18 +4,9 @@
 	$(document).ready(function(){
 
 		sro = function (){
-			$('#dialog').dialog({
-				title: 'Shipment Request Order',
-				width: $(window).width() * 0.8,
-				height: $(window).height() * 0.99,
-				closed: true,
-				cache: false,
-				href: base_url+'delivered/sro',
-				modal: true
+			$('#konten').panel({
+				href:base_url+'delivered/sro'
 			});
-			 
-			$('#dialog').dialog('open');
-			url = base_url+'departement/save/add';
 		}
 				
 		actiondetail = function(value, row, index){
@@ -27,13 +18,24 @@
 
 		$(function(){ // init
 			$('#dtgrd').datagrid({url:"picking_req_order_selected/grid"});	
-			//$('#dg').datagrid('enableFilter'); 
 		});	
 		
 	});
 </script>
 
-<table id="dtgrd" data-options="
+<div id="toolbar_detail" style="padding:5px;height:auto">
+	<div class="fsearch">
+		<table>
+			<tr>
+					<td>
+							&nbsp;&nbsp;<a href="#" onclick="sro()" class="easyui-linkbutton" iconCls="icon-list">Shipment Request Order</a>
+					</td> 
+			</tr>		
+		</table>
+	</div>
+</div>
+
+<table id="dtgrd" title="Detail Request Order Selected" data-options="
 			rownumbers:true,
 			singleSelect:false,
 			autoRowHeight:false,
@@ -52,16 +54,6 @@
 		</tr>
 	</thead>
 </table>
-<div id="toolbar_detail" style="padding:5px;height:auto">
-	<div>
-		<table>
-			<tr>
-					<td>
-							&nbsp;&nbsp;<a href="#" onclick="sro()" class="easyui-linkbutton" iconCls="icon-list">Shipment Request Order</a>
-					</td> 
-			</tr>		
-		</table>
-	</div>
-</div>
+
 
 

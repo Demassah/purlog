@@ -154,7 +154,7 @@
 	  .fsearch div{
 		background:url('<?=base_url();?>public/css/themes/gray/images/panel_title.gif') repeat-x;
 		height:200%;
-		border-bottom: 1px solid #99BBE8;
+		/*border-bottom: 1px solid #99BBE8;*/
 		color:#15428B;
 		font-size:10pt;
 		text-transform:uppercase;
@@ -287,11 +287,19 @@
 		
 	</div>
 	<div id="dlg-buttons-detail">
+		<a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="saveData()">Add</a>
 		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#detail_dialog').dialog('close')">Cancel</a>
 	</div>
 </div>
 
-	
+<div id="dialog_hungkul" class="easyui-dialog" style="width:400px;height:150px;" closed="true" buttons="#dlg-buttons-hungkul">
+	<div id="dialogHungkul" class="easyui-dialog" style="width:400px;height:150px" closed="true">
+		
+	</div>
+	<div id="dlg-buttons-hungkul">
+		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#detail_dialog').dialog('close')">Cancel</a>
+	</div>
+</div>	
 	
 </body>
 </html>

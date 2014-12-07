@@ -5,7 +5,7 @@
 
 		detailDelivered = function (){
 			$('#dialog').dialog({
-				title: 'Detail Barang SRO',
+				title: 'Detail Barang Shipment Request Order',
 				//style:{background:'#d4d4d4'},
 				width: $(window).width() * 0.8,
 				height: $(window).height() * 0.99,
@@ -33,14 +33,26 @@
 		
 
 		$(function(){ // init
-			$('#dtgrd').datagrid({url:"delivered/grid"});	
+			$('#dg').datagrid({url:"delivered/grid"});	
 			//$('#dg').datagrid('enableFilter'); 
 		});	
 		
 	});
 </script>
 
-<table id="dtgrd" data-options="
+<div id="toolbar_detail" style="padding:5px;height:auto">
+	<div class="fsearch">
+		<table>	
+			<tr> 
+				<td>
+						&nbsp;&nbsp;<a href="#" onclick="detailDelivered()" class="easyui-linkbutton" iconCls="icon-detail-form">Detail Barang SRO</a>
+				</td>
+			</tr>			
+		</table>
+	</div>
+</div>
+
+<table id="dg" title="Receive Barang SRO" data-options="
 			rownumbers:true,
 			singleSelect:false,
 			autoRowHeight:false,
@@ -64,16 +76,6 @@
 		</tr>
 	</thead>
 </table>
-<div id="toolbar_detail" style="padding:5px;height:auto">
-	<div>
-		<table>	
-			<tr> 
-				<td>
-						&nbsp;&nbsp;<a href="#" onclick="detailDelivered()" class="easyui-linkbutton" iconCls="icon-detail-form">Detail Barang SRO</a>
-				</td>
-			</tr>			
-		</table>
-	</div>
-</div>
+
 
 

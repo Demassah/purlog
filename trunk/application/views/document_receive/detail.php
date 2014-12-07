@@ -4,23 +4,16 @@
 	$(document).ready(function(){
 
 		detail_dr = function (){
-			$('#dialog').dialog({
-				title: 'Detail Document Receive',
-				width: $(window).width() * 0.8,
-				height: $(window).height() * 0.99,
-				closed: true,
-				cache: false,
-				href: base_url+'document_receive/detail_dr',
-				modal: true
-			});			 
-			$('#dialog').dialog('open');
+			$('#konten').panel({
+				href:base_url+'document_receive/detail_dr'
+			});
 		}
 		
 		var editIndex = undefined;
 		endEditing = function(){
 			if (editIndex == undefined){return true}
-			if ($('#dtgrd').datagrid('validateRow', editIndex)){
-				$('#dtgrd').datagrid('endEdit', editIndex);
+			if ($('#dg').datagrid('validateRow', editIndex)){
+				$('#dg').datagrid('endEdit', editIndex);
 				editIndex = undefined;
 				return true;
 			} else {
@@ -30,20 +23,32 @@
 
 			actionbutton = function(value, row, index){
 			var col='';
-				col += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="detailData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';			
+				col += '<a href="#" onclick="detailData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';			
 				col += '&nbsp;&nbsp; | &nbsp;&nbsp;<a href="#" onclick="detailData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';			
 			return col;
 		}
 		
 		$(function(){ // init
-			$('#dtgrd').datagrid({url:"document_receive/grid"});	
+			$('#dg').datagrid({url:"document_receive/grid"});	
 			//$('#dg').datagrid('enableFilter'); 
 		});	
 		
 	});
 </script>
 
-<table id="dtgrd" data-options="
+<div id="toolbar_detail" style="padding:5px;height:auto">
+	<div class="fsearch">
+		<table>
+			<tr>
+					<td>
+							&nbsp;&nbsp;<a href="#" onclick="detail_dr()" class="easyui-linkbutton" iconCls="icon-detail-form">Detail Document Receive</a>
+					</td>							
+			</tr>	
+		</table>
+	</div>
+</div>
+
+<table id="dg" title="Detail Purchase Order" data-options="
 			rownumbers:true,
 			singleSelect:false,
 			autoRowHeight:false,
@@ -62,14 +67,3 @@
 		</tr>
 	</thead>
 </table>
-<div id="toolbar_detail" style="padding:5px;height:auto">
-	<div>
-		<table>
-			<tr>
-					<td>
-							&nbsp;&nbsp;<a href="#" onclick="detail_dr()" class="easyui-linkbutton" iconCls="icon-add">Add</a>
-					</td>							
-			</tr>	
-		</table>
-	</div>
-</div>

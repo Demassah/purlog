@@ -1,21 +1,20 @@
+<script>
+	$(document).ready(function(){
+		$("#RO").select2();
+	});
+</script>
+
 <form id="form1" method="post" style="margin:10px">
-	<input type="hidden" name="kode" id="kode" value="<?=$kode?>">
+	<input type="hidden" name="kode" id="kode" value=" ">
 	<div class="fitem" >
-		<label style="width:100px">Kategori </label>: 
-		<select id="id_kategori" name="id_kategori" style="width:200px;">
-					<?=$this->mdl_prosedur->OptionKategori(array('value'=>$id_kategori));?>
-			</select>	
-	</div>
-	<div class="fitem" >
-		<label style="width:100px">Sub Kategori </label>: 
-		<select id="id_sub_kategori" name="id_sub_kategori" style="width:200px;">
-					<?=$this->mdl_prosedur->OptionSubKategori(array('value'=>$id_sub_kategori, 'id_kategori'=>$id_kategori));?>
-			</select>	
-	</div>
-	<br>
-	<div class="fitem" >
-		<label style="width:100px">Field </label>: 
-		<input name="kode_barang" size="15" value=" ">
+		<label style="width:140px">Request Order </label>: 
+		<select id="RO" name="id_kategori" style="width:167px;">
+							<option>Pilih RO</option>
+							<option>Request Order 1</option>
+              <option>Request Order 2</option>
+              <option>Request Order 3</option>	
+              <option>Request Order 4</option>              
+		</select>	
 	</div>
 </form>
 	

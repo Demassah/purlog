@@ -4,33 +4,15 @@
 	$(document).ready(function(){
 
 		detailData = function (){
-			$('#dialog').dialog({
-				title: 'List Detail SRO',
-				width: $(window).width() * 0.8,
-				height: $(window).height() * 0.99,
-				closed: true,
-				cache: false,
-				href: base_url+'shipment_req_order/detail',
-				modal: true
+			$('#konten').panel({
+				href:base_url+'shipment_req_order/detail'
 			});
-			 
-			$('#dialog').dialog('open');
-			url = base_url+'shipment_req_order/save/add';
 		}
 
 		checkout = function (){
-			$('#dialog').dialog({
-				title: 'Checkout',
-				width: $(window).width() * 0.8,
-				height: $(window).height() * 0.99,
-				closed: true,
-				cache: false,
-				href: base_url+'shipment_req_order/checkout',
-				modal: true
+			$('#konten').panel({
+				href:base_url+'shipment_req_order/checkout'
 			});
-			 
-			$('#dialog').dialog('open');
-			url = base_url+'departement/save/add';
 		}
 					
 		actiondetail = function(value, row, index){
@@ -43,13 +25,43 @@
 			$('#dtgrd').datagrid({url:"picking_req_order_selected/grid"});	
 			//$('#dg').datagrid('enableFilter'); 
 		});	
+
+			//# Tombol Bawah
+    $(function(){
+      var pager = $('#dtgrd').datagrid().datagrid('getPager'); // get the pager of datagrid
+      pager.pagination({
+        buttons:[
+          {
+            iconCls:'icon-loading',
+            text:'Loading Sheet',
+            handler:function(){
+              a();
+            }
+          }              
+        ]
+      });     
+    });
 		
 	});
 </script>
 
-<table id="dtgrd" data-options="
+<div id="toolbar_detail" style="padding:5px;height:auto">
+	<div class="fsearch">
+		<table>
+			<tr>
+					<td>
+							&nbsp;&nbsp;<a href="#" onclick="detailData()" class="easyui-linkbutton" iconCls="icon-detail">List Detail SRO</a>
+							&nbsp;&nbsp;<a href="#" onclick="checkout()" class="easyui-linkbutton" iconCls="icon-checkout">Checkout</a>
+					</td>							
+			</tr>		
+		</table>
+	</div>
+</div>
+
+<table id="dtgrd" title="Loading List Shipment Request Order" data-options="
 			rownumbers:true,
 			singleSelect:false,
+			pagination:true,
 			autoRowHeight:false,
 			fit:true,
 			toolbar:'#toolbar_detail',
@@ -61,29 +73,10 @@
 			<th field="kode_barang" sortable="true" width="120">ID ROS</th>
 			<th field="kode_barang" sortable="true" width="120">ID Item</th>
 			<th field="kode_barang" sortable="true" width="120">Qty</th>
-			<th field="nama_sub_kategori" sortable="true" width="650">Deskripsi</th>		
+			<th field="nama_sub_kategori" sortable="true" width="600">Deskripsi</th>		
 		</tr>
 	</thead>
 </table>
-<div id="toolbar_detail" style="padding:5px;height:auto">
-	<div>
-		<table>
-			<tr>
-					<td>
-							&nbsp;&nbsp;<a href="#" onclick="detailData()" class="easyui-linkbutton" iconCls="icon-detail">List Detail SRO</a>
-							&nbsp;&nbsp;<a href="#" onclick="checkout()" class="easyui-linkbutton" iconCls="icon-checkout">Checkout</a>
-					</td>							
-			</tr>
-			<tr> 
-					<td>&nbsp;</td>
-			</tr>		
-			<tr> 
-				<td>
-						&nbsp;&nbsp;<a href="#" onclick="loading()" class="easyui-linkbutton" iconCls="icon-loading">Loading Sheet</a>
-				</td>
-			</tr>			
-		</table>
-	</div>
-</div>
+
 
 

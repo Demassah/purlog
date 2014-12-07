@@ -4,21 +4,21 @@
 	<div class="fitem" >
 		<label style="width:140px">Category </label>: 
 		<select id="purpose" name="id_kategori" style="width:167px;">
-			<option value="">Choose Purpose</option>
+			<option value="">-- Pilih --</option>
 			<?=$this->mdl_prosedur->OptionKategori(array('value'=>$id_kategori));?>
 		</select>	
 	</div>
 	<div class="fitem" >
 		<label style="width:140px">Category </label>: 
 		<select id="id_sub_kategori" name="id_sub_kategori" style="width:167px;">
-			<option value="">Choose Category</option>
+			<option value="">-- Pilih --</option>
 			<?=$this->mdl_prosedur->OptionSubKategori(array('value'=>$id_sub_kategori, 'id_kategori'=>$id_kategori));?>
 		</select>	
 	</div>
 	<div class="fitem" >
 		<label style="width:140px">Id Item </label>: 
 		<select id="id_item" name="id_sub_kategori" style="width:167px;">
-			<option value="">Choose Category</option>
+			<option value="">-- Pilih --</option>
 			<?=$this->mdl_prosedur->OptionSubKategori(array('value'=>$id_sub_kategori, 'id_kategori'=>$id_kategori));?>
 		</select>	
 	</div>

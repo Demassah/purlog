@@ -7,7 +7,13 @@
 		  <tr>
 			<td>Search</td>
 			<td>: 
-				<input name="#" size="30" value=" ">
+				<select id="search" name=" " style="width:200px;">
+						<option>Pilih</option>
+						<option>Search 1</option>
+            <option>Search 2</option>
+            <option>Search 3</option>	
+            <option>Search 4</option>              
+				</select>	
 			</td>
 			<td><a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-search">Search</a></td>
 		  </tr>
@@ -15,7 +21,7 @@
 	</div>
 </div>
 
-<table id="dg" title="Request Order List" data-options="
+<table id="dg" title="Request Order Approval List" data-options="
 			rownumbers:true,
 			singleSelect:true,
 			autoRowHeight:false,
@@ -38,140 +44,20 @@
 			<th field="action" align="center" formatter="actionbutton" width="140">Aksi</th>
 		</tr>
 	</thead>
-	<!--<thead>
-		<tr>
-			<th field="id_kategori" sortable="true" width="150" hidden="true">ID</th>
-			<th field="nama_kategori" sortable="true" width="350">Kategori</th>
-			<th field="action" align="center" formatter="actionbutton" width="100">Aksi</th>
-		</tr>
-	</thead>-->
 </table>
 
-<!-- AREA untuk Form MENU >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
-<div id="dialog-menu" class="easyui-dialog" style="width:400px;height:150px" closed="true" buttons="#dlg-buttons-menu">
-	<div id="dlg-buttons-menu">
-		<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveMenu()">Save</a>
-		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dialog-menu').dialog('close')">Cancel</a>
-	</div>
-</div>
-<div id="detail"></div>
+
 <script type="text/javascript">
 	var url;
 	$(document).ready(function(){
-	
-		newData = function (){
-			$('#dialog').dialog({
-				title: 'Tambah Request Order',
-				width: 380,
-				height: 280,
-				closed: true,
-				cache: false,
-				href: base_url+'request_order_approval/add',
-				modal: true
-			});
-			 
-			$('#dialog').dialog('open');
-			url = base_url+'request_order_approval/save/add';
-		}
-		// end newData
-		
-		editData = function (val){
-			// var row = $('#dg').datagrid('getSelected');
-			// if (row){
-				$('#dialog').dialog({
-					title: 'Edit Request Order',
-					width: 380,
-					height: 130,
-					closed: true,
-					cache: false,
-					href: base_url+'request_order_approval/edit/'+val,
-					modal: true
-				});
-				
-				$('#dialog').dialog('open');  
-				url = base_url+'request_order_approval/save/edit';
-			// }
-		}
-		//end editData
-		
-			DetailData = function (val){
-				//$('#detail').load(base_url+'request_order_approval_approval/');
-			$('#dialog').dialog({
-				title: 'Detail Request Order',
-				//style:{background:'#d4d4d4'},
-				//width: $(window).width() * 0.8,
-				//height: $(window).height() * 0.99,
-					width: $(window).width() * 0.8,
-				height: $(window).height() * 0.99,
-				closed: true,
-				cache: false,
+
+		DetailData = function (val){
+			//detail
+			$('#konten').panel({
 				href: base_url+'request_order_approval/detail/'+val,
-				modal: true
 			});
-			 
-			$('#dialog').dialog('open');
-			url = base_url+'request_order_approval/save';
+
 		}
-		// end newData
-		
-		DeleteData = function (val){
-			// var row = $('#dg').datagrid('getSelected');
-			// if(row){
-				if(confirm("Apakah yakin akan menghapus data '" + val + "'?")){
-					var response = '';
-					$.ajax({ type: "GET",
-						 url: base_url+'kategori/delete/' + val,
-						 async: false,
-						 success : function(response){
-							var response = eval('('+response+')');
-							if (response.success){
-								$.messager.show({
-									title: 'Success',
-									msg: 'Data Berhasil Dihapus'
-								});
-								// reload and close tab
-								$('#dg').datagrid('reload');
-							} else {
-								$.messager.show({
-									title: 'Error',
-									msg: response.msg
-								});
-							}
-						 }
-					});
-				}
-			// }
-		}
-		//end deleteData 
-		
-		saveData = function(){
-			
-			$('#form1').form('submit',{
-				url: url,
-				onSubmit: function(){
-					return $(this).form('validate');
-				},
-				success: function(result){
-					//alert(result);
-					var result = eval('('+result+')');
-					if (result.success){
-						$('#dialog').dialog('close');		// close the dialog
-						$('#dg').datagrid('reload');		// reload the user data
-					} else {
-						$.messager.show({
-							title: 'Error',
-							msg: result.msg
-						});
-					}
-				}
-			});
-		}
-		//end saveData
-		optionbutton = function(value){
-			var col ='';
-			$(col).load(base_url + 'request_order_approval/option');
-			return col;
-		} 
 		
 		actionbutton = function(value, row, index){
 			var col='';
@@ -187,14 +73,10 @@
 			return col;
 		}
 
-		combo = function(value, row, index){
-			return '<select id="coba" name="id_sub_kategori" ><option value="1">Approve</option> <option value="2">Reject</option></select>';
-			
-		}
-
-		text = function(value, row, index){
-			return '<input name="menu_name" id="reason" size="30" value=" ">';
-		}
+		// search text combo
+		$(document).ready(function(){
+			$("#search").select2();
+		});
 		
 		$(function(){
 			$('#dg').datagrid({
@@ -202,21 +84,12 @@
 			});
 		});
 		
-
 		//# Tombol Bawah
 		$(function(){
 			var pager = $('#dg').datagrid().datagrid('getPager');	// get the pager of datagrid
 			pager.pagination({
 				buttons:[
-					<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'ADD'))){?>
-					// {
-					// 	iconCls:'icon-add',
-					// 	text:'Tambah Data',
-					// 	handler:function(){
-					// 		newData();
-					// 	}
-					// }
-					<?}?>
+
 				]
 			});			
 		});
