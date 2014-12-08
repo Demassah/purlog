@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/css/style.css" />
 	<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/easyui/themes/metro/easyui.css" />
 	<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/select/select2.css"/>
+	<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/css/style_2.css" />
 	<!--<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/easyui/themes/bootstrap/easyui.css" />-->
 	<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/easyui/themes/icon.css" />
 	<!--	<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/jquery-ui-1.11.2/jquery-ui.css" />-->
@@ -23,14 +24,10 @@
 <body class="easyui-layout">
 	<script>
 		base_url = '<?=base_url();?>';
-		del = '<?=$this->mdl_auth->CekAkses(array("menu_id"=>14, "policy"=>"DELETE"))?>';
-		detail = '<?=$this->mdl_auth->CekAkses(array("menu_id"=>14, "policy"=>"DETAIL"))?>';
-		add = '$this->mdl_auth->CekAkses(array("menu_id"=>14, "policy"=>"ADD"))?>';
+		del = '<?=$this->mdl_auth->CekAkses(array("menu_id"=>2, "policy"=>"DELETE"));?>';
+		detail = '<?=$this->mdl_auth->CekAkses(array("menu_id"=>2, "policy"=>"DETAIL"));?>';
+		tambah = '<?=$this->mdl_auth->CekAkses(array("menu_id"=>2, "policy"=>"ADD"));?>';
 
-		$(document).ready(function(){
-			$("#search").select2();
-		});
-		
 		$(document).ready(function(){
 			$('#konten').panel({
 				href:base_url+'main/dashboard'
@@ -123,106 +120,7 @@
 			check_login();
 		});
 	</script>
-	
-	<style type="text/css">
-		#fm/*<?=$objectId;?>*/{
-			margin:0;
-			padding:10px 30px;
-		}
-		.ftitle{
-			font-size:14px;
-			font-weight:bold;
-			color:#666;
-			padding:5px 0;
-			margin-bottom:10px;
-			border-bottom:1px solid #ccc;
-		}
-		.fitem{
-			margin-bottom:5px;
-		}
-		.fitem label{
-			display:inline-block;
-			min-width:30px;
-		}
-		
-	  .fsearch{
-		background:#fafafa;
-		border-radius:2px;
-		-moz-border-radius:0px;
-		-webkit-border-radius: 5px;
-		-moz-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
-		-webkit-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
-		filter: progid:DXImageTransform.Microsoft.Blur(pixelRadius=2,MakeShadow=false,ShadowOpacity=0.2);
-		margin-bottom:0px;
-		border: 1px solid #C5C5C5;
-	    color: #15428B;
-	    font-size: 12px;
-	    position: relative;
-	  }
-	  .fsearch div{
-		background:url('<?=base_url();?>public/css/themes/gray/images/panel_title.gif') repeat-x;
-		height:200%;
-		/*border-bottom: 1px solid #99BBE8;*/
-		color:#15428B;
-		font-size:10pt;
-		text-transform:uppercase;
-	    font-weight: bold;
-	    padding: 3px 5px 0px 5px;
-	    position: relative;
-	  }
-	  .fsearch table{
-	    padding: 8px;
-	  }
-	  .fsearch label{
-		display:inline-block;
-		width:60px;
-	  }
-		.fitemArea{
-			margin-bottom:5px;
-			text-align:left;
-			/* border:1px solid blue; */
-		}
-		.fitemArea label{
-			display:inline-block;
-			width:84px;
-			margin-bottom:5px;
-		}
-		
-		
-		.tbl {
-			width: 100%;
-			padding: 0;
-			margin: 0;
-		}
-		
-		.tbl th{
-			font: normal 12px;
-			color: #4f6b72;
-			border-right: 1px solid #C1DAD7;
-			border-bottom: 1px solid #C1DAD7;
-			border-top: 1px solid #C1DAD7;
-			border-left: 1px solid #C1DAD7;
-			/*text-align: left;*/
-			padding: 2px 2px 3px 4px;
-			margin:0;
-			background: #CAE8EA url(<?=base_url();?>asset/images/th.png) repeat-x;
-		}
-		
-		.tbl td{
-			border-right: 1px solid #C1DAD7;
-			border-left: 1px solid #C1DAD7;
-			border-top: 1px solid #C1DAD7;
-			border-bottom: 1px solid #C1DAD7;
-			padding: 3px 3px 3px 5px;
-			margin:0;
-		}
-		
-		.tbl tr{
-			margin:0;
-		}
-	</style>
-	
-	
+
 	
 	<div data-options="region:'north',border:false" style="height:93px;background:#FFF;background: fixed  no-repeat top left;">
 		<!-- bagian atas -->
