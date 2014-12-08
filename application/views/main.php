@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/select/select2.css"/>
 	<!--<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/easyui/themes/bootstrap/easyui.css" />-->
 	<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/easyui/themes/icon.css" />
+	<!--	<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/jquery-ui-1.11.2/jquery-ui.css" />-->
 	<script type="text/javascript" src="<?=base_url();?>asset/easyui/jquery.min.js"></script>
 	<script type="text/javascript" src="<?=base_url();?>asset/easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="<?=base_url();?>asset/easyui/plugins/jquery.datagrid-groupview.js"></script>
@@ -16,12 +17,19 @@
 	<script type="text/javascript" src="<?=base_url();?>asset/easyui/plugins/jquery.datagrid-detailview.js"></script>
 	<script type="text/javascript" src="<?=base_url();?>asset/js/ckeditor/ckeditor.js"></script>
 	<script type="text/javascript" src="<?=base_url();?>asset/select/select2.js"></script>
+	<!--<script type="text/javascript" src="<?=base_url();?>asset/jquery-ui-1.11.2/jquery-ui.js"></script>-->
 	
 </head>
 <body class="easyui-layout">
-<input type="hide" value="<?=base_url();?>"/> 
 	<script>
 		base_url = '<?=base_url();?>';
+		del = '<?=$this->mdl_auth->CekAkses(array("menu_id"=>14, "policy"=>"DELETE"))?>';
+		detail = '<?=$this->mdl_auth->CekAkses(array("menu_id"=>14, "policy"=>"DETAIL"))?>';
+		add = '$this->mdl_auth->CekAkses(array("menu_id"=>14, "policy"=>"ADD"))?>';
+
+		$(document).ready(function(){
+			$("#search").select2();
+		});
 		
 		$(document).ready(function(){
 			$('#konten').panel({

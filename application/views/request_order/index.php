@@ -1,4 +1,3 @@
-
 <div id="toolbar" style="padding:5px;height:auto">
 	<div style="margin-bottom:5px">		
 	</div>
@@ -7,24 +6,17 @@
 		  <tr>
 			<td>Search</td>
 			<td>: 
-				<select id="search" name=" " style="width:200px;">
-						<option>Pilih</option>
-						<option>Search 1</option>
-            <option>Search 2</option>
-            <option>Search 3</option>	
-            <option>Search 4</option>              
-				</select>	
+				<input class="easyui-textbox" id="search" data-options="iconCls:'icon-search'" style="width:300px">
 			</td>
 			<td><a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-search">Search</a></td>
 		  </tr>
 		</table>
 	</div>
 </div>
-
-<table id="dg" title="Request Order List" data-options="
+<table id="dg" title="Request Order List" class="easyui-datagrid" data-options="
 			rownumbers:true,
 			singleSelect:true,
-			autoRowHeight:false,
+			autoRowHeight:true,
 			pagination:true,
 			pageSize:30,
 			fit:true,
@@ -46,91 +38,5 @@
 	</thead>
 </table>
 
+<script src="<?php echo base_url();?>asset/js/modul/request_order.js" type="text/javascript" charset="utf-8"></script>
 
-<script type="text/javascript">
-	var url;
-	$(document).ready(function(){
-	
-		newData = function (){
-			$('#dialog').dialog({
-				title: 'Add Request Order',
-				width: 380,
-				height: 270,
-				closed: true,
-				cache: false,
-				href: base_url+'request_order/add',
-				modal: true
-			});
-			 
-			$('#dialog').dialog('open');
-			url = base_url+'request_order/save/add';
-		}
-		// end newData
-		
-			DetailData = function (val){
-			$('#dialog').dialog({
-				title: 'Detail Request Order',
-				//style:{background:'#d4d4d4'},
-				//width: $(window).width() * 0.8,
-				//height: $(window).height() * 0.99,
-				width: 625,
-				height: 600,
-				closed: true,
-				cache: false,
-				href: base_url+'request_order/detail/'+val,
-				modal: true
-			});
-			 
-			$('#dialog').dialog('open');
-			url = base_url+'request_order/save';
-		}
-		// end newData
-		
-		actionbutton = function(value, row, index){
-			var col='';
-			//if (row.kd_fakultas != null) {
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'DELETE'))){?>
-					col = '<a href="#" onclick="DeleteData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
-			<?}?>
-
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'DETAIL'))){?>
-					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="DetailData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
-			<?}?>
-
-					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="SendData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Send</a>';
-
-			//}
-			return col;
-		}
-		
-		$(function(){
-			$('#dg').datagrid({
-				url:base_url + "request_order/grid"
-			});
-		});
-
-		// search text combo
-		$(document).ready(function(){
-			$("#search").select2();
-		});
-		
-		//# Tombol Bawah
-		$(function(){
-			var pager = $('#dg').datagrid().datagrid('getPager');	// get the pager of datagrid
-			pager.pagination({
-				buttons:[
-					<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'ADD'))){?>
-					{
-						iconCls:'icon-add',
-						text:'Tambah Data',
-						handler:function(){
-							newData();
-						}
-					}
-					<?}?>
-				]
-			});			
-		});
-		
-	});
-</script>
