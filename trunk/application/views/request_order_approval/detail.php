@@ -100,8 +100,8 @@
     <table>
       <tr>
           <td>
-              &nbsp;&nbsp;<a href="#" onclick="app()" class="easyui-linkbutton" iconCls="icon-login">App</a>
-              &nbsp;&nbsp;<a href="#" onclick="reject()" class="easyui-linkbutton" iconCls="icon-redo">Reject</a>
+              &nbsp;&nbsp;<a href="#" onclick="#()" class="easyui-linkbutton" iconCls="icon-login">App</a>
+              &nbsp;&nbsp;<a href="#" onclick="#()" class="easyui-linkbutton" iconCls="icon-redo">Reject</a>
           </td> 
       </tr>     
     </table>
