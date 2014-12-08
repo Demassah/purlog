@@ -1,6 +1,6 @@
 	var url;
 	$(document).ready(function(){
-	
+
 		newData = function (){
 			$('#dialog').dialog({
 				title: 'Add Request Order',
@@ -20,9 +20,6 @@
 			DetailData = function (val){
 			$('#dialog').dialog({
 				title: 'Detail Request Order',
-				//style:{background:'#d4d4d4'},
-				//width: $(window).width() * 0.8,
-				//height: $(window).height() * 0.99,
 				width: 625,
 				height: 600,
 				closed: true,
@@ -54,30 +51,27 @@
 		}
 		
 		$(function(){
-			$('#dg').datagrid({
-				url:base_url + "request_order/grid"
-			});
-		});
-
-		// search text combo
-		// $(document).ready(function(){
-		// 	$("#search").select2();
-		// });
-		
-		$(function(){
 			var pager = $('#dg').datagrid().datagrid('getPager');	// get the pager of datagrid
 			pager.pagination({
 				buttons:[
-					{
+				if(tambah){
 						iconCls:'icon-add',
 						text:'Tambah Data',
 						handler:function(){
-							newData();
+						newData();
 						}
 					}
 				]
 			});			
 		});
+
+		$(function(){
+			$('#dg').datagrid({
+				url:base_url + "request_order/grid"
+			});
+		});
+
+
 		
 		
 	});
