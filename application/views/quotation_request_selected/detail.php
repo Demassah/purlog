@@ -119,7 +119,7 @@
       singleSelect:false,
       autoRowHeight:false,
       fit:true,
-      toolbar:'#toolbar_detail',
+      toolbar:'#toolbar_details',
     ">    
   <thead>
     <tr>
@@ -133,7 +133,7 @@
     </tr>
   </thead>
 </table>
-<div id="toolbar_detail" style="padding:5px;height:auto">
+<div id="toolbar_details" style="padding:5px;height:auto">
   <div>
     <table>
       <tr>

@@ -26,8 +26,8 @@ class Sample_quotation extends CI_Model {
         $this->db_sample->from('cpgt_quotation qtn');
         $this->db_sample->join('cpgt_barang brg', 'brg.barang_id = qtn.barang_id');
         $this->db_sample->join('cpgt_supplier spl', 'spl.supplier_id = qtn.supplier_id');
-        $this->db_sample->where('brg.barang_id = 1');
-        $this->db_sample->group_by('brg.barang_id');
+        //$this->db_sample->where('brg.barang_id = 1');
+        $this->db_sample->group_by('spl.supplier_nama');
         
         $q = $this->db_sample->get();
                 

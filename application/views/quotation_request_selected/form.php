@@ -21,37 +21,14 @@
 			});
 		}
 				
-		actiondetail = function(value, row, index){
-			var col='';return col;
-		}
-		
+		text = function(value, row, index){
+			return '<input name="menu_name" size="30" value=" ">';
+		}		
 
 		$(function(){ // init
-			$('#dg').datagrid({url:"delivery_order/grid"});				
+			$('#dgrtd').datagrid({url:"delivery_order/grid"});				
 		});	
 
-		//# Tombol Bawah
-    $(function(){
-      var pager = $('#dg').datagrid().datagrid('getPager'); // get the pager of datagrid
-      pager.pagination({
-        buttons:[
-          {
-            iconCls:'icon-undo',
-            text:'Kembali',
-            handler:function(){
-              back();
-            }
-          },
-          {
-            iconCls:'icon-print',
-            text:'Print',
-            handler:function(){
-              print();
-            }
-          }           
-        ]
-      });     
-    });
 		
 	});
 </script>
@@ -66,23 +43,17 @@
 	</div>
 	<div class="fitem" >
 		<label style="width:140px">TOP </label>: 
-		<input name="name" size="19" value=" ">
-	</div>
-
-	<div class="fitem" >
-		<label style="width:140px">Price</label>: 
-		<input name="kode_barang" size="19" value=" ">
+		<input name="name" size="19" value=" "> Days
 	</div>
 
 </form>
 
-<table id="dg" title="Detail" data-options="
+<table id="dgrtd" title="Detail" data-options="
 			rownumbers:true,
 			singleSelect:false,
-			pagination:true,
 			autoRowHeight:false,
 			fit:true,
-			toolbar:'#toolbar_detail',
+			toolbar:'#toolbar_form',
 		">		
 	<thead>
 		<tr>
@@ -91,7 +62,7 @@
 			<th field="kode_barang" sortable="true" width="120">Item</th>
 			<th field="kode_barang" sortable="true" width="80">Qty</th>
 			<th field="nama_sub_kategori" sortable="true" width="480">Deskripsi</th>		
-			<th field="action" align="center" formatter="actiondetail" width="140">Aksi</th>
+			<th field="text" align="center" width="75" formatter="text">Price</th>	
 		</tr>
 	</thead>
 </table>

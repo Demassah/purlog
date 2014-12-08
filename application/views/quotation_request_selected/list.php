@@ -41,30 +41,30 @@ $_colname = array(0=>"supplier_nama", 1=>"top", 2=>"price");
             toolbar:'#toolbar_pending'
         "> 
     <thead>
-        <?php
-        foreach ($_crossfield as $rows) {
-            $_columns = explode(',', $dataset[0][$_colname[$counter]]);
-            
-            echo '<tr>';
-            if(!$header) {
-                echo '<th>'.$rows.'</th>';                
-                
-                foreach ($_columns as $cols) {
-                    echo '<td>'.$cols.'</td>';
-                }
-                
-            } else {
-                echo '<th>'.$rows.'</th>';
-                
-                foreach ($_columns as $cols) {
-                    echo '<th>'.$cols.'</th>';
-                }
-            }
-            echo '</tr>';
-            
-            $header = FALSE;
-            $counter++;
-        }?>
+        <tr>
+            <th> </th>
+            <th>PT. Demas Nusantara</th>
+            <th>PT. Demas Nusantara</th>
+            <th>PT. Demas Nusantara</th>
+        </tr>
+        <tr>
+            <th>TOP</th>
+            <td>12</td>
+            <td>11</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <th>Ban</th>
+            <td>Rp.12000</td>
+            <td>Rp.11000</td>
+            <td>Rp.10000</td>
+        </tr>
+
+        <tr>
+            <th>Busi</th>
+            <td>Rp.1200</td>
+            <td>Rp.1100</td>
+            <td>Rp.1000</td>
+        </tr>   
     </thead>
 </table>
-  
