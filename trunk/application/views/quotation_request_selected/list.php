@@ -2,8 +2,8 @@
     listSRO = function (){
             $('#dialog').dialog({
                 title: 'Add Vendor',
-                width: $(window).width() * 0.8,
-                height: $(window).height() * 0.99,
+                width: $(window).width() * 0.7,
+                height: $(window).height() * 0.7,
                 closed: true,
                 cache: false,
                 href: base_url+'quotation_request_selected/add',
