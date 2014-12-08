@@ -45,21 +45,6 @@
 			});
 		});
 		
-		//Bawah
-		$(function(){
-			var pager = $('#dg').datagrid().datagrid('getPager');	// get the pager of datagrid
-			pager.pagination({
-				buttons:[
-					{
-						iconCls:'icon-add',
-						text:'Tambah Data',
-						handler:function(){
-							newData();
-						}
-					}
-				]
-			});			
-		});
 		
 	});
 </script>

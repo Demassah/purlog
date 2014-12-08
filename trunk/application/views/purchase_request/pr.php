@@ -37,24 +37,7 @@
 				url:"<?=base_url()?>purchase_request/grid"
 			});
 		});
-		
-		//# Tombol Bawah
-		$(function(){
-			var pager = $('#dg').datagrid().datagrid('getPager');	// get the pager of datagrid
-			pager.pagination({
-				buttons:[
-				<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'ADD'))){?>
-					{
-						iconCls:'icon-add',
-						text:'Tambah Data',
-						handler:function(){
-							newData();
-						}
-					}
-				<?}?>	
-				]
-			});			
-		});
+	
 		
 	});
 </script>
