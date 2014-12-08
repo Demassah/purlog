@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 05, 2014 at 01:26 AM
+-- Generation Time: Dec 07, 2014 at 05:10 PM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.1
 
@@ -260,6 +260,169 @@ CREATE TABLE IF NOT EXISTS `sys_user_level` (
 INSERT INTO `sys_user_level` (`user_level_id`, `level_name`, `level`) VALUES
 (1, 'Administrator', 10000),
 (2, 'Logistic', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tr_po`
+--
+
+CREATE TABLE IF NOT EXISTS `tr_po` (
+  `id_po` varchar(21) NOT NULL,
+  `id_pr` varchar(21) DEFAULT NULL,
+  `id_ro` varchar(21) DEFAULT NULL,
+  `requestor` varchar(21) DEFAULT NULL,
+  `departement` varchar(21) DEFAULT NULL,
+  `purpose` varchar(21) DEFAULT NULL,
+  `cat_req` varchar(21) DEFAULT NULL,
+  `ext_doc_no` varchar(21) DEFAULT NULL,
+  `ETD` date DEFAULT NULL,
+  `date_create` datetime DEFAULT NULL,
+  `status` int(1) DEFAULT NULL,
+  PRIMARY KEY (`id_po`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tr_po`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tr_pr`
+--
+
+CREATE TABLE IF NOT EXISTS `tr_pr` (
+  `id_pr` varchar(21) NOT NULL,
+  `id_ro` varchar(21) DEFAULT NULL,
+  `requestor` varchar(21) DEFAULT NULL,
+  `departement` varchar(21) DEFAULT NULL,
+  `purpose` varchar(21) DEFAULT NULL,
+  `cat_req` varchar(21) DEFAULT NULL,
+  `ext_doc_no` varchar(21) DEFAULT NULL,
+  `ETD` date DEFAULT NULL,
+  `date_create` datetime DEFAULT NULL,
+  `status` int(1) DEFAULT NULL,
+  PRIMARY KEY (`id_pr`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tr_pr`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tr_qr`
+--
+
+CREATE TABLE IF NOT EXISTS `tr_qr` (
+  `id_qr` varchar(21) NOT NULL,
+  `id_pr` varchar(21) DEFAULT NULL,
+  `id_vendor` varchar(21) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL,
+  PRIMARY KEY (`id_qr`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `tr_qr`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tr_qrs`
+--
+
+CREATE TABLE IF NOT EXISTS `tr_qrs` (
+  `id_po` varchar(21) NOT NULL,
+  `id_pr` varchar(21) DEFAULT NULL,
+  `id_ro` varchar(21) DEFAULT NULL,
+  `requestor` varchar(21) DEFAULT NULL,
+  `departement` varchar(21) DEFAULT NULL,
+  `purpose` varchar(21) DEFAULT NULL,
+  `cat_req` varchar(21) DEFAULT NULL,
+  `ext_doc_no` varchar(21) DEFAULT NULL,
+  `ETD` date DEFAULT NULL,
+  `date_create` datetime DEFAULT NULL,
+  `status` int(1) DEFAULT NULL,
+  PRIMARY KEY (`id_po`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tr_qrs`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tr_qr_detail`
+--
+
+CREATE TABLE IF NOT EXISTS `tr_qr_detail` (
+  `id_detail_qr` int(11) NOT NULL AUTO_INCREMENT,
+  `id_barang` varchar(21) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL,
+  PRIMARY KEY (`id_detail_qr`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `tr_qr_detail`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tr_ro`
+--
+
+CREATE TABLE IF NOT EXISTS `tr_ro` (
+  `id_ro` varchar(21) NOT NULL,
+  `requestor` varchar(21) DEFAULT NULL,
+  `departement` varchar(21) DEFAULT NULL,
+  `purpose` varchar(21) DEFAULT NULL,
+  `cat_req` varchar(21) DEFAULT NULL,
+  `ext_doc_no` varchar(21) DEFAULT NULL,
+  `ETD` date DEFAULT NULL,
+  `date_create` datetime DEFAULT NULL,
+  `status` int(1) DEFAULT NULL,
+  PRIMARY KEY (`id_ro`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `tr_ro`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tr_ros`
+--
+
+CREATE TABLE IF NOT EXISTS `tr_ros` (
+  `id_ro` varchar(21) NOT NULL,
+  `requestor` varchar(21) DEFAULT NULL,
+  `departement` varchar(21) DEFAULT NULL,
+  `purpose` varchar(21) DEFAULT NULL,
+  `cat_req` varchar(21) DEFAULT NULL,
+  `ext_doc_no` varchar(21) DEFAULT NULL,
+  `ETD` date DEFAULT NULL,
+  `date_create` datetime DEFAULT NULL,
+  `status` int(1) DEFAULT NULL,
+  PRIMARY KEY (`id_ro`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tr_ros`
+--
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
