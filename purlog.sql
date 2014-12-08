@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 07, 2014 at 05:10 PM
+-- Generation Time: Dec 08, 2014 at 02:12 AM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.1
 
@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS `ref_barang` (
   `kode_barang` varchar(10) NOT NULL,
   `nama_barang` varchar(30) NOT NULL,
   `jumlah` int(5) NOT NULL,
+  `status` varchar(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
@@ -39,18 +40,18 @@ CREATE TABLE IF NOT EXISTS `ref_barang` (
 -- Dumping data for table `ref_barang`
 --
 
-INSERT INTO `ref_barang` (`id`, `id_kategori`, `id_sub_kategori`, `kode_barang`, `nama_barang`, `jumlah`) VALUES
-(1, 2, 2, '001', 'Busi', 100),
-(2, 2, 2, '101', 'Asd', 25),
-(3, 3, 4, '002', 'Ban', 200),
-(4, 2, 2, '003', 'CPU', 50),
-(5, 3, 4, '004', 'Monitor', 75),
-(6, 2, 2, '005', 'Keyboard', 100),
-(7, 3, 4, '006', 'Mouse', 500),
-(8, 2, 2, '007', 'Meja', 1000),
-(9, 3, 4, '008', 'Kursi', 800),
-(10, 3, 4, '009', 'Mobil', 5000),
-(11, 3, 4, '010', 'Bis Pariwisata', 1000);
+INSERT INTO `ref_barang` (`id`, `id_kategori`, `id_sub_kategori`, `kode_barang`, `nama_barang`, `jumlah`, `status`) VALUES
+(1, 2, 2, '001', 'Busi', 100, ''),
+(2, 2, 2, '101', 'Asd', 25, ''),
+(3, 3, 4, '002', 'Ban', 200, ''),
+(4, 2, 2, '003', 'CPU', 50, ''),
+(5, 3, 4, '004', 'Monitor', 75, ''),
+(6, 2, 2, '005', 'Keyboard', 100, ''),
+(7, 3, 4, '006', 'Mouse', 500, ''),
+(8, 2, 2, '007', 'Meja', 1000, ''),
+(9, 3, 4, '008', 'Kursi', 800, ''),
+(10, 3, 4, '009', 'Mobil', 5000, ''),
+(11, 3, 4, '010', 'Bis Pariwisata', 1000, '');
 
 -- --------------------------------------------------------
 
@@ -85,6 +86,7 @@ INSERT INTO `ref_departement` (`departement_id`, `departement_name`) VALUES
 CREATE TABLE IF NOT EXISTS `ref_kategori` (
   `id_kategori` smallint(6) NOT NULL AUTO_INCREMENT,
   `nama_kategori` varchar(25) NOT NULL,
+  `status` varchar(1) NOT NULL,
   PRIMARY KEY (`id_kategori`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
@@ -92,9 +94,9 @@ CREATE TABLE IF NOT EXISTS `ref_kategori` (
 -- Dumping data for table `ref_kategori`
 --
 
-INSERT INTO `ref_kategori` (`id_kategori`, `nama_kategori`) VALUES
-(2, 'Consumables'),
-(3, 'Not  Consumables');
+INSERT INTO `ref_kategori` (`id_kategori`, `nama_kategori`, `status`) VALUES
+(2, 'Consumables', ''),
+(3, 'Not  Consumables', '');
 
 -- --------------------------------------------------------
 
@@ -106,6 +108,7 @@ CREATE TABLE IF NOT EXISTS `ref_sub_kategori` (
   `id_sub_kategori` smallint(6) NOT NULL AUTO_INCREMENT,
   `id_kategori` smallint(6) NOT NULL,
   `nama_sub_kategori` varchar(25) NOT NULL,
+  `status` varchar(1) NOT NULL,
   PRIMARY KEY (`id_sub_kategori`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
@@ -113,9 +116,9 @@ CREATE TABLE IF NOT EXISTS `ref_sub_kategori` (
 -- Dumping data for table `ref_sub_kategori`
 --
 
-INSERT INTO `ref_sub_kategori` (`id_sub_kategori`, `id_kategori`, `nama_sub_kategori`) VALUES
-(2, 2, 'Barang Konsumsi'),
-(4, 3, 'Tak Habis');
+INSERT INTO `ref_sub_kategori` (`id_sub_kategori`, `id_kategori`, `nama_sub_kategori`, `status`) VALUES
+(2, 2, 'Barang Konsumsi', ''),
+(4, 3, 'Tak Habis', '');
 
 -- --------------------------------------------------------
 
@@ -159,8 +162,8 @@ INSERT INTO `sys_menu` (`menu_id`, `menu_group`, `menu_name`, `menu_parent`, `ur
 (17, 'Purchase', 'Purchase Order', 9, 'purchase_order', 10, 0, 'icon-po', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
 (18, 'Purchase', 'Document Receive', 34, 'document_receive', 10, 0, 'icon-dr', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
 (19, 'Logistic', 'Delivery Order', 34, 'delivery_order', 8, 0, 'icon-delivery', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
-(20, 'Purchase', 'Berita Acara Pengembalian', 9, 'berkas_acara_pemeriksaan', 12, 0, 'icon-bap', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
-(21, 'Purchase', 'Berita Acara Pengembalian Pengiriman', 9, 'bap_pengembalian', 13, 0, 'icon-bapp', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
+(20, 'Purchase', 'Berita Acara Pengembalian', 9, 'underconstruction', 12, 0, 'icon-bap', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
+(21, 'Purchase', 'Berita Acara Pengembalian Pengiriman', 9, 'underconstruction', 13, 0, 'icon-bapp', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
 (22, 'Logistic', 'Request Order Logistic', 34, 'request_order_logistic', 4, 0, 'icon-rol', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
 (23, 'Administrator', 'Menu', 1, 'menu', 1, 0, 'icon-menu', 'ACCESS;ADD;EDIT;DELETE;'),
 (34, 'Logistic', 'Logistic', 0, '#', 3, 0, 'icon-logistic', 'ACCESS;'),
@@ -423,6 +426,31 @@ CREATE TABLE IF NOT EXISTS `tr_ros` (
 -- Dumping data for table `tr_ros`
 --
 
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `v_barang`
+--
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `purlog`.`v_barang` AS select `a`.`kode_barang` AS `kode_barang`,`a`.`nama_barang` AS `nama_barang`,`a`.`jumlah` AS `jumlah`,`b`.`nama_kategori` AS `nama_kategori`,`c`.`nama_sub_kategori` AS `nama_sub_kategori` from ((`purlog`.`ref_barang` `a` join `purlog`.`ref_kategori` `b` on((`a`.`id_kategori` = `b`.`id_kategori`))) join `purlog`.`ref_sub_kategori` `c` on((`a`.`id_sub_kategori` = `c`.`id_sub_kategori`)));
+
+--
+-- Dumping data for table `v_barang`
+--
+
+INSERT INTO `v_barang` (`kode_barang`, `nama_barang`, `jumlah`, `nama_kategori`, `nama_sub_kategori`) VALUES
+('001', 'Busi', 100, 'Consumables', 'Barang Konsumsi'),
+('101', 'Asd', 25, 'Consumables', 'Barang Konsumsi'),
+('002', 'Ban', 200, 'Not  Consumables', 'Tak Habis'),
+('003', 'CPU', 50, 'Consumables', 'Barang Konsumsi'),
+('004', 'Monitor', 75, 'Not  Consumables', 'Tak Habis'),
+('005', 'Keyboard', 100, 'Consumables', 'Barang Konsumsi'),
+('006', 'Mouse', 500, 'Not  Consumables', 'Tak Habis'),
+('007', 'Meja', 1000, 'Consumables', 'Barang Konsumsi'),
+('008', 'Kursi', 800, 'Not  Consumables', 'Tak Habis'),
+('009', 'Mobil', 5000, 'Not  Consumables', 'Tak Habis'),
+('010', 'Bis Pariwisata', 1000, 'Not  Consumables', 'Tak Habis');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
