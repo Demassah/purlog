@@ -9,6 +9,13 @@
 			});
 		}
 
+		back = function (val){
+		  //detail
+		  $('#konten').panel({
+			href: base_url+'shipment_req_order/index',
+		  });
+		}
+
 		loadingList = function (){
 			$('#konten').panel({
 				href:base_url+'shipment_req_order/loadingList'
@@ -33,6 +40,13 @@
             text:'Checkout',
             handler:function(){
               a();
+            }
+          },
+          {
+            iconCls:'icon-undo',
+            text:'Kembali',
+            handler:function(){
+              back();
             }
           }             
         ]

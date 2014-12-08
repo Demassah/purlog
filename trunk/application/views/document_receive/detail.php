@@ -8,6 +8,13 @@
 				href:base_url+'document_receive/detail_dr'
 			});
 		}
+
+		back = function (val){
+		  //detail
+		  $('#konten').panel({
+			href: base_url+'document_receive/index',
+		  });
+		}
 		
 		var editIndex = undefined;
 		endEditing = function(){
@@ -32,6 +39,22 @@
 			$('#dg').datagrid({url:"document_receive/grid"});	
 			//$('#dg').datagrid('enableFilter'); 
 		});	
+
+		//# Tombol Bawah
+    $(function(){
+      var pager = $('#dg').datagrid().datagrid('getPager'); // get the pager of datagrid
+      pager.pagination({
+        buttons:[
+            {
+            iconCls:'icon-undo',
+            text:'Kembali',
+            handler:function(){
+              back();
+            }
+          }           
+        ]
+      });     
+    });
 		
 	});
 </script>
@@ -52,6 +75,7 @@
 			rownumbers:true,
 			singleSelect:false,
 			autoRowHeight:false,
+			pagination:true,
 			fit:true,
 			toolbar:'#toolbar_detail',
 		">		

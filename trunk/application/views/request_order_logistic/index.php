@@ -9,7 +9,7 @@
 		
 		$(function(){
 			$('#dg').datagrid({
-				url:base_url + "pros/grid"
+				url:base_url + "request_order_logistic/grid"
 			});
 		});
 		
@@ -66,16 +66,9 @@
 			<th field="nama_barang" sortable="true" width="100">Ext Document No</th>
 			<th field="nama_barang" sortable="true" width="100">ETD</th>
 			<th field="nama_barang" sortable="true" width="100">Date Create</th>
-			<th field="action" align="center" formatter="actionbutton" width="140">Aksi</th>
+			<!--<th field="action" align="center" formatter="actionbutton" width="140">Aksi</th>-->
 		</tr>
 	</thead>
-	<!--<thead>
-		<tr>
-			<th field="id_kategori" sortable="true" width="150" hidden="true">ID</th>
-			<th field="nama_kategori" sortable="true" width="350">Kategori</th>
-			<th field="action" align="center" formatter="actionbutton" width="100">Aksi</th>
-		</tr>
-	</thead>-->
 </table>
 
 
