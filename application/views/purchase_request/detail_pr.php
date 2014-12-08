@@ -2,6 +2,14 @@
 	
 	var url;
 	$(document).ready(function(){
+
+		back = function (val){
+		  //detail
+		  $('#konten').panel({
+			href: base_url+'purchase_request/index',
+		  });
+
+		}
 		
 		var editIndex = undefined;
 		endEditing = function(){
@@ -19,13 +27,30 @@
 			$('#dtgrd').datagrid({url:"picking_req_order_selected/grid"});	
 			//$('#dg').datagrid('enableFilter'); 
 		});	
+
+		//# Tombol Bawah
+    $(function(){
+      var pager = $('#dtgrd').datagrid().datagrid('getPager'); // get the pager of datagrid
+      pager.pagination({
+        buttons:[
+          {
+            iconCls:'icon-undo',
+            text:'Kembali',
+            handler:function(){
+              back();
+            }
+          }           
+        ]
+      });     
+    });
 		
 	});
 </script>
 
-<table id="dtgrd" data-options="
+<table id="dtgrd" title="Detail Purchase Request" data-options="
 			rownumbers:true,
 			singleSelect:false,
+			pagination:true,
 			autoRowHeight:false,
 			fit:true,
 			toolbar:'#toolbar_pending',

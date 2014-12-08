@@ -2,17 +2,23 @@
 	var url;
 	$(document).ready(function(){
 
-		detail_po = function (){
+		newData = function (){
 			$('#dialog').dialog({
-				title: 'Detail Purchase Order',
-				width: $(window).width() * 0.8,
-				height: $(window).height() * 0.99,
+				title: 'Add Purchase Order',
+				width: 380,
+				height: 130,
 				closed: true,
 				cache: false,
-				href: base_url+'purchase_order/detail_po',
+				href: base_url+'purchase_order/add',
 				modal: true
 			});			 
 			$('#dialog').dialog('open');
+		}
+
+		detail_po = function (){
+			$('#konten').panel({
+				href:base_url+'purchase_order/detail_po'
+			});
 		}
 
 		qrs = function (){
@@ -64,7 +70,7 @@
 		
 	});
 </script>
-<table id="dg" title="Data Purchase Order" data-options="
+<table id="dg" title="Purchase Order List" data-options="
 			rownumbers:true,
 			singleSelect:true,
 			autoRowHeight:false,

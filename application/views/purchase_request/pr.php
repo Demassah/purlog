@@ -3,16 +3,9 @@
 	$(document).ready(function(){
 
 		detail_pr = function (){
-			$('#dialog').dialog({
-				title: 'Detail Purchase Request',
-				width: $(window).width() * 0.8,
-				height: $(window).height() * 0.99,
-				closed: true,
-				cache: false,
-				href: base_url+'purchase_request/detail_pr',
-				modal: true
-			});			 
-			$('#dialog').dialog('open');
+			$('#konten').panel({
+				href:base_url+'purchase_request/detail_pr'
+			});
 		}
 
 		qrs = function (){
@@ -35,7 +28,7 @@
 				col = '<a href="#" onclick="detail_pr(\''+row.id_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
 			<?}?>
 
-				col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="qrs(\''+row.id_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">QRS</a>';
+				col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="#(\''+row.id_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">QRS</a>';
 			return col;
 		}
 		
@@ -65,7 +58,7 @@
 		
 	});
 </script>
-<table id="dg" title="Data Purchase Request" data-options="
+<table id="dg" title="Purchase Request List" data-options="
 			rownumbers:true,
 			singleSelect:true,
 			autoRowHeight:false,

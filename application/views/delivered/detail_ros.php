@@ -8,6 +8,13 @@
 				href:base_url+'delivered/sro'
 			});
 		}
+
+		back = function (val){
+		  //detail
+		  $('#konten').panel({
+			href: base_url+'delivered/index',
+		  });
+		}
 				
 		actiondetail = function(value, row, index){
 			var col='';
@@ -19,6 +26,22 @@
 		$(function(){ // init
 			$('#dtgrd').datagrid({url:"picking_req_order_selected/grid"});	
 		});	
+
+		//# Tombol Bawah
+    $(function(){
+      var pager = $('#dtgrd').datagrid().datagrid('getPager'); // get the pager of datagrid
+      pager.pagination({
+        buttons:[
+            {
+            iconCls:'icon-undo',
+            text:'Kembali',
+            handler:function(){
+              back();
+            }
+          }           
+        ]
+      });     
+    });
 		
 	});
 </script>
@@ -38,6 +61,7 @@
 <table id="dtgrd" title="Detail Request Order Selected" data-options="
 			rownumbers:true,
 			singleSelect:false,
+			pagination:true,
 			autoRowHeight:false,
 			fit:true,
 			toolbar:'#toolbar_detail',
