@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 08, 2014 at 02:12 AM
+-- Generation Time: Dec 08, 2014 at 07:27 
 -- Server version: 5.1.41
 -- PHP Version: 5.3.1
 
@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `sys_menu` (
   `position` int(11) NOT NULL,
   `hide` smallint(6) DEFAULT NULL,
   `icon_class` varchar(30) DEFAULT NULL,
-  `policy` varchar(50) DEFAULT '',
+  `policy` varchar(70) DEFAULT NULL,
   PRIMARY KEY (`menu_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=39 ;
 
@@ -151,7 +151,7 @@ INSERT INTO `sys_menu` (`menu_id`, `menu_group`, `menu_name`, `menu_parent`, `ur
 (5, 'Master Data', 'Master Data', 0, '#', 2, 0, 'icon-master', 'ACCESS;'),
 (6, 'Master Data', 'Kategori', 5, 'kategori', 2, 0, 'icon-kategori', 'ACCESS;ADD;EDIT;DELETE;'),
 (7, 'Master Data', 'Sub Kategori', 5, 'sub_kategori', 3, 0, 'icon-subkateg', 'ACCESS;ADD;EDIT;DELETE;'),
-(8, 'Master Data', 'Barang', 5, 'barang', 4, 0, 'icon-barang', 'ACCESS;ADD;EDIT;DELETE;PRINT;IMPORT;'),
+(8, 'Master Data', 'Barang', 5, 'barang', 4, 0, 'icon-barang', 'ACCESS;ADD;EDIT;DELETE;PRINT;IMPORT;PDF;EXCEL;APPROVE;'),
 (9, 'Purchase', 'Purchase', 0, '#', 4, 0, 'icon-purchase', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
 (10, 'Logistic', 'Request Order', 34, 'request_order', 2, 0, 'icon-ro', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
 (11, 'Logistic', 'Request Order Selected', 34, 'request_order_selected', 5, 0, 'icon-ros', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
@@ -261,7 +261,7 @@ CREATE TABLE IF NOT EXISTS `sys_user_level` (
 --
 
 INSERT INTO `sys_user_level` (`user_level_id`, `level_name`, `level`) VALUES
-(1, 'Administrator', 10000),
+(1, 'Administrator', 1),
 (2, 'Logistic', 1);
 
 -- --------------------------------------------------------
@@ -426,31 +426,6 @@ CREATE TABLE IF NOT EXISTS `tr_ros` (
 -- Dumping data for table `tr_ros`
 --
 
-
--- --------------------------------------------------------
-
---
--- Table structure for table `v_barang`
---
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `purlog`.`v_barang` AS select `a`.`kode_barang` AS `kode_barang`,`a`.`nama_barang` AS `nama_barang`,`a`.`jumlah` AS `jumlah`,`b`.`nama_kategori` AS `nama_kategori`,`c`.`nama_sub_kategori` AS `nama_sub_kategori` from ((`purlog`.`ref_barang` `a` join `purlog`.`ref_kategori` `b` on((`a`.`id_kategori` = `b`.`id_kategori`))) join `purlog`.`ref_sub_kategori` `c` on((`a`.`id_sub_kategori` = `c`.`id_sub_kategori`)));
-
---
--- Dumping data for table `v_barang`
---
-
-INSERT INTO `v_barang` (`kode_barang`, `nama_barang`, `jumlah`, `nama_kategori`, `nama_sub_kategori`) VALUES
-('001', 'Busi', 100, 'Consumables', 'Barang Konsumsi'),
-('101', 'Asd', 25, 'Consumables', 'Barang Konsumsi'),
-('002', 'Ban', 200, 'Not  Consumables', 'Tak Habis'),
-('003', 'CPU', 50, 'Consumables', 'Barang Konsumsi'),
-('004', 'Monitor', 75, 'Not  Consumables', 'Tak Habis'),
-('005', 'Keyboard', 100, 'Consumables', 'Barang Konsumsi'),
-('006', 'Mouse', 500, 'Not  Consumables', 'Tak Habis'),
-('007', 'Meja', 1000, 'Consumables', 'Barang Konsumsi'),
-('008', 'Kursi', 800, 'Not  Consumables', 'Tak Habis'),
-('009', 'Mobil', 5000, 'Not  Consumables', 'Tak Habis'),
-('010', 'Bis Pariwisata', 1000, 'Not  Consumables', 'Tak Habis');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

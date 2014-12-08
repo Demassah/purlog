@@ -70,8 +70,8 @@
 		menu = function (val){
 			$('#dialog-menu').dialog({
 				title: 'Kelola Menu',
-				//width: $(window).width() * 0.8,
-				width: 600,
+				width: $(window).width() * 0.6,
+				//width: 600,
 				height: $(window).height() * 0.99,
 				closed: true,
 				cache: false,
