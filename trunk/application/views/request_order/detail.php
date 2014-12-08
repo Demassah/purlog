@@ -30,6 +30,9 @@
 		<label style="width:140px">Description </label>: 
 		<textarea name="kode_barang" size="19" value=" "></textarea>
 	</div>
+	<div>
+		<button type="button" id="tambah">Add</button>
+	</div>
 </form>
 
 
