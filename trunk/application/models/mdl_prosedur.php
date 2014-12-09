@@ -125,6 +125,70 @@ class mdl_prosedur extends CI_Model {
 		return $out;
 	}
 
+	function OptionUserID($d=""){
+		$value = isset($d['value'])?$d['value']:'';
+		$out = '';
+		
+		$this->db->flush_cache();
+		$this->db->from('sys_user');
+		$this->db->order_by('full_name');
+		//$this->db->where('user_level_id', '1');
+				
+		$res = $this->db->get();
+		
+		foreach($res->result() as $r){
+			if(trim($r->user_id) == trim($value)){
+				$out .= '<option value="'.$r->user_id.'" selected="selected">'.$r->full_name.'</option>';
+			}else{
+				$out .= '<option value="'.$r->user_id.'">'.$r->full_name.'</option>';
+			}
+		}
+		
+		return $out;
+	}
+
+	function OptionRO($d=""){
+		$value = isset($d['value'])?$d['value']:'';
+		$out = '';
+		
+		$this->db->flush_cache();
+		$this->db->from('tr_ro');
+		$this->db->order_by('id_ro');
+				
+		$res = $this->db->get();
+		
+		foreach($res->result() as $r){
+			if(trim($r->id_ro) == trim($value)){
+				$out .= '<option value="'.$r->id_ro.'" selected="selected">'.$r->date_create.'</option>';
+			}else{
+				$out .= '<option value="'.$r->id_ro.'">'.$r->date_create.'</option>';
+			}
+		}
+		
+		return $out;
+	}
+
+	function OptionBarang($d=""){
+		$value = isset($d['value'])?$d['value']:'';
+		$out = '';
+		
+		$this->db->flush_cache();
+		$this->db->from('ref_barang');
+		$this->db->order_by('nama_barang');
+				
+		$res = $this->db->get();
+		
+		foreach($res->result() as $r){
+			if(trim($r->id) == trim($value)){
+				$out .= '<option value="'.$r->id.'" selected="selected">'.$r->nama_barang.'</option>';
+			}else{
+				$out .= '<option value="'.$r->id.'">'.$r->nama_barang.'</option>';
+			}
+		}
+		
+		return $out;
+	}
+
 }
 
 ?>

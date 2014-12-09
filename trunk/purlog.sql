@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 08, 2014 at 07:27 
+-- Generation Time: Dec 09, 2014 at 02:04 AM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.1
 
@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `sys_menu` (
   `position` int(11) NOT NULL,
   `hide` smallint(6) DEFAULT NULL,
   `icon_class` varchar(30) DEFAULT NULL,
-  `policy` varchar(70) DEFAULT NULL,
+  `policy` varchar(50) DEFAULT '',
   PRIMARY KEY (`menu_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=39 ;
 
@@ -151,7 +151,7 @@ INSERT INTO `sys_menu` (`menu_id`, `menu_group`, `menu_name`, `menu_parent`, `ur
 (5, 'Master Data', 'Master Data', 0, '#', 2, 0, 'icon-master', 'ACCESS;'),
 (6, 'Master Data', 'Kategori', 5, 'kategori', 2, 0, 'icon-kategori', 'ACCESS;ADD;EDIT;DELETE;'),
 (7, 'Master Data', 'Sub Kategori', 5, 'sub_kategori', 3, 0, 'icon-subkateg', 'ACCESS;ADD;EDIT;DELETE;'),
-(8, 'Master Data', 'Barang', 5, 'barang', 4, 0, 'icon-barang', 'ACCESS;ADD;EDIT;DELETE;PRINT;IMPORT;PDF;EXCEL;APPROVE;'),
+(8, 'Master Data', 'Barang', 5, 'barang', 4, 0, 'icon-barang', 'ACCESS;ADD;EDIT;DELETE;PRINT;IMPORT;'),
 (9, 'Purchase', 'Purchase', 0, '#', 4, 0, 'icon-purchase', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
 (10, 'Logistic', 'Request Order', 34, 'request_order', 2, 0, 'icon-ro', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
 (11, 'Logistic', 'Request Order Selected', 34, 'request_order_selected', 5, 0, 'icon-ros', 'ACCESS;ADD;EDIT;DELETE;DETAIL;'),
@@ -261,8 +261,49 @@ CREATE TABLE IF NOT EXISTS `sys_user_level` (
 --
 
 INSERT INTO `sys_user_level` (`user_level_id`, `level_name`, `level`) VALUES
-(1, 'Administrator', 1),
+(1, 'Administrator', 10000),
 (2, 'Logistic', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tr_do`
+--
+
+CREATE TABLE IF NOT EXISTS `tr_do` (
+  `id_do` int(11) NOT NULL AUTO_INCREMENT,
+  `id_courir` varchar(21) DEFAULT NULL,
+  `date_create` datetime DEFAULT NULL,
+  `id_user` varchar(21) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL,
+  PRIMARY KEY (`id_do`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `tr_do`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tr_do_detail`
+--
+
+CREATE TABLE IF NOT EXISTS `tr_do_detail` (
+  `id_do_detail` int(11) NOT NULL AUTO_INCREMENT,
+  `id_do` int(11) DEFAULT NULL,
+  `id_sro` int(11) DEFAULT NULL,
+  `date_create` datetime DEFAULT NULL,
+  `id_user` varchar(21) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL,
+  PRIMARY KEY (`id_do_detail`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `tr_do_detail`
+--
+
 
 -- --------------------------------------------------------
 
@@ -386,9 +427,8 @@ CREATE TABLE IF NOT EXISTS `tr_qr_detail` (
 --
 
 CREATE TABLE IF NOT EXISTS `tr_ro` (
-  `id_ro` varchar(21) NOT NULL,
-  `requestor` varchar(21) DEFAULT NULL,
-  `departement` varchar(21) DEFAULT NULL,
+  `id_ro` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` smallint(6) DEFAULT NULL,
   `purpose` varchar(21) DEFAULT NULL,
   `cat_req` varchar(21) DEFAULT NULL,
   `ext_doc_no` varchar(21) DEFAULT NULL,
@@ -396,12 +436,15 @@ CREATE TABLE IF NOT EXISTS `tr_ro` (
   `date_create` datetime DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id_ro`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `tr_ro`
 --
 
+INSERT INTO `tr_ro` (`id_ro`, `user_id`, `purpose`, `cat_req`, `ext_doc_no`, `ETD`, `date_create`, `status`) VALUES
+(1, 1, 'REQUEST', 'ASSET', ' asd123', '2014-12-08', '2014-12-08 00:00:00', 2),
+(2, 1, 'STOCK', 'ASSET', ' 001123456', '2014-12-08', '2014-12-08 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -426,6 +469,34 @@ CREATE TABLE IF NOT EXISTS `tr_ros` (
 -- Dumping data for table `tr_ros`
 --
 
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tr_ro_detail`
+--
+
+CREATE TABLE IF NOT EXISTS `tr_ro_detail` (
+  `id_detail_ro` int(11) NOT NULL AUTO_INCREMENT,
+  `id_ro` int(11) DEFAULT NULL,
+  `ext_doc_no` varchar(21) DEFAULT NULL,
+  `kode_barang` varchar(21) DEFAULT NULL,
+  `qty` int(11) DEFAULT NULL,
+  `user_id` smallint(6) DEFAULT NULL,
+  `date_create` datetime DEFAULT NULL,
+  `note` text,
+  `status` int(1) DEFAULT NULL,
+  `status_delete` int(1) NOT NULL,
+  PRIMARY KEY (`id_detail_ro`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `tr_ro_detail`
+--
+
+INSERT INTO `tr_ro_detail` (`id_detail_ro`, `id_ro`, `ext_doc_no`, `kode_barang`, `qty`, `user_id`, `date_create`, `note`, `status`, `status_delete`) VALUES
+(2, 1, '123456789', '002', 25, 1, '2014-12-09 13:25:58', 'KW 1', 1, 0),
+(3, 1, '987654321', '003', 50, 1, '2014-12-09 13:25:58', 'KW Super', 1, 0);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

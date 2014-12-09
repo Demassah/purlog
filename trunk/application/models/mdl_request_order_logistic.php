@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class mdl_req_order_logistic extends CI_Model {
+class mdl_request_order_logistic extends CI_Model {
     
 	function __construct(){
         parent::__construct();
