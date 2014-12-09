@@ -4,7 +4,7 @@ class request_order_approval extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
-		$this->load->model('mdl_barang');
+		$this->load->model('mdl_request_order_approval');
 		//$this->output->enable_profiler(TRUE);
 	}
 	
@@ -13,41 +13,28 @@ class request_order_approval extends CI_Controller {
 	}
 
 	function grid(){
-		$data = $this->mdl_barang->getdata();
-		echo $this->mdl_barang->togrid($data['row_data'], $data['row_count']);
-	}
-		
-	function add(){
-		$data['kode'] = '';
-		$data['name'] = '';
-		$data['name_kode'] = '';		
-		$this->load->view('request_order_approval/form_add', $data);
+		$data = $this->mdl_request_order_approval->getdata();
+		echo $this->mdl_request_order_approval->togrid($data['row_data'], $data['row_count']);
 	}
 
-	function edit($kode){
-		$r = $this->mdl_barang->getdataedit($kode);
-		
-    $data['id_kategori'] = $r->row()->id_kategori;
-    $data['id_sub_kategori'] = $r->row()->id_sub_kategori;
-    $data['kode_barang'] = $r->row()->kode_barang;
-    $data['nama_barang'] = $r->row()->nama_barang;
-    $data['jumlah'] = $r->row()->jumlah;
-		$data['kode'] = $kode;
-		
-		$this->load->view('request_order_approval/form', $data);
+
+	function done($id){
+		$result = $this->mdl_request_order_approval->DoneData($id);
+		if ($result){
+			echo json_encode(array('success'=>true));
+		} else {
+			echo json_encode(array('msg'=>'Data gagal di kirim'));
+		}
+	} 
+
+	function detail(){
+		$this->load->view('request_order_approval/detail');
 	}
 
-	function detail($kode){
-		$r = $this->mdl_barang->getdataedit($kode);
-		
-    $data['id_kategori'] = $r->row()->id_kategori;
-    $data['id_sub_kategori'] = $r->row()->id_sub_kategori;
-    $data['kode_barang'] = $r->row()->kode_barang;
-    $data['nama_barang'] = $r->row()->nama_barang;
-    $data['jumlah'] = $r->row()->jumlah;
-		$data['kode'] = $kode;
-		
-		$this->load->view('request_order_approval/detail', $data);
+	function grid_detail(){
+		$data = $this->mdl_request_order_approval->getdata_detail();
+		echo $this->mdl_request_order_approval->togrid($data['row_data'], $data['row_count']);
 	}
+
 	
 }

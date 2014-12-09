@@ -4,7 +4,7 @@ class request_order_logistic extends CI_Controller {
 	
 	function __construct(){
 		parent::__construct();
-		$this->load->model('mdl_req_order_logistic');
+		$this->load->model('mdl_request_order_logistic');
 		//$this->output->enable_profiler(TRUE);
 	}
 	
@@ -13,8 +13,8 @@ class request_order_logistic extends CI_Controller {
 	}
 
 	function grid(){
-		$data = $this->mdl_req_order_logistic->getdata();
-		echo $this->mdl_req_order_logistic->togrid($data['row_data'], $data['row_count']);
+		$data = $this->mdl_request_order_logistic->getdata();
+		echo $this->mdl_request_order_logistic->togrid($data['row_data'], $data['row_count']);
 	}
 		
 	function add(){

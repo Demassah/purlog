@@ -1,84 +1,104 @@
 <script type="text/javascript">
-  var url;
+    var url;
   $(document).ready(function(){
 
-    add = function (){
+    back = function (val){
+      $('#konten').panel({
+        href:base_url+'request_order/index'
+      });
+    }
+
+    newDetail = function (){
       $('#dialog').dialog({
-        title: 'Add Detail Request approval',
-         width: 400,
-        height: 300,
+        title: 'Tambah Detail Request Order',
+        width: 700,
+        height: $(window).height() * 0.99,
         closed: true,
         cache: false,
-        href: base_url+'request_order_approval/add',
+        href: base_url+'request_order/add_detail',
         modal: true
-      });
-       
+      });      
       $('#dialog').dialog('open');
+      url = base_url+'request_order/save/add_detail';
     }
-
-     back = function (val){
-      //detail
-      $('#konten').panel({
-        href: base_url+'request_order_approval/index',
+    // end newData
+    
+    
+    saveData = function(){
+      
+      $('#form1').form('submit',{
+        url: url,
+        onSubmit: function(){
+          return $(this).form('validate');
+        },
+        success: function(result){
+          alert(result);
+          var result = eval('('+result+')');
+          if (result.success){
+            $('#dialog').dialog('close');   // close the dialog
+            $('#dg_roa').datagrid('reload');   // reload the user data
+          } else {
+            $.messager.show({
+              title: 'Error',
+              msg: result.msg
+            });
+          }
+        }
       });
-
     }
-
-    app = function (val){
-      //detail
-      $('#konten').panel({
-        href: base_url+'picking_req_order_selected/lock',
-      });
-
+    //end saveData
+    
+    deleteData = function (val){
+        if(confirm("Apakah yakin akan menghapus data '" + val + "'?")){
+          var response = '';
+          $.ajax({ type: "GET",
+             url: base_url+'request_order/deleteDetail/' + val,
+             async: false,
+             success : function(response){
+              var response = eval('('+response+')');
+              if (response.success){
+                $.messager.show({
+                  title: 'Success',
+                  msg: 'Data Berhasil Dihapus'
+                });
+                // reload and close tab
+                $('#dg').datagrid('reload');
+              } else {
+                $.messager.show({
+                  title: 'Error',
+                  msg: response.msg
+                });
+              }
+             }
+          });
+        }
+      //}
     }
+    //end deleteData 
 
-    reject = function (val){
-      //detail
-      $('#konten').panel({
-        href: base_url+'picking_req_order_selected/pending',
-      });
-
-    }
-
-   update = function (){
-        $('#dialog').dialog({
-          title: 'Edit Kategori',
-          width: 380,
-          height: 130,
-          closed: true,
-          cache: false,
-          href: base_url+'kategori/edit/',
-          modal: true
-        });
-        
-        $('#dialog').dialog('open');  
-        url = base_url+'kategori/save/edit';
-      // }
-    }
-
-    actiondetail = function(value, row, index){
+    actionbutton = function(value, row, index){
       var col='';
-          col += '&nbsp;&nbsp; &nbsp;&nbsp;<a href="#" onclick="update(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">update</a>';      
+          col += '<a href="#" onclick="deleteData(\''+row.id_detail_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
       return col;
     }
-    
+
+  
     $(function(){
-      $('#dtgrd').datagrid({
-        url:base_url + "request_order_approval/grid"
+      $('#dg_roa').datagrid({
+        url:base_url + "request_order_approval/grid_detail"
       });
     });
-    
 
     //# Tombol Bawah
     $(function(){
-      var pager = $('#dtgrd').datagrid().datagrid('getPager'); // get the pager of datagrid
+      var pager = $('#dg_roa').datagrid().datagrid('getPager');  // get the pager of datagrid
       pager.pagination({
         buttons:[
           {
             iconCls:'icon-add',
             text:'Tambah Detail',
             handler:function(){
-              add();
+              newDetail();
             }
           },
           {
@@ -87,46 +107,35 @@
             handler:function(){
               back();
             }
-          }          
+          }
         ]
       });     
     });
 
-  }); 
+    
+  });
 </script>
 
-<div id="toolbar_detail" style="padding:5px;height:auto">
-  <div class="fsearch">
-    <table>
-      <tr>
-          <td>
-              &nbsp;&nbsp;<a href="#" onclick="#()" class="easyui-linkbutton" iconCls="icon-login">App</a>
-              &nbsp;&nbsp;<a href="#" onclick="#()" class="easyui-linkbutton" iconCls="icon-redo">Reject</a>
-          </td> 
-      </tr>     
-    </table>
-  </div>
-</div>
-
-<table id="dtgrd" title="Detail Request Order Approval" data-options="
+<table id="dg_roa" title="Detail Request Order Approval" data-options="
       rownumbers:true,
       singleSelect:true,
       autoRowHeight:false,
       pagination:true,
       pageSize:30,
       fit:true,
-      toolbar:'#toolbar_detail',
+      toolbar:'#toolbar_ro',
       ">
   <thead>
-   <tr>
-      <th data-options="field:'id_krs_detail',width:'100', hidden:true">aa</th>
-      <th field="nama_kategori" sortable="true" width="120">ID Detail</th>
-      <th field="kode_barang" sortable="true" width="120">ID RO</th>
-      <th field="kode_barang" sortable="true" width="120">ID Item</th>
-      <th field="kode_barang" sortable="true" width="120">Qty</th>
-      <th field="nama_barang" sortable="true" width="350">Description</th>   
-      <th field="action" align="center" formatter="actiondetail" width="140">Aksi</th>
+    <tr>
+      <th field="id_detail_ro" sortable="true" width="150" hidden="true">ID</th>
+      <th field="id_ro" sortable="true" width="130">ID Request Order</th>
+      <th field="ext_doc_no" sortable="true" width="120">External Doc No</th>
+      <th field="nama_barang" sortable="true" width="120">Nama Barang</th>
+      <th field="qty" sortable="true" width="120">Qty</th>
+      <th field="full_name" sortable="true" width="130">Requestor</th>
+      <th field="date_create" sortable="true" width="130">Date Create</th>
+      <th field="note" sortable="true" width="200">Note</th>
+      <th field="action" align="center" formatter="actionbutton" width="80">Aksi</th>
     </tr>
   </thead>
 </table>
-
