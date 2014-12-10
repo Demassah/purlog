@@ -3,8 +3,8 @@
 class mdl_shipment_req_order extends CI_Model {
     
 	function __construct(){
-        parent::__construct();
-    }
+     parent::__construct();
+   }
 	
 	function getdata($plimit=true){
 		# get parameter from easy grid
@@ -20,10 +20,6 @@ class mdl_shipment_req_order extends CI_Model {
 			$this->db->select('id_sro,id_ros,id_do,date_create,id_user,status,b.full_name');
 			$this->db->from('tr_sro a');
 			$this->db->join('sys_user b', 'b.user_id = a.id_user', 'left');
-			// $this->db->select('*, b.nama_kategori, c.nama_sub_kategori');
-			// $this->db->from('ref_barang a');
-			// $this->db->join('ref_kategori b', 'b.id_kategori = a.id_kategori');
-			// $this->db->join('ref_sub_kategori c', 'c.id_sub_kategori = a.id_sub_kategori');
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
 		
@@ -54,6 +50,8 @@ class mdl_shipment_req_order extends CI_Model {
 		}
 		return json_encode($response);
 	}
+
+
 	
 }
 

@@ -18,9 +18,9 @@
 		}
 		// end newData
 
-		detailData = function (){
+		detailData = function (val){
 			$('#konten').panel({
-				href:base_url+'shipment_req_order/detail'
+				href:base_url+'shipment_req_order/detail/'+ val
 			});
 		}
 		
@@ -28,7 +28,7 @@
 			var col='';
 
 			<?if($this->mdl_auth->CekAkses(array('menu_id'=>13, 'policy'=>'DETAIL'))){?>
-					col += '<a href="#" onclick="detailData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
+					col += '<a href="#" onclick="detailData(\''+row.id_sro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
 			<?}?>
 			
 					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
