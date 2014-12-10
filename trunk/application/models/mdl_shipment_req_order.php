@@ -10,15 +10,16 @@ class mdl_shipment_req_order extends CI_Model {
 		# get parameter from easy grid
 		$page = isset($_POST['page']) ? intval($_POST['page']) : 1;  
 		$limit = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
-		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'nama_barang';  
+		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'id_sro';  
 		$order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
 		$offset = ($page-1)*$limit;
 		
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('id_sro,id_ros,date_create,id_user,status,id_ro,user_id,requestos,departement,purpose,cat_req,ext_doc,ETD');
-			$this->db->from('v_sro');
+			$this->db->select('id_sro,id_ros,id_do,date_create,id_user,status,b.full_name');
+			$this->db->from('tr_sro a');
+			$this->db->join('sys_user b', 'b.user_id = a.id_user', 'left');
 			// $this->db->select('*, b.nama_kategori, c.nama_sub_kategori');
 			// $this->db->from('ref_barang a');
 			// $this->db->join('ref_kategori b', 'b.id_kategori = a.id_kategori');

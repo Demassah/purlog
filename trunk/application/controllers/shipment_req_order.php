@@ -9,7 +9,7 @@ class shipment_req_order extends CI_Controller {
 	}
 	
 	function index(){
-		$this->load->view('shipment_req_order/sro');
+		$this->load->view('shipment_req_order/index');
 	}
 	
 	function grid(){
