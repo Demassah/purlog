@@ -1,5 +1,6 @@
+
 <script>
-	
+	var id ="<?php echo $list?>"
 	var url;
 	$(document).ready(function(){
 
@@ -27,7 +28,7 @@
 		}
 		
 		$(function(){ // init
-			$('#dg').datagrid({url:"picking_req_order_selected/grid"});	
+			$('#dg').datagrid({url:"shipment_req_order/detail/"+id});	
 		});	
 
 			//# Tombol Bawah
@@ -79,8 +80,8 @@
 	<thead>
 		<tr>
 			<th data-options="field:'id_krs_detail',width:'100', hidden:true">aa</th>
-			<th field="nama_kategori" sortable="true" width="120">ID Detail ROS</th>
-			<th field="kode_barang" sortable="true" width="120">ID ROS</th>
+			<th field="id_detail_ros" sortable="true" width="120">ID Detail PROS</th>
+			<th field="id_detail_ros" sortable="true" width="120">ID ROS</th>
 			<th field="kode_barang" sortable="true" width="120">ID Item</th>
 			<th field="kode_barang" sortable="true" width="80">Qty</th>
 			<th field="nama_sub_kategori" sortable="true" width="600">Deskripsi</th>		
