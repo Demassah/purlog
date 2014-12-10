@@ -27,8 +27,6 @@ class shipment_req_order extends CI_Controller {
 
 	function detail($id){	
 		$data['list']=$id;
-		$data = $this->mdl_shipment_req_order->detail($id);
-		echo $this->mdl_shipment_req_order->togrid_detail($data['row_data'], $data['row_count']);
 		$this->load->view('shipment_req_order/detail_sro',$data);
 	}
 
@@ -42,6 +40,13 @@ class shipment_req_order extends CI_Controller {
 	function checkout(){		
 		$this->load->view('shipment_req_order/checkout');
 	}
+
+	public function detail_checkout()
+	{
+		$data = $this->mdl_shipment_req_order->detail();
+		echo $this->mdl_shipment_req_order->togrid_checkout($data['row_data'], $data['row_count']);
+	}
+
 	
 	function loadingList(){		
 		$this->load->view('shipment_req_order/loading_list');

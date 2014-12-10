@@ -18,9 +18,9 @@
 		}
 		// end newData
 
-		detailData = function (val){
+		detailData = function (id){
 			$('#konten').panel({
-				href:base_url+'shipment_req_order/detail/'+ val
+				href:base_url+'shipment_req_order/detail/'+ id
 			});
 		}
 		
