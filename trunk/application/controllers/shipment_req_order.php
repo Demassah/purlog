@@ -25,8 +25,17 @@ class shipment_req_order extends CI_Controller {
 		$this->load->view('shipment_req_order/sro_form', $data);
 	}
 
-	function detail(){	
-		$this->load->view('shipment_req_order/detail_sro');
+	function detail($id){	
+		$data['list']=$id;
+		$data = $this->mdl_shipment_req_order->detail($id);
+		echo $this->mdl_shipment_req_order->togrid_detail($data['row_data'], $data['row_count']);
+		$this->load->view('shipment_req_order/detail_sro',$data);
+	}
+
+	public function detail_grid($id)
+	{
+		$data = $this->mdl_shipment_req_order->detail($id);
+		echo $this->mdl_shipment_req_order->togrid_detail($data['row_data'], $data['row_count']);
 	}
 
 
