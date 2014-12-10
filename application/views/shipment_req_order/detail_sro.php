@@ -61,8 +61,7 @@
 		<table>
 			<tr>
 					<td>
-							&nbsp;&nbsp;<a href="#" onclick="checkout()" class="easyui-linkbutton" iconCls="icon-ok">Checkout</a>
-							&nbsp;&nbsp;<a href="#" onclick="loadingList()" class="easyui-linkbutton" iconCls="icon-list">Loading List</a>
+							&nbsp;&nbsp;<a href="#" onclick="checkout()" class="easyui-linkbutton" iconCls="icon-ok">Add</a>
 					</td>							
 			</tr>		
 		</table>

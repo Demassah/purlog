@@ -25,9 +25,10 @@ class shipment_req_order extends CI_Controller {
 		$this->load->view('shipment_req_order/sro_form', $data);
 	}
 
-	function detail(){		
+	function detail(){	
 		$this->load->view('shipment_req_order/detail_sro');
 	}
+
 
 	function checkout(){		
 		$this->load->view('shipment_req_order/checkout');
