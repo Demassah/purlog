@@ -107,7 +107,7 @@
 			<th field="id_ros" sortable="true" width="100">ID ROS</th>
 			<th field="id_do" sortable="true" width="100">ID DO</th>
 			<th field="full_name" sortable="true" width="100">Requestor</th>
-			<th field="date_create" sortable="true" width="100">Date Create</th>
+			<th field="date_create" sortable="true" width="120">Date Create</th>
 			<th field="action" align="center" formatter="actionbutton" width="140">Aksi</th>
 		</tr>
 	</thead>
