@@ -17,10 +17,12 @@ class mdl_shipment_req_order extends CI_Model {
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('*, b.nama_kategori, c.nama_sub_kategori');
-			$this->db->from('ref_barang a');
-			$this->db->join('ref_kategori b', 'b.id_kategori = a.id_kategori');
-			$this->db->join('ref_sub_kategori c', 'c.id_sub_kategori = a.id_sub_kategori');
+			$this->db->select('id_sro,id_ros,date_create,id_user,status,id_ro,user_id,requestos,departement,purpose,cat_req,ext_doc,ETD');
+			$this->db->from('v_sro');
+			// $this->db->select('*, b.nama_kategori, c.nama_sub_kategori');
+			// $this->db->from('ref_barang a');
+			// $this->db->join('ref_kategori b', 'b.id_kategori = a.id_kategori');
+			// $this->db->join('ref_sub_kategori c', 'c.id_sub_kategori = a.id_sub_kategori');
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
 		
