@@ -10,19 +10,17 @@ class mdl_delivery_order extends CI_Model {
 		# get parameter from easy grid
 		$page = isset($_POST['page']) ? intval($_POST['page']) : 1;  
 		$limit = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
-		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'nama_barang';  
+		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'id_do';  
 		$order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
 		$offset = ($page-1)*$limit;
 		
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('id_do,is_courir,date_create,id_user,status');
-			$this->db->from('tr_do');
-			// $this->db->select('*, b.nama_kategori, c.nama_sub_kategori');
-			// $this->db->from('ref_barang a');
-			// $this->db->join('ref_kategori b', 'b.id_kategori = a.id_kategori');
-			// $this->db->join('ref_sub_kategori c', 'c.id_sub_kategori = a.id_sub_kategori');
+			$this->db->select('id_do,date_create,b.name_courir,c.full_name');
+			$this->db->from('tr_do a');
+			$this->db->join('ref_courir b', 'b.id_courir = a.id_courir', 'left');
+			$this->db->join('sys_user c', 'c.user_id = a.id_user', 'left');
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
 		
@@ -53,7 +51,27 @@ class mdl_delivery_order extends CI_Model {
 		}
 		return json_encode($response);
 	}
+
+
+	function InsertOnDb($data){
+		$this->db->flush_cache();
+        $this->db->set('id_user', $data['id_user']);
+        $this->db->set('id_courir', $data['id_courir']);
+        $this->db->set('date_create',$data['date']);
+        $this->db->set('status', $data['status']);
+
+		$result = $this->db->insert('tr_do');
+		
+		//return
+		if($result) {
+			return TRUE;
+		}else {
+			return FALSE;
+		}
+	}
+
 	
 }
+
 
 ?>
