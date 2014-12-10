@@ -26,7 +26,7 @@
 		}
 
 		$(function(){ // init
-			$('#dtgrd').datagrid({url:"picking_req_order_selected/grid"});	
+			$('#dtgrd').datagrid({url:"shipment_req_order/detail_checkout"});	
 			//$('#dg').datagrid('enableFilter'); 
 		});	
 
@@ -93,15 +93,16 @@
 		">		
 	<thead>
 		<tr>
-			<th data-options="field:'id_krs_detail',width:'100', hidden:true">aa</th>
+			<th data-options="field:'id_krs_detail',width:'100', hidden:true"></th>
+			<th field="chk" width="23" formatter="Checkbox">
+				<input style="margin-top:2px;" type="checkbox" name="checkbox" id="checkbox" onclick="update_value('+index+', this.checked, \''+row.id_jadwal+'\')" '+(row.chk==true?'checked="checked"':'')+'/>
+			</th>
 			<th field="nama_kategori" sortable="true" width="120">ID Detail ROS</th>
 			<th field="kode_barang" sortable="true" width="120">ID ROS</th>
 			<th field="kode_barang" sortable="true" width="120">ID Item</th>
 			<th field="kode_barang" sortable="true" width="80">Qty</th>
-			<th field="nama_sub_kategori" sortable="true" width="600">Deskripsi</th>		
-			<th field="chk" width="23" formatter="Checkbox">
-				<input style="margin-top:2px;" type="checkbox" name="checkbox" id="checkbox" onclick="update_value('+index+', this.checked, \''+row.id_jadwal+'\')" '+(row.chk==true?'checked="checked"':'')+'/>
-			</th>
+			<th field="nama_sub_kategori" sortable="true" width="400">Deskripsi</th>		
+			
 		</tr>
 	</thead>
 </table>
