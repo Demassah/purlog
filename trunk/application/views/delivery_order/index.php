@@ -103,7 +103,7 @@
 			<th field="user_id" sortable="true" width="150" hidden="true">ID</th>
 			<th field="id_do" sortable="true" width="120">ID Delivery Order</th>
 			<th field="name_courir" sortable="true" width="120">Courir</th>
-			<th field="date_create" sortable="true" width="100">Date Create</th>
+			<th field="date_create" sortable="true" width="125">Date Create</th>
 			<th field="action" align="center" formatter="actionbutton" width="140">Aksi</th>
 		</tr>
 	</thead>
