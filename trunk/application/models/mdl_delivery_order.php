@@ -17,10 +17,12 @@ class mdl_delivery_order extends CI_Model {
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('*, b.nama_kategori, c.nama_sub_kategori');
-			$this->db->from('ref_barang a');
-			$this->db->join('ref_kategori b', 'b.id_kategori = a.id_kategori');
-			$this->db->join('ref_sub_kategori c', 'c.id_sub_kategori = a.id_sub_kategori');
+			$this->db->select('id_do,is_courir,date_create,id_user,status');
+			$this->db->from('tr_do');
+			// $this->db->select('*, b.nama_kategori, c.nama_sub_kategori');
+			// $this->db->from('ref_barang a');
+			// $this->db->join('ref_kategori b', 'b.id_kategori = a.id_kategori');
+			// $this->db->join('ref_sub_kategori c', 'c.id_sub_kategori = a.id_sub_kategori');
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
 		

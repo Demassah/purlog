@@ -3,7 +3,7 @@
 class mdl_request_order extends CI_Model {
     
 	function __construct(){
-        parent::__construct();
+	    parent::__construct();
     }
 	
 	function getdata($plimit=true){
@@ -17,14 +17,12 @@ class mdl_request_order extends CI_Model {
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('*, a.id_ro, b.full_name, c.departement_name');
-			$this->db->from('tr_ro a');
-			$this->db->join('sys_user b', 'b.user_id = a.user_id');
-			$this->db->join('ref_departement c', 'c.departement_id = b.departement_id');
-
-			$this->db->where('status','1');
-
-			$this->db->order_by($sort, $order);
+		$this->db->select('*, a.id_ro, b.full_name, c.departement_name');
+		$this->db->from('tr_ro a');
+		$this->db->join('sys_user b', 'b.user_id = a.user_id');
+		$this->db->join('ref_departement c', 'c.departement_id = b.departement_id');
+		$this->db->where('status','1');
+		$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
 		
 		# get count
@@ -35,7 +33,6 @@ class mdl_request_order extends CI_Model {
 			$this->db->limit($limit, $offset);
 		}
 		$tmp['row_data'] = $this->db->get();
-		
 		return $tmp;
 	}
 
@@ -97,16 +94,16 @@ class mdl_request_order extends CI_Model {
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('*, a.id_ro, c.full_name, d.departement_name, e.nama_barang');
-			$this->db->from('tr_ro_detail a');
-			$this->db->join('tr_ro b', 'b.id_ro = a.id_ro');
-			$this->db->join('sys_user c', 'c.user_id = a.user_id');
-			$this->db->join('ref_departement d', 'd.departement_id = c.departement_id');
-			$this->db->join('ref_barang e', 'e.kode_barang = a.kode_barang');
+		$this->db->select('*, a.id_ro, c.full_name, d.departement_name, e.nama_barang');
+		$this->db->from('tr_ro_detail a');
+		$this->db->join('tr_ro b', 'b.id_ro = a.id_ro');
+		$this->db->join('sys_user c', 'c.user_id = a.user_id');
+		$this->db->join('ref_departement d', 'd.departement_id = c.departement_id');
+		$this->db->join('ref_barang e', 'e.kode_barang = a.kode_barang');
 			
 			//$this->db->where('a.id_ro', $kode);
 			
-			$this->db->order_by($sort, $order);
+		$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
 		
 		# get count
@@ -117,20 +114,19 @@ class mdl_request_order extends CI_Model {
 			$this->db->limit($limit, $offset);
 		}
 		$tmp['row_data'] = $this->db->get();
-		
 		return $tmp;
 	}
 
 	function InsertDetail($data){
 		$this->db->flush_cache();
-        $this->db->set('id_ro', $data['id_ro']);
-        $this->db->set('ext_doc_no', $data['ext_doc_no']);
-        $this->db->set('id_barang', $data['id_barang']);
-        $this->db->set('qty', $data['qty']);
-        $this->db->set('user_id', $data['user_id']);
-        $this->db->set('date_create', FormatDateToMysql($data['date_create']));
-        $this->db->set('note', $data['note']);
-        $this->db->set('status', $data['status']);
+    $this->db->set('id_ro', $data['id_ro']);
+    $this->db->set('ext_doc_no', $data['ext_doc_no']);
+    $this->db->set('id_barang', $data['id_barang']);
+    $this->db->set('qty', $data['qty']);
+    $this->db->set('user_id', $data['user_id']);
+    $this->db->set('date_create', FormatDateToMysql($data['date_create']));
+    $this->db->set('note', $data['note']);
+    $this->db->set('status', $data['status']);
 
 		$result = $this->db->insert('tr_ro_detail');
 		
@@ -143,15 +139,11 @@ class mdl_request_order extends CI_Model {
 	}
 
 	function SendData($kode){
-		
 		$this->db->flush_cache();
-		
 		$this->db->set('status', "2");
-		
 		$this->db->where('id_ro', $kode);
 		$result = $this->db->update('tr_ro');
-	   
-	   
+	  
 		//return
 		if($result) {
 				return TRUE;
