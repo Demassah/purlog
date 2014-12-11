@@ -36,7 +36,6 @@ class shipment_req_order extends CI_Controller {
 		echo $this->mdl_shipment_req_order->togrid_detail($data['row_data'], $data['row_count']);
 	}
 
-
 	function checkout(){		
 		$this->load->view('shipment_req_order/checkout');
 	}

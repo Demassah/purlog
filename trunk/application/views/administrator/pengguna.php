@@ -5,7 +5,7 @@
 		newData = function (){
 			$('#dialog').dialog({
 				title: 'Tambah Pengguna',
-				width: 350,
+				width: 400,
 				height: 275,
 				closed: true,
 				cache: false,
