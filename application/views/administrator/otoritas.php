@@ -5,7 +5,7 @@
 		newData = function (){
 			$('#dialog').dialog({
 				title: 'Tambah Otoritas Menu',
-				width: 380,
+				width: 400,
 				height: 160,
 				closed: true,
 				cache: false,
