@@ -5,9 +5,8 @@
 		DetailData = function (val){
 			//detail
 			$('#konten').panel({
-				href: base_url+'request_order_approval/detail/'+val,
+				href: base_url+'request_order_approval/detail/'+ val,
 			});
-
 		}
 
 		doneData = function (val){
@@ -40,7 +39,6 @@
 		
 		actionbutton = function(value, row, index){
 			var col='';
-			//if (row.kd_fakultas != null) {
 			<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'DETAIL'))){?>
 					col += '<a href="#" onclick="DetailData(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
 			<?}?>
@@ -85,9 +83,9 @@
 				<select id="search" name=" " style="width:200px;">
 						<option>Pilih</option>
 						<option>Search 1</option>
-			            <option>Search 2</option>
-			            <option>Search 3</option>	
-			            <option>Search 4</option>              
+            <option>Search 2</option>
+            <option>Search 3</option>	
+            <option>Search 4</option>              
 				</select>	
 			</td>
 			<td>&nbsp;</td>
@@ -109,7 +107,7 @@
 			">
 	<thead>
 		<tr>
-			<th field="id_ro" sortable="true" width="150" >ID RO</th>
+			<th field="id_ro" sortable="true" width="80" >ID RO</th>
 			<th field="full_name" sortable="true" width="130">Requestor</th>
 			<th field="departement_name" sortable="true" width="130">Departement</th>
 			<th field="purpose" sortable="true" width="120">Purpose</th>

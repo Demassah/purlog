@@ -11,20 +11,20 @@
 		newDetail = function (){
 			$('#dialog').dialog({
 				title: 'Tambah Detail Request Order',
-				width: 700,
-				height: $(window).height() * 0.99,
+				width: 400,
+				height: $(window).height() * 0.7,
 				closed: true,
 				cache: false,
 				href: base_url+'request_order/add_detail',
 				modal: true
 			});			 
 			$('#dialog').dialog('open');
-			url = base_url+'request_order/save/add_detail';
+			url = base_url+'request_order/save_Detail/add_detail';
 		}
 		// end newData
 		
 		
-		saveData = function(){
+		save = function(){
 			
 			$('#form1').form('submit',{
 				url: url,
@@ -36,7 +36,7 @@
 					var result = eval('('+result+')');
 					if (result.success){
 						$('#dialog').dialog('close');		// close the dialog
-						$('#dg_ro').datagrid('reload');		// reload the user data
+						$('#dg_detailRO').datagrid('reload');		// reload the user data
 					} else {
 						$.messager.show({
 							title: 'Error',
@@ -76,7 +76,7 @@
 		}
 		//end deleteData 
 
-		actionbutton = function(value, row, index){
+		actionDetail = function(value, row, index){
 			var col='';
 					col += '<a href="#" onclick="deleteData(\''+row.id_detail_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
 			return col;
@@ -84,14 +84,14 @@
 
 	
 		$(function(){
-			$('#dg_ro').datagrid({
-				url:base_url + "request_order/grid_detail"
+			$('#dg_detailRO').datagrid({
+				url:base_url + "request_order/grid_detail/<?=$id_ro?>"
 			});
 		});
 
 		//# Tombol Bawah
 		$(function(){
-			var pager = $('#dg_ro').datagrid().datagrid('getPager');	// get the pager of datagrid
+			var pager = $('#dg_detailRO').datagrid().datagrid('getPager');	// get the pager of datagrid
 			pager.pagination({
 				buttons:[
 					{
@@ -116,14 +116,14 @@
 	});
 </script>
 
-<table id="dg_ro" title="Detail Request Order" data-options="
+<table id="dg_detailRO" title="Detail Request Order" data-options="
 			rownumbers:true,
 			singleSelect:true,
 			autoRowHeight:false,
 			pagination:true,
 			pageSize:30,
 			fit:true,
-			toolbar:'#toolbar_ro',
+			toolbar:'#toolbar_detailRO',
 			">
 	<thead>
 		<tr>
@@ -135,7 +135,7 @@
 			<th field="full_name" sortable="true" width="130">Requestor</th>
 			<th field="date_create" sortable="true" width="130">Date Create</th>
 			<th field="note" sortable="true" width="200">Note</th>
-			<th field="action" align="center" formatter="actionbutton" width="80">Aksi</th>
+			<th field="action" align="center" formatter="actionDetail" width="80">Aksi</th>
 		</tr>
 	</thead>
 </table>

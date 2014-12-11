@@ -83,7 +83,7 @@ class mdl_request_order extends CI_Model {
 		}
 	}
 
-	function getdata_detail($plimit=true){
+	function getdata_detail($id_ro, $plimit=true){
 		# get parameter from easy grid
 		$page = isset($_POST['page']) ? intval($_POST['page']) : 1;  
 		$limit = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
@@ -101,7 +101,7 @@ class mdl_request_order extends CI_Model {
 		$this->db->join('ref_departement d', 'd.departement_id = c.departement_id');
 		$this->db->join('ref_barang e', 'e.kode_barang = a.kode_barang');
 			
-			//$this->db->where('a.id_ro', $kode);
+			$this->db->where('a.id_ro', $id_ro);
 			
 		$this->db->order_by($sort, $order);
 		$this->db->stop_cache();

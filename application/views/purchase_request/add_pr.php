@@ -3,37 +3,12 @@
 	var url;
 	$(document).ready(function(){
 
-		detail_pr = function (){
-      $('#konten').panel({
-        href:base_url+'picking_req_order_selected/detail_pr'
-      });
-    }
-		
-		var editIndex = undefined;
-		endEditing = function(){
-			if (editIndex == undefined){return true}
-			if ($('#dtgrd').datagrid('validateRow', editIndex)){
-				$('#dtgrd').datagrid('endEdit', editIndex);
-				editIndex = undefined;
-				return true;
-			} else {
-				return false;
-			}
-		}
-		
-		actionAvailable = function(value, row, index){
-			var col='';
-					col += '&nbsp;&nbsp;| &nbsp;&nbsp;<a href="#" onclick="detailData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">ReAlocate</a>';		
-			return col;
-		}
-
 		Checkbox = function(value, row, index){
 			return '<input style="margin-top:2px;" type="checkbox" name="checkbox" id="checkbox" onclick="update_value('+index+', this.checked, \''+row.id_jadwal+'\')" '+(row.chk==true?'checked="checked"':'')+'/>';
 		}
 			
 		$(function(){ // init
-			$('#dtgrd').datagrid({url:"picking_req_order_selected/grid_pending"});	
-			//$('#dg').datagrid('enableFilter'); 
+			$('#dtgrd').datagrid({url:"purchase_request/grid_pr"});	
 		});		
 		
 	});
@@ -49,7 +24,6 @@
 		">		
 	<thead>
 		<tr>
-			<th data-options="field:'id_krs_detail',width:'100', hidden:true">aa</th>
 			<th field="id_detail_ro" sortable="true" width="120">ID Detail ROS</th>
 			<th field="id_ro" sortable="true" width="120">ID ROS</th>
 			<th field="kode_barang" sortable="true" width="120">ID Item</th>

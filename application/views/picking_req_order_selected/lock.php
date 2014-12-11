@@ -3,22 +3,37 @@
 	var url;
 	$(document).ready(function(){
 
-		detail = function (){
+		detail = function (val){      
+      if(val==null){
+          var row = $('#dg_lock').datagrid('getData');              
+          var id = row.rows[0].id_ro;
+          val = id;
+      }
 			$('#konten').panel({
-				href: base_url+'picking_req_order_selected/detail',
+        href: base_url+'picking_req_order_selected/detail/' + val,
 			});
 		}
 
-		available = function (){
-			$('#konten').panel({
-				href:base_url+'picking_req_order_selected/available'
-			});
-		}
+		available = function (val){      
+      if(val==null){
+          var row = $('#dg_lock').datagrid('getData');              
+          var id = row.rows[0].id_ro;
+          val = id;
+      }
+      $('#konten').panel({
+        href: base_url+'picking_req_order_selected/available/' + val,
+      });
+    }
 
-		pending = function (){
-			$('#konten').panel({
-				href:base_url+'picking_req_order_selected/pending'
-			});
+		pending = function (val){
+       if(val==null){
+          var row = $('#dg_lock').datagrid('getData');              
+          var id = row.rows[0].id_ro;
+          val = id;
+      }
+      $('#konten').panel({
+        href: base_url+'picking_req_order_selected/pending/' + val,
+      });
 		}
 
 		purchase = function (){
@@ -30,8 +45,8 @@
 		var editIndex = undefined;
 		endEditing = function(){
 			if (editIndex == undefined){return true}
-			if ($('#dtgrd').datagrid('validateRow', editIndex)){
-				$('#dtgrd').datagrid('endEdit', editIndex);
+			if ($('#dg_lock').datagrid('validateRow', editIndex)){
+				$('#dg_lock').datagrid('endEdit', editIndex);
 				editIndex = undefined;
 				return true;
 			} else {
@@ -40,10 +55,8 @@
 		}
 		
 			
-		// load matkul
 		$(function(){ // init
-			$('#dtgrd').datagrid({url:"picking_req_order_selected/grid"});	
-			//$('#dg').datagrid('enableFilter'); 
+			$('#dg_lock').datagrid({url:"picking_req_order_selected/grid_lock/<?=$id_ro?>"});	
 		});	
 		
 		
@@ -65,7 +78,7 @@
 </div>
 
 
-<table id="dtgrd" title="Lock Picking Request Order Selected" data-options="
+<table id="dg_lock" title="Lock Picking Request Order Selected" data-options="
 			rownumbers:true,
 			singleSelect:true,
 			autoRowHeight:false,
@@ -74,15 +87,15 @@
 			fit:true,
 			toolbar:'#toolbar_lock',
 		">		
-	<thead>
-		<tr>
-			<th data-options="field:'id_krs_detail',width:'100', hidden:true">aa</th>
-			<th field="nama_kategori" sortable="true" width="120">ID Detail ROS</th>
-			<th field="kode_barang" sortable="true" width="120">ID ROS</th>
-			<th field="kode_barang" sortable="true" width="120">ID Item</th>
-			<th field="kode_barang" sortable="true" width="80">Qty</th>
-			<th field="nama_sub_kategori" sortable="true" width="645">Deskripsi</th>		
-		</tr>
-	</thead>
+	 <thead>
+    <tr>
+      <th field="id_detail_ros" sortable="true" width="150" hidden="true">ID</th>
+      <th field="id_ro" sortable="true" width="130">ID ROS</th>
+      <th field="kode_barang" sortable="true" width="120">ID Barang</th>
+      <th field="nama_barang" sortable="true" width="130">Nama Barang</th>
+      <th field="qty" sortable="true" width="120">Qty</th>
+      <th field="note" sortable="true" width="130">Deskripsi</th>
+    </tr>
+  </thead>
 </table>
 

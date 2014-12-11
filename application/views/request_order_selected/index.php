@@ -2,26 +2,38 @@
 	var url;
 	$(document).ready(function(){
 
-		newData = function (){
-			$('#dialog').dialog({
-				title: 'Add Request Order',
-				width: 380,
-				height: 130,
-				closed: true,
-				cache: false,
-				href: base_url+'request_order_selected/add',
-				modal: true
-			});
-			 
-			$('#dialog').dialog('open');
-			url = base_url+'request_order_selected/save/add';
-		}
-		// end newData
+		doneData = function (val){
+        if(confirm("Apakah yakin akan mengalokasi data ke Picking '" + val + "'?")){
+          var response = '';
+          $.ajax({ type: "GET",
+             url: base_url+'request_order_selected/done/' + val,
+             async: false,
+             success : function(response){
+              var response = eval('('+response+')');
+              if (response.success){
+                $.messager.show({
+                  title: 'Success',
+                  msg: 'Data Berhasil Dialokasi'
+                });
+                // reload and close tab
+                $('#dg').datagrid('reload');
+              } else {
+                $.messager.show({
+                  title: 'Error',
+                  msg: response.msg
+                });
+              }
+             }
+          });
+        }
+      //}
+    }
+    //end alocateData 
 		
-		detailROS = function (){
+		detailROS = function (val){
 			//detail
 			$('#konten').panel({
-				href: base_url+'request_order_selected/detailROS/'
+				href: base_url+'request_order_selected/detailROS/' + val,
 			});
 
 		}
@@ -30,12 +42,10 @@
 		actionbutton = function(value, row, index){
 			var col='';
 			<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'DETAIL'))){?>
-					col += '&nbsp;&nbsp; &nbsp;&nbsp;<a href="#" onclick="detailROS(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
+					col += '&nbsp;&nbsp; &nbsp;&nbsp;<a href="#" onclick="detailROS(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
 			<?}?>
 
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'DELETE'))){?>
-					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="deleteData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
-			<?}?>			
+					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
 			return col;
 		}
 		
@@ -56,7 +66,13 @@
 		  <tr>
 			<td>Search</td>
 			<td>: 
-				<input name="#" size="30" value=" ">
+				<select id="search" name=" " style="width:200px;">
+						<option>Pilih</option>
+						<option>Search 1</option>
+            <option>Search 2</option>
+            <option>Search 3</option>	
+            <option>Search 4</option>              
+				</select>	
 			</td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
@@ -65,6 +81,7 @@
 		</table>
 	</div>
 </div>
+
 <table id="dg" title="Request Order Selected List" data-options="
 			rownumbers:true,
 			singleSelect:true,
@@ -76,16 +93,15 @@
 			">
 	<thead>
 		<tr>
-			<th field="user_id" sortable="true" width="150" hidden="true">ID</th>
-			<th field="kode_barang" sortable="true" width="100">ID RO</th>
-			<th field="nama_kategori" sortable="true" width="130">Requestor</th>
-			<th field="nama_sub_kategori" sortable="true" width="120">Departement</th>
-			<th field="kode_barang" sortable="true" width="120">Purpose</th>
-			<th field="nama_barang" sortable="true" width="120">Cat Request</th>
-			<th field="nama_barang" sortable="true" width="100">Ext Document No</th>
-			<th field="nama_barang" sortable="true" width="100">ETD</th>
-			<th field="nama_barang" sortable="true" width="100">Date Create</th>
-			<th field="action" align="center" formatter="actionbutton" width="140">Aksi</th>
+			<th field="id_ro" sortable="true" width="80" >ID RO</th>
+			<th field="full_name" sortable="true" width="130">Requestor</th>
+			<th field="departement_name" sortable="true" width="130">Departement</th>
+			<th field="purpose" sortable="true" width="120">Purpose</th>
+			<th field="cat_req" sortable="true" width="120">Category Request</th>
+			<th field="ext_doc_no" sortable="true" width="120">External Doc No</th>
+			<th field="ETD" sortable="true" width="100">ETD</th>
+			<th field="date_create" sortable="true" width="130">Date Create</th>
+			<th field="action" align="center" formatter="actionbutton" width="150">Aksi</th>
 		</tr>
 	</thead>
 </table>

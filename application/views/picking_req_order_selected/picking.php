@@ -3,13 +3,41 @@
 	$(document).ready(function(){
 
 		// search text combo
-		$(document).ready(function(){
+		/*$(document).ready(function(){
 			$("#search").select2();
-		});
+		});*/
+
+		doneData = function (val){
+				if(confirm("Apakah yakin akan mengirim data ke Shipment '" + val + "'?")){
+					var response = '';
+					$.ajax({ type: "GET",
+						 url: base_url+'picking_req_order_selected/doneData/' + val,
+						 async: false,
+						 success : function(response){
+							var response = eval('('+response+')');
+							if (response.success){
+								$.messager.show({
+									title: 'Success',
+									msg: 'Data Berhasil Dikirim'
+								});
+								// reload and close tab
+								$('#dg').datagrid('reload');
+							} else {
+								$.messager.show({
+									title: 'Error',
+									msg: response.msg
+								});
+							}
+						 }
+					});
+				}
+			//}
+		}
+		//end sendData 
 	
-		detailData = function (){
+		detailData = function (val){
 			$('#konten').panel({
-				href:base_url+'picking_req_order_selected/detail'
+				href: base_url+'picking_req_order_selected/detail/' + val,
 			});
 		}
 		
@@ -17,10 +45,10 @@
 			var col='';
 		
 			<?if($this->mdl_auth->CekAkses(array('menu_id'=>12, 'policy'=>'DETAIL'))){?>
-					col += ' <a href="#" onclick="detailData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
+					col += ' <a href="#" onclick="detailData(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
 			<?}?>
 			
-					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
+					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
 			return col;
 		}
 		
@@ -68,15 +96,15 @@
 			">
 	<thead>
 		<tr>
-			<th field="user_id" sortable="true" width="150" hidden="true">ID</th>
-			<th field="nama_kategori" sortable="true" width="130">Requestor</th>
-			<th field="nama_sub_kategori" sortable="true" width="120">Departement</th>
-			<th field="kode_barang" sortable="true" width="120">Purpose</th>
-			<th field="nama_barang" sortable="true" width="120">Cat Request</th>
-			<th field="nama_barang" sortable="true" width="100">Ext Document No</th>
-			<th field="nama_barang" sortable="true" width="100">ETD</th>
-			<th field="nama_barang" sortable="true" width="100">Date Create</th>
-			<th field="action" align="center" formatter="actionbutton" width="140">Aksi</th>
+			<th field="id_ro" sortable="true" width="80" >ID ROS</th>
+			<th field="full_name" sortable="true" width="130">Requestor</th>
+			<th field="departement_name" sortable="true" width="130">Departement</th>
+			<th field="purpose" sortable="true" width="120">Purpose</th>
+			<th field="cat_req" sortable="true" width="120">Category Request</th>
+			<th field="ext_doc_no" sortable="true" width="120">External Doc No</th>
+			<th field="ETD" sortable="true" width="100">ETD</th>
+			<th field="date_create" sortable="true" width="130">Date Create</th>
+			<th field="action" align="center" formatter="actionbutton" width="150">Aksi</th>
 		</tr>
 	</thead>
 </table>

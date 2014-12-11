@@ -9,7 +9,7 @@ class purchase_request extends CI_Controller {
 	}
 	
 	function index(){
-		$this->load->view('purchase_request/pr');
+		$this->load->view('purchase_request/purchase_request');
 	}
 	
 	function grid(){
@@ -17,20 +17,33 @@ class purchase_request extends CI_Controller {
 		echo $this->mdl_purchase_request->togrid($data['row_data'], $data['row_count']);
 	}
 
-	function detail_pr(){
-		$this->load->view('purchase_request/detail_pr');
+	function add_pr(){
+		$this->load->view('purchase_request/add_pr');
+	}
+
+	function grid_pr(){
+		$data = $this->mdl_purchase_request->getdata_pr();
+		echo $this->mdl_purchase_request->togrid($data['row_data'], $data['row_count']);
+	}
+
+	function detail_pr($id){
+		$data['id_pr'] = $id;
+		$this->load->view('purchase_request/detail_pr', $data);
+	}
+
+	function grid_detail($id){
+		$data = $this->mdl_purchase_request->getdata_detail($id);
+		echo $this->mdl_purchase_request->togrid($data['row_data'], $data['row_count']);
 	}
 
 	function qrs(){
 		$this->load->view('purchase_request/qrs');
 	}
 	
-	function add(){
-		$data['kode'] = '';
-		$data['id_kategori'] = '';
-		$data['nama_kategori'] = '';
-		
-		$this->load->view('pr/pr_form', $data);
-	}
+	// function detail_pr(){
+	// 	$this->load->view('picking_req_order_selected/detail_pr');
+	// }
+
+	
 	
 }
