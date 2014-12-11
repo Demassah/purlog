@@ -3,6 +3,40 @@
 	var url;
 	$(document).ready(function(){
 
+		detail = function (val){      
+      if(val==null){
+          var row = $('#dg_pending').datagrid('getData');              
+          var id = row.rows[0].id_ro;
+          val = id;
+      }
+			$('#konten').panel({
+        href: base_url+'picking_req_order_selected/detail/' + val,
+			});
+		}
+
+		available = function (val){      
+      if(val==null){
+          var row = $('#dg_pending').datagrid('getData');              
+          var id = row.rows[0].id_ro;
+          val = id;
+      }
+      $('#konten').panel({
+        href: base_url+'picking_req_order_selected/available/' + val,
+      });
+    }
+
+		lock = function (val){
+
+      if(val==null){
+          var row = $('#dg_pending').datagrid('getData');              
+          var id = row.rows[0].id_ro;
+          val = id;
+      }
+      $('#konten').panel({
+        href: base_url+'picking_req_order_selected/lock/' + val,
+      });
+		}
+
 		purchase = function (){
 			$('#konten').panel({
 				href:base_url+'picking_req_order_selected/purchase'
@@ -10,7 +44,7 @@
 		}
 		
 		$(function(){ // init
-			$('#dtgrd').datagrid({url:"picking_req_order_selected/grid"});	
+			$('#dg_pending').datagrid({url:"picking_req_order_selected/grid_pending/<?=$id_ro?>"});	
 		});	
 		
 	});
@@ -30,7 +64,7 @@
 	</div>
 </div>
 
-<table id="dtgrd" title="Pending Picking Request Order Selected" data-options="
+<table id="dg_pending" title="Pending Picking Request Order Selected" data-options="
 			rownumbers:true,
 			singleSelect:true,
 			autoRowHeight:false,
@@ -39,16 +73,16 @@
 			fit:true,
 			toolbar:'#toolbar_pending',
 		">		
-	<thead>
-		<tr>
-			<th data-options="field:'id_krs_detail',width:'100', hidden:true">aa</th>
-			<th field="nama_kategori" sortable="true" width="120">ID Detail ROS</th>
-			<th field="kode_barang" sortable="true" width="120">ID ROS</th>
-			<th field="kode_barang" sortable="true" width="120">ID Item</th>
-			<th field="kode_barang" sortable="true" width="80">Qty</th>
-			<th field="nama_sub_kategori" sortable="true" width="645">Deskripsi</th>	
-		</tr>
-	</thead>
+	 <thead>
+    <tr>
+      <th field="id_detail_ros" sortable="true" width="150" hidden="true">ID</th>
+      <th field="id_ro" sortable="true" width="130">ID ROS</th>
+      <th field="kode_barang" sortable="true" width="120">ID Barang</th>
+      <th field="nama_barang" sortable="true" width="130">Nama Barang</th>
+      <th field="qty" sortable="true" width="120">Qty</th>
+      <th field="note" sortable="true" width="130">Deskripsi</th>
+    </tr>
+  </thead>
 </table>
 
 

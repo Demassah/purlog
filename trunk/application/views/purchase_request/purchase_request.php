@@ -2,76 +2,77 @@
   var url;
   $(document).ready(function(){
 
-      add = function (){
+      add_pr = function (){
       $('#dialog').dialog({
         title: 'Add Request Order',
         width: $(window).width() * 0.8,
         height: $(window).height() * 0.99,
         closed: true,
         cache: false,
-        href: base_url+'picking_req_order_selected/add_detail_pr',
+        href: base_url+'purchase_request/add_pr',
         modal: true
       });
        
       $('#dialog').dialog('open');
-      url = base_url+'picking_req_order_selected/save/add_detail_pr';
+      url = base_url+'purchase_requst/save/add_pr';
     }
     // end newData
 
-    detail = function (val){      
-      if(val==null){
-          var row = $('#dg').datagrid('getData');              
-          var id = row.rows[0].id_ro;
-          val = id;
-      }
-      $('#konten').panel({
-        href: base_url+'picking_req_order_selected/detail/' + val,
-      });
-    }
+    // detail = function (val){      
+    //   if(val==null){
+    //       var row = $('#dg').datagrid('getData');              
+    //       var id = row.rows[0].id_ro;
+    //       val = id;
+    //   }
+    //   $('#konten').panel({
+    //     href: base_url+'picking_req_order_selected/detail/' + val,
+    //   });
+    // }
 
-    available = function (val){      
-      if(val==null){
-          var row = $('#dg').datagrid('getData');              
-          var id = row.rows[0].id_ro;
-          val = id;
-      }
-      $('#konten').panel({
-        href: base_url+'picking_req_order_selected/available/' + val,
-      });
-    }
+    // available = function (val){      
+    //   if(val==null){
+    //       var row = $('#dg').datagrid('getData');              
+    //       var id = row.rows[0].id_ro;
+    //       val = id;
+    //   }
+    //   $('#konten').panel({
+    //     href: base_url+'picking_req_order_selected/available/' + val,
+    //   });
+    // }
 
-    lock = function (val){
+    // lock = function (val){
 
-      if(val==null){
-          var row = $('#dg').datagrid('getData');              
-          var id = row.rows[0].id_ro;
-          val = id;
-      }
-      $('#konten').panel({
-        href: base_url+'picking_req_order_selected/lock/' + val,
-      });
-    }
+    //   if(val==null){
+    //       var row = $('#dg').datagrid('getData');              
+    //       var id = row.rows[0].id_ro;
+    //       val = id;
+    //   }
+    //   $('#konten').panel({
+    //     href: base_url+'picking_req_order_selected/lock/' + val,
+    //   });
+    // }
 
-    pending = function (val){
-       if(val==null){
-          var row = $('#dg').datagrid('getData');              
-          var id = row.rows[0].id_ro;
-          val = id;
-      }
-      $('#konten').panel({
-        href: base_url+'picking_req_order_selected/pending/' + val,
-      });
-    }
+    // pending = function (val){
+    //    if(val==null){
+    //       var row = $('#dg').datagrid('getData');              
+    //       var id = row.rows[0].id_ro;
+    //       val = id;
+    //   }
+    //   $('#konten').panel({
+    //     href: base_url+'picking_req_order_selected/pending/' + val,
+    //   });
+    // }
 
-    detail_pr = function (){
+    detail_pr = function (val){
       $('#konten').panel({
-        href:base_url+'picking_req_order_selected/detail_pr'
+        href: base_url+'purchase_request/detail_pr/' + val,
       });
     }
   
-    actiondetail = function(value, row, index){
+    actionPurchaseRequest = function(value, row, index){
       var col='';
-          col += '<a href="#" onclick="detail_pr(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';     
+          col += '<a href="#" onclick="detail_pr(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';     
+          col += '&nbsp;&nbsp; | &nbsp;&nbsp;<a href="#" onclick="detail_pr(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">QRS</a>';     
       return col;
     }
     
@@ -88,7 +89,7 @@
             iconCls:'icon-add',
             text:'Create PR',
             handler:function(){
-              add();
+              add_pr();
             }
           }            
         ]
@@ -98,7 +99,7 @@
 });
 </script>
 
-<div id="toolbar_purchase" style="padding:5px;height:auto">
+<!-- <div id="toolbar_purchase" style="padding:5px;height:auto">
   <div class="fsearch">
     <table>
       <tr>
@@ -110,9 +111,9 @@
       </tr>
     </table>
   </div>
-</div>
+</div> -->
 
-<table id="dg" title="Purchase Request" data-options="
+<table id="dg" title="Purchase Request List" data-options="
       rownumbers:true,
       singleSelect:true,
       autoRowHeight:false,
@@ -132,7 +133,7 @@
       <th field="ext_doc_no" sortable="true" width="120">External Doc No</th>
       <th field="ETD" sortable="true" width="100">ETD</th>
       <th field="date_create" sortable="true" width="130">Date Create</th>
-      <th field="action" align="center" formatter="actionbutton" width="120">Aksi</th>
+      <th field="action" align="center" formatter="actionPurchaseRequest" width="120">Aksi</th>
     </tr>
   </thead>
 </table>

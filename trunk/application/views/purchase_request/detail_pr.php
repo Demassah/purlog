@@ -3,34 +3,26 @@
 	var url;
 	$(document).ready(function(){
 
-		back = function (val){
-		  //detail
-		  $('#konten').panel({
-			href: base_url+'purchase_request/index',
-		  });
+		purchase = function (){
+      $('#konten').panel({
+        href:base_url+'picking_req_order_selected/purchase'
+      });
+    }
 
-		}
+		back = function (){
+      $('#konten').panel({
+        href:base_url+'purchase_request/index'
+      });
+    }
 		
-		var editIndex = undefined;
-		endEditing = function(){
-			if (editIndex == undefined){return true}
-			if ($('#dtgrd').datagrid('validateRow', editIndex)){
-				$('#dtgrd').datagrid('endEdit', editIndex);
-				editIndex = undefined;
-				return true;
-			} else {
-				return false;
-			}
-		}
 		
 		$(function(){ // init
-			$('#dtgrd').datagrid({url:"picking_req_order_selected/grid"});	
-			//$('#dg').datagrid('enableFilter'); 
+      $('#dg_detail').datagrid({url:"purchase_request/grid_detail/<?=$id_pr?>"});  
 		});	
 
-		//# Tombol Bawah
+		 //# Tombol Bawah
     $(function(){
-      var pager = $('#dtgrd').datagrid().datagrid('getPager'); // get the pager of datagrid
+      var pager = $('#dg_detail').datagrid().datagrid('getPager'); // get the pager of datagrid
       pager.pagination({
         buttons:[
           {
@@ -39,15 +31,15 @@
             handler:function(){
               back();
             }
-          }           
+          }            
         ]
       });     
-    });
+    }); 
 		
 	});
 </script>
 
-<table id="dtgrd" title="Detail Purchase Request" data-options="
+<table id="dg_detail" title ="Detail Purchase Request" data-options="
 			rownumbers:true,
 			singleSelect:false,
 			pagination:true,
@@ -57,12 +49,15 @@
 		">		
 	<thead>
 		<tr>
-			<th data-options="field:'id_krs_detail',width:'100', hidden:true">aa</th>
-			<th field="nama_kategori" sortable="true" width="120">ID Detail ROS</th>
-			<th field="kode_barang" sortable="true" width="120">ID ROS</th>
-			<th field="kode_barang" sortable="true" width="120">ID Item</th>
-			<th field="kode_barang" sortable="true" width="80">Qty</th>
-			<th field="nama_sub_kategori" sortable="true" width="665">Deskripsi</th>	
+			<th field="id_detail_ro" sortable="true" width="150" hidden="true">ID</th>
+      <th field="id_ro" sortable="true" width="130">ID Request Order</th>
+      <th field="ext_doc_no" sortable="true" width="120">External Doc No</th>
+      <th field="nama_barang" sortable="true" width="120">Nama Barang</th>
+      <th field="qty" sortable="true" width="120">Qty</th>
+      <th field="full_name" sortable="true" width="130">Requestor</th>
+      <th field="date_create" sortable="true" width="130">Date Create</th>
+      <th field="note" sortable="true" width="200">Note</th>
 		</tr>
 	</thead>
 </table>
+

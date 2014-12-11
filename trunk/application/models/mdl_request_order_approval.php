@@ -72,7 +72,7 @@ class mdl_request_order_approval extends CI_Model {
 		}
 	}
 
-	function getdata_detail($plimit=true){
+	function getdata_detail($id_ro, $plimit=true){
 		# get parameter from easy grid
 		$page = isset($_POST['page']) ? intval($_POST['page']) : 1;  
 		$limit = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
@@ -90,7 +90,8 @@ class mdl_request_order_approval extends CI_Model {
 			$this->db->join('ref_departement d', 'd.departement_id = c.departement_id');
 			$this->db->join('ref_barang e', 'e.kode_barang = a.kode_barang');
 
-			//$this->db->where('a.id_ro', $kode);
+			$this->db->where('a.id_ro', $id_ro);
+			$this->db->where('a.status_delete', '0');
 
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
@@ -107,6 +108,23 @@ class mdl_request_order_approval extends CI_Model {
 		return $tmp;
 	}
 	
+	function DeleteDetail($kode){
+		
+		$this->db->flush_cache();
+		
+		$this->db->set('status_delete', "1");
+		
+		$this->db->where('id_detail_ro', $kode);
+		$result = $this->db->update('tr_ro');
+	   
+	   
+		//return
+		if($result) {
+				return TRUE;
+		}else {
+				return FALSE;
+		}
+	}
 	
 }
 

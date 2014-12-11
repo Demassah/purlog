@@ -3,22 +3,38 @@
 	var url;
 	$(document).ready(function(){
 
-		available = function (){
-			$('#konten').panel({
-				href: base_url+'picking_req_order_selected/available',
-			});
+    available = function (val){      
+      if(val==null){
+          var row = $('#dg_detail').datagrid('getData');              
+          var id = row.rows[0].id_ro;
+          val = id;
+      }
+      $('#konten').panel({
+        href: base_url+'picking_req_order_selected/available/' + val,
+      });
+    }
+
+		lock = function (val){
+
+      if(val==null){
+          var row = $('#dg_detail').datagrid('getData');              
+          var id = row.rows[0].id_ro;
+          val = id;
+      }
+      $('#konten').panel({
+        href: base_url+'picking_req_order_selected/lock/' + val,
+      });
 		}
 
-		lock = function (){
-			$('#konten').panel({
-				href:base_url+'picking_req_order_selected/lock'
-			});
-		}
-
-		pending = function (){
-			$('#konten').panel({
-				href:base_url+'picking_req_order_selected/pending'
-			});
+		pending = function (val){
+       if(val==null){
+          var row = $('#dg_detail').datagrid('getData');              
+          var id = row.rows[0].id_ro;
+          val = id;
+      }
+      $('#konten').panel({
+        href: base_url+'picking_req_order_selected/pending/' + val,
+      });
 		}
 
 		purchase = function (){
@@ -32,29 +48,86 @@
 		  $('#konten').panel({
 			href: base_url+'picking_req_order_selected/index',
 		  });
-
 		}
+
+    alocateData = function (val){
+        if(confirm("Apakah yakin akan mengalokasi data ke proses picking '" + val + "'?")){
+          var response = '';
+          $.ajax({ type: "GET",
+             url: base_url+'picking_req_order_selected/alocateData/' + val,
+             async: false,
+             success : function(response){
+              var response = eval('('+response+')');
+              if (response.success){
+                $.messager.show({
+                  title: 'Success',
+                  msg: 'Data Berhasil Dialokasi'
+                });
+                // reload and close tab
+                $('#dg_detail').datagrid('reload');
+              } else {
+                $.messager.show({
+                  title: 'Error',
+                  msg: response.msg
+                });
+              }
+             }
+          });
+        }
+      //}
+    }
+    //end sendData 
+
+    alocateAll = function (val){
+        if(confirm("Apakah yakin akan mengalokasi semua data ke proses picking '" + val + "'?")){
+          var response = '';
+          $.ajax({ type: "GET",
+             url: base_url+'picking_req_order_selected/alocateAll/' + val,
+             async: false,
+             success : function(response){
+              var response = eval('('+response+')');
+              if (response.success){
+                $.messager.show({
+                  title: 'Success',
+                  msg: 'Data Berhasil Dialokasi'
+                });
+                // reload and close tab
+                $('#dg_detail').datagrid('reload');
+              } else {
+                $.messager.show({
+                  title: 'Error',
+                  msg: response.msg
+                });
+              }
+             }
+          });
+        }
+      //}
+    }
+    //end sendData 
 
 		actiondetail = function(value, row, index){
 			var col='';
-					col += '<a href="#" onclick="detailData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Alocate</a>';			
+					col += '<a href="#" onclick="alocateData(\''+row.id_detail_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Alocate</a>';			
 			return col;
 		}
 		
 		$(function(){ // init
-			$('#dtgrd').datagrid({url:"picking_req_order_selected/grid"});	
+			$('#dg_detail').datagrid({url:"picking_req_order_selected/grid_detail/<?=$id_ro?>"});	
 		});	
 
 		//# Tombol Bawah
     $(function(){
-      var pager = $('#dtgrd').datagrid().datagrid('getPager'); // get the pager of datagrid
+      var pager = $('#dg_detail').datagrid().datagrid('getPager'); // get the pager of datagrid
       pager.pagination({
         buttons:[
           {
             iconCls:'icon-all',
             text:'Alocate All',
             handler:function(){
-              add();
+              var row = $('#dg_detail').datagrid('getData');              
+              var id = row.rows[0].id_ro;
+              alocateAll(id);
             }
           },
           {
@@ -85,7 +158,7 @@
 	</div>
 </div>
 
-<table id="dtgrd" title="Detail Picking Request Order Selected" data-options="
+<table id="dg_detail" title="Detail Picking Request Order Selected" data-options="
 		rownumbers:true,
 		singleSelect:true,
 		autoRowHeight:false,
@@ -94,17 +167,18 @@
 		fit:true,
 		toolbar:'#toolbar_detail',
 		">		
-	<thead>
-		<tr>
-			<th data-options="field:'id_krs_detail',width:'100', hidden:true">aa</th>
-			<th field="nama_kategori" sortable="true" width="120">ID Detail ROS</th>
-			<th field="kode_barang" sortable="true" width="120">ID ROS</th>
-			<th field="kode_barang" sortable="true" width="120">ID Item</th>
-			<th field="kode_barang" sortable="true" width="80">Qty</th>
-			<th field="nama_sub_kategori" sortable="true" width="505">Deskripsi</th>	
-			<th field="action" align="center" formatter="actiondetail" width="80">Aksi</th>
-		</tr>
-	</thead>
+
+   <thead>
+    <tr>
+      <th field="id_detail_ros" sortable="true" width="150" hidden="true">ID</th>
+      <th field="id_ro" sortable="true" width="130">ID ROS</th>
+      <th field="kode_barang" sortable="true" width="120">ID Barang</th>
+      <th field="nama_barang" sortable="true" width="130">Nama Barang</th>
+      <th field="qty" sortable="true" width="120">Qty</th>
+      <th field="note" sortable="true" width="130">Deskripsi</th>
+      <th field="action" align="center" formatter="actiondetail" width="80">Aksi</th>
+    </tr>
+  </thead>
 </table>
 
 

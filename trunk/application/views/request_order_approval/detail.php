@@ -52,7 +52,7 @@
         if(confirm("Apakah yakin akan menghapus data '" + val + "'?")){
           var response = '';
           $.ajax({ type: "GET",
-             url: base_url+'request_order/deleteDetail/' + val,
+             url: base_url+'request_order_approval/DeleteDetail/' + val,
              async: false,
              success : function(response){
               var response = eval('('+response+')');
@@ -85,7 +85,7 @@
   
     $(function(){
       $('#dg_roa').datagrid({
-        url:base_url + "request_order_approval/grid_detail"
+        url:base_url + "request_order_approval/grid_detail/<?=$id_ro?>"
       });
     });
 

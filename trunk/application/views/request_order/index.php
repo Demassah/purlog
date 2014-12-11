@@ -158,9 +158,9 @@
 				<select id="search" name=" " style="width:200px;">
 						<option>Pilih</option>
 						<option>Search 1</option>
-			            <option>Search 2</option>
-			            <option>Search 3</option>	
-			            <option>Search 4</option>              
+            <option>Search 2</option>
+            <option>Search 3</option>	
+            <option>Search 4</option>              
 				</select>	
 			</td>
 			<td>&nbsp;</td>
@@ -182,7 +182,7 @@
 			">
 	<thead>
 		<tr>
-			<th field="id_ro" sortable="true" width="150">ID RO</th>			
+			<th field="id_ro" sortable="true" width="80">ID RO</th>			
 			<th field="full_name" sortable="true" width="130">Requestor</th>
 			<th field="departement_name" sortable="true" width="130">Departement</th>
 			<th field="purpose" sortable="true" width="120">Purpose</th>
