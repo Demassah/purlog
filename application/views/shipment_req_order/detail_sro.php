@@ -4,10 +4,19 @@
 	$(document).ready(function(){
 
 		checkout = function (){
-			$('#konten').panel({
-				href:base_url+'shipment_req_order/checkout'
-			});
+			$('#dialog').dialog({
+				title: 'Tambah Request Order',
+				width: 980,
+				height: 590,
+				closed: true,
+				cache: false,
+				href:base_url+'shipment_req_order/checkout',
+				modal: true
+			});			 
+			$('#dialog').dialog('open');
+			url = base_url+'request_order/save/add';
 		}
+		// end newData
 
 		back = function (val){
 		  //detail
@@ -17,11 +26,18 @@
 		}
 
 		loadingList = function (){
-			$('#konten').panel({
-				href:base_url+'shipment_req_order/loadingList'
-			});
+		$('#dialog').dialog({
+				title: 'Tambah Request Order',
+				width: 980,
+				height: 590,
+				closed: true,
+				cache: false,
+				href:base_url+'shipment_req_order/loadingList',
+				modal: true
+			});			 
+			$('#dialog').dialog('open');
+			url = base_url+'request_order/save/add';
 		}
-
 		Checkbox = function(value, row, index){
 			return '<input style="margin-top:2px;" type="checkbox" name="checkbox" id="checkbox" onclick="update_value('+index+', this.checked, \''+row.id_jadwal+'\')" '+(row.chk==true?'checked="checked"':'')+'/>';
 		}
@@ -74,7 +90,7 @@
 			pagination:true,
 			autoRowHeight:false,
 			fit:true,
-			toolbar:'#toolbar_detail',
+			toolbar:'#toolbar',
 		">		
 	<thead>
 		<tr>
