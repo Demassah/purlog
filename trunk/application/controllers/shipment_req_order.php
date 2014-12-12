@@ -9,7 +9,8 @@ class shipment_req_order extends CI_Controller {
 	}
 	
 	function index(){
-		$this->load->view('shipment_req_order/index');
+		$data['list']=$this->mdl_shipment_req_order->add_sro();
+		$this->load->view('shipment_req_order/index',$data);
 	}
 	
 	function grid(){
@@ -61,36 +62,30 @@ class shipment_req_order extends CI_Controller {
 	}
 
 
-	function detail($id){	
-		$data['list']=$id;
+	function detail($id,$id_sro){	
+		$data['id_ro']=$id;
+		$data['id_sro']=$id_sro;
 		$this->load->view('shipment_req_order/detail_sro',$data);
 	}
 
-	public function detail_grid($id)
+	public function detail_grid($id,$id_sro) 
 	{
-		$data = $this->mdl_shipment_req_order->detail($id);
-		echo $this->mdl_shipment_req_order->togrid_detail($data['row_data'], $data['row_count']);
+		$data = $this->mdl_shipment_req_order->detail($id,$id_sro);
+		echo $this->mdl_shipment_req_order->togrid($data['row_data'], $data['row_count']);
 	}
 
-	function checkout(){		
-		$this->load->view('shipment_req_order/checkout');
-	}
-
-	public function detail_checkout()
+	public function add_detail($id,$id_sro)
 	{
-		$data = $this->mdl_shipment_req_order->detail();
-		echo $this->mdl_shipment_req_order->togrid_checkout($data['row_data'], $data['row_count']);
+		$data['id_ro']=$id;
+		$data['id_sro']=$id_sro;
+		$this->load->view('shipment_req_order/add_detail',$data);
 	}
 
-	
-	function loadingList(){		
-		$this->load->view('shipment_req_order/loading_list');
+	public function add_grid($id,$id_sro)
+	{
+		$data = $this->mdl_shipment_req_order->add_detail($id,$id_sro);
+		echo $this->mdl_shipment_req_order->togrid($data['row_data'], $data['row_count']);
 	}
 
-	// public function v_sro()
-	// {
-		
-
-	// }
 	
 }

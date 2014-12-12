@@ -3,7 +3,7 @@
 		<table>
 			<tr>
 					<td>
-							&nbsp;&nbsp;<a href="#" onclick="checkout()" class="easyui-linkbutton" iconCls="icon-ok">Add</a>
+							&nbsp;&nbsp;<a href="#" onclick="add_detail()" class="easyui-linkbutton" iconCls="icon-ok">Add</a>
 					</td>							
 			</tr>		
 		</table>
@@ -20,7 +20,7 @@
 		">		
 	<thead>
 		<tr>
-			<th data-options="field:'id_krs_detail',width:'100', hidden:true">aa</th>
+			<th data-options="field:'id_krs_detail',width:'100', hidden:true"></th>
 			<th field="id_detail_pros" sortable="true" width="120">ID Detail ROS</th>
 			<th field="id_detail_ros" sortable="true" width="120">ID ROS</th>
 			<th field="kode_barang" sortable="true" width="120">ID Item</th>
@@ -34,24 +34,59 @@
 </table>
 
 <script>
-	var val = "<?php echo $list;?>";
 	var url;
+	var id_sro ='<?php echo $id_sro;?>';
+	var id_ro ='<?php echo $id_ro;?>';
 	$(document).ready(function(){
 
-		checkout = function (){
+		add_detail = function (val){
+			if(val==null){
+          var row = $('#dg').datagrid('getData');              
+          var id = id_ro;
+          var id_sro=id_sro;
+          val = id;
+          id_sro =id_sro;
+      }
+    //   $('#konten').panel({
+    //     href: base_url+'shipment_req_order/add_detail/' + val,
+    //   });
+    // }
 			$('#dialog').dialog({
-				title: 'Tambah Request Order',
-				width: 980,
-				height: 590,
+				title: 'Tambah SRO',
+				width: 880,
+				height: 390,
 				closed: true,
 				cache: false,
-				href:base_url+'shipment_req_order/checkout',
+				href:base_url+'shipment_req_order/add_detail/'+val+'/<?php echo $id_ro;?>',
 				modal: true
-			});			 
+			});
+
 			$('#dialog').dialog('open');
-			url = base_url+'request_order/save/add';
+			url = base_url+'shipment_req_order/save/add';
 		}
-		// end newData
+		//end newData
+		saveData = function(){
+			
+			$('#form1').form('submit',{
+				url: url,
+				onSubmit: function(){
+					return $(this).form('validate');
+				},
+				success: function(result){
+					alert(result);
+					var result = eval('('+result+')');
+					if (result.success){
+						$('#dialog').dialog('close');		// close the dialog
+						$('#dg').datagrid('reload');		// reload the user data
+					} else {
+						$.messager.show({
+							title: 'Error',
+							msg: result.msg
+						});
+					}
+				}
+			});
+		}
 
 		back = function (val){
 		  //detail
@@ -78,8 +113,9 @@
 		}
 		
 		$(function(){ // init
-			$('#dg').datagrid({url:"shipment_req_order/detail_grid/"+ val});	
+			$('#dg').datagrid({url:"shipment_req_order/detail_grid/<?=$id_ro?>"});	
 		});	
+
 
 			//# Tombol Bawah
     $(function(){
