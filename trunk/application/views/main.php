@@ -6,7 +6,7 @@
 		<link rel="shortcut icon" href="<?php echo base_url();?>asset/images/favicon.png">
 		<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/css/style.css" />
 		<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/easyui/themes/metro/easyui.css" />
-		<!-- <link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/select/select2.css"/> -->
+		<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/select/select2.css"/>
 		<!--<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/easyui/themes/bootstrap/easyui.css" />-->
 		<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/easyui/themes/icon.css" />
 		<script type="text/javascript" src="<?=base_url();?>asset/easyui/jquery.min.js"></script>
@@ -15,7 +15,7 @@
 		<script type="text/javascript" src="<?=base_url();?>asset/easyui/plugins/jquery.datagrid-filter.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>asset/easyui/plugins/jquery.datagrid-detailview.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>asset/js/ckeditor/ckeditor.js"></script>
-		<!-- <script type="text/javascript" src="<?=base_url();?>asset/select/select2.js"></script> -->
+		<script type="text/javascript" src="<?=base_url();?>asset/select/select2.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>asset/js/modernizr.custom.05095.js"></script>
 				 
 	</head>

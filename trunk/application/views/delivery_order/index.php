@@ -116,7 +116,7 @@
 		  <tr>
 			<td>Delivery Order</td>
 			<td>: 
-					<select id="search" name=" " style="width:200px;">
+					<select class="easyui-combobox" name=" " style="width:200px;">
 						<option>Pilih</option>
 						<option>Search 1</option>
             <option>Search 2</option>

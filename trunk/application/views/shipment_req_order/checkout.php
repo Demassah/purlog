@@ -94,9 +94,10 @@
 	<thead>
 		<tr>
 			<th data-options="field:'id_krs_detail',width:'100', hidden:true"></th>
-			<th field="chk" width="23" formatter="Checkbox">
+			<th data-options="field:'ck',checkbox:true"></th>
+			<!-- <th field="chk" width="23" formatter="Checkbox">
 				<input style="margin-top:2px;" type="checkbox" name="checkbox" id="checkbox" onclick="update_value('+index+', this.checked, \''+row.id_jadwal+'\')" '+(row.chk==true?'checked="checked"':'')+'/>
-			</th>
+			</th> -->
 			<th field="nama_kategori" sortable="true" width="120">ID Detail ROS</th>
 			<th field="kode_barang" sortable="true" width="120">ID ROS</th>
 			<th field="kode_barang" sortable="true" width="120">ID Item</th>
