@@ -16,6 +16,7 @@
 		<script type="text/javascript" src="<?=base_url();?>asset/easyui/plugins/jquery.datagrid-detailview.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>asset/js/ckeditor/ckeditor.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>asset/select/select2.js"></script>
+		<script type="text/javascript" src="<?=base_url();?>asset/js/modernizr.custom.05095"></script>
 				 
 	</head>
 	<body class="easyui-layout">
