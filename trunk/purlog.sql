@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 11, 2014 at 09:37 
+-- Generation Time: Dec 12, 2014 at 02:36 AM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.1
 
@@ -31,27 +31,26 @@ CREATE TABLE IF NOT EXISTS `ref_barang` (
   `id_sub_kategori` smallint(6) NOT NULL,
   `kode_barang` varchar(10) NOT NULL,
   `nama_barang` varchar(30) NOT NULL,
-  `jumlah` int(5) NOT NULL,
   `status` varchar(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `ref_barang`
 --
 
-INSERT INTO `ref_barang` (`id`, `id_kategori`, `id_sub_kategori`, `kode_barang`, `nama_barang`, `jumlah`, `status`) VALUES
-(1, 2, 2, '001', 'Busi', 100, ''),
-(2, 2, 2, '101', 'Asd', 25, ''),
-(3, 3, 4, '002', 'Ban', 200, ''),
-(4, 2, 2, '003', 'CPU', 50, ''),
-(5, 3, 4, '004', 'Monitor', 75, ''),
-(6, 2, 2, '005', 'Keyboard', 100, ''),
-(7, 3, 4, '006', 'Mouse', 500, ''),
-(8, 2, 2, '007', 'Meja', 1000, ''),
-(9, 3, 4, '008', 'Kursi', 800, ''),
-(10, 3, 4, '009', 'Mobil', 5000, ''),
-(11, 3, 4, '010', 'Bis Pariwisata', 1000, '');
+INSERT INTO `ref_barang` (`id`, `id_kategori`, `id_sub_kategori`, `kode_barang`, `nama_barang`, `status`) VALUES
+(1, 2, 2, '001', 'Busi', '1'),
+(2, 2, 2, '101', 'Asd', '1'),
+(3, 3, 4, '002', 'Ban', '1'),
+(4, 2, 2, '003', 'CPU', '1'),
+(5, 3, 4, '004', 'Monitor', '1'),
+(6, 2, 2, '005', 'Keyboard', '1'),
+(7, 3, 4, '006', 'Mouse', '1'),
+(8, 2, 2, '007', 'Meja', '1'),
+(9, 3, 4, '008', 'Kursi', '1'),
+(10, 3, 4, '009', 'Mobil', '1'),
+(11, 3, 4, '010', 'Bis Pariwisata', '1');
 
 -- --------------------------------------------------------
 
@@ -62,20 +61,19 @@ INSERT INTO `ref_barang` (`id`, `id_kategori`, `id_sub_kategori`, `kode_barang`,
 CREATE TABLE IF NOT EXISTS `ref_departement` (
   `departement_id` smallint(6) NOT NULL AUTO_INCREMENT,
   `departement_name` varchar(25) NOT NULL,
+  `status` varchar(1) NOT NULL,
   PRIMARY KEY (`departement_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `ref_departement`
 --
 
-INSERT INTO `ref_departement` (`departement_id`, `departement_name`) VALUES
-(1, 'IT'),
-(2, 'Heavy Equipment'),
-(3, 'Workshop'),
-(4, 'Logistic'),
-(5, 'Purchasing'),
-(6, 'Promotion');
+INSERT INTO `ref_departement` (`departement_id`, `departement_name`, `status`) VALUES
+(1, 'IT', '1'),
+(15, 'Workshop', '1'),
+(16, 'Heavy Equipment', '1'),
+(17, 'Promotion', '1');
 
 -- --------------------------------------------------------
 
@@ -88,15 +86,15 @@ CREATE TABLE IF NOT EXISTS `ref_kategori` (
   `nama_kategori` varchar(25) NOT NULL,
   `status` varchar(1) NOT NULL,
   PRIMARY KEY (`id_kategori`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `ref_kategori`
 --
 
 INSERT INTO `ref_kategori` (`id_kategori`, `nama_kategori`, `status`) VALUES
-(2, 'Consumables', ''),
-(3, 'Not  Consumables', '');
+(2, 'Consumables', '1'),
+(3, 'Not  Consumables', '1');
 
 -- --------------------------------------------------------
 
@@ -110,15 +108,15 @@ CREATE TABLE IF NOT EXISTS `ref_sub_kategori` (
   `nama_sub_kategori` varchar(25) NOT NULL,
   `status` varchar(1) NOT NULL,
   PRIMARY KEY (`id_sub_kategori`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `ref_sub_kategori`
 --
 
 INSERT INTO `ref_sub_kategori` (`id_sub_kategori`, `id_kategori`, `nama_sub_kategori`, `status`) VALUES
-(2, 2, 'Barang Konsumsi', ''),
-(4, 3, 'Tak Habis', '');
+(2, 2, 'Barang Konsumsi', '1'),
+(4, 3, 'Tak Habis', '1');
 
 -- --------------------------------------------------------
 
@@ -254,15 +252,26 @@ CREATE TABLE IF NOT EXISTS `sys_user_level` (
   `level_name` varchar(40) DEFAULT NULL,
   `level` smallint(6) DEFAULT NULL,
   PRIMARY KEY (`user_level_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `sys_user_level`
 --
 
 INSERT INTO `sys_user_level` (`user_level_id`, `level_name`, `level`) VALUES
-(1, 'Administrator', 10000),
-(2, 'Logistic', 1);
+(1, 'Administrator', 99),
+(2, 'Logistic', 2),
+(3, 'Purchasing', 3),
+(4, 'Requestor', 1),
+(5, 'Vendor', 4),
+(6, 'Dept Manager', 5),
+(7, 'Related Dept Manager', 6),
+(8, 'Inventory', 7),
+(9, 'Warehouse Man', 8),
+(10, 'Inbound Receive Team', 9),
+(11, 'Inbound Retur Team', 10),
+(12, 'Outbond Distribution Team', 11),
+(13, 'Courir', 12);
 
 -- --------------------------------------------------------
 
@@ -358,6 +367,36 @@ INSERT INTO `tr_pr` (`id_pr`, `id_ro`, `user_id`, `purpose`, `cat_req`, `ext_doc
 (1, 1, 1, 'REQUEST', 'ASSET', '001123456', '2014-12-10', '2014-12-10 06:20:36', 1),
 (2, 2, 1, 'STOCK', 'ATK', '001123456', '2014-12-08', '2014-12-08 00:00:00', 2),
 (3, 3, 1, 'REQUEST', 'SPAREPART', '001123456', '2014-12-08', '2014-12-09 21:09:35', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tr_pros_detail`
+--
+
+CREATE TABLE IF NOT EXISTS `tr_pros_detail` (
+  `id_detail_pros` int(11) NOT NULL AUTO_INCREMENT,
+  `id_detail_ro` int(11) DEFAULT NULL,
+  `id_ro` int(11) DEFAULT NULL,
+  `id_sro` int(11) DEFAULT NULL,
+  `id_stock` int(11) DEFAULT NULL,
+  `kode_barang` varchar(21) DEFAULT NULL,
+  `qty` int(11) DEFAULT NULL,
+  `id_lokasi` varchar(21) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL,
+  PRIMARY KEY (`id_detail_pros`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `tr_pros_detail`
+--
+
+INSERT INTO `tr_pros_detail` (`id_detail_pros`, `id_detail_ro`, `id_ro`, `id_sro`, `id_stock`, `kode_barang`, `qty`, `id_lokasi`, `status`) VALUES
+(1, 1, 1, NULL, 1, '003', 2, 'A0101', 1),
+(2, 1, 1, NULL, 2, '003', 1, 'A0201', 1),
+(3, 1, 1, NULL, 4, '003', 1, 'A0402', 1),
+(4, 2, 1, NULL, 3, '005', 10, 'A0301', 1),
+(5, 2, 1, NULL, 3, '005', 6, 'A0301', 1);
 
 -- --------------------------------------------------------
 
@@ -520,7 +559,7 @@ CREATE TABLE IF NOT EXISTS `tr_ros` (
 INSERT INTO `tr_ros` (`id_ro`, `user_id`, `purpose`, `cat_req`, `ext_doc_no`, `ETD`, `date_create`, `status`) VALUES
 (1, 1, 'REQUEST', 'ASSET', '001123456', '2014-12-10', '2014-12-10 06:20:36', 1),
 (2, 1, 'STOCK', 'ATK', '001123456', '2014-12-08', '2014-12-08 00:00:00', 2),
-(3, 1, 'REQUEST', 'SPAREPART', '001123456', '2014-12-08', '2014-12-09 21:09:35', 2);
+(3, 1, 'REQUEST', 'SPAREPART', '001123456', '2014-12-08', '2014-12-09 21:09:35', 3);
 
 -- --------------------------------------------------------
 
@@ -538,7 +577,7 @@ CREATE TABLE IF NOT EXISTS `tr_ros_detail` (
   `date_create` datetime DEFAULT NULL,
   `note` text,
   `status` int(1) DEFAULT NULL,
-  `status_delete` int(1) NOT NULL,
+  `id_sro` smallint(6) NOT NULL,
   PRIMARY KEY (`id_detail_ro`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18446744073709551615 ;
 
@@ -546,17 +585,17 @@ CREATE TABLE IF NOT EXISTS `tr_ros_detail` (
 -- Dumping data for table `tr_ros_detail`
 --
 
-INSERT INTO `tr_ros_detail` (`id_detail_ro`, `id_ro`, `ext_doc_no`, `kode_barang`, `qty`, `user_id`, `date_create`, `note`, `status`, `status_delete`) VALUES
+INSERT INTO `tr_ros_detail` (`id_detail_ro`, `id_ro`, `ext_doc_no`, `kode_barang`, `qty`, `user_id`, `date_create`, `note`, `status`, `id_sro`) VALUES
 (1, 1, '001123456', '004', 50, 1, '2014-12-09 21:09:35', 'tes 1', 1, 0),
 (2, 2, '001123456', '005', 50, 1, '2014-12-08 00:00:00', 'tes 2', 3, 0),
-(3, 2, '001123456', '007', 150, 1, '2014-12-11 07:39:52', 'tes2', 2, 0),
-(4, 2, '001123456', '010', 75, 1, '2014-12-09 21:09:35', 'Yomannn', 2, 0),
-(5, 2, '001123456', '009', 25, 1, '2014-12-09 21:09:35', 'tes purchase request', 1, 0),
+(3, 2, '001123456', '007', 150, 1, '2014-12-11 07:39:52', 'tes2', 1, 0),
+(4, 2, '001123456', '010', 75, 1, '2014-12-09 21:09:35', 'Yomannn', 3, 1),
+(5, 2, '001123456', '009', 25, 1, '2014-12-09 21:09:35', 'tes purchase request', 2, 0),
 (6, 2, '001123456', '002', 250, 1, '2014-12-10 06:20:36', 'tes allocate all', 1, 0),
 (7, 3, '001123456', '001', 25, 1, '2014-12-09 21:09:35', 'Tes data 1', 1, 0),
 (8, 3, '001123456', '005', 50, 1, '2014-12-08 00:00:00', 'Tes data 2', 1, 0),
 (9, 3, '001123456', '008', 125, 1, '2014-12-08 00:00:00', 'Tes data 3', 2, 0),
-(10, 3, '012345678', '010', 225, 1, '2014-12-11 12:13:21', 'Tes data 4', 3, 0),
+(10, 3, '012345678', '010', 225, 1, '2014-12-11 12:13:21', 'Tes data 4', 2, 0),
 (11, 3, '0976541213', '003', 10, 1, '2014-12-11 12:13:56', 'Tes data 5', 3, 0);
 
 -- --------------------------------------------------------
@@ -590,6 +629,61 @@ INSERT INTO `tr_ro_detail` (`id_detail_ro`, `id_ro`, `ext_doc_no`, `kode_barang`
 (5, 16, '001123456', '005', 50, 1, '2014-12-08 21:09:38', 'KW Super', 3, 0),
 (6, 16, '001123456', '004', 50, 1, '2014-12-09 21:09:35', 'ORI', 3, 1),
 (7, 16, '001123456', '005', 50, 1, '2014-12-08 21:09:38', 'KW Super', 3, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tr_sro`
+--
+
+CREATE TABLE IF NOT EXISTS `tr_sro` (
+  `id_sro` int(11) NOT NULL AUTO_INCREMENT,
+  `id_ro` int(11) DEFAULT NULL,
+  `date_create` datetime DEFAULT NULL,
+  `id_user` varchar(21) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL,
+  PRIMARY KEY (`id_sro`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `tr_sro`
+--
+
+INSERT INTO `tr_sro` (`id_sro`, `id_ro`, `date_create`, `id_user`, `status`) VALUES
+(2, 3, '2014-12-10 10:12:37', '1', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tr_stock`
+--
+
+CREATE TABLE IF NOT EXISTS `tr_stock` (
+  `id_stock` int(11) NOT NULL AUTO_INCREMENT,
+  `kode_barang` varchar(5) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `price` int(11) DEFAULT NULL,
+  `id_lokasi` varchar(21) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL,
+  PRIMARY KEY (`id_stock`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=12 ;
+
+--
+-- Dumping data for table `tr_stock`
+--
+
+INSERT INTO `tr_stock` (`id_stock`, `kode_barang`, `qty`, `price`, `id_lokasi`, `status`) VALUES
+(1, '001', 50, 1000, 'A0101', 1),
+(2, '002', 75, 1000, 'A0201', 1),
+(3, '003', 100, 1500, 'A0301', 1),
+(4, '004', 25, 2000, 'A0402', 1),
+(5, '005', 20, 500, 'A0101', 1),
+(6, '006', 30, 1250, 'A0101', 1),
+(7, '007', 300, 400, 'A0201', 1),
+(8, '008', 500, 5000, 'A0301', 1),
+(9, '009', 10, 75000, 'A0402', 1),
+(10, '010', 25, 15000, 'A0201', 1),
+(11, '011', 10, 2000, 'A0301', 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
