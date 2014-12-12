@@ -254,7 +254,7 @@
 			<div id="dialogDetail" class="easyui-dialog" style="width:400px;height:150px" closed="true">
 			</div>
 			<div id="dlg-buttons">
-				<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveData()">Save</a>
+				<a href="#" class="easyui-linkbutton" id="save" iconCls="icon-ok" onclick="saveData()">Save</a>
 				<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dialog').dialog('close')">Cancel</a>
 			</div>
 		</div>
@@ -270,4 +270,14 @@
 				 
 				 
 	</body>
+
+	<script type="text/javascript">
+$(document).ready(function() {
+		$('#save').click(){
+			alert('test');
+		}
+				
+		
+	});
+	</script>
 </html>
