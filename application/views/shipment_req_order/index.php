@@ -35,10 +35,10 @@
 			return col;
 		}
 
-		// search text combo
-		// $(document).ready(function(){
-		// 	$("#search").select2();
-		// });
+		
+		$(document).ready(function(){
+			$(".select").select2();
+		});
 		
 		$(function(){
 			$('#dg').datagrid({
@@ -104,8 +104,7 @@
 		<tr>
 			<th field="user_id" sortable="true" width="150" hidden="true">ID</th>
 			<th field="id_sro" sortable="true" width="100">ID SRO</th>
-			<th field="id_ros" sortable="true" width="100">ID ROS</th>
-			<th field="id_do" sortable="true" width="100">ID DO</th>
+			<th field="id_ro" sortable="true" width="100">ID RO</th>
 			<th field="full_name" sortable="true" width="100">Requestor</th>
 			<th field="date_create" sortable="true" width="120">Date Create</th>
 			<th field="action" align="center" formatter="actionbutton" width="140">Aksi</th>
