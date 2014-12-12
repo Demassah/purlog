@@ -22,7 +22,7 @@ class mdl_picking extends CI_Model {
 			$this->db->join('sys_user b', 'b.user_id = a.user_id');
 			$this->db->join('ref_departement c', 'c.departement_id = b.departement_id');
 
-			$this->db->where('status','2');
+			$this->db->where('a.status','2');
 
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
@@ -210,6 +210,23 @@ class mdl_picking extends CI_Model {
 		$result = $this->db->update('tr_ros_detail');
 	   
 	   
+		//return
+		if($result) {
+				return TRUE;
+		}else {
+				return FALSE;
+		}
+	}
+
+	function lockAll($kode){
+		
+		$this->db->flush_cache();
+		
+		$this->db->set('status', "3");
+		$this->db->where('status', '2');
+		$this->db->where('id_ro', $kode);
+		$result = $this->db->update('tr_ros_detail');
+	   	   
 		//return
 		if($result) {
 				return TRUE;

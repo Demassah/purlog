@@ -21,6 +21,7 @@ class mdl_barang extends CI_Model {
 			$this->db->from('ref_barang a');
 			$this->db->join('ref_kategori b', 'b.id_kategori = a.id_kategori');
 			$this->db->join('ref_sub_kategori c', 'c.id_sub_kategori = a.id_sub_kategori');
+			$this->db->where('a.status','1');
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
 		
@@ -66,7 +67,7 @@ class mdl_barang extends CI_Model {
         $this->db->set('id_sub_kategori', $data['id_sub_kategori']);
         $this->db->set('kode_barang', $data['kode_barang']);
         $this->db->set('nama_barang', $data['nama_barang']);
-        $this->db->set('jumlah', $data['jumlah']);
+        $this->db->set('status', isset($data['status'])?'1':'0');
 
 		$result = $this->db->insert('ref_barang');
 		
@@ -85,7 +86,6 @@ class mdl_barang extends CI_Model {
     $this->db->set('id_sub_kategori', $data['id_sub_kategori']);
     $this->db->set('kode_barang', $data['kode_barang']);
     $this->db->set('nama_barang', $data['nama_barang']);
-    $this->db->set('jumlah', $data['jumlah']);
 		
 		$this->db->where('id', $data['kode']);
 		$result = $this->db->update('ref_barang');
@@ -98,10 +98,17 @@ class mdl_barang extends CI_Model {
 		}
 	}
 	
-	function DeleteOnDb($kode){		
-		$this->db->where('id', $kode);
-		$result = $this->db->delete('ref_barang');
+
+	function DeleteOnDb($kode){
 		
+		$this->db->flush_cache();
+		
+		$this->db->set('status', "0");
+		
+		$this->db->where('id', $kode);
+		$result = $this->db->update('ref_barang');
+	   
+	   
 		//return
 		if($result) {
 				return TRUE;

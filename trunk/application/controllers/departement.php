@@ -21,6 +21,7 @@ class departement extends CI_Controller {
 		$data['kode'] = '';
 		$data['departement_id'] = '';
 		$data['departement_name'] = '';
+		$data['status'] = '1';
 		
 		$this->load->view('administrator/departement_form', $data);
 	}

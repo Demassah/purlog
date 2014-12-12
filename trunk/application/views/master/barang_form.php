@@ -31,9 +31,9 @@
 		<label style="width:100px">Nama Barang </label>: 
 		<input name="nama_barang" size="30" value="<?=$nama_barang?>">
 	</div>
-	<div class="fitem" >
-		<label style="width:100px">Jumlah </label>: 
-		<input name="jumlah" size="5" value="<?=$jumlah?>">
+	<div class="fitem" hidden="true" >
+		<label style="width:120px">Status</label>:
+		<input type="checkbox" name="status" <?=$status=='1'?'checked':''?>/> Aktif
 	</div>
 </form>
 	

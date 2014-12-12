@@ -22,6 +22,7 @@ class sub_kategori extends CI_Controller {
 		$data['id_sub_kategori'] = '';
 		$data['id_kategori'] = '';
 		$data['nama_sub_kategori'] = '';
+		$data['status'] = '1';
 		
 		$this->load->view('master/sub_kategori_form', $data);
 	}
