@@ -20,11 +20,11 @@ class barang extends CI_Controller {
 	function add(){
 		$data['kode'] = '';
 		$data['id'] = '';
-    $data['id_kategori'] = '';
-    $data['id_sub_kategori'] = '';
-    $data['kode_barang'] = '';
-    $data['nama_barang'] = '';
-    $data['jumlah'] = '';
+	    $data['id_kategori'] = '';
+	    $data['id_sub_kategori'] = '';
+	    $data['kode_barang'] = '';
+	    $data['nama_barang'] = '';
+	    $data['status'] = '1';
 		
 		$this->load->view('master/barang_form', $data);
 	}
@@ -32,11 +32,10 @@ class barang extends CI_Controller {
 	function edit($kode){
 		$r = $this->mdl_barang->getdataedit($kode);
 		
-    $data['id_kategori'] = $r->row()->id_kategori;
-    $data['id_sub_kategori'] = $r->row()->id_sub_kategori;
-    $data['kode_barang'] = $r->row()->kode_barang;
-    $data['nama_barang'] = $r->row()->nama_barang;
-    $data['jumlah'] = $r->row()->jumlah;
+	    $data['id_kategori'] = $r->row()->id_kategori;
+	    $data['id_sub_kategori'] = $r->row()->id_sub_kategori;
+	    $data['kode_barang'] = $r->row()->kode_barang;
+	    $data['nama_barang'] = $r->row()->nama_barang;
 		$data['kode'] = $kode;
 		
 		$this->load->view('master/barang_form', $data);

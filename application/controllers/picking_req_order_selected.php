@@ -97,6 +97,15 @@ class picking_req_order_selected extends CI_Controller {
 		$this->load->view('picking_req_order_selected/lock', $data);
 	}
 
+	function lockAll($kode) {
+        $result = $this->mdl_picking->lockAll($kode);
+        if ($result) {
+            echo json_encode(array('success' => true));
+        } else {
+            echo json_encode(array('msg' => 'Data gagal dikunci'));
+        }
+    }
+
 	function grid_lock($id){
 		$data = $this->mdl_picking->getdata_lock($id);
 		echo $this->mdl_picking->togrid($data['row_data'], $data['row_count']);

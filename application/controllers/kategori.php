@@ -21,6 +21,7 @@ class kategori extends CI_Controller {
 		$data['kode'] = '';
 		$data['id_kategori'] = '';
 		$data['nama_kategori'] = '';
+		$data['status'] = '1';
 		
 		$this->load->view('master/kategori_form', $data);
 	}

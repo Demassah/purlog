@@ -120,6 +120,34 @@
       //}
     }
     //end sendData 
+    
+    lockAll = function (val){
+        if(confirm("Apakah yakin akan mengunci semua data ke lock '" + val + "'?")){
+          var response = '';
+          $.ajax({ type: "GET",
+             url: base_url+'picking_req_order_selected/lockAll/' + val,
+             async: false,
+             success : function(response){
+              var response = eval('('+response+')');
+              if (response.success){
+                $.messager.show({
+                  title: 'Success',
+                  msg: 'Data Berhasil Dikunci'
+                });
+                // reload and close tab
+                $('#dg_picking').datagrid('reload');
+              } else {
+                $.messager.show({
+                  title: 'Error',
+                  msg: response.msg
+                });
+              }
+             }
+          });
+        }
+      //}
+    }
+    //end lockAll 
 		
 		actionAvailable = function(value, row, index){
 			var col='';
@@ -153,9 +181,11 @@
           },
           {
             iconCls:'icon-login',
-            text:'Lock SRO',
+            text:'Lock All SRO',
             handler:function(){
-              b();
+              var row = $('#dg_picking').datagrid('getData');              
+              var id = row.rows[0].id_ro;
+              lockAll(id);
             }
           },
           {

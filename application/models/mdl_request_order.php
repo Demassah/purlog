@@ -21,7 +21,7 @@ class mdl_request_order extends CI_Model {
 		$this->db->from('tr_ro a');
 		$this->db->join('sys_user b', 'b.user_id = a.user_id');
 		$this->db->join('ref_departement c', 'c.departement_id = b.departement_id');
-		$this->db->where('status','1');
+		$this->db->where('a.status','1');
 		$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
 		

@@ -19,6 +19,7 @@ class mdl_departement extends CI_Model {
 		$this->db->start_cache();
 			$this->db->select('*');
 			$this->db->from('ref_departement');
+			$this->db->where('status', '1');
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
 		
@@ -61,6 +62,7 @@ class mdl_departement extends CI_Model {
 		//query insert data		
 		$this->db->flush_cache();
 		$this->db->set('departement_name', $data['departement_name']);
+		$this->db->set('status', isset($data['status'])?'1':'0');
 		
 		$result = $this->db->insert('ref_departement');
 		
@@ -98,10 +100,16 @@ class mdl_departement extends CI_Model {
 		}
 	}
 
-	function DeleteOnDb($kode){		
-		$this->db->where('departement_id', $kode);
-		$result = $this->db->delete('ref_departement');
+	function DeleteOnDb($kode){
 		
+		$this->db->flush_cache();
+		
+		$this->db->set('status', "0");
+		
+		$this->db->where('departement_id', $kode);
+		$result = $this->db->update('ref_departement');
+	   
+	   
 		//return
 		if($result) {
 				return TRUE;
