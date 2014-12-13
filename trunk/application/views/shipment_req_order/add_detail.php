@@ -125,19 +125,27 @@
         $("#bsave").click(function () {
 //            alert('test save');
 //            event.preventDefault();
-//            var searchIDs = $("input:checkbox:checked").map(function () {
-//                return $(this).val();
-//            }).get(); 
+//            var searchIDs = $(".datagrid-btable").find("input[type=checkbox]").is(":checked"); 
 //            console.log('checkbox: '+ searchIDs);
+
+            var names = [];
             $(".datagrid-btable").find("input[type=checkbox]").each(function () {
                 if (this.checked) {
-                    alert('Checkbox Checked: ');
+                    names.push(this.value);
+                    alert('Checkbox Checked: ' + this.value);
                 }
                 else
                 {
                     alert('Checkbox not Checked');
                 }
             });
+
+//            var names = [];
+//            $(".datagrid-btable").find("input[type=checkbox]").each(function () {
+//                names.push(this.value);
+//            });
+//            alert('value dari checkbox: '+ names);
+
         });
     });
 </script>
