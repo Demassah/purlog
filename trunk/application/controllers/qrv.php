@@ -78,5 +78,9 @@ class qrv extends CI_Controller {
 			echo json_encode(array('msg'=>'Data gagal dihapus'));
 		}
 	}
-	
+
+
+	function test{
+
+	}
 }
