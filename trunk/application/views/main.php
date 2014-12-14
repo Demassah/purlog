@@ -272,12 +272,9 @@
 	</body>
 
 	<script type="text/javascript">
-$(document).ready(function() {
-		$('#save').click(){
-			alert('test');
-		}
-				
-		
-	});
+	// 	$(document).ready(function() {
+	// 		$('#save').click(){
+	// 			alert('test');
+	// 	});
 	</script>
 </html>

@@ -138,6 +138,13 @@ class mdl_request_order extends CI_Model {
 		}
 	}
 
+	function getDetail($id_detail_ro){
+		$this->db->where('id_detail_ro', $id_detail_ro);
+		$this->db->from('tr_ro_detail');
+		
+		return $this->db->get();
+	}
+
 	function SendData($kode){
 		$this->db->flush_cache();
 		$this->db->set('status', "2");

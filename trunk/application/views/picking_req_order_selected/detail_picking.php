@@ -2,11 +2,12 @@
 	
 	var url;
 	$(document).ready(function(){
+    var id_ro = <?php echo $id_ro;?>;
 
     available = function (val){      
       if(val==null){
           var row = $('#dg_detail').datagrid('getData');              
-          var id = row.rows[0].id_ro;
+          var id = id_ro;
           val = id;
       }
       $('#konten').panel({
@@ -18,7 +19,7 @@
 
       if(val==null){
           var row = $('#dg_detail').datagrid('getData');              
-          var id = row.rows[0].id_ro;
+          var id = id_ro;
           val = id;
       }
       $('#konten').panel({
@@ -29,7 +30,7 @@
 		pending = function (val){
        if(val==null){
           var row = $('#dg_detail').datagrid('getData');              
-          var id = row.rows[0].id_ro;
+          var id = id_ro;
           val = id;
       }
       $('#konten').panel({
@@ -126,7 +127,7 @@
             text:'Alocate All',
             handler:function(){
               var row = $('#dg_detail').datagrid('getData');              
-              var id = row.rows[0].id_ro;
+              var id = id_ro;
               alocateAll(id);
             }
           },
