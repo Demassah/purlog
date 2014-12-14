@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php // VIEW MAIN; ?><!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
