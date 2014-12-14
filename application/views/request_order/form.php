@@ -52,25 +52,3 @@
 		</select></li>
 	</div>
 </form>
-
-	<div class="columns">
-		<p class="colx2-left">
-			<input onclick="set_detail()" type="button" name="button2" id="button2" value="Tambah Ke List" />
-		</p>
-	</div>
-
-		<table class="table" border="1" cellspacing="0" width="100%">
-		
-			<thead>
-				<tr>
-					<th scope="col">No</th>
-					<th scope="col">Nama Barang</th>
-					<th scope="col">Qty</th>
-					<th scope="col">Aksi</th>
-				</tr>
-			</thead>
-			
-			<tbody id="detail">
-				
-			</tbody>
-		</table>

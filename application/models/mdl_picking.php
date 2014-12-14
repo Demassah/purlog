@@ -58,13 +58,12 @@ class mdl_picking extends CI_Model {
 	function done($kode){
 		
 		$this->db->flush_cache();
-		
+
 		$this->db->set('status', "3");
-		
+
 		$this->db->where('id_ro', $kode);
 		$result = $this->db->update('tr_ros');
-	   
-	   
+
 		//return
 		if($result) {
 				return TRUE;
@@ -114,28 +113,123 @@ class mdl_picking extends CI_Model {
 		
 		$this->db->flush_cache();
 		
-		$this->db->set('status', "2");
-		
+		$CI =& get_instance();
+
+		$CI->load->model('mdl_stock');
+
+		// Get ROS Detail
 		$this->db->where('id_detail_ro', $kode);
+		$ros_get = $this->db->get('tr_ros_detail');
+		$ros_detail = $ros_get->row();
+		$ros_arr = $ros_get->row_array();
+
+		$this->db->flush_cache();
+
+		// HTW POENYA
+		// Get Stock of current item
+		// $stock = $CI->mdl_stock->getStock('kode_barang', $ros_detail->kode_barang);
+
+		// $rosQty = $ros_detail->qty;
+		// $sisa = $stock->qty - $rosQty;
+		// if($sisa < 0) {
+		// 	// Buat entry baru/Update entry untuk pending
+		// 	$rosQty += $sisa;
+		// 	$sisa = 0;
+
+		// 	// Duplicate current row, set status to 4
+		// 	$params = array(
+		// 		'id_ro' => $ros_detail->id_ro,
+		// 		'kode_barang' => $ros_detail->kode_barang,
+		// 		'status' => 4,
+		// 	);
+		// 	$this->rosExists($params);
+		// }
+
+		// $this->db->set('status', '2');
+		// $this->db->where('id_detail_ro', $kode);
+		// $result = $this->db->update('tr_ros_detail');
+
+		// $stock = $this->mdl_stock->updateStock($stock->id_stock, $sisa);
+
+		//#PickingAlocate BY SCC
+		$stocks = $this->mdl_stock->getStock('kode_barang', $ros_detail->kode_barang);
+        $request = $ros_detail->qty;
+
+        foreach ($stocks->result() as $stock) {
+            if($stock->qty >= $request){
+                $newQty = $stock->qty - $request;
+                $prosQty = $request;
+            }elseif($stock->qty < $request){
+                $newQty = 0;
+                $prosQty = $stock->qty;
+            }
+            $request -= $stock->qty;
+            $CI->mdl_stock->updateStock($stock->id_stock, $newQty);
+        	
+        	// Buat tr_pros_detail
+			$params = array(
+				'id_detail_ro' => $ros_detail->id_detail_ro,
+				'id_ro' => $ros_detail->id_ro,
+				'id_sro' => $ros_detail->id_sro,
+				'id_stock' => $stock->id_stock,
+				'kode_barang' => $stock->kode_barang,
+				'qty' => $prosQty,
+				'id_lokasi' => $stock->id_lokasi,
+				'status' => 1,
+			);
+			$this->addProsDetail($params);
+            
+            if($request == 0) {break;}
+        }
+
+        //Pending
+        if($request > 0){
+			$alocQty = $ros_detail->qty - $request;
+        	$this->addPending($ros_arr, $request);	
+	    	$this->db->set('qty', $alocQty);
+        }
+    	$this->db->set('status', '2');
+    	$this->db->where('id_detail_ro', $ros_detail->id_detail_ro);
+		
 		$result = $this->db->update('tr_ros_detail');
-	   
-	   
+		//END #PickingAlocate
+
 		//return
 		if($result) {
-				return TRUE;
+			return TRUE;
 		}else {
-				return FALSE;
+			return FALSE;
 		}
+	}
+
+	function rosExists($params = array())
+	{
+		$this->db->flush_cache();
+
+		foreach($params as $key => $val) {
+			$this->db->where($key, $val);
+		}
+
+		if($this->db->get('tr_ros_detail') == false) {
+			return false;
+		}
+		return true;
 	}
 
 	function alocateAll($kode){
 		
 		$this->db->flush_cache();
 		
-		$this->db->set('status', "2");
+		// EDIT BY SCC;
+		// $this->db->set('status', "2");
 		$this->db->where('status', '1');
 		$this->db->where('id_ro', $kode);
-		$result = $this->db->update('tr_ros_detail');
+		$items = $this->db->get('tr_ros_detail');
+
+		foreach ($items->result() as $item) {
+			$result = $this->alocate($item->id_detail_ro);
+		}
+		// END EDIT;
 	   	   
 		//return
 		if($result) {
@@ -310,7 +404,7 @@ class mdl_picking extends CI_Model {
 			$this->db->join('ref_barang e', 'e.kode_barang = a.kode_barang');
 
 			$this->db->where('a.id_ro', $id_ro);
-			$this->db->where('a.status', '2');
+			$this->db->where('a.status', '4');
 			//$this->db->where('a.status_delete', '0');
 
 			$this->db->order_by($sort, $order);
@@ -327,6 +421,40 @@ class mdl_picking extends CI_Model {
 		
 		return $tmp;
 	}
+
+	//#addPending BY SCC
+	function addPending($data, $qty){
+		
+		$this->db->flush_cache();
+		
+		$data['id_detail_ro'] = null;
+		$data['status'] = '4';
+		$data['qty'] = $qty;
+
+		$result = $this->db->insert('tr_ros_detail',$data);
+	   
+		if($result) {
+			return TRUE;
+		}else{
+			return FALSE;
+		}
+	}
+	//END #addPending
+
+	//#addProsDetail BY SCC
+	function addProsDetail($data){
+		
+		$this->db->flush_cache();
+
+		$result = $this->db->insert('tr_pros_detail',$data);
+	   
+		if($result) {
+			return TRUE;
+		}else{
+			return FALSE;
+		}
+	}
+	//END #addProsDetail
 	
 }
 

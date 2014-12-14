@@ -2,6 +2,27 @@
 	var url;
 	$(document).ready(function(){
 
+    newData = function (){
+      $('#dialog').dialog({
+        title: 'Tambah Request Order Selected',
+        width: 380,
+        height: 130,
+        closed: true,
+        cache: false,
+        href: base_url+'request_order_selected/add',
+        modal: true
+      });      
+      $('#dialog').dialog('open');
+      url = base_url+'request_order_selected/save/add';
+    }
+    // end newData
+    
+    detailData = function (val){
+      $('#konten').panel({      
+        href:base_url+'request_order/detail/' + val,
+      });
+    }
+
 		doneData = function (val){
         if(confirm("Apakah yakin akan mengalokasi data ke Picking '" + val + "'?")){
           var response = '';
@@ -54,6 +75,24 @@
 				url:base_url + "request_order_selected/grid"
 			});
 		});
+
+    //# Tombol Bawah
+    $(function(){
+      var pager = $('#dg').datagrid().datagrid('getPager'); // get the pager of datagrid
+      pager.pagination({
+        buttons:[
+        <?if($this->mdl_auth->CekAkses(array('menu_id'=>10, 'policy'=>'ADD'))){?>
+          {
+            iconCls:'icon-add',
+            text:'Tambah Data',
+            handler:function(){
+              newData();
+            }
+          }
+          <?}?> 
+        ]
+      });     
+    });
 		
 		
 	});

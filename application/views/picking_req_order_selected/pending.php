@@ -2,11 +2,12 @@
 	
 	var url;
 	$(document).ready(function(){
+    	var id_ro = <?php echo $id_ro;?>;
 
 		detail = function (val){      
       if(val==null){
           var row = $('#dg_pending').datagrid('getData');              
-          var id = row.rows[0].id_ro;
+          var id = id_ro;
           val = id;
       }
 			$('#konten').panel({
@@ -17,7 +18,7 @@
 		available = function (val){      
       if(val==null){
           var row = $('#dg_pending').datagrid('getData');              
-          var id = row.rows[0].id_ro;
+          var id = id_ro;
           val = id;
       }
       $('#konten').panel({
@@ -29,7 +30,7 @@
 
       if(val==null){
           var row = $('#dg_pending').datagrid('getData');              
-          var id = row.rows[0].id_ro;
+          var id = id_ro;
           val = id;
       }
       $('#konten').panel({

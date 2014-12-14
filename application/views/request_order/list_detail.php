@@ -11,11 +11,11 @@
 		newDetail = function (){
 			$('#dialog').dialog({
 				title: 'Tambah Detail Request Order',
-				width: 400,
-				height: $(window).height() * 0.7,
+				width: 640,
+				height: $(window).height() * 0.99,
 				closed: true,
 				cache: false,
-				href: base_url+'request_order/add_detail',
+				href: base_url+'request_order/add_detail/<?=$id_ro?>',
 				modal: true
 			});			 
 			$('#dialog').dialog('open');

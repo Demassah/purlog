@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 12, 2014 at 02:36 AM
+-- Generation Time: Dec 15, 2014 at 05:28 
 -- Server version: 5.1.41
 -- PHP Version: 5.3.1
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `ref_barang` (
   `nama_barang` varchar(30) NOT NULL,
   `status` varchar(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `ref_barang`
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `ref_kategori` (
   `nama_kategori` varchar(25) NOT NULL,
   `status` varchar(1) NOT NULL,
   PRIMARY KEY (`id_kategori`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `ref_kategori`
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `ref_sub_kategori` (
   `nama_sub_kategori` varchar(25) NOT NULL,
   `status` varchar(1) NOT NULL,
   PRIMARY KEY (`id_sub_kategori`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `ref_sub_kategori`
@@ -184,7 +184,7 @@ CREATE TABLE IF NOT EXISTS `sys_user` (
   `departement_id` smallint(6) NOT NULL,
   `user_level_id` smallint(6) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `sys_user`
@@ -192,7 +192,8 @@ CREATE TABLE IF NOT EXISTS `sys_user` (
 
 INSERT INTO `sys_user` (`user_id`, `nik`, `user_name`, `full_name`, `passwd`, `departement_id`, `user_level_id`) VALUES
 (1, 1111111, 'admin', 'administrator', '21232f297a57a5a743894a0e4a801fc3', 1, 1),
-(11, 1111112, 'iqbal', 'Mochamad Iqbal', 'eedae20fc3c7a6e9c5b1102098771c70', 1, 1);
+(11, 1111112, 'iqbal', 'Mochamad Iqbal', 'eedae20fc3c7a6e9c5b1102098771c70', 1, 1),
+(12, 12345, 'harry', 'Harry Pret', '3b87c97d15e8eb11e51aa25e9a5770e9', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -385,18 +386,15 @@ CREATE TABLE IF NOT EXISTS `tr_pros_detail` (
   `id_lokasi` varchar(21) DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id_detail_pros`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `tr_pros_detail`
 --
 
 INSERT INTO `tr_pros_detail` (`id_detail_pros`, `id_detail_ro`, `id_ro`, `id_sro`, `id_stock`, `kode_barang`, `qty`, `id_lokasi`, `status`) VALUES
-(1, 1, 1, NULL, 1, '003', 2, 'A0101', 1),
-(2, 1, 1, NULL, 2, '003', 1, 'A0201', 1),
-(3, 1, 1, NULL, 4, '003', 1, 'A0402', 1),
-(4, 2, 1, NULL, 3, '005', 10, 'A0301', 1),
-(5, 2, 1, NULL, 3, '005', 6, 'A0301', 1);
+(1, 12, 2, 0, 2, '002', 100, 'A0201', 1),
+(2, 12, 2, 0, 12, '002', 50, 'A0101', 1);
 
 -- --------------------------------------------------------
 
@@ -516,7 +514,7 @@ CREATE TABLE IF NOT EXISTS `tr_ro` (
   `date_create` datetime DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id_ro`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `tr_ro`
@@ -532,7 +530,8 @@ INSERT INTO `tr_ro` (`id_ro`, `user_id`, `purpose`, `cat_req`, `ext_doc_no`, `ET
 (16, 1, 'STOCK', 'SPAREPART', '012345678', '2014-12-08', '2014-12-08 00:00:00', 3),
 (18, 1, 'STOCK', 'ASSET', '001123456', '2014-12-10', '2014-12-10 06:20:36', 1),
 (19, 1, 'REQUEST', 'ATK', '001123456', '2014-12-10', '2014-12-09 21:09:35', 3),
-(20, 1, 'STOCK', 'SPAREPART', ' 098765543321', '2014-12-11', '2014-12-11 00:00:00', 1);
+(20, 1, 'STOCK', 'SPAREPART', ' 098765543321', '2014-12-11', '2014-12-11 00:00:00', 1),
+(21, 12, 'REQUEST', 'ATK', '098765543321', '2014-12-13', '2014-12-13 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -548,7 +547,7 @@ CREATE TABLE IF NOT EXISTS `tr_ros` (
   `ext_doc_no` varchar(21) DEFAULT NULL,
   `ETD` date DEFAULT NULL,
   `date_create` datetime DEFAULT NULL,
-  `status` int(1) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL COMMENT '1: ros, 2: picking, 3:shipment',
   PRIMARY KEY (`id_ro`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
@@ -559,7 +558,7 @@ CREATE TABLE IF NOT EXISTS `tr_ros` (
 INSERT INTO `tr_ros` (`id_ro`, `user_id`, `purpose`, `cat_req`, `ext_doc_no`, `ETD`, `date_create`, `status`) VALUES
 (1, 1, 'REQUEST', 'ASSET', '001123456', '2014-12-10', '2014-12-10 06:20:36', 1),
 (2, 1, 'STOCK', 'ATK', '001123456', '2014-12-08', '2014-12-08 00:00:00', 2),
-(3, 1, 'REQUEST', 'SPAREPART', '001123456', '2014-12-08', '2014-12-09 21:09:35', 3);
+(3, 1, 'REQUEST', 'SPAREPART', '001123456', '2014-12-08', '2014-12-09 21:09:35', 2);
 
 -- --------------------------------------------------------
 
@@ -568,7 +567,7 @@ INSERT INTO `tr_ros` (`id_ro`, `user_id`, `purpose`, `cat_req`, `ext_doc_no`, `E
 --
 
 CREATE TABLE IF NOT EXISTS `tr_ros_detail` (
-  `id_detail_ro` smallint(6) NOT NULL AUTO_INCREMENT,
+  `id_detail_ro` int(6) NOT NULL AUTO_INCREMENT,
   `id_ro` int(11) DEFAULT NULL,
   `ext_doc_no` varchar(21) DEFAULT NULL,
   `kode_barang` varchar(21) DEFAULT NULL,
@@ -576,27 +575,28 @@ CREATE TABLE IF NOT EXISTS `tr_ros_detail` (
   `user_id` smallint(6) DEFAULT NULL,
   `date_create` datetime DEFAULT NULL,
   `note` text,
-  `status` int(1) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL COMMENT '1: detail, 2: picking, 3: lock, 4: pending',
   `id_sro` smallint(6) NOT NULL,
   PRIMARY KEY (`id_detail_ro`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18446744073709551615 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `tr_ros_detail`
 --
 
 INSERT INTO `tr_ros_detail` (`id_detail_ro`, `id_ro`, `ext_doc_no`, `kode_barang`, `qty`, `user_id`, `date_create`, `note`, `status`, `id_sro`) VALUES
-(1, 1, '001123456', '004', 50, 1, '2014-12-09 21:09:35', 'tes 1', 1, 0),
-(2, 2, '001123456', '005', 50, 1, '2014-12-08 00:00:00', 'tes 2', 3, 0),
-(3, 2, '001123456', '007', 150, 1, '2014-12-11 07:39:52', 'tes2', 1, 0),
-(4, 2, '001123456', '010', 75, 1, '2014-12-09 21:09:35', 'Yomannn', 3, 1),
-(5, 2, '001123456', '009', 25, 1, '2014-12-09 21:09:35', 'tes purchase request', 2, 0),
-(6, 2, '001123456', '002', 250, 1, '2014-12-10 06:20:36', 'tes allocate all', 1, 0),
-(7, 3, '001123456', '001', 25, 1, '2014-12-09 21:09:35', 'Tes data 1', 1, 0),
-(8, 3, '001123456', '005', 50, 1, '2014-12-08 00:00:00', 'Tes data 2', 1, 0),
-(9, 3, '001123456', '008', 125, 1, '2014-12-08 00:00:00', 'Tes data 3', 2, 0),
-(10, 3, '012345678', '010', 225, 1, '2014-12-11 12:13:21', 'Tes data 4', 2, 0),
-(11, 3, '0976541213', '003', 10, 1, '2014-12-11 12:13:56', 'Tes data 5', 3, 0);
+(1, 1, '001123456', '004', 100, 1, '2014-12-09 21:09:35', 'tes 1', 2, 0),
+(2, 2, '001123456', '005', 150, 1, '2014-12-08 00:00:00', 'tes 2', 2, 0),
+(3, 2, '001123456', '007', 200, 1, '2014-12-11 07:39:52', 'tes2', 2, 0),
+(4, 2, '001123456', '010', 250, 1, '2014-12-09 21:09:35', 'Yomannn', 2, 1),
+(6, 2, '001123456', '009', 300, 1, '2014-12-09 21:09:35', 'tes purchase request', 2, 0),
+(7, 3, '001123456', '001', 200, 1, '2014-12-09 21:09:35', 'Tes data 1', 2, 0),
+(8, 3, '001123456', '005', 50, 1, '2014-12-08 00:00:00', 'Tes data 2', 2, 0),
+(9, 3, '001123456', '008', 150, 1, '2014-12-08 00:00:00', 'Tes data 3', 2, 0),
+(10, 3, '012345678', '010', 250, 1, '2014-12-11 12:13:21', 'Tes data 4', 2, 0),
+(11, 3, '0976541213', '003', 200, 1, '2014-12-11 12:13:56', 'Tes data 5', 2, 0),
+(12, 2, '001123456', '002', 150, 1, '2014-12-10 06:20:36', 'tes allocate all', 2, 0),
+(15, 2, '001123456', '002', 100, 1, '2014-12-10 06:20:36', 'tes allocate all', 4, 0);
 
 -- --------------------------------------------------------
 
@@ -643,7 +643,7 @@ CREATE TABLE IF NOT EXISTS `tr_sro` (
   `id_user` varchar(21) DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id_sro`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `tr_sro`
@@ -666,7 +666,7 @@ CREATE TABLE IF NOT EXISTS `tr_stock` (
   `id_lokasi` varchar(21) DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id_stock`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=12 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `tr_stock`
@@ -674,7 +674,7 @@ CREATE TABLE IF NOT EXISTS `tr_stock` (
 
 INSERT INTO `tr_stock` (`id_stock`, `kode_barang`, `qty`, `price`, `id_lokasi`, `status`) VALUES
 (1, '001', 50, 1000, 'A0101', 1),
-(2, '002', 75, 1000, 'A0201', 1),
+(2, '002', 0, 1000, 'A0201', 1),
 (3, '003', 100, 1500, 'A0301', 1),
 (4, '004', 25, 2000, 'A0402', 1),
 (5, '005', 20, 500, 'A0101', 1),
@@ -683,7 +683,27 @@ INSERT INTO `tr_stock` (`id_stock`, `kode_barang`, `qty`, `price`, `id_lokasi`, 
 (8, '008', 500, 5000, 'A0301', 1),
 (9, '009', 10, 75000, 'A0402', 1),
 (10, '010', 25, 15000, 'A0201', 1),
-(11, '011', 10, 2000, 'A0301', 1);
+(11, '011', 10, 2000, 'A0301', 1),
+(12, '002', 0, 1000, 'A0101', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tr_trans_stock`
+--
+
+CREATE TABLE IF NOT EXISTS `tr_trans_stock` (
+  `id_trans_stock` int(11) NOT NULL AUTO_INCREMENT,
+  `id_stock` int(11) NOT NULL,
+  `id_trans` int(11) NOT NULL,
+  `type` varchar(100) NOT NULL,
+  PRIMARY KEY (`id_trans_stock`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `tr_trans_stock`
+--
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

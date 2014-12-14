@@ -78,17 +78,42 @@ class request_order extends CI_Controller {
 		echo $this->mdl_request_order->togrid($data['row_data'], $data['row_count']);
 	}
 
-	function add_detail(){
-			$data['kode'] = '';
-			$data['id_detail_ro'] = '';
-	    $data['id_ro'] = '';
-	    $data['ext_doc_no'] = '';
-	    $data['id_barang'] = '';
-	    $data['qty'] = '';
-	    $data['user_id'] = '';
-	    $data['date_create'] = date('d/m/Y');
-	    $data['note'] = '';
-			$data['status'] = '';
+	function add_detail($id){
+			// $data['kode'] = '';
+			// $data['id_detail_ro'] = '';
+	  //   $data['id_ro'] = '';
+	  //   $data['ext_doc_no'] = '';
+	  //   $data['id_barang'] = '';
+	  //   $data['qty'] = '';
+	  //   $data['user_id'] = '';
+	  //   $data['date_create'] = date('d/m/Y');
+	  //   $data['note'] = '';
+			// $data['status'] = '';
+
+		// get data
+		$label 	= $this->mdl_request_order->getdataedit($id);
+		// var_export($label->row()); exit();
+		$detail = $this->mdl_request_order->getDetail($label->row()->id_ro);
+		
+		# hidden input
+		$data['id_ro'] = $id;
+		$data['ext_doc_no'] = $label->row()->ext_doc_no;
+		$data['full_name'] = $label->row()->full_name;
+		$data['user_id'] = $label->row()->user_id;
+		$data['date_create'] = $label->row()->date_create;
+		
+		# data input detail
+		$detail_row = $detail->num_rows();
+		if($detail_row > 0){
+			$data['data_detail'] = json_encode($detail->result_array()); 
+		}else{
+			$data['data_detail'] = '['.json_encode(array(
+										'kode_barang'=>'',
+										'qty'=>'',
+										'note'=>'',
+										'status'=>'',
+									)).']';
+		}
 
 		$this->load->view('request_order/form_detail', $data);
 	}
