@@ -91,6 +91,7 @@ class mdl_request_order_approval extends CI_Model {
 			$this->db->join('ref_barang e', 'e.kode_barang = a.kode_barang');
 
 			$this->db->where('a.id_ro', $id_ro);
+			$this->db->where('a.status', '1');
 			$this->db->where('a.status_delete', '0');
 
 			$this->db->order_by($sort, $order);

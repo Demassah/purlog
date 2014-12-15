@@ -1,113 +1,142 @@
-
-<form id="form1" method="post" style="margin:10px">
-<!-- 	<input type="hidden" name="kode" id="kode" value="<?=$kode?>"> -->
-	<div class="fitem" >
-		<label style="width:140px">Category </label>: 
-		<select id="purpose" name="id_kategori" style="width:167px;">
-			<option value="">Choose Purpose</option>
-			<?=$this->mdl_prosedur->OptionKategori(array('value'=>$id_kategori));?>
-		</select>	
-	</div>
-	<div class="fitem" >
-		<label style="width:140px">Category </label>: 
-		<select id="id_sub_kategori" name="id_sub_kategori" style="width:167px;">
-			<option value="">Choose Category</option>
-			<?=$this->mdl_prosedur->OptionSubKategori(array('value'=>$id_sub_kategori, 'id_kategori'=>$id_kategori));?>
-		</select>	
-	</div>
-	<div class="fitem" >
-		<label style="width:140px">Id Item </label>: 
-		<select id="id_item" name="id_sub_kategori" style="width:167px;">
-			<option value="">Choose Category</option>
-			<?=$this->mdl_prosedur->OptionSubKategori(array('value'=>$id_sub_kategori, 'id_kategori'=>$id_kategori));?>
-		</select>	
-	</div>
-	<div class="fitem" >
-		<label style="width:140px">Qty </label>: 
-		<input name="kode_barang" size="19" value=" ">
-	</div>
-	<div class="fitem" >
-		<label style="width:140px">Description </label>: 
-		<textarea name="kode_barang" size="19" value=" "></textarea>
-	</div>
-	<div>
-		<button type="button" id="tambah">Add</button>
-	</div>
-</form>
-
-
-<br />
-<div id="p" class="easyui-panel" title="Table List Item" style="padding:10px;background:#fafafa;" data-options="collapsible:true">
-	<table id="dg" title="Request Order List" data-options="
-				rownumbers:true,
-				singleSelect:true,
-				autoRowHeight:false,
-				pagination:true,
-				pageSize:30,
-				fit:true,
-				toolbar:'#toolbar',
-				">
-		<thead>
-			<tr border="1px" style:{background:'#000000'>
-				<th width="150">ID Detail</th>
-				<th width="150">ID RO</th>
-				<th width="150">ID Detail</th>
-				<th width="150">ID RO</th>
-				<th width="150">ID Item</th>
-				<th width="50">Qty</th>
-				<th width="150">Decsription</th>
-			</tr>
-		</thead>
-		<tbody id="data">
-			
-		</tbody>
-	</table>
-</div>
-
 <script type="text/javascript">
-	var arrayPenerimaan=[];
-		$("#tambah").click(function(){
-			var x = 0;
-			var id_item = $('#id_item').val();
-			var item_type = $('.item_type').val();
-			var item_name = $('#item_name').val();
-			var desc 			= $('.desc').val();
-			$.each( arrayPenerimaan, function( key, value ) {
-				if(id_item==value.id_item)
-				{
-					x = 1;
+		var url;
+	$(document).ready(function(){
+
+		back = function (val){
+			$('#konten').panel({
+				href:base_url+'request_order/index'
+			});
+		}
+
+		newDetail = function (){
+			$('#dialog').dialog({
+				title: 'Tambah Detail Request Order',
+				width: 640,
+				height: $(window).height() * 0.99,
+				closed: true,
+				cache: false,
+				href: base_url+'request_order/add_detail/<?=$id_ro?>',
+				modal: true
+			});			 
+			$('#dialog').dialog('open');
+			url = base_url+'request_order/save_Detail/add_detail';
+		}
+		// end newData
+		
+		
+		save = function(){
+			
+			$('#form1').form('submit',{
+				url: url,
+				onSubmit: function(){
+					return $(this).form('validate');
+				},
+				success: function(result){
+					alert(result);
+					var result = eval('('+result+')');
+					if (result.success){
+						$('#dialog').dialog('close');		// close the dialog
+						$('#dg_detailRO').datagrid('reload');		// reload the user data
+					} else {
+						$.messager.show({
+							title: 'Error',
+							msg: result.msg
+						});
+					}
 				}
 			});
-			if(x==1){
-				alert('Kode barang tidak boleh sama');
-			}else{
-			$('#data').empty();
-			arrayPenerimaan.push({
-				id_item: id_item,
-				item_type: item_type, 
-				item_name: item_name,
-				desc:desc
-			});
-			
-			$.each( arrayPenerimaan, function( key, value ) {
-				$("#data").append("<tr class='gradeX'><td>" + value.id_item +"</td><td>" + value.item_type +"</td><td>" + value.item_name +"</td><td>" + value.desc +"</td></tr>");
-			});
-			}
-		});
-</script>
-<script>
-	 $(document).ready(function(){
+		}
+		//end saveData
 		
-		$('#purpose').change(function(){
-			$('#id_sub_kategori').load(base_url+'prosedur/getSubKategoribyKategori/'+$('#purpose').val());
+		deleteData = function (val){
+				if(confirm("Apakah yakin akan menghapus data '" + val + "'?")){
+					var response = '';
+					$.ajax({ type: "GET",
+						 url: base_url+'request_order/deleteDetail/' + val,
+						 async: false,
+						 success : function(response){
+							var response = eval('('+response+')');
+							if (response.success){
+								$.messager.show({
+									title: 'Success',
+									msg: 'Data Berhasil Dihapus'
+								});
+								// reload and close tab
+								$('#dg').datagrid('reload');
+							} else {
+								$.messager.show({
+									title: 'Error',
+									msg: response.msg
+								});
+							}
+						 }
+					});
+				}
+			//}
+		}
+		//end deleteData 
+
+		actionDetail = function(value, row, index){
+			var col='';
+					col += '<a href="#" onclick="deleteData(\''+row.id_detail_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
+			return col;
+		}
+
+	
+		$(function(){
+			$('#dg_detailRO').datagrid({
+				url:base_url + "request_order/grid_detail/<?=$id_ro?>"
+			});
 		});
+
+		//# Tombol Bawah
+		$(function(){
+			var pager = $('#dg_detailRO').datagrid().datagrid('getPager');	// get the pager of datagrid
+			pager.pagination({
+				buttons:[
+					{
+						iconCls:'icon-add',
+						text:'Tambah Detail',
+						handler:function(){
+							newDetail();
+						}
+					},
+					{
+						iconCls:'icon-undo',
+						text:'Kembali',
+						handler:function(){
+							back();
+						}
+					}
+				]
+			});			
+		});
+
 		
 	});
-
-	 $(document).ready(function() {
-		$("#id_item").select2();
-		$("#id_sub_kategori").select2();
-		$("#purpose").select2();
-	});
-
 </script>
+
+<table id="dg_detailRO" title="Detail Request Order" data-options="
+			rownumbers:true,
+			singleSelect:true,
+			autoRowHeight:false,
+			pagination:true,
+			pageSize:30,
+			fit:true,
+			toolbar:'#toolbar_detailRO',
+			">
+	<thead>
+		<tr>
+			<th field="id_detail_ro" sortable="true" width="150" hidden="true">ID</th>
+			<th field="id_ro" sortable="true" width="130">ID Request Order</th>
+			<th field="ext_doc_no" sortable="true" width="120">External Doc No</th>
+			<th field="kode_barang" sortable="true" width="80">ID Barang</th>
+			<th field="nama_barang" sortable="true" width="120">Nama Barang</th>
+			<th field="qty" sortable="true" width="60">Qty</th>
+			<th field="full_name" sortable="true" width="130">Requestor</th>
+			<th field="date_create" sortable="true" width="130">Date Create</th>
+			<th field="note" sortable="true" width="200">Note</th>
+			<th field="action" align="center" formatter="actionDetail" width="80">Aksi</th>
+		</tr>
+	</thead>
+</table>

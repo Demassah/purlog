@@ -39,9 +39,9 @@
 		
 		actionbutton = function(value, row, index){
 			var col='';
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'DETAIL'))){?>
+			
 					col += '<a href="#" onclick="DetailData(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
-			<?}?>
+			
 
 					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
 			return col;
@@ -96,7 +96,7 @@
 	</div>
 </div>
 
-<table id="dg" title="Request Order List" data-options="
+<table id="dg" title="Request Order Approval List" data-options="
 			rownumbers:true,
 			singleSelect:true,
 			autoRowHeight:false,

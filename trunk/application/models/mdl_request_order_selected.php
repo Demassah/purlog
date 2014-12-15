@@ -18,11 +18,11 @@ class mdl_request_order_selected extends CI_Model {
 		$this->db->flush_cache();
 		$this->db->start_cache();
 			$this->db->select('*, b.full_name, c.departement_name');
-			$this->db->from('tr_ros a');
+			$this->db->from('tr_ro a');
 			$this->db->join('sys_user b', 'b.user_id = a.user_id');
 			$this->db->join('ref_departement c', 'c.departement_id = b.departement_id');
 
-			$this->db->where('a.status','1');
+			$this->db->where('a.status','4');
 
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
@@ -67,8 +67,8 @@ class mdl_request_order_selected extends CI_Model {
 		$this->db->flush_cache();
 		$this->db->start_cache();
 			$this->db->select('*, a.id_ro, c.full_name, d.departement_name, e.nama_barang');
-			$this->db->from('tr_ros_detail a');
-			$this->db->join('tr_ros b', 'b.id_ro = a.id_ro');
+			$this->db->from('tr_ro_detail a');
+			$this->db->join('tr_ro b', 'b.id_ro = a.id_ro');
 			$this->db->join('sys_user c', 'c.user_id = a.user_id');
 			$this->db->join('ref_departement d', 'd.departement_id = c.departement_id');
 			$this->db->join('ref_barang e', 'e.kode_barang = a.kode_barang');
@@ -98,7 +98,7 @@ class mdl_request_order_selected extends CI_Model {
 		$this->db->set('status', "2");
 		
 		$this->db->where('id_detail_ro', $kode);
-		$result = $this->db->update('tr_ros_detail');
+		$result = $this->db->update('tr_ro_detail');
 	   
 	   
 		//return
@@ -113,10 +113,10 @@ class mdl_request_order_selected extends CI_Model {
 		
 		$this->db->flush_cache();
 		
-		$this->db->set('status', "2");
+		$this->db->set('status', "5");
 		
 		$this->db->where('id_ro', $kode);
-		$result = $this->db->update('tr_ros');
+		$result = $this->db->update('tr_ro');
 	   
 	   
 		//return

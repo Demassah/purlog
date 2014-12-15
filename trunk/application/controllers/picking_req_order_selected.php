@@ -27,7 +27,7 @@ class picking_req_order_selected extends CI_Controller {
         }
     }
 
-
+/* ------------------------ Index --------------------------------------------- */
 
 	function detail($id){
 		$data['id_ro'] = $id;
@@ -57,7 +57,7 @@ class picking_req_order_selected extends CI_Controller {
         }
     }
 
-
+/* ------------------------ Detail --------------------------------------------- */
 
 	function available($id){
 		$data['id_ro'] = $id;
@@ -96,6 +96,7 @@ class picking_req_order_selected extends CI_Controller {
         }
     }
 
+/* ------------------------ Available (picking) --------------------------------------------- */
 
 
 	function lock($id){
@@ -117,8 +118,33 @@ class picking_req_order_selected extends CI_Controller {
 		echo $this->mdl_picking->togrid($data['row_data'], $data['row_count']);
 	}
 
+    function grid_input(){
+        $data = $this->mdl_picking->getdata_input();
+        echo $this->mdl_picking->togrid($data['row_data'], $data['row_count']);
+    }
 
+    function save(){
+        # get post data
+        foreach($_POST as $key => $value){
+            $data[$key] = $value;
+        }
+        
+        # init
+        $status = "";
+        $result = false;
+        $data['pesan_error'] = '';
+        
 
+        $result = $this->mdl_picking->update_stock($data);
+        
+        if($result){
+            echo json_encode(array('success'=>true));
+        }else{
+            echo json_encode(array('msg'=>$data['pesan_error']));
+        }
+    }
+
+/* ------------------------ Lock --------------------------------------------- */
 
 	function pending($id){
 		$data['id_ro'] = $id;
@@ -134,31 +160,6 @@ class picking_req_order_selected extends CI_Controller {
 		$this->load->view('purchase_request/purchase_request');
 	}
 
-
-    // //SCC Alocate (Pindahin ke mdl_picking@alocate)
-    // function alocateTest($id_picking){  
-    //     $stocks = $this->mdl_stock->getStock('kode_barang','002');
-    //     $request = 250;
-
-    //     foreach ($stocks->result() as $stock) {
-    //         if($stock->qty >= $request){
-    //             $newQty = $stock->qty - $request;
-    //             $this->mdl_stock->updateStock($stock->id_stock, $newQty);
-    //             $request = 0;
-    //         }elseif($stock->qty < $request){
-    //             $newQty = 0;
-    //             $this->mdl_stock->updateStock($stock->id_stock, $newQty);
-    //             $request -= $stock->qty;
-    //         }
-    //         //Buat Lognya, lihat table tr_pros_detail
-    //         //Buat fungsi ini $this->mdl_picking->insertProsDetail($data);
-    //         if($request == 0) {break;}
-    //     }
-
-    //     //Pending
-    //     if($request > 0){
-
-    //     }
-    // }
+    /* ------------------------ Pending --------------------------------------------- */
 	
 }

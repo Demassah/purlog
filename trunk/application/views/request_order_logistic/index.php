@@ -9,13 +9,41 @@
 			});
 		}
 
+		doneData = function (val){
+				if(confirm("Apakah yakin akan mengirim data ke Logistic '" + val + "'?")){
+					var response = '';
+					$.ajax({ type: "GET",
+						 url: base_url+'request_order_logistic/done/' + val,
+						 async: false,
+						 success : function(response){
+							var response = eval('('+response+')');
+							if (response.success){
+								$.messager.show({
+									title: 'Success',
+									msg: 'Data Berhasil Dikirim Ke Proses Seleksi'
+								});
+								// reload and close tab
+								$('#dg').datagrid('reload');
+							} else {
+								$.messager.show({
+									title: 'Error',
+									msg: response.msg
+								});
+							}
+						 }
+					});
+				}
+			//}
+		}
+		//end sendData 
+
 		actionbutton = function(value, row, index){
 			var col='';
 			//if (row.kd_fakultas != null) {
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'DETAIL'))){?>
+			
 					col += '<a href="#" onclick="DetailData(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
-			<?}?>
-
+			
+					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
 			return col;
 		}
 		
@@ -53,7 +81,7 @@
 	</div>
 </div>
 
-<table id="dg" title="Request Order List" data-options="
+<table id="dg" title="Request Order Logistic List" data-options="
 			rownumbers:true,
 			singleSelect:true,
 			autoRowHeight:false,
@@ -72,7 +100,7 @@
 			<th field="ext_doc_no" sortable="true" width="120">External Doc No</th>
 			<th field="ETD" sortable="true" width="100">ETD</th>
 			<th field="date_create" sortable="true" width="130">Date Create</th>
-			<th field="action" align="center" formatter="actionbutton" width="80">Aksi</th>
+			<th field="action" align="center" formatter="actionbutton" width="120">Aksi</th>
 		</tr>
 	</thead>
 </table>

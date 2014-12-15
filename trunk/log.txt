@@ -1,0 +1,6 @@
+#ketika result
+cek ke stock jika alokasi stock = 0
+tidak usah melakukan pengulangan utk pengurangan stock (di skip)
+langsung menghasilkan result true. (agar langsung refresh)
+
+# menampilkan view pendig dari v_pros_detail, dengan kondisi sisa !=0
