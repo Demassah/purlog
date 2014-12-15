@@ -27,4 +27,13 @@ class request_order_logistic extends CI_Controller {
 		echo $this->mdl_request_order_logistic->togrid($data['row_data'], $data['row_count']);
 	}
 
+	function done($id){
+		$result = $this->mdl_request_order_logistic->DoneData($id);
+		if ($result){
+			echo json_encode(array('success'=>true));
+		} else {
+			echo json_encode(array('msg'=>'Data gagal di kirim'));
+		}
+	} 
+
 }

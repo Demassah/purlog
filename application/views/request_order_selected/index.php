@@ -62,9 +62,9 @@
 		
 		actionbutton = function(value, row, index){
 			var col='';
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'DETAIL'))){?>
+			
 					col += '&nbsp;&nbsp; &nbsp;&nbsp;<a href="#" onclick="detailROS(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
-			<?}?>
+			
 
 					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
 			return col;
@@ -76,25 +76,6 @@
 			});
 		});
 
-    //# Tombol Bawah
-    $(function(){
-      var pager = $('#dg').datagrid().datagrid('getPager'); // get the pager of datagrid
-      pager.pagination({
-        buttons:[
-        <?if($this->mdl_auth->CekAkses(array('menu_id'=>10, 'policy'=>'ADD'))){?>
-          {
-            iconCls:'icon-add',
-            text:'Tambah Data',
-            handler:function(){
-              newData();
-            }
-          }
-          <?}?> 
-        ]
-      });     
-    });
-		
-		
 	});
 </script>
 <div id="toolbar" style="padding:5px;height:auto">

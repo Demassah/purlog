@@ -88,6 +88,24 @@ class mdl_request_order_logistic extends CI_Model {
 		}
 		return json_encode($response);
 	}
+
+	function DoneData($kode){
+		
+		$this->db->flush_cache();
+		
+		$this->db->set('status', "4");
+		
+		$this->db->where('id_ro', $kode);
+		$result = $this->db->update('tr_ro');
+	   
+	   
+		//return
+		if($result) {
+				return TRUE;
+		}else {
+				return FALSE;
+		}
+	}
 	
 }
 

@@ -37,14 +37,7 @@
         }
       //}
     }
-    //end alocateData 
-				
-		actiondetail = function(value, row, index){
-			var col='';
-					col += '<a href="#" onclick="alocateData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Alocate</a>';			
-			return col;
-		}
-		
+    //end alocateData 		
 
 		$(function(){ // init
 			$('#dg_ros').datagrid({url:"request_order_selected/grid_detail/<?=$id_ro?>"});	
@@ -84,12 +77,12 @@
       <th field="id_detail_ro" sortable="true" width="150" hidden="true">ID</th>
       <th field="id_ro" sortable="true" width="130">ID Request Order</th>
       <th field="ext_doc_no" sortable="true" width="120">External Doc No</th>
+      <th field="kode_barang" sortable="true" width="80">ID Barang</th>
       <th field="nama_barang" sortable="true" width="120">Nama Barang</th>
-      <th field="qty" sortable="true" width="120">Qty</th>
+      <th field="qty" sortable="true" width="60">Qty</th>
       <th field="full_name" sortable="true" width="130">Requestor</th>
       <th field="date_create" sortable="true" width="130">Date Create</th>
       <th field="note" sortable="true" width="200">Note</th>
-      <th field="action" align="center" formatter="actiondetail" width="80">Aksi</th>
     </tr>
   </thead>
 </table>

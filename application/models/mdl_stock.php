@@ -19,6 +19,7 @@ class mdl_stock extends CI_Model {
         }
 
         $this->db->where($field, $id);
+        $this->db->where ('qty !=', '0');
         return $this->db->get($this->tbl);
     }
 
@@ -38,7 +39,4 @@ class mdl_stock extends CI_Model {
         return false;
     }
 
-    public function addTrans($type)
-    {
-    }
 }

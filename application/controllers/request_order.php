@@ -70,7 +70,7 @@ class request_order extends CI_Controller {
 
 	function detail($id){
 		$data['id_ro'] = $id;
-		$this->load->view('request_order/list_detail', $data);
+		$this->load->view('request_order/detail', $data);
 	}
 
 	function grid_detail($id){

@@ -149,6 +149,79 @@
       //}
     }
     //end lockAll 
+    
+    // editing cell
+    $.extend($.fn.datagrid.methods, {
+      editCell: function(jq,param){
+        return jq.each(function(){
+          var opts = $(this).datagrid('options');
+          var fields = $(this).datagrid('getColumnFields',true).concat($(this).datagrid('getColumnFields'));
+          for(var i=0; i<fields.length; i++){
+            var col = $(this).datagrid('getColumnOption', fields[i]);
+            col.editor1 = col.editor;
+            if (fields[i] != param.field){
+              col.editor = null;
+            }
+          }
+          $(this).datagrid('beginEdit', param.index);
+          for(var i=0; i<fields.length; i++){
+            var col = $(this).datagrid('getColumnOption', fields[i]);
+            col.editor = col.editor1;
+          }
+        });
+      }
+    });
+
+    var editIndex = undefined;
+    endEditing = function(){
+      if (editIndex == undefined){return true}
+      if ($('#dg_picking').datagrid('validateRow', editIndex)){
+        $('#dg_picking').datagrid('endEdit', editIndex);
+        editIndex = undefined;
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    onClickCells = function(index, field){
+      if (endEditing()){
+        $('#dg_picking').datagrid('selectRow', index)
+            .datagrid('editCell', {index:index,field:field});
+        editIndex = index;
+      }
+    }
+
+    saveData = function(){
+      // save jika cell masih dlm keadaan edit
+      $('#dg_picking').datagrid('endEdit', editIndex);
+      //alert(JSON.stringify($('#dg-nilai').datagrid('getData')));
+      $.ajax({
+        url: base_url+"picking_req_order_selected/save",
+        method: 'POST',
+        data: {
+                data_stock : $('#dg_picking').datagrid('getData')
+              },
+        success : function(response, textStatus){
+        //alert(response);
+        var response = eval('('+response+')');
+        if(response.success){
+          $.messager.show({
+            title: 'Success',
+            msg: 'Data Berhasil Disimpan'
+          });
+          $('#dg_picking').dialog('close');
+          //$('#dg').datagrid('reload');
+        }else{
+          $.messager.show({
+            title: 'Error',
+            msg: response.msg
+          });
+        }
+        }
+      });
+    }
+    
 		
 		actionAvailable = function(value, row, index){
 			var col='';
@@ -165,6 +238,10 @@
 		$(function(){ // init
 			$('#dg_picking').datagrid({url:"picking_req_order_selected/grid_available/<?=$id_ro?>"});	
 		});	
+
+    text = function(value, row, index){
+      return '<input name="menu_name" size="11" value=" ">';
+    }
 
 		//# Tombol Bawah
     $(function(){
@@ -195,7 +272,14 @@
             handler:function(){
               c();
             }
-          }              
+          },
+          {
+            iconCls:'icon-ok',
+            text:'Save',
+            handler:function(){
+              saveData();
+            }
+          }               
         ]
       });     
     });
@@ -226,15 +310,16 @@
 		pageSize:30,
 		fit:true,
 		toolbar:'#toolbar_available',
+    onClickCell: onClickCells,
 		">		
 	 <thead>
     <tr>
-      <th field="id_detail_ros" sortable="true" width="150" hidden="true">ID</th>
-      <th field="id_ro" sortable="true" width="130">ID ROS</th>
+      <th field="id_detail_pros" sortable="true" width="150" hidden="true">ID</th>
+      <th field="id_ro" sortable="true" width="130">ID RO</th>
       <th field="kode_barang" sortable="true" width="120">ID Barang</th>
       <th field="nama_barang" sortable="true" width="130">Nama Barang</th>
-      <th field="qty" sortable="true" width="120">Qty</th>
-      <th field="note" sortable="true" width="130">Deskripsi</th>
+      <th data-options="field:'qty',width:'100'" editor="text">Qty</th>    
+      <th field="id_lokasi" sortable="true" width="100">Lokasi</th>
       <th field="action" align="center" formatter="actionAvailable" width="155">Aksi</th>
     </tr>
   </thead>
