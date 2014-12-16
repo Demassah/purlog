@@ -157,7 +157,7 @@
 	<a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="addRow('tbl')">Tambah Barang</a>
 	<a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="deleteRow('tbl')">Hapus Barang</a>
 	&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveData()">Simpan</a>
+	<!-- <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveData()">Simpan</a> -->
 </div>
 </div>
 

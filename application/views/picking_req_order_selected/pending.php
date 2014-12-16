@@ -26,17 +26,17 @@
       });
     }
 
-		lock = function (val){
+		// lock = function (val){
 
-      if(val==null){
-          var row = $('#dg_pending').datagrid('getData');              
-          var id = id_ro;
-          val = id;
-      }
-      $('#konten').panel({
-        href: base_url+'picking_req_order_selected/lock/' + val,
-      });
-		}
+  //     if(val==null){
+  //         var row = $('#dg_pending').datagrid('getData');              
+  //         var id = id_ro;
+  //         val = id;
+  //     }
+  //     $('#konten').panel({
+  //       href: base_url+'picking_req_order_selected/lock/' + val,
+  //     });
+		// }
 
 		purchase = function (){
 			$('#konten').panel({
@@ -57,7 +57,7 @@
 			<tr>
 					<td>&nbsp;&nbsp;<a href="#" onclick="detail()" class="easyui-linkbutton" iconCls="icon-detail">Detail</a>
 							&nbsp;&nbsp;<a href="#" onclick="available()" class="easyui-linkbutton" iconCls="icon-ok">Picking</a>
-							&nbsp;&nbsp;<a href="#" onclick="lock()" class="easyui-linkbutton" iconCls="icon-login">Lock</a>
+							<!-- &nbsp;&nbsp;<a href="#" onclick="lock()" class="easyui-linkbutton" iconCls="icon-login">Lock</a> -->
 							&nbsp;&nbsp;<a href="#" onclick="purchase()" class="easyui-linkbutton" iconCls="icon-purchase-form">Purchase Request</a>
 					</td> 
 			</tr>

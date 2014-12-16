@@ -159,9 +159,32 @@ class mdl_prosedur extends CI_Model {
 		
 		foreach($res->result() as $r){
 			if(trim($r->id_ro) == trim($value)){
-				$out .= '<option value="'.$r->id_ro.'" selected="selected">'.$r->date_create.'</option>';
+				$out .= '<option value="'.$r->id_ro.'" selected="selected">'.$r->id_ro.' </option>';
 			}else{
-				$out .= '<option value="'.$r->id_ro.'">'.$r->date_create.'</option>';
+				$out .= '<option value="'.$r->id_ro.'">'.$r->id_ro.'</option>';
+			}
+		}
+		
+		return $out;
+	}
+
+	function OptionRO_Purchase($d=""){
+		$value = isset($d['value'])?$d['value']:'';
+		$out = '';
+		
+		$this->db->flush_cache();
+		$this->db->from('tr_pr_detail');
+		$this->db->where('id_pr','0');
+		$this->db->group_by('id_ro');
+		$this->db->order_by('id_ro');
+				
+		$res = $this->db->get();
+		
+		foreach($res->result() as $r){
+			if(trim($r->id_ro) == trim($value)){
+				$out .= '<option value="'.$r->id_ro.'" selected="selected">'.$r->id_ro.' </option>';
+			}else{
+				$out .= '<option value="'.$r->id_ro.'">'.$r->id_ro.'</option>';
 			}
 		}
 		
