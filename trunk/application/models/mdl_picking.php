@@ -438,15 +438,14 @@ class mdl_picking extends CI_Model {
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('*, a.id_ro, a.qty, a.note, c.full_name, d.departement_name, a.kode_barang, e.nama_barang');
-			$this->db->from('tr_ro_detail a');
-			$this->db->join('tr_ro b', 'b.id_ro = a.id_ro');
-			$this->db->join('sys_user c', 'c.user_id = a.user_id');
-			$this->db->join('ref_departement d', 'd.departement_id = c.departement_id');
-			$this->db->join('ref_barang e', 'e.kode_barang = a.kode_barang');
+			$this->db->select('a.id_detail_ro, a.id_ro, a.kode_barang, b.nama_barang, a.sisa');
+			$this->db->from('v_pros_detail a');
+			//$this->db->join('tr_ro b', 'b.id_ro = a.id_ro');
+			//$this->db->join('tr_ro_detail c', 'c.id_detail_ro = a.id_detail_ro');
+			$this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang');
 
 			$this->db->where('a.id_ro', $id_ro);
-			$this->db->where('a.status', '7');
+			$this->db->where('a.sisa !=', '0');
 			//$this->db->where('a.status_delete', '0');
 
 			$this->db->order_by($sort, $order);

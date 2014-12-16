@@ -15,17 +15,17 @@
       });
     }
 
-		lock = function (val){
+		// lock = function (val){
 
-      if(val==null){
-          var row = $('#dg_detail').datagrid('getData');              
-          var id = id_ro;
-          val = id;
-      }
-      $('#konten').panel({
-        href: base_url+'picking_req_order_selected/lock/' + val,
-      });
-		}
+  //     if(val==null){
+  //         var row = $('#dg_detail').datagrid('getData');              
+  //         var id = id_ro;
+  //         val = id;
+  //     }
+  //     $('#konten').panel({
+  //       href: base_url+'picking_req_order_selected/lock/' + val,
+  //     });
+		// }
 
 		pending = function (val){
        if(val==null){
@@ -150,7 +150,7 @@
 		<table>
 			<tr>
 					<td>&nbsp;&nbsp;<a href="#" onclick="available()" class="easyui-linkbutton" iconCls="icon-ok">Picking</a>
-							&nbsp;&nbsp;<a href="#" onclick="lock()" class="easyui-linkbutton" iconCls="icon-login">Lock</a>
+							<!-- &nbsp;&nbsp;<a href="#" onclick="lock()" class="easyui-linkbutton" iconCls="icon-login">Lock</a> -->
 							&nbsp;&nbsp;<a href="#" onclick="pending()" class="easyui-linkbutton" iconCls="icon-redo">Pending</a>
 							&nbsp;&nbsp;<a href="#" onclick="purchase()" class="easyui-linkbutton" iconCls="icon-purchase-form">Purchase Request</a>
 					</td> 

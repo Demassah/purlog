@@ -2,66 +2,12 @@
   var url;
   $(document).ready(function(){
 
-      add_pr = function (){
-      $('#dialog').dialog({
-        title: 'Add Request Order',
-        width: $(window).width() * 0.8,
-        height: $(window).height() * 0.99,
-        closed: true,
-        cache: false,
-        href: base_url+'purchase_request/add_pr',
-        modal: true
+    add_pr = function (val){
+      $('#konten').panel({
+        href: base_url+'purchase_request/add_pr/',
       });
-       
-      $('#dialog').dialog('open');
-      url = base_url+'purchase_requst/save/add_pr';
     }
     // end newData
-
-    // detail = function (val){      
-    //   if(val==null){
-    //       var row = $('#dg').datagrid('getData');              
-    //       var id = row.rows[0].id_ro;
-    //       val = id;
-    //   }
-    //   $('#konten').panel({
-    //     href: base_url+'picking_req_order_selected/detail/' + val,
-    //   });
-    // }
-
-    // available = function (val){      
-    //   if(val==null){
-    //       var row = $('#dg').datagrid('getData');              
-    //       var id = row.rows[0].id_ro;
-    //       val = id;
-    //   }
-    //   $('#konten').panel({
-    //     href: base_url+'picking_req_order_selected/available/' + val,
-    //   });
-    // }
-
-    // lock = function (val){
-
-    //   if(val==null){
-    //       var row = $('#dg').datagrid('getData');              
-    //       var id = row.rows[0].id_ro;
-    //       val = id;
-    //   }
-    //   $('#konten').panel({
-    //     href: base_url+'picking_req_order_selected/lock/' + val,
-    //   });
-    // }
-
-    // pending = function (val){
-    //    if(val==null){
-    //       var row = $('#dg').datagrid('getData');              
-    //       var id = row.rows[0].id_ro;
-    //       val = id;
-    //   }
-    //   $('#konten').panel({
-    //     href: base_url+'picking_req_order_selected/pending/' + val,
-    //   });
-    // }
 
     detail_pr = function (val){
       $('#konten').panel({
@@ -71,8 +17,9 @@
   
     actionPurchaseRequest = function(value, row, index){
       var col='';
-          col += '<a href="#" onclick="detail_pr(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';     
-          col += '&nbsp;&nbsp; | &nbsp;&nbsp;<a href="#" onclick="detail_pr(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">QRS</a>';     
+          col += '<a href="#" onclick="detail_pr(\''+row.id_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';     
+          
+          col += '&nbsp;&nbsp; | &nbsp;&nbsp;<a href="#" onclick="detail_pr(\''+row.id_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">QRS</a>';     
       return col;
     }
     
@@ -125,7 +72,7 @@
   <thead>
     <tr>
       <th field="id_pr" sortable="true" width="80" >ID PR</th>
-      <th field="id_ro" sortable="true" width="80" >ID RO</th>
+      <th field="id_ro" sortable="true" width="80">ID RO</th>     
       <th field="full_name" sortable="true" width="130">Requestor</th>
       <th field="departement_name" sortable="true" width="130">Departement</th>
       <th field="purpose" sortable="true" width="120">Purpose</th>
