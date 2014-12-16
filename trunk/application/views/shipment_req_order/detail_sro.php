@@ -54,15 +54,15 @@
 			$('#dialog').dialog({
 				title: 'Tambah SRO',
 				width: 880,
-				height: 390,
+				height: 290,
 				closed: true,
 				cache: false,
-				href:base_url+'shipment_req_order/add_detail/'+val+'/<?php echo $id_ro;?>',
+				href:base_url+'shipment_req_order/add_detail/'+val+'/<?php echo $id_sro;?>',
 				modal: true
 			});
 
 			$('#dialog').dialog('open');
-			url = base_url+'shipment_req_order/save/add';
+			url = base_url+'shipment_req_order/save_detail/add';
 		}
 		//end newData
 		saveData = function(){
@@ -73,7 +73,7 @@
 					return $(this).form('validate');
 				},
 				success: function(result){
-					alert(result);
+					//alert(result);
 					var result = eval('('+result+')');
 					if (result.success){
 						$('#dialog').dialog('close');		// close the dialog
@@ -113,7 +113,7 @@
 		}
 		
 		$(function(){ // init
-			$('#dg').datagrid({url:"shipment_req_order/detail_grid/<?=$id_ro?>"});	
+			$('#dg').datagrid({url:"shipment_req_order/detail_grid/<?=$id_ro?>/<?=$id_sro?>"});	
 		});	
 
 
