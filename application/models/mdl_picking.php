@@ -92,7 +92,7 @@ class mdl_picking extends CI_Model {
 			$this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang');
 
 			$this->db->where('a.id_ro', $id_ro);
-			$this->db->where('a.sisa !=', '0');
+			//$this->db->where('a.sisa !=', '0');
 			//$this->db->where('a.status_delete', '0');
 
 			$this->db->order_by($sort, $order);
@@ -111,7 +111,7 @@ class mdl_picking extends CI_Model {
 	}
 
 	function alocate($kode){
-		
+		$result = false;
 		$this->db->flush_cache();
 		
 		$CI =& get_instance();
@@ -158,18 +158,6 @@ class mdl_picking extends CI_Model {
             
             if($request == 0) {break;}
         }
-
-        //Pending
-        //if($request > 0){
-			//$alocQty = $ros_detail->qty - $request;
-        	//$this->addPending($ros_arr, $request);	
-	    	//$this->db->set('qty', $alocQty);
-        //}
-    	//$this->db->set('status', '2');
-    	//$this->db->where('id_detail_ro', $ros_detail->id_detail_ro);
-		
-		//$result = $this->db->update('tr_ro_detail');
-		//END #PickingAlocate
 
 		// //return
 		 if($result) {
@@ -435,7 +423,7 @@ class mdl_picking extends CI_Model {
 		$order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
 		$offset = ($page-1)*$limit;
 		
-		# create query
+			# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
 			$this->db->select('a.id_detail_ro, a.id_ro, a.kode_barang, b.nama_barang, a.sisa');
@@ -463,26 +451,7 @@ class mdl_picking extends CI_Model {
 		return $tmp;
 	}
 
-	// //#addPending BY SCC
-	// function addPending($data, $qty){
-		
-	// 	$this->db->flush_cache();
-		
-	// 	$data['id_detail_ro'] = null;
-	// 	$data['status'] = '7';
-	// 	$data['qty'] = $qty;
-
-	// 	$result = $this->db->insert('tr_ro_detail',$data);
-	   
-	// 	if($result) {
-	// 		return TRUE;
-	// 	}else{
-	// 		return FALSE;
-	// 	}
-	// }
-	// //END #addPending
-
-	//#addProsDetail BY SCC
+	//#addProsDetail 
 	function addProsDetail($data){
 		
 		$this->db->flush_cache();

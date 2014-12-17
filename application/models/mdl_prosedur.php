@@ -191,6 +191,30 @@ class mdl_prosedur extends CI_Model {
 		return $out;
 	}
 
+	function OptionRO_DetailPR($d=""){
+		$value = isset($d['value'])?$d['value']:'';
+		$out = '';
+		
+		$this->db->flush_cache();
+		$this->db->from('tr_pr_detail');
+		$this->db->where('id_pr','0');
+		$this->db->where('status','1');
+		$this->db->group_by('id_ro');
+		$this->db->order_by('id_ro');
+				
+		$res = $this->db->get();
+		
+		foreach($res->result() as $r){
+			if(trim($r->id_ro) == trim($value)){
+				$out .= '<option value="'.$r->id_ro.'" selected="selected">'.$r->id_ro.' </option>';
+			}else{
+				$out .= '<option value="'.$r->id_ro.'">'.$r->id_ro.'</option>';
+			}
+		}
+		
+		return $out;
+	}
+
 	function OptionBarang($d=""){
 		$value = isset($d['value'])?$d['value']:'';
 		$out = '';
@@ -203,9 +227,9 @@ class mdl_prosedur extends CI_Model {
 		
 		foreach($res->result() as $r){
 			if(trim($r->id) == trim($value)){
-				$out .= '<option value="'.$r->id.'" selected="selected">'.$r->nama_barang.'</option>';
+				$out .= '<option value="'.$r->id.'" selected="selected">'.$r->kode_barang.'.'.$r->nama_barang.'</option>';
 			}else{
-				$out .= '<option value="'.$r->id.'">'.$r->nama_barang.'</option>';
+				$out .= '<option value="'.$r->id.'">'.$r->kode_barang.'.'.$r->nama_barang.'</option>';
 			}
 		}
 		

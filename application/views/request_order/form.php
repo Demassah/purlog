@@ -42,7 +42,7 @@
 		<label style="width:140px">Date Create </label>: 
 		<input class="easyui-datebox" name="date_create" size="13" value="<?=$date_create?>" id="date_create" data-options="formatter:DateFormatter, parser:DateParser">
 	</div>
-	<div class="fitem" >
+	<div class="fitem" hidden="true">
 		<label style="width:140px">Status request</label>: 
 		<select class="easyui-combobox" name="status" style="width:170px;">
 			<!--<option value="">- Select Status -</option>-->

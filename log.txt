@@ -1,16 +1,17 @@
 #Tambah RO Detail Error
 
-# Detail Picking
+(FIX)# Detail Picking
 ketika sudah di alocate result cek ke stock jika alokasi stock = 0
 tidak usah melakukan pengulangan utk pengurangan stock (di skip)
 langsung menghasilkan result true. (agar langsung refresh)
 
-# Available / picking, ketika save ada error var opts=$ ...
-# Available / picking ketika di realocate belum ada pengecekan jumlahnya tidak boleh lebih dari qty di grid & tidak boleh -1 (0 dan -dari jumlah maksimal qty)
+(FIXED)# Available / picking, ketika save ada error var opts=$ ...   
+(PENDING)# Available / picking ketika di realocate belum ada pengecekan jumlahnya tidak boleh lebih dari qty di grid & tidak boleh -1 (0 dan -dari jumlah maksimal qty) 
 
 
-#PR Tambah PR not editable ? 
-#Combobox saat save PR supaya bisa dipilih beberapa / semua yang akan di simpan ke DB
-#ketika tambah detail PR, status di detail pr yang asalnya 1 berubah menjadi 2  (ID PR = 0)
-#ID PR berubah terisi sesuai pr yg dipilih (indexnya terbawa seperti PROS)
-#ketika pr sudah selesai seperti done pada ROA
+(FIXED) #PR Tambah PR not editable ? 
+(FIXED) #Combobox saat save PR supaya bisa dipilih beberapa / semua yang akan di simpan ke DB
+
+(FIXED)#ketika tambah detail PR, status di detail pr yang asalnya 1 berubah menjadi 2  (ID PR = 0)
+(FIXED)#ID Detail PR berubah terisi sesuai pr yg dipilih (indexnya terbawa seperti PROS)
+(FIXED)#ketika pr sudah selesai seperti done pada ROA

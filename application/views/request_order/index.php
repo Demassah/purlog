@@ -6,7 +6,7 @@
 			$('#dialog').dialog({
 				title: 'Tambah Request Order',
 				width: 380,
-				height: 290,
+				height: 270,
 				closed: true,
 				cache: false,
 				href: base_url+'request_order/add',
@@ -32,7 +32,7 @@
 					return $(this).form('validate');
 				},
 				success: function(result){
-					alert(result);
+					//alert(result);
 					var result = eval('('+result+')');
 					if (result.success){
 						$('#dialog').dialog('close');		// close the dialog

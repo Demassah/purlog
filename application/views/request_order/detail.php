@@ -36,7 +36,7 @@
 					var result = eval('('+result+')');
 					if (result.success){
 						$('#dialog').dialog('close');		// close the dialog
-						$('#dg_detailRO').datagrid('reload');		// reload the user data
+						$('#dg').datagrid('reload');		// reload the user data
 					} else {
 						$.messager.show({
 							title: 'Error',
@@ -84,14 +84,14 @@
 
 	
 		$(function(){
-			$('#dg_detailRO').datagrid({
+			$('#dg').datagrid({
 				url:base_url + "request_order/grid_detail/<?=$id_ro?>"
 			});
 		});
 
 		//# Tombol Bawah
 		$(function(){
-			var pager = $('#dg_detailRO').datagrid().datagrid('getPager');	// get the pager of datagrid
+			var pager = $('#dg').datagrid().datagrid('getPager');	// get the pager of datagrid
 			pager.pagination({
 				buttons:[
 					{
@@ -116,7 +116,7 @@
 	});
 </script>
 
-<table id="dg_detailRO" title="Detail Request Order" data-options="
+<table id="dg" title="Detail Request Order" data-options="
 			rownumbers:true,
 			singleSelect:true,
 			autoRowHeight:false,

@@ -15,18 +15,6 @@
 			});
 		}
 
-		// lock = function (val){
-
-  //     if(val==null){
-  //         var row = $('#dg_picking').datagrid('getData');              
-  //         var id = id_ro;
-  //         val = id;
-  //     }
-  //     $('#konten').panel({
-  //       href: base_url+'picking_req_order_selected/lock/' + val,
-  //     });
-  //   }
-
     pending = function (val){
        if(val==null){
           var row = $('#dg_picking').datagrid('getData');              
@@ -64,35 +52,7 @@
         }
       //}
     }
-    //end sendData 
-
-    // lockSRO = function (val){
-    //     if(confirm("Apakah yakin akan mengunci data '" + val + "'?")){
-    //       var response = '';
-    //       $.ajax({ type: "GET",
-    //          url: base_url+'picking_req_order_selected/lockSRO/' + val,
-    //          async: false,
-    //          success : function(response){
-    //           var response = eval('('+response+')');
-    //           if (response.success){
-    //             $.messager.show({
-    //               title: 'Success',
-    //               msg: 'Data Berhasil Dikunci'
-    //             });
-    //             // reload and close tab
-    //             $('#dg_picking').datagrid('reload');
-    //           } else {
-    //             $.messager.show({
-    //               title: 'Error',
-    //               msg: response.msg
-    //             });
-    //           }
-    //          }
-    //       });
-    //     }
-    //   //}
-    // }
-    // //end sendData 
+    //end sendData
 
     realocateAll = function (val){
         if(confirm("Apakah yakin akan merelokasi semua data ke detail picking '" + val + "'?")){
@@ -121,34 +81,6 @@
       //}
     }
     //end sendData 
-    
-    // lockAll = function (val){
-    //     if(confirm("Apakah yakin akan mengunci semua data ke lock '" + val + "'?")){
-    //       var response = '';
-    //       $.ajax({ type: "GET",
-    //          url: base_url+'picking_req_order_selected/lockAll/' + val,
-    //          async: false,
-    //          success : function(response){
-    //           var response = eval('('+response+')');
-    //           if (response.success){
-    //             $.messager.show({
-    //               title: 'Success',
-    //               msg: 'Data Berhasil Dikunci'
-    //             });
-    //             // reload and close tab
-    //             $('#dg_picking').datagrid('reload');
-    //           } else {
-    //             $.messager.show({
-    //               title: 'Error',
-    //               msg: response.msg
-    //             });
-    //           }
-    //          }
-    //       });
-    //     }
-    //   //}
-    // }
-    // //end lockAll 
     
     // editing cell
     $.extend($.fn.datagrid.methods, {
@@ -210,8 +142,6 @@
             title: 'Success',
             msg: 'Data Berhasil Disimpan'
           });
-          $('#dg_picking').dialog('close');
-          //$('#dg').datagrid('reload');
         }else{
           $.messager.show({
             title: 'Error',
@@ -222,14 +152,6 @@
       });
     }
     
-		
-		// actionAvailable = function(value, row, index){
-		// 	var col='';
-		// 			col += '<a href="#" onclick="reAlocate(\''+row.id_detail_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Re-Alocate</a>';		
-
-  //         col += ' <a href="#" onclick="lockSRO(\''+row.id_detail_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Lock SRO</a>';   
-		// 	return col;
-		// }
 
 		Checkbox = function(value, row, index){
 			return '<input style="margin-top:2px;" type="checkbox" name="checkbox" id="checkbox" onclick="update_value('+index+', this.checked, \''+row.id_jadwal+'\')" '+(row.chk==true?'checked="checked"':'')+'/>';
@@ -283,7 +205,6 @@
 		</table>
 	</div>
 </div>
-
 <table id="dg_picking" title="Available Picking Request Order Selected" data-options="
 		rownumbers:true,
 		singleSelect:true,
@@ -299,15 +220,14 @@
     return value + ' - ' + rows.length + ' Lokasi';  }
 		">		
 	 <thead>
-    <tr>
+    <tr>      
       <th field="id_detail_pros" sortable="true" width="150" hidden="true">ID</th>
       <th field="id_ro" sortable="true" width="100">ID RO</th>
       <th field="id_stock" sortable="true" width="100">ID Stock</th>
       <th field="kode_barang" sortable="true" width="120">ID Barang</th>
       <th field="nama_barang" sortable="true" width="130">Nama Barang</th>
       <th data-options="field:'qty',width:'100'" editor="text">Qty</th>    
-      <th field="id_lokasi" sortable="true" width="100">Lokasi</th>
-      <!-- <th field="action" align="center" formatter="actionAvailable" width="80">Aksi</th> -->
+      <th field="id_lokasi" sortable="true" width="100">Lokasi</th>      
     </tr>
   </thead>
 </table>

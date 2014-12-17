@@ -8,7 +8,9 @@
 			<td>: 
 					<select class="" name=" " style="width:200px;">
 						<option>Choose ROS</option>
-						           
+						<?php foreach($list as $l){ 
+							echo "<option value='".$l->id_ro."'>".$l->id_ro."</option>";
+						}?>            
 				</select>	
 			</td>
 			<td>&nbsp;</td>
@@ -33,7 +35,7 @@
 			<th field="user_id" sortable="true" width="150" hidden="true">ID</th>
 			<th field="id_sro" sortable="true" width="100">ID SRO</th>
 			<th field="id_ro" sortable="true" width="100">ID RO</th>
-			<th field="full_name" sortable="true" width="200">Requestor</th>
+			<th field="full_name" sortable="true" width="100">Requestor</th>
 			<th field="date_create" sortable="true" width="120">Date Create</th>
 			<th field="action" align="center" formatter="actionbutton" width="140">Aksi</th>
 		</tr>
@@ -43,8 +45,8 @@
 <script>
 	var url;
 	$(document).ready(function(){
-
-		addData = function (){
+	
+		newData = function (){
 			$('#dialog').dialog({
 				title: 'Tambah SRO',
 				width: 380,
@@ -62,60 +64,9 @@
 
 		detailData = function (val){
 			$('#konten').panel({
-				href:base_url+'shipment_req_order/detail/'+val
+				href:base_url+'shipment_req_order/detail/'+ val
 			});
 		}
-
-		saveData = function(){
-			
-			$('#form1').form('submit',{
-				url: url,
-				onSubmit: function(){
-					return $(this).form('validate');
-				},
-				success: function(result){
-					alert(result);
-					var result = eval('('+result+')');
-					if (result.success){
-						$('#dialog').dialog('close');		// close the dialog
-						$('#dg').datagrid('reload');		// reload the user data
-					} else {
-						$.messager.show({
-							title: 'Error',
-							msg: result.msg
-						});
-					}
-				}
-			});
-		}
-
-		doneData = function (val){
-			if(confirm("Apakah yakin akan mengirim data ke Delivery Order '" + val + "'?")){
-				var response = '';
-				$.ajax({ type: "GET",
-					 url: base_url+'shipment_req_order/doneData/' + val,
-					 async: false,
-					 success : function(response){
-						var response = eval('('+response+')');
-						if (response.success){
-							$.messager.show({
-								title: 'Success',
-								msg: 'Data Berhasil Dikirim'
-							});
-							// reload and close tab
-							$('#dg').datagrid('reload');
-						} else {
-							$.messager.show({
-								title: 'Error',
-								msg: response.msg
-							});
-						}
-					 }
-				});
-			}
-			//}
-		}
-		//end sendData 
 		
 		actionbutton = function(value, row, index){
 			var col='';
@@ -124,7 +75,7 @@
 					col += '<a href="#" onclick="detailData(\''+row.id_ro+'/'+row.id_sro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
 			<?}?>
 			<?if($this->mdl_auth->CekAkses(array('menu_id'=>13, 'policy'=>'ACCESS'))){?>
-					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id_sro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
+					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
 			<?}?>
 			return col;
 		}
@@ -150,7 +101,7 @@
 						iconCls:'icon-add',
 						text:'Tambah Data',
 						handler:function(){
-							addData();
+							newData();
 						}
 					}
 				<?}?>	
