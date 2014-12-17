@@ -1,6 +1,12 @@
 <script>
   var url;
   $(document).ready(function(){
+
+    kembali = function (){
+      $('#konten').panel({      
+        href:base_url+'purchase_request/index/',
+      });
+    }
     
     loaddata = function(){
       $.ajax({ 
@@ -39,6 +45,7 @@
               title: 'Error',
               msg: result.msg
             });
+
           }
         }
       });
@@ -89,13 +96,16 @@
         <th width="" bgcolor="#F4F4F4">Ext Document No</th>
         <th width="" bgcolor="#F4F4F4">ETD</th>
         <th width="" bgcolor="#F4F4F4">Date Create</th>
-        <th width="200px" align="center" bgcolor="#F4F4F4">Ditambah</th>
+        <th width="200px" align="center" bgcolor="#F4F4F4">Aksi</th>
       </tr>
     </thead>
     <tbody id="tbodypurchase">
       
     </tbody>
   </table>
-  <br>
-  <div align="right"><a href="#" class="easyui-linkbutton" onclick="saveData();" iconCls="icon-save" plain="false">Simpan</a>&nbsp;&nbsp;&nbsp;</div>
+  <br>  
+  <div align="right">
+      <a href="#" class="easyui-linkbutton" onclick="kembali();" iconCls="icon-undo" plain="false">Kembali</a>
+      <a href="#" class="easyui-linkbutton" onclick="saveData();" iconCls="icon-save" plain="false">Simpan</a>&nbsp;&nbsp;&nbsp;
+  </div>
 </form>

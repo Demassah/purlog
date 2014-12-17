@@ -8,7 +8,9 @@ class picking_req_order_selected extends CI_Controller {
 		$this->load->model('mdl_stock');
 		// $this->output->enable_profiler(TRUE);
 	}
-	
+
+/* ------------------------ Index --------------------------------------------- */
+
 	function index(){
 		$this->load->view('picking_req_order_selected/picking');
 	}
@@ -27,7 +29,7 @@ class picking_req_order_selected extends CI_Controller {
         }
     }
 
-/* ------------------------ Index --------------------------------------------- */
+/* ------------------------ Detail --------------------------------------------- */
 
 	function detail($id){
 		$data['id_ro'] = $id;
@@ -44,7 +46,7 @@ class picking_req_order_selected extends CI_Controller {
         if ($result) {
             echo json_encode(array('success' => true));
         } else {
-            echo json_encode(array('msg' => 'Data gagal dialokasi'));
+            echo json_encode(array('msg' => 'Data gagal dialokasi, stock barang belum tersedia'));
         }
     }
 
@@ -53,11 +55,11 @@ class picking_req_order_selected extends CI_Controller {
         if ($result) {
             echo json_encode(array('success' => true));
         } else {
-            echo json_encode(array('msg' => 'Data gagal dialokasi'));
+            echo json_encode(array('msg' => 'Data gagal dialokasi, stock barang belum tersedia'));
         }
     }
 
-/* ------------------------ Detail --------------------------------------------- */
+/* ------------------------ Available (picking) --------------------------------------------- */
 
 	function available($id){
 		$data['id_ro'] = $id;
@@ -96,55 +98,7 @@ class picking_req_order_selected extends CI_Controller {
         }
     }
 
-/* ------------------------ Available (picking) --------------------------------------------- */
-
-
-	function lock($id){
-		$data['id_ro'] = $id;
-		$this->load->view('picking_req_order_selected/lock', $data);
-	}
-
-	function lockAll($kode) {
-        $result = $this->mdl_picking->lockAll($kode);
-        if ($result) {
-            echo json_encode(array('success' => true));
-        } else {
-            echo json_encode(array('msg' => 'Data gagal dikunci'));
-        }
-    }
-
-	function grid_lock($id){
-		$data = $this->mdl_picking->getdata_lock($id);
-		echo $this->mdl_picking->togrid($data['row_data'], $data['row_count']);
-	}
-
-    function grid_input(){
-        $data = $this->mdl_picking->getdata_input();
-        echo $this->mdl_picking->togrid($data['row_data'], $data['row_count']);
-    }
-
-    function save(){
-        # get post data
-        foreach($_POST as $key => $value){
-            $data[$key] = $value;
-        }
-        
-        # init
-        $status = "";
-        $result = false;
-        $data['pesan_error'] = '';
-        
-
-        $result = $this->mdl_picking->update_stock($data);
-        
-        if($result){
-            echo json_encode(array('success'=>true));
-        }else{
-            echo json_encode(array('msg'=>$data['pesan_error']));
-        }
-    }
-
-/* ------------------------ Lock --------------------------------------------- */
+/* ------------------------ Pending --------------------------------------------- */
 
 	function pending($id){
 		$data['id_ro'] = $id;
@@ -160,6 +114,6 @@ class picking_req_order_selected extends CI_Controller {
 		$this->load->view('purchase_request/purchase_request');
 	}
 
-    /* ------------------------ Pending --------------------------------------------- */
+   
 	
 }

@@ -11,16 +11,16 @@
           val = id;
         }
 
-      $('#dialog').dialog({
+      $('#dialog_kosong').dialog({
         title: 'Tambah Detail Purchase Request',
-        width: 720,
+        width: $(window).width() * 0.88,
         height: $(window).height() * 0.99,
         closed: true,
         cache: false,
         href: base_url+'purchase_request/add_detailPR/' + val,
         modal: true
       });      
-      $('#dialog').dialog('open');
+      $('#dialog_kosong').dialog('open');
       url = base_url+'purchase_request/save_detailPR/add_detail';
     }
     // end newData

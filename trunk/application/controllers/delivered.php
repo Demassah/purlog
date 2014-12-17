@@ -9,7 +9,7 @@ class delivered extends CI_Controller {
 	}
 	
 	function index(){
-		$this->load->view('delivered/index');
+		$this->load->view('delivered/delivered');
 	}
 	
 	function grid(){
@@ -17,29 +17,30 @@ class delivered extends CI_Controller {
 		echo $this->mdl_delivered->togrid($data['row_data'], $data['row_count']);
 	}
 
-	function detail_do($id_do)
-	{
-		$data['id_do']=$id_do;
-		$this->load->view('delivered/detail', $data);
-	}
-	
-	function detail_grid($id_do)
-	{
-		$data = $this->mdl_delivered->getdatadetail($id_do);
-		echo $this->mdl_delivered->togrid($data['row_data'], $data['row_count']);
+	function detail(){
+		$this->load->view('delivered/detail_delivered');
 	}
 
-	function detail_sro($id_ro,$id_sro)
-	{
-		$data['id_ro']=$id_ro;
-		$data['id_sro']=$id_sro;
-		$this->load->view('delivered/detail_delivered', $data);
-	}
-	
-	function detail_grid_sro($id_ro,$id_sro)
-	{
-		$data = $this->mdl_delivered->getdatadetailsro($id_ro,$id_sro);
-		echo $this->mdl_delivered->togrid($data['row_data'], $data['row_count']);
+	function listSRO(){
+		$this->load->view('delivered/list_sro');
 	}
 
+	function receive(){
+		$this->load->view('delivered/receive');
+	}
+
+	function detail_ros(){
+		$this->load->view('delivered/detail_ros');
+	}
+
+	function sro(){
+		$this->load->view('delivered/sro');
+	}
+
+	function add(){
+		$data['kode'] = '';
+		$data['id_kategori'] = '';
+		$this->load->view('delivered/delivered_form');
+	}
+	
 }

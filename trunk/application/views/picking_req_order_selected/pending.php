@@ -76,12 +76,11 @@
 		">		
 	 <thead>
     <tr>
-      <th field="id_detail_ros" sortable="true" width="150" hidden="true">ID</th>
-      <th field="id_ro" sortable="true" width="130">ID ROS</th>
+      <th field="id_detail_ro" sortable="true" width="150" hidden="true">ID</th>
+      <th field="id_ro" sortable="true" width="130">ID RO</th>
       <th field="kode_barang" sortable="true" width="120">ID Barang</th>
       <th field="nama_barang" sortable="true" width="130">Nama Barang</th>
-      <th field="qty" sortable="true" width="120">Qty</th>
-      <th field="note" sortable="true" width="130">Deskripsi</th>
+      <th field="sisa" sortable="true" width="120">Qty</th>
     </tr>
   </thead>
 </table>

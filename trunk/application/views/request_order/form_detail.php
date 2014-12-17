@@ -1,94 +1,72 @@
 <script>
 	$(document).ready(function(){
-		
-		function addRow (tableID) {
- 
-      var table = document.getElementById(tableID);
- 
-            //var rowCountTable = table.rows.length;
-			//alert(table.rows[rowCountTable-1].cells[2].childNodes[1].id);
-			//var rowCount = parseInt(table.rows[rowCountTable-1].cells[2].childNodes[1].id) + 1;
-            var rowCount = table.rows.length;
-			var row = table.insertRow(rowCount);
- 
-            var colCount = table.rows[1].cells.length;
-			
-			var newcell = row.insertCell(0);
-			newcell.innerHTML = table.rows[1].cells[0].innerHTML;
-			
-			newcell = row.insertCell(1);
-			newcell.innerHTML = rowCount;
-			
-			newcell = row.insertCell(2);
-			newcell.innerHTML = table.rows[1].cells[2].innerHTML;
-			newcell.childNodes[1].selectedIndex = 0;
-			newcell.childNodes[1].id = rowCount;
-			newcell.childNodes[1].name = "detail[" + rowCount + "][kode_barang]";
-			
-			newcell = row.insertCell(3);
-			newcell.innerHTML = table.rows[1].cells[3].innerHTML;
-			newcell.childNodes[1].value = "";
-			newcell.childNodes[1].name = "detail[" + rowCount + "][qty]";
-			
-			newcell = row.insertCell(4);
-			newcell.innerHTML = table.rows[1].cells[4].innerHTML;
-			newcell.childNodes[1].id = "note" + rowCount + ' ';
-			newcell.childNodes[1].value = "";
-			newcell.childNodes[1].name = "detail[" + rowCount + "][note]";
 
-			newcell.childNodes[1].readOnly = "true";
-			
-        }
- 
-    function deleteRow (tableID) {
-            try {
-				var table = document.getElementById(tableID);
-				var rowCount = table.rows.length;
+		// var editIndex = undefined;
+		// endEditing = function(){
+		// 	if (editIndex == undefined){return true}
+		// 	if ($('#dg_addDetail').datagrid('validateRow', editIndex)){
 				
-				if(rowCount <= 2) {
-					alert("Cannot delete all the rows.");
-				}else{
-					//table.deleteRow(rowCount-1);
-					for(var i=0; i<rowCount; i++) {
-						if(rowCount <= 2){
-							//alert("Cannot delete all the rows.");
-							break;
-						}
-						var row = table.rows[i];
-						var chkbox = row.cells[0].childNodes[0];
-						if(null != chkbox && true == chkbox.checked) {
-							table.deleteRow(i);
-							rowCount--;
-							i--;
-						}
-					}
-					
-					for(var i=1; i<rowCount; i++) {
-						var row = table.rows[i];
-						row.cells[1].innerHTML = (i);
-						
-						row.cells[2].childNodes[1].id = i;
-						row.cells[2].childNodes[1].name = "detail[" + i + "][kode_barang]";;
-						
-						row.cells[3].childNodes[1].name = "detail[" + i + "][qty]";
-						
-						row.cells[4].childNodes[1].id = "note" + i + ' ';
-
-						row.cells[4].childNodes[1].name = "detail[" + i + "][note]";
-					}
-				}
-				
-            }catch(e) {
-                alert(e);
-            }
-        }
+		// 		// . set colum nama barang, sebelum selesai edit
+		// 		var cmb = $('#dg_addDetail').datagrid('getEditor',{
+		// 			index:editIndex,
+		// 			field:'kode_barang'
+		// 		});
+		// 		if(cmb){
+		// 			$('#dg_addDetail').datagrid('updateRow',{
+		// 				index: editIndex,
+		// 				row: {
+		// 					kode_barang: $(cmb.target).combobox('getValue'),
+		// 					nama_barang: $(cmb.target).combobox('getText')
+		// 				}
+		// 			});
+		// 		}
+			    
+		// 		// close editor and save
+		// 		$('#dg_addDetail').datagrid('endEdit', editIndex);
+		// 		editIndex = undefined;
+		// 		//hitung_sks();
+		// 		return true;
+		// 	} else {
+		// 		return false;
+		// 	}
+		// }
 		
-		$('#dg-detail').datagrid({
+		// onClickCells = function(index, field, row){
+		// 	// , get kode barang
+		// 	var dat = $('#dg_addDetail').datagrid('getData');
+		// 	var kode_barang = dat.rows[index].kode_barang;
+			
+		// 	// 
+		// 	// change column option
+		// 	var opts = $('#dg_addDetail').datagrid('getColumnOption', 'kode_barang');
+		// 	opts.editor = {
+		// 		type:'combobox',
+		// 		options:{
+		// 			mode:'remote',
+		// 			valueField:'kode_barang',
+		// 			textField:'nama_barang',
+		// 			editable:false,
+		// 			url:base_url+'krs/load_kode_barang/',
+		// 		}
+		// 	};
+		// 	if (endEditing()){
+		// 		$('#dg_addDetail').datagrid('selectRow', index)
+		// 				.datagrid('editCell', {index:index,field:field});
+		// 		editIndex = index;
+		// 	}
+		// }
+		
+		// FormatterCell_kode_barang = function(value,row,index){
+		// 	return row.nama_barang;
+		// }
+		
+		$('#dg_addDetail').edatagrid({
 			data:<?=$data_detail?>
 		});
 		
 	});
 </script>
+
 
 <div style="margin:15px">
 	<input type="hidden" name="id_ro" id="id_ro" value="<?=$id_ro?>">
@@ -112,54 +90,37 @@
 		<label style="width:150px;vertical-align:top;">Date Create </label>:
 		<b><?=$date_create?></b>
 	</div>
+	<br>
+	<table id="dg_addDetail" title="Barang" data-options="
+			rownumbers:true,
+			singleSelect:true,
+			autoRowHeight:false,
+			pagination:false,
+			pageSize:60,
+			fit:true,
+			toolbar:'#toolbar_addDetail',
+			">
+	<thead>
+		<tr>
+			<th field="kode_barang" width="200"  editor="combobox" >Kode / Nama Barang</th>
+			<th field="nama_barang" width="200" hidden="true">Barang</th>
+			<!-- <th field="kode_barang" width="220" sortable="true" editor="{type:'validatebox',options:{required:true}}">Barang</th> -->
+	    <th field="qty" width="80" sortable="true" editor="text">Qty</th>
+	    <th field="note" width="250" sortable="true" editor="{type:'validatebox'}">Note</th>
 
-	<!-- <div class="fitem">
-		<label style="width:150px;vertical-align:top;"> </label>
-		<table id="dg-detail" style="width:575px;height:25px"
-			data-options="	rownumbers:true,
-							singleSelect:true,
-							autoRowHeight:false,
-							pagination:true,
-							pageSize:50,
-							pageList:[10,20,30,40,50,100,150,200],
-							fit:false,
-							onClickCell: onClickCells,
-					    ">
-		<thead>
-			<tr>
-				<th field="kd_prodi" hidden="true" sortable="false" width="80">x</th>
-				<th field="kd_matakuliah" hidden="true" sortable="false" width="80">y</th>
-				<th field="kode_barang" sortable="false" width="80" editor="text" position="center">KD Barang</th>
-				<th field="qty" sortable="false" width="50" editor="text" position="center">Qty</th>
-				<th field="note" sortable="false" width="500" editor="text" position="center">Note</th>
-				<th field="status" sortable="false" width="50" hidden="true" editor="text">Status</th>
-			</tr> 
-		</thead>
-	</table> 
-	</div>-->
-	<div class="fitem">
-	<br>
-	<table id="tbl ">
-		<thead>
-			<tr>
-				<th></th>
-				<th bgcolor="#F4F4F4">No.</th>
-				<th bgcolor="#F4F4F4">Nama Barang</th>
-				<th bgcolor="#F4F4F4">Qty</th>
-				<th width="60%" bgcolor="#F4F4F4">Note</th>
-			</tr>
-		</thead>
-		<tbody id="tbodyiku ">
-			
-		</tbody>
-	</table>
-	<br>
-	<a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="addRow('tbl')">Tambah Barang</a>
-	<a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="deleteRow('tbl')">Hapus Barang</a>
-	&nbsp;&nbsp;&nbsp;&nbsp;
-	<!-- <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveData()">Simpan</a> -->
+		</tr>
+	</thead>
+</table>
+<div id="toolbar_addDetail">
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="javascript:$('#dg_addDetail').edatagrid('addRow')">New</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:$('#dg_addDetail').edatagrid('destroyRow')">Destroy</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#dg_addDetail').edatagrid('saveRow')">Save</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#dg_addDetail').edatagrid('cancelRow')">Cancel</a>
 </div>
+
 </div>
+
+
 
 
 

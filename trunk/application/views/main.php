@@ -17,6 +17,7 @@
 		<script type="text/javascript" src="<?=base_url();?>asset/js/ckeditor/ckeditor.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>asset/select/select2.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>asset/js/modernizr.custom.05095.js"></script>
+		<script type="text/javascript" src="<?=base_url();?>asset/easyui/plugins/jquery.edatagrid.js"></script>
 				 
 	</head>
 	<body class="easyui-layout">
@@ -266,8 +267,12 @@
 				<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#detail_dialog').dialog('close')">Cancel</a>
 			</div>
 		</div>
-
-				 
+		<div id="dialog_kosong" class="easyui-dialog" style="width:400px;height:150px;" closed="true" buttons="#dlg-buttons-kosong">
+			<div id="dialogKosong" class="easyui-dialog" style="width:400px;height:150px" closed="true">		 
+			</div>
+			<div id="dlg-buttons-kosong">
+			</div>
+		</div>				 
 				 
 	</body>
 

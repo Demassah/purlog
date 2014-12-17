@@ -181,6 +181,14 @@ class request_order extends CI_Controller {
 		}
 	} 
 
-	
+	function load_kode_barang(){
+		$data = $this->mdl_prosedur->load_kode_barang( );
+		$arr = array();
+		array_push($arr, array('kode_barang'=>'', 'nama_barang'=>'&nbsp;'));
+		foreach($data['row_data']->result() as $row){
+			array_push($arr, array('kode_barang'=>$row->kode_barang, 'nama_barang'=>$row->nama_barang));
+		}
+		echo json_encode($arr);
+	}
 
 }

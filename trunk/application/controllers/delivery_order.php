@@ -18,16 +18,19 @@ class delivery_order extends CI_Controller {
 		echo $this->mdl_delivery_order->togrid($data['row_data'], $data['row_count']);
 	}
 
-	function doneData($kode) {
-    $result = $this->mdl_delivery_order->done($kode);
-    if ($result) {
-        echo json_encode(array('success' => true));
-    } else {
-        echo json_encode(array('msg' => 'Data gagal dikirim'));
-    }
-  }	
+	function detail(){
+		$this->load->view('delivery_order/detail_delivery');
+	}
 
-  function add(){
+	function listSRO(){
+		$this->load->view('delivery_order/list_sro');
+	}
+
+	function detailSROlist(){
+		$this->load->view('delivery_order/detailSRO_list');
+	}
+
+	function add(){
 		$this->data['id_user'] = '';
 		$this->data['date'] = '';
 		$this->data['list'] = $this->mdl_courir->v_courir();
@@ -69,64 +72,5 @@ class delivery_order extends CI_Controller {
 			echo json_encode(array('msg'=>$data['pesan_error']));
 		}
 	}
-
-	// Detail Function
-
-	function detail($id_do){
-		$data['id_do']=$id_do;
-		$this->load->view('delivery_order/detail_delivery',$data);
-	}
-
-	function detail_grid($id_do)
-	{
-		$data = $this->mdl_delivery_order->getdatadetail($id_do);
-		echo $this->mdl_delivery_order->togrid($data['row_data'], $data['row_count']);	
-	}
-
-	// funtion Add SRO
-	function add_detail($id_do)
-	{
-		$data['id_do']=$id_do;
-		$data['list']=$this->mdl_delivery_order->getdataadddetail();
-		$this->load->view('delivery_order/add_detail', $data);
-	}
-
-	function save_add($aksi){
-		# init
-		$status = "";
-		$result = false;
-		$data['pesan_error'] = '';
-		
-		# get post data
-		foreach($_POST as $key => $value){
-			$data[$key] = $value;
-		}
-		
-		# rules validasi form
-		$this->form_validation->set_rules("id_sro[]", 'ID Pros Detail', 'trim|required|xss_clean');
-
-		# message rules
-		$this->form_validation->set_message('required', 'Field %s harus diisi.');
-
-		$data['pesan_error'] = '';
-		if ($this->form_validation->run() == FALSE){
-			$data["pesan_error"] .= trim(validation_errors(' ',' '))==''?'':validation_errors(' ',' ');
-		}else{
-			if($aksi=="add"){ // add
-			//print_r($data);
-			$result = $this->mdl_delivery_order->Insert_detail($data);
-			}else { // edit
-				$result=$this->mdl_delivery_order->Update_detail($data);
-			}
-		}
-		
-		if($result){
-			echo json_encode(array('success'=>true));
-		}else{
-			echo json_encode(array('msg' => 'Data gagal dikirim'));
-		}
-	}
-
-	
 	
 }
