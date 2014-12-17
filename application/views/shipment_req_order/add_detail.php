@@ -1,9 +1,13 @@
 <form id="form1" method="post" style="margin:10px">
-    <table>
+    <table border='1'>
         <thead>
             <tr>
                 <th></th>
                 <th>ID RO</th>
+                <th>ID SRO</th>
+                <th>ID RO</th>
+                <th>Kode Barang</th>
+                <th>Nama Barang</th>
             </tr>
         </thead>
         <tbody>
@@ -13,7 +17,7 @@
         echo"
             <tr>
             <td align='center'><input type='checkbox' name='id_detail_pros[]'  value='$d[id_detail_pros]'></td>
-            <td align='center'><input name='id_sro'  value='$id_sro'></td>
+            <td align='center'><input type='hidden' name='id_sro'  value='$id_sro'></td>
             <td>$id_ro</td>
             <td>$id_sro</td>
             <td>$d[kode_barang]</td>

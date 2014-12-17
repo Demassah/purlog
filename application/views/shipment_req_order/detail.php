@@ -54,7 +54,7 @@
 				height: 290,
 				closed: true,
 				cache: false,
-				href:base_url+'shipment_req_order/add_detail/'+val+'/<?=$id_sro;?>',
+				href:base_url+'shipment_req_order/add_detail/<?=$id_ro?>/<?=$id_sro;?>',
 				modal: true
 			});
 
