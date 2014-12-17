@@ -1,36 +1,14 @@
-<table id="dg" title="Delivery Order List" data-options="
-			rownumbers:true,
-			singleSelect:true,
-			autoRowHeight:false,
-			pagination:true,
-			pageSize:30,
-			fit:true,
-			toolbar:'#toolbar',
-			">
-	<thead>
-		<tr>
-			<th field="user_id" sortable="true" width="150" hidden="true">ID</th>
-			<th field="id_do" sortable="true" width="120">ID Delivery Order</th>
-			<th field="name_courir" sortable="true" width="120">Courir</th>
-			<th field="date_create" sortable="true" width="125">Date Create</th>
-			<th field="action" align="center" formatter="actionbutton" width="140">Aksi</th>
-		</tr>
-	</thead>
-</table>
 <div id="toolbar" style="padding:5px;height:auto">
 	<div style="margin-bottom:5px">		
 	</div>
 	<div class="fsearch">
 		<table width="500" border="0">
 		  <tr>
-			<td>Delivery Order</td>
+			<td>ROS</td>
 			<td>: 
-					<select class="easyui-combobox" name=" " style="width:200px;">
-						<option>Pilih</option>
-						<option>Search 1</option>
-            <option>Search 2</option>
-            <option>Search 3</option>	
-            <option>Search 4</option>              
+					<select class="" name=" " style="width:200px;">
+						<option>Choose ROS</option>
+						           
 				</select>	
 			</td>
 			<td>&nbsp;</td>
@@ -40,36 +18,54 @@
 		</table>
 	</div>
 </div>
+
+<table id="dg" title="Shipment Request Order List" data-options="
+			rownumbers:true,
+			singleSelect:true,
+			autoRowHeight:false,
+			pagination:true,
+			pageSize:30,
+			fit:true,
+			toolbar:'#toolbar'
+			">
+	<thead>
+		<tr>
+			<th field="user_id" sortable="true" width="150" hidden="true">ID</th>
+			<th field="id_sro" sortable="true" width="100">ID SRO</th>
+			<th field="id_ro" sortable="true" width="100">ID RO</th>
+			<th field="full_name" sortable="true" width="200">Requestor</th>
+			<th field="date_create" sortable="true" width="120">Date Create</th>
+			<th field="action" align="center" formatter="actionbutton" width="140">Aksi</th>
+		</tr>
+	</thead>
+</table>
+
 <script>
 	var url;
 	$(document).ready(function(){
 
-		// search text combo
-		$(document).ready(function(){
-			$("#search").select2();
-		});
-
-		detailDO = function (val){
-			$('#konten').panel({
-				href: base_url+'delivery_order/detail/'+val,
-			});
-		}
-	
-		newData = function (){
+		addData = function (){
 			$('#dialog').dialog({
-				title: 'Tambah Delivery Order',
+				title: 'Tambah SRO',
 				width: 380,
 				height: 130,
 				closed: true,
 				cache: false,
-				href: base_url+'delivery_order/add',
+				href: base_url+'shipment_req_order/add',
 				modal: true
 			});
 			 
 			$('#dialog').dialog('open');
-			url = base_url+'delivery_order/save/add';
+			url = base_url+'shipment_req_order/save/add';
 		}
 		// end newData
+
+		detailData = function (val){
+			$('#konten').panel({
+				href:base_url+'delivered/detail_sro/'+val
+			});
+		}
+
 		saveData = function(){
 			
 			$('#form1').form('submit',{
@@ -92,12 +88,12 @@
 				}
 			});
 		}
-		// save data
+
 		doneData = function (val){
-			if(confirm("Apakah yakin akan mengirim data ke Delivery '" + val + "'?")){
+			if(confirm("Apakah yakin akan mengirim data ke Delivery Order '" + val + "'?")){
 				var response = '';
 				$.ajax({ type: "GET",
-					 url: base_url+'delivery_order/doneData/' + val,
+					 url: base_url+'shipment_req_order/doneData/' + val,
 					 async: false,
 					 success : function(response){
 						var response = eval('('+response+')');
@@ -117,22 +113,27 @@
 					 }
 				});
 			}
+			//}
 		}
-		//Done 
+		//end sendData 
+		
 		actionbutton = function(value, row, index){
 			var col='';
 
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>19, 'policy'=>'DETAIL'))){?>
-					col += '&nbsp;&nbsp; &nbsp;&nbsp;<a href="#" onclick="detailDO(\''+row.id_do+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
+			<?if($this->mdl_auth->CekAkses(array('menu_id'=>38, 'policy'=>'DETAIL'))){?>
+					col += '<a href="#" onclick="detailData(\''+row.id_ro+'/'+row.id_sro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
 			<?}?>
-			
-					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id_do+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
 			return col;
 		}
+
+		
+		$(document).ready(function(){
+			$(".select").select2();
+		});
 		
 		$(function(){
 			$('#dg').datagrid({
-				url:base_url+"delivery_order/grid"
+				url:base_url+"delivered/detail_grid/<?=$id_do?>"
 			});
 		});
 		
@@ -141,18 +142,19 @@
 			var pager = $('#dg').datagrid().datagrid('getPager');	// get the pager of datagrid
 			pager.pagination({
 				buttons:[
-				<?if($this->mdl_auth->CekAkses(array('menu_id'=>19, 'policy'=>'ADD'))){?>
+				<?if($this->mdl_auth->CekAkses(array('menu_id'=>13, 'policy'=>'ADD'))){?>
 					{
 						iconCls:'icon-add',
 						text:'Tambah Data',
 						handler:function(){
-							newData();
+							addData();
 						}
 					}
-					<?}?>
+				<?}?>	
 				]
 			});			
 		});
 		
 	});
 </script>
+

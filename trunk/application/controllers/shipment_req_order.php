@@ -19,6 +19,15 @@ class shipment_req_order extends CI_Controller {
 		echo $this->mdl_shipment_req_order->togrid($data['row_data'], $data['row_count']);	
 	}
 
+	function doneData($kode) {
+    $result = $this->mdl_shipment_req_order->done($kode);
+    if ($result) {
+        echo json_encode(array('success' => true));
+    } else {
+        echo json_encode(array('msg' => 'Data gagal dikirim'));
+    }
+  }	
+  
 	function add()
 	{
 		$data['id_ro']='';
@@ -59,9 +68,11 @@ class shipment_req_order extends CI_Controller {
 		if($result){
 			echo json_encode(array('success'=>true));
 		}else{
-			echo json_encode(array('msg'=>$data['pesan_error']));
+			echo json_encode(array('msg' => 'Data gagal dikirim'));
 		}
 	}
+	
+	// detail function
 
 	function detail($id_ro,$id_sro)
 	{
@@ -113,11 +124,8 @@ class shipment_req_order extends CI_Controller {
 			$data["pesan_error"] .= trim(validation_errors(' ',' '))==''?'':validation_errors(' ',' ');
 		}else{
 			if($aksi=="add"){ // add
-			
-						print_r($data);
-				
-				
-				//$result = $this->mdl_shipment_req_order->Insert_detail($data);
+			//print_r($data);
+			$result = $this->mdl_shipment_req_order->Insert_detail($data);
 			}else { // edit
 				$result=$this->mdl_shipment_req_order->Update_detail($data);
 			}
@@ -126,7 +134,7 @@ class shipment_req_order extends CI_Controller {
 		if($result){
 			echo json_encode(array('success'=>true));
 		}else{
-			echo json_encode(array('msg'=>$data['pesan_error']));
+			echo json_encode(array('msg' => 'Data gagal dikirim'));
 		}
 	}
 
