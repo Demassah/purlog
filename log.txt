@@ -1,6 +1,6 @@
-#Tambah RO Detail Error
+(PENDING)#Tambah RO Detail Error
 
-(FIX)# Detail Picking
+(FIXED)# Detail Picking
 ketika sudah di alocate result cek ke stock jika alokasi stock = 0
 tidak usah melakukan pengulangan utk pengurangan stock (di skip)
 langsung menghasilkan result true. (agar langsung refresh)
