@@ -20,12 +20,13 @@
 		">		
 	<thead>
 		<tr>
-			<th data-options="field:'id_krs_detail',width:'100', hidden:true"></th>
-			<th field="id_detail_pros" sortable="true" width="120">ID Detail ROS</th>
-			<th field="id_detail_ros" sortable="true" width="120">ID ROS</th>
-			<th field="kode_barang" sortable="true" width="120">ID Item</th>
+			<th data-options="field:'id_detail_pros',width:'100', hidden:true"></th>
+			<th field="id_detail_ro" sortable="true" width="120">ID Detail RO</th>
+			<th field="id_ro" sortable="true" width="120">ID RO</th>
+			<th field="kode_barang" sortable="true" width="120">ID barang</th>
+			<th field="nama_barang" sortable="true" width="120">Item Name</th>
 			<th field="qty" sortable="true" width="80">Qty</th>
-			<th field="nama_sub_kategori" sortable="true" width="600">Deskripsi</th>		
+			<th field="id_lokasi" sortable="true" width="200">Lokasi</th>		
 			<th field="chk" width="23" formatter="Checkbox">
 				<input style="margin-top:2px;" type="checkbox" name="checkbox" id="checkbox" onclick="update_value('+index+', this.checked, \''+row.id_jadwal+'\')" '+(row.chk==true?'checked="checked"':'')+'/>
 			</th>

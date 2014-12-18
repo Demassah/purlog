@@ -54,39 +54,39 @@
 			$('#dialog').dialog({
 				title: 'Tambah SRO',
 				width: 880,
-				height: 290,
+				height: 390,
 				closed: true,
 				cache: false,
-				href:base_url+'shipment_req_order/add_detail/'+val+'/<?php echo $id_sro;?>',
+				href:base_url+'shipment_req_order/add_detail/'+val+'/<?php echo $id_ro;?>',
 				modal: true
 			});
 
 			$('#dialog').dialog('open');
-			url = base_url+'shipment_req_order/save_detail/add';
+			url = base_url+'shipment_req_order/save/add';
 		}
 		//end newData
-		saveData = function(){
+		// saveData = function(){
 			
-			$('#form1').form('submit',{
-				url: url,
-				onSubmit: function(){
-					return $(this).form('validate');
-				},
-				success: function(result){
-					//alert(result);
-					var result = eval('('+result+')');
-					if (result.success){
-						$('#dialog').dialog('close');		// close the dialog
-						$('#dg').datagrid('reload');		// reload the user data
-					} else {
-						$.messager.show({
-							title: 'Error',
-							msg: result.msg
-						});
-					}
-				}
-			});
-		}
+		// 	$('#dtgrd').form('submit',{
+		// 		url: url,
+		// 		onSubmit: function(){
+		// 			return $(this).form('validate');
+		// 		},
+		// 		success: function(result){
+		// 			alert(result);
+		// 			var result = eval('('+result+')');
+		// 			if (result.success){
+		// 				$('#dialog').dialog('close');		// close the dialog
+		// 				$('#dg').datagrid('reload');		// reload the user data
+		// 			} else {
+		// 				$.messager.show({
+		// 					title: 'Error',
+		// 					msg: result.msg
+		// 				});
+		// 			}
+		// 		}
+		// 	});
+		// }
 
 		back = function (val){
 		  //detail
@@ -113,7 +113,7 @@
 		}
 		
 		$(function(){ // init
-			$('#dg').datagrid({url:"shipment_req_order/detail_grid/<?=$id_ro?>/<?=$id_sro?>"});	
+			$('#dg').datagrid({url:"shipment_req_order/detail_grid/<?=$id_ro?>"});	
 		});	
 
 
