@@ -95,8 +95,9 @@ class mdl_delivery_order extends CI_Model {
 			$this->db->join('sys_user b', 'b.user_id = a.id_user');
 			$this->db->where('id_do', $id_do);
 			$this->db->order_by('id_do', 'asc');
-				$query = $this->db->get('tr_sro a');
-		$query->result_array();
+			$query = $this->db->get('tr_sro a');
+			return $query->result();
+
 		// $this->db->stop_cache();
 
 	}
