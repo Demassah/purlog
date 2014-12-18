@@ -236,11 +236,9 @@ CREATE TABLE `tr_pr` (
   `date_create` datetime DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id_pr`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tr_pr` */
-
-insert  into `tr_pr`(`id_pr`,`id_ro`,`user_id`,`purpose`,`cat_req`,`ext_doc_no`,`ETD`,`date_create`,`status`) values (20,2,1,'STOCK','ATK','54321','2014-12-15','2014-12-15 00:00:00',2),(21,1,1,'REQUEST','ASSET',' 12345','2014-12-15','2014-12-15 00:00:00',1);
 
 /*Table structure for table `tr_pr_detail` */
 
@@ -259,11 +257,9 @@ CREATE TABLE `tr_pr_detail` (
   `status` int(1) DEFAULT NULL,
   `status_delete` int(1) NOT NULL,
   PRIMARY KEY (`id_detail_pr`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tr_pr_detail` */
-
-insert  into `tr_pr_detail`(`id_detail_pr`,`id_pr`,`id_detail_ro`,`id_ro`,`kode_barang`,`qty`,`user_id`,`date_create`,`note`,`status`,`status_delete`) values (13,0,1,1,'003',15,1,'2014-12-17 22:24:46',NULL,1,0),(14,21,2,1,'005',20,1,'2014-12-17 22:24:46',NULL,2,0),(15,20,3,2,'002',50,1,'2014-12-17 22:24:55',NULL,2,0),(16,20,4,2,'004',30,1,'2014-12-17 22:24:55',NULL,2,0),(17,0,1,1,'003',15,1,'2014-12-17 23:04:48',NULL,1,0),(18,0,2,1,'005',20,1,'2014-12-17 23:04:48',NULL,1,0),(19,0,5,3,'001',15,NULL,'2014-12-17 18:03:25',NULL,1,0),(20,0,9,7,'006',20,NULL,'2014-12-17 18:03:27',NULL,1,0),(21,0,6,4,'001',20,NULL,'2014-12-17 18:32:16',NULL,1,0),(22,0,7,5,'003',25,NULL,'2014-12-17 18:35:14',NULL,1,0),(23,0,1,1,'003',11,NULL,'2014-12-17 18:39:24',NULL,1,0),(24,0,2,1,'005',5,NULL,'2014-12-17 18:39:24',NULL,1,0),(25,0,5,3,'001',15,NULL,'2014-12-17 18:45:13',NULL,1,0);
 
 /*Table structure for table `tr_pros_detail` */
 
@@ -280,11 +276,9 @@ CREATE TABLE `tr_pros_detail` (
   `id_lokasi` varchar(21) DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id_detail_pros`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `tr_pros_detail` */
-
-insert  into `tr_pros_detail`(`id_detail_pros`,`id_detail_ro`,`id_ro`,`id_sro`,`id_stock`,`kode_barang`,`qty`,`id_lokasi`,`status`) values (24,5,3,1,1,'001',15,'A0101',1),(25,5,3,NULL,1,'001',0,'A0101',1),(26,9,7,2,14,'006',20,'A0301',1);
 
 /*Table structure for table `tr_qr` */
 
@@ -347,13 +341,13 @@ CREATE TABLE `tr_ro` (
   `ext_doc_no` varchar(21) DEFAULT NULL,
   `ETD` date DEFAULT NULL,
   `date_create` datetime DEFAULT NULL,
-  `status` int(1) DEFAULT NULL COMMENT '1: RO, 2: ROA, 3:ROL, 4: ROS, 5: Picking, 6: Shipment',
+  `status` int(1) DEFAULT NULL COMMENT '1: RO, 2: ROA, 3:ROL, 4: ROS, 5: Picking, 6: Shipment, 7: DO',
   PRIMARY KEY (`id_ro`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `tr_ro` */
 
-insert  into `tr_ro`(`id_ro`,`user_id`,`purpose`,`cat_req`,`ext_doc_no`,`ETD`,`date_create`,`status`) values (1,1,'REQUEST','ASSET',' 12345','2014-12-15','2014-12-15 00:00:00',5),(2,1,'STOCK','ATK','54321','2014-12-15','2014-12-15 00:00:00',5),(3,1,'REQUEST','ASSET',' 12345','2014-12-17','2014-12-17 00:00:00',7),(4,1,'REQUEST','ATK',' 12345','2014-12-17','2014-12-17 00:00:00',5),(5,1,'REQUEST','SPAREPART',' 12345','2014-12-17','2014-12-17 00:00:00',5),(6,1,'STOCK','ASSET',' 54321','2014-12-17','2014-12-17 00:00:00',2),(7,1,'STOCK','ATK','54321','2014-12-17','2014-12-17 00:00:00',7),(8,1,'STOCK','SPAREPART','54321','2014-12-17','2014-12-17 00:00:00',1),(9,1,'STOCK','SPAREPART','09866','2014-12-17','2014-12-15 00:00:00',1),(10,1,'STOCK','SPAREPART',' 567890','2014-12-17','2014-12-17 00:00:00',1);
+insert  into `tr_ro`(`id_ro`,`user_id`,`purpose`,`cat_req`,`ext_doc_no`,`ETD`,`date_create`,`status`) values (1,1,'REQUEST','ASSET',' 12345','2014-12-15','2014-12-15 00:00:00',1),(2,1,'STOCK','ATK','54321','2014-12-15','2014-12-15 00:00:00',1),(3,1,'REQUEST','ASSET',' 12345','2014-12-17','2014-12-17 00:00:00',1),(4,1,'REQUEST','ATK',' 12345','2014-12-17','2014-12-17 00:00:00',1),(5,1,'REQUEST','SPAREPART',' 12345','2014-12-17','2014-12-17 00:00:00',1),(6,1,'STOCK','ASSET',' 54321','2014-12-17','2014-12-17 00:00:00',1),(7,1,'STOCK','ATK','54321','2014-12-17','2014-12-17 00:00:00',1),(8,1,'STOCK','SPAREPART','54321','2014-12-17','2014-12-17 00:00:00',1),(9,1,'STOCK','SPAREPART','09866','2014-12-17','2014-12-15 00:00:00',1),(10,1,'STOCK','SPAREPART',' 567890','2014-12-17','2014-12-17 00:00:00',1);
 
 /*Table structure for table `tr_ro_detail` */
 
@@ -390,11 +384,11 @@ CREATE TABLE `tr_sro` (
   `id_user` varchar(21) DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id_sro`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `tr_sro` */
 
-insert  into `tr_sro`(`id_sro`,`id_do`,`id_ro`,`date_create`,`id_user`,`status`) values (1,NULL,3,'2014-12-17 00:00:00','1',1),(2,NULL,7,'2014-12-17 00:00:00','1',1);
+insert  into `tr_sro`(`id_sro`,`id_do`,`id_ro`,`date_create`,`id_user`,`status`) values (1,1,3,'2014-12-17 00:00:00','1',2),(2,NULL,7,'2014-12-17 00:00:00','1',1),(3,NULL,2,'2014-12-18 00:00:00','1',2);
 
 /*Table structure for table `tr_stock` */
 
@@ -412,7 +406,7 @@ CREATE TABLE `tr_stock` (
 
 /*Data for the table `tr_stock` */
 
-insert  into `tr_stock`(`id_stock`,`kode_barang`,`qty`,`price`,`id_lokasi`,`status`) values (1,'001',35,1000,'A0101',1),(2,'003',0,1000,'A0201',1),(3,'003',0,1500,'A0301',1),(4,'004',4,2000,'A0402',1),(5,'005',0,500,'A0101',1),(6,'005',0,1250,'A0101',1),(7,'005',0,400,'A0201',1),(8,'008',0,5000,'A0301',1),(9,'009',10,75000,'A0402',1),(10,'010',0,15000,'A0201',1),(11,'011',10,2000,'A0301',1),(12,'002',5,1000,'A0101',1),(13,'002',5,5000,'A0302',1),(14,'006',5,1000,'A0301',1);
+insert  into `tr_stock`(`id_stock`,`kode_barang`,`qty`,`price`,`id_lokasi`,`status`) values (1,'001',15,1000,'A0101',1),(2,'003',0,1000,'A0201',1),(3,'003',0,1500,'A0301',1),(4,'004',0,2000,'A0402',1),(5,'005',0,500,'A0101',1),(6,'005',0,1250,'A0101',1),(7,'005',0,400,'A0201',1),(8,'008',0,5000,'A0301',1),(9,'009',10,75000,'A0402',1),(10,'010',0,15000,'A0201',1),(11,'011',10,2000,'A0301',1),(12,'002',0,1000,'A0101',1),(13,'002',0,5000,'A0302',1),(14,'006',5,1000,'A0301',1);
 
 /* Trigger structure for table `tr_pros_detail` */
 
