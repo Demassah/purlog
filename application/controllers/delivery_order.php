@@ -74,7 +74,7 @@ class delivery_order extends CI_Controller {
 
 	function detail($id_do){
 		$data['id_do']=$id_do;
-		$data['l'] = $this->mdl_delivery_order->getdatadetail($id_do);
+		$data['item'] = $this->mdl_delivery_order->getdatadetail($id_do);
 		$this->load->view('delivery_order/detail_delivery',$data);
 	}
 

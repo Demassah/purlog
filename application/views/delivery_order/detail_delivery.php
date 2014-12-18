@@ -1,5 +1,16 @@
+<div id="toolbar" style="padding:5px;height:auto">
+	<div class="fsearch">
+		<table>
+			<tr>
+					<td>
+							&nbsp;&nbsp;<a href="#" onclick="Insert()" class="easyui-linkbutton" iconCls="icon-ok">Add</a>
+					</td>							
+			</tr>		
+		</table>
+	</div>
+</div>
 <form id="form1" id="dg" method="post">
-  <table class="tbl" >       
+  <table class="tbl" title="List Delivery Order">       
     <thead>
       <tr>
         <th width="20"></th>
@@ -11,20 +22,25 @@
     <tbody>
       <?php 
         // foreach ($list as $d) {
-        foreach ($l as $d) {
+        foreach ($item as $l) {
 
        		echo"
           <tr>
-          <td align='center'><input type='checkbox' name='id_sro[]'  value='$d[id_sro]'>
+          <td align='center'><input type='checkbox' name='id_sro[]'  value='".$l->id_sro."'>
           <input type='hidden' name='id_do'  value='$id_do'></td>
-          <td>$d[id_sro]</td>
-          <td>$d[date_create]</td>
-          <td>$d[full_name]</td>
+          <td>".$l->id_sro."</td>
+          <td>".$l->date_create."</td>
+          <td>".$l->full_name."</td>
           </tr> ";
          }
        ?>
     </tbody>
   </table>
+
+   <br>  
+	  <div align="right">
+	      <a href="#" class="easyui-linkbutton" onclick="CancelData();" iconCls="icon-cancel" plain="false">Cancel</a>&nbsp;&nbsp;&nbsp;
+	  </div>
 </form>
 
 <script>
@@ -43,7 +59,7 @@
 			});
 		}
 
-		add_sro = function (){
+		Insert = function (){
 			$('#dialog').dialog({
 				title: 'Add Shipment Request Order',
 				width: 480,
@@ -54,14 +70,14 @@
 				modal: true
 			}); 
 			 
-			$('#dialog').dialog('open');
-			url = base_url+'delivery_order/save_add/add';
+			// $('#dialog').dialog('open');
+			// url = base_url+'delivery_order/save_add/add';
 		}
 
 		saveData = function(){
 			
 			$('#form1').form('submit',{
-				url: url,
+				url: base_url+'delivery_order/save_add/add',
 				onSubmit: function(){
 					return $(this).form('validate');
 				},
