@@ -114,6 +114,28 @@ class mdl_shipment_req_order extends CI_Model {
 			return FALSE;
 		}
 	}
+
+	function Cancel($data)
+	{
+		$this->db->flush_cache();
+
+		$jumlah = count($data['id_detail_pros']);
+			for($i=0; $i < $jumlah; $i++) 
+			{
+			    $id_detail_pros=$data['id_detail_pros'][$i];
+			    $this->db->where('id_detail_pros', $id_detail_pros);
+			    $result = $this->db->update('tr_pros_detail',array('id_sro' => Null));
+			}		
+		
+		//return
+		if($result) {
+			return TRUE;
+		}else {
+			return FALSE;
+		}
+
+	}
+	
 	function getdatadetail($id_ro,$id_sro)
 	{
 		$this->db->flush_cache();
@@ -129,36 +151,6 @@ class mdl_shipment_req_order extends CI_Model {
 		$query = $this->db->get('tr_pros_detail a');
 		return $query->result();
 	}
-	// function getdatadetail($id_ro,$id_sro,$plimit=true){
-	// 	# get parameter from easy grid
-	// 	$page = isset($_POST['page']) ? intval($_POST['page']) : 1;  
-	// 	$limit = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
-	// 	$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'a.id_ro';  
-	// 	$order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
-	// 	$offset = ($page-1)*$limit;
-
-	// 	# create query
-	// 	$this->db->flush_cache();
-	// 	$this->db->start_cache();
-	// 	$this->db->select('id_detail_pros,id_detail_ro,a.id_ro,id_sro,id_stock,a.kode_barang,qty,id_lokasi,a.status,c.nama_barang');
-	// 	$this->db->from('tr_pros_detail a');
-	// 	$this->db->join('ref_barang c', 'c.kode_barang = a.kode_barang');
-	// 	$this->db->where('a.status', 1);
-	// 	$this->db->where('id_ro', $id_ro);
-	// 	$this->db->where('id_sro', $id_sro);
-	// 	$this->db->order_by($sort, $order);
-	// 	$this->db->stop_cache();
-
-	// 	# get count
-	// 	$tmp['row_count'] = $this->db->get()->num_rows();
-		
-	// 	# get data
-	// 	if($plimit == true){
-	// 		$this->db->limit($limit, $offset);
-	// 	}
-	// 	$tmp['row_data'] = $this->db->get();
-	// 	return $tmp;
-	// }
 
 	function getdataadddetail($id_ro)
 	{
@@ -195,28 +187,6 @@ class mdl_shipment_req_order extends CI_Model {
 			return FALSE;
 		}
 	}
-
-	function Cancel($data)
-	{
-		$this->db->flush_cache();
-
-		$jumlah = count($data['id_detail_pros']);
-			for($i=0; $i < $jumlah; $i++) 
-			{
-			    $id_detail_pros=$data['id_detail_pros'][$i];
-			    $this->db->where('id_detail_pros', $id_detail_pros);
-			    $result = $this->db->update('tr_pros_detail',array('id_sro' => Null));
-			}		
-		
-		//return
-		if($result) {
-			return TRUE;
-		}else {
-			return FALSE;
-		}
-
-	}
-
 
 } //End
 

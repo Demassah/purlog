@@ -83,11 +83,42 @@ class shipment_req_order extends CI_Controller {
 		$this->load->view('shipment_req_order/detail', $data, FALSE);
 	}
 
-	// function detail_grid($id_ro,$id_sro)
-	// {
-	// 	$data = $this->mdl_shipment_req_order->getdatadetail($id_ro,$id_sro);
-	// 	echo $this->mdl_shipment_req_order->togrid($data['row_data'], $data['row_count']);	
-	// }
+	function after($id_ro,$id_sro)
+	{
+
+		$data['id_ro']=$id_ro;
+		$data['id_sro']=$id_sro;
+		$list= $this->mdl_shipment_req_order->getdatadetail($id_ro,$id_sro);
+		echo'
+			<table class="tbl" id="dg">		
+				<thead>
+					<tr>
+						<th width="20"></th>
+						<th width="120">ID Detail RO</th>
+						<th width="120">ID RO</th>
+						<th width="120">ID barang</th>
+						<th width="120">Item Name</th>
+						<th width="80">Qty</th>
+						<th width="100">Lokasi</th>				
+					</tr>
+				</thead>
+				<tbody>'; 
+							foreach ($list as $l) {
+								echo "<tr>";
+								echo "<td><input type='checkbox' name='id_detail_pros[]'  value=".$l->id_detail_pros."></td>";
+								echo "<td>".$l->id_detail_ro."</td>";
+								echo "<td>".$l->id_ro."</td>";
+								echo "<td>".$l->kode_barang."</td>";
+								echo "<td>".$l->nama_barang."</td>";
+								echo "<td>".$l->qty."</td>";
+								echo "<td>".$l->id_lokasi."</td>";
+								echo "</tr>";
+							}
+				echo'
+					
+				</tbody>
+			</table>';
+	}
 
 	function add_detail($id_ro,$id_sro)
 	{
