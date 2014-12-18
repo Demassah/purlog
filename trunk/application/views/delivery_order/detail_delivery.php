@@ -1,3 +1,52 @@
+
+<div id="toolbar_detail" style="padding:5px;height:auto">
+	<div class="fsearch">
+		<table>
+			<tr>
+					<td>&nbsp;&nbsp;<a href="#" onclick="listSRO()" class="easyui-linkbutton" iconCls="icon-detail">Add SRO</a></td>					
+			</tr>
+			<tr> 
+					<td>&nbsp;</td>
+			</tr>		
+			<tr> 
+				<td>
+						<label style="width:120px">&nbsp;&nbsp;SRO </label>:
+							<select id="SRO" name=" " style="width:200px;">
+								<option>Pilih</option>
+								<option>SRO 1</option>
+		            <option>SRO 2</option>
+		            <option>SRO 3</option>	
+		            <option>SRO 4</option>              
+						</select>	
+						&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-ok">Done</a>
+				</td>
+			</tr>			
+		</table>
+	</div>
+</div>
+
+
+<table id="dg" title="Detail Delivery Order" data-options="
+			rownumbers:true,
+			singleSelect:false,
+			pagination:true,
+			autoRowHeight:false,
+			fit:true,
+			toolbar:'#toolbar_detail',
+		">		
+	<thead>
+		<tr>
+			<th data-options="field:'id_krs_detail',width:'100', hidden:true">aa</th>
+			<th field="nama_kategori" sortable="true" width="120">ID Detail ROS</th>
+			<th field="kode_barang" sortable="true" width="120">ID ROS</th>
+			<th field="kode_barang" sortable="true" width="120">ID Item</th>
+			<th field="kode_barang" sortable="true" width="80">Qty</th>
+			<th field="nama_sub_kategori" sortable="true" width="480">Deskripsi</th>		
+			<th field="action" align="center" formatter="actiondetail" width="140">Aksi</th>
+		</tr>
+	</thead>
+</table>
+
 <script>
 	
 	var url;
@@ -72,53 +121,4 @@
 		
 	});
 </script>
-
-<div id="toolbar_detail" style="padding:5px;height:auto">
-	<div class="fsearch">
-		<table>
-			<tr>
-					<td>&nbsp;&nbsp;<a href="#" onclick="listSRO()" class="easyui-linkbutton" iconCls="icon-detail">Add SRO</a></td>					
-			</tr>
-			<tr> 
-					<td>&nbsp;</td>
-			</tr>		
-			<tr> 
-				<td>
-						<label style="width:120px">&nbsp;&nbsp;SRO </label>:
-							<select id="SRO" name=" " style="width:200px;">
-								<option>Pilih</option>
-								<option>SRO 1</option>
-		            <option>SRO 2</option>
-		            <option>SRO 3</option>	
-		            <option>SRO 4</option>              
-						</select>	
-						&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-ok">Done</a>
-				</td>
-			</tr>			
-		</table>
-	</div>
-</div>
-
-
-<table id="dg" title="Detail Delivery Order" data-options="
-			rownumbers:true,
-			singleSelect:false,
-			pagination:true,
-			autoRowHeight:false,
-			fit:true,
-			toolbar:'#toolbar_detail',
-		">		
-	<thead>
-		<tr>
-			<th data-options="field:'id_krs_detail',width:'100', hidden:true">aa</th>
-			<th field="nama_kategori" sortable="true" width="120">ID Detail ROS</th>
-			<th field="kode_barang" sortable="true" width="120">ID ROS</th>
-			<th field="kode_barang" sortable="true" width="120">ID Item</th>
-			<th field="kode_barang" sortable="true" width="80">Qty</th>
-			<th field="nama_sub_kategori" sortable="true" width="480">Deskripsi</th>		
-			<th field="action" align="center" formatter="actiondetail" width="140">Aksi</th>
-		</tr>
-	</thead>
-</table>
-
 
