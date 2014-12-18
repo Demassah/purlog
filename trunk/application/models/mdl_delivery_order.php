@@ -166,6 +166,27 @@ class mdl_delivery_order extends CI_Model {
 			return FALSE;
 		}
 	}
+	
+	function Cancel($data)
+	{
+		$this->db->flush_cache();
+
+		$jumlah = count($data['id_sro']);
+			for($i=0; $i < $jumlah; $i++) 
+			{
+			    $id_detail_pros=$data['id_sro'][$i];
+			    $this->db->where('id_sro', $id_detail_pros);
+			    $result = $this->db->update('tr_sro',array('id_do' => Null));
+			}		
+		
+		//return
+		if($result) {
+			return TRUE;
+		}else {
+			return FALSE;
+		}
+
+	}
 
 
 

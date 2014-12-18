@@ -1,5 +1,5 @@
 <form id="form1" method="post">
-    <table class="tbl" id="dg" title="Detail Shipment Request Order">       
+    <table class="tbl"  title="Detail Shipment Request Order">       
         <thead>
             <tr>
                 <th width="20"></th>
