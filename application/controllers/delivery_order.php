@@ -74,14 +74,15 @@ class delivery_order extends CI_Controller {
 
 	function detail($id_do){
 		$data['id_do']=$id_do;
+		$data['l'] = $this->mdl_delivery_order->getdatadetail($id_do);
 		$this->load->view('delivery_order/detail_delivery',$data);
 	}
 
-	function detail_grid($id_do)
-	{
-		$data = $this->mdl_delivery_order->getdatadetail($id_do);
-		echo $this->mdl_delivery_order->togrid($data['row_data'], $data['row_count']);	
-	}
+	// function detail_grid($id_do)
+	// {
+	// 	$data = $this->mdl_delivery_order->getdatadetail($id_do);
+	// 	echo $this->mdl_delivery_order->togrid($data['row_data'], $data['row_count']);	
+	// }
 
 	// funtion Add SRO
 	function add_detail($id_do)

@@ -1,4 +1,3 @@
-
 <div id="toolbar" style="padding:5px;height:auto">
 	<div class="fsearch">
 		<table>
@@ -97,7 +96,7 @@
 
 		CancelData = function(){
       $('#form2').form('submit',{
-        url: base_url+'shipment_req_order/save/cancel',
+        url: base_url+'shipment_req_order/save_add_detail/cancel',
         onSubmit: function(){
           return $(this).form('validate');
         },

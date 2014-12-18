@@ -1,33 +1,31 @@
-<div id="toolbar_detail" style="padding:5px;height:auto">
-	<div class="fsearch">
-		<table>
-			<tr>
-					<td>&nbsp;&nbsp;<a href="#" onclick="add_sro()" class="easyui-linkbutton" iconCls="icon-detail">Add SRO</a></td>					
-			</tr>	
-		</table>
-	</div>
-</div>
+<form id="form1" id="dg" method="post">
+  <table class="tbl" >       
+    <thead>
+      <tr>
+        <th width="20"></th>
+        <th width="20">ID SRO</th>
+        <th width="120">Create</th>
+        <th width="120">Requestor</th>         
+      </tr>
+    </thead>
+    <tbody>
+      <?php 
+        // foreach ($list as $d) {
+        foreach ($l as $d) {
 
-<table id="dg" title="Detail Delivery Order" data-options="
-			rownumbers:true,
-			singleSelect:false,
-			pagination:true,
-			autoRowHeight:false,
-			fit:true,
-			toolbar:'#toolbar_detail',
-		">		
-	<thead>
-		<tr>
-			<th data-options="field:'id_krs_detail',width:'100', hidden:true"></th>
-			<th field="id_do" sortable="true" width="120">ID DO</th>
-			<th field="id_sro" sortable="true" width="120">ID SRO</th>
-			<th field="date_create" sortable="true" width="80">Create</th>
-			<th field="full_name" sortable="true" width="180">Requestor</th>	
-			<!-- <th field="action" align="center" formatter="actiondetail" width="140">Aksi</th>	 -->
-		</tr>
-	</thead>
-</table>
-
+       		echo"
+          <tr>
+          <td align='center'><input type='checkbox' name='id_sro[]'  value='$d[id_sro]'>
+          <input type='hidden' name='id_do'  value='$id_do'></td>
+          <td>$d[id_sro]</td>
+          <td>$d[date_create]</td>
+          <td>$d[full_name]</td>
+          </tr> ";
+         }
+       ?>
+    </tbody>
+  </table>
+</form>
 
 <script>
 	
@@ -52,9 +50,9 @@
 				height: 290,
 				closed: true,
 				cache: false,
-				href: base_url+'delivery_order/add_detail/<?=$id_do?>',
+				href: base_url + 'delivery_order/add_detail/<?=$id_do?>',
 				modal: true
-			});
+			}); 
 			 
 			$('#dialog').dialog('open');
 			url = base_url+'delivery_order/save_add/add';
@@ -83,41 +81,7 @@
 			});
 		}				
 
-		// detail_sro = function (val){
-		// 	$('#konten').panel({
-		// 		href:base_url+'delivery_order/detail/'+val
-		// 	});
-		// }
-
-		// actiondetail = function(value, row, index){
-		// 	var col='';
-		// 	<?if($this->mdl_auth->CekAkses(array('menu_id'=>19, 'policy'=>'DETAIL'))){?>
-		// 			col += '&nbsp;&nbsp; &nbsp;&nbsp;<a href="#" onclick="detail_sro(\''+row.id_sro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
-		// 	<?}?>			
-		// 	return col;
-		// }
 		
-
-		$(function(){ // init
-			$('#dg').datagrid({url:"delivery_order/detail_grid/<?=$id_do?>"
-			});				
-		});	
-
-		//# Tombol Bawah
-    $(function(){
-      var pager = $('#dg').datagrid().datagrid('getPager'); // get the pager of datagrid
-      pager.pagination({
-        buttons:[
-          {
-            iconCls:'icon-undo',
-            text:'Kembali',
-            handler:function(){
-              back();
-            }
-          }         
-        ]
-      });     
-    });
 		
 	});
 </script>
