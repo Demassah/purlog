@@ -61,7 +61,29 @@
 			url = base_url+'shipment_req_order/save/add';
 		}
 		// end newData
-
+		saveData = function(){
+			
+			$('#form1').form('submit',{
+				url: url,
+				onSubmit: function(){
+					return $(this).form('validate');
+				},
+				success: function(result){
+					alert(result);
+					var result = eval('('+result+')');
+					if (result.success){
+						$('#dialog').dialog('close');		// close the dialog
+						$('#dg').datagrid('reload');		// reload the user data
+					} else {
+						$.messager.show({
+							title: 'Error',
+							msg: result.msg
+						});
+					}
+				}
+			});
+		}
+		
 		detailData = function (val){
 			$('#konten').panel({
 				href:base_url+'shipment_req_order/detail/'+ val
