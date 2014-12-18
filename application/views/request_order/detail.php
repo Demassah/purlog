@@ -9,44 +9,19 @@
 		}
 
 		newDetail = function (){
-			$('#dialog').dialog({
+			$('#dialog_kosong').dialog({
 				title: 'Tambah Detail Request Order',
 				width: 640,
-				height: $(window).height() * 0.99,
+				height: $(window).height() * 0.85,
 				closed: true,
 				cache: false,
 				href: base_url+'request_order/add_detail/<?=$id_ro?>',
 				modal: true
 			});			 
-			$('#dialog').dialog('open');
+			$('#dialog_kosong').dialog('open');
 			url = base_url+'request_order/save_Detail/add_detail';
 		}
 		// end newData
-		
-		
-		save = function(){
-			
-			$('#form1').form('submit',{
-				url: url,
-				onSubmit: function(){
-					return $(this).form('validate');
-				},
-				success: function(result){
-					alert(result);
-					var result = eval('('+result+')');
-					if (result.success){
-						$('#dialog').dialog('close');		// close the dialog
-						$('#dg').datagrid('reload');		// reload the user data
-					} else {
-						$.messager.show({
-							title: 'Error',
-							msg: result.msg
-						});
-					}
-				}
-			});
-		}
-		//end saveData
 		
 		deleteData = function (val){
 				if(confirm("Apakah yakin akan menghapus data '" + val + "'?")){
