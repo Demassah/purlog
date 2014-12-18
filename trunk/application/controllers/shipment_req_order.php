@@ -49,7 +49,7 @@ class shipment_req_order extends CI_Controller {
 		}
 		
 		# rules validasi form
-		$this->form_validation->set_rules("id_detail_pros[]", 'Requestor', 'trim|required|xss_clean');
+		$this->form_validation->set_rules("id_ro[]", 'Requestor', 'trim|required|xss_clean');
 
 		# message rules
 		$this->form_validation->set_message('required', 'Field %s harus diisi.');
@@ -61,8 +61,6 @@ class shipment_req_order extends CI_Controller {
 			if($aksi=="add"){ // add
 				//var_dump($data);
 				$result = $this->mdl_shipment_req_order->Insert($data);
-			}else { // edit
-				$result=$this->mdl_shipment_req_order->Cancel($data);
 			}
 		}
 		
@@ -153,7 +151,7 @@ class shipment_req_order extends CI_Controller {
 			//print_r($data);
 			$result = $this->mdl_shipment_req_order->Insert_detail($data);
 			}else { // edit
-				$result=$this->mdl_shipment_req_order->Update_detail($data);
+				$result=$this->mdl_shipment_req_order->Cancel($data);
 			}
 		}
 		

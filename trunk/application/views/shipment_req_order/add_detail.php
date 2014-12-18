@@ -12,7 +12,6 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
             <?php 
             foreach ($list as $d) {
             echo"
@@ -29,7 +28,6 @@
                 }
                
             ?>
-    </tr>
     </tbody>
 </table>
 </form>

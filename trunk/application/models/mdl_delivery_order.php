@@ -87,36 +87,49 @@ class mdl_delivery_order extends CI_Model {
 		}
 	}
 
-	// detail function
-	function getdatadetail($id_do,$plimit=true){
-		# get parameter from easy grid
-		$page = isset($_POST['page']) ? intval($_POST['page']) : 1;  
-		$limit = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
-		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'id_do';  
-		$order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
-		$offset = ($page-1)*$limit;
-		
-		# create query
-		$this->db->flush_cache();
-		$this->db->start_cache();
+	function getdatadetail($id_do)
+	{
+		// $this->db->flush_cache();
+		// $this->db->start_cache();
 			$this->db->select('id_sro,id_ro,id_do,date_create,id_user,a.status,b.full_name');
-			$this->db->from('tr_sro a');
 			$this->db->join('sys_user b', 'b.user_id = a.id_user');
 			$this->db->where('id_do', $id_do);
-			$this->db->order_by($sort, $order);
-		$this->db->stop_cache();
-		
-		# get count
-		$tmp['row_count'] = $this->db->get()->num_rows();
-		
-		# get data
-		if($plimit == true){
-			$this->db->limit($limit, $offset);
-		}
-		$tmp['row_data'] = $this->db->get();
-		
-		return $tmp;
+			$this->db->order_by('id_do', 'asc');
+				$query = $this->db->get('tr_sro a');
+		$query->result_array();
+		// $this->db->stop_cache();
+
 	}
+	// detail function
+	// function getdatadetail($id_do,$plimit=true){
+	// 	# get parameter from easy grid
+	// 	$page = isset($_POST['page']) ? intval($_POST['page']) : 1;  
+	// 	$limit = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
+	// 	$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'id_do';  
+	// 	$order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
+	// 	$offset = ($page-1)*$limit;
+		
+	// 	# create query
+	// 	$this->db->flush_cache();
+	// 	$this->db->start_cache();
+	// 		$this->db->select('id_sro,id_ro,id_do,date_create,id_user,a.status,b.full_name');
+	// 		$this->db->from('tr_sro a');
+	// 		$this->db->join('sys_user b', 'b.user_id = a.id_user');
+	// 		$this->db->where('id_do', $id_do);
+	// 		$this->db->order_by($sort, $order);
+	// 	$this->db->stop_cache();
+		
+	// 	# get count
+	// 	$tmp['row_count'] = $this->db->get()->num_rows();
+		
+	// 	# get data
+	// 	if($plimit == true){
+	// 		$this->db->limit($limit, $offset);
+	// 	}
+	// 	$tmp['row_data'] = $this->db->get();
+		
+	// 	return $tmp;
+	// }
 
 	// detail sro
 		function getdataadddetail()
