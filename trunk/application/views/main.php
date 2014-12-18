@@ -202,19 +202,19 @@
 		<div data-options="region:'north',border:false" style="height:93px;background:#FFF;background: fixed  no-repeat top left;">
 			<!-- bagian atas -->
 			<div id="topheader">
-				<div class="bg">
-					<div class="logo"><a href="">home</a></div>
-					<div class="title">
+				<div class="bg" >
+					<div class="logo" style="margin-top: 10px;"><a href="">home</a></div>
+					<div class="title" style="margin-top: 30px;">
 						<h1>Sistem Informasi Purchasing Logistic</h1>
 					</div>			 
 					<div class="rpanel">
-						<div class="left">
+						<div class="left" style="margin-top: 10px;">
 							<h4>Selamat Datang :</h4>
-							<p><a href="#">Administrator</a></p>
+							<!-- <p><a href="#">Administrator</a></p> -->
 							<hr>
 							<a href="#" onclick="editData();" class="inlink">Setting dan Ubah Password</a>
 						</div>
-							<div class="right"><a href="<?=base_url()?>auth" class="logout">LOGOUT</a></div>
+							<div class="right" style="margin-top: 5px;"><a href="<?=base_url()?>auth" class="logout">LOGOUT</a></div>
 							<div class="clear"></div>
 					</div>
 					<div class="clear"></div>
