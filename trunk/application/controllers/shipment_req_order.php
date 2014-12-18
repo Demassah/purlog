@@ -49,7 +49,7 @@ class shipment_req_order extends CI_Controller {
 		}
 		
 		# rules validasi form
-		$this->form_validation->set_rules("id_ro", 'Requestor', 'trim|required|xss_clean');
+		$this->form_validation->set_rules("id_detail_pros[]", 'Requestor', 'trim|required|xss_clean');
 
 		# message rules
 		$this->form_validation->set_message('required', 'Field %s harus diisi.');
@@ -59,9 +59,10 @@ class shipment_req_order extends CI_Controller {
 			$data["pesan_error"] .= trim(validation_errors(' ',' '))==''?'':validation_errors(' ',' ');
 		}else{
 			if($aksi=="add"){ // add
+				//var_dump($data);
 				$result = $this->mdl_shipment_req_order->Insert($data);
 			}else { // edit
-				$result=$this->mdl_shipment_req_order->Update($data);
+				$result=$this->mdl_shipment_req_order->Cancel($data);
 			}
 		}
 		
@@ -78,14 +79,15 @@ class shipment_req_order extends CI_Controller {
 	{
 		$data['id_ro']=$id_ro;
 		$data['id_sro']=$id_sro;
+		$data['list']= $this->mdl_shipment_req_order->getdatadetail($id_ro,$id_sro);
 		$this->load->view('shipment_req_order/detail', $data, FALSE);
 	}
 
-	function detail_grid($id_ro,$id_sro)
-	{
-		$data = $this->mdl_shipment_req_order->getdatadetail($id_ro,$id_sro);
-		echo $this->mdl_shipment_req_order->togrid($data['row_data'], $data['row_count']);	
-	}
+	// function detail_grid($id_ro,$id_sro)
+	// {
+	// 	$data = $this->mdl_shipment_req_order->getdatadetail($id_ro,$id_sro);
+	// 	echo $this->mdl_shipment_req_order->togrid($data['row_data'], $data['row_count']);	
+	// }
 
 	function add_detail($id_ro,$id_sro)
 	{

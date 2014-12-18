@@ -125,7 +125,7 @@ class mdl_delivery_order extends CI_Model {
 		$this->db->start_cache();
 		$this->db->select('id_sro,id_ro,id_do,date_create,id_user,a.status,b.full_name');
 		$this->db->join('sys_user b', 'b.user_id = a.id_user');
-		$this->db->where('a.status', 1);
+		$this->db->where('a.status', 2);
 		$this->db->where('id_do', null);
 		$this->db->stop_cache();
 

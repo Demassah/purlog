@@ -3,36 +3,47 @@
 		<table>
 			<tr>
 					<td>
-							&nbsp;&nbsp;<a href="#" onclick="add()" class="easyui-linkbutton" iconCls="icon-ok">Add</a>
+							&nbsp;&nbsp;<a href="#" onclick="Insert()" class="easyui-linkbutton" iconCls="icon-ok">Add</a>
 					</td>							
 			</tr>		
 		</table>
 	</div>
 </div>
-
-<table id="dg" title="Detail Shipment Request Order" data-options="
-			rownumbers:true,
-			singleSelect:false,
-			pagination:true,
-			autoRowHeight:false,
-			fit:true,
-			toolbar:'#toolbar',
-		">		
+<form id="form2" method="post">
+<table class="tbl" id="dg" title="Detail Shipment Request Order">		
 	<thead>
 		<tr>
-			<th data-options="field:'id_detail_pros',width:'100', hidden:true"></th>
-			<th field="id_detail_ro" sortable="true" width="120">ID Detail RO</th>
-			<th field="id_ro" sortable="true" width="120">ID RO</th>
-			<th field="kode_barang" sortable="true" width="120">ID barang</th>
-			<th field="nama_barang" sortable="true" width="120">Item Name</th>
-			<th field="qty" sortable="true" width="80">Qty</th>
-			<th field="id_lokasi" sortable="true" width="200">Lokasi</th>		
-			<th field="chk" width="23" formatter="Checkbox">
-				<input style="margin-top:2px;" type="checkbox" name="checkbox" id="checkbox" onclick="update_value('+index+', this.checked, \''+row.id_jadwal+'\')" '+(row.chk==true?'checked="checked"':'')+'/>
-			</th>
+			<th width="120">ID Detail RO</th>
+			<th width="120">ID RO</th>
+			<th width="120">ID barang</th>
+			<th width="120">Item Name</th>
+			<th width="80">Qty</th>
+			<th width="100">Lokasi</th>	
+			<th width="20"></th>			
 		</tr>
 	</thead>
+	<tbody>
+		<tr>
+			<?php 
+				foreach ($list as $l) {
+					echo "<td>".$l->id_detail_ro."</td>";
+					echo "<td>".$l->id_ro."</td>";
+					echo "<td>".$l->kode_barang."</td>";
+					echo "<td>".$l->nama_barang."</td>";
+					echo "<td>".$l->qty."</td>";
+					echo "<td>".$l->id_lokasi."</td>";
+					echo "<td><input type='checkbox' name='id_detail_pros[]'  value='".$l->id_detail_pros."'></td>";
+				}
+			?>
+		</tr>
+	</tbody>
 </table>
+  <br>  
+  <div align="right">
+      <a href="#" class="easyui-linkbutton" onclick="cancelData();" iconCls="icon-cancel" plain="false">Cancel</a>&nbsp;&nbsp;&nbsp;
+  </div>
+</form>
+
 
 <script>
 	var url;
@@ -40,15 +51,8 @@
 	var id_ro ='<?php echo $id_ro;?>';
 	$(document).ready(function(){
 
-		add = function (val){
-			if(val==null){
-	          var row = $('#dg').datagrid('getData');              
-	          var id = id_ro;
-	          var id_sro=id_sro;
-	          val = id;
-	          id_sro =id_sro;
-	     	}
-	     	
+		Insert = function (val){
+     	
 			$('#dialog').dialog({
 				title: 'Detail SRO',
 				width: 880,
@@ -86,6 +90,32 @@
 			});
 		}
 
+		cancelData = function(){
+      $('#form2').form('submit',{
+        url: base_url+'shipment_req_order/save/cancel',
+        onSubmit: function(){
+          return $(this).form('validate');
+        },
+        success: function(result){
+          //alert(result);
+          var result = eval('('+result+')');
+          if (result.success){
+            $.messager.show({
+              title: 'Succes',
+              msg: 'Data Berhasil Disimpan'
+            });
+            $('#tbodypurchase').html(' ');
+          } else {
+            $.messager.show({
+              title: 'Error',
+              msg: result.msg
+            });
+
+          }
+        }
+      });
+    }
+
 		back = function (val){
 		  //detail
 		  $('#konten').panel({
@@ -93,29 +123,6 @@
 		  });
 		}
 
-		loadingList = function (){
-		$('#dialog').dialog({
-				title: 'Tambah Request Order',
-				width: 980,
-				height: 590,
-				closed: true,
-				cache: false,
-				href:base_url+'shipment_req_order/loadingList',
-				modal: true
-			});			 
-			$('#dialog').dialog('open');
-			url = base_url+'request_order/save/add';
-		}
-		Checkbox = function(value, row, index){
-			return '<input style="margin-top:2px;" type="checkbox" name="checkbox" id="checkbox" onclick="update_value('+index+', this.checked, \''+row.id_jadwal+'\')" '+(row.chk==true?'checked="checked"':'')+'/>';
-		}
-		
-		$(function(){ // init
-			$('#dg').datagrid({url:"shipment_req_order/detail_grid/<?=$id_ro?>/<?=$id_sro?>"});	
-		});	
-
-
-
-		
+			
 	});
 </script>
