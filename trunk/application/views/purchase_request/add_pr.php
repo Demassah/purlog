@@ -105,7 +105,8 @@
   </table>
   <br>  
   <div align="right">
+      <a href="#" class="easyui-linkbutton" onclick="saveData();" iconCls="icon-save" plain="false">Simpan</a>
       <a href="#" class="easyui-linkbutton" onclick="kembali();" iconCls="icon-undo" plain="false">Kembali</a>
-      <a href="#" class="easyui-linkbutton" onclick="saveData();" iconCls="icon-save" plain="false">Simpan</a>&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;
   </div>
 </form>

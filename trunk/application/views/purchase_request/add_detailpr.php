@@ -2,11 +2,9 @@
   var url;
   $(document).ready(function(){
 
-    // kembali = function (){
-    //   $('#konten').panel({      
-    //     href:base_url+'purchase_request/detail_pr/',
-    //   });
-    // }
+    tutup = function (){
+      $('#dialog_kosong').dialog('close');      
+    }
     
     loaddata = function(){
       $.ajax({ 
@@ -105,7 +103,8 @@
   </table>
   <br>  
   <div align="right">
-      <!-- <a href="#" class="easyui-linkbutton" onclick="kembali();" iconCls="icon-undo" plain="false">Kembali</a> -->
-      <a href="#" class="easyui-linkbutton" onclick="saveData();" iconCls="icon-save" plain="false">Simpan</a>&nbsp;&nbsp;&nbsp;
+      <a href="#" class="easyui-linkbutton" onclick="saveData();" iconCls="icon-save" plain="false">Simpan</a>
+      <a href="#" class="easyui-linkbutton" onclick="tutup();" iconCls="icon-cancel" plain="false">Tutup</a>
+      &nbsp;&nbsp;&nbsp;
   </div>
 </form>

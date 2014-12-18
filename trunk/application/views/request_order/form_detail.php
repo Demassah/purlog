@@ -2,6 +2,39 @@
 	$(document).ready(function(){
 
 		var editIndex = undefined;
+
+		tutup = function (){
+			$('#dialog_kosong').dialog('close');			
+		}
+		
+		saveData = function(){
+	      $('#dg_addDetail').edatagrid('submit',{
+	        url: base_url+'request_order/save_detail/<?php echo $id_ro;?>',
+	        onSubmit: function(){
+	          return $(this).edatagrid('validate');
+	        },
+	        success: function(result){
+	          alert(result);
+	          var result = eval('('+result+')');
+	          if (result.success){
+	            $.messager.show({
+	              title: 'Succes',
+	              msg: 'Data Berhasil Disimpan'
+	            });
+	            $('#dialog_kosong').dialog('close');   // close the dialog
+	            //$('#tbodydetail').html(' ');
+	          } else {
+	            $.messager.show({
+	              title: 'Error',
+	              msg: result.msg
+	            });
+
+	          }
+	        }
+	      });
+	    }
+	    //end saveData
+
 		endEditing = function(){
 			if (editIndex == undefined){return true}
 			if ($('#dg_addDetail').edatagrid('validateRow', editIndex)){
@@ -79,7 +112,7 @@
 </script>
 
 
-<div style="margin:15px;width:600px;height:600px">
+<div style="margin:15px;width:600px;height:475px">
 	<input type="hidden" name="id_ro" id="id_ro" value="<?=$id_ro?>">
 	<input type="hidden" name="ext_doc_no" id="ext_doc_no" value="<?=$ext_doc_no?>">
 	<input type="hidden" name="user_id" id="user_id" value="<?=$user_id?>">
@@ -133,3 +166,9 @@
 </div>
 
 </div>
+
+<div align="right">
+      <a href="#" class="easyui-linkbutton" onclick="saveData();" iconCls="icon-save" plain="false">Simpan</a>
+      <a href="#" class="easyui-linkbutton" onclick="tutup();" iconCls="icon-cancel" plain="false">Tutup</a>
+      &nbsp;&nbsp;&nbsp;
+  </div>
