@@ -1,6 +1,6 @@
 <form id="form1" method="post" style="margin:10px">
     <input type="hidden" name="id_sro" value="<?=$id_sro?>"/>
-    <table  title="Detail Shipment Request Order">      
+    <table  title="Detail Shipment Request Order" border='1'>      
         <thead>
             <tr>
                 <th></th>

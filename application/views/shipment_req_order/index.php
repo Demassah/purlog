@@ -75,12 +75,38 @@
 					col += '<a href="#" onclick="detailData(\''+row.id_ro+'/'+row.id_sro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
 			<?}?>
 			<?if($this->mdl_auth->CekAkses(array('menu_id'=>13, 'policy'=>'ACCESS'))){?>
-					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
+					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id_sro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
 			<?}?>
 			return col;
 		}
 
-		
+		doneData = function (val){
+        if(confirm("Apakah yakin akan mengalokasi data ke Delivery Order '" + val + "'?")){
+          var response = '';
+          $.ajax({ type: "GET",
+             url: base_url+'shipment_req_order/done/' + val,
+             async: false,
+             success : function(response){
+              var response = eval('('+response+')');
+              if (response.success){
+                $.messager.show({
+                  title: 'Success',
+                  msg: 'Data Berhasil Dialokasi'
+                });
+                // reload and close tab
+                $('#dg').datagrid('reload');
+              } else {
+                $.messager.show({
+                  title: 'Error',
+                  msg: response.msg
+                });
+              }
+             }
+          });
+        }
+      //}
+    }
+
 		$(document).ready(function(){
 			$(".select").select2();
 		});

@@ -21,6 +21,7 @@ class mdl_delivery_order extends CI_Model {
 			$this->db->from('tr_do a');
 			$this->db->join('ref_courir b', 'b.id_courir = a.id_courir', 'left');
 			$this->db->join('sys_user c', 'c.user_id = a.id_user', 'left');
+			$this->db->where('a.status', 1);
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
 		
@@ -52,6 +53,22 @@ class mdl_delivery_order extends CI_Model {
 		return json_encode($response);
 	}
 
+	function done($kode){
+		
+		$this->db->flush_cache();
+
+		$this->db->set('status', "2");
+
+		$this->db->where('id_do', $kode);
+		$result = $this->db->update('tr_do');
+
+		//return
+		if($result) {
+				return TRUE;
+		}else {
+				return FALSE;
+		}
+	}
 
 	function InsertOnDb($data){
 		$this->db->flush_cache();
@@ -69,7 +86,6 @@ class mdl_delivery_order extends CI_Model {
 			return FALSE;
 		}
 	}
-
 
 	// detail function
 	function getdatadetail($id_do,$plimit=true){
@@ -109,8 +125,8 @@ class mdl_delivery_order extends CI_Model {
 		$this->db->start_cache();
 		$this->db->select('id_sro,id_ro,id_do,date_create,id_user,a.status,b.full_name');
 		$this->db->join('sys_user b', 'b.user_id = a.id_user');
-		$wcond = 'a.status = 1 and isnull(id_do) or id_do = 0';
-		$this->db->where($wcond);
+		$this->db->where('a.status', 1);
+		$this->db->where('id_do', null);
 		$this->db->stop_cache();
 
 		$query = $this->db->get('tr_sro a');
@@ -136,6 +152,9 @@ class mdl_delivery_order extends CI_Model {
 			return FALSE;
 		}
 	}
+
+
+
 	
 }
 
