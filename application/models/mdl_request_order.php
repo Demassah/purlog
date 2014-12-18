@@ -182,6 +182,57 @@ class mdl_request_order extends CI_Model {
 				return FALSE;
 		}
 	}
+
+	function load_kode_barang(){
+		#get filter
+		
+		# create query
+		$this->db->flush_cache();
+		$this->db->start_cache();
+			$this->db->select('a.kode_barang, concat(a.kode_barang, \' - \' ,a.nama_barang) as nama_barang', false);
+			$this->db->from('ref_barang a');
+			$this->db->order_by('a.nama_barang', 'ASC');
+		$this->db->stop_cache();
+		
+		# get count
+		$tmp['row_count'] = $this->db->get()->num_rows();
+		
+		# get data
+		$tmp['row_data'] = $this->db->get();
+		
+		return $tmp;
+	}
+
+	function Update_DetailRO($data){
+		$this->db->trans_start();
+		
+		$result = true;
+		
+		# tambah data ke tabel
+		foreach($data['data_detailRO']['rows'] as $row){
+			
+			$this->db->flush_cache();
+			$this->db->set('id_ro', $row['id_ro']);
+			$this->db->set('ext_doc_no', $row['ext_doc_no']);
+			$this->db->set('kode_barang', $row['kode_barang']);
+			$this->db->set('qty', $row['qty']);
+			$this->db->set('user_id', $row['user_id']);
+			$this->db->set('date_create', $row['date_create']);
+            $this->db->set('note', $row['note']);
+            $this->db->set('status', $row['status']); //status = 1
+            $this->db->set('status_delete', $row['status_delete']); //status = 0
+            $this->db->set('id_sro', $row['id_sro']); //status = 0
+			
+			$this->db->where('id_krs_detail', $row['id_krs_detail']);
+
+			$result = $this->db->update('tbl_krs_detail');
+			
+		}
+		
+		//return
+		$this->db->trans_complete();
+	    return $this->db->trans_status();
+	}
 	
 }
 

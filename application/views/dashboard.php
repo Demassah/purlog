@@ -1,25 +1,25 @@
-<script src="<?=base_url();?>asset/js/Chart.js"></script>
+<!--<script src="<?=base_url();?>asset/js/Chart.js"></script>-->
 <script>
 		$(document).ready(function(){
 			
 			$('#menu-mhs').click(function(){
 				$('#konten').panel({
-					href:base_url+'mahasiswa'
+					href:base_url+'barang'
 				});
 			});
 			$('#menu-krs').click(function(){
 				$('#konten').panel({
-					href:base_url+'krs'
+					href:base_url+'barang'
 				});
 			});
 			$('#menu-trns').click(function(){
 				$('#konten').panel({
-					href:base_url+'transkrip'
+					href:base_url+'barang'
 				});
 			});
 			$('#menu-ka').click(function(){
 				$('#konten').panel({
-					href:base_url+'kalender_akademik'
+					href:base_url+'barang'
 				});
 			});
 		});
@@ -32,8 +32,8 @@
 		<div class="col3">
 			<a>
 			  <div class="icon">
-				<img src="<?php echo base_url();?>asset/images/s1.png">
-				<img src="<?php echo base_url();?>asset/images/s1-h.png" class="hover">
+				<!-- <img src="<?php echo base_url();?>asset/images/s1.png">
+				<img src="<?php echo base_url();?>asset/images/s1-h.png" class="hover"> -->
 			  </div>
 			  <div class="heading">
 				 <!--<?php echo $mhsActCount;?>-->
@@ -46,8 +46,8 @@
 		<div class="col3">
 			<a>
 			  <div class="icon">
-				<img src="<?php echo base_url();?>asset/images/s2.png">
-				<img src="<?php echo base_url();?>asset/images/s2-h.png" class="hover">
+				<!-- <img src="<?php echo base_url();?>asset/images/s2.png">
+				<img src="<?php echo base_url();?>asset/images/s2-h.png" class="hover"> -->
 			  </div>
 			  <div class="heading">
 				 <!--<?php echo $mhsCount;?>-->
@@ -60,8 +60,8 @@
 		<div class="col3">
 			<a>
 			  <div class="icon">
-				<img src="<?php echo base_url();?>asset/images/t.png">
-				<img src="<?php echo base_url();?>asset/images/t-h.png" class="hover">
+				<!-- <img src="<?php echo base_url();?>asset/images/t.png">
+				<img src="<?php echo base_url();?>asset/images/t-h.png" class="hover"> -->
 			  </div>
 			  <div class="heading">
 				 <!--<?php echo $dsnCount;?>-->
@@ -123,7 +123,7 @@
 	</div>
 </div>
 
-<script>
+<!--<script>
 	var canvasNode = document.getElementById("canvas");
 	var canvasParent = document.getElementById("diagram");
 	canvasNode.width = (canvasParent.clientWidth * 60) / 100;
@@ -153,4 +153,4 @@
 	}
 
 	var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData);
-</script>
+</script>-->
