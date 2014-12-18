@@ -1,5 +1,5 @@
 <form id="form1"  method="post" accept-charset="utf-8">
-<input type="text" name="id_sro" value="<?=$id_sro?>"/>
+<input type="hidden" name="id_sro" value="<?=$id_sro?>"/>
     <table  title="Detail Shipment Request Order">      
         <thead>
             <tr>
@@ -13,7 +13,7 @@
              <?php foreach ($list as $l) {
             echo"
                 <tr>
-                <td align='center'><input type='checkbox' name='item' value='$l->kode_barang'></td>
+                <td align='center'><input type='checkbox' name='item[]' value='$l->kode_barang'></td>
                 <td>$l->id_ro</td>
                 <td>$l->ext_doc_no</td>
                 <td>$l->kode_barang</td>
