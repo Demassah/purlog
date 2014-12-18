@@ -3,49 +3,52 @@
 		<table>
 			<tr>
 					<td>
-							&nbsp;&nbsp;<a href="#" onclick="Insert()" class="easyui-linkbutton" iconCls="icon-ok">Add</a>
+							&nbsp;&nbsp;<a href="#" onclick="Add_sro()" class="easyui-linkbutton" iconCls="icon-ok">Add</a>
 					</td>							
 			</tr>		
 		</table>
 	</div>
 </div>
-<form id="form1" id="dg" method="post">
-  <table class="tbl" title="List Delivery Order">       
-    <thead>
-      <tr>
-        <th width="20"></th>
-        <th width="20">ID SRO</th>
-        <th width="120">Create</th>
-        <th width="120">Requestor</th>         
-      </tr>
-    </thead>
-    <tbody>
-      <?php 
-        // foreach ($list as $d) {
-        foreach ($item as $l) {
-
-       		echo"
-          <tr>
-          <td align='center'><input type='checkbox' name='id_sro[]'  value='".$l->id_sro."'>
-          <input type='hidden' name='id_do'  value='$id_do'></td>
-          <td>".$l->id_sro."</td>
-          <td>".$l->date_create."</td>
-          <td>".$l->full_name."</td>
-          </tr> ";
-         }
-       ?>
-    </tbody>
-  </table>
-
-   <br>  
+<form id="form2" method="post">
+	<div id="isi">
+	  <table class="tbl" title="List Delivery Order">       
+	    <thead>
+	      <tr>
+	        <th width="20"></th>
+	        <th width="20">ID SRO</th>
+	        <th width="120">Create</th>
+	        <th width="120">Requestor</th>         
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <?php 
+	        // foreach ($list as $d) {
+	        foreach ($item as $l) {
+	       		echo "<tr>";
+	          echo "<td align='center'><input type='checkbox' name='id_sro[]' value=".$l->id_sro.">";
+	          echo "<input type='hidden' name='id_do'  value='$id_do'></td>";
+	          echo "<td>".$l->id_sro."</td>";
+	          echo "<td>".$l->date_create."</td>";
+	          echo "<td>".$l->full_name."</td>";
+	          echo "</tr>";
+	         }
+	       ?>
+	    </tbody>
+	  </table>
+	</div>
+    <br>
 	  <div align="right">
 	      <a href="#" class="easyui-linkbutton" onclick="CancelData();" iconCls="icon-cancel" plain="false">Cancel</a>&nbsp;&nbsp;&nbsp;
 	  </div>
+
 </form>
+
+
 
 <script>
 	
 	var url;
+	var id_do = '<?=$id_do;?>'
 	$(document).ready(function(){
 
 		// search text combo
@@ -59,25 +62,25 @@
 			});
 		}
 
-		Insert = function (){
+		Add_sro = function (){
 			$('#dialog').dialog({
 				title: 'Add Shipment Request Order',
-				width: 480,
+				width: 580,
 				height: 290,
 				closed: true,
 				cache: false,
-				href: base_url + 'delivery_order/add_detail/<?=$id_do?>',
+				href: base_url+'delivery_order/add_detail/<?=$id_do?>',
 				modal: true
-			}); 
+			});
 			 
-			// $('#dialog').dialog('open');
-			// url = base_url+'delivery_order/save_add/add';
+			$('#dialog').dialog('open');
+			url = base_url+'delivery_order/save_add/add';
 		}
 
 		saveData = function(){
 			
 			$('#form1').form('submit',{
-				url: base_url+'delivery_order/save_add/add',
+				url: url,
 				onSubmit: function(){
 					return $(this).form('validate');
 				},
@@ -86,7 +89,8 @@
 					var result = eval('('+result+')');
 					if (result.success){
 						$('#dialog').dialog('close');		// close the dialog
-						$('#dg').datagrid('reload');		// reload the user data
+						//$('#isi').html(' ');
+						$("#isi").load('<?=base_url();?>delivery_order/after/'+id_do).fadeIn(5000);
 					} else {
 						$.messager.show({
 							title: 'Error',
@@ -97,7 +101,32 @@
 			});
 		}				
 
-		
-		
+		CancelData = function(){
+      $('#form2').form('submit',{
+        url: base_url + 'delivery_order/save_add/cancel',
+        onSubmit: function(){
+          return $(this).form('validate');
+        },
+        success: function(result){
+          //alert(result);
+          var result = eval('('+result+')');
+          if (result.success){
+            $.messager.show({
+              title: 'Succes',
+              msg: 'Data Berhasil ',
+            });
+            $("#isi").load('<?=base_url();?>delivery_order/after/'+id_do).fadeIn(5000);
+            $('#tbodypurchase').html(' ');
+          } else {
+            $.messager.show({
+              title: 'Error',
+              msg: result.msg
+            });
+          }
+        }
+      });
+    }
+
+	
 	});
 </script>

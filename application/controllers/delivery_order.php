@@ -104,7 +104,7 @@ class delivery_order extends CI_Controller {
 		}
 		
 		# rules validasi form
-		$this->form_validation->set_rules("id_sro[]", 'ID Pros Detail', 'trim|required|xss_clean');
+		$this->form_validation->set_rules("id_sro[]", 'ID SRO', 'trim|required|xss_clean');
 
 		# message rules
 		$this->form_validation->set_message('required', 'Field %s harus diisi.');
@@ -117,7 +117,7 @@ class delivery_order extends CI_Controller {
 			//print_r($data);
 			$result = $this->mdl_delivery_order->Insert_detail($data);
 			}else { // edit
-				$result=$this->mdl_delivery_order->Update_detail($data);
+				$result=$this->mdl_delivery_order->cancel($data);
 			}
 		}
 		
@@ -127,6 +127,39 @@ class delivery_order extends CI_Controller {
 			echo json_encode(array('msg' => 'Data gagal dikirim'));
 		}
 	}
+
+	function after($id_do)
+	{
+
+		$data['id_do']=$id_do;
+		$list= $this->mdl_delivery_order->getdatadetail($id_do);
+		echo'
+			<table class="tbl" title="List Delivery Order">       
+    <thead>
+      <tr>
+        <th width="20"></th>
+        <th width="20">ID SRO</th>
+        <th width="120">Create</th>
+        <th width="120">Requestor</th>         
+      </tr>
+    </thead>
+    <tbody>';
+        foreach ($list as $l) {
+       		echo"
+          <tr>
+          <td align='center'><input type='checkbox' name='id_sro[]'  value='".$l->id_sro."'>
+          <input type='hidden' name='id_do'  value='$id_do'></td>
+          <td>".$l->id_sro."</td>
+          <td>".$l->date_create."</td>
+          <td>".$l->full_name."</td>
+          </tr> ";
+         }
+        echo"
+    </tbody>
+  </table>";
+  
+	}
+
 
 	
 	
