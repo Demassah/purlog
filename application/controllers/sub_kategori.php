@@ -37,7 +37,7 @@ class sub_kategori extends CI_Controller {
 		$this->load->view('master/sub_kategori_form', $data);
 	}
 	
-	function save($aksi){
+	function save($aksi){ 
 		# init
 		$status = "";
 		$result = false;
