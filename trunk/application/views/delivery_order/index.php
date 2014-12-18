@@ -1,94 +1,3 @@
-<script>
-	var url;
-	$(document).ready(function(){
-
-		// search text combo
-		$(document).ready(function(){
-			$("#search").select2();
-		});
-
-		detailDO = function (){
-			$('#konten').panel({
-				href: base_url+'delivery_order/detail',
-			});
-		}
-	
-		newData = function (){
-			$('#dialog').dialog({
-				title: 'Tambah Delivery Order',
-				width: 380,
-				height: 130,
-				closed: true,
-				cache: false,
-				href: base_url+'delivery_order/add',
-				modal: true
-			});
-			 
-			$('#dialog').dialog('open');
-			url = base_url+'delivery_order/save/add';
-		}
-		// end newData
-		saveData = function(){
-			
-			$('#form1').form('submit',{
-				url: url,
-				onSubmit: function(){
-					return $(this).form('validate');
-				},
-				success: function(result){
-					alert(result);
-					var result = eval('('+result+')');
-					if (result.success){
-						$('#dialog').dialog('close');		// close the dialog
-						$('#dg').datagrid('reload');		// reload the user data
-					} else {
-						$.messager.show({
-							title: 'Error',
-							msg: result.msg
-						});
-					}
-				}
-			});
-		}
-		// save data
-		
-		actionbutton = function(value, row, index){
-			var col='';
-
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>19, 'policy'=>'DETAIL'))){?>
-					col += '&nbsp;&nbsp; &nbsp;&nbsp;<a href="#" onclick="detailDO(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
-			<?}?>
-			
-					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
-			return col;
-		}
-		
-		$(function(){
-			$('#dg').datagrid({
-				url:base_url+"delivery_order/grid"
-			});
-		});
-		
-		//# Tombol Bawah
-		$(function(){
-			var pager = $('#dg').datagrid().datagrid('getPager');	// get the pager of datagrid
-			pager.pagination({
-				buttons:[
-				<?if($this->mdl_auth->CekAkses(array('menu_id'=>19, 'policy'=>'ADD'))){?>
-					{
-						iconCls:'icon-add',
-						text:'Tambah Data',
-						handler:function(){
-							newData();
-						}
-					}
-					<?}?>
-				]
-			});			
-		});
-		
-	});
-</script>
 <table id="dg" title="Delivery Order List" data-options="
 			rownumbers:true,
 			singleSelect:true,
@@ -131,3 +40,119 @@
 		</table>
 	</div>
 </div>
+<script>
+	var url;
+	$(document).ready(function(){
+
+		// search text combo
+		$(document).ready(function(){
+			$("#search").select2();
+		});
+
+		detailDO = function (val){
+			$('#konten').panel({
+				href: base_url+'delivery_order/detail/'+val,
+			});
+		}
+	
+		newData = function (){
+			$('#dialog').dialog({
+				title: 'Tambah Delivery Order',
+				width: 380,
+				height: 130,
+				closed: true,
+				cache: false,
+				href: base_url+'delivery_order/add',
+				modal: true
+			});
+			 
+			$('#dialog').dialog('open');
+			url = base_url+'delivery_order/save/add';
+		}
+		// end newData
+		saveData = function(){
+			
+			$('#form1').form('submit',{
+				url: url,
+				onSubmit: function(){
+					return $(this).form('validate');
+				},
+				success: function(result){
+					alert(result);
+					var result = eval('('+result+')');
+					if (result.success){
+						$('#dialog').dialog('close');		// close the dialog
+						$('#dg').datagrid('reload');		// reload the user data
+					} else {
+						$.messager.show({
+							title: 'Error',
+							msg: result.msg
+						});
+					}
+				}
+			});
+		}
+		// save data
+		doneData = function (val){
+			if(confirm("Apakah yakin akan mengirim data ke Delivery '" + val + "'?")){
+				var response = '';
+				$.ajax({ type: "GET",
+					 url: base_url+'delivery_order/doneData/' + val,
+					 async: false,
+					 success : function(response){
+						var response = eval('('+response+')');
+						if (response.success){
+							$.messager.show({
+								title: 'Success',
+								msg: 'Data Berhasil Dikirim'
+							});
+							// reload and close tab
+							$('#dg').datagrid('reload');
+						} else {
+							$.messager.show({
+								title: 'Error',
+								msg: response.msg
+							});
+						}
+					 }
+				});
+			}
+		}
+		//Done 
+		actionbutton = function(value, row, index){
+			var col='';
+
+			<?if($this->mdl_auth->CekAkses(array('menu_id'=>19, 'policy'=>'DETAIL'))){?>
+					col += '&nbsp;&nbsp; &nbsp;&nbsp;<a href="#" onclick="detailDO(\''+row.id_do+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
+			<?}?>
+			
+					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id_do+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
+			return col;
+		}
+		
+		$(function(){
+			$('#dg').datagrid({
+				url:base_url+"delivery_order/grid"
+			});
+		});
+		
+		//# Tombol Bawah
+		$(function(){
+			var pager = $('#dg').datagrid().datagrid('getPager');	// get the pager of datagrid
+			pager.pagination({
+				buttons:[
+				<?if($this->mdl_auth->CekAkses(array('menu_id'=>19, 'policy'=>'ADD'))){?>
+					{
+						iconCls:'icon-add',
+						text:'Tambah Data',
+						handler:function(){
+							newData();
+						}
+					}
+					<?}?>
+				]
+			});			
+		});
+		
+	});
+</script>

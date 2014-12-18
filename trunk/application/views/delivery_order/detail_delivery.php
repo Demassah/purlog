@@ -1,30 +1,12 @@
-
 <div id="toolbar_detail" style="padding:5px;height:auto">
 	<div class="fsearch">
 		<table>
 			<tr>
-					<td>&nbsp;&nbsp;<a href="#" onclick="listSRO()" class="easyui-linkbutton" iconCls="icon-detail">Add SRO</a></td>					
-			</tr>
-			<tr> 
-					<td>&nbsp;</td>
-			</tr>		
-			<tr> 
-				<td>
-						<label style="width:120px">&nbsp;&nbsp;SRO </label>:
-							<select id="SRO" name=" " style="width:200px;">
-								<option>Pilih</option>
-								<option>SRO 1</option>
-		            <option>SRO 2</option>
-		            <option>SRO 3</option>	
-		            <option>SRO 4</option>              
-						</select>	
-						&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-ok">Done</a>
-				</td>
-			</tr>			
+					<td>&nbsp;&nbsp;<a href="#" onclick="add_sro()" class="easyui-linkbutton" iconCls="icon-detail">Add SRO</a></td>					
+			</tr>	
 		</table>
 	</div>
 </div>
-
 
 <table id="dg" title="Detail Delivery Order" data-options="
 			rownumbers:true,
@@ -36,16 +18,16 @@
 		">		
 	<thead>
 		<tr>
-			<th data-options="field:'id_krs_detail',width:'100', hidden:true">aa</th>
-			<th field="nama_kategori" sortable="true" width="120">ID Detail ROS</th>
-			<th field="kode_barang" sortable="true" width="120">ID ROS</th>
-			<th field="kode_barang" sortable="true" width="120">ID Item</th>
-			<th field="kode_barang" sortable="true" width="80">Qty</th>
-			<th field="nama_sub_kategori" sortable="true" width="480">Deskripsi</th>		
-			<th field="action" align="center" formatter="actiondetail" width="140">Aksi</th>
+			<th data-options="field:'id_krs_detail',width:'100', hidden:true"></th>
+			<th field="id_do" sortable="true" width="120">ID DO</th>
+			<th field="id_sro" sortable="true" width="120">ID SRO</th>
+			<th field="date_create" sortable="true" width="80">Create</th>
+			<th field="full_name" sortable="true" width="180">Requestor</th>	
+			<!-- <th field="action" align="center" formatter="actiondetail" width="140">Aksi</th>	 -->
 		</tr>
 	</thead>
 </table>
+
 
 <script>
 	
@@ -63,37 +45,62 @@
 			});
 		}
 
-		listSRO = function (){
+		add_sro = function (){
 			$('#dialog').dialog({
 				title: 'Add Shipment Request Order',
-				width: $(window).width() * 0.8,
-				height: $(window).height() * 0.99,
+				width: 480,
+				height: 290,
 				closed: true,
 				cache: false,
-				href: base_url+'delivery_order/listSRO',
+				href: base_url+'delivery_order/add_detail/<?=$id_do?>',
 				modal: true
 			});
 			 
 			$('#dialog').dialog('open');
-			url = base_url+'departement/save/add';
+			url = base_url+'delivery_order/save_add/add';
 		}
 
-		detailSROlist = function (){
-			$('#konten').panel({
-				href: base_url+'delivery_order/detailSROlist',
+		saveData = function(){
+			
+			$('#form1').form('submit',{
+				url: url,
+				onSubmit: function(){
+					return $(this).form('validate');
+				},
+				success: function(result){
+					alert(result);
+					var result = eval('('+result+')');
+					if (result.success){
+						$('#dialog').dialog('close');		// close the dialog
+						$('#dg').datagrid('reload');		// reload the user data
+					} else {
+						$.messager.show({
+							title: 'Error',
+							msg: result.msg
+						});
+					}
+				}
 			});
-		}
-				
-		actiondetail = function(value, row, index){
-			var col='';
-					col += '<a href="#" onclick="detailSROlist(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';			
-					col += '&nbsp;&nbsp; | &nbsp;&nbsp;<a href="#" onclick="detailData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Cancel</a>';			
-			return col;
-		}
+		}				
+
+		// detail_sro = function (val){
+		// 	$('#konten').panel({
+		// 		href:base_url+'delivery_order/detail/'+val
+		// 	});
+		// }
+
+		// actiondetail = function(value, row, index){
+		// 	var col='';
+		// 	<?if($this->mdl_auth->CekAkses(array('menu_id'=>19, 'policy'=>'DETAIL'))){?>
+		// 			col += '&nbsp;&nbsp; &nbsp;&nbsp;<a href="#" onclick="detail_sro(\''+row.id_sro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
+		// 	<?}?>			
+		// 	return col;
+		// }
 		
 
 		$(function(){ // init
-			$('#dg').datagrid({url:"delivery_order/grid"});				
+			$('#dg').datagrid({url:"delivery_order/detail_grid/<?=$id_do?>"
+			});				
 		});	
 
 		//# Tombol Bawah
@@ -107,18 +114,10 @@
             handler:function(){
               back();
             }
-          },
-          {
-            iconCls:'icon-print',
-            text:'Print',
-            handler:function(){
-              print();
-            }
-          }           
+          }         
         ]
       });     
     });
 		
 	});
 </script>
-
