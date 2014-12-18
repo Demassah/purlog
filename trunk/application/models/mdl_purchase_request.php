@@ -206,43 +206,6 @@ class mdl_purchase_request extends CI_Model {
 		return false;
 	}
 
-	// function getdata_detailpr($id_pr, $plimit=true){
-	// 	# get parameter from easy grid
-	// 	$page = isset($_POST['page']) ? intval($_POST['page']) : 1;  
-	// 	$limit = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
-	// 	$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'a.id_pr';  
-	// 	$order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
-	// 	$offset = ($page-1)*$limit;
-		
-	// 	# create query
-	// 	$this->db->flush_cache();
-	// 	$this->db->start_cache();
-	// 		$this->db->select('*, a.id_pr, a.id_ro, a.qty, a.note, c.full_name, d.departement_name, a.kode_barang, e.nama_barang');
-	// 		$this->db->from('tr_pr_detail a');
-	// 		$this->db->join('tr_pr b', 'b.id_ro = a.id_ro');
-	// 		$this->db->join('sys_user c', 'c.user_id = a.user_id');
-	// 		$this->db->join('ref_departement d', 'd.departement_id = c.departement_id');
-	// 		$this->db->join('ref_barang e', 'e.kode_barang = a.kode_barang');
-
-	// 		$this->db->where('a.id_pr', $id_pr);
-	// 		$this->db->where('a.status', '1');
-	// 		//$this->db->where('a.status_delete', '0');
-
-	// 		$this->db->order_by($sort, $order);
-	// 	$this->db->stop_cache();
-		
-	// 	# get count
-	// 	$tmp['row_count'] = $this->db->get()->num_rows();
-		
-	// 	# get data
-	// 	if($plimit == true){
-	// 		$this->db->limit($limit, $offset);
-	// 	}
-	// 	$tmp['row_data'] = $this->db->get();
-		
-	// 	return $tmp;
-	// }
-
 	function getdata_detailpr($dt){
 		$this->db->flush_cache();
 		$this->db->select('a.id_detail_pr, a.id_ro, a.id_detail_ro, a.kode_barang, b.nama_barang, a.qty, c.full_name, a.date_create, a.note');
@@ -269,14 +232,6 @@ class mdl_purchase_request extends CI_Model {
 			$out .= '<tr>';
 			$out .= '  <td bgcolor="'.$color.'">'.$i;
 			$out .= '     <input type="hidden" name="data['.$i.'][id_detail_pr]" value="'.$r->id_detail_pr.'">';
-			// $out .= '     <input type="hidden" name="data['.$i.'][id_ro]" value="'.$r->id_ro.'">';
-			// $out .= '     <input type="hidden" name="data['.$i.'][user_id]" value="'.$r->user_id.'">';
-			// $out .= '     <input type="hidden" name="data['.$i.'][purpose]" value="'.$r->purpose.'">';
-			// $out .= '     <input type="hidden" name="data['.$i.'][cat_req]" value="'.$r->cat_req.'">';
-			// $out .= '     <input type="hidden" name="data['.$i.'][ext_doc_no]" value="'.$r->ext_doc_no.'">';
-			// $out .= '     <input type="hidden" name="data['.$i.'][ETD]" value="'.$r->ETD.'">';
-			// $out .= '     <input type="hidden" name="data['.$i.'][date_create]" value="'.$r->date_create.'">';
-			//$out .= '     <input type="hidden" name="data['.$i.'][date_create]" value="'.$r->date_create.'">';
 						  
 			$out .= '  </td>';
 			$out .= '  <td bgcolor="'.$color.'">'.$r->id_ro.'</td>';
@@ -304,8 +259,7 @@ class mdl_purchase_request extends CI_Model {
 		foreach($data as $row){
 			if(isset($row['chk'])){
 				# update table purchase request detail
-				//$this->db->flush_cache();
-
+				$this->db->flush_cache();
 				$this->db->set('status', '2');
 				if(isset($data['id_pr'])){
 					$this->db->set('id_pr', $data['id_pr']);
@@ -313,19 +267,6 @@ class mdl_purchase_request extends CI_Model {
 				//var_dump($row); exit();
 				$this->db->where('id_detail_pr', $row['id_detail_pr']);
 				$this->db->update('tr_pr_detail');
-
-				# insert to table purchase reqeust
-				//$this->db->flush_cache();
-				// $this->db->set('id_ro', $row['id_ro']);
-				// $this->db->set('user_id', $row['user_id']);
-				// $this->db->set('purpose', $row['purpose']);
-				// $this->db->set('cat_req', $row['cat_req']);
-				// $this->db->set('ext_doc_no', $row['ext_doc_no']);
-				// $this->db->set('ETD', $row['ETD']);
-				// $this->db->set('date_create', $row['date_create']);
-				//$this->db->set('status', '2');
-
-				//$this->db->insert('tr_pr');
 			}
 		}
 

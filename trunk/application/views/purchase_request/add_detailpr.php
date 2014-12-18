@@ -64,9 +64,7 @@
           <tr>
             <td>ID Request Order</td>
             <td>: 
-              <select id="id_ro" name="id_ro" style="width:80px;" ReadOnly="True" >
-                <?=$this->mdl_prosedur->OptionRO_DetailPR(array('value'=>$id_ro));?>
-              </select>
+              <input name="id_ro" readonly="True" size="10" value="<?=$id_ro?>">
             </td>
             <td>&nbsp;&nbsp;&nbsp;</td>
           
