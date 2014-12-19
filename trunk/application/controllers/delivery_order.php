@@ -5,7 +5,7 @@ class delivery_order extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->model('mdl_delivery_order');
-		$this->load->model('mdl_courir');
+		//$this->load->model('mdl_courir');
 		//$this->output->enable_profiler(TRUE);
 	}
 	
@@ -30,7 +30,7 @@ class delivery_order extends CI_Controller {
   function add(){
 		$this->data['id_user'] = '';
 		$this->data['date'] = '';
-		$this->data['list'] = $this->mdl_courir->v_courir();
+		//$this->data['list'] = $this->mdl_courir->v_courir();
 		$this->load->view('delivery_order/form',$this->data);
 	}
 
@@ -78,11 +78,12 @@ class delivery_order extends CI_Controller {
 		$this->load->view('delivery_order/detail_delivery',$data);
 	}
 
-	// function detail_grid($id_do)
-	// {
-	// 	$data = $this->mdl_delivery_order->getdatadetail($id_do);
-	// 	echo $this->mdl_delivery_order->togrid($data['row_data'], $data['row_count']);	
-	// }
+	// detail sro
+	function detail_ro($id_sro='')
+	{
+		$data['list']=$this->mdl_delivery_order->detail_ro($id_sro);
+		$this->load->view('delivery_order/detail_ro', $data, FALSE);
+	}
 
 	// funtion Add SRO
 	function add_detail($id_do)
@@ -139,8 +140,11 @@ class delivery_order extends CI_Controller {
       <tr>
         <th width="20"></th>
         <th width="20">ID SRO</th>
-        <th width="120">Create</th>
-        <th width="120">Requestor</th>         
+        <th width="20">ID RO</th>
+        <th width="20">ID DO</th>
+        <th width="140">Create</th>
+        <th width="100">Requestor</th>
+        <th width="30">Aksi</th>        
       </tr>
     </thead>
     <tbody>';
@@ -150,8 +154,12 @@ class delivery_order extends CI_Controller {
           <td align='center'><input type='checkbox' name='id_sro[]'  value='".$l->id_sro."'>
           <input type='hidden' name='id_do'  value='$id_do'></td>
           <td>".$l->id_sro."</td>
+          <td>".$l->id_ro."</td>
+          <td>$id_do</td>
           <td>".$l->date_create."</td>
-          <td>".$l->full_name."</td>
+          <td>".$l->full_name."</td>";
+    echo '<td><a href="javascript:void(0)"  onclick="Detail_ro(id_ro);" plain="false">Detail</a></td>';
+    echo "
           </tr> ";
          }
         echo"

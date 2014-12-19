@@ -89,48 +89,22 @@ class mdl_delivery_order extends CI_Model {
 
 	function getdatadetail($id_do)
 	{
-		// $this->db->flush_cache();
-		// $this->db->start_cache();
+		$this->db->flush_cache();
+		$this->db->start_cache();
 			$this->db->select('id_sro,id_ro,id_do,date_create,id_user,a.status,b.full_name');
 			$this->db->join('sys_user b', 'b.user_id = a.id_user');
 			$this->db->where('id_do', $id_do);
 			$this->db->order_by('id_do', 'asc');
+			$this->db->stop_cache();
+
 			$query = $this->db->get('tr_sro a');
+
 			return $query->result();
 
-		// $this->db->stop_cache();
+		
 
 	}
-	// detail function
-	// function getdatadetail($id_do,$plimit=true){
-	// 	# get parameter from easy grid
-	// 	$page = isset($_POST['page']) ? intval($_POST['page']) : 1;  
-	// 	$limit = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
-	// 	$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'id_do';  
-	// 	$order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
-	// 	$offset = ($page-1)*$limit;
-		
-	// 	# create query
-	// 	$this->db->flush_cache();
-	// 	$this->db->start_cache();
-	// 		$this->db->select('id_sro,id_ro,id_do,date_create,id_user,a.status,b.full_name');
-	// 		$this->db->from('tr_sro a');
-	// 		$this->db->join('sys_user b', 'b.user_id = a.id_user');
-	// 		$this->db->where('id_do', $id_do);
-	// 		$this->db->order_by($sort, $order);
-	// 	$this->db->stop_cache();
-		
-	// 	# get count
-	// 	$tmp['row_count'] = $this->db->get()->num_rows();
-		
-	// 	# get data
-	// 	if($plimit == true){
-	// 		$this->db->limit($limit, $offset);
-	// 	}
-	// 	$tmp['row_data'] = $this->db->get();
-		
-	// 	return $tmp;
-	// }
+
 
 	// detail sro
 		function getdataadddetail()
@@ -186,6 +160,17 @@ class mdl_delivery_order extends CI_Model {
 			return FALSE;
 		}
 
+	}
+
+	// detail ro
+	function detail_ro($id_ro='')
+	{
+		$this->db->select('a.id_ro,ext_doc_no,qty,a.kode_barang,date_create,a.user_id,date_create,b.full_name,c.nama_barang,note');
+		$this->db->join('sys_user b', 'b.user_id = a.user_id');
+		$this->db->join('ref_barang c', 'c.kode_barang = a.kode_barang');
+		$this->db->where('a.id_ro', $id_ro);
+		$query = $this->db->get('tr_ro_detail a');
+		return $query->result();
 	}
 
 
