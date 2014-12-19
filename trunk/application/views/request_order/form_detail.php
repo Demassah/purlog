@@ -1,118 +1,69 @@
 <script>
 	$(document).ready(function(){
 
-		var editIndex = undefined;
-
 		tutup = function (){
-			$('#dialog_kosong').dialog('close');			
-		}
-		
-		saveData = function(){
-	      $('#dg_addDetail').edatagrid('submit',{
-	        url: base_url+'request_order/save_detail/<?php echo $id_ro;?>',
-	        onSubmit: function(){
-	          return $(this).edatagrid('validate');
-	        },
-	        success: function(result){
-	          alert(result);
-	          var result = eval('('+result+')');
-	          if (result.success){
-	            $.messager.show({
-	              title: 'Succes',
-	              msg: 'Data Berhasil Disimpan'
-	            });
-	            $('#dialog_kosong').dialog('close');   // close the dialog
-	            //$('#tbodydetail').html(' ');
-	          } else {
-	            $.messager.show({
-	              title: 'Error',
-	              msg: result.msg
-	            });
-
-	          }
-	        }
-	      });
+	      $('#dialog_kosong').dialog('close');      
 	    }
-	    //end saveData
 
-		endEditing = function(){
-			if (editIndex == undefined){return true}
-			if ($('#dg_addDetail').edatagrid('validateRow', editIndex)){
-				
-				// . set colum nama dosen, sebelum selesai edit
-				var cmb = $('#dg_addDetail').edatagrid('getEditor',{
-					index:editIndex,
-					field:'kode_barang'
-				});
-				if(cmb){
-					$('#dg_addDetail').edatagrid('updateRow',{
-						index: editIndex,
-						row: {
-							kode_barang: $(cmb.target).combobox('getValue'),
-							nama_barang: $(cmb.target).combobox('getText')
-						}
+		save_detail = function(){			
+			$.ajax({
+			  url: base_url+"request_order/save_detail/",
+			  method: 'POST',
+			  data: {
+						id_ro : $('#id_ro').val(),
+						ext_doc_no 		: $('#ext_doc_no').val(),
+						user_id 		: $('#user_id').val(),
+						date_create 	: $('#date_create').val(),
+						kode_barang 	: $('#kode_barang').val(),
+						qty				: $('#qty').val(),
+						note 			: $('#note').val(),
+						status 			: $('#status').val(),
+						status_delete	: $('#status_delete').val(),
+						id_sro 			: $('#id_sro').val(),
+					},
+			  success : function(response, textStatus){
+				//alert(response);
+				var response = eval('('+response+')');
+				if(response.success){
+					$.messager.show({
+						title: 'Success',
+						msg: 'Data Berhasil Disimpan'
+					});
+					$('#dialog_kosong').dialog('close');
+					$('#dg').datagrid('reload');
+				}else{
+					$.messager.show({
+						title: 'Error',
+						msg: response.msg
 					});
 				}
-			    
-				// close editor and save
-				$('#dg_addDetail').edatagrid('endEdit', editIndex);
-				editIndex = undefined;
-				//hitung_sks();
-				return true;
-			} else {
-				return false;
-			}
-		}
-		
-		onClickCells = function(index, field, row){
-			// , get kode barang
-			var dat = $('#dg_addDetail').edatagrid('getData');
-			//var kd_matkul = dat.rows[index].kd_matakuliah;
-			
-			// 
-			// change column option
-			var opts = $('#dg_addDetail').edatagrid('getColumnOption', 'kode_barang');
-			opts.editor = {
-				type:'combobox',
-				options:{
-					mode:'remote',
-					valueField:'kode_barang',
-					textField:'nama_barang',
-					editable:false,
-					url:base_url+'request_order/load_kode_barang/',
-					
-				}
-			};
-			if (endEditing()){
-				$('#dg_addDetail').edatagrid('selectRow', index)
-						.edatagrid('editCell', {index:index,field:field});
-				editIndex = index;
-			}
-		}
-		
-		FormatterCell_kode_barang = function(value,row,index){
-			return row.nama_barang;
+			  }
+			});
 		}
 
-		// update_value = function(index, value, kode_barang){
-		// 	//alert(id_jadwal);
-		// 	if(kode_barang == 0 || kode_barang == 'null'){
-		// 		$('#dg_addDetail').datagrid('updateRow',{index:index, row:{chk:0}});
-		// 		alert('Request Order tidak bisa diambil, karena kode dan nama barang tidak ada.');
-		// 	}else{
-		// 		$('#dg_addDetail').datagrid('updateRow',{index:index, row:{chk:(value==true?1:0)}});
-		// 	}
-		// }
+		//text combo
+		$(document).ready(function(){
+			$("#id_kategori").select2();
+			$("#id_sub_kategori").select2();
+			$("#kode_barang").select2();
+		});
 
-		$('#dg_addDetail').edatagrid({
-			data:<?=$data_detail?>
+		$('#dg_addDetail').datagrid({
+		});
+
+		$('#id_kategori').change(function(){
+			$('#id_sub_kategori').load(base_url+'prosedur/getSubKategoribyKategori/'+$('#id_kategori').val());
+		});
+		
+		$('#id_sub_kategori').change(function(){
+			$('#kode_barang').load(base_url+'prosedur/getBarangbySubkat/'+$('#id_sub_kategori').val());
 		});
 		
 	});
 </script>
 
 
-<div style="margin:15px;width:600px;height:475px">
+<div style="margin:15px; ">
 	<input type="hidden" name="id_ro" id="id_ro" value="<?=$id_ro?>">
 	<input type="hidden" name="ext_doc_no" id="ext_doc_no" value="<?=$ext_doc_no?>">
 	<input type="hidden" name="user_id" id="user_id" value="<?=$user_id?>">
@@ -135,40 +86,54 @@
 		<b><?=$date_create?></b>
 	</div>
 	<br>
+	<div class="fitem" >
+		<label style="width:150px">Kategori </label>:
+			<select id="id_kategori" name="id_kategori" style="width:200px;">
+					<?=$this->mdl_prosedur->OptionKategori(array('value'=>$id_kategori));?>
+			</select>	
+	</div>
+	<div class="fitem" >
+		<label style="width:150px">Sub Kategori  </label>:
+			<select id="id_sub_kategori" name="id_sub_kategori" style="width:200px;">
+				<?=$this->mdl_prosedur->OptionSubKategori(array('value'=>$id_sub_kategori, 'id_kategori'=>$id_kategori));?>
+			</select>
+	</div>
+	<div class="fitem">
+		<label style="width:150px;vertical-align:top;">Barang </label>:
+		<select id="kode_barang" name="kode_barang" style="width:200px;">
+				<?=$this->mdl_prosedur->OptionBarang(array('value'=>$kode_barang, 'id_sub_kategori'=>$id_sub_kategori));?>
+		</select>
+	</div>
+	<div class="fitem">
+		<label style="width:150px;vertical-align:top;">Qty </label>:
+		<input name="qty" id="qty" size="10" value="<?=$qty?>" class="easyui-textbox" required="true">
+	</div>
+	<div class="fitem">
+		<label style="width:150px;vertical-align:top;">Note </label>:
+		<textarea name="note" id="note" cols="25" rows="5"><?=$note?></textarea>
+	</div>
+	<div class="fitem" align="left">
+		<label style="width:300px;">*Keterangan: Note di isi jika dibutuhkan </label>
+	</div>
 
-	<table id="dg_addDetail" title="List Barang" data-options="
-			rownumbers:true,
-			singleSelect:true,
-			autoRowHeight:false,
-			pagination:false,
-			pageSize:60,
-			fit:true,
-			toolbar:'#toolbar_addDetail',
+	<!-- Hidden -->
 
-			onClickCell: onClickCells,
-
-			">
-	<thead>
-		<tr>
-			<th field="kode_barang" width="220" editor="text" formatter="FormatterCell_kode_barang">Kode Barang | Nama Barang</th>
-			<th field="nama_barang" width="200" hidden="true">Nama Barang</th>
-			<th field="qty" width="70" editor="text">Qty</th>
-			<th field="note" width="250" editor="text">Note</th>
-		</tr>
-	</thead>
-</table> 
-
-<div id="toolbar_addDetail">
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="javascript:$('#dg_addDetail').edatagrid('addRow')">New</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:$('#dg_addDetail').edatagrid('destroyRow')">Destroy</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#dg_addDetail').edatagrid('saveRow')">Save</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#dg_addDetail').edatagrid('cancelRow')">Cancel</a>
-</div>
-
+	<div class="fitem" hidden="True">
+		<label style="width:150px;vertical-align:top;">Status </label>:
+		<input id="status" name="status" size="10" value="<?=$status?>">
+	</div>
+	<div class="fitem" hidden="True">
+		<label style="width:150px;vertical-align:top;">Status delete </label>:
+		<input id="status_delete" name="status_delete" size="10" value="<?=$status_delete?>">
+	</div>
+	<div class="fitem" hidden="True">
+		<label style="width:150px;vertical-align:top;">ID SRO </label>:
+		<input id="id_sro" name="id_sro" size="10" value="<?=$id_sro?>">
+	</div>
 </div>
 
 <div align="right">
-      <a href="#" class="easyui-linkbutton" onclick="saveData();" iconCls="icon-save" plain="false">Simpan</a>
-      <a href="#" class="easyui-linkbutton" onclick="tutup();" iconCls="icon-cancel" plain="false">Tutup</a>
-      &nbsp;&nbsp;&nbsp;
-  </div>
+  <a href="#" class="easyui-linkbutton" onclick="save_detail();" iconCls="icon-save" plain="false">Save</a>
+  <a href="#" class="easyui-linkbutton" onclick="tutup();" iconCls="icon-cancel" plain="false">Cancel</a>
+  &nbsp;&nbsp;&nbsp;
+</div>

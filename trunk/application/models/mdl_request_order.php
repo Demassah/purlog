@@ -205,35 +205,31 @@ class mdl_request_order extends CI_Model {
 
 	function Update_DetailRO($data){
 		$this->db->trans_start();
-		
-		$result = true;
-		
-		# tambah data ke tabel
-		foreach($data['data_detailRO']['rows'] as $row){
-			
-			$this->db->flush_cache();
-			$this->db->set('id_ro', $row['id_ro']);
-			$this->db->set('ext_doc_no', $row['ext_doc_no']);
-			$this->db->set('kode_barang', $row['kode_barang']);
-			$this->db->set('qty', $row['qty']);
-			$this->db->set('user_id', $row['user_id']);
-			$this->db->set('date_create', $row['date_create']);
-            $this->db->set('note', $row['note']);
-            $this->db->set('status', $row['status']); //status = 1
-            $this->db->set('status_delete', $row['status_delete']); //status = 0
-            $this->db->set('id_sro', $row['id_sro']); //status = 0
-			
-			$this->db->where('id_krs_detail', $row['id_krs_detail']);
 
-			$result = $this->db->update('tbl_krs_detail');
-			
-		}
-		
+		$result = true;
+
+		# tambah data ke tabel
+		$this->db->flush_cache();
+		$this->db->set('id_ro', $data['id_ro']);
+		$this->db->set('ext_doc_no', $data['ext_doc_no']);
+		$this->db->set('kode_barang', $data['kode_barang']);
+		$this->db->set('qty', $data['qty']);
+		$this->db->set('user_id', $data['user_id']);
+		$this->db->set('date_create', $data['date_create']);
+		$this->db->set('note', $data['note']);
+		$this->db->set('status', '1');
+		$this->db->set('status_delete', '0');
+		$this->db->set('id_sro', '0');
+
+		$result = $this->db->insert('tr_ro_detail');
+
 		//return
 		$this->db->trans_complete();
-	    return $this->db->trans_status();
-	}
-	
+		return $this->db->trans_status();
+
+		}
+
+
 }
 
 ?>

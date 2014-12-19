@@ -6,7 +6,28 @@ class mdl_prosedur extends CI_Model {
         parent::__construct();
     }
 
-  function OptionDepartement($d=""){
+    function OptionOtoritas($d=""){
+		$value = isset($d['value'])?$d['value']:'';
+		
+		$this->db->flush_cache();
+		$this->db->from('sys_user_level');
+		
+		$this->db->order_by('level');
+		$res = $this->db->get();
+		
+		$out = '<option value="">-- Pilih --</option>';
+		foreach($res->result() as $r){
+			if(trim($r->user_level_id) == trim($value)){
+				$out .= '<option value="'.$r->user_level_id.'" selected="selected">'.$r->level_name.'</option>';
+			}else{
+				$out .= '<option value="'.$r->user_level_id.'">'.$r->level_name.'</option>';
+			}
+		}
+		
+		return $out;
+	}
+
+ 	function OptionDepartement($d=""){
 		$value = isset($d['value'])?$d['value']:'';
 		$out = '';
 		
@@ -30,6 +51,50 @@ class mdl_prosedur extends CI_Model {
 				$out .= '<option value="'.$r->departement_id.'" selected="selected">'.$r->departement_name.'</option>';
 			}else{
 				$out .= '<option value="'.$r->departement_id.'">'.$r->departement_name.'</option>';
+			}
+		}
+		
+		return $out;
+	}
+
+	function OptionUserID($d=""){
+		$value = isset($d['value'])?$d['value']:'';
+		$out = '';
+		
+		$this->db->flush_cache();
+		$this->db->from('sys_user');
+		$this->db->order_by('full_name');
+		//$this->db->where('user_level_id', '1');
+				
+		$res = $this->db->get();
+		
+		foreach($res->result() as $r){
+			if(trim($r->user_id) == trim($value)){
+				$out .= '<option value="'.$r->user_id.'" selected="selected">'.$r->full_name.'</option>';
+			}else{
+				$out .= '<option value="'.$r->user_id.'">'.$r->full_name.'</option>';
+			}
+		}
+		
+		return $out;
+	}
+
+	function OptionMenuParent($d=""){
+		$value = isset($d['value'])?$d['value']:'';
+		$out = '';
+		
+		$this->db->flush_cache();
+		$this->db->from('sys_menu');
+		$this->db->order_by('menu_name');
+		$this->db->where('url', '#');
+				
+		$res = $this->db->get();
+		
+		foreach($res->result() as $r){
+			if(trim($r->menu_id) == trim($value)){
+				$out .= '<option value="'.$r->menu_id.'" selected="selected">'.$r->menu_name.'</option>';
+			}else{
+				$out .= '<option value="'.$r->menu_id.'">'.$r->menu_name.'</option>';
 			}
 		}
 		
@@ -81,66 +146,25 @@ class mdl_prosedur extends CI_Model {
 		
 		return $out;
 	}
-	
-	function OptionOtoritas($d=""){
+
+	function OptionBarang($d=""){
 		$value = isset($d['value'])?$d['value']:'';
+		$id_kategori = isset($d['id_sub_kategori'])?$d['id_sub_kategori']:'';
 		
 		$this->db->flush_cache();
-		$this->db->from('sys_user_level');
-		
-		$this->db->order_by('level');
+		$this->db->from('ref_barang');
+		$this->db->where('id_sub_kategori', $id_sub_kategori);
+		$this->db->order_by('kode_barang');
+
+		//$this->db->where('status', 'A');
 		$res = $this->db->get();
 		
 		$out = '<option value="">-- Pilih --</option>';
 		foreach($res->result() as $r){
-			if(trim($r->user_level_id) == trim($value)){
-				$out .= '<option value="'.$r->user_level_id.'" selected="selected">'.$r->level_name.'</option>';
+			if(trim($r->kode_barang) == trim($value)){
+				$out .= '<option value="'.$r->kode_barang.'" selected="selected">'.$r->kode_barang.' - '.$r->nama_barang.'</option>';
 			}else{
-				$out .= '<option value="'.$r->user_level_id.'">'.$r->level_name.'</option>';
-			}
-		}
-		
-		return $out;
-	}
-
-	function OptionMenuParent($d=""){
-		$value = isset($d['value'])?$d['value']:'';
-		$out = '';
-		
-		$this->db->flush_cache();
-		$this->db->from('sys_menu');
-		$this->db->order_by('menu_name');
-		$this->db->where('url', '#');
-				
-		$res = $this->db->get();
-		
-		foreach($res->result() as $r){
-			if(trim($r->menu_id) == trim($value)){
-				$out .= '<option value="'.$r->menu_id.'" selected="selected">'.$r->menu_name.'</option>';
-			}else{
-				$out .= '<option value="'.$r->menu_id.'">'.$r->menu_name.'</option>';
-			}
-		}
-		
-		return $out;
-	}
-
-	function OptionUserID($d=""){
-		$value = isset($d['value'])?$d['value']:'';
-		$out = '';
-		
-		$this->db->flush_cache();
-		$this->db->from('sys_user');
-		$this->db->order_by('full_name');
-		//$this->db->where('user_level_id', '1');
-				
-		$res = $this->db->get();
-		
-		foreach($res->result() as $r){
-			if(trim($r->user_id) == trim($value)){
-				$out .= '<option value="'.$r->user_id.'" selected="selected">'.$r->full_name.'</option>';
-			}else{
-				$out .= '<option value="'.$r->user_id.'">'.$r->full_name.'</option>';
+				$out .= '<option value="'.$r->kode_barang.'">'.$r->kode_barang.' - '.$r->nama_barang.'</option>';
 			}
 		}
 		
@@ -215,26 +239,7 @@ class mdl_prosedur extends CI_Model {
 		return $out;
 	}
 
-	function OptionBarang($d=""){
-		$value = isset($d['value'])?$d['value']:'';
-		$out = '';
-		
-		$this->db->flush_cache();
-		$this->db->from('ref_barang');
-		$this->db->order_by('nama_barang');
-				
-		$res = $this->db->get();
-		
-		foreach($res->result() as $r){
-			if(trim($r->id) == trim($value)){
-				$out .= '<option value="'.$r->id.'" selected="selected">'.$r->kode_barang.'.'.$r->nama_barang.'</option>';
-			}else{
-				$out .= '<option value="'.$r->id.'">'.$r->kode_barang.'.'.$r->nama_barang.'</option>';
-			}
-		}
-		
-		return $out;
-	}
+	
 
 	function OptionCourir($d=""){
 		$value = isset($d['value'])?$d['value']:'';

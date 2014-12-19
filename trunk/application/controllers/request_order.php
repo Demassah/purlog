@@ -121,25 +121,10 @@ class request_order extends CI_Controller {
 
 
 	function add_detail($id){
-		  
-		   	$data['kode'] = '';
-			$data['id_ro'] = '';
-		    $data['ext_doc_no'] = '';
-		    $data['kode_barang'] = '';
-		    $data['qty'] = '';
-		    $data['user_id'] = '';
-		    $data['date_create'] = date('d/m/Y');
-		    $data['note'] = '';
-			$data['status'] = '1';
-			$data['status_delete'] = '0';
-			$data['id_sro'] = '0';
-			
-
 		// get data
-		$label 	= $this->mdl_request_order->getdataedit($id);
-		// var_export($label->row()); exit();
+		$label  = $this->mdl_request_order->getdataedit($id);
 		$detail = $this->mdl_request_order->getDetail($label->row()->id_ro);
-		
+
 		# hidden input
 		$data['id_ro'] = $id;
 		$data['ext_doc_no'] = $label->row()->ext_doc_no;
@@ -147,18 +132,15 @@ class request_order extends CI_Controller {
 		$data['user_id'] = $label->row()->user_id;
 		$data['date_create'] = $label->row()->date_create;
 		
-		# data input detail
-		$detail_row = $detail->num_rows();
-		if($detail_row > 0){
-			$data['data_detail'] = json_encode($detail->result_array()); 
-		}else{
-			$data['data_detail'] = '['.json_encode(array(
-										'kode_barang'=>'',
-										'qty'=>'',
-										'note'=>'',
-										'status'=>'',
-									)).']';
-		}
+		# data input barang
+		$data['id_kategori'] = '';
+		$data['id_sub_kategori'] = '';
+		$data['kode_barang'] = '';
+		$data['qty'] = '';
+		$data['note'] = '';
+		$data['status'] = '';
+		$data['status_delete'] = '';
+		$data['id_sro'] = '';
 
 		$this->load->view('request_order/form_detail', $data);
 	}
@@ -169,7 +151,6 @@ class request_order extends CI_Controller {
 		foreach($_POST as $key => $value){
 			$data[$key] = $value;
 		}
-		//var_dump($_POST['data_nilai']);
 		
 		# init
 		$status = "";
@@ -184,7 +165,5 @@ class request_order extends CI_Controller {
 			echo json_encode(array('msg'=>$data['pesan_error']));
 		}
 	}
-	
-	
 
 }

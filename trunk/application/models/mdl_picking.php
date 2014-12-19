@@ -92,7 +92,7 @@ class mdl_picking extends CI_Model {
 			$this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang');
 
 			$this->db->where('a.id_ro', $id_ro);
-			//$this->db->where('a.sisa !=', '0');
+			$this->db->where('a.sisa !=', '0');
 			//$this->db->where('a.status_delete', '0');
 
 			$this->db->order_by($sort, $order);

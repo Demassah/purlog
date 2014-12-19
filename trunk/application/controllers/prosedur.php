@@ -14,6 +14,10 @@ class prosedur extends CI_Controller {
 	function getSubKategoribyKategori($id_kategori){
 		echo $this->mdl_prosedur->OptionSubKategori(array('id_kategori'=>$id_kategori));
 	}
+
+	function getBarangbySubkat($id_sub_kategori){
+		echo $this->mdl_prosedur->OptionBarang(array('id_sub_kategori'=>$id_sub_kategori));
+	}
 	
 }
 
