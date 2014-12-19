@@ -71,9 +71,12 @@ class mdl_shipment_req_order extends CI_Model {
 	{
 		$this->db->flush_cache();
 		$this->db->start_cache();
-		$this->db->select('id_ro,user_id,status');
-		$this->db->where('status', '6');
-		$query = $this->db->get('tr_ro');
+		$this->db->select('a.id_ro,b.status');
+		$this->db->join('tr_ro b', 'b.id_ro = a.id_ro');
+		$this->db->where('b.status', '6');
+		$this->db->where('a.id_sro', null);
+		$this->db->group_by('a.id_ro');
+		$query = $this->db->get('tr_pros_detail a');
 		$this->db->stop_cache();
 		return $query->result();
 	}
@@ -85,20 +88,12 @@ class mdl_shipment_req_order extends CI_Model {
 		return $query->row();
 	}
 
-	public function update_ro($data)
-	{
-
-		$this->db->where('id_ro', $data['id_ro']);
-		return $this->db->update('tr_ro', array('status' => 7));
-
-	}
-
 	function Insert($data){
 		$this->db->flush_cache();
 		// get search
 			$result = $this->mdl_shipment_req_order->search_ro($data);
-		// update state on tr_ro
-			$this->mdl_shipment_req_order->update_ro($data);
+
+
 		// insert data
     $this->db->set('id_user', $result->user_id);
     $this->db->set('id_ro', $result->id_ro);

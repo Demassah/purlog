@@ -94,7 +94,7 @@
 			var col='';
 
 			<?if($this->mdl_auth->CekAkses(array('menu_id'=>13, 'policy'=>'DETAIL'))){?>
-					col += '<a href="#" onclick="detailData(\''+row.id_ro+'/'+row.id_sro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
+					col += '<a href="#" onclick="detailData(\''+row.id_ro+'/'+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
 			<?}?>
 			<?if($this->mdl_auth->CekAkses(array('menu_id'=>13, 'policy'=>'ACCESS'))){?>
 					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id_sro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
