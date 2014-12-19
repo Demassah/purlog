@@ -47,4 +47,37 @@
 		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dialog-menu').dialog('close')">Cancel</a>
 	</div>
 </div>
-<script src="<?=base_url();?>asset/js/modul/quotation_request_selected.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var url;
+	$(document).ready(function(){
+	
+	DetailData = function (val){
+			//detail
+			$('#konten').panel({
+				href: base_url+'sample',
+			});
+
+		}
+
+	actionbutton = function(value, row, index){
+			var col='';
+			//if (row.kd_fakultas != null) {
+
+			if(detail){
+					col += '<a href="#" onclick="DetailData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">List QR</a>';
+			}
+
+			//}
+			return col;
+		}
+		
+		$(function(){
+			$('#dg').datagrid({
+				url:base_url + "request_order/grid"
+			});
+		});
+
+	});
+
+
+</script>
