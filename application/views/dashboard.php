@@ -74,7 +74,7 @@
 	</div>
 	<div class="content">
 		<div class="diagram">
-			<h2>Perkembangan Jumlah Barang</h2>
+			<!--<h2>Perkembangan Jumlah Barang</h2>-->
 			<!--<h2><?php $l = count($lblDiagram)-1; echo $lblDiagram[0].' - '.$lblDiagram[$l];?></h2>-->
 			<div id="diagram" style="width:auto;height:250px"><canvas id="canvas"></canvas></div>
 		</div>
