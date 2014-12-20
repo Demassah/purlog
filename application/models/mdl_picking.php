@@ -41,6 +41,7 @@ class mdl_picking extends CI_Model {
 	
 	
 	function togrid($data, $count){
+		$response = new StdClass;
 		$response->total = $count;
 		$response->rows = array();
 		if($count>0){
@@ -350,6 +351,18 @@ class mdl_picking extends CI_Model {
 		$tmp['row_data'] = $this->db->get();
 		
 		return $tmp;
+	}
+
+	function getProsDetailIds($ids) {
+		$this->db->flush_cache();
+		$this->db->where_in('id_detail_pros', $ids);
+		return $this->db->get('tr_pros_detail');
+	}
+
+	function getProsDetail($id) {
+		$this->db->flush_cache();
+		$this->db->where('id_detail_pros', $id);
+		return $this->db->get('tr_pros_detail');
 	}
 
 	function update_stock($data){

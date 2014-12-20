@@ -75,6 +75,7 @@ class mdl_request_order_logistic extends CI_Model {
 	}
 
 	function togrid($data, $count){
+		$response = new StdClass;
 		$response->total = $count;
 		$response->rows = array();
 		if($count>0){

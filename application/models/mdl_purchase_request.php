@@ -40,6 +40,7 @@ class mdl_purchase_request extends CI_Model {
 	}
 
 	function togrid($data, $count){
+		$response = new StdClass;
 		$response->total = $count;
 		$response->rows = array();
 		if($count>0){
@@ -109,10 +110,12 @@ class mdl_purchase_request extends CI_Model {
 	}
 	
 	function InsertOnDB($data){
+		$kosongan = true;
 		$this->db->trans_start();
 
 		foreach($data as $row){
 			if(isset($row['chk'])){
+				$kosongan = false;
 				# update table purchase request detail
 				//$this->db->flush_cache();
 				//$this->db->set('id_pr', '1');
@@ -136,6 +139,9 @@ class mdl_purchase_request extends CI_Model {
 		}
 
 		$this->db->trans_complete();
+		if($kosongan) {
+			return false;
+		}
 		return $this->db->trans_status();
 	}
 

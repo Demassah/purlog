@@ -69,11 +69,16 @@ class request_order extends CI_Controller {
 	}
 
 	function send($id){
-		$result = $this->mdl_request_order->SendData($id);
-		if ($result){
-			echo json_encode(array('success'=>true));
-		} else {
-			echo json_encode(array('msg'=>'Data gagal di kirim'));
+		$result = $this->mdl_request_order->countDetail($id);
+		if($result > 0){
+			$result = $this->mdl_request_order->SendData($id);
+			if ($result){
+				echo json_encode(array('success'=>true));
+			} else {
+				echo json_encode(array('msg'=>'Data gagal di kirim'));
+			} 
+		}else{
+			echo json_encode(array('msg'=>'Detail RO Kosong'));
 		}
 	}
 

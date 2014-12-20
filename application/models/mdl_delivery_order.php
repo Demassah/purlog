@@ -39,6 +39,7 @@ class mdl_delivery_order extends CI_Model {
 	
 	
 	function togrid($data, $count){
+		$response = new StdClass;
 		$response->total = $count;
 		$response->rows = array();
 		if($count>0){
@@ -52,7 +53,7 @@ class mdl_delivery_order extends CI_Model {
 		}
 		return json_encode($response);
 	}
-
+	
 	function done($kode){
 		
 		$this->db->flush_cache();

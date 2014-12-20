@@ -40,7 +40,7 @@ class purchase_request extends CI_Controller {
 			$data[$key] = $value;
 		}
 		
-		$data['pesan_error'] = '';
+		$data['pesan_error'] = 'Data Gagal Disimpan';
 		
 		$result=$this->mdl_purchase_request->InsertOnDB($data['data']);
 		
@@ -106,7 +106,7 @@ class purchase_request extends CI_Controller {
 		if($id!=null){
 			$data['data']['id_pr'] = $id;
 		}
-		$data['pesan_error'] = '';
+		$data['pesan_error'] = 'Data Gagal Disimpan';
 		
 		$result=$this->mdl_purchase_request->InsertDetailOnDB($data['data']);
 		
