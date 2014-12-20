@@ -49,6 +49,7 @@ class mdl_request_order extends CI_Model {
 	}
 	
 	function togrid($data, $count){
+		$response = new StdClass;
 		$response->total = $count;
 		$response->rows = array();
 		if($count>0){
@@ -143,6 +144,13 @@ class mdl_request_order extends CI_Model {
 		$this->db->from('tr_ro_detail');
 		
 		return $this->db->get();
+	}
+
+	function countDetail($id_ro){
+		$this->db->where('id_ro', $id_ro);
+		$this->db->from('tr_ro_detail');
+		
+		return $this->db->count_all_results();
 	}
 
 	function SendData($kode){
