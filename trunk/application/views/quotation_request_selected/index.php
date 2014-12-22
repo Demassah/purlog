@@ -1,83 +1,116 @@
+<!-- <div id="toolbar_purchase" style="padding:5px;height:auto">
+  <div class="fsearch">
+    <table>
+      <tr>
+          <td>&nbsp;&nbsp;<a href="#" onclick="detail()" class="easyui-linkbutton" iconCls="icon-detail">Detail</a>
+              &nbsp;&nbsp;<a href="#" onclick="available()" class="easyui-linkbutton" iconCls="icon-ok">Picking</a>
+              &nbsp;&nbsp;<a href="#" onclick="lock()" class="easyui-linkbutton" iconCls="icon-login">Lock</a>
+              &nbsp;&nbsp;<a href="#" onclick="pending()" class="easyui-linkbutton" iconCls="icon-redo">pending</a>
+          </td> 
+      </tr>
+    </table>
+  </div>
+</div> -->
 
-<div id="toolbar" style="padding:5px;height:auto">
-	<div style="margin-bottom:5px">		
-	</div>
-	<div class="fsearch">
-		<table width="500" border="0">
-		  <tr>
-			<td>Search</td>
-			<td>: 
-				<input name="#" size="30" value=" ">
-			</td>
-			<td><a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-search">Search</a></td>
-		  </tr>
-		</table>
-	</div>
-</div>
-
-<table id="dg" title="Quotation Request Selected" data-options="
-			rownumbers:true,
-			singleSelect:true,
-			autoRowHeight:false,
-			pagination:true,
-			pageSize:30,
-			fit:true,
-			toolbar:'#toolbar',
-			">
-	<thead>
-		<tr>
-			<th field="user_id" sortable="true" width="150" hidden="true">ID</th>
-			<th field="kode_barang" sortable="true" width="100">ID RO</th>
-			<th field="nama_kategori" sortable="true" width="130">Requestor</th>
-			<th field="nama_sub_kategori" sortable="true" width="120">Departement</th>
-			<th field="kode_barang" sortable="true" width="120">Purpose</th>
-			<th field="nama_barang" sortable="true" width="120">Cat Request</th>
-			<th field="nama_barang" sortable="true" width="100">Ext Document No</th>
-			<th field="nama_barang" sortable="true" width="100">ETD</th>
-			<th field="nama_barang" sortable="true" width="100">Date Create</th>
-			<th field="action" align="center" formatter="actionbutton" width="140">Aksi</th>
-		</tr>
-	</thead>
+<table id="dg" title="Purchase Request List" data-options="
+      rownumbers:true,
+      singleSelect:true,
+      autoRowHeight:false,
+      pagination:true,
+      pageSize:30,
+      fit:true,
+      toolbar:'#toolbar_purchase',
+    ">    
+  <thead>
+    <tr>
+      <th field="id_pr" sortable="true" width="80" >ID PR</th>
+      <th field="id_ro" sortable="true" width="60">ID RO</th>     
+      <th field="full_name" sortable="true" width="130">Requestor</th>
+      <th field="departement_name" sortable="true" width="130">Departement</th>
+      <th field="purpose" sortable="true" width="90">Purpose</th>
+      <th field="cat_req" sortable="true" width="120">Category Request</th>
+      <th field="ext_doc_no" sortable="true" width="120">External Doc No</th>
+      <th field="ETD" sortable="true" width="100">ETD</th>
+      <th field="date_create" sortable="true" width="130">Date Create</th>
+      <th field="action" align="center" formatter="actionPurchaseRequest" width="150">Aksi</th>
+    </tr>
+  </thead>
 </table>
 
-<!-- AREA untuk Form MENU >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
-<div id="dialog-menu" class="easyui-dialog" style="width:400px;height:150px" closed="true" buttons="#dlg-buttons-menu">
-	<div id="dlg-buttons-menu">
-		<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveMenu()">Save</a>
-		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dialog-menu').dialog('close')">Cancel</a>
-	</div>
-</div>
-<script type="text/javascript">
-	var url;
-	$(document).ready(function(){
-	
-	DetailData = function (val){
-			//detail
-			$('#konten').panel({
-				href: base_url+'sample',
-			});
+<script >
+  var url;
+  $(document).ready(function(){
 
-		}
+    doneData = function (val){
+        if(confirm("Apakah yakin akan mengirim data ke QRS '" + val + "'?")){
+          var response = '';
+          $.ajax({ type: "GET",
+             url: base_url+'purchase_request/doneData/' + val,
+             async: false,
+             success : function(response){
+              var response = eval('('+response+')');
+              if (response.success){
+                $.messager.show({
+                  title: 'Success',
+                  msg: 'Data Berhasil Dikirim'
+                });
+                // reload and close tab
+                $('#dg').datagrid('reload');
+              } else {
+                $.messager.show({
+                  title: 'Error',
+                  msg: response.msg
+                });
+              }
+             }
+          });
+        }
+      //}
+    }
+    //end sendData 
 
-	actionbutton = function(value, row, index){
-			var col='';
-			//if (row.kd_fakultas != null) {
+    add_pr = function (val){
+      $('#konten').panel({
+        href: base_url+'purchase_request/add_pr/',
+      });
+    }
+    // end newData
 
-			if(detail){
-					col += '<a href="#" onclick="DetailData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">List QR</a>';
-			}
+    detail_pr = function (val){
+      $('#konten').panel({
+        href: base_url+'purchase_request/detail_pr/' + val,
+      });
+    }
+  
+    actionPurchaseRequest = function(value, row, index){
+      var col='';
+          col += '<a href="#" onclick="detail_pr(\''+row.id_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';     
+          
+          col += '&nbsp;&nbsp; | &nbsp;&nbsp;<a href="#" onclick="detail_pr(\''+row.id_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">QRS</a>';     
 
-			//}
-			return col;
-		}
-		
-		$(function(){
-			$('#dg').datagrid({
-				url:base_url + "request_order/grid"
-			});
-		});
+          col += '&nbsp;&nbsp; | &nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit"plain="false">Done</a>';
+      return col;
+    }
+    
+    $(function(){ // init
+      $('#dg').datagrid({url:"quotation_request_selected/grid"});      
+  });
 
-	});
+  // //# Tombol Bawah
+  //   $(function(){
+  //     var pager = $('#dg').datagrid().datagrid('getPager'); // get the pager of datagrid
+  //     pager.pagination({
+  //       buttons:[
+  //         {
+  //           iconCls:'icon-add',
+  //           text:'Create PR',
+  //           handler:function(){
+  //             add_pr();
+  //           }
+  //         }            
+  //       ]
+  //     });     
+  //   }); 
 
-
+});
 </script>
