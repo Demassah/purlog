@@ -12,14 +12,13 @@
 			$('#dialog_kosong').dialog({
 				title: 'Tambah Detail Request Order',
 				width: 440,
-				height: $(window).height() * 0.62,
+				height: $(window).height() * 0.66,
 				closed: true,
 				cache: false,
 				href: base_url+'request_order/add_detail/<?=$id_ro?>',
 				modal: true
 			});
 			$('#dialog_kosong').dialog('open');
-			//url = base_url+'request_order/save_Detail';
 		}
 		// end newData
 		
