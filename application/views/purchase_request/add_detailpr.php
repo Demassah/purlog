@@ -23,6 +23,7 @@
       });
     }
     
+    
     saveData = function(){
       $('#form3').form('submit',{
         url: base_url+'purchase_request/saveDetail/<?php echo $id_pr;?>',
@@ -30,15 +31,14 @@
           return $(this).form('validate');
         },
         success: function(result){
-          //alert(result);
+          alert(result);
           var result = eval('('+result+')');
           if (result.success){
             $.messager.show({
               title: 'Succes',
               msg: 'Data Berhasil Disimpan'
             });
-            $('#dialog_kosong').dialog('close');   // close the dialog
-            //$('#tbodydetail').html(' ');
+            $('#dialog_kosong').dialog('close');  // close the dialog
           } else {
             $.messager.show({
               title: 'Error',
@@ -50,6 +50,7 @@
       });
     }
     //end saveData
+    
     
   });
 </script>

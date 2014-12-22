@@ -103,7 +103,6 @@ class mdl_prosedur extends CI_Model {
 
 	function OptionKategori($d=""){
 		$value = isset($d['value'])?$d['value']:'';
-		$out = '';
 		
 		$this->db->flush_cache();
 		$this->db->from('ref_kategori');
@@ -112,6 +111,7 @@ class mdl_prosedur extends CI_Model {
 				
 		$res = $this->db->get();
 		
+		$out = '<option value="">-- Pilih --</option>';
 		foreach($res->result() as $r){
 			if(trim($r->id_kategori) == trim($value)){
 				$out .= '<option value="'.$r->id_kategori.'" selected="selected">'.$r->nama_kategori.'</option>';
@@ -149,7 +149,7 @@ class mdl_prosedur extends CI_Model {
 
 	function OptionBarang($d=""){
 		$value = isset($d['value'])?$d['value']:'';
-		$id_kategori = isset($d['id_sub_kategori'])?$d['id_sub_kategori']:'';
+		$id_sub_kategori = isset($d['id_sub_kategori'])?$d['id_sub_kategori']:'';
 		
 		$this->db->flush_cache();
 		$this->db->from('ref_barang');

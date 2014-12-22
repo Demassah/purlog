@@ -50,6 +50,27 @@ function __construct(){
         }
     }
 
+    function save(){
+		# get post data
+		foreach($_POST as $key => $value){
+			$data[$key] = $value;
+		}
+		
+		
+		# init
+		$status = "";
+		$result = false;
+		$data['pesan_error'] = '';
+
+		$result = $this->mdl_request_order_selected->Update_Kode_Barang($data);
+		
+		if($result){
+			echo json_encode(array('success'=>true));
+		}else{
+			echo json_encode(array('msg'=>$data['pesan_error']));
+		}
+	}
+
 
 }
 

@@ -127,6 +127,39 @@ class mdl_request_order_selected extends CI_Model {
 				return FALSE;
 		}
 	}
+
+	function Update_Kode_Barang($data){
+		$this->db->trans_start();
+		
+		$result = true;
+		
+		# tambah ke tabel
+		foreach($data['data_detail']['rows'] as $row){
+			
+			$this->db->flush_cache();
+			$this->db->set('kode_barang', $row['kode_barang']);
+			
+			$this->db->where('id_detail_ro', $row['id_detail_ro']);
+			//$this->db->where('id_ro', $row['id_ro']);
+			//$this->db->where('type', '3');
+
+			$result = $this->db->update('tr_ro_detail');
+			
+		}
+		
+		//return
+		$this->db->trans_complete();
+	    return $this->db->trans_status();
+	}
+
+	function cekType($id_detail_ro){
+		$this->db->where('id_detail_ro', $id_detail_ro);
+		$this->db->where('status_delete', '3');
+		$this->db->from('tr_ro_detail');
+		
+		return $this->db->count_all_results();
+	}
+
 	
 }
 

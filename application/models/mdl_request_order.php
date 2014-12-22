@@ -222,6 +222,7 @@ class mdl_request_order extends CI_Model {
 		$this->db->set('ext_doc_no', $data['ext_doc_no']);
 		$this->db->set('kode_barang', $data['kode_barang']);
 		$this->db->set('qty', $data['qty']);
+		$this->db->set('barang_bekas', $data['barang_bekas']);
 		$this->db->set('user_id', $data['user_id']);
 		$this->db->set('date_create', $data['date_create']);
 		$this->db->set('note', $data['note']);

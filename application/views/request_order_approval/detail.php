@@ -9,17 +9,16 @@
     }
 
     newDetail = function (){
-      $('#dialog').dialog({
+      $('#dialog_kosong').dialog({
         title: 'Tambah Detail Request Order',
-        width: 700,
-        height: $(window).height() * 0.99,
+        width: 440,
+        height: $(window).height() * 0.66,
         closed: true,
         cache: false,
-        href: base_url+'request_order/add_detail',
+        href: base_url+'request_order_approval/add_detail/<?=$id_ro?>',
         modal: true
-      });      
-      $('#dialog').dialog('open');
-      url = base_url+'request_order/save/add_detail';
+      });
+      $('#dialog_kosong').dialog('open');
     }
     // end newData
     
@@ -62,7 +61,7 @@
                   msg: 'Data Berhasil Dihapus'
                 });
                 // reload and close tab
-                $('#dg').datagrid('reload');
+                $('#dg_roa').datagrid('reload');
               } else {
                 $.messager.show({
                   title: 'Error',

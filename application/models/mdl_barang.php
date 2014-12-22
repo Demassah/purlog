@@ -68,6 +68,7 @@ class mdl_barang extends CI_Model {
         $this->db->set('kode_barang', $data['kode_barang']);
         $this->db->set('nama_barang', $data['nama_barang']);
         $this->db->set('status', isset($data['status'])?'1':'0');
+        $this->db->set('type', $data['type']);
 
 		$result = $this->db->insert('ref_barang');
 		
@@ -86,6 +87,7 @@ class mdl_barang extends CI_Model {
     $this->db->set('id_sub_kategori', $data['id_sub_kategori']);
     $this->db->set('kode_barang', $data['kode_barang']);
     $this->db->set('nama_barang', $data['nama_barang']);
+    $this->db->set('type', $data['type']);
 		
 		$this->db->where('id', $data['kode']);
 		$result = $this->db->update('ref_barang');

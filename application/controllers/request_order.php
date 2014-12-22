@@ -78,7 +78,7 @@ class request_order extends CI_Controller {
 				echo json_encode(array('msg'=>'Data gagal di kirim'));
 			} 
 		}else{
-			echo json_encode(array('msg'=>'Detail RO Kosong'));
+			echo json_encode(array('msg'=>'Detail Request Order Masih Kosong'));
 		}
 	}
 
@@ -142,6 +142,7 @@ class request_order extends CI_Controller {
 		$data['id_sub_kategori'] = '';
 		$data['kode_barang'] = '';
 		$data['qty'] = '';
+		$data['barang_bekas'] = '';
 		$data['note'] = '';
 		$data['status'] = '';
 		$data['status_delete'] = '';

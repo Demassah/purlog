@@ -6,7 +6,7 @@
 			$('#dialog').dialog({
 				title: 'Tambah Barang',
 				width: 400,
-				height: 225,
+				height: 245,
 				closed: true,
 				cache: false,
 				href: base_url+'barang/add',
@@ -24,7 +24,7 @@
 				$('#dialog').dialog({
 					title: 'Edit ',
 					width: 400,
-					height: 225,
+					height: 245,
 					closed: true,
 					cache: false,
 					href: base_url+'barang/edit/'+val,

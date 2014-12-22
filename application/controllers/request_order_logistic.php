@@ -34,6 +34,16 @@ class request_order_logistic extends CI_Controller {
 		} else {
 			echo json_encode(array('msg'=>'Data gagal di kirim'));
 		}
-	} 
+	}
+
+	function rejected($id){
+		$data['id_ro'] = $id;
+		$this->load->view('request_order_logistic/rejected', $data);
+	}
+		
+	function grid_rejected($id){
+		$data = $this->mdl_request_order_logistic->getdata_rejected($id);
+		echo $this->mdl_request_order_logistic->togrid($data['row_data'], $data['row_count']);
+	}
 
 }

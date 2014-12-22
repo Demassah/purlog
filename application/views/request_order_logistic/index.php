@@ -9,6 +9,13 @@
 			});
 		}
 
+		DetailReject = function (val){
+			//detail
+			$('#konten').panel({
+				href: base_url+'request_order_logistic/rejected/'+ val,
+			});
+		}
+
 		doneData = function (val){
 				if(confirm("Apakah yakin akan mengirim data ke Logistic '" + val + "'?")){
 					var response = '';
@@ -41,7 +48,9 @@
 			var col='';
 			//if (row.kd_fakultas != null) {
 			
-					col += '<a href="#" onclick="DetailData(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
+					col += '<a href="#" onclick="DetailData(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Approved</a>';
+
+					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="DetailReject(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Rejected</a>';
 			
 					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
 			return col;
@@ -100,7 +109,7 @@
 			<th field="ext_doc_no" sortable="true" width="120">External Doc No</th>
 			<th field="ETD" sortable="true" width="100">ETD</th>
 			<th field="date_create" sortable="true" width="130">Date Create</th>
-			<th field="action" align="center" formatter="actionbutton" width="120">Aksi</th>
+			<th field="action" align="center" formatter="actionbutton" width="200">Aksi</th>
 		</tr>
 	</thead>
 </table>

@@ -110,18 +110,12 @@ class mdl_purchase_request extends CI_Model {
 	}
 	
 	function InsertOnDB($data){
-		$kosongan = true;
+		$kosong = true;
 		$this->db->trans_start();
 
 		foreach($data as $row){
 			if(isset($row['chk'])){
-				$kosongan = false;
-				# update table purchase request detail
-				//$this->db->flush_cache();
-				//$this->db->set('id_pr', '1');
-				//var_dump($row); exit();
-				//$this->db->where('id_detail_pr', $row['id_detail_pr']);
-				//$this->db->update('tr_pr_detail');
+				$kosong = false;
 
 				# insert to table purchase reqeust
 				$this->db->flush_cache();
@@ -139,7 +133,7 @@ class mdl_purchase_request extends CI_Model {
 		}
 
 		$this->db->trans_complete();
-		if($kosongan) {
+		if($kosong) {
 			return false;
 		}
 		return $this->db->trans_status();
@@ -260,10 +254,13 @@ class mdl_purchase_request extends CI_Model {
 	}
 	
 	function InsertDetailOnDB($data){
+		//$data_kosong = true;
 		$this->db->trans_start();
 
 		foreach($data as $row){
 			if(isset($row['chk'])){
+				//$data_kosong = false;
+				
 				# update table purchase request detail
 				$this->db->flush_cache();
 				$this->db->set('status', '2');
@@ -277,8 +274,12 @@ class mdl_purchase_request extends CI_Model {
 		}
 
 		$this->db->trans_complete();
+		// if($data_kosong) {
+		// 	return false;
+		// }
 		return $this->db->trans_status();
 	}
+
 	
 }
 
