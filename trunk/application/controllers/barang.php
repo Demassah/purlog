@@ -25,6 +25,7 @@ class barang extends CI_Controller {
 	    $data['kode_barang'] = '';
 	    $data['nama_barang'] = '';
 	    $data['status'] = '1';
+	    $data['type'] = '';
 		
 		$this->load->view('master/barang_form', $data);
 	}
@@ -36,6 +37,8 @@ class barang extends CI_Controller {
 	    $data['id_sub_kategori'] = $r->row()->id_sub_kategori;
 	    $data['kode_barang'] = $r->row()->kode_barang;
 	    $data['nama_barang'] = $r->row()->nama_barang;
+	    $data['type'] = $r->row()->type;
+	    
 		$data['kode'] = $kode;
 		
 		$this->load->view('master/barang_form', $data);
@@ -57,6 +60,7 @@ class barang extends CI_Controller {
 		$this->form_validation->set_rules("id_sub_kategori", 'Sub Kategori', 'trim|required|xss_clean');
 		$this->form_validation->set_rules("kode_barang", 'Kode Barang', 'trim|required|xss_clean');
 		$this->form_validation->set_rules("nama_barang", 'Nama Barang', 'trim|required|xss_clean');
+		$this->form_validation->set_rules("type", 'Tipe', 'trim|required|xss_clean');
 
 		# message rules
 		$this->form_validation->set_message('required', 'Field %s harus diisi.');

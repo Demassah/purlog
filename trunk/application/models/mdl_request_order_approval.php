@@ -10,19 +10,21 @@ class mdl_request_order_approval extends CI_Model {
 		# get parameter from easy grid
 		$page = isset($_POST['page']) ? intval($_POST['page']) : 1;  
 		$limit = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
-		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'id_ro';  
+		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'a.id_ro';  
 		$order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
 		$offset = ($page-1)*$limit;
 		
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('*, b.full_name, c.departement_name');
+			$this->db->select('*, b.full_name, c.departement_name, d.status_delete');
 			$this->db->from('tr_ro a');
 			$this->db->join('sys_user b', 'b.user_id = a.user_id');
 			$this->db->join('ref_departement c', 'c.departement_id = b.departement_id');
+			$this->db->join('tr_ro_detail d', 'd.id_ro = a.id_ro');
 
 			$this->db->where('a.status','2');
+			$this->db->group_by('a.id_ro');
 
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
@@ -62,6 +64,7 @@ class mdl_request_order_approval extends CI_Model {
 		$this->db->set('status', "3");
 		
 		$this->db->where('id_ro', $kode);
+		//$this->db->where('status_delete', '0');
 		$result = $this->db->update('tr_ro');
 	   
 	   
@@ -117,7 +120,7 @@ class mdl_request_order_approval extends CI_Model {
 		$this->db->set('status_delete', "1");
 		
 		$this->db->where('id_detail_ro', $kode);
-		$result = $this->db->update('tr_ro');
+		$result = $this->db->update('tr_ro_detail');
 	   
 	   
 		//return
@@ -126,6 +129,14 @@ class mdl_request_order_approval extends CI_Model {
 		}else {
 				return FALSE;
 		}
+	}
+
+	function countDetail($id_ro){
+		$this->db->where('id_ro', $id_ro);
+		$this->db->where('status_delete', '0');
+		$this->db->from('tr_ro_detail');
+		
+		return $this->db->count_all_results();
 	}
 	
 }

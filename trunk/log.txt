@@ -1,4 +1,4 @@
-(PENDING)#Tambah RO Detail Error
+(FIXED)#Tambah RO Detail Error
 
 (FIXED)# Detail Picking
 ketika sudah di alocate result cek ke stock jika alokasi stock = 0
@@ -6,7 +6,7 @@ tidak usah melakukan pengulangan utk pengurangan stock (di skip)
 langsung menghasilkan result true. (agar langsung refresh)
 
 (FIXED)# Available / picking, ketika save ada error var opts=$ ...   
-(PENDING)# Available / picking ketika di realocate belum ada pengecekan jumlahnya tidak boleh lebih dari qty di grid & tidak boleh -1 (0 dan -dari jumlah maksimal qty) 
+(FIXED)# Available / picking ketika di realocate belum ada pengecekan jumlahnya tidak boleh lebih dari qty di grid & tidak boleh -1 (0 dan -dari jumlah maksimal qty) 
 
 
 (FIXED) #PR Tambah PR not editable ? 
@@ -15,3 +15,12 @@ langsung menghasilkan result true. (agar langsung refresh)
 (FIXED)#ketika tambah detail PR, status di detail pr yang asalnya 1 berubah menjadi 2  (ID PR = 0)
 (FIXED)#ID Detail PR berubah terisi sesuai pr yg dipilih (indexnya terbawa seperti PROS)
 (FIXED)#ketika pr sudah selesai seperti done pada ROA
+
+------------------------------  22 Desember 2014 ------------------------------------------------------
+
+(FIXED) ROA done data detail tidak boleh kosong
+(FIXED) (RESEARCH) Pemisahan detail yang di approve dan tidak di approve
+(FIXED) ROS & Picking (available) ketika save dari grid berhasil
+
+(On Going) PR Detail notif Error jika detailnya kosong
+(on Going) Save ROS Detail yang type barangnya = 3 (tanpa pengecekan tipe barang sudah berhasil save)

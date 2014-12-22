@@ -31,7 +31,7 @@
 						msg: 'Data Berhasil Disimpan'
 					});
 					$('#dialog_kosong').dialog('close');
-					$('#dg').datagrid('reload');
+					$('#dg_roa').datagrid('reload');
 				}else{
 					$.messager.show({
 						title: 'Error',

@@ -13,14 +13,14 @@
 	<div class="fitem" >
 		<label style="width:100px">Kategori </label>: 
 		<select id="id_kategori" name="id_kategori" style="width:200px;">
-					<?=$this->mdl_prosedur->OptionKategori(array('value'=>$id_kategori));?>
-			</select>	
+			<?=$this->mdl_prosedur->OptionKategori(array('value'=>$id_kategori));?>
+		</select>	
 	</div>
 	<div class="fitem" >
 		<label style="width:100px">Sub Kategori </label>: 
 		<select id="id_sub_kategori" name="id_sub_kategori" style="width:200px;">
-					<?=$this->mdl_prosedur->OptionSubKategori(array('value'=>$id_sub_kategori, 'id_kategori'=>$id_kategori));?>
-			</select>	
+			<?=$this->mdl_prosedur->OptionSubKategori(array('value'=>$id_sub_kategori, 'id_kategori'=>$id_kategori));?>
+		</select>	
 	</div>
 	<br>
 	<div class="fitem" >
@@ -34,6 +34,15 @@
 	<div class="fitem" hidden="true" >
 		<label style="width:120px">Status</label>:
 		<input type="checkbox" name="status" <?=$status=='1'?'checked':''?>/> Aktif
+	</div>
+	<div class="fitem" >
+		<label style="width:100px">Type</label>:
+		<select class="easyui-combobox" name="type" style="width:170px;">
+			<option value="">-- Pilih --</option>
+			<option value="1" <?= $type == '1'?'selected ="selected"':''; ?>>Fast Moving</option>
+			<option value="2" <?= $type == '2'?'selected ="selected"':''; ?>>Slow Moving</option>
+			<option value="3" <?= $type == '3'?'selected ="selected"':''; ?>>New Item</option>		
+		</select></li>
 	</div>
 </form>
 	

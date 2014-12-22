@@ -9,14 +9,14 @@
     }
   
     $(function(){
-      $('#dg_rol').datagrid({
-        url:base_url + "request_order_logistic/grid_detail/<?=$id_ro?>"
+      $('#dg_rejected').datagrid({
+        url:base_url + "request_order_logistic/grid_rejected/<?=$id_ro?>"
       });
     });
 
     //# Tombol Bawah
     $(function(){
-      var pager = $('#dg_rol').datagrid().datagrid('getPager');  // get the pager of datagrid
+      var pager = $('#dg_rejected').datagrid().datagrid('getPager');  // get the pager of datagrid
       pager.pagination({
         buttons:[
           {
@@ -34,7 +34,7 @@
   });
 </script>
 
-<table id="dg_rol" title="Detail Request Order Approved" data-options="
+<table id="dg_rejected" title="Detail Request Order Rejected" data-options="
       rownumbers:true,
       singleSelect:true,
       autoRowHeight:false,

@@ -27,12 +27,13 @@ CREATE TABLE `ref_barang` (
   `kode_barang` varchar(10) NOT NULL,
   `nama_barang` varchar(30) NOT NULL,
   `status` varchar(1) NOT NULL,
+  `type` int(1) NOT NULL COMMENT '1: fast moving, 2: slow moving, 3: new item',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 /*Data for the table `ref_barang` */
 
-insert  into `ref_barang`(`id`,`id_kategori`,`id_sub_kategori`,`kode_barang`,`nama_barang`,`status`) values (1,2,2,'001','Busi','1'),(2,2,2,'101','Asd','1'),(3,3,4,'002','Ban','1'),(4,2,2,'003','CPU','1'),(5,3,4,'004','Monitor','1'),(6,2,2,'005','Keyboard','1'),(7,3,4,'006','Mouse','1'),(8,2,2,'007','Meja','1'),(9,3,4,'008','Kursi','1'),(10,3,4,'009','Mobil','1'),(11,3,4,'010','Bis Pariwisata','1');
+insert  into `ref_barang`(`id`,`id_kategori`,`id_sub_kategori`,`kode_barang`,`nama_barang`,`status`,`type`) values (1,2,2,'001','Busi','1',1),(2,2,2,'101','Asd','1',1),(3,3,4,'002','Ban','1',1),(4,2,2,'003','CPU','1',1),(5,3,4,'004','Monitor','1',1),(6,2,2,'005','Keyboard','1',1),(7,3,4,'006','Mouse','1',1),(8,2,2,'007','Meja','1',1),(9,3,4,'008','Kursi','1',1),(10,3,4,'009','Mobil','1',1),(11,3,4,'010','Bis Pariwisata','1',1),(12,3,4,'020','tes type','1',3);
 
 /*Table structure for table `ref_courir` */
 
@@ -95,6 +96,24 @@ CREATE TABLE `ref_sub_kategori` (
 /*Data for the table `ref_sub_kategori` */
 
 insert  into `ref_sub_kategori`(`id_sub_kategori`,`id_kategori`,`nama_sub_kategori`,`status`) values (2,2,'Barang Konsumsi','1'),(4,3,'Tak Habis','1');
+
+/*Table structure for table `ref_vendor` */
+
+DROP TABLE IF EXISTS `ref_vendor`;
+
+CREATE TABLE `ref_vendor` (
+  `id_vendor` varchar(21) CHARACTER SET latin1 NOT NULL,
+  `name_vendor` varchar(60) CHARACTER SET latin1 DEFAULT NULL,
+  `address_vendor` text CHARACTER SET latin1,
+  `contac_vendor` varchar(25) CHARACTER SET latin1 DEFAULT NULL,
+  `mobile_venddor` varchar(25) CHARACTER SET latin1 DEFAULT NULL,
+  `status` smallint(1) DEFAULT NULL,
+  PRIMARY KEY (`id_vendor`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `ref_vendor` */
+
+insert  into `ref_vendor`(`id_vendor`,`name_vendor`,`address_vendor`,`contac_vendor`,`mobile_venddor`,`status`) values ('V001','Adi','aa','12','34',1),('V002','iqbal','bb','23','45',1),('V003','Demas','cc','34','67',1);
 
 /*Table structure for table `sys_menu` */
 
@@ -205,9 +224,10 @@ CREATE TABLE `tr_do_detail` (
 DROP TABLE IF EXISTS `tr_po`;
 
 CREATE TABLE `tr_po` (
-  `id_po` varchar(21) NOT NULL,
-  `id_pr` varchar(21) DEFAULT NULL,
-  `id_ro` varchar(21) DEFAULT NULL,
+  `id_po` int(11) NOT NULL AUTO_INCREMENT,
+  `id_pr` int(11) DEFAULT NULL,
+  `id_ro` int(11) DEFAULT NULL,
+  `id_qr` int(11) DEFAULT NULL,
   `requestor` varchar(21) DEFAULT NULL,
   `departement` varchar(21) DEFAULT NULL,
   `purpose` varchar(21) DEFAULT NULL,
@@ -236,9 +256,11 @@ CREATE TABLE `tr_pr` (
   `date_create` datetime DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id_pr`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tr_pr` */
+
+insert  into `tr_pr`(`id_pr`,`id_ro`,`user_id`,`purpose`,`cat_req`,`ext_doc_no`,`ETD`,`date_create`,`status`) values (2,2,1,'STOCK','ATK','54321','2014-12-15','2014-12-15 00:00:00',2),(4,4,1,'REQUEST','ATK',' 12345','2014-12-17','2014-12-17 00:00:00',1);
 
 /*Table structure for table `tr_pr_detail` */
 
@@ -257,9 +279,11 @@ CREATE TABLE `tr_pr_detail` (
   `status` int(1) DEFAULT NULL,
   `status_delete` int(1) NOT NULL,
   PRIMARY KEY (`id_detail_pr`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tr_pr_detail` */
+
+insert  into `tr_pr_detail`(`id_detail_pr`,`id_pr`,`id_detail_ro`,`id_ro`,`kode_barang`,`qty`,`user_id`,`date_create`,`note`,`status`,`status_delete`) values (6,2,3,2,'002',20,1,'2014-12-19 01:23:24',NULL,2,0),(7,2,4,2,'004',10,1,'2014-12-19 01:23:24',NULL,2,0),(8,0,6,4,'001',10,1,'2014-12-21 17:40:06',NULL,1,0);
 
 /*Table structure for table `tr_pros_detail` */
 
@@ -276,23 +300,29 @@ CREATE TABLE `tr_pros_detail` (
   `id_lokasi` varchar(21) DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id_detail_pros`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `tr_pros_detail` */
+
+insert  into `tr_pros_detail`(`id_detail_pros`,`id_detail_ro`,`id_ro`,`id_sro`,`id_stock`,`kode_barang`,`qty`,`id_lokasi`,`status`) values (1,1,1,NULL,2,'003',15,'A0201',1),(2,3,2,NULL,13,'002',30,'A0302',1),(3,4,2,NULL,4,'004',20,'A0402',1),(4,6,4,NULL,1,'001',10,'A0101',1),(5,8,6,NULL,4,'004',5,'A0402',1);
 
 /*Table structure for table `tr_qr` */
 
 DROP TABLE IF EXISTS `tr_qr`;
 
 CREATE TABLE `tr_qr` (
-  `id_qr` varchar(21) NOT NULL,
+  `id_qr` int(11) NOT NULL AUTO_INCREMENT,
   `id_pr` varchar(21) DEFAULT NULL,
   `id_vendor` varchar(21) DEFAULT NULL,
-  `status` int(1) DEFAULT NULL,
+  `top` int(3) DEFAULT NULL,
+  `ETD` date DEFAULT NULL,
+  `status` int(2) DEFAULT '1',
   PRIMARY KEY (`id_qr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `tr_qr` */
+
+insert  into `tr_qr`(`id_qr`,`id_pr`,`id_vendor`,`top`,`ETD`,`status`) values (1,'2','V001',15,'2014-12-19',1),(2,'2','V002',30,'2014-12-19',1),(3,'2','V003',20,'2014-12-19',1);
 
 /*Table structure for table `tr_qr_detail` */
 
@@ -300,34 +330,16 @@ DROP TABLE IF EXISTS `tr_qr_detail`;
 
 CREATE TABLE `tr_qr_detail` (
   `id_detail_qr` int(11) NOT NULL AUTO_INCREMENT,
+  `id_qr` int(11) DEFAULT NULL,
   `id_barang` varchar(21) DEFAULT NULL,
   `price` int(11) DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id_detail_qr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `tr_qr_detail` */
 
-/*Table structure for table `tr_qrs` */
-
-DROP TABLE IF EXISTS `tr_qrs`;
-
-CREATE TABLE `tr_qrs` (
-  `id_po` varchar(21) NOT NULL,
-  `id_pr` varchar(21) DEFAULT NULL,
-  `id_ro` varchar(21) DEFAULT NULL,
-  `requestor` varchar(21) DEFAULT NULL,
-  `departement` varchar(21) DEFAULT NULL,
-  `purpose` varchar(21) DEFAULT NULL,
-  `cat_req` varchar(21) DEFAULT NULL,
-  `ext_doc_no` varchar(21) DEFAULT NULL,
-  `ETD` date DEFAULT NULL,
-  `date_create` datetime DEFAULT NULL,
-  `status` int(1) DEFAULT NULL,
-  PRIMARY KEY (`id_po`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Data for the table `tr_qrs` */
+insert  into `tr_qr_detail`(`id_detail_qr`,`id_qr`,`id_barang`,`price`,`status`) values (1,1,'001',1000,1),(2,1,'002',1500,1),(3,2,'001',1100,1),(4,2,'002',1600,1),(5,3,'001',1200,1),(6,3,'002',1700,1);
 
 /*Table structure for table `tr_ro` */
 
@@ -343,11 +355,11 @@ CREATE TABLE `tr_ro` (
   `date_create` datetime DEFAULT NULL,
   `status` int(1) DEFAULT NULL COMMENT '1: RO, 2: ROA, 3:ROL, 4: ROS, 5: Picking, 6: Shipment, 7: DO',
   PRIMARY KEY (`id_ro`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `tr_ro` */
 
-insert  into `tr_ro`(`id_ro`,`user_id`,`purpose`,`cat_req`,`ext_doc_no`,`ETD`,`date_create`,`status`) values (1,1,'REQUEST','ASSET',' 12345','2014-12-15','2014-12-15 00:00:00',1),(2,1,'STOCK','ATK','54321','2014-12-15','2014-12-15 00:00:00',1),(3,1,'REQUEST','ASSET',' 12345','2014-12-17','2014-12-17 00:00:00',1),(4,1,'REQUEST','ATK',' 12345','2014-12-17','2014-12-17 00:00:00',1),(5,1,'REQUEST','SPAREPART',' 12345','2014-12-17','2014-12-17 00:00:00',1),(6,1,'STOCK','ASSET',' 54321','2014-12-17','2014-12-17 00:00:00',1),(7,1,'STOCK','ATK','54321','2014-12-17','2014-12-17 00:00:00',1),(8,1,'STOCK','SPAREPART','54321','2014-12-17','2014-12-17 00:00:00',1),(9,1,'STOCK','SPAREPART','09866','2014-12-17','2014-12-15 00:00:00',1),(10,1,'STOCK','SPAREPART',' 567890','2014-12-17','2014-12-17 00:00:00',1);
+insert  into `tr_ro`(`id_ro`,`user_id`,`purpose`,`cat_req`,`ext_doc_no`,`ETD`,`date_create`,`status`) values (1,1,'REQUEST','ASSET',' 12345','2014-12-15','2014-12-15 00:00:00',6),(2,1,'STOCK','ATK','54321','2014-12-15','2014-12-15 00:00:00',6),(3,1,'REQUEST','ASSET',' 12345','2014-12-17','2014-12-17 00:00:00',4),(4,1,'REQUEST','ATK',' 12345','2014-12-17','2014-12-17 00:00:00',6),(5,1,'REQUEST','SPAREPART',' 12345','2014-12-17','2014-12-17 00:00:00',3),(6,1,'STOCK','ASSET',' 54321','2014-12-17','2014-12-17 00:00:00',5),(7,1,'STOCK','ATK','54321','2014-12-17','2014-12-17 00:00:00',3),(8,1,'STOCK','SPAREPART','54321','2014-12-17','2014-12-17 00:00:00',1),(9,1,'STOCK','SPAREPART','09866','2014-12-17','2014-12-15 00:00:00',1),(10,1,'STOCK','SPAREPART',' 567890','2014-12-17','2014-12-17 00:00:00',1),(11,0,'REQUEST','ATK','','2014-12-19','2014-12-19 00:00:00',1),(12,1,'REQUEST','ASSET','563214','2014-12-21','2014-12-21 00:00:00',1);
 
 /*Table structure for table `tr_ro_detail` */
 
@@ -359,6 +371,7 @@ CREATE TABLE `tr_ro_detail` (
   `ext_doc_no` varchar(21) DEFAULT NULL,
   `kode_barang` varchar(21) DEFAULT NULL,
   `qty` int(11) DEFAULT NULL,
+  `barang_bekas` int(1) NOT NULL,
   `user_id` smallint(6) DEFAULT NULL,
   `date_create` datetime DEFAULT NULL,
   `note` text,
@@ -366,11 +379,11 @@ CREATE TABLE `tr_ro_detail` (
   `status_delete` int(1) NOT NULL,
   `id_sro` int(6) NOT NULL,
   PRIMARY KEY (`id_detail_ro`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tr_ro_detail` */
 
-insert  into `tr_ro_detail`(`id_detail_ro`,`id_ro`,`ext_doc_no`,`kode_barang`,`qty`,`user_id`,`date_create`,`note`,`status`,`status_delete`,`id_sro`) values (1,1,'12345','003',15,1,'2014-12-15 00:00:00','dfsdsf',1,0,0),(2,1,'12345','005',20,1,'2014-12-15 00:00:00','dsfdsf',1,0,0),(3,2,'54321','002',50,1,'2014-12-15 00:00:00','dsfs',1,0,0),(4,2,'54321','004',30,1,'2014-12-15 00:00:00','xcv',1,0,0),(5,3,'12345','001',15,1,'2014-12-17 21:37:36','asd',1,0,0),(6,4,'12345','001',20,1,'2014-12-17 21:37:36','dsa',1,0,0),(7,5,'12345','003',25,1,'2014-12-17 21:37:36','fds',1,0,0),(8,6,'54321','004',20,1,'2014-12-17 21:37:36','jkl',1,0,0),(9,7,'54321','006',20,1,'2014-12-17 21:37:36','klh',1,0,0),(10,8,'54321','008',15,1,'2014-12-17 21:37:36','lkj',1,0,0);
+insert  into `tr_ro_detail`(`id_detail_ro`,`id_ro`,`ext_doc_no`,`kode_barang`,`qty`,`barang_bekas`,`user_id`,`date_create`,`note`,`status`,`status_delete`,`id_sro`) values (1,1,'12345','003',15,0,1,'2014-12-15 00:00:00','dfsdsf',1,0,0),(2,1,'12345','005',20,0,1,'2014-12-15 00:00:00','dsfdsf',1,0,0),(3,2,'54321','002',50,0,1,'2014-12-15 00:00:00','dsfs',1,0,0),(4,2,'54321','004',30,0,1,'2014-12-15 00:00:00','xcv',1,0,0),(5,3,'12345','001',15,0,1,'2014-12-17 21:37:36','asd',1,0,0),(6,4,'12345','001',20,0,1,'2014-12-17 21:37:36','dsa',1,0,0),(7,5,'12345','003',25,0,1,'2014-12-17 21:37:36','fds',1,1,0),(8,6,'54321','004',20,0,1,'2014-12-17 21:37:36','jkl',1,0,0),(9,7,'54321','006',20,0,1,'2014-12-17 21:37:36','klh',1,0,0),(38,9,'09866','010',50,0,1,'2014-12-15 00:00:00','',1,0,0),(39,9,'09866','009',5,0,1,'2014-12-15 00:00:00','',1,0,0),(48,10,' 567890','001',NULL,0,1,'0000-00-00 00:00:00','',1,0,0),(49,10,' 567890','001',NULL,0,1,'0000-00-00 00:00:00','',1,0,0),(53,10,' 567890','007',10,1,1,'0000-00-00 00:00:00','',1,0,0),(54,3,' 12345','009',5,2,1,'0000-00-00 00:00:00','',1,0,0),(55,3,' 12345','007',7,1,1,'0000-00-00 00:00:00','hhh',1,0,0),(56,5,' 12345','003',25,2,1,'2014-12-17 00:00:00','',1,0,0),(57,5,' 12345','009',5,1,1,'2014-12-17 00:00:00','',1,0,0),(58,5,' 12345','007',15,1,1,'2014-12-17 00:00:00','',1,0,0);
 
 /*Table structure for table `tr_sro` */
 
@@ -384,11 +397,9 @@ CREATE TABLE `tr_sro` (
   `id_user` varchar(21) DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id_sro`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `tr_sro` */
-
-insert  into `tr_sro`(`id_sro`,`id_do`,`id_ro`,`date_create`,`id_user`,`status`) values (1,1,3,'2014-12-17 00:00:00','1',2),(2,NULL,7,'2014-12-17 00:00:00','1',1),(3,NULL,2,'2014-12-18 00:00:00','1',2);
 
 /*Table structure for table `tr_stock` */
 
@@ -406,7 +417,35 @@ CREATE TABLE `tr_stock` (
 
 /*Data for the table `tr_stock` */
 
-insert  into `tr_stock`(`id_stock`,`kode_barang`,`qty`,`price`,`id_lokasi`,`status`) values (1,'001',15,1000,'A0101',1),(2,'003',0,1000,'A0201',1),(3,'003',0,1500,'A0301',1),(4,'004',0,2000,'A0402',1),(5,'005',0,500,'A0101',1),(6,'005',0,1250,'A0101',1),(7,'005',0,400,'A0201',1),(8,'008',0,5000,'A0301',1),(9,'009',10,75000,'A0402',1),(10,'010',0,15000,'A0201',1),(11,'011',10,2000,'A0301',1),(12,'002',0,1000,'A0101',1),(13,'002',0,5000,'A0302',1),(14,'006',5,1000,'A0301',1);
+insert  into `tr_stock`(`id_stock`,`kode_barang`,`qty`,`price`,`id_lokasi`,`status`) values (1,'001',5,1000,'A0101',1),(2,'003',5,1000,'A0201',1),(3,'003',0,1500,'A0301',1),(4,'004',5,2000,'A0402',1),(5,'005',15,500,'A0101',1),(6,'005',0,1250,'A0101',1),(7,'005',0,400,'A0201',1),(8,'008',0,5000,'A0301',1),(9,'009',10,75000,'A0402',1),(10,'010',0,15000,'A0201',1),(11,'011',10,2000,'A0301',1),(12,'002',0,1000,'A0101',1),(13,'002',0,5000,'A0302',1),(14,'006',5,1000,'A0301',1);
+
+/* Trigger structure for table `tr_do` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `after_update_do` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `after_update_do` AFTER UPDATE ON `tr_do` FOR EACH ROW BEGIN
+    IF new.status = 2 THEN
+	UPDATE tr_sro SET STATUS = 2  WHERE id_do = old.id_do;
+   END IF;
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `tr_do` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `after_delete_do` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `after_delete_do` AFTER DELETE ON `tr_do` FOR EACH ROW BEGIN
+	UPDATE tr_sro SET id_do = NULL WHERE id_do = old.id_do;
+    END */$$
+
+
+DELIMITER ;
 
 /* Trigger structure for table `tr_pros_detail` */
 
@@ -444,8 +483,21 @@ DELIMITER $$
 
 /*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `after_allocated` AFTER UPDATE ON `tr_ro` FOR EACH ROW BEGIN
 	IF new.status = 6 THEN
-	CALL p_allocated(old.id_ro);
+	CALL p_allocated(old.id_ro, old.user_id);
 	END IF;
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `tr_sro` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `after_delete_sro` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `after_delete_sro` AFTER DELETE ON `tr_sro` FOR EACH ROW BEGIN
+	UPDATE tr_pros_detail SET id_sro = NULL WHERE id_sro = old.id_sro;
     END */$$
 
 
@@ -457,23 +509,23 @@ DELIMITER ;
 
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_allocated`(IN p_id_ro INT)
-BEGIN
-	DECLARE done INT DEFAULT FALSE;
-	DECLARE a, b, d INT;
-	DECLARE c VARCHAR(21);
-	DECLARE cur1 CURSOR FOR SELECT id_detail_ro, id_ro, kode_barang, sisa FROM v_pros_detail WHERE sisa != 0 AND id_ro = p_id_ro ;
-	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-		
-	OPEN cur1;
-	read_loop : LOOP
-	FETCH cur1 INTO a, b, c, d ;
-	IF done THEN 
-	LEAVE read_loop;
-	END IF;
-	INSERT INTO tr_pr_detail (id_detail_ro, id_ro, kode_barang, qty, date_create, STATUS) VALUES (a, b, c, d, CURRENT_TIMESTAMP(),"1");
-	END LOOP;
-	CLOSE cur1; 
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_allocated`(IN p_id_ro INT, IN p_user_id INT)
+BEGIN
+	DECLARE done INT DEFAULT FALSE;
+	DECLARE a, b, d INT;
+	DECLARE c VARCHAR(21);
+	DECLARE cur1 CURSOR FOR SELECT id_detail_ro, id_ro, kode_barang, sisa FROM v_pros_detail WHERE sisa != 0 AND id_ro = p_id_ro ;
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+		
+	OPEN cur1;
+	read_loop : LOOP
+	FETCH cur1 INTO a, b, c, d ;
+	IF done THEN 
+	LEAVE read_loop;
+	END IF;
+	INSERT INTO tr_pr_detail (id_detail_ro, id_ro, kode_barang, qty, date_create, user_id, STATUS) VALUES (a, b, c, d, CURRENT_TIMESTAMP(), p_user_id,"1");
+	END LOOP;
+	CLOSE cur1; 
     END */$$
 DELIMITER ;
 

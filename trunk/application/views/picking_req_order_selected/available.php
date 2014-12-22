@@ -126,8 +126,7 @@
 
     saveData = function(){
       // save jika cell masih dlm keadaan edit
-      $('#dg_picking').datagrid('endEdit', editIndex);
-      //alert(JSON.stringify($('#dg-nilai').datagrid('getData')));
+      $('#dg_picking').datagrid('endEdit', editIndex);      
       $.ajax({
         url: base_url+"picking_req_order_selected/save",
         method: 'POST',
@@ -142,6 +141,7 @@
             title: 'Success',
             msg: 'Data Berhasil Disimpan'
           });
+          $('#dg_picking').datagrid('reload');
         }else{
           $.messager.show({
             title: 'Error',
@@ -187,7 +187,10 @@
         ]
       });     
     });
-		
+
+    cellStyler = function(value,row,index){
+        return 'background-color:#ffee00;color:red;';
+    }
 		
 	});
 </script>
@@ -226,7 +229,7 @@
       <th field="id_stock" sortable="true" width="100">ID Stock</th>
       <th field="kode_barang" sortable="true" width="120">ID Barang</th>
       <th field="nama_barang" sortable="true" width="130">Nama Barang</th>
-      <th data-options="field:'qty',width:'100'" editor="text">Qty</th>    
+      <th data-options="field:'qty',width:'100',styler:cellStyler" editor="text">Qty</th>    
       <th field="id_lokasi" sortable="true" width="100">Lokasi</th>      
     </tr>
   </thead>
