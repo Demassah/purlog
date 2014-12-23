@@ -9,7 +9,30 @@
 		</table>
 	</div>
 </div>
-<form id="form2" method="post">
+<table class="tbl">
+    <caption>Compare vendor List</caption>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Vendor Name</th>
+        <th>TOP</th>
+        <th>Kode Barang</th>
+        <th>Nama Barang</th>
+        <th>Price</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>TOP</td>
+        <td>Price</td>
+      </tr>
+      <tr>
+        <td>Price 1</td>
+      </tr>
+    </tbody>
+  </table>
+<!-- <form id="form2" method="post">
 	<table class="tbl">
 		<caption>Compare vendor List</caption>
 		<thead>
@@ -44,7 +67,7 @@
 			?>
 		</tbody>
 	</table>
-</form>
+</form> -->
 <script type="text/javascript">
   $(document).ready(function() {
     var id_pr = '<?php echo $l->id_pr;?>';
