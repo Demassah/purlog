@@ -63,7 +63,7 @@
 		actionbutton = function(value, row, index){
 			var col='';
 			
-					col += '&nbsp;&nbsp; &nbsp;&nbsp;<a href="#" onclick="detailROS(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
+					col += '<a href="#" onclick="detailROS(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
 			
 
 					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
