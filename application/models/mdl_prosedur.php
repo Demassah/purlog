@@ -262,6 +262,27 @@ class mdl_prosedur extends CI_Model {
 		return $out;
 	}
 
+	function OptionVendor($d=""){
+		$value = isset($d['value'])?$d['value']:'';
+		$out = '';
+		
+		$this->db->flush_cache();
+		$this->db->from('ref_vendor');
+		$this->db->order_by('name_vendor');
+				
+		$res = $this->db->get();
+		
+		foreach($res->result() as $l){
+			if(trim($l->id_vendor) == trim($value)){
+				$out .= '<option value="'.$l->id_vendor.'" selected="selected">'.$l->name_vendor.'</option>';
+			}else{
+				$out .= '<option value="'.$l->id_vendor.'">'.$l->name_vendor.'</option>';
+			}
+		}
+		
+		return $out;
+	}
+
 }
 
 ?>
