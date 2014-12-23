@@ -3,7 +3,7 @@
 		<table>
 			<tr>
 					<td>
-							&nbsp;&nbsp;<a href="#" onclick="Add_sro()" class="easyui-linkbutton" iconCls="icon-ok">Add</a>
+							&nbsp;&nbsp;<a href="#" onclick="Add_vendor()" class="easyui-linkbutton" iconCls="icon-ok">Add</a>
 					</td>							
 			</tr>		
 		</table>
@@ -47,6 +47,7 @@
 </form>
 <script type="text/javascript">
   $(document).ready(function() {
+    var id_pr = '<?php echo $l->id_pr;?>';
   	$(".editbox").hide();
     $(".edit_tr").click(function() {
      var ID=$(this).attr('id');
@@ -89,30 +90,69 @@
           });
           // Selected
      Selected = function (val){
-        if(confirm("Apakah yakin akan mengirim data ke QRS '" + val + "'?")){
-          var response = '';
-          $.ajax({ type: "GET",
-             url: base_url+'quotation_request_selected/Selected/' + val,
-             async: false,
-             success : function(response){
-              var response = eval('('+response+')');
-              if (response.success){
-                $.messager.show({
-                  title: 'Success',
-                  msg: 'Data Berhasil Di save'
-                });
-                // reload and close tab
-                $('#dg').datagrid('reload');
-              } else {
-                $.messager.show({
-                  title: 'Error',
-                  msg: response.msg
-                });
-              }
-             }
-          });
-        }
-      //}
+      if(confirm("Apakah yakin akan mengirim data ke QRS '" + val + "'?")){
+        var response = '';
+        $.ajax({ type: "GET",
+           url: base_url+'quotation_request_selected/Selected/' + val,
+           async: false,
+           success : function(response){
+            var response = eval('('+response+')');
+            if (response.success){
+              $.messager.show({
+                title: 'Success',
+                msg: 'Data Berhasil Di save'
+              });
+              // reload and close tab
+              $('#dg').datagrid('reload');
+            } else {
+              $.messager.show({
+                title: 'Error',
+                msg: response.msg
+              });
+            }
+           }
+        });
+      }
     }
+
+    Add_vendor = function (){
+      $('#dialog').dialog({
+        title: 'Tambah Vendor',
+        width: 380,
+        height: 150,
+        closed: true,
+        cache: false,
+        href: base_url+'quotation_request_selected/add/'+id_pr,
+        modal: true
+      });
+       
+      $('#dialog').dialog('open');
+      url = base_url+'quotation_request_selected/save/add';
+    }
+    // end newData
+    saveData = function(){
+      
+      $('#form1').form('submit',{
+        url: url,
+        onSubmit: function(){
+          return $(this).form('validate');
+        },
+        success: function(result){
+          alert(result);
+          var result = eval('('+result+')');
+          if (result.success){
+            $('#dialog').dialog('close');   // close the dialog
+            $('#dg').datagrid('reload');    // reload the user data
+          } else {
+            $.messager.show({
+              title: 'Error',
+              msg: result.msg
+            });
+          }
+        }
+      });
+    }
+    
+
     });
     </script>

@@ -110,6 +110,26 @@ class mdl_quotation_request_selected extends CI_Model {
 		}
 	}
 
+	function Insert_vendor($data)
+	{
+		$this->db->flush_cache();
+		// insert data
+    $this->db->set('id_pr', $data['id_pr']);
+    $this->db->set('id_vendor',$data['id_vendor']);
+    $this->db->set('top',$data['top']);
+    $this->db->set('ETD', $data['date_create']);
+    $this->db->set('status',$data['status'] );
+
+		$result = $this->db->insert('tr_qr');
+		
+		//return
+		if($result) {
+			return TRUE;
+		}else {
+			return FALSE;
+		}
+	}
+
 }
 
 /* End of file mdl_quotation_request_selected.php */

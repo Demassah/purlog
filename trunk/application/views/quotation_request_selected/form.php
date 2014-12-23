@@ -1,85 +1,27 @@
 <script>
-	
-	var url;
-	$(document).ready(function(){
-
-		// search text combo
+	// search text combo
 		$(document).ready(function(){
-			$("#SRO").select2();
+			$(".select").select2();
 		});
-
-		back = function (){
-			$('#konten').panel({
-				href: base_url+'delivery_order/index',
-			});
-		}
-
-
-		detailSROlist = function (){
-			$('#konten').panel({
-				href: base_url+'delivery_order/detailSROlist',
-			});
-		}
-				
-		text = function(value, row, index){
-			return '<input name="menu_name" size="30" value=" ">';
-		}		
-
-		$(function(){ // init
-			$('#dgrtd').datagrid({url:"delivery_order/grid"});				
-		});	
-
-		$(document).ready(function(){
-		
-		$('#purpose').change(function(){
-			$('#id_sub_kategori').load(base_url+'prosedur/getSubKategoribyKategori/'+$('#purpose').val());
-		});
-		
-	});
-
-	 $(document).ready(function() {
-		$("#id_item").select2();
-		$("#id_sub_kategori").select2();
-		$("#purpose").select2();
-	});
-
-		
-	});
 </script>
-<!-- <form id="form1" method="post" style="margin:10px"> -->
-<!-- 	<input type="hidden" name="kode" id="kode" value="<?=$kode?>"> -->
-<div id="toolbar_form" style="padding:5px;height:auto">
-	<div class="fsearch" >
-		<div class="fitem" >
-			<label style="width:140px">Vendor </label>: 
-			<select id="purpose" name="id_kategori" style="width:167px;">
-							<option value="">Choose Vendor</option>
-							<option value="">Vendor A</option>			
-			</select>	
-		</div>
-		<div class="fitem" >
-			<label style="width:140px">TOP </label>: 
-			<input name="name" size="19" value=" "> Days
-		</div>
+<?php date_default_timezone_set("Asia/Jakarta");?>
+<form id="form1" method="post" style="margin:10px">
+	<input type="hidden" name="id_pr" value="<?php echo $id_pr;?>">
+	<input type="hidden" name="date_create" value="<?php echo date('Y-m-d');?>">
+	<input type="hidden" name="status" value="1">
+	<div class="fitem" >
+		<label style="width:100px">Vendor </label>: 
+			<select class="select" name="id_vendor" style="width:200px;">
+						<option>Pilih</option>
+							<?=$this->mdl_prosedur->OptionVendor(array('value'=>$id_vendor));?>
+						       
+				</select>	
 	</div>
-</div>	
+	<div class="fitem">
+		<label style="width:100px">TOP</label>:
+		<input type="text" name="top" placeholder="TOP" />
+	</div>
 
+</form>
+	
 
-<table id="dgrtd" data-options="
-			rownumbers:true,
-			singleSelect:false,
-			autoRowHeight:false,
-			fit:true,
-			toolbar:'#toolbar_form',
-		">		
-	<thead>
-		<tr>
-			<th data-options="field:'id_krs_detail',width:'100', hidden:true">aa</th>
-			<th field="kode_barang" sortable="true" width="120">ID </th>
-			<th field="kode_barang" sortable="true" width="120">Item</th>
-			<th field="kode_barang" sortable="true" width="80">Qty</th>
-			<th field="nama_sub_kategori" sortable="true" width="480">Deskripsi</th>		
-			<th field="text" align="center" width="75" formatter="text">Price</th>	
-		</tr>
-	</thead>
-</table>
