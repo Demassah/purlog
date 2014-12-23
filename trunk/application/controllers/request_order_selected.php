@@ -50,26 +50,57 @@ function __construct(){
         }
     }
 
-    function save(){
-		# get post data
-		foreach($_POST as $key => $value){
-			$data[$key] = $value;
-		}
-		
-		
-		# init
-		$status = "";
-		$result = false;
-		$data['pesan_error'] = '';
+    function edit($kode) {
+    	// $r = false;
+     //    $data['pesan_error'] = '';
 
-		$result = $this->mdl_request_order_selected->Update_Kode_Barang($data);
-		
-		if($result){
-			echo json_encode(array('success'=>true));
-		}else{
-			echo json_encode(array('msg'=>$data['pesan_error']));
-		}
-	}
+        $r = $this->mdl_request_order_selected->getdataedit($kode);
+        
+        $data['kode'] 				= $kode;
+        $data['id_ro'] 				= $r->row()->id_ro;
+        $data['ext_doc_no'] 		= $r->row()->ext_doc_no;
+        $data['type'] 		= $r->row()->type;
+        $data['id_kategori'] 		= $r->row()->id_kategori;
+        $data['id_sub_kategori'] 	= $r->row()->id_sub_kategori;
+        $data['kode_barang'] 		= $r->row()->kode_barang;
+        $data['qty'] 				= $r->row()->qty;
+        $data['barang_bekas']		= $r->row()->barang_bekas;
+        $data['user_id']			= $r->row()->user_id;
+        $data['date_create'] 		= $r->row()->date_create;
+        $data['note'] 				= $r->row()->note;
+        $data['status']				= $r->row()->status;
+        $data['status_delete'] 		= $r->row()->status_delete;
+        $data['id_sro'] 			= $r->row()->id_sro;
+        
+        $this->load->view('request_order_selected/form_detail', $data);
+        
+        /*
+        if ($r) {
+            echo json_encode(array('success' => true));
+        } else {
+            echo json_encode(array('msg' => 'Bukan Type New Item'));
+        }*/
+        
+    }
+
+    function save($aksi) {
+        // init
+        $status = "";
+        $result = false;
+        $data['pesan_error'] = '';
+        // get post data
+        foreach ($_POST as $key => $value) {
+            $data[$key] = $value;
+        }
+
+        $result = $this->mdl_request_order_selected->UpdateOnDb($data);
+
+        if ($result) {
+            echo json_encode(array('success' => true));
+        } else {
+            echo json_encode(array('msg' => $data['pesan_error']));
+        }
+    }
 
 
 }

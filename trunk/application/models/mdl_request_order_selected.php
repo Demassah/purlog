@@ -67,7 +67,7 @@ class mdl_request_order_selected extends CI_Model {
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('*, a.id_ro, c.full_name, d.departement_name, e.nama_barang');
+			$this->db->select('*, a.kode_barang, a.id_ro, c.full_name, d.departement_name, e.nama_barang');
 			$this->db->from('tr_ro_detail a');
 			$this->db->join('tr_ro b', 'b.id_ro = a.id_ro');
 			$this->db->join('sys_user c', 'c.user_id = a.user_id');
@@ -128,39 +128,62 @@ class mdl_request_order_selected extends CI_Model {
 		}
 	}
 
-	function Update_Kode_Barang($data){
-		$this->db->trans_start();
-		
-		$result = true;
-		
-		# tambah ke tabel
-		foreach($data['data_detail']['rows'] as $row){
-			
-			$this->db->flush_cache();
-			$this->db->set('kode_barang', $row['kode_barang']);
-			
-			$this->db->where('id_detail_ro', $row['id_detail_ro']);
-			//$this->db->where('id_ro', $row['id_ro']);
-			//$this->db->where('type', '3');
+	function getdataedit($kode){
+		$this->db->flush_cache();
+		$this->db->select('*, a.id_ro, a.id_detail_ro, c.full_name, d.departement_name, e.nama_barang, e.type');
+		$this->db->from('tr_ro_detail a');
+		$this->db->join('tr_ro b', 'b.id_ro = a.id_ro');
+		$this->db->join('sys_user c', 'c.user_id = a.user_id');
+		$this->db->join('ref_departement d', 'd.departement_id = c.departement_id');
+		$this->db->join('ref_barang e', 'e.kode_barang = a.kode_barang');
 
-			$result = $this->db->update('tr_ro_detail');
-			
-		}
+		$this->db->where('a.id_detail_ro', $kode);
+		//$this->db->where('e.type', '3');
+
+		return $this->db->get();
+	}
+
+	function isExistKode($kode){
+		if ($kode!=null)
+			$this->db->where('id_detail_ro',$kode);
+		
+		$this->db->select('*');
+		$this->db->from('tr_ro_detail');
+		$query = $this->db->get();
+		
+		$rs = $query->num_rows() ;		
+		$query->free_result();
+		
+		return ($rs>0);
+	}
+
+	function UpdateOnDb($data){
+		//query insert data		
+		$this->db->flush_cache();
+		//$this->db->set('id_detail_ro', $data['id_detail_ro']);
+		$this->db->set('id_ro', $data['id_ro']);
+		$this->db->set('ext_doc_no', $data['ext_doc_no']);
+		$this->db->set('kode_barang', $data['kode_barang']);
+		$this->db->set('qty', $data['qty']);
+		$this->db->set('barang_bekas', $data['barang_bekas']);
+		$this->db->set('user_id', $data['user_id']);
+		$this->db->set('date_create', $data['date_create']);
+		$this->db->set('note', $data['note']);
+		$this->db->set('status', $data['status']);		
+		$this->db->set('status_delete', $data['status_delete']);		
+		$this->db->set('id_sro', $data['id_sro']);
+
+		$this->db->where('id_detail_ro', $data['kode']);
+		$result = $this->db->update('tr_ro_detail');
 		
 		//return
-		$this->db->trans_complete();
-	    return $this->db->trans_status();
+		if($result) {
+			return TRUE;
+		}else {
+			return FALSE;
+		}
 	}
 
-	function cekType($id_detail_ro){
-		$this->db->where('id_detail_ro', $id_detail_ro);
-		$this->db->where('status_delete', '3');
-		$this->db->from('tr_ro_detail');
-		
-		return $this->db->count_all_results();
-	}
-
-	
 }
 
 ?>
