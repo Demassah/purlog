@@ -70,6 +70,15 @@ class shipment_req_order extends CI_Controller {
 			echo json_encode(array('msg' => 'Data gagal dikirim'));
 		}
 	}
+
+	function delete($kode) {
+    $result = $this->mdl_shipment_req_order->delete($kode);
+    if ($result) {
+        echo json_encode(array('success' => true));
+    } else {
+        echo json_encode(array('msg' => 'Data gagal dihapus'));
+    }
+  }	
 	
 	// detail function
 

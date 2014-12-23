@@ -13,7 +13,7 @@
 			<th field="id_do" sortable="true" width="120">ID Delivery Order</th>
 			<th field="name_courir" sortable="true" width="120">Courir</th>
 			<th field="date_create" sortable="true" width="125">Date Create</th>
-			<th field="action" align="center" formatter="actionbutton" width="140">Aksi</th>
+			<th field="action" align="center" formatter="actionbutton" width="180">Aksi</th>
 		</tr>
 	</thead>
 </table>
@@ -118,6 +118,32 @@
 				});
 			}
 		}
+		// delete data
+		deletedata = function (val){
+			if(confirm("Apakah yakin akan Menghapus Data '" + val + "'?")){
+				var response = '';
+				$.ajax({ type: "GET",
+					 url: base_url+'delivery_order/delete/' + val,
+					 async: false,
+					 success : function(response){
+						var response = eval('('+response+')');
+						if (response.success){
+							$.messager.show({
+								title: 'Success',
+								msg: 'Data Berhasil Dihapus'
+							});
+							// reload and close tab
+							$('#dg').datagrid('reload');
+						} else {
+							$.messager.show({
+								title: 'Error',
+								msg: response.msg
+							});
+						}
+					 }
+				});
+			}
+		}
 		//Done 
 		actionbutton = function(value, row, index){
 			var col='';
@@ -127,6 +153,11 @@
 			<?}?>
 			
 					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id_do+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
+			
+			<?if($this->mdl_auth->CekAkses(array('menu_id'=>19, 'policy'=>'DELETE'))){?>
+					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="deletedata(\''+row.id_do+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
+			<?}?>
+
 			return col;
 		}
 		

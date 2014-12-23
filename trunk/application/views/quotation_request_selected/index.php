@@ -12,7 +12,7 @@
   </div>
 </div> -->
 
-<table id="dg" title="Purchase Request List" data-options="
+<table id="dg" title="Quotation Request List" data-options="
       rownumbers:true,
       singleSelect:true,
       autoRowHeight:false,
@@ -45,14 +45,14 @@
         if(confirm("Apakah yakin akan mengirim data ke QRS '" + val + "'?")){
           var response = '';
           $.ajax({ type: "GET",
-             url: base_url+'purchase_request/doneData/' + val,
+             url: base_url+'quotation_request_selected/Done/' + val,
              async: false,
              success : function(response){
               var response = eval('('+response+')');
               if (response.success){
                 $.messager.show({
                   title: 'Success',
-                  msg: 'Data Berhasil Dikirim'
+                  msg: 'Data Berhasil Di save'
                 });
                 // reload and close tab
                 $('#dg').datagrid('reload');
@@ -68,25 +68,17 @@
       //}
     }
     //end sendData 
-
-    add_pr = function (val){
+    Add_Qrs = function (val){
       $('#konten').panel({
-        href: base_url+'purchase_request/add_pr/',
-      });
-    }
-    // end newData
-
-    detail_pr = function (val){
-      $('#konten').panel({
-        href: base_url+'purchase_request/detail_pr/' + val,
+        href: base_url+'quotation_request_selected/add_qrs/' + val,
       });
     }
   
     actionPurchaseRequest = function(value, row, index){
       var col='';
-          col += '<a href="#" onclick="detail_pr(\''+row.id_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';     
+          // col += '<a href="#" onclick="detail_pr(\''+row.id_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';     
           
-          col += '&nbsp;&nbsp; | &nbsp;&nbsp;<a href="#" onclick="detail_pr(\''+row.id_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">QRS</a>';     
+          col += '<a href="#" onclick="Add_Qrs(\''+row.id_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">QRS</a>';     
 
           col += '&nbsp;&nbsp; | &nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit"plain="false">Done</a>';
       return col;

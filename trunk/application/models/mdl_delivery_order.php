@@ -71,6 +71,19 @@ class mdl_delivery_order extends CI_Model {
 		}
 	}
 
+	function delete($kode)
+	{
+		$this->db->flush_cache();
+		$this->db->where('id_do', $kode);
+		$result = $this->db->delete('tr_do');
+
+		if($result) {
+			return TRUE;
+		}else{
+			return FALSE;
+		}
+	}
+
 	function InsertOnDb($data){
 		$this->db->flush_cache();
         $this->db->set('id_user', $data['id_user']);
