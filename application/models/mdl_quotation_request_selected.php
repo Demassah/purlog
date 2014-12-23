@@ -2,11 +2,11 @@
 
 class mdl_quotation_request_selected extends CI_Model {
 
-function __construct(){
-        parent::__construct();
-    }
+	function __construct(){
+    parent::__construct();
+  }
 
-    function getdata($plimit=true){
+  function getdata($plimit=true){
 	# get parameter from easy grid
 		$page = isset($_POST['page']) ? intval($_POST['page']) : 1;  
 		$limit = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
@@ -52,6 +52,62 @@ function __construct(){
 			}
 		}
 		return json_encode($response);
+	}
+
+	function list_pr($id_pr)
+	{
+		$this->db->select('a.id_qr,a.id_pr,a.id_vendor,top,a.ETD,a.status,b.id_barang,b.price,c.nama_barang,d.name_vendor,b.id_barang,b.id_detail_qr');
+		$this->db->join('tr_qr_detail b', 'b.id_qr = a.id_qr');
+		$this->db->join('ref_barang c', 'c.kode_barang = b.id_barang');
+		$this->db->join('ref_vendor d', 'd.id_vendor = a.id_vendor');
+		$this->db->join('tr_pr e', 'e.id_pr = a.id_pr');
+		$this->db->order_by('a.id_pr', 'desc');
+		$this->db->where('e.id_pr',$id_pr);
+		$this->db->where('e.status', 2);
+
+		$query = $this->db->get('tr_qr a');
+		return $query->result();
+	}
+
+	function update($id,$data)
+	{
+		$this->db->where('id_detail_qr', $id);
+		$this->db->set('price',$data);
+		$this->db->update('tr_qr_detail');
+	}
+
+	function selected($kode){
+		
+		$this->db->flush_cache();
+
+		$this->db->set('status', "2");
+
+		$this->db->where('id_qr', $kode);
+		$result = $this->db->update('tr_qr');
+
+		//return
+		if($result) {
+				return TRUE;
+		}else {
+				return FALSE;
+		}
+	}
+
+	function done($kode){
+		
+		$this->db->flush_cache();
+
+		$this->db->set('status', "3");
+
+		$this->db->where('id_pr', $kode);
+		$result = $this->db->update('tr_pr');
+
+		//return
+		if($result) {
+				return TRUE;
+		}else {
+				return FALSE;
+		}
 	}
 
 }

@@ -68,6 +68,19 @@ class mdl_shipment_req_order extends CI_Model {
 		}
 	}
 
+	function delete($kode)
+	{
+		$this->db->flush_cache();
+		$this->db->where('id_sro', $kode);
+		$result = $this->db->delete('tr_sro');
+
+		if($result) {
+			return TRUE;
+		}else{
+			return FALSE;
+		}
+	}
+
 	public function get_ro()
 	{
 		$this->db->flush_cache();
@@ -110,6 +123,7 @@ class mdl_shipment_req_order extends CI_Model {
 			return FALSE;
 		}
 	}
+	
 
 	function Cancel($data)
 	{

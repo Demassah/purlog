@@ -99,34 +99,62 @@
 			<?if($this->mdl_auth->CekAkses(array('menu_id'=>13, 'policy'=>'ACCESS'))){?>
 					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id_sro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
 			<?}?>
+			<?if($this->mdl_auth->CekAkses(array('menu_id'=>13, 'policy'=>'DELETE'))){?>
+					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="deletedata(\''+row.id_sro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
+			<?}?>
 			return col;
 		}
 
 		doneData = function (val){
-        if(confirm("Apakah yakin akan mengalokasi data ke Delivery Order '" + val + "'?")){
-          var response = '';
-          $.ajax({ type: "GET",
-             url: base_url+'shipment_req_order/done/' + val,
-             async: false,
-             success : function(response){
-              var response = eval('('+response+')');
-              if (response.success){
-                $.messager.show({
-                  title: 'Success',
-                  msg: 'Data Berhasil Dialokasi'
-                });
-                // reload and close tab
-                $('#dg').datagrid('reload');
-              } else {
-                $.messager.show({
-                  title: 'Error',
-                  msg: response.msg
-                });
-              }
-             }
-          });
-        }
-      //}
+      if(confirm("Apakah yakin akan mengalokasi data ke Delivery Order '" + val + "'?")){
+        var response = '';
+        $.ajax({ type: "GET",
+           url: base_url+'shipment_req_order/done/' + val,
+           async: false,
+           success : function(response){
+            var response = eval('('+response+')');
+            if (response.success){
+              $.messager.show({
+                title: 'Success',
+                msg: 'Data Berhasil Dialokasi'
+              });
+              // reload and close tab
+              $('#dg').datagrid('reload');
+            } else {
+              $.messager.show({
+                title: 'Error',
+                msg: response.msg
+              });
+            }
+           }
+        });
+      }
+    }
+
+    deletedata = function (val){
+      if(confirm("Apakah yakin akan Akan Menghapus SRO ini '" + val + "'?")){
+        var response = '';
+        $.ajax({ type: "GET",
+           url: base_url+'shipment_req_order/delete/' + val,
+           async: false,
+           success : function(response){
+            var response = eval('('+response+')');
+            if (response.success){
+              $.messager.show({
+                title: 'Success',
+                msg: 'Data Berhasil Dihapus'
+              });
+              // reload and close tab
+              $('#dg').datagrid('reload');
+            } else {
+              $.messager.show({
+                title: 'Error',
+                msg: response.msg
+              });
+            }
+           }
+        });
+      }
     }
 
 		$(document).ready(function(){

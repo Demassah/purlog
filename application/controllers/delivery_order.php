@@ -70,6 +70,15 @@ class delivery_order extends CI_Controller {
 		}
 	}
 
+	function delete($kode) {
+    $result = $this->mdl_delivery_order->delete($kode);
+    if ($result) {
+        echo json_encode(array('success' => true));
+    } else {
+        echo json_encode(array('msg' => 'Data gagal dihapus'));
+    }
+  }	
+
 	// Detail Function
 
 	function detail($id_do){
