@@ -42,12 +42,17 @@ function __construct(){
     }
 
     function done($kode) {
-        $result = $this->mdl_request_order_selected->done($kode);
-        if ($result) {
-            echo json_encode(array('success' => true));
-        } else {
-            echo json_encode(array('msg' => 'Data gagal dialokasi'));
-        }
+    	$result = $this->mdl_request_order_selected->countNewItem($kode);
+		if($result == 0){
+	        $result = $this->mdl_request_order_selected->done($kode);
+	        if ($result) {
+	            echo json_encode(array('success' => true));
+	        } else {
+	            echo json_encode(array('msg' => 'Data gagal dialokasi'));
+	        }
+	    }else{
+			echo json_encode(array('msg'=>'Detail Request Order Masih Terdapat New Item'));
+		}
     }
 
     function edit($kode) {

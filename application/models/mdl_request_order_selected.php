@@ -184,6 +184,15 @@ class mdl_request_order_selected extends CI_Model {
 		}
 	}
 
+	function countNewItem($id_ro){
+		$this->db->where('id_ro', $id_ro);
+		$this->db->where('type', '3');
+		$this->db->from('tr_ro_detail a');
+		$this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang');
+		
+		return $this->db->count_all_results();
+	}
+
 }
 
 ?>

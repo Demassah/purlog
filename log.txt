@@ -22,6 +22,8 @@ langsung menghasilkan result true. (agar langsung refresh)
 (FIXED) (RESEARCH) Pemisahan detail yang di approve dan tidak di approve
 (FIXED) ROS & Picking (available) ketika save dari grid berhasil
 (FIXED) Save ROS Detail yang type barangnya = 3 (tanpa pengecekan tipe barang sudah berhasil save)
+(FIXED) berhasil done request order selected yang type barang = 3nya kosong
 
 (On Going) PR Detail notif Error jika detailnya kosong
+(CEK) Add pr masih ada warning
 
