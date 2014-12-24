@@ -13,7 +13,11 @@
 		<label style="width:100px">Vendor </label>: 
 			<select class="select" name="id_vendor" style="width:200px;">
 						<option>Pilih</option>
-							<?=$this->mdl_prosedur->OptionVendor(array('value'=>$id_vendor));?>
+						<?php
+						foreach ($list as $l) {
+						 	echo "<option value=".$l->id_vendor.">".$l->name_vendor."</option>";
+						 } 
+						?>
 						       
 				</select>	
 	</div>

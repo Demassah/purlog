@@ -35,7 +35,7 @@
 	          echo "<td>".$l->id_do."</td>";
 	          echo "<td>".$l->date_create."</td>";
 	          echo "<td>".$l->full_name."</td>";
-	          echo "<td value=''><a href='javascript:void(0)'  onclick='Detail_ro(".$l->id_ro.")'  plain='false'>Detail</a></td>";
+	          echo "<td value=''><a href='javascript:void(0)'  onclick='Detail_ro(".$l->id_sro.")'  plain='false'>Detail</a></td>";
 	          ?>
 
 	          <!-- <td value="<?=$l->id_ro?>"><a href="javascript:void(0)"  onclick="Detail_ro"  plain="false">Detail</a></td> -->
