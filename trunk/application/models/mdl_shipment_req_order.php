@@ -155,7 +155,7 @@ class mdl_shipment_req_order extends CI_Model {
 		$this->db->where('a.status', 1);
 		$this->db->where('id_ro', $id_ro);
 		$this->db->where('id_sro', $id_sro);
-		$this->db->order_by('a.id_ro','asc' );
+		$this->db->order_by('a.id_sro','asc' );
 		$this->db->stop_cache();
 
 		$query = $this->db->get('tr_pros_detail a');

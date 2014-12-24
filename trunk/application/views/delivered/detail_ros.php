@@ -2,10 +2,16 @@
 	
 	var url;
 	$(document).ready(function(){
+		
 
-		sro = function (){
+		sro = function (val){
+			if(val==null){
+		          var row = $('#dg').datagrid('getData');              
+		          var id = id_sro;
+		          val = id;
+		    }
 			$('#konten').panel({
-				href:base_url+'delivered/sro'
+				href:base_url+'delivered/sro/' + val,
 			});
 		}
 
@@ -18,13 +24,13 @@
 				
 		actiondetail = function(value, row, index){
 			var col='';
-					col += '&nbsp;&nbsp; &nbsp;&nbsp;<a href="#" onclick="detailData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Alocate</a>';			
+					col += '<a href="#" onclick="sro(\''+row.id_sro+'/'+row.id_do+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
 			return col;
 		}
 		
 
 		$(function(){ // init
-			$('#dtgrd').datagrid({url:"picking_req_order_selected/grid"});	
+			$('#dtgrd').datagrid({url:"delivered/grid_detail/<?=$id_do?>"});
 		});	
 
 		//# Tombol Bawah
@@ -52,13 +58,14 @@
 			<tr>
 					<td>
 							&nbsp;&nbsp;<a href="#" onclick="sro()" class="easyui-linkbutton" iconCls="icon-list">Shipment Request Order</a>
+
 					</td> 
 			</tr>		
 		</table>
 	</div>
 </div>
 
-<table id="dtgrd" title="Detail Request Order Selected" data-options="
+<table id="dtgrd" title="Detail Delivered" data-options="
 			rownumbers:true,
 			singleSelect:false,
 			pagination:true,
@@ -68,13 +75,12 @@
 		">		
 	<thead>
 		<tr>
-			<th data-options="field:'id_krs_detail',width:'100', hidden:true">aa</th>
-			<th field="nama_kategori" sortable="true" width="120">ID Detail ROS</th>
-			<th field="kode_barang" sortable="true" width="120">ID ROS</th>
-			<th field="kode_barang" sortable="true" width="120">ID Item</th>
-			<th field="kode_barang" sortable="true" width="120">Qty</th>
-			<th field="nama_sub_kategori" sortable="true" width="600">Deskripsi</th>		
-			<!--<th field="action" align="center" formatter="actiondetail" width="140">Aksi</th>-->
+			<th field="id_sro" sortable="true" width="120">ID Shipment RO</th>
+			<th field="id_ro" sortable="true" width="120">ID Request Order</th>
+			<th field="id_do" sortable="true" width="120">ID Delivery Order</th>
+			<th field="date_create" sortable="true" width="180">Date Create</th>
+			<th field="full_name" sortable="true" width="150">Requestor</th>		
+			<th field="action" align="center" formatter="actiondetail" width="80">Aksi</th>
 		</tr>
 	</thead>
 </table>

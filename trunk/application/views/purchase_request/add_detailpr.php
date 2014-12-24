@@ -39,6 +39,7 @@
               msg: 'Data Berhasil Disimpan'
             });
             $('#dialog_kosong').dialog('close');  // close the dialog
+            $('#dialog_kosong').datagrid('reload');
           } else {
             $.messager.show({
               title: 'Error',

@@ -2,10 +2,16 @@
 	
 	var url;
 	$(document).ready(function(){
+		var id_do = <?php echo $id_do;?>;
 
-		detail_ros = function (){
+		detail_ros = function (val){
+			if(val==null){
+		          var row = $('#dg').datagrid('getData');              
+		          var id = id_do;
+		          val = id;
+		    }
 			$('#konten').panel({
-				href:base_url+'delivered/detail_ros'
+				href:base_url+'delivered/detail_ros/'+ val,
 			});
 		}
 
@@ -28,16 +34,14 @@
 			$('#dialog').dialog('open');
 		}
 
-		actiondetail = function(value, row, index){
-			var col='';
-					col += '<a href="#" onclick="detailDelivered(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';			
-			return col;
-		}
-		
+		// actiondetail = function(value, row, index){
+		// 	var col='';
+		// 			col += '<a href="#" onclick="detailDelivered(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';			
+		// 	return col;
+		// }
 
 		$(function(){ // init
-			$('#dg').datagrid({url:"picking_req_order_selected/grid"});	
-			//$('#dg').datagrid('enableFilter'); 
+			$('#dg').datagrid({url:"delivered/grid_detailSRO/<?=$id_sro?>/<?=$id_do?>"});
 		});	
 		
 	});
@@ -48,8 +52,8 @@
 		<table>
 			<tr>
 					<td>
-							&nbsp;&nbsp;<a href="#" onclick="detail_ros()" class="easyui-linkbutton" iconCls="icon-detail-form">Detail ROS</a>
-
+							&nbsp;&nbsp;<a href="#" onclick="detail_ros()" class="easyui-linkbutton" iconCls="icon-detail-form">Shipment RO</a>
+		
 							&nbsp;&nbsp;<a href="#" onclick="receive()" class="easyui-linkbutton" iconCls="icon-ok">Receive</a>
 					</td> 
 			</tr>		
@@ -63,16 +67,19 @@
 			autoRowHeight:false,
 			fit:true,
 			toolbar:'#toolbar_detail',
+			pagination:true,
 		">		
 	<thead>
 		<tr>
-			<th data-options="field:'id_krs_detail',width:'100', hidden:true">aa</th>
-			<th field="nama_kategori" sortable="true" width="120">ID Detail ROS</th>
-			<th field="kode_barang" sortable="true" width="120">ID ROS</th>
-			<th field="kode_barang" sortable="true" width="120">ID Item</th>
-			<th field="kode_barang" sortable="true" width="80">Qty</th>
-			<th field="nama_sub_kategori" sortable="true" width="540">Deskripsi</th>	
-			<th field="action" align="center" formatter="actiondetail" width="80">Aksi</th>
+			<th field="id_sro" sortable="true" width="120">ID Shipment RO</th>
+			<th field="id_detail_pros" sortable="true" width="120">ID Detail PROS</th>
+			<th field="ext_doc_no" sortable="true" width="120">Ext Document No</th>
+			<th field="kode_barang" sortable="true" width="120">Kode Barang</th>
+			<th field="nama_barang" sortable="true" width="150">Nama Barang</th>
+			<th field="qty" sortable="true" width="80">qty</th>	
+			<th field="id_lokasi" sortable="true" width="90">Lokasi</th>	
+			<th field="date_create" sortable="true" width="150">Date Create</th>	
+			<!-- <th field="action" align="center" formatter="actiondetail" width="80">Aksi</th> -->
 		</tr>
 	</thead>
 </table>

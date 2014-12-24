@@ -106,7 +106,7 @@
 		}
 
 		doneData = function (val){
-      if(confirm("Apakah yakin akan mengalokasi data ke Delivery Order '" + val + "'?")){
+      if(confirm("Apakah yakin akan mengalokasi data ke Delivery Order, dengan ID SRO '" + val + "'?")){
         var response = '';
         $.ajax({ type: "GET",
            url: base_url+'shipment_req_order/done/' + val,
