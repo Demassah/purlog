@@ -1,107 +1,94 @@
-<div id="toolbar" style="padding:5px;height:auto">
-	<div class="fsearch">
-		<table>
-			<tr>
-					<td>
-							<a href="#" onclick="Add_vendor()" class="easyui-linkbutton" iconCls="icon-ok">Add</a>
-					</td>
-			</tr>
-		</table>
-	</div>
-</div>
-<!-- <h2 align="center">Compare Vendor List</h2>
-  <table class="tbl">
-      <thead>
-          <tr>
-              <th></th>
-              <th scope="col" abbr="Starter">Smart Starter</th>
-              <th scope="col" abbr="Medium">Smart Medium</th>
-              <th scope="col" abbr="Business">Smart Business</th>
-              <th scope="col" abbr="Deluxe">Smart Deluxe</th>
-          </tr>
-      </thead>
-      <tfoot>
-          <tr>
-              <th scope="row"></th>
-              <td>$ 2.90</td>
-              <td>$ 5.90</td>
-              <td>$ 9.90</td>
-              <td>$ 14.90</td>
-          </tr>
-      </tfoot>
-      <tbody>
-          <tr>
-              <th scope="row">TOP</th>
-              <td>512 MB</td>
-              <td>1 GB</td>
-              <td>2 GB</td>
-              <td>4 GB</td>
-          </tr>
-          <tr>
-              <th scope="row">Nama Barang</th>
-              <td>50 GB</td>
-              <td>100 GB</td>
-              <td>150 GB</td>
-              <td>Unlimited</td>
-          </tr>
-          <tr>
-              <th scope="row">Nama Barang </th>
-              <td>Unlimited</td>
-              <td>Unlimited</td>
-              <td>Unlimited</td>
-              <td>Unlimited</td>
-          </tr>
-          <tr>
-              <th scope="row">Nama Barang </th>
-              <td>19.90 $</td>
-              <td>12.90 $</td>
-              <td>free</td>
-              <td>free</td>
-          </tr>
-      </tbody>
-  </table> -->
-<div id="isi">
-  <form id="form2" method="post" >
-  	<table class="tbl" id="dataTable">
-  		<caption>Compare vendor List</caption>
-  		<thead>
-  			<tr>
-  				<th></th>
-  				<th>Vendor Name</th>
-  				<th>TOP</th>
-  				<th>Kode Barang</th>
-  				<th>Nama Barang</th>
-  				<th>Price</th>
-  				<th>Aksi</th>
-  			</tr>
-  		</thead>
-  		<tbody>
-  			<?php
-        if(empty($list)){
-          echo "data kosong";
-        }else{
-  				foreach ($list as $l) {
-  					echo "
-  						<tr id='".$l->id_detail_qr."' class='edit_tr'>
-  							<td></td>
-  							<td>".$l->name_vendor."</td>
-  							<td>".$l->top."</td>
-  							<td>".$l->kode_barang."</td>
-  							<td>".$l->nama_barang."</td>
-  							<td class='edit_td'>
-  								<span id='price_".$l->id_detail_qr."' class='text'>".$l->price."</span>
-  								<input type='text' name='price' value='".$l->price."' class='editbox cek' id='price_input_".$l->id_detail_qr."'/>
-  							</td>
-  							<td><a href='#'' class='easyui-linkbutton' onclick='Selected(".$l->id_qr.");'  plain='false'>Select</a></td>
-  						</tr>
-  					";
-  				}
+<?php
+
+$supplier_id = '';
+$supplier_set = array();
+$top_set = array();
+$barang_set = array();
+$harga_set = array();
+$index =0;
+$qr_set = array();
+
+echo '<br><br>';
+// print_r($list);
+
+foreach ($list as $data) {
+    // echo "<br>".$data['name_vendor'];
+
+    if ($data['id_vendor'] != $supplier_id) {
+        array_push($supplier_set, $data['name_vendor']);
+        array_push($top_set, $data['top']);
+        array_push($qr_set,$data['id_qr']);
+        // echo "<br>".$data['name_vendor'];
+        $supplier_id = $data['id_vendor'];
+        $index = 0;
+    }
+
+    // echo "<br>".print_r($supplier_set);
+
+    $harga_set[$data['nama_barang']][] = $data['price'];
+    $barang_set[$index] = array("barang_nama" => $data['nama_barang'], "harga" => $harga_set[$data['nama_barang']]);
+    $index++;
+}
+
+$quotation = array("supplier_nama" => $supplier_set, "top" => $top_set, "data" => $barang_set, "Selected" => $qr_set);
+
+echo '<br><br>';
+// print_r($quotation);
+$header = TRUE;
+$counter = 0;
+$_crossfield = array('Supplier', 'TOP');
+$_colname = array(0 => "supplier_nama", 1 => "top");
+
+echo '<table class="tbl">';
+
+foreach ($_crossfield as $rows) {
+
+    echo '<tr>';
+    if (!$header) {
+        echo '<td>'.$rows.'</td>';
+        foreach ($quotation[$_colname[$counter]] as $cols) {
+            echo '<td>'.$cols.'</td>';
         }
-  			?>
-  		</tbody>
-  	</table>
-  </form>
-</div>
+    } else {
+        echo '<th>'.$rows.'</th>';
+        foreach ($quotation[$_colname[$counter]] as $cols) {
+            echo '<th>'.$cols.'</th>';
+        }
+    }
+    echo '</tr>';
+
+    $header = FALSE;
+    $counter++;
+    echo '</tr>';
+}
+
+$data_counter = 0;
+
+foreach ($quotation['data'] as $details) {
+
+    echo '<tr>';
+    echo '<td>'.$quotation['data'][$data_counter]['barang_nama'].'</td>';
+
+    $harga_counter = 0;
+    foreach ($quotation['data'][$data_counter]['harga'] as $harga) {
+        echo '<td>'.$quotation['data'][$data_counter]['harga'][$harga_counter].'</td>';
+        $harga_counter++;
+    }
+
+    echo '</tr>';
+    $data_counter++;
+}
+echo "<tr><td></td>";
+foreach ($quotation['Selected'] as $l) {
+  // echo '<td>'.$l.'</td>';
+  echo "<td><a href='#'' class='easyui-linkbutton' onclick='Selected(".$l.");'  plain='false'>Select</a>
+  <a href='#'' class='easyui-linkbutton' onclick='Delete(".$l.");'  plain='false'>Delete</a></td>";
+}
+echo "</tr>";
+
+echo '</table>';
+?>
+
 
 <script type="text/javascript">
   $(document).ready(function() {
@@ -183,6 +170,32 @@
       }
     }
 
+    Delete = function (val){
+      if(confirm("Apakah yakin akan Menghapus Vendor '" + val + "'?")){
+        var response = '';
+        $.ajax({ type: "GET",
+           url: base_url+'quotation_request_selected/Delete/' + val,
+           async: false,
+           success : function(response){
+            var response = eval('('+response+')');
+            if (response.success){
+              $.messager.show({
+                title: 'Success',
+                msg: 'Data Berhasil Di save'
+              });
+              // reload and close tab
+              $('#dg').datagrid('reload');
+            } else {
+              $.messager.show({
+                title: 'Error',
+                msg: response.msg
+              });
+            }
+           }
+        });
+      }
+    }
+
     Add_vendor = function (){
       $('#dialog').dialog({
         title: 'Tambah Vendor',
@@ -190,12 +203,12 @@
         height: 150,
         closed: true,
         cache: false,
-        href: base_url+'quotation_request_selected/add/'+id_pr,
+        href: base_url+'quotation_request_selected/add_vendor/'+id_pr,
         modal: true
       });
        
       $('#dialog').dialog('open');
-      url = base_url+'quotation_request_selected/save/add';
+      url = base_url+'quotation_request_selected/save_vendor/add';
     }
     // end newData
     saveData = function(){

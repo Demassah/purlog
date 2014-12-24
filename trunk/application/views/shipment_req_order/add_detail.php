@@ -8,6 +8,7 @@
             <th width="120">ID RO</th>
             <th width="120">ID Item</th>
             <th width="80">Item Name</th>
+            <th width="80">Qty</th>
             <th width="100">Lokasi</th>          
         </tr>
     </thead>
@@ -22,6 +23,7 @@
                 <td>$id_ro</td>
                 <td>$d[kode_barang]</td>
                 <td>$d[nama_barang]</td>
+                <td>$d[qty]</td>
                 <td>$d[id_lokasi]</td>
                 </tr> ";
 

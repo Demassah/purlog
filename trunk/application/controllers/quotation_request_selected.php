@@ -21,6 +21,7 @@ class quotation_request_selected extends CI_Controller {
 	{
 		$data['id_pr'] = $id_pr;
 		$data['list'] = $this->mdl_quotation_request_selected->list_pr($id_pr);
+
 		$this->load->view('quotation_request_selected/add_qrs', $data, FALSE);
 	}
 
@@ -39,6 +40,16 @@ class quotation_request_selected extends CI_Controller {
     }
   }	
 
+  function Delete($kode) {
+    $result = $this->mdl_quotation_request_selected->Delete($kode);
+    if ($result) {
+        echo json_encode(array('success' => true));
+    } else {
+        echo json_encode(array('msg' => 'Data gagal dikirim'));
+    }
+  }
+
+
   function Done($kode) {
     $result = $this->mdl_quotation_request_selected->done($kode);
     if ($result) {
@@ -48,14 +59,14 @@ class quotation_request_selected extends CI_Controller {
     }
   }
 
-  function Add($id_pr)
+  function Add_vendor($id_pr)
   {
   	$data['id_pr'] = $id_pr;
-  	$data['list'] = $this->mdl_quotation_request_selected->list_vendor($id_pr);
+  	$data['list'] = $this->mdl_quotation_request_selected->list_vendor();
   	$this->load->view('quotation_request_selected/form', $data);
   }
 
-  function save($aksi){
+  function save_vendor($aksi){
 		# init
 		$status = "";
 		$result = false;

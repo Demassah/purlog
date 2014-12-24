@@ -54,27 +54,41 @@ class mdl_quotation_request_selected extends CI_Model {
 		return json_encode($response);
 	}
 
-	function list_vendor($id_pr)
+	function check_tr_qr()
 	{
-		$this->db->select('a.id_pr,a.id_ro,a.user_id,a.purpose,a.cat_req,a.ext_doc_no,a.ETD,a.date_create,a.status,b.full_name');
-		$this->db->join('sys_user b', 'b.user_id = a.user_id');
-		$query = $this->db->get('tr_pr a');
+		$this->db->select('id_vendor');
+		$query = $this->db->get('tr_qr');
+		return $query->result();
+
+	}
+
+	function list_vendor()
+	{
+		$id_vendor = $this->mdl_quotation_request_selected->check_tr_qr();
+		$item ='';
+		foreach ($id_vendor as $l) {
+			$item = $l->id_vendor;
+		}
+
+		$this->db->select('a.id_vendor,a.name_vendor');
+		$this->db->where('a.id_vendor !=', $item);
+		$query = $this->db->get('ref_vendor a');
 		return $query->result();
 	}
 
 	function list_pr($id_pr)
 	{
-		$this->db->select('a.id_qr,a.id_pr,a.id_vendor,top,a.ETD,a.status,b.kode_barang,b.price,c.nama_barang,d.name_vendor,b.kode_barang,b.id_detail_qr');
+		$this->db->select('a.id_qr,a.id_pr,a.id_vendor,top,a.ETD,a.status,b.kode_barang,b.price,c.nama_barang,d.name_vendor,b.id_detail_qr');
 		$this->db->join('tr_qr_detail b', 'b.id_qr = a.id_qr');
 		$this->db->join('ref_barang c', 'c.kode_barang = b.kode_barang');
 		$this->db->join('ref_vendor d', 'd.id_vendor = a.id_vendor');
 		$this->db->join('tr_pr e', 'e.id_pr = a.id_pr');
-		$this->db->order_by('a.id_pr', 'desc');
+		$this->db->order_by('a.id_vendor asc,  b.kode_barang asc');
 		$this->db->where('e.id_pr',$id_pr);
 		$this->db->where('e.status', 2);
 
 		$query = $this->db->get('tr_qr a');
-		return $query->result();
+		return $query->result_array();
 	}
 
 	function update($id,$data)
@@ -91,9 +105,23 @@ class mdl_quotation_request_selected extends CI_Model {
 		$this->db->set('status', "2");
 
 		$this->db->where('id_qr', $kode);
+
 		$result = $this->db->update('tr_qr');
 
 		//return
+		if($result) {
+				return TRUE;
+		}else {
+				return FALSE;
+		}
+	}
+
+	function Delete($kode)
+	{
+		$this->db->flush_cache();
+		$this->db->where('id_qr', $kode);
+		$result = $this->db->delete('tr_qr');
+
 		if($result) {
 				return TRUE;
 		}else {
