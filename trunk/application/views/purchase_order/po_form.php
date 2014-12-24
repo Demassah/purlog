@@ -18,7 +18,7 @@
 				</select>	
 	</div>
 	<div class="fitem" >
-		<label style="width:100px">Purchase Order</label>: 
+		<label style="width:100px">Purchase Request</label>: 
 			<select class="select" name="id_pr" style="width:200px;">
 						<option>Pilih</option>
 							<?=$this->mdl_prosedur->OptionPurchaseOrder(array('value'=>$id_pr));?>

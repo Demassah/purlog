@@ -12,7 +12,7 @@
 			<th field="user_id" sortable="true" width="150" hidden="true">ID</th>
 			<th field="id_po" sortable="true" width="130">ID Purchase Order</th>
 			<th field="id_pr" sortable="true" width="130">ID Purchase Request</th>
-			<th field="jumlah" sortable="true" width="70">ID Vendor</th>
+			<th field="id_vendor" sortable="true" width="70">ID Vendor</th>
 			<th field="full_name" sortable="true" width="130">Requestor</th>
 			<th field="departement_name" sortable="true" width="120">Departement</th>
 			<th field="purpose" sortable="true" width="70">Purpose</th>

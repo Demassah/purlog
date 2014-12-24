@@ -17,8 +17,9 @@ class mdl_purchase_order extends CI_Model {
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('a.id_pr,a.id_ro,a.requestor,a.purpose,a.cat_req,a.ext_doc_no,a.ETD,a.status,b.departement_id,c.full_name,b.departement_name');
+			$this->db->select('a.id_pr,a.id_ro,a.requestor,a.purpose,a.cat_req,a.date_create,a.ext_doc_no,a.ETD,a.status,b.departement_id,c.full_name,b.departement_name,d.id_vendor');
 			$this->db->from('tr_po a');
+			$this->db->join('tr_qr d', 'd.id_po = a.id_po');
 			$this->db->join('ref_departement b', 'b.departement_id = a.departement');
 			$this->db->join('sys_user c', 'c.user_id = a.requestor');
 			$this->db->order_by($sort, $order);
@@ -77,7 +78,6 @@ class mdl_purchase_order extends CI_Model {
 		// function select
 		$this->db->set('id_pr',$pr->id_pr);
 		$this->db->set('id_ro',$pr->id_ro);
-		$this->db->set('id_qr',$qr->id_qr);
 		$this->db->set('requestor',$data['user_id']);
 		$this->db->set('departement',$data['departement_id']);
 		$this->db->set('purpose',$pr->purpose);
