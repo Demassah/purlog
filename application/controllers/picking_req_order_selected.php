@@ -44,7 +44,7 @@ class picking_req_order_selected extends CI_Controller {
         if ($result) {
             echo json_encode(array('success' => true));
         } else {
-            echo json_encode(array('msg' => 'Data gagal dialokasi'));
+            echo json_encode(array('msg' => 'Stock Barang Kosong'));
         }
     }
 
@@ -53,7 +53,7 @@ class picking_req_order_selected extends CI_Controller {
         if ($result) {
             echo json_encode(array('success' => true));
         } else {
-            echo json_encode(array('msg' => 'Data gagal dialokasi'));
+            echo json_encode(array('msg' => ' Terdapat Stock Barang yang Kosong'));
         }
     }
 

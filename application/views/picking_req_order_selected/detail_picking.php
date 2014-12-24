@@ -15,18 +15,6 @@
       });
     }
 
-		// lock = function (val){
-
-  //     if(val==null){
-  //         var row = $('#dg_detail').datagrid('getData');              
-  //         var id = id_ro;
-  //         val = id;
-  //     }
-  //     $('#konten').panel({
-  //       href: base_url+'picking_req_order_selected/lock/' + val,
-  //     });
-		// }
-
 		pending = function (val){
        if(val==null){
           var row = $('#dg_detail').datagrid('getData');              
@@ -71,6 +59,7 @@
                   title: 'Error',
                   msg: response.msg
                 });
+                $('#dg_detail').datagrid('reload');
               }
              }
           });
@@ -99,6 +88,7 @@
                   title: 'Error',
                   msg: response.msg
                 });
+                $('#dg_detail').datagrid('reload');
               }
              }
           });

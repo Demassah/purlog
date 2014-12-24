@@ -8,12 +8,37 @@ class delivered extends CI_Controller {
 		//$this->output->enable_profiler(TRUE);
 	}
 	
+	/* --------------------------------list -------------------------------------- */
+
 	function index(){
 		$this->load->view('delivered/delivered');
 	}
 	
 	function grid(){
 		$data = $this->mdl_delivered->getdata();
+		echo $this->mdl_delivered->togrid($data['row_data'], $data['row_count']);
+	}
+/* --------------------------------Detail -------------------------------------- */
+	function detail_ros($id){
+		$data['id_do'] = $id;
+		$this->load->view('delivered/detail_ros', $data);
+	}
+
+	function grid_detail($id){
+		$data = $this->mdl_delivered->getdata_detail($id);
+		echo $this->mdl_delivered->togrid($data['row_data'], $data['row_count']);
+	}
+
+	/* --------------------------------Detail (Detail SRO) -------------------------------------- */
+
+	function sro($id, $id_do){
+		$data['id_sro'] = $id;
+		$data['id_do'] = $id_do;
+		$this->load->view('delivered/sro', $data);
+	}
+
+	function grid_detailSRO($id){
+		$data = $this->mdl_delivered->getdata_detailSRO($id);
 		echo $this->mdl_delivered->togrid($data['row_data'], $data['row_count']);
 	}
 
@@ -29,13 +54,9 @@ class delivered extends CI_Controller {
 		$this->load->view('delivered/receive');
 	}
 
-	function detail_ros(){
-		$this->load->view('delivered/detail_ros');
-	}
+	
 
-	function sro(){
-		$this->load->view('delivered/sro');
-	}
+	
 
 	function add(){
 		$data['kode'] = '';
