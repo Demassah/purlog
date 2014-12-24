@@ -51,6 +51,7 @@ class quotation_request_selected extends CI_Controller {
   function Add($id_pr)
   {
   	$data['id_pr'] = $id_pr;
+  	$data['list'] = $this->mdl_quotation_request_selected->list_vendor($id_pr);
   	$this->load->view('quotation_request_selected/form', $data);
   }
 
@@ -87,6 +88,49 @@ class quotation_request_selected extends CI_Controller {
 		}else{
 			echo json_encode(array('msg' => 'Data gagal dikirim'));
 		}
+	}
+
+	function after($id_pr)
+	{
+		$list= $this->mdl_quotation_request_selected->list_pr($id_pr);
+		echo "<form id='form2' method='post'>
+			<table class='tbl'>
+				<caption>Compare vendor List</caption>
+				<thead>
+					<tr>
+						<th></th>
+						<th>Vendor Name</th>
+						<th>TOP</th>
+						<th>Kode Barang</th>
+						<th>Nama Barang</th>
+						<th>Price</th>
+						<th>Aksi</th>
+					</tr>
+				</thead>
+				<tbody>";
+		      if(empty($list)){
+		        echo "data kosong";
+		      }else{
+						foreach ($list as $l) {
+							echo "
+								<tr id='".$l->id_detail_qr."' class='edit_tr'>
+									<td></td>
+									<td>".$l->name_vendor."</td>
+									<td>".$l->top."</td>
+									<td>".$l->kode_barang."</td>
+									<td>".$l->nama_barang."</td>
+									<td class='edit_td'>
+										<span id='price_".$l->id_detail_qr."' class='text'>".$l->price."</span>
+										<input type='text' name='price' value='".$l->price."' class='editbox' id='price_input_".$l->id_detail_qr."'/>
+									</td>
+									<td><a href='#' class='easyui-linkbutton' onclick='Selected(".$l->id_qr.");' plain='false'>Select</a></td>
+								</tr>
+							";
+				    }
+				  }
+			echo "</tbody>
+			</table>
+		</form>";
 	}
 
 

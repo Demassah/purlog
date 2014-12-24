@@ -9,113 +9,106 @@
 		</table>
 	</div>
 </div>
-<h2>Table Style 1</h2>
+<!-- <h2 align="center">Compare Vendor List</h2>
+  <table class="tbl">
+      <thead>
+          <tr>
+              <th></th>
+              <th scope="col" abbr="Starter">Smart Starter</th>
+              <th scope="col" abbr="Medium">Smart Medium</th>
+              <th scope="col" abbr="Business">Smart Business</th>
+              <th scope="col" abbr="Deluxe">Smart Deluxe</th>
+          </tr>
+      </thead>
+      <tfoot>
+          <tr>
+              <th scope="row"></th>
+              <td>$ 2.90</td>
+              <td>$ 5.90</td>
+              <td>$ 9.90</td>
+              <td>$ 14.90</td>
+          </tr>
+      </tfoot>
+      <tbody>
+          <tr>
+              <th scope="row">TOP</th>
+              <td>512 MB</td>
+              <td>1 GB</td>
+              <td>2 GB</td>
+              <td>4 GB</td>
+          </tr>
+          <tr>
+              <th scope="row">Nama Barang</th>
+              <td>50 GB</td>
+              <td>100 GB</td>
+              <td>150 GB</td>
+              <td>Unlimited</td>
+          </tr>
+          <tr>
+              <th scope="row">Nama Barang </th>
+              <td>Unlimited</td>
+              <td>Unlimited</td>
+              <td>Unlimited</td>
+              <td>Unlimited</td>
+          </tr>
+          <tr>
+              <th scope="row">Nama Barang </th>
+              <td>19.90 $</td>
+              <td>12.90 $</td>
+              <td>free</td>
+              <td>free</td>
+          </tr>
+      </tbody>
+  </table> -->
+<div id="isi">
+  <form id="form2" method="post" >
+  	<table class="tbl">
+  		<caption>Compare vendor List</caption>
+  		<thead>
+  			<tr>
+  				<th></th>
+  				<th>Vendor Name</th>
+  				<th>TOP</th>
+  				<th>Kode Barang</th>
+  				<th>Nama Barang</th>
+  				<th>Price</th>
+  				<th>Aksi</th>
+  			</tr>
+  		</thead>
+  		<tbody>
+  			<?php
+        if(empty($list)){
+          echo "data kosong";
+        }else{
+  				foreach ($list as $l) {
+  					echo "
+  						<tr id='".$l->id_detail_qr."' class='edit_tr'>
+  							<td></td>
+  							<td>".$l->name_vendor."</td>
+  							<td>".$l->top."</td>
+  							<td>".$l->kode_barang."</td>
+  							<td>".$l->nama_barang."</td>
+  							<td class='edit_td'>
+  								<span id='price_".$l->id_detail_qr."' class='text'>".$l->price."</span>
+  								<input type='text' name='price' value='".$l->price."' class='editbox' id='price_input_".$l->id_detail_qr."'/>
+  							</td>
+  							<td><a href='#'' class='easyui-linkbutton' onclick='Selected(".$l->id_qr.");'  plain='false'>Select</a></td>
+  						</tr>
+  					";
+  				}
+        }
+  			?>
+  		</tbody>
+  	</table>
+  </form>
+</div>
 
-            <table class="tbl">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th scope="col" abbr="Starter">Smart Starter</th>
-                        <th scope="col" abbr="Medium">Smart Medium</th>
-                        <th scope="col" abbr="Business">Smart Business</th>
-                        <th scope="col" abbr="Deluxe">Smart Deluxe</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th scope="row">Price per month</th>
-                        <td>$ 2.90</td>
-                        <td>$ 5.90</td>
-                        <td>$ 9.90</td>
-                        <td>$ 14.90</td>
-                    </tr>
-                </tfoot>
-                <tbody>
-                    <tr>
-                        <th scope="row">Storage Space</th>
-                        <td>512 MB</td>
-                        <td>1 GB</td>
-                        <td>2 GB</td>
-                        <td>4 GB</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Bandwidth</th>
-                        <td>50 GB</td>
-                        <td>100 GB</td>
-                        <td>150 GB</td>
-                        <td>Unlimited</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">MySQL Databases</th>
-                        <td>Unlimited</td>
-                        <td>Unlimited</td>
-                        <td>Unlimited</td>
-                        <td>Unlimited</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Setup</th>
-                        <td>19.90 $</td>
-                        <td>12.90 $</td>
-                        <td>free</td>
-                        <td>free</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">PHP 5</th>
-                        <td><span class="check"></span></td>
-                        <td><span class="check"></span></td>
-                        <td><span class="check"></span></td>
-                        <td><span class="check"></span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Ruby on Rails</th>
-                        <td><span class="check"></span></td>
-                        <td><span class="check"></span></td>
-                        <td><span class="check"></span></td>
-                        <td><span class="check"></span></td>
-                    </tr>
-                </tbody>
-            </table>
-<form id="form2" method="post">
-	<table class="tbl">
-		<caption>Compare vendor List</caption>
-		<thead>
-			<tr>
-				<th></th>
-				<th>Vendor Name</th>
-				<th>TOP</th>
-				<th>Kode Barang</th>
-				<th>Nama Barang</th>
-				<th>Price</th>
-				<th>Aksi</th>
-			</tr>
-		</thead>
-		<tbody>
-			<?php
-				foreach ($list as $l) {
-					echo "
-						<tr id='".$l->id_detail_qr."' class='edit_tr'>
-							<td></td>
-							<td>".$l->name_vendor."</td>
-							<td>".$l->top."</td>
-							<td>".$l->id_barang."</td>
-							<td>".$l->nama_barang."</td>
-							<td class='edit_td'>
-								<span id='price_".$l->id_detail_qr."' class='text'>".$l->price."</span>
-								<input type='text' name='price' value='".$l->price."' class='editbox' id='price_input_".$l->id_detail_qr."'/>
-							</td>
-							<td><a href='#'' class='easyui-linkbutton' onclick='Selected(".$l->id_qr.");' iconCls='icon-save' plain='false'>Select</a></td>
-						</tr>
-					";
-				}
-			?>
-		</tbody>
-	</table>
-</form> 
 <script type="text/javascript">
   $(document).ready(function() {
-    var id_pr = '<?php echo $l->id_pr;?>';
+    var id_pr = '<?php echo $id_pr;?>';
   	$(".editbox").hide();
-    $(".edit_tr").click(function() {
+
+    $(".edit_tr").on("click", function() {
      var ID=$(this).attr('id');
      $("#price_"+ID).hide();
      $("#price_input_"+ID).show();
@@ -123,7 +116,7 @@
      var ID=$(this).attr('id');
      var price=$("#price_input_"+ID).val();
      var dataString = 'id='+ ID +'&price='+price;
-     $("#price_"+ID).html('<img src="load.gif" />');
+     $("#price_"+ID).html('');
        if(price.length>0 ) {
           $.ajax({
             type: "POST",
@@ -208,7 +201,7 @@
           var result = eval('('+result+')');
           if (result.success){
             $('#dialog').dialog('close');   // close the dialog
-            $('#dg').datagrid('reload');    // reload the user data
+            $("#isi").load(base_url + 'quotation_request_selected/after/'+id_pr);  // reload the user data
           } else {
             $.messager.show({
               title: 'Error',

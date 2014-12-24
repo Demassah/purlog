@@ -10,17 +10,17 @@ class mdl_purchase_order extends CI_Model {
 		# get parameter from easy grid
 		$page = isset($_POST['page']) ? intval($_POST['page']) : 1;  
 		$limit = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
-		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'nama_barang';  
+		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'a.id_pr';  
 		$order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
 		$offset = ($page-1)*$limit;
 		
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('*, b.nama_kategori, c.nama_sub_kategori');
-			$this->db->from('ref_barang a');
-			$this->db->join('ref_kategori b', 'b.id_kategori = a.id_kategori');
-			$this->db->join('ref_sub_kategori c', 'c.id_sub_kategori = a.id_sub_kategori');
+			$this->db->select('a.id_pr,a.id_ro,a.requestor,a.purpose,a.cat_req,a.ext_doc_no,a.ETD,a.status,b.departement_id,c.full_name,b.departement_name');
+			$this->db->from('tr_po a');
+			$this->db->join('ref_departement b', 'b.departement_id = a.departement');
+			$this->db->join('sys_user c', 'c.user_id = a.requestor');
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
 		
@@ -51,7 +51,54 @@ class mdl_purchase_order extends CI_Model {
 		}
 		return json_encode($response);
 	}
+
+	function search_pr($data)
+	{
+		$this->db->select('*');
+		$this->db->where('id_pr', $data['id_pr']);
+		$query = $this->db->get('tr_pr');
+		return $query->row();
+
+	}
+	function search_qr($data)
+	{
+		$this->db->select('id_qr');
+		$this->db->where('id_pr', $data['id_pr']);
+		$this->db->where('status', 2);
+		$query = $this->db->get('tr_qr');
+		return $query->row();
+	}
+	function Insert_qrs($data)
+	{
+		// function searc
+		$pr = $this->mdl_purchase_order->search_pr($data);
+		$qr = $this->mdl_purchase_order->search_qr($data);
+
+		// function select
+		$this->db->set('id_pr',$pr->id_pr);
+		$this->db->set('id_ro',$pr->id_ro);
+		$this->db->set('id_qr',$qr->id_qr);
+		$this->db->set('requestor',$data['user_id']);
+		$this->db->set('departement',$data['departement_id']);
+		$this->db->set('purpose',$pr->purpose);
+		$this->db->set('cat_req',$pr->cat_req);
+		$this->db->set('ETD',$pr->ETD);
+		$this->db->set('ext_doc_no',$pr->ext_doc_no);
+		$this->db->set('date_create',$data['date_create']);
+		$this->db->set('status',$data['status']);
+
+		// function Insert
+		$result = $this->db->insert('tr_po');
+
+		// function Notif
+		if($result) {
+				return TRUE;
+		}else {
+				return FALSE;
+		}
+
+	}
 	
-}
+} //End
 
 ?>
