@@ -108,7 +108,7 @@
     var id_pr = '<?php echo $id_pr;?>';
   	$(".editbox").hide();
 
-    $(".edit_tr").on("click", function() {
+    $('.edit_tr').on('click', function() {
      var ID=$(this).attr('id');
      $("#price_"+ID).hide();
      $("#price_input_"+ID).show();
