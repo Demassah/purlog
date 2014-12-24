@@ -5,6 +5,7 @@
                 <th width="80">Ext Doc No</th>
                 <th width="80">Kode barang</th>
                 <th width="80">Nama Barang</th>
+                <th width="80">Qty</th>
                 <th width="80">Create</th>
                 <th width="120">Note</th>         
             </tr>
@@ -17,6 +18,7 @@
                         <td>".$l->ext_doc_no."</td>
                         <td>".$l->kode_barang."</td>
                         <td>".$l->nama_barang."</td>
+                        <td>".$l->qty."</td>
                         <td>".$l->date_create."</td>
                         <td>".$l->note."</td>
                         </tr> ";
