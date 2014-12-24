@@ -9,8 +9,7 @@
 			">
 	<thead>
 		<tr>
-			<th field="user_id" sortable="true" width="150" hidden="true">ID</th>
-			<th field="id_po" sortable="true" width="130">ID Purchase Order</th>
+			<th field="id_po" sortable="true" width="150" hidden="true">ID</th>
 			<th field="id_pr" sortable="true" width="130">ID Purchase Request</th>
 			<th field="id_vendor" sortable="true" width="70">ID Vendor</th>
 			<th field="full_name" sortable="true" width="130">Requestor</th>
@@ -37,7 +36,8 @@
 				cache: false,
 				href: base_url+'purchase_order/add',
 				modal: true
-			});			 
+			});
+
 			$('#dialog').dialog('open');
 			url = base_url+'purchase_order/save/add';
 		}
@@ -65,30 +65,25 @@
 			});
 		}
 		//save
-		detail_po = function (){
-			$('#konten').panel({
-				href:base_url+'purchase_order/detail_po'
+		detail_po = function (value){
+			$('#dialog').dialog({
+				title: 'Detail Purchase Order / Detail Vendor',
+				width: 580,
+				height: 490,
+				closed: true,
+				cache: false,
+				href: base_url+'purchase_order/detail_po/' + value,
+				modal: true
 			});
+			$('#dialog').dialog('open');
 		}
 
-		// qrs = function (){
-		// 	$('#dialog').dialog({
-		// 		title: 'Add Purchase Request',
-		// 		width: $(window).width() * 0.8,
-		// 		height: $(window).height() * 0.99,
-		// 		closed: true,
-		// 		cache: false,
-		// 		href: base_url+'purchase_request/qrs',
-		// 		modal: true
-		// 	});			 
-		// 	$('#dialog').dialog('open');
-		// }
 		
 		actionbutton = function(value, row, index){
 			var col;
 
 			<?if($this->mdl_auth->CekAkses(array('menu_id'=>17, 'policy'=>'DETAIL'))){?>
-				col = '<a href="#" onclick="detail_po(\''+row.id_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
+				col = '<a href="#" onclick="detail_po(\''+row.id_po+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
 			<?}?>
 
 			return col;

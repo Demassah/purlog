@@ -1,67 +1,52 @@
-<script>
-	
-	var url;
-	$(document).ready(function(){
+ <h2 align='center'>Detail Vendor</h2>
 
-		back = function (val){
-		  //detail
-		  $('#konten').panel({
-			href: base_url+'purchase_order/index',
-		  });
-		}
+<div class="detail">
+<div class="fitem">
+		<label style="width:80px">ID Vendor </label>:
+			<?=$list->id_vendor;?>
+	</div>
+	<div class="fitem" >
+		<label style="width:80px">Vendor </label>:
+			<?=$list->name_vendor;?>
+	</div>
+	<div class="fitem">
+		<label style="width:80px">Contact </label>:
+			<?=$list->contact_vendor;?>
+	</div>
+	<div class="fitem">
+		<label style="width:80px">Mobile </label>:
+			<?=$list->mobile_vendor;?>
+	</div>
+	<div class="fitem">
+		<label style="width:80px">Address </label>:
+			<?=$list->address_vendor;?>
+	</div>
+	<div class="fitem">
+		<label style="width:80px">TOP </label>:
+			<?=$list->top;?>
+	</div>
 
-		var editIndex = undefined;
-		endEditing = function(){
-			if (editIndex == undefined){return true}
-			if ($('#dtgrd').datagrid('validateRow', editIndex)){
-				$('#dtgrd').datagrid('endEdit', editIndex);
-				editIndex = undefined;
-				return true;
-			} else {
-				return false;
+	<table class="tbl">
+		
+		<thead>
+			<tr>
+				<th>Kode barang</th>
+				<th>Nama Barang</th>
+				<th>Price</th>
+			</tr>
+		</thead>
+		<tbody>
+		<?php 
+			foreach ($item as $l) {
+				echo " <tr>
+				<td>".$l->kode_barang."</td>
+				<td>".$l->nama_barang."</td>
+				<td>".$l->price."</td>
+			</tr>
+				";
 			}
-		}
-		
-		$(function(){ // init
-			$('#dtgrd').datagrid({url:"purchase_order/grid"});	
-			//$('#dg').datagrid('enableFilter'); 
-		});	
+		?>
+		</tbody>
+	</table>
 
-		//# Tombol Bawah
-    $(function(){
-      var pager = $('#dtgrd').datagrid().datagrid('getPager'); // get the pager of datagrid
-      pager.pagination({
-        buttons:[
-            {
-            iconCls:'icon-undo',
-            text:'Kembali',
-            handler:function(){
-              back();
-            }
-          }           
-        ]
-      });     
-    });
-		
-	});
-</script>
-
-<table id="dtgrd" title="Detail Purchase Order" data-options="
-			rownumbers:true,
-			singleSelect:false,
-			pagination:true,
-			autoRowHeight:false,
-			fit:true,
-			toolbar:'#toolbar_pending',
-		">		
-	<thead>
-		<tr>
-			<th data-options="field:'id_krs_detail',width:'100', hidden:true">aa</th>
-			<th field="nama_kategori" sortable="true" width="120">ID Detail ROS</th>
-			<th field="kode_barang" sortable="true" width="120">ID ROS</th>
-			<th field="kode_barang" sortable="true" width="120">ID Item</th>
-			<th field="kode_barang" sortable="true" width="80">Qty</th>
-			<th field="nama_sub_kategori" sortable="true" width="665">Deskripsi</th>	
-		</tr>
-	</thead>
-</table>
+</div>

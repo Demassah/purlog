@@ -17,8 +17,10 @@ class purchase_order extends CI_Controller {
 		echo $this->mdl_purchase_order->togrid($data['row_data'], $data['row_count']);
 	}
 
-	function detail_po(){
-		$this->load->view('purchase_order/detail_po');
+	function detail_po($id_po){
+		$data['list']=$this->mdl_purchase_order->detail_po_qr($id_po);
+		$data['item']=$this->mdl_purchase_order->detail_po_qr_detail($id_po);
+		$this->load->view('purchase_order/detail_po',$data);
 	}
 	
 	function add(){
