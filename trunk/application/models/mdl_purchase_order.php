@@ -17,7 +17,7 @@ class mdl_purchase_order extends CI_Model {
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('a.id_pr,a.id_ro,a.requestor,a.purpose,a.cat_req,a.date_create,a.ext_doc_no,a.ETD,a.status,b.departement_id,c.full_name,b.departement_name,d.id_vendor');
+			$this->db->select('a.id_po,a.id_pr,a.id_ro,a.requestor,a.purpose,a.cat_req,a.date_create,a.ext_doc_no,a.ETD,a.status,b.departement_id,c.full_name,b.departement_name,d.id_vendor');
 			$this->db->from('tr_po a');
 			$this->db->join('tr_qr d', 'd.id_po = a.id_po');
 			$this->db->join('ref_departement b', 'b.departement_id = a.departement');
@@ -51,6 +51,25 @@ class mdl_purchase_order extends CI_Model {
 			}
 		}
 		return json_encode($response);
+	}
+
+	// detail po
+	function detail_po_qr($id_po)
+	{
+		$this->db->select('a.id_vendor,a.top,a.id_po,b.name_vendor,b.address_vendor,b.contact_vendor,b.mobile_vendor,a.id_qr');
+		$this->db->join('ref_vendor b', 'b.id_vendor = a.id_vendor');
+		$query = $this->db->get('tr_qr a');
+		return $query->row();
+	}
+
+	function detail_po_qr_detail($id_po)
+	{
+		$list = $this->mdl_purchase_order->detail_po_qr($id_po);
+		$this->db->select('a.kode_barang,a.qty,a.price,b.nama_barang');
+		$this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang');
+		$this->db->where('id_qr', $list->id_qr);
+		$query=$this->db->get('tr_qr_detail a');
+		return $query->result();
 	}
 
 	function search_pr($data)

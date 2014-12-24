@@ -62,7 +62,7 @@
   </table> -->
 <div id="isi">
   <form id="form2" method="post" >
-  	<table class="tbl">
+  	<table class="tbl" id="dataTable">
   		<caption>Compare vendor List</caption>
   		<thead>
   			<tr>
@@ -90,7 +90,7 @@
   							<td>".$l->nama_barang."</td>
   							<td class='edit_td'>
   								<span id='price_".$l->id_detail_qr."' class='text'>".$l->price."</span>
-  								<input type='text' name='price' value='".$l->price."' class='editbox' id='price_input_".$l->id_detail_qr."'/>
+  								<input type='text' name='price' value='".$l->price."' class='editbox cek' id='price_input_".$l->id_detail_qr."'/>
   							</td>
   							<td><a href='#'' class='easyui-linkbutton' onclick='Selected(".$l->id_qr.");'  plain='false'>Select</a></td>
   						</tr>
@@ -138,6 +138,15 @@
           alert('Harga Tidak Boleh Null atau Harga Harus Angka');
             }
     });
+          // var cek = $('.cek').val();
+          // $('.cek').keyup(function() {
+          //   if($.isNumeric('.cek'))
+          //   {
+          //     alert(cek);
+          //   }else{
+          //     alert('bukan angka');
+          //   }
+          // });
 
           $(".editbox").mouseup(function() {
               return false
@@ -211,6 +220,12 @@
         }
       });
     }
+
+    // var auto_refresh = setInterval(
+    //   function ()
+    //   {
+    //   $("#konten").load(base_url + "quotation_request_selected/add_qrs/" + id_pr).fadeIn("slow");
+    //   }, 50000);
     
 
     });
