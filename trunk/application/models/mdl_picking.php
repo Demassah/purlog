@@ -148,7 +148,7 @@ class mdl_picking extends CI_Model {
 			$params = array(
 				'id_detail_ro' => $ros_detail->id_detail_ro,
 				'id_ro' => $ros_detail->id_ro,
-				//'id_sro' => $ros_detail->id_sro,
+				'date_create' => date("Y-m-d H:i:s"),
 				'id_stock' => $stock->id_stock,
 				'kode_barang' => $stock->kode_barang,
 				'qty' => $prosQty,
@@ -382,6 +382,10 @@ class mdl_picking extends CI_Model {
 			
 		}
 		
+		//$this->db->where('id_ro', $id_ro);
+		$this->db->where('qty', '0');
+		$result = $this->db->delete('tr_pros_detail');
+
 		//return
 		$this->db->trans_complete();
 	    return $this->db->trans_status();

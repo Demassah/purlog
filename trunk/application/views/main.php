@@ -1,4 +1,6 @@
-<?php // VIEW MAIN; ?><!DOCTYPE html>
+<?php // VIEW MAIN;
+date_default_timezone_set('Asia/Jakarta');
+?><!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
