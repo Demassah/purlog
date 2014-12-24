@@ -283,6 +283,28 @@ class mdl_prosedur extends CI_Model {
 		return $out;
 	}
 
+	function OptionPurchaseOrder($d=""){
+		$value = isset($d['value'])?$d['value']:'';
+		$out = '';
+		
+		$this->db->flush_cache();
+		$this->db->from('tr_pr');
+		$this->db->where('status', 3);
+		$this->db->order_by('id_pr');
+				
+		$res = $this->db->get();
+		
+		foreach($res->result() as $l){
+			if(trim($l->id_pr) == trim($value)){
+				$out .= '<option value="'.$l->id_pr.'" selected="selected">'.$l->id_pr.'</option>';
+			}else{
+				$out .= '<option value="'.$l->id_pr.'">'.$l->id_pr.'</option>';
+			}
+		}
+		
+		return $out;
+	}
+
 }
 
 ?>

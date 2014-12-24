@@ -54,11 +54,19 @@ class mdl_quotation_request_selected extends CI_Model {
 		return json_encode($response);
 	}
 
+	function list_vendor($id_pr)
+	{
+		$this->db->select('a.id_pr,a.id_ro,a.user_id,a.purpose,a.cat_req,a.ext_doc_no,a.ETD,a.date_create,a.status,b.full_name');
+		$this->db->join('sys_user b', 'b.user_id = a.user_id');
+		$query = $this->db->get('tr_pr a');
+		return $query->result();
+	}
+
 	function list_pr($id_pr)
 	{
-		$this->db->select('a.id_qr,a.id_pr,a.id_vendor,top,a.ETD,a.status,b.id_barang,b.price,c.nama_barang,d.name_vendor,b.id_barang,b.id_detail_qr');
+		$this->db->select('a.id_qr,a.id_pr,a.id_vendor,top,a.ETD,a.status,b.kode_barang,b.price,c.nama_barang,d.name_vendor,b.kode_barang,b.id_detail_qr');
 		$this->db->join('tr_qr_detail b', 'b.id_qr = a.id_qr');
-		$this->db->join('ref_barang c', 'c.kode_barang = b.id_barang');
+		$this->db->join('ref_barang c', 'c.kode_barang = b.kode_barang');
 		$this->db->join('ref_vendor d', 'd.id_vendor = a.id_vendor');
 		$this->db->join('tr_pr e', 'e.id_pr = a.id_pr');
 		$this->db->order_by('a.id_pr', 'desc');
