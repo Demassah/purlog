@@ -177,14 +177,17 @@ class mdl_delivery_order extends CI_Model {
 	}
 
 	// detail ro
-	function detail_ro($id_ro='')
+	function detail_ro($id_sro='')
 	{
-		$this->db->select('a.id_ro, d.ext_doc_no, a.qty, a.kode_barang, d.date_create, d.user_id, b.full_name, c.nama_barang, e.note');
+		$this->db->select('a.id_detail_ro,id_ro,a.id_sro,a.id_stock,a.kode_barang,a.qty,a.id_lokasi,a.date_create,c.nama_barang');
+		//$this->db->join('sys_user b', 'b.user_id = a.user_id');
+		$this->db->join('ref_barang c', 'c.kode_barang = a.kode_barang');
+		//$this->db->select('a.id_ro, d.ext_doc_no, a.qty, a.kode_barang, d.date_create, d.user_id, b.full_name, c.nama_barang, e.note');
 		$this->db->join('tr_ro d', 'd.id_ro = a.id_ro');
 		$this->db->join('sys_user b', 'b.user_id = d.user_id');
 		$this->db->join('ref_barang c', 'c.kode_barang = a.kode_barang');		
 		$this->db->join('tr_ro_detail e', 'e.id_ro = d.id_ro');
-		$this->db->where('a.id_ro', $id_ro);
+		$this->db->where('a.id_sro', $id_sro);
 		$query = $this->db->get('tr_pros_detail a');
 		return $query->result();
 	}
