@@ -254,12 +254,12 @@ class mdl_purchase_request extends CI_Model {
 	}
 	
 	function InsertDetailOnDB($data){
-		//$data_kosong = true;
+		$data_kosong = true;
 		$this->db->trans_start();
 
 		foreach($data as $row){
-			if(isset($row['chk'])){
-				//$data_kosong = false;
+			if(isset($row['chk']) && $row['chk'] == 'on'){
+				$data_kosong = false;
 				
 				# update table purchase request detail
 				$this->db->flush_cache();
@@ -274,9 +274,9 @@ class mdl_purchase_request extends CI_Model {
 		}
 
 		$this->db->trans_complete();
-		// if($data_kosong) {
-		// 	return false;
-		// }
+		if($data_kosong) {
+			return false;
+		}
 		return $this->db->trans_status();
 	}
 

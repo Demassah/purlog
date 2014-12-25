@@ -93,30 +93,36 @@ class purchase_request extends CI_Controller {
                 echo $this->mdl_purchase_request->getdata_detailpr($data);
         }
 
-        function saveDetail($id=null){
-                # init
-                $status = "";
-                $result = false;
-                $data['pesan_error'] = '';
-               
-                # get post data
-                foreach($_POST as $key => $value){
-                        $data[$key] = $value;
-                }
+        function returnofjedi()
+        {
+            $data = unserialize('a:4:{s:11:"pesan_error";s:0:"";s:5:"id_ro";s:1:"1";s:6:"jumlah";s:0:"";s:4:"data";a:2:{i:1;a:2:{s:12:"id_detail_pr";s:1:"1";s:3:"chk";s:2:"on";}s:5:"id_pr";s:1:"2";}}');
 
-                if($id!=null){
-                        $data['data']['id_pr'] = $id;
-                }
+            var_dump($data);
+        }
 
-                $data['pesan_error'] = 'Data Detail Gagal Disimpan';                
-               
-                $result=$this->mdl_purchase_request->InsertDetailOnDB($data['data']);
-               
-                if($result){
-                        echo json_encode(array('success'=>true));
-                }else{
-                        echo json_encode(array('msg'=>$data['pesan_error']));
-                }
+        function saveDetail($id=null) {
+            # init
+            $result = false;
+            $data['pesan_error'] = '';
+           
+            # get post data
+            foreach($_POST as $key => $value) {
+                    $data[$key] = $value;
+            }
+
+            if($id != null) {
+                    $data['data']['id_pr'] = $id;
+            }
+
+            $data['pesan_error'] = 'Data Gagal Disimpan';
+
+            $result = $this->mdl_purchase_request->InsertDetailOnDB($data['data']);
+
+            if($result) {
+                    echo json_encode(array('success'=>true));
+            } else {
+                    echo json_encode(array('msg'=>$data['pesan_error']));
+            }
         }
 
         /*----------------------------------- lain lain --------------------------------------------- */
