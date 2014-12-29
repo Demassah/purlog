@@ -74,7 +74,7 @@
       $harga_counter = 0;
       foreach ($quotation['data'][$data_counter]['harga'] as $harga) {
         echo '<td><div id="'.$quotation['data'][$data_counter]['harga'][$harga_counter][1].'" class="qrs">';
-          echo "<span id='harga_".$quotation['data'][$data_counter]['harga'][$harga_counter][1]."' class='text'>".$quotation['data'][$data_counter]['harga'][$harga_counter][0]."</span>";
+          echo "<span name='harga' id='harga_".$quotation['data'][$data_counter]['harga'][$harga_counter][1]."' class='text'>".$quotation['data'][$data_counter]['harga'][$harga_counter][0]."</span>";
           echo "<input type='text' name='harga' value='".$quotation['data'][$data_counter]['harga'][$harga_counter][0]."' class='editbox' id='harga_input_".$quotation['data'][$data_counter]['harga'][$harga_counter][1]."'/>";
         echo"</div></td>";
         $harga_counter++;
@@ -91,51 +91,45 @@
   echo '</table>';
 //echo '</div>';
 ?>
-</div>
+
 
 <script type="text/javascript">
 var id_pr = '<?php echo $id_pr;?>';
   $(".editbox").hide();
   $(document).ready(function() {
-    $('div').on('click','.qrs', function() {
-     var ID=$(this).attr('id');
-     $("#harga_"+ID).hide();
-     $("#harga_input_"+ID).show();
-     $("#harga_input_"+ID).focus();
-    }).change(function() {
-     var ID=$(this).attr('id');
-     var harga=$("#harga_input_"+ID).val();
-     var dataString = 'id='+ ID +'&harga='+ harga;
-     $("#harga_"+ID).html('');
-       if(harga.length>0 && $.isNumeric(harga) && harga != 0 ) {
+    $("div").on('click' ,'.qrs', function(event) {
+      var ID_qr = $(this).attr('id');
+          $("#harga_"+ID_qr).hide();
+          $("#harga_input_"+ID_qr).show();
+          $("#harga_input_"+ID_qr).focusin();
+
+    }).change(function(event) {
+      var ID_qr = $(this).attr('id');
+      var harga = $("#harga_input_"+ID_qr).val();
+      var dataString = 'id='+ID_qr+'&harga='+harga;
+      $("#harga_"+ID_qr).html('');
+        if(harga.length > 0 && $.isNumeric(harga) && harga !=0)
+        {
           $.ajax({
-            type: "POST",
-            url: base_url + "quotation_request_selected/update/"+ID,
+            type:"POST",
+            url: base_url+"quotation_request_selected/update/"+ID_qr,
             data: dataString,
             cache: false,
-            success: function(html) {
-             $(".editbox").hide();
-             $("#harga_"+ID).show();
-             $("#harga_"+ID).html(harga);
-             $.messager.show({
-								title: 'Success',
-								msg: 'Data Berhasil Di Update'
-							});
+            success: function (html) {
+              $(".editbox").hide();
+              $("#harga_"+ID_qr).show();
+              $("#harga_"+ID_qr).html(harga);
+              $.messager.show({
+                title:'Success',
+                msg: 'Data berhasil Di Update'
+              });
+
             }
           });
+        }else{
+          alert("Harga tidak boleh null atau harga harus angka");
         }
-        else {
-          alert('Harga Tidak Boleh Null atau Harga Harus Angka');
-            }
-      });
-        // $(".editbox").hide();
-        // $('div').on('click' ,'.qrs', function(event){
-        //   var ID=$(this).attr('id');
-        //    alert('Your id ' + ID);
-        //    $(".editbox").hide();
-        //    return false;
-        // })
-
+    });
           $(".editbox").mouseup(function() {
               return false
           });
@@ -153,14 +147,16 @@ var id_pr = '<?php echo $id_pr;?>';
            success : function(response){
             var response = eval('('+response+')');
             if (response.success){
+
               $.messager.show({
-                title: 'Success',
+                title: 'success',
                 msg: 'Data Vendor Berhasil Dipilih'
               });
-               $(".editbox").hide();
+               
               // reload and close tab
-              $('#qrs_table').load(base_url + 'quotation_request_selected/after/'+id_pr).fadeIn("slow");
-              return false;
+              $('#qrs_table').load(base_url + 'quotation_request_selected/after_select/'+id_pr).fadeIn("slow");
+
+              
             } else {
               $.messager.show({
                 title: 'Error',
@@ -186,7 +182,8 @@ var id_pr = '<?php echo $id_pr;?>';
                 msg: 'Data Vendor Berhasil Di Hapus'
               });
               // reload and close tab
-              $('#qrs_table').load(base_url + 'quotation_request_selected/after/'+id_pr).fadeIn("slow");
+              cache:false;
+              $('#qrs_table').load(base_url + 'quotation_request_selected/after_select/'+id_pr).fadeIn("slow");
             } else {
               $.messager.show({
                 title: 'Error',
@@ -224,7 +221,7 @@ var id_pr = '<?php echo $id_pr;?>';
           var result = eval('('+result+')');
           if (result.success){
             $('#dialog').dialog('close');   // close the dialog
-            $("#qrs_table").load(base_url + 'quotation_request_selected/after/'+id_pr).fadeIn("slow");;  // reload the user data
+            $("#qrs_table").load(base_url + 'quotation_request_selected/after_select/'+id_pr).fadeIn("slow");;  // reload the user data
           } else {
             $.messager.show({
               title: 'Error',
@@ -236,3 +233,4 @@ var id_pr = '<?php echo $id_pr;?>';
     }
   });
     </script>
+</div>

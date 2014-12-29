@@ -1,5 +1,5 @@
 <!--<script src="<?=base_url();?>asset/js/Chart.js"></script>-->
-<!-- <script>
+<script>
 		$(document).ready(function(){
 			
 			$('#menu-mhs').click(function(){
@@ -23,7 +23,7 @@
 				});
 			});
 		});
-</script> -->
+</script>
 
 <link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/css/dashboard.css" />
 <div class="container">

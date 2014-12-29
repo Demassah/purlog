@@ -29,7 +29,7 @@ class quotation_request_selected extends CI_Controller {
 	{
 		$data = $this->input->post('harga');
 		$this->mdl_quotation_request_selected->update($id,$data);
-		$this->load->view('quotation_request_selected/add_qrs', $data, FALSE);
+		//$this->load->view('quotation_request_selected/load', $data, FALSE);
 	}
 
 	function Selected($kode,$id_pr) {
@@ -101,7 +101,13 @@ class quotation_request_selected extends CI_Controller {
 			echo json_encode(array('msg' => 'Data gagal dikirim'));
 		}
 	}
+	function after_select($id_pr)
+	{
+		$data['id_pr'] = $id_pr;
+		$data['list'] = $this->mdl_quotation_request_selected->list_pr($id_pr);
 
+		$this->load->view('quotation_request_selected/load', $data, FALSE);
+	}
 	function after($id_pr)
 	{
 		$data['id_pr'] = $id_pr;
@@ -184,7 +190,7 @@ class quotation_request_selected extends CI_Controller {
 		}
 		echo "<tr><td></td>";
 		foreach ($quotation['Selected'] as $l) {
-		  echo "<td><a href='#''  onclick='Selected(".$l.");'  plain='false'>Select</a>
+		  echo "<td><a href='#''  onclick='select_vendor(".$l.");'  plain='false'>Select</a>
 		  <a href='#''  onclick='Delete(".$l.");'  plain='false'>Delete</a></td>";
 		}
 		echo "</tr>";
