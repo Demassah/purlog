@@ -4,19 +4,20 @@
       <tr>
           <td>
               &nbsp;&nbsp;<a href="#" onclick="Add_vendor()" class="easyui-linkbutton" iconCls="icon-ok">Add</a>
-          </td>             
-      </tr>   
+          </td>
+      </tr>
     </table>
   </div>
 </div>
 
 <?php
-
+echo '<div id="isi">';
 $supplier_id = '';
 $supplier_set = array();
 $top_set = array();
 $barang_set = array();
 $harga_set = array();
+$detail_qr = array();
 $index =0;
 $qr_set = array();
 
@@ -30,24 +31,27 @@ foreach ($list as $data) {
         array_push($supplier_set, $data['name_vendor']);
         array_push($top_set, $data['top']);
         array_push($qr_set,$data['id_qr']);
-        // echo "<br>".$data['name_vendor'];
+        array_push($detail_qr,$data['id_detail_qr']);
+        //echo "<br>".$data['id_detail_qr'];
         $supplier_id = $data['id_vendor'];
+        
         $index = 0;
     }
 
     // echo "<br>".print_r($supplier_set);
 
-    $harga_set[$data['nama_barang']][] = $data['price'];
+    $harga_set[$data['nama_barang']][] = array($data['price'],$data['id_detail_qr']);
+    //$detail_set[$data['detail_id']][]=$data['id_detail_qr'];
     $barang_set[$index] = array("barang_nama" => $data['nama_barang'], "harga" => $harga_set[$data['nama_barang']]);
     $index++;
 }
 
 $quotation = array("supplier_nama" => $supplier_set, "top" => $top_set, "data" => $barang_set, "Selected" => $qr_set);
 
-// print_r($quotation);
+//print_r($quotation);
 $header = TRUE;
 $counter = 0;
-$_crossfield = array('', 'TOP');
+$_crossfield = array('Vendor', 'TOP');
 $_colname = array(0 => "supplier_nama", 1 => "top");
 
 echo '<table class="tbl">';
@@ -76,28 +80,30 @@ foreach ($_crossfield as $rows) {
 $data_counter = 0;
 
 foreach ($quotation['data'] as $details) {
-
-    echo '<tr>';
+    echo '<tr  class="edit_tr">';
     echo '<td>'.$quotation['data'][$data_counter]['barang_nama'].'</td>';
 
     $harga_counter = 0;
     foreach ($quotation['data'][$data_counter]['harga'] as $harga) {
-        echo '<td>'.$quotation['data'][$data_counter]['harga'][$harga_counter].'</td>';
+        echo '<td  class="edit_td"><div id="'.$quotation['data'][$data_counter]['harga'][$harga_counter][1].'" class="qrs_detail">';
+          echo "<span id='price_".$quotation['data'][$data_counter]['harga'][$harga_counter][1]."' class='text'>".$quotation['data'][$data_counter]['harga'][$harga_counter][0]."</span>";
+          echo "<input type='text' name='price' value='".$quotation['data'][$data_counter]['harga'][$harga_counter][0]."' class='editbox' id='price_input_".$quotation['data'][$data_counter]['harga'][$harga_counter][1]."'/>";
+        echo"</div></td>";
         $harga_counter++;
     }
-
     echo '</tr>';
     $data_counter++;
 }
 echo "<tr><td></td>";
 foreach ($quotation['Selected'] as $l) {
   // echo '<td>'.$l.'</td>';
-  echo "<td><a href='#'' class='easyui-linkbutton' onclick='Selected(".$l.");'  plain='false'>Select</a>
-  <a href='#'' class='easyui-linkbutton' onclick='Delete(".$l.");'  plain='false'>Delete</a></td>";
+  echo "<td><a href='#''  onclick='Selected(".$l.");'  plain='false'>Select</a>
+  <a href='#''  onclick='Delete(".$l.");'  plain='false'>Delete</a></td>";
 }
 echo "</tr>";
 
 echo '</table>';
+echo '</div>';
 ?>
 
 
@@ -106,7 +112,7 @@ echo '</table>';
     var id_pr = '<?php echo $id_pr;?>';
   	$(".editbox").hide();
 
-    $('.edit_tr').on('click', function() {
+    $('.qrs_detail').on('click', function() {
      var ID=$(this).attr('id');
      $("#price_"+ID).hide();
      $("#price_input_"+ID).show();
@@ -115,7 +121,7 @@ echo '</table>';
      var price=$("#price_input_"+ID).val();
      var dataString = 'id='+ ID +'&price='+price;
      $("#price_"+ID).html('');
-       if(price.length>0 ) {
+       if(price.length>0 && $.isNumeric(price) && price != 0 ) {
           $.ajax({
             type: "POST",
             url: base_url + "quotation_request_selected/update/"+ID,
@@ -159,14 +165,14 @@ echo '</table>';
       if(confirm("Apakah yakin akan mengirim data ke QRS '" + val + "'?")){
         var response = '';
         $.ajax({ type: "GET",
-           url: base_url+'quotation_request_selected/Selected/' + val,
+           url: base_url+'quotation_request_selected/Selected/' + val +'/'+id_pr,
            async: false,
            success : function(response){
             var response = eval('('+response+')');
             if (response.success){
               $.messager.show({
                 title: 'Success',
-                msg: 'Data Berhasil Di save'
+                msg: 'Data Vendor Berhasil Dipilih'
               });
               // reload and close tab
               $('#dg').datagrid('reload');
@@ -192,10 +198,10 @@ echo '</table>';
             if (response.success){
               $.messager.show({
                 title: 'Success',
-                msg: 'Data Berhasil Di save'
+                msg: 'Data Vendor Berhasil Di Hapus'
               });
               // reload and close tab
-              $('#dg').datagrid('reload');
+              $("#isi").load(base_url + 'quotation_request_selected/after/'+id_pr); 
             } else {
               $.messager.show({
                 title: 'Error',

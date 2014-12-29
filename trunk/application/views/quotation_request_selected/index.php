@@ -42,7 +42,7 @@
   $(document).ready(function(){
 
     doneData = function (val){
-        if(confirm("Apakah yakin akan mengirim data ke QRS '" + val + "'?")){
+        if(confirm("Apakah yakin akan mengirim data ke Purchase Order '" + val + "'?")){
           var response = '';
           $.ajax({ type: "GET",
              url: base_url+'quotation_request_selected/Done/' + val,
