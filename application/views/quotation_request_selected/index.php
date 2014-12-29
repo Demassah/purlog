@@ -50,8 +50,7 @@
              }
           });
         }
-      //}
-    }
+      }
     //end sendData 
     Add_Qrs = function (val){
       $('#konten').panel({
