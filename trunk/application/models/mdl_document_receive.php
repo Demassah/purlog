@@ -10,17 +10,18 @@ class mdl_document_receive extends CI_Model {
 		# get parameter from easy grid
 		$page = isset($_POST['page']) ? intval($_POST['page']) : 1;  
 		$limit = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
-		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'nama_barang';  
+		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'a.id_receive';  
 		$order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
 		$offset = ($page-1)*$limit;
 		
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('*, b.nama_kategori, c.nama_sub_kategori');
-			$this->db->from('ref_barang a');
-			$this->db->join('ref_kategori b', 'b.id_kategori = a.id_kategori');
-			$this->db->join('ref_sub_kategori c', 'c.id_sub_kategori = a.id_sub_kategori');
+			$this->db->select('a.id_receive, a.id_sro, a.id_courir, a.date_create, b.name_courir, c.full_name');
+			$this->db->from('tr_receive a');
+			$this->db->join('ref_courir b', 'b.id_courir = a.id_courir');
+			$this->db->join('sys_user c', 'c.user_id = a.id_user');
+			$this->db->where('a.status', 1);
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
 		
@@ -51,7 +52,117 @@ class mdl_document_receive extends CI_Model {
 		}
 		return json_encode($response);
 	}
-	
+
+	function getdata_detail($id_do, $plimit=true){
+		# get parameter from easy grid
+		$page = isset($_POST['page']) ? intval($_POST['page']) : 1;  
+		$limit = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
+		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'a.id_do';  
+		$order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
+		$offset = ($page-1)*$limit;
+		
+		# create query
+		$this->db->flush_cache();
+		$this->db->start_cache();
+		$this->db->start_cache();
+			$this->db->select('a.id_sro, a.id_ro, a.id_do, a.date_create, a.id_user, a.status, b.full_name');
+			$this->db->from('tr_sro a');
+			$this->db->join('sys_user b', 'b.user_id = a.id_user');
+
+			$this->db->where('id_do', $id_do);
+
+			$this->db->order_by($sort, $order);
+		$this->db->stop_cache();
+		
+		# get count
+		$tmp['row_count'] = $this->db->get()->num_rows();
+		
+		# get data
+		if($plimit == true){
+			$this->db->limit($limit, $offset);
+		}
+		$tmp['row_data'] = $this->db->get();
+		
+		return $tmp;
+	}
+
+	function getdata_dr($dt){
+		$this->db->flush_cache();
+		$this->db->select('a.id_sro, a.date_create, a.id_user, b.id_courir, d.name_courir, c.full_name');
+			$this->db->from('tr_sro a');
+			$this->db->join('tr_do b', 'b.id_do = a.id_do');
+			$this->db->join('sys_user c', 'c.user_id = a.id_user');
+			$this->db->join('ref_courir d', 'd.id_courir = b.id_courir');
+			//$this->db->join('tr_receive_detail e', 'e.id_receive = a.id_receive');
+			
+
+			$this->db->where('a.id_sro', $dt['id_sro']);
+			$this->db->where('a.status','2');
+			//$this->db->where('e.status','0');
+
+		$this->db->limit($dt['jumlah'], 0);
+		//$this->db->group_by('id_detail_pr');
+		$this->db->group_by('id_sro');
+		$this->db->order_by('a.id_sro', 'ASC');
+		
+		$q = $this->db->get()->result();
+		
+		$out = '';
+		$i=1;
+		$color = '';
+		foreach($q as $r){
+			$color = ($i % 2 == 0)?'#FFFFFF':'#e6e6e6';
+			$out .= '<tr>';
+			$out .= '  <td bgcolor="'.$color.'">'.$i;
+			//$out .= '     <input type="hidden" name="data['.$i.'][id_detail_pr]" value="'.$r->id_detail_pr.'">';
+			$out .= '     <input type="hidden" name="data['.$i.'][id_sro]" value="'.$r->id_sro.'">';
+			$out .= '     <input type="hidden" name="data['.$i.'][id_courir]" value="'.$r->id_courir.'">';
+			$out .= '     <input type="hidden" name="data['.$i.'][date_create]" value="'.$r->date_create.'">';
+			$out .= '     <input type="hidden" name="data['.$i.'][id_user]" value="'.$r->id_user.'">';
+			//$out .= '     <input type="hidden" name="data['.$i.'][date_create]" value="'.$r->date_create.'">';
+						  
+			$out .= '  </td>';
+			$out .= '  <td bgcolor="'.$color.'">'.$r->id_sro.'</td>';
+			$out .= '  <td bgcolor="'.$color.'">'.$r->id_courir.'</td>';
+			$out .= '  <td bgcolor="'.$color.'">'.$r->date_create.'</td>';
+			$out .= '  <td bgcolor="'.$color.'">'.$r->id_user.'</td>';
+			$out .= '  <td bgcolor="'.$color.'" align="center">';
+			$out .= '   <label>
+									<input style="margin-top:2px;" type="checkbox" name="data['.$i.'][chk]" id="checkbox"/>';
+			$out .= '  </td>';
+			$out .= '</tr>';
+			$i++;
+		}
+		
+		return $out;
+	}
+
+	function InsertOnDB($data){
+		$kosong = true;
+		$this->db->trans_start();
+
+		foreach($data as $row){
+			if(isset($row['chk'])){
+				$kosong = false;
+
+				# insert to table purchase reqeust
+				$this->db->flush_cache();
+				$this->db->set('id_sro', $row['id_sro']);
+				$this->db->set('id_courir', $row['id_courir']);
+				$this->db->set('date_create', $row['date_create']);
+				$this->db->set('id_user', $row['id_user']);
+				$this->db->set('status', '1');
+
+				$this->db->insert('tr_receive');
+			}
+		}
+
+		$this->db->trans_complete();
+		if($kosong) {
+			return false;
+		}
+		return $this->db->trans_status();
+	}
 }
 
 ?>
