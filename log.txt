@@ -27,3 +27,41 @@ langsung menghasilkan result true. (agar langsung refresh)
 (On Going) PR Detail notif Error jika detailnya kosong
 (CEK) Add pr masih ada warning
 
+-------------------------------- 29 Desember 2014 ------------------------------------------------------ 
+(Kategori, Sub Kat, Barang)
+menampilkan status
+SELECT `nama_kategori`, 
+(CASE WHEN  (`status` = 1) THEN 'Aktif'
+ELSE 'Tidak Aktif'
+END) AS statuss
+FROM `ref_kategori`
+
+
+
+(Document Receive)
+#untuk combobox menampilkan dari 
+tr_pros_detail : kondisi status_receive = 0
+		 id_sro != 0
+		 group_by = id_sro
+
+SELECT `a`.`id_sro`, `a`.`date_create`, `a`.`id_user`, `b`.`id_courir`, `a`.`id_user`, `c`.`full_name`, `d`.`name_courir`
+FROM (`tr_sro` a)
+JOIN `tr_do` b ON `b`.`id_do` = `a`.`id_do`
+JOIN `sys_user` c ON `c`.`user_id` = `a`.`id_user`
+JOIN `ref_courir` d ON `d`.`id_courir` = `b`.`id_courir`
+WHERE `a`.`id_sro` = '1'
+AND `a`.`status` = '2'
+GROUP BY `id_sro`
+ORDER BY `a`.`id_sro` ASC 
+
+#untuk data form tambah DR yang ditampilkan
+tr_sro
+
+
+#untuk detail DR
+tr_detail_receive
+
+#untuk add detail DR 
+tr_pros_detail (ada kondisi menyocokan dari yang dikirim dengan yang diterima)
+		jika yang diterima sudah sama maka DR tidak muncul di form tambah
+		Kondisi textbox qty ( tidak boleh <= 0 atau >= QTY asli)

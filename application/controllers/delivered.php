@@ -54,10 +54,6 @@ class delivered extends CI_Controller {
 		$this->load->view('delivered/receive');
 	}
 
-	
-
-	
-
 	function add(){
 		$data['kode'] = '';
 		$data['id_kategori'] = '';

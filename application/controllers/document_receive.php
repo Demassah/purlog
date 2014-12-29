@@ -12,10 +12,59 @@ class document_receive extends CI_Controller {
 		$this->load->view('document_receive/dr');
 	}
 
-	function detail(){
-		$this->load->view('document_receive/detail');
+	function grid(){
+		$data = $this->mdl_document_receive->getdata();
+		echo $this->mdl_document_receive->togrid($data['row_data'], $data['row_count']);
 	}
-	
+
+	function add_dr(){
+        $this->load->view('document_receive/add_dr');
+    }
+
+    function getdata(){
+            // get post
+            $data['id_sro'] = $this->input->post('id_sro');
+            $data['jumlah'] = $this->input->post('jumlah');
+           
+            echo $this->mdl_document_receive->getdata_dr($data);
+    }
+
+    function save(){
+            # init
+            $status = "";
+            $result = false;
+            $data['pesan_error'] = '';
+           
+            # get post data
+            foreach($_POST as $key => $value){
+                    $data[$key] = $value;
+            }
+           
+            $data['pesan_error'] = 'Data Gagal Disimpan';
+           
+            $result=$this->mdl_document_receive->InsertOnDB($data['data']);
+           
+            if($result){
+                    echo json_encode(array('success'=>true));
+            }else{
+                    echo json_encode(array('msg'=>$data['pesan_error']));
+            }
+    }
+
+/* --------------------------------Detail -------------------------------------- */
+
+	function detail($id){
+		$data['id_do'] = $id;
+		$this->load->view('document_receive/detail', $data);
+	}
+
+	function grid_detail($id){
+		$data = $this->mdl_delivered->getdata_detail($id);
+		echo $this->mdl_delivered->togrid($data['row_data'], $data['row_count']);
+	}
+
+/* --------------------------------      -------------------------------------- */
+
 	function detail_dr(){
 		$this->load->view('document_receive/detail_dr');
 	}
@@ -24,10 +73,6 @@ class document_receive extends CI_Controller {
 		$this->load->view('document_receive/receive');
 	}
 
-	function grid(){
-		$data = $this->mdl_document_receive->getdata();
-		echo $this->mdl_document_receive->togrid($data['row_data'], $data['row_count']);
-	}
 	
 	function add(){
 		$data['kode'] = '';
