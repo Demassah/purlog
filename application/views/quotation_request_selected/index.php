@@ -1,18 +1,4 @@
-<!-- <div id="toolbar_purchase" style="padding:5px;height:auto">
-  <div class="fsearch">
-    <table>
-      <tr>
-          <td>&nbsp;&nbsp;<a href="#" onclick="detail()" class="easyui-linkbutton" iconCls="icon-detail">Detail</a>
-              &nbsp;&nbsp;<a href="#" onclick="available()" class="easyui-linkbutton" iconCls="icon-ok">Picking</a>
-              &nbsp;&nbsp;<a href="#" onclick="lock()" class="easyui-linkbutton" iconCls="icon-login">Lock</a>
-              &nbsp;&nbsp;<a href="#" onclick="pending()" class="easyui-linkbutton" iconCls="icon-redo">pending</a>
-          </td> 
-      </tr>
-    </table>
-  </div>
-</div> -->
-
-<table id="dg" title="Quotation Request List" data-options="
+<table id="dg_qrs" title="Quotation Request List" data-options="
       rownumbers:true,
       singleSelect:true,
       autoRowHeight:false,
@@ -54,8 +40,7 @@
                   title: 'Success',
                   msg: 'Data Berhasil Di save'
                 });
-                // reload and close tab
-                $('#dg').datagrid('reload');
+                $('#dg_qrs').datagrid('reload');
               } else {
                 $.messager.show({
                   title: 'Error',
@@ -85,24 +70,7 @@
     }
     
     $(function(){ // init
-      $('#dg').datagrid({url:"quotation_request_selected/grid"});      
+      $('#dg_qrs').datagrid({url:"quotation_request_selected/grid"});      
   });
-
-  // //# Tombol Bawah
-  //   $(function(){
-  //     var pager = $('#dg').datagrid().datagrid('getPager'); // get the pager of datagrid
-  //     pager.pagination({
-  //       buttons:[
-  //         {
-  //           iconCls:'icon-add',
-  //           text:'Create PR',
-  //           handler:function(){
-  //             add_pr();
-  //           }
-  //         }            
-  //       ]
-  //     });     
-  //   }); 
-
 });
 </script>

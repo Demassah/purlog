@@ -27,7 +27,7 @@ class quotation_request_selected extends CI_Controller {
 
 	function update($id)
 	{
-		$data = $this->input->post('price');
+		$data = $this->input->post('harga');
 		$this->mdl_quotation_request_selected->update($id,$data);
 	}
 
@@ -103,43 +103,43 @@ class quotation_request_selected extends CI_Controller {
 
 	function after($id_pr)
 	{
+		$data['id_pr'] = $id_pr;
 		$list= $this->mdl_quotation_request_selected->list_pr($id_pr);
+
 		$supplier_id = '';
 		$supplier_set = array();
 		$top_set = array();
 		$barang_set = array();
 		$harga_set = array();
+		$detail_qr = array();
 		$index =0;
 		$qr_set = array();
 
 		echo '<br> <h2 align="center"> Compare Vendor List </h2> <br>';
-		// print_r($list);
 
 		foreach ($list as $data) {
-		    // echo "<br>".$data['name_vendor'];
 
-		    if ($data['id_vendor'] != $supplier_id) {
-		        array_push($supplier_set, $data['name_vendor']);
-		        array_push($top_set, $data['top']);
-		        array_push($qr_set,$data['id_qr']);
-		        // echo "<br>".$data['name_vendor'];
-		        $supplier_id = $data['id_vendor'];
-		        $index = 0;
-		    }
+	    if ($data['id_vendor'] != $supplier_id) {
+        array_push($supplier_set, $data['name_vendor']);
+        array_push($top_set, $data['top']);
+        array_push($qr_set,$data['id_qr']);
+        array_push($detail_qr,$data['id_detail_qr']);
+        //echo "<br>".$data['id_detail_qr'];
+        $supplier_id = $data['id_vendor'];
 
-		    // echo "<br>".print_r($supplier_set);
+        $index = 0;
+			}
 
-		    $harga_set[$data['nama_barang']][] = $data['price'];
-		    $barang_set[$index] = array("barang_nama" => $data['nama_barang'], "harga" => $harga_set[$data['nama_barang']]);
-		    $index++;
+	    $harga_set[$data['nama_barang']][] = array($data['price'],$data['id_detail_qr']);
+	    $barang_set[$index] = array("barang_nama" => $data['nama_barang'], "harga" => $harga_set[$data['nama_barang']]);
+	    $index++;
 		}
 
 		$quotation = array("supplier_nama" => $supplier_set, "top" => $top_set, "data" => $barang_set, "Selected" => $qr_set);
 
-		// print_r($quotation);
 		$header = TRUE;
 		$counter = 0;
-		$_crossfield = array('', 'TOP');
+		$_crossfield = array('Vendor', 'TOP');
 		$_colname = array(0 => "supplier_nama", 1 => "top");
 
 		echo '<table class="tbl">';
@@ -158,7 +158,6 @@ class quotation_request_selected extends CI_Controller {
 		            echo '<th>'.$cols.'</th>';
 		        }
 		    }
-		    // echo '</tr>';
 
 		    $header = FALSE;
 		    $counter++;
@@ -168,34 +167,29 @@ class quotation_request_selected extends CI_Controller {
 		$data_counter = 0;
 
 		foreach ($quotation['data'] as $details) {
-
 		    echo '<tr>';
 		    echo '<td>'.$quotation['data'][$data_counter]['barang_nama'].'</td>';
 
 		    $harga_counter = 0;
 		    foreach ($quotation['data'][$data_counter]['harga'] as $harga) {
-		        echo '<td>'.$quotation['data'][$data_counter]['harga'][$harga_counter].'</td>';
+		        echo '<td><div id="'.$quotation['data'][$data_counter]['harga'][$harga_counter][1].'" class="qrs">';
+		          echo "<span id='harga_".$quotation['data'][$data_counter]['harga'][$harga_counter][1]."' class='text'>".$quotation['data'][$data_counter]['harga'][$harga_counter][0]."</span>";
+		          echo "<input type='text' name='harga' value='".$quotation['data'][$data_counter]['harga'][$harga_counter][0]."' class='editbox' id='harga_input_".$quotation['data'][$data_counter]['harga'][$harga_counter][1]."'/>";
+		        echo"</div></td>";
 		        $harga_counter++;
 		    }
-
 		    echo '</tr>';
 		    $data_counter++;
 		}
 		echo "<tr><td></td>";
 		foreach ($quotation['Selected'] as $l) {
-		  // echo '<td>'.$l.'</td>';
 		  echo "<td><a href='#''  onclick='Selected(".$l.");'  plain='false'>Select</a>
 		  <a href='#''  onclick='Delete(".$l.");'  plain='false'>Delete</a></td>";
 		}
 		echo "</tr>";
 
 		echo '</table>';
-			}
-
-
-
-		
-	
+	}
 
 }
 
