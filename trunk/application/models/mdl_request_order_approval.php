@@ -138,7 +138,57 @@ class mdl_request_order_approval extends CI_Model {
 		
 		return $this->db->count_all_results();
 	}
-	
+
+	function reject($kode){
+		
+		$this->db->flush_cache();
+		
+		$this->db->set('status', "9");
+		
+		$this->db->where('id_ro', $kode);
+		//$this->db->where('status_delete', '0');
+		$result = $this->db->update('tr_ro');
+	   
+	   
+		//return
+		if($result) {
+				return TRUE;
+		}else {
+				return FALSE;
+		}
+	}
+
+	function getRODetail($id) {
+		$this->db->flush_cache();
+		$this->db->where('id_detail_ro', $id);
+		return $this->db->get('tr_ro_detail');
+	}
+
+	function update_qty($data){
+		$this->db->trans_start();
+		
+		$result = true;
+		
+		# tambah ke tabel
+		foreach($data['data_qty']['rows'] as $row){
+			
+			$this->db->flush_cache();
+			$this->db->set('qty', $row['qty']);
+
+			$this->db->where('id_detail_ro', $row['id_detail_ro']);
+
+			$result = $this->db->update('tr_ro_detail');
+			
+		}
+		
+		//$this->db->where('id_ro', $id_ro);
+		//$this->db->where('qty', '0');
+		//$result = $this->db->delete('tr_ro_detail');
+
+		//return
+		$this->db->trans_complete();
+	    return $this->db->trans_status();
+	}
 }
 
 ?>

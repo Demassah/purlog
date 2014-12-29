@@ -10,7 +10,6 @@
 	<div class="fitem" >
 		<label style="width:140px">Requestor </label>: 
 		<select  class="easyui-combobox" name="user_id" style="width:170px;">
-			<option valus="">- Pilih -</option>
 			<?=$this->mdl_prosedur->OptionUserID(array('value'=>$user_id));?>	          
 		</select>	
 	</div>
@@ -33,7 +32,7 @@
 	</div>
 	<div class="fitem" >
 		<label style="width:140px">Ext Doc No</label>: 
-		<input name="ext_doc_no" size="20" class="easyui-validatebox textbox" data-options="required:true">
+		<input name="ext_doc_no" size="20" class="easyui-validatebox textbox" data-options="required:false">
 	</div>
 	<div class="fitem" >
 		<label style="width:140px">ETD </label>: 

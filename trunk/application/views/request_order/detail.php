@@ -11,7 +11,7 @@
 		newDetail = function (){
 			$('#dialog_kosong').dialog({
 				title: 'Tambah Detail Request Order',
-				width: 440,
+				width: 590,
 				height: $(window).height() * 0.66,
 				closed: true,
 				cache: false,

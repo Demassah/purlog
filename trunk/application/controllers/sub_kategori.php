@@ -30,7 +30,8 @@ class sub_kategori extends CI_Controller {
 	function edit($kode){
 		$r = $this->mdl_sub_kategori->getdataedit($kode);
 		$data['id_kategori'] = $r->row()->id_kategori;
-    $data['nama_sub_kategori'] = $r->row()->nama_sub_kategori;
+    	$data['nama_sub_kategori'] = $r->row()->nama_sub_kategori;
+    	$data['status'] = $r->row()->status;
     
 		$data['kode'] = $kode;	
 
@@ -49,6 +50,7 @@ class sub_kategori extends CI_Controller {
 		}
 		
 		# rules validasi form
+		$this->form_validation->set_rules("id_kategori", 'Kategori', 'trim|required|xss_clean');
 		$this->form_validation->set_rules("nama_sub_kategori", 'Nama Sub Kategori', 'trim|required|xss_clean');
 
 

@@ -38,6 +38,7 @@ class barang extends CI_Controller {
 	    $data['kode_barang'] = $r->row()->kode_barang;
 	    $data['nama_barang'] = $r->row()->nama_barang;
 	    $data['type'] = $r->row()->type;
+	    $data['status'] = $r->row()->status;
 	    
 		$data['kode'] = $kode;
 		

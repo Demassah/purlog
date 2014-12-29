@@ -76,5 +76,44 @@ class request_order_approval extends CI_Controller {
 
 		$this->load->view('request_order_approval/form_detail', $data);
 	}
-	
+
+	function reject($id){
+		$result = $this->mdl_request_order_approval->reject($id);
+		if ($result){
+			echo json_encode(array('success'=>true));
+		} else {
+			echo json_encode(array('msg'=>'Data gagal di hapus'));
+		}
+	}
+
+	function save_qty(){
+        # get post data
+        $ids = array();
+        foreach($_POST as $key => $value){
+            $data[$key] = $value;
+        }
+        
+        # init
+        $status = "";
+        $data['pesan_error'] = 'Data gagal disimpan';
+       
+        $error = false;
+        $result = false;
+
+        foreach($data['data_qty']['rows'] as $new) {
+            if($new['qty'] < 1) {
+                $error = true;
+            }
+        }
+        if(!$error) {
+            $result = $this->mdl_request_order_approval->update_qty($data);
+        }
+       
+        if($result){
+            echo json_encode(array('success'=>true));
+        }else{
+            echo json_encode(array('msg'=>$data['pesan_error']));
+        }
+    }
+
 }

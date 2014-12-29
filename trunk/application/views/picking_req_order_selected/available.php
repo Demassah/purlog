@@ -172,7 +172,7 @@
         buttons:[
           {
             iconCls:'icon-ok',
-            text:'Save',
+            text:'Save All',
             handler:function(){
               saveData();
             }

@@ -52,19 +52,6 @@
 	});
 </script>
 
-<div id="toolbar_detail" style="padding:5px;height:auto">
-	<div class="fsearch">
-		<table>
-			<tr>
-					<td>
-							&nbsp;&nbsp;<a href="#" onclick="sro()" class="easyui-linkbutton" iconCls="icon-list">Shipment Request Order</a>
-
-					</td> 
-			</tr>		
-		</table>
-	</div>
-</div>
-
 <table id="dtgrd" title="Detail Delivered" data-options="
 			rownumbers:true,
 			singleSelect:false,

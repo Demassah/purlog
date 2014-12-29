@@ -6,7 +6,7 @@
 			$('#dialog').dialog({
 				title: 'Tambah Barang',
 				width: 400,
-				height: 245,
+				height: 255,
 				closed: true,
 				cache: false,
 				href: base_url+'barang/add',
@@ -24,7 +24,7 @@
 				$('#dialog').dialog({
 					title: 'Edit ',
 					width: 400,
-					height: 245,
+					height: 255,
 					closed: true,
 					cache: false,
 					href: base_url+'barang/edit/'+val,
@@ -151,7 +151,7 @@
 		
 	});
 </script>
-<table id="dg" title="Kelola Data Barang" data-options="
+<table id="dg" title="Kelola Data Barang [ Ket Status: 1 = Aktif | 0 = Tidak Aktif ]" data-options="
 			rownumbers:true,
 			singleSelect:true,
 			autoRowHeight:false,
@@ -166,6 +166,7 @@
 			<th field="nama_sub_kategori" sortable="true" width="150">Sub Kategori</th>
 			<th field="kode_barang" sortable="true" width="150">Kode Barang</th>
 			<th field="nama_barang" sortable="true" width="150">Nama Barang</th>
+			<th field="status" sortable="true" width="120">Status</th>
 			<th field="action" align="center" formatter="actionbutton" width="100">Aksi</th>
 		</tr>
 	</thead>

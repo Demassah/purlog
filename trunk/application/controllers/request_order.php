@@ -31,21 +31,22 @@ class request_order extends CI_Controller {
 		$this->load->view('request_order/form', $data);
 	}
 
-	function save($aksi){
-		# init
-		$status = "";
-		$result = false;
-		$data['pesan_error'] = '';
-		
+	function save(){
 		# get post data
 		foreach($_POST as $key => $value){
 			$data[$key] = $value;
 		}
 		
-		# rules validasi form
+		# init
+		$status = "";
+		$result = false;
+		$data['pesan_error'] = '';
+
+		# rules validasi form		
 		$this->form_validation->set_rules("user_id", 'Requestor', 'trim|required|xss_clean');
 		$this->form_validation->set_rules("purpose", 'Purpose', 'trim|required|xss_clean');
-		$this->form_validation->set_rules("cat_req", 'Category Request', 'trim|required|xss_clean');
+		$this->form_validation->set_rules("cat_req", 'category Req', 'trim|required|xss_clean');
+		$this->form_validation->set_rules("ext_doc_no", 'Ext Document No', 'trim|required|xss_clean');
 
 		# message rules
 		$this->form_validation->set_message('required', 'Field %s harus diisi.');
@@ -54,11 +55,7 @@ class request_order extends CI_Controller {
 		if ($this->form_validation->run() == FALSE){
 			$data["pesan_error"] .= trim(validation_errors(' ',' '))==''?'':validation_errors(' ',' ');
 		}else{
-			if($aksi=="add"){ // add
-				$result = $this->mdl_request_order->InsertOnDb($data);
-			}else { // edit
-				$result=$this->mdl_request_order->UpdateOnDb($data);
-			}
+			$result = $this->mdl_request_order->InsertOnDb($data);
 		}
 		
 		if($result){
@@ -150,7 +147,6 @@ class request_order extends CI_Controller {
 
 		$this->load->view('request_order/form_detail', $data);
 	}
-
 	
 	function save_detail(){
 		# get post data
@@ -162,8 +158,21 @@ class request_order extends CI_Controller {
 		$status = "";
 		$result = false;
 		$data['pesan_error'] = '';
-		
-		$result = $this->mdl_request_order->Update_DetailRO($data);
+
+		# rules validasi form		
+		$this->form_validation->set_rules("kode_barang", 'Barang', 'trim|required|xss_clean');
+		$this->form_validation->set_rules("qty", 'Qty', 'trim|required|xss_clean');
+		$this->form_validation->set_rules("barang_bekas", 'Barang Bekas', 'trim|required|xss_clean');
+
+		# message rules
+		$this->form_validation->set_message('required', 'Field %s harus diisi.');
+
+		$data['pesan_error'] = '';
+		if ($this->form_validation->run() == FALSE){
+			$data["pesan_error"] .= trim(validation_errors(' ',' '))==''?'':validation_errors(' ',' ');
+		}else{
+			$result = $this->mdl_request_order->Update_DetailRO($data);
+		}
 		
 		if($result){
 			echo json_encode(array('success'=>true));
