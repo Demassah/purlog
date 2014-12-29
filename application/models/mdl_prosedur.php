@@ -59,7 +59,7 @@ class mdl_prosedur extends CI_Model {
 
 	function OptionUserID($d=""){
 		$value = isset($d['value'])?$d['value']:'';
-		$out = '';
+		$out = '<option value="">-- Pilih --</option>';
 		
 		$this->db->flush_cache();
 		$this->db->from('sys_user');
@@ -159,7 +159,7 @@ class mdl_prosedur extends CI_Model {
 		//$this->db->where('status', 'A');
 		$res = $this->db->get();
 		
-		$out = '<option value="">-- Pilih --</option>';
+		$out = '';
 		foreach($res->result() as $r){
 			if(trim($r->kode_barang) == trim($value)){
 				$out .= '<option value="'.$r->kode_barang.'" selected="selected">'.$r->kode_barang.' - '.$r->nama_barang.'</option>';

@@ -17,11 +17,11 @@ class mdl_barang extends CI_Model {
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('*, b.nama_kategori, c.nama_sub_kategori');
+			$this->db->select('*, a.status, b.nama_kategori, c.nama_sub_kategori');
 			$this->db->from('ref_barang a');
 			$this->db->join('ref_kategori b', 'b.id_kategori = a.id_kategori');
 			$this->db->join('ref_sub_kategori c', 'c.id_sub_kategori = a.id_sub_kategori');
-			$this->db->where('a.status','1');
+			//$this->db->where('a.status','1');
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
 		
@@ -87,6 +87,7 @@ class mdl_barang extends CI_Model {
     $this->db->set('id_sub_kategori', $data['id_sub_kategori']);
     $this->db->set('kode_barang', $data['kode_barang']);
     $this->db->set('nama_barang', $data['nama_barang']);
+    $this->db->set('status', isset($data['status'])?'1':'0');
     $this->db->set('type', $data['type']);
 		
 		$this->db->where('id', $data['kode']);

@@ -28,7 +28,8 @@ class kategori extends CI_Controller {
 	
 	function edit($kode){
 		$r = $this->mdl_kategori->getdataedit($kode);
-    $data['nama_kategori'] = $r->row()->nama_kategori;
+    	$data['nama_kategori'] = $r->row()->nama_kategori;
+    	$data['status'] = $r->row()->status;
     
 		$data['kode'] = $kode;	
 

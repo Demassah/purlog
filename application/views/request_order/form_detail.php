@@ -86,7 +86,6 @@
 		<label style="width:150px;vertical-align:top;">Date Create </label>:
 		<b><?=$date_create?></b>
 	</div>
-	<br>
 	<div class="fitem" >
 		<label style="width:150px">Kategori </label>:
 			<select id="id_kategori" name="id_kategori" style="width:200px;">
@@ -101,13 +100,13 @@
 	</div>
 	<div class="fitem">
 		<label style="width:150px;vertical-align:top;">Barang </label>:
-		<select id="kode_barang" name="kode_barang" style="width:200px;">
+		<select id="kode_barang" name="kode_barang" style="width:300px;">
 				<?=$this->mdl_prosedur->OptionBarang(array('value'=>$kode_barang, 'id_sub_kategori'=>$id_sub_kategori));?>
 		</select>
 	</div>
 	<div class="fitem">
 		<label style="width:150px;vertical-align:top;">Qty </label>:
-		<input name="qty" id="qty" size="10" value="<?=$qty?>" class="easyui-validatebox textbox" data-options="required:true">
+		<input name="qty" id="qty" size="10" value="<?=$qty?>" class="easyui-validatebox textbox" data-options="required:false">
 	</div>
 	<div class="fitem">
 		<label style="width:150px;vertical-align:top;">Barang Bekas </label>:
@@ -119,7 +118,7 @@
 	</div>
 	<div class="fitem">
 		<label style="width:150px;vertical-align:top;">Note </label>:
-		<textarea name="note" id="note" cols="25" rows="5"><?=$note?></textarea>
+		<textarea name="note" id="note" cols="36" rows="5"><?=$note?></textarea>
 	</div>
 	<div class="fitem" align="left">
 		<label style="width:300px;">*Keterangan: Note di isi jika dibutuhkan </label>
@@ -140,7 +139,7 @@
 		<input id="id_sro" name="id_sro" size="10" value="<?=$id_sro?>">
 	</div>
 </div>
-<br>
+
 <div align="right">
   <a href="#" class="easyui-linkbutton" onclick="save_detail();" iconCls="icon-save" plain="false">Save</a>
   <a href="#" class="easyui-linkbutton" onclick="tutup();" iconCls="icon-cancel" plain="false">Cancel</a>

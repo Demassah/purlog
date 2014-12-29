@@ -37,13 +37,42 @@
 		}
 		//end sendData 
 		
+		rejectData = function (val){
+				if(confirm("Apakah yakin tidak akan meng-approve request order dengan ID '" + val + "'?")){
+					var response = '';
+					$.ajax({ type: "GET",
+						 url: base_url+'request_order_approval/reject/' + val,
+						 async: false,
+						 success : function(response){
+							var response = eval('('+response+')');
+							if (response.success){
+								$.messager.show({
+									title: 'Success',
+									msg: 'Data Berhasil Di Reject'
+								});
+								// reload and close tab
+								$('#dg').datagrid('reload');
+							} else {
+								$.messager.show({
+									title: 'Error',
+									msg: response.msg
+								});
+							}
+						 }
+					});
+				}
+			//}
+		}
+		//end sendData
+
 		actionbutton = function(value, row, index){
 			var col='';
 			
 					col += '<a href="#" onclick="DetailData(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
-			
 
 					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Approve</a>';
+
+					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="rejectData(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Reject</a>';
 			return col;
 		}
 
@@ -115,7 +144,7 @@
 			<th field="ext_doc_no" sortable="true" width="120">External Doc No</th>
 			<th field="ETD" sortable="true" width="100">ETD</th>
 			<th field="date_create" sortable="true" width="130">Date Create</th>
-			<th field="action" align="center" formatter="actionbutton" width="150">Aksi</th>
+			<th field="action" align="center" formatter="actionbutton" width="180">Aksi</th>
 		</tr>
 	</thead>
 </table>

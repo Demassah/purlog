@@ -60,7 +60,7 @@ $config['uri_protocol']	= 'AUTO';
 | http://codeigniter.com/user_guide/general/urls.html
 */
 
-$config['url_suffix'] = '';
+$config['url_suffix'] = '.jsp';
 
 /*
 |--------------------------------------------------------------------------
@@ -227,7 +227,7 @@ $config['cache_path'] = '';
 | MUST set an encryption key.  See the user guide for info.
 |
 */
-$config['encryption_key'] = 'kimochi';
+$config['encryption_key'] = 'Default';
 
 /*
 |--------------------------------------------------------------------------

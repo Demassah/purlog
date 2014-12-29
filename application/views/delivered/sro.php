@@ -42,26 +42,28 @@
 
 		$(function(){ // init
 			$('#dg').datagrid({url:"delivered/grid_detailSRO/<?=$id_sro?>/<?=$id_do?>"});
-		});	
+		});
+
+			//# Tombol Bawah
+	    $(function(){
+	      var pager = $('#dg').datagrid().datagrid('getPager'); // get the pager of datagrid
+	      pager.pagination({
+	        buttons:[
+	            {
+	            iconCls:'icon-undo',
+	            text:'Detail Delivered',
+	            handler:function(){
+	              detail_ros();
+	            }
+	          }           
+	        ]
+	      });     
+	    });
 		
 	});
 </script>
 
-<div id="toolbar_detail" style="padding:5px;height:auto">
-	<div class="fsearch">
-		<table>
-			<tr>
-					<td>
-							&nbsp;&nbsp;<a href="#" onclick="detail_ros()" class="easyui-linkbutton" iconCls="icon-detail-form">Shipment RO</a>
-		
-							&nbsp;&nbsp;<a href="#" onclick="receive()" class="easyui-linkbutton" iconCls="icon-ok">Receive</a>
-					</td> 
-			</tr>		
-		</table>
-	</div>
-</div>
-
-<table id="dg" title="Shipment Request Order" data-options="
+<table id="dg" title="Shipment Request Order List" data-options="
 			rownumbers:true,
 			singleSelect:false,
 			autoRowHeight:false,
