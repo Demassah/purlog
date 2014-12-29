@@ -187,8 +187,11 @@ class mdl_delivery_order extends CI_Model {
 		$this->db->join('sys_user b', 'b.user_id = d.user_id');
 		$this->db->join('ref_barang c', 'c.kode_barang = a.kode_barang');		
 		$this->db->join('tr_ro_detail e', 'e.id_ro = d.id_ro');
+
 		$this->db->where('a.id_sro', $id_sro);
+
 		$query = $this->db->get('tr_pros_detail a');
+
 		return $query->result();
 	}
 

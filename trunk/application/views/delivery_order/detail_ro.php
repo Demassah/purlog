@@ -8,6 +8,7 @@
                 <th width="80">Item Name</th>
                 <th width="20">Qty</th>
                 <th width="90">lokasi</th>
+
             </tr>
         </thead>
         <tbody>
