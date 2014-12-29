@@ -1,3 +1,15 @@
+<div id="toolbar" style="padding:5px;height:auto">
+  <div class="fsearch">
+    <table>
+      <tr>
+          <td>
+              &nbsp;&nbsp;<a href="#" onclick="Add_vendor()" class="easyui-linkbutton" iconCls="icon-ok">Add</a>
+          </td>             
+      </tr>   
+    </table>
+  </div>
+</div>
+
 <?php
 
 $supplier_id = '';
@@ -8,7 +20,7 @@ $harga_set = array();
 $index =0;
 $qr_set = array();
 
-echo '<br><br>';
+echo '<br> <h2 align="center"> Compare Vendor List </h2> <br>';
 // print_r($list);
 
 foreach ($list as $data) {
@@ -32,11 +44,10 @@ foreach ($list as $data) {
 
 $quotation = array("supplier_nama" => $supplier_set, "top" => $top_set, "data" => $barang_set, "Selected" => $qr_set);
 
-echo '<br><br>';
 // print_r($quotation);
 $header = TRUE;
 $counter = 0;
-$_crossfield = array('Supplier', 'TOP');
+$_crossfield = array('', 'TOP');
 $_colname = array(0 => "supplier_nama", 1 => "top");
 
 echo '<table class="tbl">';
@@ -55,7 +66,7 @@ foreach ($_crossfield as $rows) {
             echo '<th>'.$cols.'</th>';
         }
     }
-    echo '</tr>';
+    // echo '</tr>';
 
     $header = FALSE;
     $counter++;
