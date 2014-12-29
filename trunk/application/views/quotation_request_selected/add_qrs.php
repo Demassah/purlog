@@ -84,7 +84,7 @@
     }
     echo "<tr><td></td>";
     foreach ($quotation['Selected'] as $l) {
-      echo "<td><a href='#''  onclick='Selected(".$l.");'  plain='false'>Select</a>
+      echo "<td><a href='#''  onclick='select_vendor(".$l.");'  plain='false'>Select</a>
                 <a href='#''  onclick='Delete(".$l.");'  plain='false'>Delete</a></td>";
     }
     echo "</tr>";
@@ -95,10 +95,8 @@
 
 <script type="text/javascript">
 var id_pr = '<?php echo $id_pr;?>';
-  $(document).ready(function() {
-   //  var id_pr = '<?php echo $id_pr;?>';
   $(".editbox").hide();
-
+  $(document).ready(function() {
     $('div').on('click','.qrs', function() {
      var ID=$(this).attr('id');
      $("#harga_"+ID).hide();
@@ -146,7 +144,7 @@ var id_pr = '<?php echo $id_pr;?>';
               $(".text").show();
           });
     // Selected
-     Selected = function (val){
+     select_vendor = function (val){
       if(confirm("Apakah yakin akan mengirim data ke QRS '" + val + "'?")){
         var response = '';
         $.ajax({ type: "GET",

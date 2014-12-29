@@ -29,6 +29,7 @@ class quotation_request_selected extends CI_Controller {
 	{
 		$data = $this->input->post('harga');
 		$this->mdl_quotation_request_selected->update($id,$data);
+		$this->load->view('quotation_request_selected/add_qrs', $data, FALSE);
 	}
 
 	function Selected($kode,$id_pr) {
