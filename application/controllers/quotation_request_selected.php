@@ -31,8 +31,8 @@ class quotation_request_selected extends CI_Controller {
 		$this->mdl_quotation_request_selected->update($id,$data);
 	}
 
-	function Selected($kode) {
-    $result = $this->mdl_quotation_request_selected->selected($kode);
+	function Selected($kode,$id_pr) {
+    $result = $this->mdl_quotation_request_selected->selected($kode,$id_pr);
     if ($result) {
         echo json_encode(array('success' => true));
     } else {
@@ -104,45 +104,93 @@ class quotation_request_selected extends CI_Controller {
 	function after($id_pr)
 	{
 		$list= $this->mdl_quotation_request_selected->list_pr($id_pr);
-		echo "<form id='form2' method='post'>
-			<table class='tbl'>
-				<caption>Compare vendor List</caption>
-				<thead>
-					<tr>
-						<th></th>
-						<th>Vendor Name</th>
-						<th>TOP</th>
-						<th>Kode Barang</th>
-						<th>Nama Barang</th>
-						<th>Price</th>
-						<th>Aksi</th>
-					</tr>
-				</thead>
-				<tbody>";
-		      if(empty($list)){
-		        echo "data kosong";
-		      }else{
-						foreach ($list as $l) {
-							echo "
-								<tr id='".$l->id_detail_qr."' class='edit_tr'>
-									<td></td>
-									<td>".$l->name_vendor."</td>
-									<td>".$l->top."</td>
-									<td>".$l->kode_barang."</td>
-									<td>".$l->nama_barang."</td>
-									<td class='edit_td'>
-										<span id='price_".$l->id_detail_qr."' class='text'>".$l->price."</span>
-										<input type='text' name='price' value='".$l->price."' class='editbox' id='price_input_".$l->id_detail_qr."'/>
-									</td>
-									<td><a href='#' class='easyui-linkbutton' onclick='Selected(".$l->id_qr.");' plain='false'>Select</a></td>
-								</tr>
-							";
-				    }
-				  }
-			echo "</tbody>
-			</table>
-		</form>";
-	}
+		$supplier_id = '';
+		$supplier_set = array();
+		$top_set = array();
+		$barang_set = array();
+		$harga_set = array();
+		$index =0;
+		$qr_set = array();
+
+		echo '<br> <h2 align="center"> Compare Vendor List </h2> <br>';
+		// print_r($list);
+
+		foreach ($list as $data) {
+		    // echo "<br>".$data['name_vendor'];
+
+		    if ($data['id_vendor'] != $supplier_id) {
+		        array_push($supplier_set, $data['name_vendor']);
+		        array_push($top_set, $data['top']);
+		        array_push($qr_set,$data['id_qr']);
+		        // echo "<br>".$data['name_vendor'];
+		        $supplier_id = $data['id_vendor'];
+		        $index = 0;
+		    }
+
+		    // echo "<br>".print_r($supplier_set);
+
+		    $harga_set[$data['nama_barang']][] = $data['price'];
+		    $barang_set[$index] = array("barang_nama" => $data['nama_barang'], "harga" => $harga_set[$data['nama_barang']]);
+		    $index++;
+		}
+
+		$quotation = array("supplier_nama" => $supplier_set, "top" => $top_set, "data" => $barang_set, "Selected" => $qr_set);
+
+		// print_r($quotation);
+		$header = TRUE;
+		$counter = 0;
+		$_crossfield = array('', 'TOP');
+		$_colname = array(0 => "supplier_nama", 1 => "top");
+
+		echo '<table class="tbl">';
+
+		foreach ($_crossfield as $rows) {
+
+		    echo '<tr>';
+		    if (!$header) {
+		        echo '<td>'.$rows.'</td>';
+		        foreach ($quotation[$_colname[$counter]] as $cols) {
+		            echo '<td>'.$cols.'</td>';
+		        }
+		    } else {
+		        echo '<th>'.$rows.'</th>';
+		        foreach ($quotation[$_colname[$counter]] as $cols) {
+		            echo '<th>'.$cols.'</th>';
+		        }
+		    }
+		    // echo '</tr>';
+
+		    $header = FALSE;
+		    $counter++;
+		    echo '</tr>';
+		}
+
+		$data_counter = 0;
+
+		foreach ($quotation['data'] as $details) {
+
+		    echo '<tr>';
+		    echo '<td>'.$quotation['data'][$data_counter]['barang_nama'].'</td>';
+
+		    $harga_counter = 0;
+		    foreach ($quotation['data'][$data_counter]['harga'] as $harga) {
+		        echo '<td>'.$quotation['data'][$data_counter]['harga'][$harga_counter].'</td>';
+		        $harga_counter++;
+		    }
+
+		    echo '</tr>';
+		    $data_counter++;
+		}
+		echo "<tr><td></td>";
+		foreach ($quotation['Selected'] as $l) {
+		  // echo '<td>'.$l.'</td>';
+		  echo "<td><a href='#''  onclick='Selected(".$l.");'  plain='false'>Select</a>
+		  <a href='#''  onclick='Delete(".$l.");'  plain='false'>Delete</a></td>";
+		}
+		echo "</tr>";
+
+		echo '</table>';
+			}
 
 
 
