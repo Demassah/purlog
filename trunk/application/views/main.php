@@ -20,6 +20,7 @@ date_default_timezone_set('Asia/Jakarta');
 		<script type="text/javascript" src="<?=base_url();?>asset/select/select2.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>asset/js/modernizr.custom.05095.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>asset/easyui/plugins/jquery.edatagrid.js"></script>
+		<script type="text/javascript" src="<?=base_url();?>asset/js/numericInput.min.js"></script>
 				 
 	</head>
 	<body class="easyui-layout">

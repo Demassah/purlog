@@ -12,7 +12,7 @@
 	<div class="fitem" >
 		<label style="width:100px">Vendor </label>: 
 			<select class="select" name="id_vendor" style="width:200px;">
-						<option>Pilih</option>
+						<!-- <option>Pilih</option> -->
 						<?php
 						foreach ($list as $l) {
 						 	echo "<option value=".$l->id_vendor.">".$l->name_vendor."</option>";
@@ -23,9 +23,12 @@
 	</div>
 	<div class="fitem">
 		<label style="width:100px">TOP</label>:
-		<input type="text" name="top" placeholder="TOP" />
+		<input type="text" name="top" class="top" placeholder="TOP" />
 	</div>
 
 </form>
-	
+<script type="text/javascript">
+var top = $(".top").val();
+$(".top").numericInput();
+</script>
 

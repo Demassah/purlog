@@ -106,12 +106,13 @@
           $("#harga_"+ID_qr).hide();
           $("#harga_input_"+ID_qr).show();
           $("#harga_input_"+ID_qr).focusin();
-
+          $("#harga_input_"+ID_qr).numericInput();
     }).change(function(event) {
       var ID_qr = $(this).attr('id');
       var harga = $("#harga_input_"+ID_qr).val();
       var dataString = 'id='+ID_qr+'&harga='+harga;
-      $("#harga_"+ID_qr).html('');
+      
+      $(harga).numericInput();
         if(harga.length > 0 && $.isNumeric(harga) && harga !=0)
         {
           $.ajax({
@@ -131,7 +132,9 @@
             }
           });
         }else{
+           $('#qrs_table').load(base_url + 'quotation_request_selected/after_select/'+id_pr).fadeIn("slow");
           alert("Harga tidak boleh null atau harga harus angka");
+
         }
     });
           $(".editbox").mouseup(function() {
