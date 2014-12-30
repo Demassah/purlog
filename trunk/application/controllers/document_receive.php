@@ -51,6 +51,24 @@ class document_receive extends CI_Controller {
             }
     }
 
+    function doneData($kode) {
+        $result = $this->mdl_document_receive->done($kode);
+        if ($result) {
+            echo json_encode(array('success' => true));
+        } else {
+            echo json_encode(array('msg' => 'Data gagal diterima'));
+        }
+    }
+
+    function deleteData($kode) {
+        $result = $this->mdl_document_receive->DeleteOnDB($kode);
+        if ($result) {
+            echo json_encode(array('success' => true));
+        } else {
+            echo json_encode(array('msg' => 'Data gagal dihapus'));
+        }
+    }
+
 /* --------------------------------Detail -------------------------------------- */
 
 	function detail($id){
@@ -63,46 +81,46 @@ class document_receive extends CI_Controller {
 		echo $this->mdl_document_receive->togrid($data['row_data'], $data['row_count']);
 	}
 
-	function add_detail($id=null){
-		 if($id!=null){
-                $data['id_receive'] = $id;
-                $data['id_sro'] = $this->mdl_document_receive->get_id_sro($id);
+	function save_qty(){
+        # get post data
+        $ids = array();
+        foreach($_POST as $key => $value){
+            $data[$key] = $value;
         }
-        $this->load->view('document_receive/add_detail', $data);
-    }
 
-    function getdata_add_detail(){
-            // get post
-            $data['id_sro'] = $this->input->post('id_sro');
-            $data['jumlah'] = $this->input->post('jumlah');
-           
-            echo $this->mdl_document_receive->getdata_add_detail($data);
-    }
 
-    function saveDetail($id=null) {
-            # init
-            $result = false;
-            $data['pesan_error'] = '';
-           
-            # get post data
-            foreach($_POST as $key => $value) {
-                    $data[$key] = $value;
-            }
+        foreach($data['data_qty']['rows'] as $dt){
+            $ids[] = $dt['id_detail_pros'];
+        }
 
-            if($id != null) {
-                    $data['data']['id_receive'] = $id;
-            }
+        if(sizeof($ids) > 0) {
+            $prevData = $this->mdl_document_receive->getProsDetailIds  ($ids)->result();
+        }
 
-            $data['pesan_error'] = 'Data Gagal Disimpan';
 
-            $result = $this->mdl_document_receive->InsertDetailOnDB($data['data']);
+        # init
+        $status = "";
+        $data['pesan_error'] = 'Data gagal di realokasi';
+       
+        $error = false;
+        $result = false;
 
-            if($result) {
-                    echo json_encode(array('success'=>true));
-            } else {
-                    echo json_encode(array('msg'=>$data['pesan_error']));
+        foreach($data['data_qty']['rows'] as $new) {
+            $prev = $this->mdl_document_receive->getProsDetail   ($new['id_detail_pros'])->row();
+            if($prev->qty < $new['qty'] || $new['qty'] < 0) {
+                $error = true;
             }
         }
+        if(!$error) {
+            $result = $this->mdl_document_receive->update_qty($data);
+        }
+       
+        if($result){
+            echo json_encode(array('success'=>true));
+        }else{
+            echo json_encode(array('msg'=>$data['pesan_error']));
+        }
+    }
 
 /* --------------------------------      -------------------------------------- */
 

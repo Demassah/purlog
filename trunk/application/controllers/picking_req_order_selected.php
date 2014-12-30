@@ -19,13 +19,13 @@ class picking_req_order_selected extends CI_Controller {
         }
 
         function doneData($kode) {
-        $result = $this->mdl_picking->done($kode);
-        if ($result) {
-            echo json_encode(array('success' => true));
-        } else {
-            echo json_encode(array('msg' => 'Data gagal dikirim'));
-        }
-    }
+			$result = $this->mdl_picking->done($kode);
+			if ($result) {
+				echo json_encode(array('success' => true));
+			} else {
+				echo json_encode(array('msg' => 'Data gagal dikirim'));
+			}
+		}
 
 /* ------------------------ Index --------------------------------------------- */
 

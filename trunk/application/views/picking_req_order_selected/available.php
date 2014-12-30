@@ -46,6 +46,7 @@
                   title: 'Error',
                   msg: response.msg
                 });
+                $('#dg_picking').datagrid('reload');
               }
              }
           });
@@ -74,6 +75,8 @@
                   title: 'Error',
                   msg: response.msg
                 });
+                // reload and close tab
+                $('#dg_picking').datagrid('reload');
               }
              }
           });
@@ -147,6 +150,7 @@
             title: 'Error',
             msg: response.msg
           });
+          $('#dg_picking').datagrid('reload');
         }
         }
       });
