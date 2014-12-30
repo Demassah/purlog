@@ -30,5 +30,10 @@
 <script type="text/javascript">
 var top = $(".top").val();
 $(".top").numericInput();
+setTimeout(
+	function(){
+		$("#form2").reset();
+		},5
+); 
 </script>
 
