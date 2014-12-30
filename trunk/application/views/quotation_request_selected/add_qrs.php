@@ -221,11 +221,16 @@
           return $(this).form('validate');
         },
         success: function(result){
-          alert(result);
+          //alert(result);
           var result = eval('('+result+')');
           if (result.success){
+            
             $('#dialog').dialog('close');   // close the dialog
             $("#qrs_table").load(base_url + 'quotation_request_selected/after_select/'+id_pr).fadeIn("slow");;  // reload the user data
+            $.messager.show({
+              title: 'Succes',
+              msg: 'Data Berhasil Ditambahkan  ',
+            });
           } else {
             $.messager.show({
               title: 'Error',

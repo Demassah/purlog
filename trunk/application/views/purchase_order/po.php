@@ -51,9 +51,13 @@
 					return $(this).form('validate');
 				},
 				success: function(result){
-					alert(result);
+					//alert(result);
 					var result = eval('('+result+')');
 					if (result.success){
+						$.messager.show({
+              title: 'Succes',
+              msg: 'Data Berhasil Ditambahkan ',
+            });
 						$('#dialog').dialog('close');		// close the dialog
 						$('#dg_po').datagrid('reload');		// reload the user data
 					} else {
