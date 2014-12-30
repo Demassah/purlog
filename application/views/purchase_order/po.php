@@ -66,7 +66,7 @@
 		}
 		//save
 		detail_po = function (value){
-			$('#dialog').dialog({
+			$('#dialog_kosong').dialog({
 				title: 'Detail Purchase Order / Detail Vendor',
 				width: 580,
 				height: 490,
@@ -75,7 +75,7 @@
 				href: base_url+'purchase_order/detail_po/' + value,
 				modal: true
 			});
-			$('#dialog').dialog('open');
+			$('#dialog_kosong').dialog('open');
 		}
 
 		done_po = function (val){
@@ -115,7 +115,7 @@
 						if (response.success){
 							$.messager.show({
 								title: 'Success',
-								msg: 'Data Berhasil Dikirim'
+								msg: 'Data Berhasil Dihapus'
 							});
 							// reload and close tab
 							$('#dg_po').datagrid('reload');

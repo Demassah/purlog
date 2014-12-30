@@ -107,7 +107,7 @@
 	// });
 
 		Detail_ro = function (value){
-			$('#dialog').dialog({
+			$('#dialog_kosong').dialog({
 				title: 'Detail List Request order',
 				width: 880,
 				height: 290,
@@ -117,7 +117,7 @@
 				modal: true
 			});
 			 
-			$('#dialog').dialog('open');
+			$('#dialog_kosong').dialog('open');
 			url = base_url+'delivery_order/save_add/add';
 		}
 
