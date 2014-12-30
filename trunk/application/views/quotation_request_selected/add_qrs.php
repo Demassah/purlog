@@ -11,7 +11,6 @@
 </div>
 <div id="qrs_table">
 <?php
-//echo '<div id="qrs_table">';
   $supplier_id = '';
   $supplier_set = array();
   $top_set = array();
@@ -29,7 +28,6 @@
       array_push($top_set, $data['top']);
       array_push($qr_set,$data['id_qr']);
       array_push($detail_qr,$data['id_detail_qr']);
-      //echo "<br>".$data['id_detail_qr'];
       $supplier_id = $data['id_vendor'];
       $index = 0;
     }
@@ -84,17 +82,23 @@
     }
     echo "<tr><td></td>";
     foreach ($quotation['Selected'] as $l) {
-      echo "<td><a href='#''  onclick='select_vendor(".$l.");'  plain='false'>Select</a>
-                <a href='#''  onclick='Delete(".$l.");'  plain='false'>Delete</a></td>";
-    }
+      echo "<td>";
+        if($this->mdl_auth->CekAkses(array('menu_id'=>15, 'policy'=>'ACCESS'))){
+        echo "<a href='#'  onclick='select_vendor(".$l.");'  plain='false'>Select</a>";
+        }
+        echo "   |  ";
+        if($this->mdl_auth->CekAkses(array('menu_id'=>15, 'policy'=>'DELETE'))){
+        echo "<a href='#'  onclick='delete_vendor(".$l.");'  plain='false'>Delete</a>";
+        }
+      echo "</td>";  
+}
     echo "</tr>";
   echo '</table>';
-//echo '</div>';
 ?>
 
 
 <script type="text/javascript">
-var id_pr = '<?php echo $id_pr;?>';
+  var id_pr = '<?php echo $id_pr;?>';
   $(".editbox").hide();
   $(document).ready(function() {
     $("div").on('click' ,'.qrs', function(event) {
@@ -139,7 +143,7 @@ var id_pr = '<?php echo $id_pr;?>';
           });
     // Selected
      select_vendor = function (val){
-      if(confirm("Apakah yakin akan mengirim data ke QRS '" + val + "'?")){
+      if(confirm("Apakah yakin akan Akan Memilih Vendor '" + val + "'?")){
         var response = '';
         $.ajax({ type: "GET",
            url: base_url+'quotation_request_selected/Selected/' + val +'/'+id_pr,
@@ -152,11 +156,8 @@ var id_pr = '<?php echo $id_pr;?>';
                 title: 'success',
                 msg: 'Data Vendor Berhasil Dipilih'
               });
-               
               // reload and close tab
               $('#qrs_table').load(base_url + 'quotation_request_selected/after_select/'+id_pr).fadeIn("slow");
-
-              
             } else {
               $.messager.show({
                 title: 'Error',
@@ -168,7 +169,7 @@ var id_pr = '<?php echo $id_pr;?>';
       }
     }
 
-    Delete = function (val){
+    delete_vendor = function (val){
       if(confirm("Apakah yakin akan Menghapus Vendor '" + val + "'?")){
         var response = '';
         $.ajax({ type: "GET",
@@ -205,7 +206,6 @@ var id_pr = '<?php echo $id_pr;?>';
         href: base_url+'quotation_request_selected/add_vendor/'+id_pr,
         modal: true
       });
-       
       $('#dialog').dialog('open');
       url = base_url+'quotation_request_selected/save_vendor/add';
     }
