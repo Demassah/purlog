@@ -101,7 +101,7 @@
       var harga = $("#harga_input_"+ID_qr).val();
       var dataString = 'id='+ID_qr+'&harga='+harga;
       $("#harga_"+ID_qr).html('');
-        if(harga.length > 0 && $.isNumeric(harga) && harga !=0)
+        if(harga.length > 0)
         {
           $.ajax({
             type:"POST",
