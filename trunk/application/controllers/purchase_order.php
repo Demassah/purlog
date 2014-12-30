@@ -25,9 +25,9 @@ class purchase_order extends CI_Controller {
 	
 	function add(){
 		$data['kode'] = '';
-		$data['id_kategori'] = '';
-		$data['nama_kategori'] = '';
-		
+		$data['id_po'] = '';
+		$data['id_ro'] = '';
+
 		$this->load->view('purchase_order/po_form', $data);
 	}
 
@@ -65,6 +65,24 @@ class purchase_order extends CI_Controller {
 			echo json_encode(array('msg' => 'Data gagal dikirim'));
 		}
 	}
+
+	function done_po($kode) {
+    $result = $this->mdl_purchase_order->done($kode);
+    if ($result) {
+        echo json_encode(array('success' => true));
+    } else {
+        echo json_encode(array('msg' => 'Data gagal dihapus'));
+    }
+  }
+
+  function delete_po($kode) {
+    $result = $this->mdl_purchase_order->delete($kode);
+    if ($result) {
+        echo json_encode(array('success' => true));
+    } else {
+        echo json_encode(array('msg' => 'Data gagal dihapus'));
+    }
+  }	
 
 
 	

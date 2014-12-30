@@ -10,18 +10,18 @@ class mdl_purchase_order extends CI_Model {
 		# get parameter from easy grid
 		$page = isset($_POST['page']) ? intval($_POST['page']) : 1;  
 		$limit = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
-		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'a.id_pr';  
+		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'a.id_po';  
 		$order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
 		$offset = ($page-1)*$limit;
 		
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('a.id_po,a.id_pr,a.id_ro,a.requestor,a.purpose,a.cat_req,a.date_create,a.ext_doc_no,a.ETD,a.status,b.departement_id,c.full_name,b.departement_name,d.id_vendor');
+			$this->db->select('a.id_po,a.id_pr,a.id_ro,a.requestor,a.departement,b.full_name,c.departement_name,a.purpose,a.cat_req,a.ext_doc_no,a.ETD,a.date_create,a.status');
 			$this->db->from('tr_po a');
-			$this->db->join('tr_qr d', 'd.id_po = a.id_po');
-			$this->db->join('ref_departement b', 'b.departement_id = a.departement');
-			$this->db->join('sys_user c', 'c.user_id = a.requestor');
+			$this->db->join('sys_user b', 'b.user_id = a.requestor');
+			$this->db->join('ref_departement c', 'c.departement_id = a.departement');
+			$this->db->where('a.status',1);
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
 		
@@ -116,6 +116,42 @@ class mdl_purchase_order extends CI_Model {
 				return FALSE;
 		}
 
+	}
+
+	function done($kode){
+		
+		$this->db->flush_cache();
+
+		$this->db->set('status', "2");
+
+		$this->db->where('id_po', $kode);
+
+		$result = $this->db->update('tr_po');
+
+		//return
+		if($result) {
+				return TRUE;
+		}else {
+				return FALSE;
+		}
+	}
+
+	function delete($kode){
+		
+		$this->db->flush_cache();
+
+		// $this->db->set('status', "2");
+
+		$this->db->where('id_po', $kode);
+
+		$result = $this->db->delete('tr_po');
+
+		//return
+		if($result) {
+				return TRUE;
+		}else {
+				return FALSE;
+		}
 	}
 	
 } //End
