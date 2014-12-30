@@ -101,101 +101,13 @@ class quotation_request_selected extends CI_Controller {
 			echo json_encode(array('msg' => 'Data gagal dikirim'));
 		}
 	}
+	
 	function after_select($id_pr)
 	{
 		$data['id_pr'] = $id_pr;
 		$data['list'] = $this->mdl_quotation_request_selected->list_pr($id_pr);
 
 		$this->load->view('quotation_request_selected/load', $data, FALSE);
-	}
-	function after($id_pr)
-	{
-		$data['id_pr'] = $id_pr;
-		$list= $this->mdl_quotation_request_selected->list_pr($id_pr);
-
-		$supplier_id = '';
-		$supplier_set = array();
-		$top_set = array();
-		$barang_set = array();
-		$harga_set = array();
-		$detail_qr = array();
-		$index =0;
-		$qr_set = array();
-
-		echo '<br> <h2 align="center"> Compare Vendor List </h2> <br>';
-
-		foreach ($list as $data) {
-
-	    if ($data['id_vendor'] != $supplier_id) {
-        array_push($supplier_set, $data['name_vendor']);
-        array_push($top_set, $data['top']);
-        array_push($qr_set,$data['id_qr']);
-        array_push($detail_qr,$data['id_detail_qr']);
-        //echo "<br>".$data['id_detail_qr'];
-        $supplier_id = $data['id_vendor'];
-
-        $index = 0;
-			}
-
-	    $harga_set[$data['nama_barang']][] = array($data['price'],$data['id_detail_qr']);
-	    $barang_set[$index] = array("barang_nama" => $data['nama_barang'], "harga" => $harga_set[$data['nama_barang']]);
-	    $index++;
-		}
-
-		$quotation = array("supplier_nama" => $supplier_set, "top" => $top_set, "data" => $barang_set, "Selected" => $qr_set);
-
-		$header = TRUE;
-		$counter = 0;
-		$_crossfield = array('Vendor', 'TOP');
-		$_colname = array(0 => "supplier_nama", 1 => "top");
-
-		echo '<table class="tbl">';
-
-		foreach ($_crossfield as $rows) {
-
-		    echo '<tr>';
-		    if (!$header) {
-		        echo '<td>'.$rows.'</td>';
-		        foreach ($quotation[$_colname[$counter]] as $cols) {
-		            echo '<td>'.$cols.'</td>';
-		        }
-		    } else {
-		        echo '<th>'.$rows.'</th>';
-		        foreach ($quotation[$_colname[$counter]] as $cols) {
-		            echo '<th>'.$cols.'</th>';
-		        }
-		    }
-
-		    $header = FALSE;
-		    $counter++;
-		    echo '</tr>';
-		}
-
-		$data_counter = 0;
-
-		foreach ($quotation['data'] as $details) {
-		    echo '<tr>';
-		    echo '<td>'.$quotation['data'][$data_counter]['barang_nama'].'</td>';
-
-		    $harga_counter = 0;
-		    foreach ($quotation['data'][$data_counter]['harga'] as $harga) {
-		        echo '<td><div id="'.$quotation['data'][$data_counter]['harga'][$harga_counter][1].'" class="qrs">';
-		          echo "<span id='harga_".$quotation['data'][$data_counter]['harga'][$harga_counter][1]."' class='text'>".$quotation['data'][$data_counter]['harga'][$harga_counter][0]."</span>";
-		          echo "<input type='text' name='harga' value='".$quotation['data'][$data_counter]['harga'][$harga_counter][0]."' class='editbox' id='harga_input_".$quotation['data'][$data_counter]['harga'][$harga_counter][1]."'/>";
-		        echo"</div></td>";
-		        $harga_counter++;
-		    }
-		    echo '</tr>';
-		    $data_counter++;
-		}
-		echo "<tr><td></td>";
-		foreach ($quotation['Selected'] as $l) {
-		  echo "<td><a href='#''  onclick='select_vendor(".$l.");'  plain='false'>Select</a>
-		  <a href='#''  onclick='Delete(".$l.");'  plain='false'>Delete</a></td>";
-		}
-		echo "</tr>";
-
-		echo '</table>';
 	}
 
 }

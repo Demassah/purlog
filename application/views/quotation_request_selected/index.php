@@ -61,10 +61,12 @@
     actionPurchaseRequest = function(value, row, index){
       var col='';
           // col += '<a href="#" onclick="detail_pr(\''+row.id_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';     
-          
+          <?if($this->mdl_auth->CekAkses(array('menu_id'=>15, 'policy'=>'ADD'))){?>
           col += '<a href="#" onclick="Add_Qrs(\''+row.id_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">QRS</a>';     
-
+          <?}?>
+          <?if($this->mdl_auth->CekAkses(array('menu_id'=>15, 'policy'=>'ACCESS'))){?>
           col += '&nbsp;&nbsp; | &nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit"plain="false">Done</a>';
+          <?}?>
       return col;
     }
     
