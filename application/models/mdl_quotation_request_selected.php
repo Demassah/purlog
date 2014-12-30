@@ -94,8 +94,9 @@ class mdl_quotation_request_selected extends CI_Model {
 
 	function update($id,$data)
 	{
+		$harga = str_replace(",","",$data);
 		$this->db->where('id_detail_qr', $id);
-		$this->db->set('price',$data);
+		$this->db->set('price',$harga);
 		$this->db->update('tr_qr_detail');
 	}
 	
