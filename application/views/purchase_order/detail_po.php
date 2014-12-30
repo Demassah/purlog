@@ -1,6 +1,6 @@
  <h2 align='center'>Detail Vendor</h2>
 
-<div class="detail">
+<div class="detail" style="margin:10px">
 <div class="fitem">
 		<label style="width:80px">ID Vendor </label>:
 			<?=$list->id_vendor;?>

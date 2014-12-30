@@ -51,6 +51,8 @@ class mdl_shipment_req_order extends CI_Model {
 		return json_encode($response);
 	}
 
+
+
 	function done($kode){
 		
 		$this->db->flush_cache();

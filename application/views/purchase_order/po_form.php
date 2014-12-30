@@ -9,14 +9,8 @@
 	<input type="hidden" name="user_id" value="<?php echo  $this->session->userdata('user_level_id')?>">
 	<input type="hidden" name="date_create" value="<?php echo date('Y-m-d H:i:s ');?>">
 	<input type="hidden" name="status" value="1">
-	<div class="fitem" >
-		<label style="width:100px">Departement </label>: 
-			<select class="select" name="departement_id" style="width:200px;">
-						<option>Pilih</option>
-							<?=$this->mdl_prosedur->OptionDepartement(array('value'=>$id_departement));?>
-						       
-				</select>	
-	</div>
+	<input type="hidden" name="departement_id" value="<?php echo $this->session->userdata('departement_id'); ?>">
+
 	<div class="fitem" >
 		<label style="width:100px">Purchase Request</label>: 
 			<select class="select" name="id_pr" style="width:200px;">

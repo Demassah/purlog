@@ -290,6 +290,7 @@ class mdl_prosedur extends CI_Model {
 		$this->db->flush_cache();
 		$this->db->from('tr_pr');
 		$this->db->where('status', 3);
+		$this->db->where('id_po', Null);
 		$this->db->order_by('id_pr');
 				
 		$res = $this->db->get();
