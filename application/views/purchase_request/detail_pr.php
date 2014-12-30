@@ -38,11 +38,11 @@
     }
 		
 		
-		$(function(){ // init
+	$(function(){ // init
       $('#dg').datagrid({url:"purchase_request/grid_detail/<?=$id_pr?>"});  
-		});	
+	});	
 
-		 //# Tombol Bawah
+	//# Tombol Bawah
     $(function(){
       var pager = $('#dg').datagrid().datagrid('getPager'); // get the pager of datagrid
       pager.pagination({

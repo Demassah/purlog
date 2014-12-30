@@ -21,7 +21,7 @@ class mdl_delivered extends CI_Model {
 			$this->db->from('tr_do a');
 			$this->db->join('ref_courir b', 'b.id_courir = a.id_courir');
 			$this->db->join('sys_user c', 'c.user_id = a.id_user');
-			$this->db->where('a.status', 1);
+			$this->db->where('a.status', '2');
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
 		

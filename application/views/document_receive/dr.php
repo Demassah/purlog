@@ -17,7 +17,7 @@
 
 		actionbutton = function(value, row, index){
 			var col='';
-				col += '<a href="#" onclick="detailData(\''+row.id_do+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
+				col += '<a href="#" onclick="detailData(\''+row.id_receive+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
 			return col;
 		}
 
