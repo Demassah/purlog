@@ -80,6 +80,7 @@ class quotation_request_selected extends CI_Controller {
 		
 		# rules validasi form
 		$this->form_validation->set_rules("id_vendor", 'ID vendor', 'trim|required|xss_clean');
+		$this->form_validation->set_rules("top", 'TOP', 'trim|required|xss_clean');
 		# message rules
 		$this->form_validation->set_message('required', 'Field %s harus diisi.');
 
