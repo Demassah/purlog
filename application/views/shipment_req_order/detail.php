@@ -79,9 +79,13 @@
 					return $(this).form('validate');
 				},
 				success: function(result){
-					alert(result);
+					//alert(result);
 					var result = eval('('+result+')');
 					if (result.success){
+						$.messager.show({
+              title: 'Succes',
+              msg: 'Data Berhasil Ditambahkan ',
+            });
 						$('#dialog').dialog('close');		// close the dialog
 						 $("#isi").load('<?=base_url();?>shipment_req_order/after/'+id_ro+'/'+id_sro).fadeIn(5000);// reload the user data
 					} else {

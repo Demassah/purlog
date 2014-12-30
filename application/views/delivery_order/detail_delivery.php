@@ -56,10 +56,6 @@
 
 
 <script>
-
-
-
-
 	var url;
 	var id_ro = $('#id_ro').val(); 
 	var id_do = '<?=$id_do;?>'
@@ -129,9 +125,13 @@
 					return $(this).form('validate');
 				},
 				success: function(result){
-					alert(result);
+					//alert(result);
 					var result = eval('('+result+')');
 					if (result.success){
+						$.messager.show({
+              title: 'Succes',
+              msg: 'Data Berhasil Ditambahkan ',
+            });
 						$('#dialog').dialog('close');		// close the dialog
 						//$('#isi').html(' ');
 						$("#isi").load('<?=base_url();?>delivery_order/after/'+id_do).fadeIn(5000);
