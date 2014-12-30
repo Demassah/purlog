@@ -80,24 +80,12 @@ class purchase_request extends CI_Controller {
                 $this->load->view('purchase_request/add_detailpr', $data);
         }
 
-        // function grid_detailPR($id){
-        //      $data = $this->mdl_purchase_request->getdata_detailpr($id);
-        //      echo $this->mdl_purchase_request->togrid($data['row_data'], $data['row_count']);
-        // }
-
         function getdata_detailpr(){
                 // get post            
                 $data['id_ro'] = $this->input->post('id_ro');
                 $data['jumlah'] = $this->input->post('jumlah');
                
                 echo $this->mdl_purchase_request->getdata_detailpr($data);
-        }
-
-        function returnofjedi()
-        {
-            $data = unserialize('a:4:{s:11:"pesan_error";s:0:"";s:5:"id_ro";s:1:"1";s:6:"jumlah";s:0:"";s:4:"data";a:2:{i:1;a:2:{s:12:"id_detail_pr";s:1:"1";s:3:"chk";s:2:"on";}s:5:"id_pr";s:1:"2";}}');
-
-            var_dump($data);
         }
 
         function saveDetail($id=null) {

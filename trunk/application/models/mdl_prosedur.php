@@ -306,13 +306,36 @@ class mdl_prosedur extends CI_Model {
 	}
 
 	function OptionSRO_DR($d=""){
+            $value = isset($d['value'])?$d['value']:'';
+            $out = '';
+           
+            $this->db->flush_cache();
+            $this->db->from('tr_pros_detail');
+            $this->db->where('id_sro !=','0');
+            $this->db->where('status_receive','0');
+            $this->db->group_by('id_sro');
+            $this->db->order_by('id_sro');
+                           
+            $res = $this->db->get();
+           
+            foreach($res->result() as $r){
+                    if(trim($r->id_sro) == trim($value)){
+                            $out .= '<option value="'.$r->id_sro.'" selected="selected">'.$r->id_sro.' </option>';
+                    }else{
+                            $out .= '<option value="'.$r->id_sro.'">'.$r->id_sro.'</option>';
+                    }
+            }
+           
+            return $out;
+    }
+
+
+	function OptionSRO_add_DetailDR($d=""){
 		$value = isset($d['value'])?$d['value']:'';
 		$out = '';
 		
 		$this->db->flush_cache();
-		$this->db->from('tr_pros_detail');
-		$this->db->where('id_sro !=','0');
-		$this->db->where('status_receive','0');
+		$this->db->from('tr_receive');
 		$this->db->group_by('id_sro');
 		$this->db->order_by('id_sro');
 				

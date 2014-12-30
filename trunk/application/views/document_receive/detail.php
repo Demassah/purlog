@@ -2,52 +2,68 @@
 	
 	var url;
 	$(document).ready(function(){
-		
+		var id_receive = <?php echo $id_receive;?>;
 
-		sro = function (val){
-			if(val==null){
-		          var row = $('#dg').datagrid('getData');              
-		          var id = id_sro;
-		          val = id;
-		    }
-			$('#konten').panel({
-				href:base_url+'delivered/sro/' + val,
-			});
-		}
+		add_detail = function (val){
+	        if(val==null){
+	          var row = $('#dtgrd').datagrid('getData');
+	          var id = id_receive;
+	          val = id;
+	        }
+
+	      $('#dialog_kosong').dialog({
+	        title: 'Tambah Detail Document Receive',
+	        width: $(window).width() * 0.88,
+	        height: $(window).height() * 0.99,
+	        closed: true,
+	        cache: false,
+	        href: base_url+'document_receive/add_detail/' + val,
+	        modal: true
+	      });      
+	      $('#dialog_kosong').dialog('open');
+	      url = base_url+'document_receive/save_detail/add_detail';
+	    }
+	    // end newData
 
 		back = function (val){
 		  //detail
 		  $('#konten').panel({
-			href: base_url+'delivered/index',
+			href: base_url+'document_receive/index',
 		  });
 		}
 				
 		actiondetail = function(value, row, index){
 			var col='';
-					col += '<a href="#" onclick="sro(\''+row.id_sro+'/'+row.id_do+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
+				col += '<a href="#" onclick="sro(\''+row.id_sro+'/'+row.id_do+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
 			return col;
 		}
-		
 
 		$(function(){ // init
-			$('#dtgrd').datagrid({url:"delivered/grid_detail/<?=$id_do?>"});
+	      	$('#dtgrd').datagrid({url:"document_receive/grid_detail/<?=$id_receive?>"});  
 		});	
 
 		//# Tombol Bawah
-    $(function(){
-      var pager = $('#dtgrd').datagrid().datagrid('getPager'); // get the pager of datagrid
-      pager.pagination({
-        buttons:[
-            {
-            iconCls:'icon-undo',
-            text:'Kembali',
-            handler:function(){
-              back();
-            }
-          }           
-        ]
-      });     
-    });
+	    $(function(){
+	      var pager = $('#dtgrd').datagrid().datagrid('getPager'); // get the pager of datagrid
+	      pager.pagination({
+	        buttons:[
+	        	{
+	            iconCls:'icon-add',
+	            text:'Tambah Detail',
+	            handler:function(){
+	              add_detail();
+	            	}
+	          	},        
+	            {
+	            iconCls:'icon-undo',
+	            text:'Kembali',
+	            handler:function(){
+	              back();
+	            }
+	          }           
+	        ]
+	      });     
+	    });
 		
 	});
 </script>
@@ -62,12 +78,18 @@
 		">		
 	<thead>
 		<tr>
-			<th field="id_sro" sortable="true" width="120">ID Shipment RO</th>
-			<th field="id_ro" sortable="true" width="120">ID Request Order</th>
-			<th field="id_do" sortable="true" width="120">ID Delivery Order</th>
-			<th field="date_create" sortable="true" width="180">Date Create</th>
-			<th field="full_name" sortable="true" width="150">Requestor</th>		
-			<th field="action" align="center" formatter="actiondetail" width="80">Aksi</th>
+			<th field="id_detail_receive" sortable="true" width="100">ID Detail Receive</th>
+			<th field="id_receive" sortable="true" width="80">ID Receive</th>
+			<!-- <th field="id_detail_pros" sortable="true" width="100">ID Detail Pros</th> -->
+			<th field="id_detail_ro" sortable="true" width="100">ID Detail RO</th>
+			<th field="id_ro" sortable="true" width="80">ID RO</th>		
+			<th field="id_sro" sortable="true" width="80">ID SRO</th>		
+			<th field="kode_barang" sortable="true" width="100">Kode Barang</th>		
+			<th field="nama_barang" sortable="true" width="150">Nama Barang</th>		
+			<th field="qty" sortable="true" width="100">Qty Delivered</th>
+			<th field="qty" sortable="true" width="100">Qty Received</th>
+			<th field="date_create" sortable="true" width="150">Date Create</th>		
+			<!-- <th field="action" align="center" formatter="actiondetail" width="80">Aksi</th> -->
 		</tr>
 	</thead>
 </table>
