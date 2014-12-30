@@ -186,11 +186,9 @@ class mdl_picking extends CI_Model {
 		
 		$this->db->flush_cache();
 		
-		// EDIT BY SCC;
-		// $this->db->set('status', "2");
-		$this->db->where('status', '1');
+		$this->db->where('sisa !=', '0');
 		$this->db->where('id_ro', $kode);
-		$items = $this->db->get('tr_ro_detail');
+		$items = $this->db->get('v_pros_detail');
 
 		foreach ($items->result() as $item) {
 			$result = $this->alocate($item->id_detail_ro);

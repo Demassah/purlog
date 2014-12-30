@@ -66,10 +66,11 @@ class mdl_document_receive extends CI_Model {
 		$this->db->flush_cache();
 		$this->db->start_cache();
 		$this->db->start_cache();
-			$this->db->select('a.id_detail_receive, a.id_receive, a.id_detail_pros, a.id_detail_ro, id_ro, a.id_sro, a.kode_barang, c.nama_barang, a.qty, a.date_create');
+			$this->db->select('a.id_detail_receive, a.id_receive, a.id_detail_pros, a.id_detail_ro, a.id_ro, a.id_sro, a.kode_barang, c.nama_barang, d.qty AS qty_delivered, a.qty AS qty, a.date_create');
 			$this->db->from('tr_receive_detail a');
 			$this->db->join('tr_receive b', 'b.id_receive = a.id_receive');
 			$this->db->join('ref_barang c', 'c.kode_barang = a.kode_barang');
+			$this->db->join('tr_pros_detail d', 'd.id_detail_pros = a.id_detail_pros');
 
 			$this->db->where('b.id_receive', $id_receive);
 
@@ -182,97 +183,73 @@ class mdl_document_receive extends CI_Model {
 		return $this->db->trans_status();
 	}
 
-
-	function getdata_add_detail($dt){
+	function getProsDetailIds($ids) {
 		$this->db->flush_cache();
-		$this->db->select('a.id_detail_pros, a.id_detail_ro, a.id_ro, a.id_ro, a.id_sro, a.kode_barang, a.qty, a.date_create, b.nama_barang, c.id_receive');
-			$this->db->from('tr_pros_detail a');
-			$this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang');
-			$this->db->join('tr_receive c', 'c.id_sro = a.id_sro');
-
-			$this->db->where('a.id_sro', $dt['id_sro']);
-			//$this->db->where('a.status','1');
-			//$this->db->where('e.status','0');
-
-		$this->db->limit($dt['jumlah'], 0);
-		//$this->db->group_by('id_detail_pr');
-		$this->db->group_by('id_sro');
-		$this->db->order_by('a.id_sro', 'ASC');
-		
-		$q = $this->db->get()->result();
-		
-		$out = '';
-		$i=1;
-		$color = '';
-		foreach($q as $r){
-			$color = ($i % 2 == 0)?'#FFFFFF':'#e6e6e6';
-			$out .= '<tr>';
-			$out .= '  <td bgcolor="'.$color.'">'.$i;
-			$out .= '     <input type="hidden" name="data['.$i.'][id_detail_pros]" value="'.$r->id_detail_pros.'">';
-			$out .= '     <input type="hidden" name="data['.$i.'][id_detail_ro]" value="'.$r->id_detail_ro.'">';
-			$out .= '     <input type="hidden" name="data['.$i.'][id_ro]" value="'.$r->id_ro.'">';
-			$out .= '     <input type="hidden" name="data['.$i.'][id_sro]" value="'.$r->id_sro.'">';
-			$out .= '     <input type="hidden" name="data['.$i.'][kode_barang]" value="'.$r->kode_barang.'">';
-			$out .= '     <input type="hidden" name="data['.$i.'][qty]" value="'.$r->qty.'">';
-			$out .= '     <input type="hidden" name="data['.$i.'][date_create]" value="'.$r->date_create.'">';
-
-			$out .= '  </td>';
-			$out .= '  <td bgcolor="'.$color.'">'.$r->id_detail_pros.'</td>';
-			$out .= '  <td bgcolor="'.$color.'">'.$r->id_detail_ro.'</td>';
-			$out .= '  <td bgcolor="'.$color.'">'.$r->id_ro.'</td>';
-			$out .= '  <td bgcolor="'.$color.'">'.$r->id_sro.'</td>';
-			$out .= '  <td bgcolor="'.$color.'">'.$r->kode_barang.'</td>';
-			$out .= '  <td bgcolor="'.$color.'">'.$r->nama_barang.'</td>';
-			$out .= '  <td bgcolor="'.$color.'">'.$r->qty.'</td>';
-			$out .= '  <td bgcolor="'.$color.'">'.$r->date_create.'</td>';
-			$out .= '  <td bgcolor="'.$color.'" align="center">';
-			$out .= '   <label>
-							<input style="margin-top:2px;" type="checkbox" name="data['.$i.'][chk]" id="checkbox"/>';
-			$out .= '  </td>';
-			$out .= '</tr>';
-			$i++;
-		}
-		
-		return $out;
+		$this->db->where_in('id_detail_pros', $ids);
+		return $this->db->get('tr_pros_detail');
 	}
 
-	function InsertDetailOnDB($data){
-		$data_kosong = true;
+	function getProsDetail($id) {
+		$this->db->flush_cache();
+		$this->db->where('id_detail_pros', $id);
+		return $this->db->get('tr_pros_detail');
+	}
+
+	function update_qty($data){
 		$this->db->trans_start();
+		
+		$result = true;
+		
+		# tambah ke tabel
+		foreach($data['data_qty']['rows'] as $row){
+			
+			$this->db->flush_cache();
+			$this->db->set('qty', $row['qty']);
 
-		foreach($data as $row){
-			if(isset($row['chk']) && $row['chk'] == 'on'){
-				$data_kosong = false;
-				
-				# insert table document receive
-				$this->db->flush_cache();
-				$this->db->set('status', '1');
-				if(isset($data['id_receive'])){
-					$this->db->set('id_receive', $data['id_receive']);
-				}
-				//var_dump($row); exit();
-				//$this->db->where('id_receive', $row['id_receive']);
-				//$this->db->update('tr_receive_detail');
+			$this->db->where('id_detail_receive', $row['id_detail_receive']);
 
-				$this->db->set('id_detail_pros', $row['id_detail_pros']);
-				$this->db->set('id_detail_ro', $row['id_detail_ro']);
-				$this->db->set('id_ro', $row['id_ro']);
-				$this->db->set('id_sro', $row['id_sro']);
-				$this->db->set('kode_barang', $row['kode_barang']);
-				$this->db->set('qty', $row['qty']);
-				$this->db->set('date_create', $row['date_create']);
-				$this->db->set('status', '1');
-
-				$this->db->insert('tr_receive_detail');
-			}
+			$result = $this->db->update('tr_receive_detail');
+			
 		}
+		
+		
+		//$this->db->where('qty', '0');
+		//$result = $this->db->delete('tr_pros_detail');
 
+		//return
 		$this->db->trans_complete();
-		if($data_kosong) {
-			return false;
-		}
-		return $this->db->trans_status();
+	    return $this->db->trans_status();
 	}
+
+	function done($kode){
+		
+		$this->db->flush_cache();
+
+		$this->db->set('status', "2");
+
+		$this->db->where('id_receive', $kode);
+		$result = $this->db->update('tr_receive');
+
+		//return
+		if($result) {
+				return TRUE;
+		}else {
+				return FALSE;
+		}
+	}
+
+	function DeleteOnDB($kode){		
+		$this->db->where('id_receive', $kode);
+		$result = $this->db->delete('tr_receive');
+		
+		//return
+		if($result) {
+				return TRUE;
+		}else {
+				return FALSE;
+		}
+	}
+
 }
 
 ?>

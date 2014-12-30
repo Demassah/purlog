@@ -38,6 +38,77 @@
 			return col;
 		}
 
+		// editing cell
+	    $.extend($.fn.datagrid.methods, {
+	      editCell: function(jq,param){
+	        return jq.each(function(){
+	          var opts = $(this).datagrid('options');
+	          var fields = $(this).datagrid('getColumnFields',true).concat($(this).datagrid('getColumnFields'));
+	          for(var i=0; i<fields.length; i++){
+	            var col = $(this).datagrid('getColumnOption', fields[i]);
+	            col.editor1 = col.editor;
+	            if (fields[i] != param.field){
+	              col.editor = null;
+	            }
+	          }
+	          $(this).datagrid('beginEdit', param.index);
+	          for(var i=0; i<fields.length; i++){
+	            var col = $(this).datagrid('getColumnOption', fields[i]);
+	            col.editor = col.editor1;
+	          }
+	        });
+	      }
+	    });
+
+	    var editIndex = undefined;
+	    endEditing = function(){
+	      if (editIndex == undefined){return true}
+	      if ($('#dtgrd').datagrid('validateRow', editIndex)){
+	        $('#dtgrd').datagrid('endEdit', editIndex);
+	        editIndex = undefined;
+	        return true;
+	      } else {
+	        return false;
+	      }
+	    }
+
+	    onClickCells = function(index, field){
+	      if (endEditing()){
+	        $('#dtgrd').datagrid('selectRow', index)
+	            .datagrid('editCell', {index:index,field:field});
+	        editIndex = index;
+	      }
+	    }
+
+	    saveData = function(){
+	      // save jika cell masih dlm keadaan edit
+	      $('#dtgrd').datagrid('endEdit', editIndex);      
+	      $.ajax({
+	        url: base_url+"document_receive/save_qty",
+	        method: 'POST',
+	        data: {
+	                data_qty : $('#dtgrd').datagrid('getData')
+	              },
+	        success : function(response, textStatus){
+	        //alert(response);
+	        var response = eval('('+response+')');
+	        if(response.success){
+	          $.messager.show({
+	            title: 'Success',
+	            msg: 'Data Berhasil Disimpan'
+	          });
+	          $('#dtgrd').datagrid('reload');
+	        }else{
+	          $.messager.show({
+	            title: 'Error',
+	            msg: response.msg
+	          });
+	        }
+	        $('#dtgrd').datagrid('reload');
+	        }
+	      });
+	    }
+
 		$(function(){ // init
 	      	$('#dtgrd').datagrid({url:"document_receive/grid_detail/<?=$id_receive?>"});  
 		});	
@@ -48,23 +119,27 @@
 	      pager.pagination({
 	        buttons:[
 	        	{
-	            iconCls:'icon-add',
-	            text:'Tambah Detail',
-	            handler:function(){
-	              add_detail();
-	            	}
-	          	},        
+		            iconCls:'icon-ok',
+		            text:'Save All',
+		            handler:function(){
+		              saveData();
+		            }
+	            },
 	            {
-	            iconCls:'icon-undo',
-	            text:'Kembali',
-	            handler:function(){
-	              back();
-	            }
+		            iconCls:'icon-undo',
+		            text:'Kembali',
+		            handler:function(){
+		              back();
+		            }
 	          }           
 	        ]
 	      });     
 	    });
-		
+
+	    cellStyler = function(value,row,index){
+	    	return 'background-color:#ffee00;color:red;';
+		}
+
 	});
 </script>
 
@@ -75,6 +150,7 @@
 			autoRowHeight:false,
 			fit:true,
 			toolbar:'#toolbar_detail',
+			onClickCell: onClickCells,
 		">		
 	<thead>
 		<tr>
@@ -86,8 +162,8 @@
 			<th field="id_sro" sortable="true" width="80">ID SRO</th>		
 			<th field="kode_barang" sortable="true" width="100">Kode Barang</th>		
 			<th field="nama_barang" sortable="true" width="150">Nama Barang</th>		
-			<th field="qty" sortable="true" width="100">Qty Delivered</th>
-			<th field="qty" sortable="true" width="100">Qty Received</th>
+			<th field="qty_delivered" sortable="true" width="100">Qty Delivered</th>
+			<th data-options="field:'qty',width:'100',styler:cellStyler" editor="text">Qty Received</th> 
 			<th field="date_create" sortable="true" width="150">Date Create</th>		
 			<!-- <th field="action" align="center" formatter="actiondetail" width="80">Aksi</th> -->
 		</tr>
