@@ -9,7 +9,8 @@
 			">
 	<thead>
 		<tr>
-			<th field="id_po" sortable="true" width="150" hidden="true">ID</th>
+			<th field="" sortable="true" width="150" hidden="true">ID</th>
+			<th field="id_po" sortable="true" width="100" >ID PO</th>
 			<th field="id_pr" sortable="true" width="130">ID Purchase Request</th>
 			<th field="id_ro" sortable="true" width="70">ID RO</th>
 			<th field="full_name" sortable="true" width="130">Requestor</th>
