@@ -40,6 +40,9 @@
               msg: 'Data Berhasil Disimpan'
             });
             $('#tbodypurchase').html(' ');
+			$('#konten').panel({      
+              href:base_url+'purchase_request/index/',
+            });
           } else {
             $.messager.show({
               title: 'Error',
