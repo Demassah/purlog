@@ -353,6 +353,54 @@ class mdl_prosedur extends CI_Model {
 		return $out;
 	}
 
+
+	function Option_add_receive($d=""){
+		$value = isset($d['value'])?$d['value']:'';
+		$out = '';
+		
+		$this->db->flush_cache();
+		$this->db->from('tr_return_detail');
+		$this->db->where('id_return', '0');
+		$this->db->group_by('id_receive');
+		$this->db->order_by('id_receive');
+				
+		$res = $this->db->get();
+		
+		foreach($res->result() as $r){
+			if(trim($r->id_receive) == trim($value)){
+				$out .= '<option value="'.$r->id_receive.'" selected="selected">'.$r->id_receive.' </option>';
+			}else{
+				$out .= '<option value="'.$r->id_receive.'">'.$r->id_receive.'</option>';
+			}
+		}
+		
+		return $out;
+	}
+
+	function OptionReceive_DetailReturn($d=""){
+		$value = isset($d['value'])?$d['value']:'';
+		$out = '';
+		
+		$this->db->flush_cache();
+		$this->db->from('tr_return_detail');
+		$this->db->where('id_return','0');
+		$this->db->where('status','1');
+		$this->db->group_by('id_receive');
+		$this->db->order_by('id_receive');
+				
+		$res = $this->db->get();
+		
+		foreach($res->result() as $r){
+			if(trim($r->id_receive) == trim($value)){
+				$out .= '<option value="'.$r->id_receive.'" selected="selected">'.$r->id_receive.' </option>';
+			}else{
+				$out .= '<option value="'.$r->id_receive.'">'.$r->id_receive.'</option>';
+			}
+		}
+		
+		return $out;
+	}
+
 }
 
 ?>
