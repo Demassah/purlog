@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class mdl_picking extends CI_Model {
+class Mdl_alocate extends CI_Model {
     
 	function __construct(){
         parent::__construct();
@@ -10,21 +10,19 @@ class mdl_picking extends CI_Model {
 	# get parameter from easy grid
 		$page = isset($_POST['page']) ? intval($_POST['page']) : 1;  
 		$limit = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
-		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'id_ro';  
+		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'id_return';  
 		$order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
 		$offset = ($page-1)*$limit;
 		
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('*, b.full_name, c.departement_name');
-			$this->db->from('tr_ro a');
-			$this->db->join('sys_user b', 'b.user_id = a.user_id');
-			$this->db->join('ref_departement c', 'c.departement_id = b.departement_id');
-
-			$this->db->where('a.status','5');
-
-			$this->db->order_by($sort, $order);
+				$this->db->select('a.id_return, a.id_receive, a.date_create, a.status, a.user_id');
+				$this->db->from('tr_return a');
+				//$this->db->join('tr_receive b', 'b.id_receive = a.id_receive');
+				//$this->db->join('sys_user c', 'c.user_id = a.user_id');
+				//$this->db->where('a.status', '2');
+				$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
 		
 		# get count
