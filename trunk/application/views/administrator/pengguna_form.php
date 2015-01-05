@@ -34,7 +34,7 @@
 	<div class="fitem" >
 		<label style="width:100px;">Departemen </label>: 
 			<select id="departement_id" name="departement_id" style="width:200px;">
-					<?=$this->mdl_prosedur->OptionDepartement(array('value'=>$departement_id));?>
+					<?=$this->mdl_prosedur->OptionDepartement_NoSession(array('value'=>$departement_id));?>
 			</select>				
 	</div>	
 	</div>

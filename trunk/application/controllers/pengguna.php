@@ -21,11 +21,11 @@ class pengguna extends CI_Controller {
 		$data['kode'] = '';
 		$data['user_id'] = '';
 		$data['nik'] = '';
-    $data['user_name'] = '';
-    $data['full_name'] = '';
-    $data['passwd'] = '';
-    $data['departement_id'] = '';
-    $data['user_level_id'] = '';
+	    $data['user_name'] = '';
+	    $data['full_name'] = '';
+	    $data['passwd'] = '';
+	    $data['departement_id'] = '';
+	    $data['user_level_id'] = '';
 		
 		$this->load->view('administrator/pengguna_form', $data);
 	}
@@ -33,11 +33,11 @@ class pengguna extends CI_Controller {
 	function edit($kode){
 		$r = $this->mdl_pengguna->getdataedit($kode);
 		$data['nik'] = $r->row()->nik;
-    $data['user_name'] = $r->row()->user_name;
-    $data['full_name'] = $r->row()->full_name;
-    //$data['passwd'] = $r->row()->passwd;
-    $data['departement_id'] = $r->row()->departement_id;
-    $data['user_level_id'] = $r->row()->user_level_id;
+	    $data['user_name'] = $r->row()->user_name;
+	    $data['full_name'] = $r->row()->full_name;
+	    //$data['passwd'] = $r->row()->passwd;
+	    $data['departement_id'] = $r->row()->departement_id;
+	    $data['user_level_id'] = $r->row()->user_level_id;
 		$data['kode'] = $kode;
 		
 		$this->load->view('administrator/pengguna_form', $data);
@@ -56,7 +56,7 @@ class pengguna extends CI_Controller {
 		
 		# rules validasi form
 		$this->form_validation->set_rules("user_name", 'Nama pengguna', 'trim|required|xss_clean');
-		$this->form_validation->set_rules("departement_id", 'Departement', 'trim|required|xss_clean');
+		//$this->form_validation->set_rules("departement_id", 'Departement', 'trim|required|xss_clean');
 		//$this->form_validation->set_rules("level", 'Posisi', 'trim|numeric|required|xss_clean');
 
 		# message rules

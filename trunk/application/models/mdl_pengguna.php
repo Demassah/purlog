@@ -20,7 +20,7 @@ class mdl_pengguna extends CI_Model {
 			$this->db->select('*, c.departement_name');
 			$this->db->from('sys_user a');
 			$this->db->join('sys_user_level b', 'b.user_level_id = a.user_level_id');
-			$this->db->join('ref_departement c', 'c.departement_id = a.departement_id');
+			$this->db->join('ref_departement c', 'c.departement_id = a.departement_id', 'left');
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
 		
