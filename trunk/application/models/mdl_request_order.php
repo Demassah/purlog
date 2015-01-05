@@ -13,6 +13,9 @@ class mdl_request_order extends CI_Model {
 		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'a.id_ro';  
 		$order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
 		$offset = ($page-1)*$limit;
+
+		#get filter
+		$departement_id = isset($_POST['departement_id']) ? strval($_POST['departement_id']) : '';
 		
 		# create query
 		$this->db->flush_cache();
@@ -21,6 +24,15 @@ class mdl_request_order extends CI_Model {
 		$this->db->from('tr_ro a');
 		$this->db->join('sys_user b', 'b.user_id = a.user_id');
 		$this->db->join('ref_departement c', 'c.departement_id = b.departement_id');
+
+		#Filter
+		if($this->session->userdata('departement_id')!='0'){
+			$this->db->where('b.departement_id', $this->session->userdata('departement_id'));
+		}else{
+			if($departement_id != '0')
+				$this->db->where('b.departement_id', $departement_id);
+		}
+
 		$this->db->where('a.status','1');
 		$this->db->order_by($sort, $order);
 		$this->db->stop_cache();

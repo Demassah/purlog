@@ -37,7 +37,7 @@ class mdl_prosedur extends CI_Model {
 		//$this->db->where('status', 'A');
 		
 		# - otoritas
-		if($this->session->userdata('departement_id')!=''){
+		if($this->session->userdata('departement_id')!='0'){
 			$this->db->where('departement_id', $this->session->userdata('departement_id'));
 		}else{
 			$out = '<option value="">-- Pilih --</option>';

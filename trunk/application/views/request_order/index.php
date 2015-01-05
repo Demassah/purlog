@@ -124,6 +124,14 @@
 			});
 		});
 
+		// filter
+		filter = function(){
+			$('#dg').datagrid('load',{
+				departement_id : $('#s_departement_id').val(),
+			});
+			//$('#dg').datagrid('enableFilter');
+		}
+
 		//# Tombol Bawah
 		$(function(){
 			var pager = $('#dg').datagrid().datagrid('getPager');	// get the pager of datagrid
@@ -153,15 +161,11 @@
 	<div class="fsearch">
 		<table width="500" border="0">
 		  <tr>
-			<td>Search</td>
+			<td>Departement</td>
 			<td>: 
-				<select id="search" name=" " style="width:200px;">
-						<option>Pilih</option>
-						<option>Search 1</option>
-            <option>Search 2</option>
-            <option>Search 3</option>	
-            <option>Search 4</option>              
-				</select>	
+				<select id="s_departement_id" name="s_departement_id" style="width:200px;">
+					<?=$this->mdl_prosedur->OptionDepartement();?>
+				</select>
 			</td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
