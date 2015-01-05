@@ -57,6 +57,28 @@ class mdl_prosedur extends CI_Model {
 		return $out;
 	}
 
+	function OptionDepartement_NoSession($d=""){
+		$value = isset($d['value'])?$d['value']:'';
+		$out = '<option value="">-- Pilih --</option>';
+		
+		$this->db->flush_cache();
+		$this->db->from('ref_departement');
+		$this->db->order_by('departement_name');
+		//$this->db->where('status', 'A');
+
+		$res = $this->db->get();
+		
+		foreach($res->result() as $r){
+			if(trim($r->departement_id) == trim($value)){
+				$out .= '<option value="'.$r->departement_id.'" selected="selected">'.$r->departement_name.'</option>';
+			}else{
+				$out .= '<option value="'.$r->departement_id.'">'.$r->departement_name.'</option>';
+			}
+		}
+		
+		return $out;
+	}
+
 	function OptionUserID($d=""){
 		$value = isset($d['value'])?$d['value']:'';
 		$out = '<option value="">-- Pilih --</option>';
