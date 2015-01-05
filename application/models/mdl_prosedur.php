@@ -87,7 +87,15 @@ class mdl_prosedur extends CI_Model {
 		$this->db->from('sys_user');
 		$this->db->order_by('full_name');
 		//$this->db->where('user_level_id', '1');
-				
+
+		# - otoritas
+		if($this->session->userdata('user_id')!=''){
+			$this->db->where('user_id', $this->session->userdata('user_id'));
+		}else{
+			$out = '<option value="">-- Pilih --</option>';
+		}
+		#End
+
 		$res = $this->db->get();
 		
 		foreach($res->result() as $r){
