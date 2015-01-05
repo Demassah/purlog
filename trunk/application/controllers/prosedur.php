@@ -18,6 +18,11 @@ class prosedur extends CI_Controller {
 	function getBarangbySubkat($id_sub_kategori){
 		echo $this->mdl_prosedur->OptionBarang(array('id_sub_kategori'=>$id_sub_kategori));
 	}
+
+	function SubInbound($id_po_re)
+	{
+			echo $this->mdl_prosedur->OptionInbound($id_po_re);
+	}
 	
 }
 
