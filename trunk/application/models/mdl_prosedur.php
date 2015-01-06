@@ -431,44 +431,7 @@ class mdl_prosedur extends CI_Model {
 		return $out;
 	}
 
-	function OptionInbound($d=""){
-		$value = isset($d['value'])?$d['value']:'';
-		$id_po_re = isset($d['id_po_re'])?$d['id_po_re']:'';
-		if($id_po_re == 1){
-			$this->db->flush_cache();
-			$this->db->from('tr_po');
-			$this->db->order_by('id_po');
-			$res = $this->db->get();
-
-			$out = '<option value="">-- Pilih --</option>';
-			foreach($res->result() as $r){
-				if(trim($r->id_po) == trim($value)){
-					$out .= '<option value="'.$r->id_po.'" selected="selected">'.$r->purpose.'</option>';
-				}else{
-					$out .= '<option value="'.$r->id_po.'">'.$r->purpose.'</option>';
-				}
-			}
-			
-		}elseif($id_po_re == 2){
-			$this->db->flush_cache();
-			$this->db->from('tr_return');
-			$this->db->order_by('id_return');
-			
-			//$this->db->where('status', 'A');
-			$res = $this->db->get();
-			
-			$out = '<option value="">-- Pilih --</option>';
-			foreach($res->result() as $r){
-				if(trim($r->id_return) == trim($value)){
-					$out .= '<option value="'.$r->id_return.'" selected="selected">'.$r->user_id.'</option>';
-				}else{
-					$out .= '<option value="'.$r->id_return.'">'.$r->user_id.'</option>';
-				}
-			}
-		}
-		
-		return $out;
-	}
+	
 
 }
 
