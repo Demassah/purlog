@@ -132,11 +132,12 @@ class mdl_inbound extends CI_Model {
 
 	/*---------------------Detail Inbound--------------------------------------- */
 
-	function getdata_detail($id=null)
+	function getdata_detail($id)
 	{
 		$this->db->select('a.id_detail_in,a.id_in,a.kode_barang,a.qty,a.ext_rec_no_detail,a.lokasi,a.status,b.nama_barang');
 		$this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang');
 		$this->db->order_by('id_detail_in', 'asc');
+		$this->db->where('id_in', $id);
 		$query = $this->db->get('tr_in_detail a');
 		$query->result();
 	}
@@ -159,24 +160,51 @@ class mdl_inbound extends CI_Model {
 	function get_iddetail($id,$type)
 	{
 		if($type == 1){
-			$id_pr_po = $this->mdl_inbound->getIdPr($id);
-			foreach ($id_pr_po as $l) {
-				$id_pr = $l->id_pr;
-				$this->db->where('a.id_pr', $id_pr);
-				$this->db->where('d.ext_rec_no_detail', $id);
-			}
-			$this->db->select('a.kode_barang,a.qty,b.nama_barang,d.kode_barang,d.qty,d.ext_rec_no_detail,c.id_po');
-			$this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang');
-			$this->db->join('tr_in_detail d', 'd.ext_rec_no_detail =c.id_po');
-			$this->db->order_by('a.id_pr', 'asc');
-			$query = $this->db->get('tr_pr_detail a,tr_pr c');
-			return $query->result_array();
+			$this->db->select('c.id_detail_pr,c.id_pr,c.id_po,c.kode_barang,c.asal,c.receive,c.sisa,c.nama_barang,a.id_in,a.ext_rec_no,b.id_lokasi,b.kode_barang');
+			$this->db->where('id_po', $id);
+			//$this->db->group_by('a.id_in');
+			$this->db->join('tr_stock b', 'b.kode_barang = c.kode_barang');
+			$query = $this->db->get('v_po_inbound c,tr_in a');
+			$query->result();
+			// $id_pr_po = $this->mdl_inbound->getIdPr($id);
+			// foreach ($id_pr_po as $l) {
+			// 	$id_pr = $l->id_pr;
+			// 	$this->db->where('a.id_pr', $id_pr);
+			// 	$this->db->where('d.ext_rec_no_detail', $id);
+			// }
+			// $this->db->select('a.kode_barang,a.qty,b.nama_barang,d.kode_barang,d.qty,d.ext_rec_no_detail,c.id_po');
+			// $this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang');
+			// $this->db->join('tr_in_detail d', 'd.ext_rec_no_detail =c.id_po');
+			// $this->db->order_by('a.id_pr', 'asc');
+			// $query = $this->db->get('tr_pr_detail a,tr_pr c');
+			return $query->result();
 		}elseif($type == 2){
 			$this->db->select('a.kode_barang,a.qty,b.nama_barang');
 			$this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang');
 			$this->db->order_by('id_return', 'asc');
 			$query = $this->db->get('tr_return_detail a');
-			return $query->result_array();
+			return $query->result();
+		}
+	}
+
+		function Insert_detail($data)
+		{
+			$jumlah = count($data['detail_id']);
+				for($i=0;$i<$jumlah;$i++){
+					$this->db->set('id_in',$data['id_in']);
+					$this->db->set('kode_barang',$data['kode_barang']);
+					$this->db->set('ext_rec_no_detail',$data['ext_rec_no']);
+					$this->db->set('qty',$data['receive']);
+					$this->db->set('lokasi',$data['lokasi']);
+					$this->db->set('status',1);
+
+					$result = $this->db->insert('tr_in_detail');
+				}
+
+		if($result) {
+			return TRUE;
+		}else {
+			return FALSE;
 		}
 		
 	}
