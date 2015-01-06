@@ -65,7 +65,7 @@ class mdl_inbound extends CI_Model {
 			foreach ($id_in as $l) {
 				if($l->type == 1){
 					$item = $l->ext_rec_no;
-					$this->db->where('id_po !=',$item);
+					$this->db->where('id_po =',$item);
 					$type = $l->type;
 				}
 			}
