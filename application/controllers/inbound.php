@@ -5,7 +5,7 @@ class inbound extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('mdl_inbound');
-		$this->output->enable_profiler(TRUE);
+		//$this->output->enable_profiler(TRUE);
 	}
 	/* --------------------------------list -------------------------------------- */
 	function index(){
