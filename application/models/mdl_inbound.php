@@ -48,29 +48,79 @@ class mdl_inbound extends CI_Model {
 		return json_encode($response);
 	}
 
+/*---------------------Option Inbound--------------------------------------- */
+	function select_inbound(){
+		$this->db->select('id_in,ext_rec_no,type,status');
+		$this->db->order_by('id_in', 'asc');
+		return $this->db->get('tr_in')->result();
+	}
+
+	function OptionInbound($d=""){
+		$value = isset($d['value'])?$d['value']:'';
+		$id_po_re = isset($d['id_po_re'])?$d['id_po_re']:'';
+		if($id_po_re == 1){
+			$this->db->flush_cache();
+			$id_in = $this->mdl_inbound->select_inbound();
+			$item = '';
+			foreach ($id_in as $l) {
+				if($l->type == 1){
+					$item = $l->ext_rec_no;
+					$this->db->where('id_po !=',$item);
+					$type = $l->type;
+				}
+			}
+			$this->db->from('tr_po');
+			$this->db->order_by('id_po');
+			$res = $this->db->get();
+
+			$out = '<option value="">-- Pilih --</option>';
+			foreach($res->result() as $r){
+				if(trim($r->id_po) == trim($value)){
+					$out .= '<option value="'.$r->id_po.'" selected="selected">'.$r->id_po.'</option>';
+				}else{
+					$out .= '<option value="'.$r->id_po.'">'.$r->id_po.'</option>';
+				}
+			}
+			
+		}elseif($id_po_re == 2){
+			$this->db->flush_cache();
+			$id_in = $this->mdl_inbound->select_inbound();
+			$item = '';
+			foreach ($id_in as $l) {
+				if($l->type == 2){
+					$item = $l->ext_rec_no;
+					$this->db->where('id_return !=',$item);
+					$type = $l->type;
+				}
+			}
+			$this->db->from('tr_return');
+			$this->db->order_by('id_return');
+			
+			$res = $this->db->get();
+			
+			$out = '<option value="">-- Pilih --</option>';
+			foreach($res->result() as $r){
+				if(trim($r->id_return) == trim($value)){
+					$out .= '<option value="'.$r->id_return.'" selected="selected">'.$r->id_return.'</option>';
+				}else{
+					$out .= '<option value="'.$r->id_return.'">'.$r->id_return.'</option>';
+				}
+			}
+		}
+		
+		return $out;
+	}
+	/*---------------------Add Inbound--------------------------------------- */
+
 	function Insert_inbound($data='')
 	{
-		// $id_po_re = $data['id_po_re'];
-		// if($id_po_re == 1){
+		$this->db->set('ext_rec_no',$data['id_sub_po_re']);
+		$this->db->set('type',$data['id_po_re']);
+		$this->db->set('date_create',$data['date_create']);
+		$this->db->set('status',$data['status']);
+		$this->db->set('user_id',$data['user_id']);
 
-			$this->db->set('ext_rec_no',$data['id_sub_po_re']);
-			$this->db->set('type',$data['id_po_re']);
-			$this->db->set('date_create',$data['date_create']);
-			$this->db->set('status',$data['status']);
-			$this->db->set('user_id',$data['user_id']);
-
-			$result = $this->db->insert('tr_in');
-		// }elseif($id_po_re == 2){
-
-		// 	$this->db->set('ext_rec_no',$data['id_return']);
-		// 	$this->db->set('type',$data['id_po_re']);
-		// 	$this->db->set('date_create',$data['date_create']);
-		// 	$this->db->set('status',1);
-		// 	$this->db->set('user_id',$data['user_id']);
-
-		// 	$result = $this->db->insert('tr_in');
-		// }
-
+		$result = $this->db->insert('tr_in');
 		//return
 		if($result) {
 			return TRUE;
@@ -79,7 +129,57 @@ class mdl_inbound extends CI_Model {
 		}
 
 	}
-	
+
+	/*---------------------Detail Inbound--------------------------------------- */
+
+	function getdata_detail($id=null)
+	{
+		$this->db->select('a.id_detail_in,a.id_in,a.kode_barang,a.qty,a.ext_rec_no_detail,a.lokasi,a.status,b.nama_barang');
+		$this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang');
+		$this->db->order_by('id_detail_in', 'asc');
+		$query = $this->db->get('tr_in_detail a');
+		$query->result();
+	}
+
+	function getId($id=null)
+	{
+		$this->db->select('*');
+		$this->db->where('id_in', $id);
+		return $this->db->get('tr_in')->result();
+	}
+
+	/*---------------------Add Detail Inbound--------------------------------------- */
+	function getIdPr($id)
+	{
+		$this->db->select('id_pr,id_po');
+		$this->db->where('id_po', $id);
+		return $this->db->get('tr_pr')->result();
+	}
+
+	function get_iddetail($id,$type)
+	{
+		if($type == 1){
+			$id_pr_po = $this->mdl_inbound->getIdPr($id);
+			foreach ($id_pr_po as $l) {
+				$id_pr = $l->id_pr;
+				$this->db->where('a.id_pr', $id_pr);
+				$this->db->where('d.ext_rec_no_detail', $id);
+			}
+			$this->db->select('a.kode_barang,a.qty,b.nama_barang,d.kode_barang,d.qty,d.ext_rec_no_detail,c.id_po');
+			$this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang');
+			$this->db->join('tr_in_detail d', 'd.ext_rec_no_detail =c.id_po');
+			$this->db->order_by('a.id_pr', 'asc');
+			$query = $this->db->get('tr_pr_detail a,tr_pr c');
+			return $query->result_array();
+		}elseif($type == 2){
+			$this->db->select('a.kode_barang,a.qty,b.nama_barang');
+			$this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang');
+			$this->db->order_by('id_return', 'asc');
+			$query = $this->db->get('tr_return_detail a');
+			return $query->result_array();
+		}
+		
+	}
 
 }
 

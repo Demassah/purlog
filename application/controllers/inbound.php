@@ -5,6 +5,7 @@ class inbound extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('mdl_inbound');
+		$this->output->enable_profiler(TRUE);
 	}
 	/* --------------------------------list -------------------------------------- */
 	function index(){
@@ -18,8 +19,12 @@ class inbound extends CI_Controller {
 	/* --------------------------------Function Add -------------------------------------- */
 	function add()
 	{
-
 		$this->load->view('inbound/form_add');
+	}
+
+	function SubInbound($id_po_re)
+	{
+			echo $this->mdl_inbound->OptionInbound($id_po_re);
 	}
 
 	function save($aksi){
@@ -44,6 +49,7 @@ class inbound extends CI_Controller {
 			$data["pesan_error"] .= trim(validation_errors(' ',' '))==''?'':validation_errors(' ',' ');
 		}else{
 			if($aksi=="add"){ // add
+			//print_r($data);
 			$result = $this->mdl_inbound->Insert_inbound($data);
 			}else { // edit
 				// $result=$this->mdl_quotation_request_selected->cancel($data);
@@ -57,6 +63,26 @@ class inbound extends CI_Controller {
 		}
 	}
 
+	/* --------------------------------Function Detail-------------------------------------- */
+	function detail_in($id){
+    $data['id_in'] = $id;
+    $data['item'] = $this->mdl_inbound->getId($id);
+    $this->load->view('inbound/detail_in', $data);
+	}
+
+	function grid_detail($id){
+  	$data = $this->mdl_inbound->getdata_detail();
+		echo $this->mdl_inbound->togrid($data['row_data'], $data['row_count']);
+  }
+  /* --------------------------------Function Add Inbound-------------------------------------- */
+  function add_detailIn($id,$type)
+  {
+  	// $data['id_detail'] = $id;
+  	// $data['type']=$type;
+  	$data['list']=$this->mdl_inbound->get_iddetail($id,$type);
+  	print_r($data);
+  	$this->load->view('inbound/form_add_detail', $data, FALSE);
+  }
 
 }
 

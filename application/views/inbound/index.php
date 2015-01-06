@@ -46,7 +46,7 @@
 					return $(this).form('validate');
 				},
 				success: function(result){
-					alert(result);
+					//alert(result);
 					var result = eval('('+result+')');
 					if (result.success){
 						$.messager.show({
@@ -65,18 +65,27 @@
 			});
 		}
 		//save
-		detail_po = function (value){
-			$('#detail_dialog').dialog({
-				title: 'Detail Purchase Order / Detail Vendor',
-				width: 580,
-				height: 490,
-				closed: true,
-				cache: false,
-				href: base_url+'purchase_order/detail_po/' + value,
-				modal: true
-			});
-			$('#detail_dialog').dialog('open');
+		actionbutton = function(value, row, index){
+			var col='';
+
+			<?if($this->mdl_auth->CekAkses(array('menu_id'=>41, 'policy'=>'DETAIL'))){?>
+				col += '<a href="#" onclick="detail_in(\''+row.id_in+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
+			<?}?>
+			<?if($this->mdl_auth->CekAkses(array('menu_id'=>41, 'policy'=>'ACCESS'))){?>
+				col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="#(\''+row.id_in+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
+			<?}?>
+			<?if($this->mdl_auth->CekAkses(array('menu_id'=>41, 'policy'=>'DELETE'))){?>
+				col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="#(\''+row.id_in+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
+			<?}?>
+
+			return col;
 		}
+
+		detail_in = function (val,row,index){
+      $('#konten').panel({
+        href: base_url+'inbound/detail_in/' + val,
+      });
+    }
 
 		done_po = function (val){
 			if(confirm("Apakah yakin akan mengirim data ke  '" + val + "'?")){
@@ -131,21 +140,7 @@
 		}
 
 		
-		actionbutton = function(value, row, index){
-			var col='';
-
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>41, 'policy'=>'DETAIL'))){?>
-				col += '<a href="#" onclick="detail_po(\''+row.id_po+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
-			<?}?>
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>41, 'policy'=>'ACCESS'))){?>
-				col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="done_po(\''+row.id_po+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
-			<?}?>
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>41, 'policy'=>'DELETE'))){?>
-				col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="delete_po(\''+row.id_po+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
-			<?}?>
-
-			return col;
-		}
+		
 		
 		$(function(){
 			$('#dg_in').datagrid({
