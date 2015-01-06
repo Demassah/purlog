@@ -46,17 +46,41 @@
       $('#dialog').dialog({
         title: 'Tambah Detail inbound',
         width: 500,
-        height: 400,
+        height: 200,
         closed: true,
         cache: false,
         href: base_url+'inbound/add_detailIn/' + val +'/'+ type,
         modal: true
       });      
       $('#dialog').dialog('open');
-      url = base_url+'inbound/save_detail/add_detail';
+      url = base_url+'inbound/save_detail/add';
     }
     // end newData
-
+    saveData = function(){
+      $('#form2').form('submit',{
+        url: url,
+        onSubmit: function(){
+          return $(this).form('validate');
+        },
+        success: function(result){
+          alert(result);
+          var result = eval('('+result+')');
+          if (result.success){
+            
+            $('#dialog').dialog('close');   // close the dialog
+            $.messager.show({
+              title: 'Succes',
+              msg: 'Data Berhasil Ditambahkan  ',
+            });
+          } else {
+            $.messager.show({
+              title: 'Error',
+              msg: result.msg
+            });
+          }
+        }
+      });
+    }
 
     back = function (){
       $('#konten').panel({

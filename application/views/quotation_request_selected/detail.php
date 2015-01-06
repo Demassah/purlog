@@ -1,3 +1,40 @@
+<table id="dtgrd" data-options="
+      rownumbers:true,
+      singleSelect:false,
+      autoRowHeight:false,
+      fit:true,
+      toolbar:'#toolbar_details',
+    ">    
+  <thead>
+    <tr>
+      <th data-options="field:'id_krs_detail',width:'100', hidden:true"></th>
+      <th field="nama_kategori" sortable="true" width="120">ID Detail</th>
+      <th field="kode_barang" sortable="true" width="120">ID RO</th>
+      <th field="kode_barang" sortable="true" width="120">ID Item</th>
+      <th field="kode_barang" sortable="true" width="120">Qty</th>
+      <th field="kode_barang" sortable="true" width="120">Description</th>   
+      <th field="action" align="center" formatter="actiondetail" width="140">Aksi</th>
+    </tr>
+  </thead>
+</table>
+<div id="toolbar_details" style="padding:5px;height:auto">
+  <div>
+    <table>
+      <tr>
+          <td>&nbsp;&nbsp;<a href="#" onclick="detail()" class="easyui-linkbutton" iconCls="icon-ok">Detail</a>
+              &nbsp;&nbsp;<a href="#" onclick="app()" class="easyui-linkbutton" iconCls="icon-login">App</a>
+              &nbsp;&nbsp;<a href="#" onclick="reject()" class="easyui-linkbutton" iconCls="icon-redo">Reject</a></td> 
+      </tr>
+      <tr> 
+          <td>&nbsp;</td>
+      </tr>   
+      <tr> 
+        <td>&nbsp;&nbsp;<a href="#" onclick="add()" class="easyui-linkbutton" iconCls="icon-add">Add</a></td>
+      </tr>     
+    </table>
+  </div>
+</div>
+
 <script>
   
   var url;
@@ -113,42 +150,4 @@
     
   });
 </script>
-
-<table id="dtgrd" data-options="
-      rownumbers:true,
-      singleSelect:false,
-      autoRowHeight:false,
-      fit:true,
-      toolbar:'#toolbar_details',
-    ">    
-  <thead>
-    <tr>
-      <th data-options="field:'id_krs_detail',width:'100', hidden:true"></th>
-      <th field="nama_kategori" sortable="true" width="120">ID Detail</th>
-      <th field="kode_barang" sortable="true" width="120">ID RO</th>
-      <th field="kode_barang" sortable="true" width="120">ID Item</th>
-      <th field="kode_barang" sortable="true" width="120">Qty</th>
-      <th field="kode_barang" sortable="true" width="120">Description</th>   
-      <th field="action" align="center" formatter="actiondetail" width="140">Aksi</th>
-    </tr>
-  </thead>
-</table>
-<div id="toolbar_details" style="padding:5px;height:auto">
-  <div>
-    <table>
-      <tr>
-          <td>&nbsp;&nbsp;<a href="#" onclick="detail()" class="easyui-linkbutton" iconCls="icon-ok">Detail</a>
-              &nbsp;&nbsp;<a href="#" onclick="app()" class="easyui-linkbutton" iconCls="icon-login">App</a>
-              &nbsp;&nbsp;<a href="#" onclick="reject()" class="easyui-linkbutton" iconCls="icon-redo">Reject</a></td> 
-      </tr>
-      <tr> 
-          <td>&nbsp;</td>
-      </tr>   
-      <tr> 
-        <td>&nbsp;&nbsp;<a href="#" onclick="add()" class="easyui-linkbutton" iconCls="icon-add">Add</a></td>
-      </tr>     
-    </table>
-  </div>
-</div>
-
 
