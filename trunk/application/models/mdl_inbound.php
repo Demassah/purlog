@@ -134,7 +134,7 @@ class mdl_inbound extends CI_Model {
 
 	function getdata_detail($id)
 	{
-		$this->db->select('a.id_detail_in,a.id_in,a.kode_barang,a.qty,a.ext_rec_no_detail,a.lokasi,a.status,b.nama_barang');
+		$this->db->select('a.id_pr,a.id_detail_in,a.id_in,a.kode_barang,a.qty,a.ext_rec_no_detail,a.lokasi,a.status,b.nama_barang');
 		$this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang');
 		$this->db->order_by('id_detail_in', 'asc');
 		$this->db->where('id_in', $id);

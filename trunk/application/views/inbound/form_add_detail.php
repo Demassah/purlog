@@ -21,7 +21,7 @@
 			echo '
 				<tr><input type="hidden" name="detail_id[]" value="'.$l->id_detail_pr.'">
 					<td>'.$l->kode_barang.'<input type="hidden" name="kode_barang" value="'.$l->kode_barang.'"></td>
-					<td>'.$l->nama_barang.'<input type="hidden" name="ext_rec_no" value="'.$l->id_po.'"></td>
+					<td>'.$l->nama_barang.'<input type="hidden" name="ext_rec_no" value="'.$l->id_pr.'"></td>
 					<td>'.$l->id_lokasi.'<input type="hidden" name="lokasi" value="'.$l->id_lokasi.'"></td>
 					<td>'.$l->asal.'<input type="hidden" name="asal" class="asal_'.$l->id_detail_pr.'" value="'.$l->asal.'"></td>
 					<td><div id="'.$l->id_detail_pr.'" class="inbound"><span class="text" id="receive_'.$l->id_detail_pr.'">'.$l->receive.'</span><input type="text" name="receive" value="" class="editbox" id="receive_input_'.$l->id_detail_pr.'"></div></td>
