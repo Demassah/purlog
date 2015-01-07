@@ -134,7 +134,7 @@ class mdl_inbound extends CI_Model {
 
 	function getdata_detail($id)
 	{
-		$this->db->select('a.id_pr,a.id_detail_in,a.id_in,a.kode_barang,a.qty,a.ext_rec_no_detail,a.lokasi,a.status,b.nama_barang');
+		$this->db->select('a.id_detail_in,a.id_in,a.kode_barang,a.qty,a.ext_rec_no_detail,a.lokasi,a.status,b.nama_barang');
 		$this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang');
 		$this->db->order_by('id_detail_in', 'asc');
 		$this->db->where('id_in', $id);
@@ -163,6 +163,7 @@ class mdl_inbound extends CI_Model {
 			$this->db->select('c.id_detail_pr,c.id_pr,c.id_po,c.kode_barang,c.asal,c.receive,c.sisa,c.nama_barang,a.id_in,a.ext_rec_no,b.id_lokasi,b.kode_barang');
 			$this->db->where('id_po', $id);
 			//$this->db->group_by('a.id_in');
+			$this->db->where('c.sisa !=', 0);
 			$this->db->join('tr_stock b', 'b.kode_barang = c.kode_barang');
 			$query = $this->db->get('v_po_inbound c,tr_in a');
 			$query->result();
@@ -190,12 +191,20 @@ class mdl_inbound extends CI_Model {
 		function Insert_detail($data)
 		{
 			$jumlah = count($data['detail_id']);
+			// $jumlah = array('id_in' =>$data['id_in'],
+			// 								'kode_barang' =>$data['kode_barang'],
+			// 								'ext_rec_no_detail' =>$data['ext_rec_no'],
+			// 								'qty' =>$data['receive'],
+			// 								'lokasi' =>$data['lokasi'],
+			// 								'status' =>1 );
+			//return $this->db->insert('tr_in_detail',$jumlah);
+
 				for($i=0;$i<$jumlah;$i++){
-					$this->db->set('id_in',$data['id_in']);
-					$this->db->set('kode_barang',$data['kode_barang']);
-					$this->db->set('ext_rec_no_detail',$data['ext_rec_no']);
-					$this->db->set('qty',$data['receive']);
-					$this->db->set('lokasi',$data['lokasi']);
+					$this->db->set('id_in',$data['id_in'][$i]);
+					$this->db->set('kode_barang',$data['kode_barang'][$i]);
+					$this->db->set('ext_rec_no_detail',$data['ext_rec_no'][$i]);
+					$this->db->set('qty',$data['receive'][$i]);
+					$this->db->set('lokasi',$data['lokasi'][$i]);
 					$this->db->set('status',1);
 
 					$result = $this->db->insert('tr_in_detail');

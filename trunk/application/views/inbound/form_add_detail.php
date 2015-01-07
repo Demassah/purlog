@@ -20,12 +20,12 @@
 			foreach ($list as $l) {
 			echo '
 				<tr><input type="hidden" name="detail_id[]" value="'.$l->id_detail_pr.'">
-					<td>'.$l->kode_barang.'<input type="hidden" name="kode_barang" value="'.$l->kode_barang.'"></td>
-					<td>'.$l->nama_barang.'<input type="hidden" name="ext_rec_no" value="'.$l->id_pr.'"></td>
-					<td>'.$l->id_lokasi.'<input type="hidden" name="lokasi" value="'.$l->id_lokasi.'"></td>
+					<td>'.$l->kode_barang.'<input type="hidden" name="kode_barang[]" value="'.$l->kode_barang.'"></td>
+					<td>'.$l->nama_barang.'<input type="hidden" name="ext_rec_no[]" value="'.$l->id_detail_pr.'"></td>
+					<td>'.$l->id_lokasi.'<input type="hidden" name="lokasi[]" value="'.$l->id_lokasi.'"></td>
 					<td>'.$l->asal.'<input type="hidden" name="asal" class="asal_'.$l->id_detail_pr.'" value="'.$l->asal.'"></td>
-					<td><div id="'.$l->id_detail_pr.'" class="inbound"><span class="text" id="receive_'.$l->id_detail_pr.'">'.$l->receive.'</span><input type="text" name="receive" value="" class="editbox" id="receive_input_'.$l->id_detail_pr.'"></div></td>
-					<td>'.$l->sisa.'<input type="hidden" name="id_in" value="'.$l->id_in.'"></td>
+					<td><div id="'.$l->id_detail_pr.'" class="inbound"><span class="text" value="'.$l->receive.'" id="receive_'.$l->id_detail_pr.'">'.$l->receive.'</span><input type="text" name="receive[]" value="" class="editbox" id="receive_input_'.$l->id_detail_pr.'"></div></td>
+					<td>'.$l->sisa.'<input type="hidden" id="sisa_'.$l->id_detail_pr.'" value="'.$l->sisa.'"><input type="hidden" name="id_in[]" value="'.$l->id_in.'"></td>
 				</tr>
 			';
 
@@ -48,7 +48,10 @@ $(".editbox").hide();
 			var id_inbound = $(this).attr('id');
 			var masuk = $("#receive_input_"+id_inbound).val();
 			var asal = $(".asal_"+id_inbound).val();
-			if(masuk > asal || masuk == 0){
+			var sisa = $("#sisa_"+id_inbound).val();
+			var isi = $("#receive_"+id_inbound).val();
+			var sisa2=sisa-isi;
+			if(masuk > sisa2 || masuk == 0){
 				alert("salah");
 			}
 
