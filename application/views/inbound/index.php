@@ -72,10 +72,10 @@
 				col += '<a href="#" onclick="detail_in(\''+row.id_in+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
 			<?}?>
 			<?if($this->mdl_auth->CekAkses(array('menu_id'=>41, 'policy'=>'ACCESS'))){?>
-				col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="#(\''+row.id_in+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
+				col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="done_in(\''+row.id_in+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
 			<?}?>
 			<?if($this->mdl_auth->CekAkses(array('menu_id'=>41, 'policy'=>'DELETE'))){?>
-				col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="#(\''+row.id_in+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
+				col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="delete_in(\''+row.id_in+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
 			<?}?>
 
 			return col;
@@ -87,11 +87,11 @@
       });
     }
 
-		done_po = function (val){
-			if(confirm("Apakah yakin akan mengirim data ke  '" + val + "'?")){
+		done_in = function (val){
+			if(confirm("Apakah yakin akan mengirim data  '" + val + "'?")){
 				var response = '';
 				$.ajax({ type: "GET",
-					 url: base_url+'purchase_order/done_po/' + val,
+					 url: base_url+'inbound/done/' + val,
 					 async: false,
 					 success : function(response){
 						var response = eval('('+response+')');
@@ -101,7 +101,7 @@
 								msg: 'Data Berhasil Dikirim'
 							});
 							// reload and close tab
-							$('#dg_po').datagrid('reload');
+							$('#dg_in').datagrid('reload');
 						} else {
 							$.messager.show({
 								title: 'Error',
@@ -113,11 +113,11 @@
 			}
 		}
 
-		delete_po = function (val){
-			if(confirm("Apakah yakin akan Menghapus data ke  '" + val + "'?")){
+		delete_in = function (val){
+			if(confirm("Apakah yakin akan Menghapus data  '" + val + "'?")){
 				var response = '';
 				$.ajax({ type: "GET",
-					 url: base_url+'purchase_order/delete_po/' + val,
+					 url: base_url+'inbound/delete/' + val,
 					 async: false,
 					 success : function(response){
 						var response = eval('('+response+')');
@@ -127,7 +127,7 @@
 								msg: 'Data Berhasil Dihapus'
 							});
 							// reload and close tab
-							$('#dg_po').datagrid('reload');
+							$('#dg_in').datagrid('reload');
 						} else {
 							$.messager.show({
 								title: 'Error',
