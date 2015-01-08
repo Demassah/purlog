@@ -83,7 +83,7 @@
     echo "<tr><td></td>";
     foreach ($quotation['Selected'] as $l) {
       echo "<td>";
-        if($this->mdl_auth->CekAkses(array('menu_id'=>15, 'policy'=>'ACCESS'))){
+        if($this->mdl_auth->CekAkses(array('menu_id'=>15, 'policy'=>'SELECT'))){
         echo "<a href='#'  onclick='select_vendor(".$l.");'  plain='false'>Select</a>";
         }
         echo "   |  ";
