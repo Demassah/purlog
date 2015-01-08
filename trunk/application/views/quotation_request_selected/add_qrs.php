@@ -73,7 +73,7 @@
       foreach ($quotation['data'][$data_counter]['harga'] as $harga) {
         echo '<td><div id="'.$quotation['data'][$data_counter]['harga'][$harga_counter][1].'" class="qrs">';
           echo "<span name='harga' id='harga_".$quotation['data'][$data_counter]['harga'][$harga_counter][1]."' class='text'>Rp.".number_format($quotation['data'][$data_counter]['harga'][$harga_counter][0],2,',','.')."</span>";
-          echo "<input type='text' name='harga' value='".$quotation['data'][$data_counter]['harga'][$harga_counter][0]."' class='editbox' id='harga_input_".$quotation['data'][$data_counter]['harga'][$harga_counter][1]."'/>";
+          echo "<input type='text' size='2' name='harga' value='".$quotation['data'][$data_counter]['harga'][$harga_counter][0]."' class='editbox' id='harga_input_".$quotation['data'][$data_counter]['harga'][$harga_counter][1]."'/>";
         echo"</div></td>";
         $harga_counter++;
       }

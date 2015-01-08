@@ -5,7 +5,7 @@ class inbound extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('mdl_inbound');
-		//$this->output->enable_profiler(TRUE);
+		// $this->output->enable_profiler(TRUE);
 	}
 	/* --------------------------------list -------------------------------------- */
 	function index(){
@@ -62,7 +62,17 @@ class inbound extends CI_Controller {
 			echo json_encode(array('msg' => 'Data gagal dikirim'));
 		}
 	}
+	/* --------------------------------Function Done Inbound-------------------------------------- */
+	function done($kode)
+	{
+		$result = $this->mdl_inbound->done($kode);
 
+		if($result){
+			echo json_encode(array('success'=>true));
+		}else{
+			echo json_encode(array('msg'=>'Data Gagal Dikirim'));
+		}
+	}
 	/* --------------------------------Function Detail-------------------------------------- */
 	function detail_in($id){
     $data['id_in'] = $id;
@@ -75,11 +85,11 @@ class inbound extends CI_Controller {
 		echo $this->mdl_inbound->togrid($data['row_data'], $data['row_count']);
   }
   /* --------------------------------Function Add Inbound-------------------------------------- */
-  function add_detailIn($id,$type)
+  function add_detailIn($id,$type,$id_in)
   {
   	// $data['id_detail'] = $id;
   	// $data['type']=$type;
-  	$data['list']=$this->mdl_inbound->get_iddetail($id,$type);
+  	$data['list']=$this->mdl_inbound->get_iddetail($id,$type,$id_in);
   	$this->load->view('inbound/form_add_detail', $data, FALSE);
   }
 
@@ -117,7 +127,19 @@ class inbound extends CI_Controller {
 			echo json_encode(array('msg' => 'Data gagal dikirim'));
 		}
 	}
+	
 
+	 /* --------------------------------Function Delete Inbound-------------------------------------- */
+	 function delete($kode)
+	 {
+		 $result = 	$this->mdl_inbound->delete($kode);
+
+		 if($result){
+		 	echo json_encode(array('success' => true ));
+		 }else{
+		 	echo json_encode(array('msg'=>'Data Gagal Dihapus'));
+		 }
+	}
 }
 
 /* End of file inbound.php */

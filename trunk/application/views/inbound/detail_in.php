@@ -49,7 +49,7 @@
         height: 200,
         closed: true,
         cache: false,
-        href: base_url+'inbound/add_detailIn/' + val +'/'+ type,
+        href: base_url+'inbound/add_detailIn/' + val +'/'+ type + '/' + id_in, 
         modal: true
       });      
       $('#dialog').dialog('open');
@@ -63,7 +63,7 @@
           return $(this).form('validate');
         },
         success: function(result){
-          alert(result);
+          //alert(result);
           var result = eval('('+result+')');
           if (result.success){
             
@@ -72,6 +72,7 @@
               title: 'Succes',
               msg: 'Data Berhasil Ditambahkan  ',
             });
+            $('#dg_detail_in').datagrid('reload');
           } else {
             $.messager.show({
               title: 'Error',
