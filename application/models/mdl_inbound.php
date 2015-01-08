@@ -132,14 +132,35 @@ class mdl_inbound extends CI_Model {
 
 	/*---------------------Detail Inbound--------------------------------------- */
 
-	function getdata_detail($id)
+	function getdata_detail($id, $plimit=true)
 	{
+		# get parameter from easy grid
+		$page = isset($_POST['page']) ? intval($_POST['page']) : 1;  
+		$limit = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
+		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'id_detail_in';  
+		$order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
+		$offset = ($page-1)*$limit;
+
+		$this->db->flush_cache();
+		$this->db->start_cache();
 		$this->db->select('a.id_detail_in,a.id_in,a.kode_barang,a.qty,a.ext_rec_no_detail,a.lokasi,a.status,b.nama_barang');
+		$this->db->from('tr_in_detail a');
 		$this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang');
-		$this->db->order_by('id_detail_in', 'asc');
 		$this->db->where('id_in', $id);
-		$query = $this->db->get('tr_in_detail a');
-		$query->result();
+
+		$this->db->order_by($sort, $order);
+		$this->db->stop_cache();
+
+		# get count
+		$tmp['row_count'] = $this->db->get()->num_rows();
+		
+		# get data
+		if($plimit == true){
+			$this->db->limit($limit, $offset);
+		}
+		$tmp['row_data'] = $this->db->get();
+		
+		return $tmp;
 	}
 
 	function getId($id=null)
