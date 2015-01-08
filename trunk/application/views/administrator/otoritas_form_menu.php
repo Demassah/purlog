@@ -48,11 +48,14 @@
 									$('#dg-menu').datagrid('updateRow',{index:index, row:{detail:0}});
 									$('#dg-menu').datagrid('updateRow',{index:index, row:{edit:0}});
 									$('#dg-menu').datagrid('updateRow',{index:index, row:{deleted:0}});
+									$('#dg-menu').datagrid('updateRow',{index:index, row:{select:0}});
 									$('#dg-menu').datagrid('updateRow',{index:index, row:{print:0}});
 									$('#dg-menu').datagrid('updateRow',{index:index, row:{pdf:0}});
 									$('#dg-menu').datagrid('updateRow',{index:index, row:{excel:0}});
 									$('#dg-menu').datagrid('updateRow',{index:index, row:{import:0}});
 									$('#dg-menu').datagrid('updateRow',{index:index, row:{approve:0}});
+
+									
 								}
 								$('#dg-menu').datagrid('updateRow',{index:index, row:{access:(value==true?1:0)}}); 
 								break;
@@ -60,11 +63,14 @@
 				case 'detail': $('#dg-menu').datagrid('updateRow',{index:index, row:{detail:(value==true?1:0)}}); break;
 				case 'edit': $('#dg-menu').datagrid('updateRow',{index:index, row:{edit:(value==true?1:0)}}); break;
 				case 'deleted': $('#dg-menu').datagrid('updateRow',{index:index, row:{deleted:(value==true?1:0)}}); break;
+				case 'select': $('#dg-menu').datagrid('updateRow',{index:index, row:{select:(value==true?1:0)}}); break;
 				case 'print': $('#dg-menu').datagrid('updateRow',{index:index, row:{print:(value==true?1:0)}}); break;
 				case 'pdf': $('#dg-menu').datagrid('updateRow',{index:index, row:{pdf:(value==true?1:0)}}); break;
 				case 'excel': $('#dg-menu').datagrid('updateRow',{index:index, row:{excel:(value==true?1:0)}}); break;
 				case 'import': $('#dg-menu').datagrid('updateRow',{index:index, row:{import:(value==true?1:0)}}); break;
 				case 'approve': $('#dg-menu').datagrid('updateRow',{index:index, row:{approve:(value==true?1:0)}}); break;
+
+				
 			}
 		}
 		
@@ -107,6 +113,14 @@
 			}
 		}
 		
+		Checkboxselect = function(value,row,index){
+			if(row.select1){
+				return '<input style="margin-top:2px;" type="checkbox" name="checkbox" id="checkbox" onclick="update_value('+index+', \'select\', this.checked)" '+(row.select==true?'checked="checked"':'')+' />';
+			}else{
+				return '';
+			}
+		}
+
 		CheckboxPrint = function(value,row,index){
 			if(row.print1){
 				return '<input style="margin-top:2px;" type="checkbox" name="checkbox" id="checkbox" onclick="update_value('+index+', \'print\', this.checked)" '+(row.print==true?'checked="checked"':'')+' />';
@@ -146,6 +160,8 @@
 				return '';
 			}
 		}
+
+		
 		
 		// load menu
 		$(function(){ // init
@@ -171,11 +187,14 @@
 				$('#dg-menu').datagrid('updateRow',{index:i, row:{detail:(value==true?1:0)}});
 				$('#dg-menu').datagrid('updateRow',{index:i, row:{edit:(value==true?1:0)}});
 				$('#dg-menu').datagrid('updateRow',{index:i, row:{deleted:(value==true?1:0)}});
+				$('#dg-menu').datagrid('updateRow',{index:i, row:{select:(value==true?1:0)}});
 				$('#dg-menu').datagrid('updateRow',{index:i, row:{print:(value==true?1:0)}});
 				$('#dg-menu').datagrid('updateRow',{index:i, row:{pdf:(value==true?1:0)}});
 				$('#dg-menu').datagrid('updateRow',{index:i, row:{excel:(value==true?1:0)}});
 				$('#dg-menu').datagrid('updateRow',{index:i, row:{import:(value==true?1:0)}});
 				$('#dg-menu').datagrid('updateRow',{index:i, row:{approve:(value==true?1:0)}});
+
+				
 			}
 		}
 		
@@ -216,22 +235,28 @@
 			<th field="detail1" width="50" formatter="CheckboxDetail" align="center">Detail</th>
 			<th field="edit1" width="50" formatter="CheckboxEdit" align="center">Edit</th>
 			<th field="delete1" width="50" formatter="CheckboxDeleted" align="center">Delete</th>
+			<th field="select1" width="60" formatter="Checkboxselect" align="center">Select</th>
 			<th field="print1" width="50" formatter="CheckboxPrint" align="center">Print</th>
 			<th field="pdf1" width="80" formatter="CheckboxPrint" align="center">Export PDF</th>
 			<th field="excel1" width="80" formatter="CheckboxPrint" align="center">Export Excel</th>
 			<th field="import1" width="50" formatter="CheckboxImport" align="center">Import</th>
 			<th field="approve1" width="60" formatter="CheckboxPrint" align="center">Approve</th>
+
+			
 			
 			<th field="access" width="30" hidden="true">access</th>
 			<th field="add" width="30" hidden="true">add</th>
 			<th field="detail" width="30" hidden="true">detail</th>
 			<th field="edit" width="30" hidden="true">edit</th>
 			<th field="deleted" width="30" hidden="true">delete</th>
+			<th field="select" width="30" hidden="true">select</th>
 			<th field="print" width="30" hidden="true">print</th>
 			<th field="pdf" width="30" hidden="true">pdf</th>
 			<th field="excel" width="30" hidden="true">excel</th>
 			<th field="import" width="30" hidden="true">import</th>
 			<th field="approve" width="30" hidden="true">approve</th>
+
+			<th field="select" width="30" hidden="true">select</th>
 		</tr>
 	</thead>
 </table>
