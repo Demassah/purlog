@@ -433,6 +433,72 @@ class mdl_prosedur extends CI_Model {
 
 	
 
+	function OptionStock($d=""){
+		$value = isset($d['value'])?$d['value']:'';
+		$out = '<option value="">-- Pilih --</option>';
+		
+		$this->db->flush_cache();
+		$this->db->from('tr_stock');
+
+		$this->db->order_by('id_stock');
+				
+		$res = $this->db->get();
+		
+		foreach($res->result() as $r){
+			if(trim($r->id_stock) == trim($value)){
+				$out .= '<option value="'.$r->id_stock.'" selected="selected">'.$r->id_stock.' </option>';
+			}else{
+				$out .= '<option value="'.$r->id_stock.'">'.$r->id_stock.'</option>';
+			}
+		}
+		
+		return $out;
+	}
+
+	function OptionLokasi($d=""){
+		$value = isset($d['value'])?$d['value']:'';
+		$out = '<option value="">-- Pilih --</option>';
+		
+		$this->db->flush_cache();
+		$this->db->from('tr_stock');
+
+		$this->db->order_by('id_lokasi');
+				
+		$res = $this->db->get();
+		
+		foreach($res->result() as $r){
+			if(trim($r->id_lokasi) == trim($value)){
+				$out .= '<option value="'.$r->id_lokasi.'" selected="selected">'.$r->id_lokasi.' </option>';
+			}else{
+				$out .= '<option value="'.$r->id_lokasi.'">'.$r->id_lokasi.'</option>';
+			}
+		}
+		
+		return $out;
+	}
+
+	function OptionBarangs($d=""){
+		$value = isset($d['value'])?$d['value']:'';
+		$out = '<option value="">-- Pilih --</option>';
+		
+		$this->db->flush_cache();
+		$this->db->from('ref_barang');
+
+		$this->db->order_by('kode_barang');
+				
+		$res = $this->db->get();
+		
+		foreach($res->result() as $r){
+			if(trim($r->kode_barang) == trim($value)){
+				$out .= '<option value="'.$r->kode_barang.'" selected="selected">'.$r->nama_barang.' </option>';
+			}else{
+				$out .= '<option value="'.$r->kode_barang.'">'.$r->kode_barang.' - '.$r->nama_barang.'</option>';
+			}
+		}
+		
+		return $out;
+	}
+
 }
 
 ?>
