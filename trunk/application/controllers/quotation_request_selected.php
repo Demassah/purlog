@@ -37,7 +37,7 @@ class quotation_request_selected extends CI_Controller {
     if ($result) {
         echo json_encode(array('success' => true));
     } else {
-        echo json_encode(array('msg' => 'Data gagal dikirim'));
+        echo json_encode(array('msg' => 'Data gagal dikirim atau harga berisi Nol'));
     }
   }	
 
@@ -52,18 +52,28 @@ class quotation_request_selected extends CI_Controller {
 
 
   function Done($kode) {
-    $result = $this->mdl_quotation_request_selected->done($kode);
-    if ($result) {
-        echo json_encode(array('success' => true));
-    } else {
-        echo json_encode(array('msg' => 'Data gagal dikirim'));
-    }
+  	$result = $this->mdl_quotation_request_selected->cek_no_vendor($kode);
+  	if($result>=3){
+  		$result = $this->mdl_quotation_request_selected->cek_pr_qr($kode);
+  		if($result>=1){
+		    $result = $this->mdl_quotation_request_selected->done($kode);
+		    if ($result) {
+		        echo json_encode(array('success' => true));
+		    } else {
+		        echo json_encode(array('msg' => 'Data gagal dikirim'));
+		    }
+		    } else {
+		    	echo json_encode(array('msg'=> 'Tidak Ada Vendor yang dipilih'));
+		    }
+		  }else{
+		    echo json_encode(array('msg'=> 'Jumlah Vendor Kurang dari 3'));
+		  }
   }
 
   function Add_vendor($id_pr)
   {
   	$data['id_pr'] = $id_pr;
-  	$data['list'] = $this->mdl_quotation_request_selected->list_vendor();
+  	$data['list'] = $this->mdl_quotation_request_selected->list_vendor($id_pr);
   	$this->load->view('quotation_request_selected/form', $data);
   }
 

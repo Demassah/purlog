@@ -2,9 +2,9 @@
   <div class="fsearch">
     <table>
       <tr>
-          <td>
-              &nbsp;&nbsp;<a href="#" onclick="Add_vendor()" class="easyui-linkbutton" iconCls="icon-ok">Add</a>
-          </td>
+          <td><a href="#" onclick="Add_vendor()" class="easyui-linkbutton" iconCls="icon-ok">Add</a></td>
+          <td style="width:100%"></td>
+          <td><a href="#" onclick="back()" class="easyui-linkbutton" iconCls="icon-undo">Kembali</a></td>
       </tr>
     </table>
   </div>
@@ -19,6 +19,7 @@
   $detail_qr = array();
   $index =0;
   $qr_set = array();
+  $status = array();
 
   echo '<br> <h2 align="center"> Compare Vendor List </h2> <br>';
 
@@ -28,6 +29,7 @@
       array_push($top_set, $data['top']);
       array_push($qr_set,$data['id_qr']);
       array_push($detail_qr,$data['id_detail_qr']);
+      array_push($status,$data['status']);
       $supplier_id = $data['id_vendor'];
       $index = 0;
     }
@@ -36,7 +38,7 @@
     $index++;
   }
 
-  $quotation = array("supplier_nama" => $supplier_set, "top" => $top_set, "data" => $barang_set, "Selected" => $qr_set);
+  $quotation = array("supplier_nama" => $supplier_set, "top" => $top_set, "data" => $barang_set, "Selected" => $qr_set,"status"=>$status);
 
   $header = TRUE;
   $counter = 0;
@@ -73,7 +75,7 @@
       foreach ($quotation['data'][$data_counter]['harga'] as $harga) {
         echo '<td><div id="'.$quotation['data'][$data_counter]['harga'][$harga_counter][1].'" class="qrs">';
           echo "<span name='harga' id='harga_".$quotation['data'][$data_counter]['harga'][$harga_counter][1]."' class='text'>Rp.".number_format($quotation['data'][$data_counter]['harga'][$harga_counter][0],2,',','.')."</span>";
-          echo "<input type='text' size='2' name='harga' value='".$quotation['data'][$data_counter]['harga'][$harga_counter][0]."' class='editbox' id='harga_input_".$quotation['data'][$data_counter]['harga'][$harga_counter][1]."'/>";
+          echo "<input type='text'  name='harga' value='".$quotation['data'][$data_counter]['harga'][$harga_counter][0]."' class='editbox'  id='harga_input_".$quotation['data'][$data_counter]['harga'][$harga_counter][1]."'/>";
         echo"</div></td>";
         $harga_counter++;
       }
@@ -81,17 +83,25 @@
       $data_counter++;
     }
     echo "<tr><td></td>";
-    foreach ($quotation['Selected'] as $l) {
-      echo "<td>";
-        if($this->mdl_auth->CekAkses(array('menu_id'=>15, 'policy'=>'SELECT'))){
-        echo "<a href='#'  onclick='select_vendor(".$l.");'  plain='false'>Select</a>";
+
+     $x=0;
+      foreach ($quotation['Selected'] as $l) {
+        //print_r($l);
+        echo "<td>";
+        if($quotation['status'][$x] != 2){
+          if($this->mdl_auth->CekAkses(array('menu_id'=>15, 'policy'=>'SELECT'))){
+          echo "<a href='#'  onclick='select_vendor(".$l.");'  plain='false'>Select</a>";
+          }
+          echo "   |  ";
+          if($this->mdl_auth->CekAkses(array('menu_id'=>15, 'policy'=>'DELETE'))){
+          echo "<a href='#'  onclick='delete_vendor(".$l.");'  plain='false'>Delete</a>";
+          }
+        echo "</td>";
+        }else{
+          echo "vendor selected";
         }
-        echo "   |  ";
-        if($this->mdl_auth->CekAkses(array('menu_id'=>15, 'policy'=>'DELETE'))){
-        echo "<a href='#'  onclick='delete_vendor(".$l.");'  plain='false'>Delete</a>";
-        }
-      echo "</td>";  
-}
+        $x++;
+      }
     echo "</tr>";
   echo '</table>';
 ?>
@@ -108,6 +118,7 @@
           $("#harga_input_"+ID_qr).focusin();
           $("#harga_input_"+ID_qr).numericInput();
           $("#harga_input_"+ID_qr).autoNumeric('init'); 
+          $("#harga_input_"+ID_qr).val(""); 
     }).change(function(event) {
       var ID_qr = $(this).attr('id');
       var harga = $("#harga_input_"+ID_qr).val();
@@ -238,6 +249,11 @@
             });
           }
         }
+      });
+    }
+    back = function (val){
+      $('#konten').panel({
+        href:base_url+'quotation_request_selected/index'
       });
     }
   });

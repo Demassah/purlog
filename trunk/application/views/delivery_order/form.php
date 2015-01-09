@@ -12,7 +12,6 @@
 	<div class="fitem" >
 		<label style="width:100px">Courir </label>: 
 			<select id="DO" name="id_courir" style="width:200px;">
-						<option>Pilih</option>
 							<?=$this->mdl_prosedur->OptionCourir(array('value'=>$id_courir));?>
 						       
 				</select>	

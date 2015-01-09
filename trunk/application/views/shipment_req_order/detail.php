@@ -2,9 +2,9 @@
 	<div class="fsearch">
 		<table>
 			<tr>
-					<td>
-							&nbsp;&nbsp;<a href="#" onclick="Insert()" class="easyui-linkbutton" iconCls="icon-ok">Add</a>
-					</td>							
+				<td><a href="#" onclick="Insert()" class="easyui-linkbutton" iconCls="icon-ok">Add</a></td>
+				<td style="width:100%"></td>
+        <td><a href="#" onclick="back()" class="easyui-linkbutton" iconCls="icon-undo">Kembali</a></td>
 			</tr>		
 		</table>
 	</div>

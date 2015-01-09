@@ -5,7 +5,7 @@ class inbound extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('mdl_inbound');
-		// $this->output->enable_profiler(TRUE);
+	//$this->output->enable_profiler(TRUE);
 	}
 	/* --------------------------------list -------------------------------------- */
 	function index(){
@@ -65,6 +65,8 @@ class inbound extends CI_Controller {
 	/* --------------------------------Function Done Inbound-------------------------------------- */
 	function done($kode)
 	{
+		$result = $this->mdl_inbound->cek_detail($kode);
+		if($result>=1){
 		$result = $this->mdl_inbound->done($kode);
 
 		if($result){
@@ -72,6 +74,19 @@ class inbound extends CI_Controller {
 		}else{
 			echo json_encode(array('msg'=>'Data Gagal Dikirim'));
 		}
+		}else{
+			echo json_encode(array('msg'=>'Detail Masih Kosong'));
+		}
+	}
+	/* --------------------------------Function Delete Detail Inbound-------------------------------------- */
+	function cancel($kode)
+	{
+		$result = $this->mdl_inbound->cancel($kode);
+			if($result){
+				echo json_encode(array('success'=>true));
+			}else{
+				echo json_encode(array('msg'=>'Detail berhasil dihapus'));
+			}
 	}
 	/* --------------------------------Function Detail-------------------------------------- */
 	function detail_in($id){

@@ -9,7 +9,6 @@
     ">    
   <thead>
     <tr>
-      <th field="id_qr" sortable="true" width="80" >ID QR</th>
       <th field="id_pr" sortable="true" width="80" >ID PR</th>
       <th field="id_ro" sortable="true" width="60">ID RO</th>     
       <th field="full_name" sortable="true" width="130">Requestor</th>

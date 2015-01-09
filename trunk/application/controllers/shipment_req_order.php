@@ -20,12 +20,17 @@ class shipment_req_order extends CI_Controller {
 	}
 
 	function done($kode) {
-    $result = $this->mdl_shipment_req_order->done($kode);
-    if ($result) {
-        echo json_encode(array('success' => true));
-    } else {
-        echo json_encode(array('msg' => 'Data gagal dikirim'));
-    }
+		$result = $this->mdl_shipment_req_order->cek_id_sro($kode);
+		if($result>=1){
+	    $result = $this->mdl_shipment_req_order->done($kode);
+	    if ($result) {
+	        echo json_encode(array('success' => true));
+	    } else {
+	        echo json_encode(array('msg' => 'Data gagal dikirim'));
+	    }
+	  }else{
+	  	echo json_encode(array('msg'=> 'Detail masih kosong'));
+	  }
   }	
   
 	function add()

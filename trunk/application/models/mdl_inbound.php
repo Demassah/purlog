@@ -49,14 +49,6 @@ class mdl_inbound extends CI_Model {
 	}
 
 /*---------------------Option Inbound--------------------------------------- */
-	function select_po(){
-		$this->db->select('a.id_pr,a.id_po,a.sisa');
-		$this->db->order_by('a.id_pr', 'asc');
-		$this->db->where('sisa !=',0);
-		$this->db->group_by('a.id_po');
-		$query = $this->db->get('v_po_inbound a');
-		return $query->result();
-	}
 
 	function OptionInbound($d=""){
 		$value = isset($d['value'])?$d['value']:'';
@@ -64,15 +56,11 @@ class mdl_inbound extends CI_Model {
 		if($id_po_re == 1){
 			$this->db->flush_cache();
 			$this->db->start_cache();
-				$list = $this->mdl_inbound->select_po();
-				$id = '';
-				foreach ($list as $l) {
-					$id = $l->id_po;
-					$this->db->where('b.id_po =', $id);
-				}
-				$this->db->select('b.id_po');
-				$this->db->order_by('b.id_po', 'asc');
-				$res = $this->db->get('tr_po b');
+				$this->db->select('id_po,id_pr,id_po,sisa');
+				$this->db->where('sisa !=', 0);
+				$this->db->group_by('id_pr');
+				$this->db->order_by('id_pr', 'asc');
+				$res = $this->db->get('v_po_inbound');
 			$this->db->stop_cache();
 
 			$out = '<option value="">-- Pilih ID --</option>';
@@ -170,6 +158,17 @@ class mdl_inbound extends CI_Model {
 		return $query->result();
 	}
 	/*---------------------Done Inbound--------------------------------------- */
+	function cek_detail($kode)
+	{
+		$this->db->flush_cache();
+		$this->db->start_cache();
+			$this->db->select('id_in');
+			$this->db->where('id_in', $kode);
+			$this->db->order_by('id_in', 'asc');
+			$this->db->from('tr_in_detail');
+			return $this->db->count_all_results();
+		$this->db->stop_cache();
+	}
 	function done($kode)
 	{
 		$this->db->flush_cache();
@@ -221,14 +220,18 @@ class mdl_inbound extends CI_Model {
 		{
 			$jumlah = count($data['detail_id']);
 				for($i=0;$i<$jumlah;$i++){
-					$this->db->set('id_in',$data['id_in'][$i]);
-					$this->db->set('kode_barang',$data['kode_barang'][$i]);
-					$this->db->set('ext_rec_no_detail',$data['ext_rec_no'][$i]);
-					$this->db->set('qty',$data['receive'][$i]);
-					$this->db->set('lokasi',$data['lokasi'][$i]);
-					$this->db->set('status',1);
+					if($data['sisa'][$i]!=0){
+						$this->db->set('id_in',$data['id_in'][$i]);
+						$this->db->set('kode_barang',$data['kode_barang'][$i]);
+						$this->db->set('ext_rec_no_detail',$data['ext_rec_no'][$i]);
+						$this->db->set('qty',$data['sisa'][$i]);
+						$this->db->set('lokasi',$data['lokasi'][$i]);
+						$this->db->set('status',1);
 
-					$result = $this->db->insert('tr_in_detail');
+						$result = $this->db->insert('tr_in_detail');
+					}else{
+						return FALSE;	
+					}
 				}
 
 		if($result) {
@@ -255,6 +258,21 @@ class mdl_inbound extends CI_Model {
 			return FALSE;
 		}
 
+	}
+
+	function cancel($kode)
+	{
+		$this->db->flush_cache();
+		$this->db->start_cache();
+			$this->db->where('id_detail_in', $kode);
+			$result = $this->db->delete('tr_in_detail');
+		$this->db->stop_cache();
+
+		if($result){
+			return TRUE;
+		}else{
+			return FALSE;
+		}
 	}
 
 

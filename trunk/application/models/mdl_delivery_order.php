@@ -53,15 +53,21 @@ class mdl_delivery_order extends CI_Model {
 		}
 		return json_encode($response);
 	}
-	
+	function cek_sro($kode)
+	{
+		$this->db->select('id_do');
+		$this->db->where('id_do', $kode);
+		$this->db->from('tr_sro');
+		return $this->db->count_all_results();
+	}
 	function done($kode){
 		
 		$this->db->flush_cache();
-
-		$this->db->set('status', "2");
-
-		$this->db->where('id_do', $kode);
-		$result = $this->db->update('tr_do');
+		$this->db->start_cache();
+			$this->db->set('status', "2");
+			$this->db->where('id_do', $kode);
+			$result = $this->db->update('tr_do');
+		$this->db->stop_cache();
 
 		//return
 		if($result) {
