@@ -31,15 +31,6 @@ class transfer extends CI_Controller {
 		}
 	}
 
-	function delete($id){
-		$result = $this->mdl_request_order->DeleteOnDb($id);
-		if ($result){
-			echo json_encode(array('success'=>true));
-		} else {
-			echo json_encode(array('msg'=>'Data gagal di hapus'));
-		}
-	}
-
 	/* ------------------------------------------------ Add Data ------------------------------------------------*/
 		
 	function add(){
@@ -165,22 +156,80 @@ class transfer extends CI_Controller {
             }
         }
 
+        function alokasi($id){
+		// get data
+		$label  = $this->mdl_transfer->getdataedit($id);
+		$detail = $this->mdl_transfer->getDetail($label->row()->id_transfer);
 
-        function alokasi($kode){
+		# hidden input
+		$data['id_detail_transfer'] = $id;
+		$data['id_transfer'] = $label->row()->id_transfer;
+		$data['id_stock'] = $label->row()->id_stock;
+		$data['kode_barang'] = $label->row()->kode_barang;
+		$data['nama_barang'] = $label->row()->nama_barang;
+		$data['qty_stock'] = $label->row()->qty_stock;
+		$data['price'] = $label->row()->price;
+		$data['lokasi_stock'] = $label->row()->lokasi_stock;
+		$data['status'] = $label->row()->status;
 
-        	$r = $this->mdl_transfer->getdataedit($kode);
+		# data input barang
+		$data['qty'] = '';
+		$data['id_lokasi'] = '';
 
-			$data['id_transfer'] = $r->row()->id_transfer;
-			$data['id_stock'] = $r->row()->id_stock;
-			$data['kode_barang'] = $r->row()->kode_barang;
-			$data['nama_barang'] = $r->row()->nama_barang;
-			$data['qty'] = $r->row()->qty;
-			$data['price'] = $r->row()->price;
-			$data['id_lokasi'] = $r->row()->id_lokasi;
-			$data['status'] = $r->row()->status;
-		    
-			$data['kode'] = $kode;
-
-			$this->load->view('transfer/alokasi_form');
+		$this->load->view('transfer/alokasi_form', $data);
 	}
+
+
+	function save_transfer(){
+		# get post data
+		foreach($_POST as $key => $value){
+			$data[$key] = $value;
+		}
+		
+		# init
+		$status = "";
+		$result = false;
+		$data['pesan_error'] = '';
+
+		# rules validasi form		
+		$this->form_validation->set_rules("qty", 'Qty', 'trim|numeric|required|xss_clean');
+		$this->form_validation->set_rules("id_lokasi", 'Lokasi', 'trim|required|xss_clean');
+
+		# message rules
+		$this->form_validation->set_message('required', 'Field %s harus diisi.');
+		$this->form_validation->set_message('numeric', 'Field %s harus diisi dengan angka.');
+
+		$data['pesan_error'] = '';
+		if ($this->form_validation->run() == FALSE){
+			$data["pesan_error"] .= trim(validation_errors(' ',' '))==''?'':validation_errors(' ',' ');
+		}else{
+			$result = $this->mdl_transfer->Alokasi_insert($data);
+		}
+		
+		if($result){
+			echo json_encode(array('success'=>true));
+		}else{
+			echo json_encode(array('msg'=>$data['pesan_error']));
+		}
+	}
+
+	function delete($id){
+		$result = $this->mdl_transfer->DeleteOnDb($id);
+		if ($result){
+			echo json_encode(array('success'=>true));
+		} else {
+			echo json_encode(array('msg'=>'Data gagal di hapus'));
+		}
+	}
+
+	function done($id){
+		$result = $this->mdl_transfer->done($id);
+		if ($result){
+			echo json_encode(array('success'=>true));
+		} else {
+			echo json_encode(array('msg'=>'Data gagal di hapus'));
+		}
+	} 
+
+
 }

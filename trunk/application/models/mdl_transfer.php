@@ -20,8 +20,9 @@ class mdl_transfer extends CI_Model {
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-		$this->db->select('*, a.id_transfer, a.type_transfer, a.note, a.date_create, a.user_id');
-		$this->db->from('tr_transfer a');		
+		$this->db->select('*, a.id_transfer, a.type_transfer, a.note, a.date_create, a.user_id, b.full_name');
+		$this->db->from('tr_transfer a');
+		$this->db->join('sys_user b', 'b.user_id = a.user_id');
 
 		#Filter
 		// if($departement_id != '0'){
@@ -195,16 +196,88 @@ class mdl_transfer extends CI_Model {
 	function getdataedit($kode){
 		# create query
 		$this->db->flush_cache();
-		$this->db->select('a.id_detail_transfer, a.id_transfer, a.id_stock, a.kode_barang, a.qty AS qty_stock, a.price, a.id_lokasi AS lokasi_stock, a.status, b.nama_barang');
+		$this->db->select('a.id_detail_transfer, a.id_transfer, a.id_stock, a.kode_barang, a.qty AS qty_stock, a.qty, a.price, a.id_lokasi AS lokasi_stock, a.id_lokasi, a.status, b.nama_barang');
 		$this->db->from('tr_transfer_detail a');
 		$this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang');
 
 		$this->db->where('a.id_detail_transfer', $kode);
 
 		return $this->db->get();
+	}
 
+	function getDetail($id_detail_transfer){
+		$this->db->where('id_detail_transfer', $id_detail_transfer);
+		$this->db->from('tr_transfer_detail');
+		
+		return $this->db->get();
+	}
+
+
+	function Alokasi_insert($data){
+		$this->db->trans_start();
+
+		$result = true;
+
+		# tambah data ke tabel
+		$this->db->flush_cache();
+		$this->db->set('id_transfer', $data['id_transfer']);
+		$this->db->set('id_stock', $data['id_stock']);
+		$this->db->set('kode_barang', $data['kode_barang']);
+		$this->db->set('qty', $data['qty']);
+		$this->db->set('price', $data['price']);
+		$this->db->set('id_lokasi', $data['id_lokasi']);
+		$this->db->set('status', $data['status']);
+		
+		$this->db->where('id_detail_transfer', $data['kode']);
+		$result = $this->db->update('tr_transfer_detail');
+
+		//return
+		$this->db->trans_complete();
+		return $this->db->trans_status();
+
+	}
+
+	function DeleteOnDb($kode){		
+		$this->db->where('id_transfer', $kode);
+		$result = $this->db->delete('tr_transfer');
+		
+		//return
+		if($result) {
+				return TRUE;
+		}else {
+				return FALSE;
+		}
+	}
+
+	function done($kode){
+		
+		$this->db->flush_cache();
+		
+		$this->db->set('status', "2");
+		
+		$this->db->where('id_transfer', $kode);
+		$result = $this->db->update('tr_transfer');
+	   
+	   
+		//return
+		if($result) {
+				return TRUE;
+		}else {
+				return FALSE;
+		}
+	}
+
+	function getTransferDetailIds($ids) {
+		$this->db->flush_cache();
+		$this->db->where_in('id_detail_transfer', $ids);
+		return $this->db->get('tr_transfer_detail');
+	}
+
+	function getTransferDetail($id) {
+		$this->db->flush_cache();
+		$this->db->where('id_detail_transfer', $id);
+		return $this->db->get('tr_transfer_detail');
 	}
 
 }
 
-?>
