@@ -163,6 +163,7 @@ class request_order extends CI_Controller {
 		$this->form_validation->set_rules("kode_barang", 'Barang', 'trim|required|xss_clean');
 		$this->form_validation->set_rules("qty", 'Qty', 'trim|numeric|required|xss_clean');
 		$this->form_validation->set_rules("barang_bekas", 'Barang Bekas', 'trim|required|xss_clean');
+		$this->form_validation->set_rules("note", 'Note', 'trim|required|xss_clean');
 
 		# message rules
 		$this->form_validation->set_message('required', 'Field %s harus diisi.');

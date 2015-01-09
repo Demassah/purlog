@@ -36,9 +36,42 @@
         href:base_url+'purchase_request/index'
       });
     }
-		
-		
-	$(function(){ // init
+
+     cancel = function (val){
+        if(confirm("Apakah yakin akan membatalkan purchase barang dengan id '" + val + "'?")){
+          var response = '';
+          $.ajax({ type: "GET",
+             url: base_url+'purchase_request/cancel/' + val,
+             async: false,
+             success : function(response){
+              var response = eval('('+response+')');
+              if (response.success){
+                $.messager.show({
+                  title: 'Success',
+                  msg: 'Data Berhasil Dikirim'
+                });
+                // reload and close tab
+                $('#dg').datagrid('reload');
+              } else {
+                $.messager.show({
+                  title: 'Error',
+                  msg: response.msg
+                });
+              }
+             }
+          });
+        }
+      //}
+    }
+    //end sendData 
+
+    actionDetail = function(value, row, index){
+      var col='';
+          col += '<a href="#" onclick="cancel(\''+row.id_detail_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Cancel</a>';
+      return col;
+    }
+	
+  $(function(){ // init
       $('#dg').datagrid({url:"purchase_request/grid_detail/<?=$id_pr?>"});  
 	});	
 
@@ -81,12 +114,14 @@
 			<th field="id_detail_pr" sortable="true" width="150" hidden="true">ID</th>
       <th field="id_pr" sortable="true" width="80">ID PR</th>
       <th field="id_detail_ro" sortable="true" width="80">ID Detail RO</th>
-      <th field="id_ro" sortable="true" width="120">ID RO</th>
-      <th field="kode_barang" sortable="true" width="120">Kode Barang</th>
+      <th field="id_ro" sortable="true" width="80">ID RO</th>
+      <th field="kode_barang" sortable="true" width="100">Kode Barang</th>
+      <th field="kode_barang" sortable="true" width="120">Nama Barang</th>
       <th field="qty" sortable="true" width="70">qty</th>
-      <th field="user_id" sortable="true" width="70">Requestor</th>
-      <th field="date_create" sortable="true" width="200">Date Create</th>
+      <th field="full_name" sortable="true" width="100">Requestor</th>
+      <th field="date_create" sortable="true" width="150">Date Create</th>
       <th field="note" sortable="true" width="200">Note</th>
+      <th field="action" align="center" formatter="actionDetail" width="100">Aksi</th>
 		</tr>
 	</thead>
 </table>

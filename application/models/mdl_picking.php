@@ -483,6 +483,38 @@ class mdl_picking extends CI_Model {
 	}
 	//END #addProsDetail
 	
+	function get_pdf(){        
+        # get data
+        $this->db->flush_cache();
+        $this->db->start_cache();
+
+        	$this->db->select('a.id_ro, a.id_stock, a.kode_barang, a.qty, a.id_lokasi, d.nama_barang, b.purpose, b.cat_req, b.ext_doc_no, b.etd, b.date_create, f.full_name, g.departement_name');
+			$this->db->from('tr_pros_detail a');
+			$this->db->join('tr_ro b', 'b.id_ro = a.id_ro');
+			$this->db->join('tr_ro_detail c', 'c.id_detail_ro = a.id_detail_ro');
+			$this->db->join('ref_barang d', 'd.kode_barang = a.kode_barang');
+			$this->db->join('tr_stock e', 'e.id_stock = a.id_stock');
+			$this->db->join('sys_user f', 'f.user_id = b.user_id');
+			$this->db->join('ref_departement g', 'g.departement_id = f.departement_id');
+
+			//$this->db->where('a.id_ro', $kode);
+			$this->db->where('a.status', '1');
+			$this->db->where('a.status_picking', '1');
+
+        // proses
+            $result = $this->db->get();
+        
+	        if ($result->num_rows() > 0) {
+	            foreach ($result->result() as $data) {
+	                $data_pdf[] = $data;
+	            }
+	        return $data_pdf;           
+        }
+        
+    }
+
+
+
 }
 
 ?>

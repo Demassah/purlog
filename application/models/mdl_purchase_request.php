@@ -167,12 +167,10 @@ class mdl_purchase_request extends CI_Model {
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('*, a.id_pr, a.id_ro, a.qty, a.note, c.full_name, d.departement_name, a.kode_barang, e.nama_barang');
+			$this->db->select('*, a.id_pr, a.id_ro, a.qty, a.note, a.kode_barang, b.full_name, c.nama_barang');
 			$this->db->from('tr_pr_detail a');
-			$this->db->join('tr_pr b', 'b.id_ro = a.id_ro');
-			$this->db->join('sys_user c', 'c.user_id = a.user_id');
-			$this->db->join('ref_departement d', 'd.departement_id = c.departement_id');
-			$this->db->join('ref_barang e', 'e.kode_barang = a.kode_barang');
+			$this->db->join('sys_user b', 'b.user_id = a.user_id');
+			$this->db->join('ref_barang c', 'c.kode_barang = a.kode_barang');
 
 			$this->db->where('a.id_pr', $id_pr);
 			//$this->db->where('a.status', '1');
@@ -280,7 +278,42 @@ class mdl_purchase_request extends CI_Model {
 		return $this->db->trans_status();
 	}
 
-	
+	function cancel($kode){
+		
+		$this->db->flush_cache();
+
+		$this->db->set('status', "1");
+		$this->db->set('id_pr', "0");
+
+		$this->db->where('id_detail_pr', $kode);
+		$result = $this->db->update('tr_pr_detail');
+
+		//return
+		if($result) {
+				return TRUE;
+		}else {
+				return FALSE;
+		}
+	}
+
+	function countDetail($id_pr){
+		$this->db->where('id_pr', $id_pr);
+		$this->db->from('tr_pr_detail');
+		
+		return $this->db->count_all_results();
+	}
+
+	function DeleteOnDb($kode){     
+        $this->db->where('id_pr', $kode);
+        $result = $this->db->delete('tr_pr');
+        
+        //return
+        if($result) {
+                return TRUE;
+        }else {
+                return FALSE;
+        }
+    }
 }
 
 ?>

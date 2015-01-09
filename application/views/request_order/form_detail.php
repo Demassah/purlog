@@ -121,7 +121,9 @@
 		<textarea name="note" id="note" cols="36" rows="5"><?=$note?></textarea>
 	</div>
 	<div class="fitem" align="left">
-		<label style="width:300px;">*Keterangan: Note di isi jika dibutuhkan </label>
+		<label style="width:300px;">*Keterangan: </label>
+		<label style="width:300px;">- Note di isi jika dibutuhkan </label>
+		<label style="width:300px;">- Jika tidak di isi beri tanda (-) </label>
 	</div>
 
 	<!-- Hidden -->

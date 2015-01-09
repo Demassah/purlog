@@ -17,7 +17,7 @@ class mdl_request_order_approval extends CI_Model {
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('*, b.full_name, c.departement_name, d.status_delete');
+			$this->db->select('a.id_ro, a.purpose, a.cat_req, a.ext_doc_no, a.etd, a.date_create, b.full_name, c.departement_name, d.status_delete');
 			$this->db->from('tr_ro a');
 			$this->db->join('sys_user b', 'b.user_id = a.user_id');
 			$this->db->join('ref_departement c', 'c.departement_id = b.departement_id');

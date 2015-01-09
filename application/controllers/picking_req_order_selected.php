@@ -123,14 +123,6 @@ class picking_req_order_selected extends CI_Controller {
         echo $this->mdl_picking->togrid($data['row_data'], $data['row_count']);
     }
 
-    // function darksideofthemoon()
-    // {
-    //     // $data = $this->mdl_picking->getProsDetailIds(array(31, 32))->result();
-
-    //     $data = 'a:2:{i:0;a:22:{s:14:"id_detail_pros";s:2:"32";s:12:"id_detail_ro";s:1:"1";s:5:"id_ro";s:1:"1";s:6:"id_sro";s:1:"0";s:8:"id_stock";s:1:"2";s:11:"kode_barang";s:3:"003";s:3:"qty";s:2:"12";s:9:"id_lokasi";s:5:"A0201";s:6:"status";s:1:"1";s:7:"user_id";s:1:"1";s:7:"purpose";s:7:"REQUEST";s:7:"cat_req";s:5:"ASSET";s:10:"ext_doc_no";s:5:"12345";s:3:"ETD";s:10:"2014-12-15";s:11:"date_create";s:19:"2014-12-15 00:00:00";s:4:"note";s:6:"dfsdsf";s:13:"status_delete";s:1:"0";s:2:"id";s:1:"4";s:11:"id_kategori";s:1:"2";s:15:"id_sub_kategori";s:1:"2";s:11:"nama_barang";s:3:"CPU";s:5:"price";s:4:"1000";}i:1;a:22:{s:14:"id_detail_pros";s:2:"31";s:12:"id_detail_ro";s:1:"2";s:5:"id_ro";s:1:"1";s:6:"id_sro";s:1:"0";s:8:"id_stock";s:1:"5";s:11:"kode_barang";s:3:"005";s:3:"qty";s:2:"25";s:9:"id_lokasi";s:5:"A0101";s:6:"status";s:1:"1";s:7:"user_id";s:1:"1";s:7:"purpose";s:7:"REQUEST";s:7:"cat_req";s:5:"ASSET";s:10:"ext_doc_no";s:5:"12345";s:3:"ETD";s:10:"2014-12-15";s:11:"date_create";s:19:"2014-12-15 00:00:00";s:4:"note";s:6:"dsfdsf";s:13:"status_delete";s:1:"0";s:2:"id";s:1:"6";s:11:"id_kategori";s:1:"2";s:15:"id_sub_kategori";s:1:"2";s:11:"nama_barang";s:8:"Keyboard";s:5:"price";s:3:"500";}}';
-    //     $data = unserialize($data);
-    //     print_r($data);
-    // }
 
     function save(){
         # get post data
@@ -187,6 +179,35 @@ class picking_req_order_selected extends CI_Controller {
                 $this->load->view('purchase_request/purchase_request');
         }
 
-    /* ------------------------ Pending --------------------------------------------- */
-       
+    /* ------------------------ Lain lain --------------------------------------------- */
+
+        function laporan_pdf() {
+            $this->load->library('HTML2PDF');
+            $html2pdf = new HTML2PDF('P', 'A4', 'fr');
+            $html2pdf->setDefaultFont('Arial');
+            
+            //filter
+            //get filter
+            //$fil['kd_prodi'] = $kd_prodi;
+            
+            //$data['nama'] = '';
+            //$data['namaUniv'] = 'STMIK BANDUNG';
+            //$data['alamatUniv'] = 'Jl.Phh.Mustofa No. 39. Grand Surapati Core (SUCORE) Blok M No.19, Telp.022 - 7207777';
+            //$data['kotaUniv'] = 'Bandung, Jawa Barat';
+            
+            // ambil data dari tabel
+            $data['data_pdf'] = $this->mdl_picking->get_pdf();
+            
+            /* if (count($da['row'])==0){
+            echo "Data Tidak Tersedia";
+            return;
+            } */
+            
+            $konten = $this->load->view('picking_req_order_selected/picklist_laporan', $data, true);
+            
+            $html2pdf->writeHTML($konten, false);
+            
+            $html2pdf->Output('picklist.pdf');
+        }
+
 }

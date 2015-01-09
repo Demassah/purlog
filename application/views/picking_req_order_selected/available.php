@@ -155,7 +155,11 @@
         }
       });
     }
-    
+
+    //Cetak
+    cetakData = function(val){    
+        window.open('<?=base_url().'picking_req_order_selected/laporan_pdf/'?>');      
+    }
 
 		Checkbox = function(value, row, index){
 			return '<input style="margin-top:2px;" type="checkbox" name="checkbox" id="checkbox" onclick="update_value('+index+', this.checked, \''+row.id_jadwal+'\')" '+(row.chk==true?'checked="checked"':'')+'/>';
@@ -185,7 +189,7 @@
             iconCls:'icon-print',
             text:'Print Picklist',
             handler:function(){
-              c();
+              cetakData();
             }
           }               
         ]
