@@ -36,16 +36,15 @@
 
     tambahDetail = function (val){
         if(val==null){
-          var row = $('#dg_detail_in').datagrid('getData');              
+          var row = $('#dg_detail_in').datagrid('getData');
           var id = ext;
           var type = $("#type").val();
           val = id;
-         
         }
 
       $('#dialog').dialog({
         title: 'Tambah Detail inbound',
-        width: 500,
+        width: 600,
         height: 200,
         closed: true,
         cache: false,
