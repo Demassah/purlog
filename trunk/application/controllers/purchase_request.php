@@ -51,14 +51,29 @@ class purchase_request extends CI_Controller {
                 }
         }
 
-        function doneData($kode) {
-        $result = $this->mdl_purchase_request->done($kode);
-        if ($result) {
-            echo json_encode(array('success' => true));
-        } else {
-            echo json_encode(array('msg' => 'Data gagal dikirim'));
+
+        function doneData($id){
+            $result = $this->mdl_purchase_request->countDetail($id);
+            if($result > 0){
+                $result = $this->mdl_purchase_request->done($id);
+                if ($result){
+                    echo json_encode(array('success'=>true));
+                } else {
+                    echo json_encode(array('msg'=>'Data gagal di kirim'));
+                } 
+            }else{
+                echo json_encode(array('msg'=>'Detail PR Masih Kosong'));
+            }
         }
-    }
+
+        function deleteData($id){
+            $result = $this->mdl_purchase_request->DeleteOnDb($id);
+            if ($result){
+                echo json_encode(array('success'=>true));
+            } else {
+                echo json_encode(array('msg'=>'Data gagal di hapus'));
+            }
+        } 
 
 /*-----------------------------------detail & form add data detail --------------------------------------------- */
 
@@ -110,6 +125,15 @@ class purchase_request extends CI_Controller {
                     echo json_encode(array('success'=>true));
             } else {
                     echo json_encode(array('msg'=>$data['pesan_error']));
+            }
+        }
+
+        function cancel($kode) {
+            $result = $this->mdl_purchase_request->cancel($kode);
+            if ($result) {
+                echo json_encode(array('success' => true));
+            } else {
+                echo json_encode(array('msg' => 'Data gagal dicancel'));
             }
         }
 
