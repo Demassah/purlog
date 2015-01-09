@@ -47,6 +47,63 @@
 			});
 		}
 		//end saveData
+		
+		deleteData = function (val){
+				if(confirm("Apakah yakin akan menghapus data '" + val + "'?")){
+					var response = '';
+					$.ajax({ type: "GET",
+						 url: base_url+'transfer/delete/' + val,
+						 async: false,
+						 success : function(response){
+							var response = eval('('+response+')');
+							if (response.success){
+								$.messager.show({
+									title: 'Success',
+									msg: 'Data Berhasil Dihapus'
+								});
+								// reload and close tab
+								$('#dg').datagrid('reload');
+							} else {
+								$.messager.show({
+									title: 'Error',
+									msg: response.msg
+								});
+							}
+						 }
+					});
+				}
+			//}
+		}
+		//end deleteData
+		
+
+		doneData = function (val){
+				if(confirm("Apakah yakin akan mentransfer data '" + val + "'?")){
+					var response = '';
+					$.ajax({ type: "GET",
+						 url: base_url+'transfer/done/' + val,
+						 async: false,
+						 success : function(response){
+							var response = eval('('+response+')');
+							if (response.success){
+								$.messager.show({
+									title: 'Success',
+									msg: 'Data Berhasil Ditransfer'
+								});
+								// reload and close tab
+								$('#dg').datagrid('reload');
+							} else {
+								$.messager.show({
+									title: 'Error',
+									msg: response.msg
+								});
+							}
+						 }
+					});
+				}
+			//}
+		}
+		//end deleteData 
 
 		actionbutton = function(value, row, index){
 			var col='';
@@ -132,7 +189,7 @@
 			<th field="type_transfer" sortable="true" width="130">Tipe Transfer</th>
 			<th field="note" sortable="true" width="250">Note</th>
 			<th field="date_create" sortable="true" width="120">Date Create</th>
-			<th field="user_id" sortable="true" width="120">Requestor</th>
+			<th field="full_name" sortable="true" width="120">Requestor</th>
 			<th field="action" align="center" formatter="actionbutton" width="180">Aksi</th>
 		</tr>
 	</thead>
