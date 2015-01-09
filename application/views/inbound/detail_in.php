@@ -15,7 +15,7 @@
       <th field="qty" sortable="true" width="70">Qty</th>
       <th field="ext_rec_no_detail" sortable="true" width="120">Detail Rec No</th>
       <th field="lokasi" sortable="true" width="70">Lokasi</th>
-      <th field="status" sortable="true" width="70">Status</th>
+      <th field="action" align="center" formatter="actionbutton" width="180">Aksi</th>
 		</tr>
 	</thead>
 </table>
@@ -87,7 +87,40 @@
         href:base_url+'inbound/index'
       });
     }
-    
+    actionbutton = function(value, row, index){
+      var col='';
+      <?if($this->mdl_auth->CekAkses(array('menu_id'=>41, 'policy'=>'DELETE'))){?>
+          col += '<a href="#" onclick="cancel(\''+row.id_detail_in+'\');" class="easyui-linkbutton" iconCls="icon-cancel" plain="false">Cancel</a>';
+      <?}?>
+         
+      return col;
+    }
+    cancel = function (val){
+        if(confirm("Apakah yakin akan menghapus data '" + val + "'?")){
+          var response = '';
+          $.ajax({ type: "GET",
+             url: base_url+'inbound/cancel/' + val,
+             async: false,
+             success : function(response){
+              var response = eval('('+response+')');
+              if (response.success){
+                $.messager.show({
+                  title: 'Success',
+                  msg: 'Data Berhasil Dihapus'
+                });
+                // reload and close tab
+                $('#dg_detail_in').datagrid('reload');
+              } else {
+                $.messager.show({
+                  title: 'Error',
+                  msg: response.msg
+                });
+              }
+             }
+          });
+        }
+      //}
+    }
     
   $(function(){ // init
       $('#dg_detail_in').datagrid({url:"inbound/grid_detail/"+id_in});  
@@ -115,6 +148,6 @@
         ]
       });     
     }); 
-    
+
   });
 </script>

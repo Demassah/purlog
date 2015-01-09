@@ -19,12 +19,18 @@ class delivery_order extends CI_Controller {
 	}
 
 	function doneData($kode) {
-    $result = $this->mdl_delivery_order->done($kode);
-    if ($result) {
-        echo json_encode(array('success' => true));
-    } else {
-        echo json_encode(array('msg' => 'Data gagal dikirim'));
-    }
+    $result = $this->mdl_delivery_order->cek_sro($kode);
+    if ($result>0) {
+    		$result = $this->mdl_delivery_order->done($kode);
+    		if($result){
+						echo json_encode(array('success' => true));
+			    } else {
+			        echo json_encode(array('msg' => 'Data gagal dikirim'));
+			    }
+			  }else{
+			  	echo json_encode(array('msg'=> 'Detail masih kosong'));
+			  }
+        
   }	
 
   function add(){

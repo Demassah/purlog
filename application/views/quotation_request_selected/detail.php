@@ -30,7 +30,7 @@
       </tr>   
       <tr> 
         <td>&nbsp;&nbsp;<a href="#" onclick="add()" class="easyui-linkbutton" iconCls="icon-add">Add</a></td>
-      </tr>     
+      </tr>    
     </table>
   </div>
 </div>

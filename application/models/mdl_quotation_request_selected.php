@@ -54,17 +54,18 @@ class mdl_quotation_request_selected extends CI_Model {
 		return json_encode($response);
 	}
 
-	function check_tr_qr()
+	function check_tr_qr($id_pr)
 	{
-		$this->db->select('id_vendor');
-		$query = $this->db->get('tr_qr');
+		$this->db->select('b.id_vendor,b.id_pr');
+		$this->db->where('b.id_pr', $id_pr);
+		$query = $this->db->get('tr_qr b');
 		return $query->result();
 
 	}
 
-	function list_vendor()
+	function list_vendor($id_pr)
 	{
-		$id_vendor = $this->mdl_quotation_request_selected->check_tr_qr();
+		$id_vendor = $this->mdl_quotation_request_selected->check_tr_qr($id_pr);
 		$item ='';
 		foreach ($id_vendor as $l) {
 			$item = $l->id_vendor;
@@ -153,6 +154,31 @@ class mdl_quotation_request_selected extends CI_Model {
 		}else {
 				return FALSE;
 		}
+	}
+
+	function cek_pr_qr($kode)
+	{
+		$this->db->flush_cache();
+		$this->db->start_cache();
+			$this->db->select('id_pr,status');
+			$this->db->order_by('id_pr', 'asc');
+			$this->db->from('tr_qr');
+			$this->db->where('id_pr', $kode);
+			$this->db->where('status', 2);
+			return $this->db->count_all_results();
+		$this->db->stop_cache();
+	}
+
+	function cek_no_vendor($kode)
+	{
+		$this->db->flush_cache();
+		$this->db->start_cache();
+			// $this->db->select('x.id_pr,x.status');
+			$this->db->order_by('x.id_pr', 'asc');
+			$this->db->from('tr_qr x');
+			$this->db->where('id_pr', $kode);
+			return $this->db->count_all_results();
+		$this->db->stop_cache();
 	}
 
 	function done($kode){

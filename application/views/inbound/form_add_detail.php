@@ -33,17 +33,13 @@
 							<input type="hidden" name="asal" class="asal_'.$l->id_detail_pr.'" value="'.$l->asal.'">
 					</td>
 					<td>
-							<div id="'.$l->id_detail_pr.'" class="inbound">
 								<span class="text" value="'.$l->receive.'" id="receive_'.$l->id_detail_pr.'">'.$l->receive.'</span>
-								<input type="text" name="receive[]" value="" class="editbox" id="receive_input_'.$l->id_detail_pr.'" size="2">
-							</div>
 					</td>
-					<td>
-							<input type="hidden" class="sisa_kurang2" id="sisa_kurang2_'.$l->id_detail_pr.'" value="'.$l->sisa.'">
-							<span class="sisa">'.$l->sisa.'</span>
-							<input type="text" class="sisa_kurang" id="sisa_kurang_'.$l->id_detail_pr.'" size = "2" readonly>
-							<input type="hidden" id="sisa_'.$l->id_detail_pr.'" value="'.$l->sisa.'">
+					<td><div id="'.$l->id_detail_pr.'" class="inbound">
+							<span id="sisa_"'.$l->id_detail_pr.'">'.$l->sisa.'</span>
+							<input type="text" name="sisa[]" value="" class="editbox" id="sisa_input_'.$l->id_detail_pr.'" size="2">
 							<input type="hidden" name="id_in[]" value="'.$l->id_in.'">
+							</div>
 					</td>
 				</tr>
 			';
@@ -58,33 +54,21 @@
 
 <script type="text/javascript">
 $(".editbox").hide();
-$(".sisa_kurang").hide();
-$(".sisa_kurang2").hide();
 	$(document).ready(function() {
 		$("div").on('click', '.inbound', function(event) {
 			var id_inbound = $(this).attr('id');
-				$("#receive_"+id_inbound).hide();
-				$("#receive_input_"+id_inbound).show();
-				$("#receive_input_"+id_inbound).numericInput();
+				$("#sisa_"+id_inbound).hide();
+				$("#sisa_input_"+id_inbound).show();
+				$("#sisa_input_"+id_inbound).numericInput();
 
 		}).change(function(event) {
 			var id_inbound = $(this).attr('id');
-			var masuk = $("#receive_input_"+id_inbound).val();
-			var asal = $(".asal_"+id_inbound).val();
+			var masuk = $("#sisa_input_"+id_inbound).val();
 			var sisa = $("#sisa_"+id_inbound).val();
-			var isi = $("#receive_"+id_inbound).val();
-			var sisa2=sisa-isi;
-			if(masuk > sisa2 || masuk == 0){
+			if(masuk>sisa){
 				alert("Data Tidak Boleh Kosong atau melebihi data yang ada");
-			}else{
-				var id_inbound = $(this).attr('id');
-				var masuk = $("#receive_input_"+id_inbound).val();
-				var sisa2 =	$("#sisa_kurang2_"+id_inbound).val();
-				var sisa = sisa2-masuk;
-				$("#sisa_kurang_"+id_inbound).val(sisa);
-				$("#sisa_kurang_"+id_inbound).show();
-				$(".sisa").hide();
 			}
+			
 
 		});
 

@@ -10,7 +10,7 @@ class mdl_shipment_req_order extends CI_Model {
 		# get parameter from easy grid
 		$page = isset($_POST['page']) ? intval($_POST['page']) : 1;  
 		$limit = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
-		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'a.id_ro';  
+		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'a.id_sro';  
 		$order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
 		$offset = ($page-1)*$limit;
 
@@ -51,7 +51,17 @@ class mdl_shipment_req_order extends CI_Model {
 		return json_encode($response);
 	}
 
-
+function cek_id_sro($kode)
+{
+	$this->db->flush_cache();
+	$this->db->start_cache();
+		$this->db->select('id_sro');
+		$this->db->order_by('id_detail_pros', 'asc');
+		$this->db->where('id_sro', $kode);
+		$this->db->from('tr_pros_detail');
+		return $this->db->count_all_results();
+	$this->db->stop_cache();
+}
 
 	function done($kode){
 		
