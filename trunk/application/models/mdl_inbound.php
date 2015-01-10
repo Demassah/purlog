@@ -196,11 +196,10 @@ class mdl_inbound extends CI_Model {
 	function get_iddetail($id,$type,$id_in)
 	{
 		if($type == 1){
-			$this->db->select('c.id_detail_pr,c.id_pr,c.id_po,c.kode_barang,c.asal,c.receive,c.sisa,c.nama_barang,a.id_in,a.ext_rec_no,b.id_lokasi,b.kode_barang');
+			$this->db->select('c.id_detail_pr,c.id_pr,c.id_po,c.kode_barang,c.asal,c.receive,c.sisa,c.nama_barang,a.id_in,a.ext_rec_no,b.id_lokasi');
 			$this->db->where('id_po', $id);
 			$this->db->where('c.sisa !=', 0);
 			$this->db->where('a.id_in', $id_in);
-			//$this->db->group_by('id_po');
 			$this->db->join('tr_stock b', 'b.kode_barang = c.kode_barang');
 			$query = $this->db->get('v_po_inbound c,tr_in a');
 			$query->result();
