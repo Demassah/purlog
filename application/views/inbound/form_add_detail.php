@@ -37,6 +37,7 @@
 					</td>
 					<td><div id="'.$l->id_detail_pr.'" class="inbound">
 							<span id="sisa_"'.$l->id_detail_pr.'">'.$l->sisa.'</span>
+							<input type="hidden" value="'.$l->sisa.'" id="sisa_'.$l->id_detail_pr.'" size="2">
 							<input type="text" name="sisa[]" value="" class="editbox" id="sisa_input_'.$l->id_detail_pr.'" size="2">
 							<input type="hidden" name="id_in[]" value="'.$l->id_in.'">
 							</div>
