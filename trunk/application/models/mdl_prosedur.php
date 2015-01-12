@@ -499,6 +499,28 @@ class mdl_prosedur extends CI_Model {
 		return $out;
 	}
 
+	function OptionSatuan($d=""){
+		$value = isset($d['value'])?$d['value']:'';
+		
+		$this->db->flush_cache();
+		$this->db->from('ref_satuan');
+		$this->db->order_by('nama_satuan');
+		//$this->db->where('status', 'A');
+				
+		$res = $this->db->get();
+		
+		$out = '<option value="">-- Pilih --</option>';
+		foreach($res->result() as $r){
+			if(trim($r->id_satuan) == trim($value)){
+				$out .= '<option value="'.$r->id_satuan.'" selected="selected">'.$r->nama_satuan.'</option>';
+			}else{
+				$out .= '<option value="'.$r->id_satuan.'">'.$r->nama_satuan.'</option>';
+			}
+		}
+		
+		return $out;
+	}
+
 }
 
 ?>

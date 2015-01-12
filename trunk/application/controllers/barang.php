@@ -24,6 +24,7 @@ class barang extends CI_Controller {
 	    $data['id_sub_kategori'] = '';
 	    $data['kode_barang'] = '';
 	    $data['nama_barang'] = '';
+	    $data['id_satuan'] = '';
 	    $data['status'] = '1';
 	    $data['type'] = '';
 		
@@ -37,6 +38,7 @@ class barang extends CI_Controller {
 	    $data['id_sub_kategori'] = $r->row()->id_sub_kategori;
 	    $data['kode_barang'] = $r->row()->kode_barang;
 	    $data['nama_barang'] = $r->row()->nama_barang;
+	    $data['id_satuan'] = $r->row()->id_satuan;
 	    $data['type'] = $r->row()->type;
 	    $data['status'] = $r->row()->status;
 	    
@@ -61,6 +63,7 @@ class barang extends CI_Controller {
 		$this->form_validation->set_rules("id_sub_kategori", 'Sub Kategori', 'trim|required|xss_clean');
 		$this->form_validation->set_rules("kode_barang", 'Kode Barang', 'trim|required|xss_clean');
 		$this->form_validation->set_rules("nama_barang", 'Nama Barang', 'trim|required|xss_clean');
+		$this->form_validation->set_rules("id_satuan", 'Satuan', 'trim|required|xss_clean');
 		$this->form_validation->set_rules("type", 'Tipe', 'trim|required|xss_clean');
 
 		# message rules

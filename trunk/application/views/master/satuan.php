@@ -4,17 +4,17 @@
 	
 		newData = function (){
 			$('#dialog').dialog({
-				title: 'Tambah Barang',
-				width: 400,
-				height: 275,
+				title: 'Tambah Satuan',
+				width: 380,
+				height: 145,
 				closed: true,
 				cache: false,
-				href: base_url+'barang/add',
+				href: base_url+'satuan/add',
 				modal: true
 			});
 			 
 			$('#dialog').dialog('open');
-			url = base_url+'barang/save/add';
+			url = base_url+'satuan/save/add';
 		}
 		// end newData
 		
@@ -22,17 +22,17 @@
 			// var row = $('#dg').datagrid('getSelected');
 			// if (row){
 				$('#dialog').dialog({
-					title: 'Edit ',
-					width: 400,
-					height: 275,
+					title: 'Edit Satuan',
+					width: 380,
+					height: 145,
 					closed: true,
 					cache: false,
-					href: base_url+'barang/edit/'+val,
+					href: base_url+'satuan/edit/'+val,
 					modal: true
 				});
 				
 				$('#dialog').dialog('open');  
-				url = base_url+'barang/save/edit';
+				url = base_url+'satuan/save/edit';
 			// }
 		}
 		//end editData
@@ -43,7 +43,7 @@
 				if(confirm("Apakah yakin akan menghapus data '" + val + "'?")){
 					var response = '';
 					$.ajax({ type: "GET",
-						 url: base_url+'barang/delete/' + val,
+						 url: base_url+'satuan/delete/' + val,
 						 async: false,
 						 success : function(response){
 							var response = eval('('+response+')');
@@ -92,66 +92,39 @@
 		//end saveData
 		
 		actionbutton = function(value, row, index){
-			var col='';
+			var col;
 			//if (row.kd_fakultas != null) {
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>8, 'policy'=>'edit'))){?>
-					col = '<a href="#" onclick="editData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Edit</a>';
-			<?}?>
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>8, 'policy'=>'DELETE'))){?>
-					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="deleteData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
-			<?}?>
+				col = '<a href="#" onclick="editData(\''+row. 	id_satuan+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Edit</a>';
+				col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="deleteData(\''+row. 	id_satuan+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
 			//}
 			return col;
 		}
 		
 		$(function(){
 			$('#dg').datagrid({
-				url:"<?=base_url()?>barang/grid"
+				url:"<?=base_url()?>satuan/grid"
 			});
 		});
-		
 		
 		//# Tombol Bawah
 		$(function(){
 			var pager = $('#dg').datagrid().datagrid('getPager');	// get the pager of datagrid
 			pager.pagination({
 				buttons:[
-				<?if($this->mdl_auth->CekAkses(array('menu_id'=>8, 'policy'=>'ADD'))){?>
 					{
 						iconCls:'icon-add',
 						text:'Tambah Data',
 						handler:function(){
 							newData();
 						}
-					},
-					<?}?>
-
-					<?if($this->mdl_auth->CekAkses(array('menu_id'=>8, 'policy'=>'PRINT'))){?>
-					{
-						iconCls:'icon-pdf',
-						text:'Export PDF',
-						handler:function(){
-							window.open('<?=base_url().'#/#'?>');
-						}
-					},
-					<?}?>
-
-					<?if($this->mdl_auth->CekAkses(array('menu_id'=>8, 'policy'=>'IMPORT'))){?>
-					{
-						iconCls:'icon-upload',
-						text:'Import Excel',
-						handler:function(){
-							importDialog();
-						}
 					}
-					<?}?>					
 				]
 			});			
 		});
 		
 	});
 </script>
-<table id="dg" title="Kelola Data Barang [ Ket Status: 1 = Aktif | 0 = Tidak Aktif ]" data-options="
+<table id="dg" title="Kelola Data Satuan &nbsp;[ Ket Status: 1 = Aktif | 0 = Tidak Aktif ]" data-options="
 			rownumbers:true,
 			singleSelect:true,
 			autoRowHeight:false,
@@ -161,12 +134,8 @@
 			">
 	<thead>
 		<tr>
-			<th field="user_id" sortable="true" width="150" hidden="true">ID</th>
-			<th field="nama_kategori" sortable="true" width="150">Kategori</th>
-			<th field="nama_sub_kategori" sortable="true" width="150">Sub Kategori</th>
-			<th field="kode_barang" sortable="true" width="150">Kode Barang</th>
-			<th field="nama_barang" sortable="true" width="150">Nama Barang</th>
-			<th field="nama_satuan" sortable="true" width="80">Satuan</th>
+			<th field="id_satuan" sortable="true" width="150" hidden="true">ID</th>
+			<th field="nama_satuan" sortable="true" width="350">Satuan</th>
 			<th field="status" sortable="true" width="120">Status</th>
 			<th field="action" align="center" formatter="actionbutton" width="100">Aksi</th>
 		</tr>
@@ -175,8 +144,7 @@
 
 <!-- AREA untuk Form MENU >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
 <div id="dialog-menu" class="easyui-dialog" style="width:400px;height:150px" closed="true" buttons="#dlg-buttons-menu">
-	<div id="dlg-buttons-menu">
-		<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveMenu()">Save</a>
-		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dialog-menu').dialog('close')">Cancel</a>
-	</div>
+<div id="dlg-buttons-menu">
+	<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveMenu()">Save</a>
+	<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dialog-menu').dialog('close')">Cancel</a>
 </div>

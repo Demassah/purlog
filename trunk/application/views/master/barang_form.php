@@ -32,6 +32,12 @@
 		<input name="nama_barang" size="30" value="<?=$nama_barang?>">
 	</div>
 	<div class="fitem" >
+		<label style="width:100px">Satuan </label>: 
+		<select id="id_satuan" name="id_satuan" style="width:100px;">
+			<?=$this->mdl_prosedur->OptionSatuan(array('value'=>$id_satuan));?>
+		</select>	
+	</div>
+	<div class="fitem" >
 		<label style="width:100px">Type</label>:
 		<select class="easyui-combobox" name="type" style="width:170px;">
 			<option value="">-- Pilih --</option>
