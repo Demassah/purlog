@@ -30,11 +30,11 @@ CREATE TABLE `ref_barang` (
   `status` varchar(1) NOT NULL,
   `type` int(1) NOT NULL COMMENT '1: fast moving, 2: slow moving, 3: new item',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 /*Data for the table `ref_barang` */
 
-insert  into `ref_barang`(`id`,`id_kategori`,`id_sub_kategori`,`kode_barang`,`nama_barang`,`id_satuan`,`status`,`type`) values (1,1,1,'100','PC',NULL,'1',1),(2,1,2,'201','Microsoft Office',NULL,'1',2),(3,2,6,'301','Lampu',NULL,'1',2),(4,2,5,'302','Oli',NULL,'1',1),(5,1,1,'202','New  Item - Hardware',NULL,'1',3);
+insert  into `ref_barang`(`id`,`id_kategori`,`id_sub_kategori`,`kode_barang`,`nama_barang`,`id_satuan`,`status`,`type`) values (1,1,1,'100','PC',5,'1',1),(2,1,2,'201','Microsoft Office',2,'1',2),(3,2,6,'301','Lampu',2,'1',2),(4,2,5,'302','Oli',6,'1',1),(5,1,1,'202','New  Item - Hardware',5,'1',3);
 
 /*Table structure for table `ref_courir` */
 
@@ -81,6 +81,21 @@ CREATE TABLE `ref_kategori` (
 /*Data for the table `ref_kategori` */
 
 insert  into `ref_kategori`(`id_kategori`,`nama_kategori`,`status`) values (1,'IT','1'),(2,'Sparepart','1'),(3,'Furniture','1');
+
+/*Table structure for table `ref_satuan` */
+
+DROP TABLE IF EXISTS `ref_satuan`;
+
+CREATE TABLE `ref_satuan` (
+  `id_satuan` smallint(6) NOT NULL AUTO_INCREMENT,
+  `nama_satuan` varchar(21) DEFAULT NULL,
+  `status` smallint(1) DEFAULT NULL,
+  PRIMARY KEY (`id_satuan`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+/*Data for the table `ref_satuan` */
+
+insert  into `ref_satuan`(`id_satuan`,`nama_satuan`,`status`) values (1,'Biji',1),(2,'PCS',1),(3,'Sachet',1),(4,'Box',1),(5,'Unit',1),(6,'Liter',NULL);
 
 /*Table structure for table `ref_sub_kategori` */
 
@@ -131,11 +146,11 @@ CREATE TABLE `sys_menu` (
   `icon_class` varchar(30) DEFAULT NULL,
   `policy` varchar(50) DEFAULT '',
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `sys_menu` */
 
-insert  into `sys_menu`(`menu_id`,`menu_group`,`menu_name`,`menu_parent`,`url`,`position`,`hide`,`icon_class`,`policy`) values (1,'Administrator','Administrator',0,'#',99,0,'icon-administrator','ACCESS;'),(2,'Administrator','Otoritas Menu',1,'otoritas',2,0,'icon-otoritas','ACCESS;ADD;EDIT;DETAIL;DELETE;'),(3,'Administrator','Pengguna',1,'pengguna',3,0,'icon-user','ACCESS;ADD;EDIT;DELETE;'),(4,'Administrator','Departemen',36,'departement',4,0,'icon-departement','ACCESS;ADD;EDIT;DELETE;'),(5,'Master Data','Master Data',0,'#',2,0,'icon-master','ACCESS;'),(6,'Master Data','Kategori',5,'kategori',2,0,'icon-kategori','ACCESS;ADD;EDIT;DELETE;'),(7,'Master Data','Sub Kategori',5,'sub_kategori',3,0,'icon-subkateg','ACCESS;ADD;EDIT;DELETE;'),(8,'Master Data','Barang',5,'barang',4,0,'icon-barang','ACCESS;ADD;EDIT;DELETE;PRINT;IMPORT;'),(9,'Purchase','Purchase',0,'#',4,0,'icon-purchase','ACCESS;ADD;EDIT;DELETE;DETAIL;'),(10,'Logistic','Request Order',34,'request_order',2,0,'icon-ro','ACCESS;ADD;EDIT;DELETE;DETAIL;'),(11,'Logistic','Request Order Selected',34,'request_order_selected',5,0,'icon-ros','ACCESS;ADD;EDIT;DELETE;DETAIL;'),(12,'Logistic','Picking Request Order Selected',34,'picking_req_order_selected',6,0,'icon-picking','ACCESS;ADD;EDIT;DELETE;DETAIL;'),(13,'Logistic','Shipment Request Order',34,'shipment_req_order',7,0,'icon-shipment','ACCESS;ADD;EDIT;DELETE;DETAIL;'),(14,'Purchase','Purchase Request',9,'purchase_request',7,0,'icon-pr','ACCESS;ADD;EDIT;DELETE;DETAIL;'),(15,'Purchase','Quotation Request Selected',9,'quotation_request_selected',8,0,'icon-qrs','ACCESS;ADD;EDIT;DELETE;DETAIL;SELECT;'),(17,'Purchase','Purchase Order',9,'purchase_order',10,0,'icon-po','ACCESS;ADD;EDIT;DELETE;DETAIL;'),(18,'Purchase','Document Receive',34,'document_receive',10,0,'icon-dr','ACCESS;ADD;EDIT;DELETE;DETAIL;'),(19,'Logistic','Delivery Order',34,'delivery_order',8,0,'icon-delivery','ACCESS;ADD;EDIT;DELETE;DETAIL;'),(20,'Purchase','Berita Acara Pengembalian',9,'underconstruction',12,0,'icon-bap','ACCESS;ADD;EDIT;DELETE;DETAIL;'),(21,'Logistic','Return',34,'retur',13,0,'icon-bapp','ACCESS;ADD;EDIT;DELETE;DETAIL;'),(22,'Logistic','Request Order Logistic',34,'request_order_logistic',4,0,'icon-rol','ACCESS;ADD;EDIT;DELETE;DETAIL;'),(23,'Administrator','Menu',1,'menu',1,0,'icon-menu','ACCESS;ADD;EDIT;DELETE;'),(34,'Logistic','Logistic',0,'#',3,0,'icon-logistic','ACCESS;'),(36,'Setup','Setup',0,'#',1,0,'icon-setup','ACCESS;'),(37,'Logistic','Request Order Approval',34,'request_order_approval',3,0,'icon-approval','ACCESS;EDIT;DELETE;DETAIL;'),(38,'Logistic','Delivered',34,'delivered',9,0,'icon-delivered','ACCESS;DETAIL;'),(39,'Purchase','Ordered',9,'ordered',11,0,'','DETAIL;'),(40,'Logistic','Alocate Return',34,'alocate_return',14,1,'','ACCESS;DETAIL;'),(41,'Logistic','Inbound',34,'inbound',20,0,'','ACCESS;EDIT;DELETE;DETAIL;ADD;'),(42,'Logistic','Stock On Hand',34,'soh',21,0,'','ACCESS;'),(43,'Logistic','Transfer',34,'transfer',26,0,'','ACCESS;EDIT;DELETE;DETAIL;');
+insert  into `sys_menu`(`menu_id`,`menu_group`,`menu_name`,`menu_parent`,`url`,`position`,`hide`,`icon_class`,`policy`) values (1,'Administrator','Administrator',0,'#',99,0,'icon-administrator','ACCESS;'),(2,'Administrator','Otoritas Menu',1,'otoritas',2,0,'icon-otoritas','ACCESS;ADD;EDIT;DETAIL;DELETE;'),(3,'Administrator','Pengguna',1,'pengguna',3,0,'icon-user','ACCESS;ADD;EDIT;DELETE;'),(4,'Setup','Departemen',36,'departement',2,0,'icon-departement','ACCESS;ADD;EDIT;DELETE;'),(5,'Master Data','Master Data',0,'#',2,0,'icon-master','ACCESS;'),(6,'Master Data','Kategori',5,'kategori',2,0,'icon-kategori','ACCESS;ADD;EDIT;DELETE;'),(7,'Master Data','Sub Kategori',5,'sub_kategori',3,0,'icon-subkateg','ACCESS;ADD;EDIT;DELETE;'),(8,'Master Data','Barang',5,'barang',4,0,'icon-barang','ACCESS;ADD;EDIT;DELETE;PRINT;IMPORT;'),(9,'Purchase','Purchase',0,'#',4,0,'icon-purchase','ACCESS;ADD;EDIT;DELETE;DETAIL;'),(10,'Logistic','Request Order',34,'request_order',2,0,'icon-ro','ACCESS;ADD;EDIT;DELETE;DETAIL;'),(11,'Logistic','Request Order Selected',34,'request_order_selected',5,0,'icon-ros','ACCESS;ADD;EDIT;DELETE;DETAIL;'),(12,'Logistic','Picking Request Order Selected',34,'picking_req_order_selected',6,0,'icon-picking','ACCESS;ADD;EDIT;DELETE;DETAIL;'),(13,'Logistic','Shipment Request Order',34,'shipment_req_order',7,0,'icon-shipment','ACCESS;ADD;EDIT;DELETE;DETAIL;'),(14,'Purchase','Purchase Request',9,'purchase_request',7,0,'icon-pr','ACCESS;ADD;EDIT;DELETE;DETAIL;'),(15,'Purchase','Quotation Request Selected',9,'quotation_request_selected',8,0,'icon-qrs','ACCESS;ADD;EDIT;DELETE;DETAIL;SELECT;'),(17,'Purchase','Purchase Order',9,'purchase_order',10,0,'icon-po','ACCESS;ADD;EDIT;DELETE;DETAIL;'),(18,'Purchase','Document Receive',34,'document_receive',10,0,'icon-dr','ACCESS;ADD;EDIT;DELETE;DETAIL;'),(19,'Logistic','Delivery Order',34,'delivery_order',8,0,'icon-delivery','ACCESS;ADD;EDIT;DELETE;DETAIL;'),(20,'Purchase','Berita Acara Pengembalian',9,'underconstruction',12,0,'icon-bap','ACCESS;ADD;EDIT;DELETE;DETAIL;'),(21,'Logistic','Return',34,'retur',13,0,'icon-bapp','ACCESS;ADD;EDIT;DELETE;DETAIL;'),(22,'Logistic','Request Order Logistic',34,'request_order_logistic',4,0,'icon-rol','ACCESS;ADD;EDIT;DELETE;DETAIL;'),(23,'Administrator','Menu',1,'menu',1,0,'icon-menu','ACCESS;ADD;EDIT;DELETE;'),(34,'Logistic','Logistic',0,'#',3,0,'icon-logistic','ACCESS;'),(36,'Setup','Setup',0,'#',1,0,'icon-setup','ACCESS;'),(37,'Logistic','Request Order Approval',34,'request_order_approval',3,0,'icon-approval','ACCESS;EDIT;DELETE;DETAIL;'),(38,'Logistic','Delivered',34,'delivered',9,0,'icon-delivered','ACCESS;DETAIL;'),(39,'Purchase','Ordered',9,'ordered',11,0,'icon-ordered','DETAIL;'),(40,'Logistic','Alocate Return',34,'alocate_return',14,1,'','ACCESS;DETAIL;'),(41,'Logistic','Inbound',34,'inbound',20,0,'icon-inbound','ACCESS;EDIT;DELETE;DETAIL;ADD;'),(42,'Logistic','Stock On Hand',34,'soh',21,0,'icon-stock','ACCESS;'),(43,'Logistic','Transfer',34,'transfer',26,0,'icon-transfer','ACCESS;EDIT;DELETE;DETAIL;'),(44,'Setup','Satuan',36,'satuan',3,0,'icon-satuan','ACCESS;ADD;EDIT;DELETE;DETAIL;');
 
 /*Table structure for table `sys_user` */
 
@@ -166,11 +181,11 @@ CREATE TABLE `sys_user_access` (
   `user_level_id` smallint(6) NOT NULL DEFAULT '0',
   `policy` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`user_access_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=756 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=757 DEFAULT CHARSET=latin1;
 
 /*Data for the table `sys_user_access` */
 
-insert  into `sys_user_access`(`user_access_id`,`menu_id`,`user_level_id`,`policy`) values (1,1,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(2,2,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(3,3,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(4,4,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(727,5,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(728,6,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(729,7,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(730,8,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(731,9,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(732,10,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(733,11,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(734,12,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(735,13,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(736,14,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(737,15,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;'),(739,17,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(740,18,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(741,19,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(742,20,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(743,21,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(744,22,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(745,23,1,'ACCESS;ADD;EDIT;DELETE;'),(746,34,1,'ACCESS;'),(747,35,1,'ACCESS;'),(748,36,1,'ACCESS;'),(749,37,1,'ACCESS;DETAIL;EDIT;DELETE;'),(750,38,1,'ACCESS;DETAIL;'),(751,39,1,'ACCESS;DETAIL;'),(752,40,1,'ACCESS;DETAIL;'),(753,41,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;'),(754,42,1,'ACCESS;'),(755,43,1,'ACCESS;DETAIL;EDIT;DELETE;');
+insert  into `sys_user_access`(`user_access_id`,`menu_id`,`user_level_id`,`policy`) values (1,1,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(2,2,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(3,3,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(4,4,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(727,5,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(728,6,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(729,7,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(730,8,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(731,9,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(732,10,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(733,11,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(734,12,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(735,13,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(736,14,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(737,15,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;'),(739,17,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(740,18,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(741,19,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(742,20,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(743,21,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(744,22,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;IMPORT;'),(745,23,1,'ACCESS;ADD;EDIT;DELETE;'),(746,34,1,'ACCESS;'),(747,35,1,'ACCESS;'),(748,36,1,'ACCESS;'),(749,37,1,'ACCESS;DETAIL;EDIT;DELETE;'),(750,38,1,'ACCESS;DETAIL;'),(751,39,1,'ACCESS;DETAIL;'),(752,40,1,'ACCESS;DETAIL;'),(753,41,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;'),(754,42,1,'ACCESS;'),(755,43,1,'ACCESS;DETAIL;EDIT;DELETE;'),(756,44,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;');
 
 /*Table structure for table `sys_user_level` */
 
@@ -319,7 +334,7 @@ CREATE TABLE `tr_pr_detail` (
   `status` int(1) DEFAULT NULL,
   `status_delete` int(1) NOT NULL,
   PRIMARY KEY (`id_detail_pr`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tr_pr_detail` */
 
@@ -366,7 +381,7 @@ CREATE TABLE `tr_qr` (
 
 /*Data for the table `tr_qr` */
 
-insert  into `tr_qr`(`id_qr`,`id_pr`,`id_vendor`,`id_po`,`top`,`ETD`,`status`) values (1,2,'V001',0,11,'2015-01-09',1),(2,2,'V002',0,11,'2015-01-09',2),(3,2,'V003',0,23,'2015-01-09',1),(4,3,'V001',0,11,'2015-01-09',1),(6,3,'V003',9,56,'2015-01-09',2);
+insert  into `tr_qr`(`id_qr`,`id_pr`,`id_vendor`,`id_po`,`top`,`ETD`,`status`) values (1,4,'V001',0,11,'2015-01-09',1),(2,4,'V002',0,11,'2015-01-09',2),(3,4,'V003',0,23,'2015-01-09',1),(4,3,'V001',0,11,'2015-01-09',1),(6,3,'V003',9,56,'2015-01-09',2);
 
 /*Table structure for table `tr_qr_detail` */
 
@@ -387,7 +402,7 @@ CREATE TABLE `tr_qr_detail` (
 
 /*Data for the table `tr_qr_detail` */
 
-insert  into `tr_qr_detail`(`id_detail_qr`,`id_qr`,`id_detail_pr`,`id_pr`,`kode_barang`,`qty`,`price`,`date_create`,`status`) values (1,1,3,2,'202',12,200000,'2015-01-08 22:52:58',1),(2,1,4,2,'201',12,10000,'2015-01-08 22:52:58',1),(3,2,3,2,'202',12,1560000,'2015-01-08 23:05:41',1),(4,2,4,2,'201',12,150000,'2015-01-08 23:05:41',1),(5,3,3,2,'202',12,0,'2015-01-08 23:05:45',1),(6,3,4,2,'201',12,5555555,'2015-01-08 23:05:45',1),(7,4,5,3,'201',45,10000000,'2015-01-08 23:05:53',1),(9,6,5,3,'201',45,200000,'2015-01-08 23:06:02',1);
+insert  into `tr_qr_detail`(`id_detail_qr`,`id_qr`,`id_detail_pr`,`id_pr`,`kode_barang`,`qty`,`price`,`date_create`,`status`) values (1,2,1,4,'301',12,200000,'2015-01-08 22:52:58',1),(2,2,2,4,'302',12,10000,'2015-01-08 22:52:58',1),(3,2,3,2,'202',12,1560000,'2015-01-08 23:05:41',1),(4,2,4,2,'201',12,150000,'2015-01-08 23:05:41',1),(5,3,3,2,'202',12,0,'2015-01-08 23:05:45',1),(6,3,4,2,'201',12,5555555,'2015-01-08 23:05:45',1),(7,4,5,3,'201',45,10000000,'2015-01-08 23:05:53',1),(9,6,5,3,'201',45,200000,'2015-01-08 23:06:02',1);
 
 /*Table structure for table `tr_receive` */
 
@@ -508,11 +523,11 @@ CREATE TABLE `tr_ro_detail` (
   `status_delete` int(1) NOT NULL COMMENT '1. deleted',
   `id_sro` int(6) NOT NULL,
   PRIMARY KEY (`id_detail_ro`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tr_ro_detail` */
 
-insert  into `tr_ro_detail`(`id_detail_ro`,`id_ro`,`ext_doc_no`,`kode_barang`,`qty`,`barang_bekas`,`user_id`,`date_create`,`note`,`status`,`status_delete`,`id_sro`) values (1,1,'SPK/123/2014','301',15,1,1,'0000-00-00 00:00:00','Putih',1,0,0),(2,1,'SPK/123/2014','302',2,2,1,'0000-00-00 00:00:00','mesin',1,0,0),(3,2,'ADI','302',25,1,1,'0000-00-00 00:00:00','',1,0,0),(4,2,'ADI','302',15,1,1,'0000-00-00 00:00:00','',1,0,0),(6,3,'123/dpk/345','202',12,0,1,'0000-00-00 00:00:00','',1,1,0),(7,3,'123/dpk/345','201',12,0,1,'0000-00-00 00:00:00','adi',1,0,0),(8,3,'123/dpk/345','201',45,0,1,'0000-00-00 00:00:00','sdf',1,0,0),(9,7,'123/dpk/345','',45,0,1,'0000-00-00 00:00:00','',1,0,0),(10,7,'123/dpk/345','',1223,0,1,'0000-00-00 00:00:00','',1,0,0),(11,7,'123/dpk/345','',50,0,1,'0000-00-00 00:00:00','',1,0,0),(12,7,'123/dpk/345','201',5,1,1,'0000-00-00 00:00:00','',1,0,0),(14,15,'432','301',5,1,1,'2014-12-28 00:00:00','',1,0,0),(17,25,'123/dpk/345','301',50,2,1,'0000-00-00 00:00:00','',1,0,0),(18,25,'123/dpk/345','302',35,1,1,'0000-00-00 00:00:00','',1,0,0),(19,25,'123/dpk/345','202',15,2,1,'0000-00-00 00:00:00','',1,1,0),(20,25,'123/dpk/345','302',-5,1,1,'0000-00-00 00:00:00','',1,1,0),(21,25,'123/dpk/345','301',0,2,1,'0000-00-00 00:00:00','',1,1,0),(22,26,'123/dpk/345','301',30,1,1,'0000-00-00 00:00:00','',1,0,0),(23,26,'123/dpk/345','302',15,1,1,'0000-00-00 00:00:00','',1,0,0),(24,27,'5464','100',10,1,1,'0000-00-00 00:00:00','',1,0,0),(25,36,'5','302',10,1,1,'2015-01-04 19:54:36','',1,0,0),(26,28,'89797','301',5,2,1,'0000-00-00 00:00:00','',1,0,0),(27,37,'atk101','100',6,1,13,'0000-00-00 00:00:00','pc',1,0,0),(28,37,'atk101','201',7,1,13,'0000-00-00 00:00:00','office\n',1,0,0),(30,37,'atk101','301',8,1,13,'0000-00-00 00:00:00','lampu philip',1,0,0),(31,37,'atk101','302',8,1,13,'0000-00-00 00:00:00','oli enduro',1,0,0),(32,37,'atk101','100',67,1,13,'2015-01-09 00:00:00','keyboard logitech',1,0,0),(33,38,'asst101','100',90,2,13,'0000-00-00 00:00:00','mac book',1,1,0),(34,31,'200','202',23,1,1,'0000-00-00 00:00:00','',1,0,0),(35,38,'asst101','202',10,1,13,'0000-00-00 00:00:00','PC asus',1,0,0),(36,38,'asst101','201',10,1,13,'0000-00-00 00:00:00','office 2013',1,0,0),(37,39,'ASST101','100',45,1,13,'2015-01-09 00:00:00','pc',1,0,0),(38,40,'58646','201',5,2,1,'0000-00-00 00:00:00','-',1,0,0),(39,41,'87945','100',5,2,13,'0000-00-00 00:00:00','-',1,0,0);
+insert  into `tr_ro_detail`(`id_detail_ro`,`id_ro`,`ext_doc_no`,`kode_barang`,`qty`,`barang_bekas`,`user_id`,`date_create`,`note`,`status`,`status_delete`,`id_sro`) values (1,1,'SPK/123/2014','301',15,1,1,'0000-00-00 00:00:00','Putih',1,0,0),(2,1,'SPK/123/2014','302',2,2,1,'0000-00-00 00:00:00','mesin',1,0,0),(3,2,'ADI','302',25,1,1,'0000-00-00 00:00:00','',1,0,0),(4,2,'ADI','302',15,1,1,'0000-00-00 00:00:00','',1,0,0),(6,3,'123/dpk/345','202',12,0,1,'0000-00-00 00:00:00','',1,1,0),(7,3,'123/dpk/345','201',12,0,1,'0000-00-00 00:00:00','adi',1,0,0),(8,3,'123/dpk/345','201',45,0,1,'0000-00-00 00:00:00','sdf',1,0,0),(9,7,'123/dpk/345','',45,0,1,'0000-00-00 00:00:00','',1,0,0),(10,7,'123/dpk/345','',1223,0,1,'0000-00-00 00:00:00','',1,0,0),(11,7,'123/dpk/345','',50,0,1,'0000-00-00 00:00:00','',1,0,0),(12,7,'123/dpk/345','201',5,1,1,'0000-00-00 00:00:00','',1,0,0),(14,15,'432','301',5,1,1,'2014-12-28 00:00:00','',1,0,0),(17,25,'123/dpk/345','301',50,2,1,'0000-00-00 00:00:00','',1,0,0),(18,25,'123/dpk/345','302',35,1,1,'0000-00-00 00:00:00','',1,0,0),(19,25,'123/dpk/345','202',15,2,1,'0000-00-00 00:00:00','',1,1,0),(20,25,'123/dpk/345','302',-5,1,1,'0000-00-00 00:00:00','',1,1,0),(21,25,'123/dpk/345','301',0,2,1,'0000-00-00 00:00:00','',1,1,0),(22,26,'123/dpk/345','301',30,1,1,'0000-00-00 00:00:00','',1,0,0),(23,26,'123/dpk/345','302',15,1,1,'0000-00-00 00:00:00','',1,0,0),(24,27,'5464','100',10,1,1,'0000-00-00 00:00:00','',1,0,0),(25,36,'5','302',10,1,1,'2015-01-04 19:54:36','',1,0,0),(26,28,'89797','301',5,2,1,'0000-00-00 00:00:00','',1,0,0),(27,37,'atk101','100',6,1,13,'0000-00-00 00:00:00','pc',1,0,0),(28,37,'atk101','201',7,1,13,'0000-00-00 00:00:00','office\n',1,0,0),(30,37,'atk101','301',8,1,13,'0000-00-00 00:00:00','lampu philip',1,0,0),(31,37,'atk101','302',8,1,13,'0000-00-00 00:00:00','oli enduro',1,0,0),(32,37,'atk101','100',67,1,13,'2015-01-09 00:00:00','keyboard logitech',1,0,0),(33,38,'asst101','100',90,2,13,'0000-00-00 00:00:00','mac book',1,1,0),(34,31,'200','202',23,1,1,'0000-00-00 00:00:00','',1,0,0),(35,38,'asst101','202',10,1,13,'0000-00-00 00:00:00','PC asus',1,0,0),(36,38,'asst101','201',10,1,13,'0000-00-00 00:00:00','office 2013',1,0,0),(37,39,'ASST101','100',45,1,13,'2015-01-09 00:00:00','pc',1,0,0),(38,40,'58646','201',5,2,1,'0000-00-00 00:00:00','-',1,0,0),(39,41,'87945','100',5,2,13,'0000-00-00 00:00:00','-',1,0,0),(40,34,'500','301',15,2,1,'0000-00-00 00:00:00','-',1,0,0);
 
 /*Table structure for table `tr_sro` */
 
@@ -628,7 +643,8 @@ DELIMITER $$
 
 /*!50003 CREATE */ /*!50017 DEFINER = 'root'@'%' */ /*!50003 TRIGGER `after_update_in` AFTER UPDATE ON `tr_in` FOR EACH ROW BEGIN
 	IF new.status = 2 and new.type = 1 THEN
-	CALL p_in_po(new.id_in);	
+	CALL p_in_po(new.id_in);
+	CALL p_in_stock(new.id_in);	
 	END IF;
     END */$$
 
@@ -982,6 +998,42 @@ BEGIN
 	
 	INSERT INTO tr_pros_detail (id_detail_ro, id_ro, id_stock, kode_barang,  qty, id_lokasi, date_create, status, status_picking ) 
 	VALUES (  a, b, 0, c, d, 'CROSSDOCK', CURRENT_TIMESTAMP(), 1, 2);
+	
+	END LOOP;
+	CLOSE cur1; 
+END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `p_in_stock` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `p_in_stock` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_in_stock`(IN p_id_in INT)
+BEGIN
+	DECLARE done INT DEFAULT FALSE;
+	DECLARE a, b, d, e, g INT;
+	DECLARE c, f VARCHAR(21);
+	DECLARE cur1 CURSOR FOR SELECT  a.`id_in`, a.`id_detail_in`, a.`kode_barang`, a.`qty`, f.`price` , a.`lokasi`, b.`type`
+	FROM tr_in_detail a
+	LEFT JOIN tr_in b ON a.id_in = b.id_in
+	LEFT JOIN tr_pr c ON b.`ext_rec_no` = c.`id_po`
+	LEFT JOIN tr_pr_detail d ON a.`ext_rec_no_detail` = d.`id_detail_pr`
+	LEFT JOIN tr_qr e ON c.`id_pr` = e.`id_pr` AND e.`status` = 2
+	LEFT JOIN tr_qr_detail f ON a.`ext_rec_no_detail` = f.`id_detail_pr` AND f.`id_qr` = e.`id_qr`
+	where a.id_in = p_id_in ;	
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+			
+	OPEN cur1;
+	read_loop : LOOP
+	FETCH cur1 INTO a, b, c, d, e, f, g;
+	IF done THEN 
+	LEAVE read_loop;
+	END IF;
+	
+	INSERT INTO tr_stock (id_in, id_detail_in, kode_barang,  qty, price, id_lokasi, date_create, status, type_in ) 
+	VALUES (  a, b, c, d, e, f, CURRENT_TIMESTAMP(), 1, g);
 	
 	END LOOP;
 	CLOSE cur1; 
