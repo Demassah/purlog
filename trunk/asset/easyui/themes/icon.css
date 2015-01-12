@@ -218,7 +218,25 @@
 	background:url('icons/icon/detail.png') no-repeat;
 }
 
+.icon-stock{
+	background:url('icons/menu/stock.png') no-repeat center center;
+}
 
+.icon-inbound{
+	background:url('icons/menu/inbound.png') no-repeat center center;
+}
+
+.icon-satuan{
+	background:url('icons/menu/satuan.png') no-repeat center center;
+}
+
+.icon-transfer{
+	background:url('icons/menu/transfer.png') no-repeat center center;
+}
+
+.icon-ordered{
+	background:url('icons/menu/ordered.png') no-repeat center center;
+}
 
 
 
