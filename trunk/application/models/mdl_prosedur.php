@@ -182,7 +182,9 @@ class mdl_prosedur extends CI_Model {
 		$id_sub_kategori = isset($d['id_sub_kategori'])?$d['id_sub_kategori']:'';
 		
 		$this->db->flush_cache();
+		$this->db->select('*, ref_satuan.nama_satuan');
 		$this->db->from('ref_barang');
+		$this->db->join('ref_satuan', 'ref_satuan.id_satuan = ref_barang.id_satuan');
 		$this->db->where('id_sub_kategori', $id_sub_kategori);
 		$this->db->order_by('kode_barang');
 
@@ -192,9 +194,9 @@ class mdl_prosedur extends CI_Model {
 		$out = '';
 		foreach($res->result() as $r){
 			if(trim($r->kode_barang) == trim($value)){
-				$out .= '<option value="'.$r->kode_barang.'" selected="selected">'.$r->kode_barang.' - '.$r->nama_barang.'</option>';
+				$out .= '<option value="'.$r->kode_barang.'" selected="selected">'.$r->kode_barang.' - '.$r->nama_barang.' - '.$r->nama_satuan.'</option>';
 			}else{
-				$out .= '<option value="'.$r->kode_barang.'">'.$r->kode_barang.' - '.$r->nama_barang.'</option>';
+				$out .= '<option value="'.$r->kode_barang.'">'.$r->kode_barang.' - '.$r->nama_barang.' - '.$r->nama_satuan.'</option>';
 			}
 		}
 		
