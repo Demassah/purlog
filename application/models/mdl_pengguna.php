@@ -62,7 +62,7 @@ class mdl_pengguna extends CI_Model {
 	
 	function InsertOnDb($data){
 		$this->db->flush_cache();
-				$this->db->set('nik', $data['nik']);
+		$this->db->set('nik', $data['nik']);
         $this->db->set('user_name', $data['user_name']);
         $this->db->set('full_name', $data['full_name']);
         $this->db->set('passwd', md5($data['passwd']));

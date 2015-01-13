@@ -30,7 +30,7 @@ CREATE TABLE `ref_barang` (
   `status` varchar(1) NOT NULL,
   `type` int(1) NOT NULL COMMENT '1: fast moving, 2: slow moving, 3: new item',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `ref_barang` */
 
@@ -165,11 +165,11 @@ CREATE TABLE `sys_user` (
   `departement_id` smallint(6) DEFAULT NULL,
   `user_level_id` smallint(6) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 /*Data for the table `sys_user` */
 
-insert  into `sys_user`(`user_id`,`nik`,`user_name`,`full_name`,`passwd`,`departement_id`,`user_level_id`) values (1,1111111,'admin','administrator','21232f297a57a5a743894a0e4a801fc3',1,1),(11,1111112,'iqbal','Mochamad Iqbal','eedae20fc3c7a6e9c5b1102098771c70',15,1),(12,12345,'harry','Harry Pret','3b87c97d15e8eb11e51aa25e9a5770e9',17,1),(13,5757,'demas','Demassah','d8f08986e8072e78bf9295c294ef3bc2',1,1),(14,3453,'asd','asd','7815696ecbf1c96e6894b779456d330e',0,2),(15,56361,'tes','tes','28b662d883b6d76fd96e4ddc5e9ba780',0,1);
+insert  into `sys_user`(`user_id`,`nik`,`user_name`,`full_name`,`passwd`,`departement_id`,`user_level_id`) values (1,1111111,'admin','administrator','21232f297a57a5a743894a0e4a801fc3',1,1),(11,1111112,'iqbal','Mochamad Iqbal','eedae20fc3c7a6e9c5b1102098771c70',15,1),(12,12345,'harry','Harry Pret','3b87c97d15e8eb11e51aa25e9a5770e9',17,1),(13,5757,'demas','Demassah','d8f08986e8072e78bf9295c294ef3bc2',1,1),(14,3453,'asd','asd','7815696ecbf1c96e6894b779456d330e',0,2),(15,56361,'tes','tes','28b662d883b6d76fd96e4ddc5e9ba780',0,1),(16,112233,'superadmin','Superadmin','17c4520f6cfd1ab53d8745e84681eb49',0,1),(17,9988,'operator','operator','4b583376b2767b923c3e1da60d10de59',NULL,1);
 
 /*Table structure for table `sys_user_access` */
 
@@ -217,7 +217,7 @@ CREATE TABLE `tr_do` (
 
 /*Data for the table `tr_do` */
 
-insert  into `tr_do`(`id_do`,`id_courir`,`date_create`,`id_user`,`status`) values (8,'430016','2015-01-09 10:34:35','1',2),(13,'420015','2015-01-09 10:57:27','1',1),(14,'430016','2015-01-09 11:05:10','1',1);
+insert  into `tr_do`(`id_do`,`id_courir`,`date_create`,`id_user`,`status`) values (8,'430016','2015-01-09 10:34:35','1',2),(13,'420015','2015-01-09 10:57:27','1',1),(14,'430016','2015-01-09 11:05:10','1',2);
 
 /*Table structure for table `tr_do_detail` */
 
@@ -247,7 +247,7 @@ CREATE TABLE `tr_in` (
   `user_id` smallint(6) DEFAULT NULL,
   `status` smallint(1) DEFAULT NULL,
   PRIMARY KEY (`id_in`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tr_in` */
 
@@ -289,11 +289,11 @@ CREATE TABLE `tr_po` (
   `date_create` datetime DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id_po`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tr_po` */
 
-insert  into `tr_po`(`id_po`,`id_pr`,`id_ro`,`requestor`,`departement`,`purpose`,`cat_req`,`ext_doc_no`,`ETD`,`date_create`,`status`) values (4,1,1,'1','1','REQUEST','SPAREPART','SPK/123/2014','2014-12-23','2014-12-30 13:54:25',2),(6,7,37,'1','1','REQUEST','SPAREPART','atk101','2015-01-09','2015-01-09 10:06:11',2),(7,9,39,'1','1','REQUEST','ASSET','ASST101','2015-01-09','2015-01-09 13:33:04',2),(8,4,25,'1','1','REQUEST','SPAREPART','123/dpk/345','2014-12-30','2015-01-09 13:37:08',2),(9,3,3,'1','1','REQUEST','ASSET','123/dpk/345','2014-12-28','2015-01-09 15:27:49',2),(10,2,3,'1','1','REQUEST','ASSET','123/dpk/345','2014-12-28','2015-01-09 15:30:14',2);
+insert  into `tr_po`(`id_po`,`id_pr`,`id_ro`,`requestor`,`departement`,`purpose`,`cat_req`,`ext_doc_no`,`ETD`,`date_create`,`status`) values (14,3,3,'1','1','REQUEST','ASSET','123/dpk/345','2014-12-28','2015-01-13 10:52:41',1);
 
 /*Table structure for table `tr_pr` */
 
@@ -315,7 +315,7 @@ CREATE TABLE `tr_pr` (
 
 /*Data for the table `tr_pr` */
 
-insert  into `tr_pr`(`id_pr`,`id_ro`,`id_po`,`user_id`,`purpose`,`cat_req`,`ext_doc_no`,`ETD`,`date_create`,`status`) values (1,1,4,1,'REQUEST','SPAREPART','SPK/123/2014','2014-12-23','2014-12-23 00:00:00',3),(2,3,10,1,'REQUEST','ASSET','123/dpk/345','2014-12-28','2014-12-28 00:00:00',3),(3,3,9,1,'REQUEST','ASSET','123/dpk/345','2014-12-28','2014-12-28 00:00:00',2),(4,25,8,1,'REQUEST','SPAREPART','123/dpk/345','2014-12-30','2014-12-30 00:00:00',2),(7,37,6,13,'REQUEST','SPAREPART','atk101','2015-01-09','2015-01-09 00:00:00',2),(9,39,7,13,'REQUEST','ASSET','ASST101','2015-01-09','2015-01-09 00:00:00',2),(10,26,NULL,1,'REQUEST','SPAREPART','123/dpk/345','2014-12-30','2014-12-30 00:00:00',2),(14,27,NULL,1,'REQUEST','ATK','5464','2014-12-30','2014-12-30 00:00:00',1);
+insert  into `tr_pr`(`id_pr`,`id_ro`,`id_po`,`user_id`,`purpose`,`cat_req`,`ext_doc_no`,`ETD`,`date_create`,`status`) values (1,1,NULL,1,'REQUEST','SPAREPART','SPK/123/2014','2014-12-23','2014-12-23 00:00:00',3),(2,3,NULL,1,'REQUEST','ASSET','123/dpk/345','2014-12-28','2014-12-28 00:00:00',1),(3,3,14,1,'REQUEST','ASSET','123/dpk/345','2014-12-28','2014-12-28 00:00:00',3),(4,25,NULL,1,'REQUEST','SPAREPART','123/dpk/345','2014-12-30','2014-12-30 00:00:00',1),(7,37,NULL,13,'REQUEST','SPAREPART','atk101','2015-01-09','2015-01-09 00:00:00',1),(9,39,NULL,13,'REQUEST','ASSET','ASST101','2015-01-09','2015-01-09 00:00:00',1),(10,26,NULL,1,'REQUEST','SPAREPART','123/dpk/345','2014-12-30','2014-12-30 00:00:00',1);
 
 /*Table structure for table `tr_pr_detail` */
 
@@ -362,7 +362,7 @@ CREATE TABLE `tr_pros_detail` (
 
 /*Data for the table `tr_pros_detail` */
 
-insert  into `tr_pros_detail`(`id_detail_pros`,`id_detail_ro`,`id_ro`,`id_sro`,`id_stock`,`kode_barang`,`qty`,`id_lokasi`,`date_create`,`status`,`status_receive`,`status_picking`) values (1,1,1,1,2,'301',10,'M','2014-12-23 23:56:01',1,1,1),(2,2,1,2,3,'302',1,'L','2014-12-23 23:56:01',1,1,1),(10,3,2,3,3,'302',10,'L','2014-12-24 00:55:51',1,1,1),(11,3,2,3,3,'302',15,'L','2014-12-29 08:59:46',1,1,1),(12,4,2,4,3,'302',15,'L','2014-12-29 08:59:49',1,1,1),(13,14,15,10,2,'301',5,'M','2014-12-28 23:09:28',1,0,1),(14,17,25,5,2,'301',45,'M','2014-12-30 11:29:35',1,1,1),(15,18,25,5,3,'302',20,'L','2014-12-30 11:29:51',1,1,1),(34,23,26,NULL,3,'302',15,'L','2014-12-30 00:24:17',1,0,1),(35,22,26,NULL,2,'301',30,'M','2014-12-30 00:24:53',1,0,1),(39,27,37,14,1,'100',6,'A','2015-01-09 09:30:47',1,1,1),(40,28,37,14,4,'201',7,'P','2015-01-09 09:30:47',1,1,1),(41,30,37,13,2,'301',8,'M','2015-01-09 09:30:47',1,1,1),(42,32,37,13,1,'100',61,'A','2015-01-09 09:30:47',1,1,1),(43,31,37,13,3,'302',8,'L','2015-01-09 09:31:50',1,1,1),(44,32,37,15,0,'100',5,'CROSSDOCK','2015-01-08 19:14:56',1,0,2),(45,32,37,15,0,'100',1,'CROSSDOCK','2015-01-08 19:14:56',1,0,2),(46,37,39,16,5,'100',40,'A','2015-01-09 11:04:28',1,1,1),(47,26,28,NULL,2,'301',2,'M','2015-01-08 23:24:54',1,0,1),(48,1,1,NULL,0,'301',5,'CROSSDOCK','2015-01-09 01:45:01',1,0,2),(49,2,1,NULL,0,'302',1,'CROSSDOCK','2015-01-09 01:45:01',1,0,2);
+insert  into `tr_pros_detail`(`id_detail_pros`,`id_detail_ro`,`id_ro`,`id_sro`,`id_stock`,`kode_barang`,`qty`,`id_lokasi`,`date_create`,`status`,`status_receive`,`status_picking`) values (1,1,1,1,2,'301',10,'M','2014-12-23 23:56:01',1,1,1),(2,2,1,1,3,'302',1,'L','2014-12-23 23:56:01',1,1,1),(10,3,2,3,3,'302',10,'L','2014-12-24 00:55:51',1,1,1),(11,3,2,3,3,'302',15,'L','2014-12-29 08:59:46',1,1,1),(12,4,2,NULL,3,'302',15,'L','2014-12-29 08:59:49',1,1,1),(13,14,15,NULL,2,'301',5,'M','2014-12-28 23:09:28',1,0,1),(14,17,25,5,2,'301',45,'M','2014-12-30 11:29:35',1,1,1),(15,18,25,5,3,'302',20,'L','2014-12-30 11:29:51',1,1,1),(34,23,26,17,3,'302',15,'L','2014-12-30 00:24:17',1,0,1),(35,22,26,17,2,'301',30,'M','2014-12-30 00:24:53',1,0,1),(39,27,37,14,1,'100',6,'A','2015-01-09 09:30:47',1,1,1),(40,28,37,14,4,'201',7,'P','2015-01-09 09:30:47',1,1,1),(41,30,37,13,2,'301',8,'M','2015-01-09 09:30:47',1,1,1),(42,32,37,13,1,'100',61,'A','2015-01-09 09:30:47',1,1,1),(43,31,37,13,3,'302',8,'L','2015-01-09 09:31:50',1,1,1),(44,32,37,NULL,0,'100',5,'CROSSDOCK','2015-01-08 19:14:56',1,0,2),(45,32,37,NULL,0,'100',1,'CROSSDOCK','2015-01-08 19:14:56',1,0,2),(46,37,39,16,5,'100',40,'A','2015-01-09 11:04:28',1,1,1),(47,26,28,NULL,2,'301',2,'M','2015-01-08 23:24:54',1,0,1),(48,1,1,1,0,'301',5,'CROSSDOCK','2015-01-09 01:45:01',1,0,2),(49,2,1,1,0,'302',1,'CROSSDOCK','2015-01-09 01:45:01',1,0,2);
 
 /*Table structure for table `tr_qr` */
 
@@ -377,11 +377,11 @@ CREATE TABLE `tr_qr` (
   `ETD` date DEFAULT NULL,
   `status` int(2) DEFAULT '1',
   PRIMARY KEY (`id_qr`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `tr_qr` */
 
-insert  into `tr_qr`(`id_qr`,`id_pr`,`id_vendor`,`id_po`,`top`,`ETD`,`status`) values (1,4,'V001',0,11,'2015-01-09',1),(2,4,'V002',0,11,'2015-01-09',2),(3,4,'V003',0,23,'2015-01-09',1),(4,3,'V001',0,11,'2015-01-09',1),(6,3,'V003',9,56,'2015-01-09',2);
+insert  into `tr_qr`(`id_qr`,`id_pr`,`id_vendor`,`id_po`,`top`,`ETD`,`status`) values (1,3,'V001',0,11,'2015-01-13',1),(2,3,'V002',0,10,'2015-01-13',1),(3,3,'V003',14,12,'2015-01-13',2);
 
 /*Table structure for table `tr_qr_detail` */
 
@@ -398,11 +398,11 @@ CREATE TABLE `tr_qr_detail` (
   `date_create` datetime DEFAULT NULL,
   `status` int(1) DEFAULT '1',
   PRIMARY KEY (`id_detail_qr`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `tr_qr_detail` */
 
-insert  into `tr_qr_detail`(`id_detail_qr`,`id_qr`,`id_detail_pr`,`id_pr`,`kode_barang`,`qty`,`price`,`date_create`,`status`) values (1,2,1,4,'301',12,200000,'2015-01-08 22:52:58',1),(2,2,2,4,'302',12,10000,'2015-01-08 22:52:58',1),(3,2,3,2,'202',12,1560000,'2015-01-08 23:05:41',1),(4,2,4,2,'201',12,150000,'2015-01-08 23:05:41',1),(5,3,3,2,'202',12,0,'2015-01-08 23:05:45',1),(6,3,4,2,'201',12,5555555,'2015-01-08 23:05:45',1),(7,4,5,3,'201',45,10000000,'2015-01-08 23:05:53',1),(9,6,5,3,'201',45,200000,'2015-01-08 23:06:02',1);
+insert  into `tr_qr_detail`(`id_detail_qr`,`id_qr`,`id_detail_pr`,`id_pr`,`kode_barang`,`qty`,`price`,`date_create`,`status`) values (1,1,5,3,'201',45,100000,'2015-01-12 19:51:38',1),(2,2,5,3,'201',45,200000,'2015-01-12 19:51:43',1),(3,3,5,3,'201',45,300000,'2015-01-12 19:51:48',1);
 
 /*Table structure for table `tr_receive` */
 
@@ -545,7 +545,7 @@ CREATE TABLE `tr_sro` (
 
 /*Data for the table `tr_sro` */
 
-insert  into `tr_sro`(`id_sro`,`id_do`,`id_ro`,`date_create`,`id_user`,`status`) values (1,8,1,'2014-12-23 00:00:00','1',2),(2,NULL,1,'2014-12-23 00:00:00','1',2),(3,NULL,2,'2014-12-29 00:00:00','1',2),(4,NULL,2,'2014-12-30 00:00:00','1',2),(5,NULL,25,'2014-12-30 00:00:00','1',2),(6,NULL,15,'2014-12-29 00:00:00','1',1),(10,NULL,15,'2014-12-30 00:00:00','1',2),(12,NULL,37,'2015-01-09 00:00:00','13',2),(13,NULL,37,'2015-01-09 00:00:00','13',2),(14,NULL,37,'2015-01-09 00:00:00','13',2),(15,14,37,'2015-01-09 00:00:00','13',2),(16,14,39,'2015-01-09 00:00:00','13',2),(17,NULL,26,'2015-01-09 00:00:00','1',1);
+insert  into `tr_sro`(`id_sro`,`id_do`,`id_ro`,`date_create`,`id_user`,`status`) values (1,8,1,'2014-12-23 00:00:00','1',2),(3,NULL,2,'2014-12-29 00:00:00','1',1),(5,NULL,25,'2014-12-30 00:00:00','1',1),(6,NULL,15,'2014-12-29 00:00:00','1',1),(12,NULL,37,'2015-01-09 00:00:00','13',1),(13,NULL,37,'2015-01-09 00:00:00','13',1),(14,NULL,37,'2015-01-09 00:00:00','13',1),(16,14,39,'2015-01-09 00:00:00','13',2),(17,NULL,26,'2015-01-09 00:00:00','1',1);
 
 /*Table structure for table `tr_stock` */
 
@@ -581,11 +581,11 @@ CREATE TABLE `tr_transfer` (
   `user_id` int(11) DEFAULT NULL,
   `status` smallint(1) DEFAULT NULL,
   PRIMARY KEY (`id_transfer`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tr_transfer` */
 
-insert  into `tr_transfer`(`id_transfer`,`type_transfer`,`note`,`date_create`,`user_id`,`status`) values (1,0,'','0000-00-00 00:00:00',1,1),(3,1,'','2015-01-23 00:00:00',1,2);
+insert  into `tr_transfer`(`id_transfer`,`type_transfer`,`note`,`date_create`,`user_id`,`status`) values (1,0,'','0000-00-00 00:00:00',1,1),(3,1,'','2015-01-23 00:00:00',1,2),(4,1,'tes','2015-01-14 00:00:00',1,1);
 
 /*Table structure for table `tr_transfer_detail` */
 
@@ -1226,6 +1226,23 @@ BEGIN
 END */$$
 DELIMITER ;
 
+/*Table structure for table `v_po_detail` */
+
+DROP TABLE IF EXISTS `v_po_detail`;
+
+/*!50001 DROP VIEW IF EXISTS `v_po_detail` */;
+/*!50001 DROP TABLE IF EXISTS `v_po_detail` */;
+
+/*!50001 CREATE TABLE  `v_po_detail`(
+ `id_po` int(11) ,
+ `id_detail_pr` int(11) ,
+ `kode_barang` varchar(21) ,
+ `note` text ,
+ `qty` int(11) ,
+ `price` bigint(12) ,
+ `Total` bigint(30) 
+)*/;
+
 /*Table structure for table `v_po_inbound` */
 
 DROP TABLE IF EXISTS `v_po_inbound`;
@@ -1259,6 +1276,13 @@ DROP TABLE IF EXISTS `v_pros_detail`;
  `picking` decimal(34,0) ,
  `sisa` decimal(33,0) 
 )*/;
+
+/*View structure for view v_po_detail */
+
+/*!50001 DROP TABLE IF EXISTS `v_po_detail` */;
+/*!50001 DROP VIEW IF EXISTS `v_po_detail` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_po_detail` AS select `c`.`id_po` AS `id_po`,`a`.`id_detail_pr` AS `id_detail_pr`,`a`.`kode_barang` AS `kode_barang`,`a`.`note` AS `note`,`a`.`qty` AS `qty`,`e`.`price` AS `price`,(`a`.`qty` * `e`.`price`) AS `Total` from ((((`tr_pr_detail` `a` left join `tr_pr` `b` on((`a`.`id_pr` = `b`.`id_pr`))) left join `tr_po` `c` on((`b`.`id_po` = `c`.`id_po`))) left join `tr_qr` `d` on(((`b`.`id_pr` = `d`.`id_pr`) and (`d`.`status` = 2)))) left join `tr_qr_detail` `e` on(((`e`.`id_qr` = `d`.`id_qr`) and (`e`.`id_detail_pr` = `a`.`id_detail_pr`)))) */;
 
 /*View structure for view v_po_inbound */
 

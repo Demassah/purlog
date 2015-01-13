@@ -16,6 +16,8 @@ class mdl_request_order extends CI_Model {
 
 		#get filter
 		$departement_id = isset($_POST['departement_id']) ? strval($_POST['departement_id']) : '';
+		$id_ro = isset($_POST['id_ro']) ? strval($_POST['id_ro']) : '';
+		$ext_doc_no = isset($_POST['ext_doc_no']) ? strval($_POST['ext_doc_no']) : '';
 		
 		# create query
 		$this->db->flush_cache();
@@ -26,11 +28,19 @@ class mdl_request_order extends CI_Model {
 		$this->db->join('ref_departement c', 'c.departement_id = b.departement_id');
 
 		#Filter
-		if($this->session->userdata('departement_id')!='0'){
+		if($this->session->userdata('departement_id')!=''){
 			$this->db->where('b.departement_id', $this->session->userdata('departement_id'));
 		}else{
-			if($departement_id != '0')
-				$this->db->where('b.departement_id', $departement_id);
+			if($departement_id != '')
+				$this->db->like('b.departement_id', $departement_id);
+		}
+
+		if($id_ro != '') {
+				$this->db->like('a.id_ro', $id_ro);
+		}
+
+		if($ext_doc_no != '') {
+				$this->db->like('a.ext_doc_no', $ext_doc_no);
 		}
 
 		$this->db->where('a.status','1');
