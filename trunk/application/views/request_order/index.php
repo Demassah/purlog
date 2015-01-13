@@ -128,6 +128,8 @@
 		filter = function(){
 			$('#dg').datagrid('load',{
 				departement_id : $('#s_departement_id').val(),
+				id_ro : $('#s_id_ro').val(),
+				ext_doc_no : $('#s_ext_doc_no').val(),
 			});
 			//$('#dg').datagrid('enableFilter');
 		}
@@ -159,17 +161,29 @@
 	<div style="margin-bottom:5px">		
 	</div>
 	<div class="fsearch">
-		<table width="500" border="0">
+		<table width="650" border="0">
 		  <tr>
 			<td>Departement</td>
 			<td>: 
-				<select id="s_departement_id" name="s_departement_id" style="width:200px;">
+				<select id="s_departement_id" name="s_departement_id" style="width:120px;">
 					<?=$this->mdl_prosedur->OptionDepartement();?>
 				</select>
+			</td>
+			<td>Ext Document No</td>
+			<td>: 
+				<input name="s_ext_doc_no" id="s_ext_doc_no" size="15">
 			</td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
 			<td>&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-search">Search</a></td>
+		  </tr>
+		  <tr>
+			<td>ID RO</td>
+			<td>: 
+				<input name="s_id_ro" id="s_id_ro" size="15">
+			</td>
+
+			<td>&nbsp;</td>
 		  </tr>
 		</table>
 	</div>

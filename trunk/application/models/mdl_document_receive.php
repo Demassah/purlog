@@ -13,6 +13,11 @@ class mdl_document_receive extends CI_Model {
 		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'a.id_receive';  
 		$order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
 		$offset = ($page-1)*$limit;
+
+		#get filter
+		$id_receive = isset($_POST['id_receive']) ? strval($_POST['id_receive']) : '';
+		$id_sro = isset($_POST['id_sro']) ? strval($_POST['id_sro']) : '';
+		$id_courir = isset($_POST['id_courir']) ? strval($_POST['id_courir']) : '';
 		
 		# create query
 		$this->db->flush_cache();
@@ -21,6 +26,19 @@ class mdl_document_receive extends CI_Model {
 			$this->db->from('tr_receive a');
 			$this->db->join('ref_courir b', 'b.id_courir = a.id_courir');
 			$this->db->join('sys_user c', 'c.user_id = a.id_user');
+
+			if($id_receive != '') {
+				$this->db->like('a.id_receive', $id_receive);
+			}
+
+			if($id_sro != '') {
+					$this->db->like('a.id_sro', $id_sro);
+			}
+
+			if($id_courir != '') {
+					$this->db->like('a.id_courir', $id_courir);
+			}
+
 			$this->db->where('a.status', 1);
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();

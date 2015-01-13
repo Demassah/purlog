@@ -15,6 +15,15 @@
 			return col;
 		}
 
+		// filter
+		filter = function(){
+			$('#dg').datagrid('load',{
+				id_do : $('#s_id_do').val(),
+				id_courir : $('#s_id_courir').val(),
+			});
+			//$('#dg').datagrid('enableFilter');
+		}
+
 		$(function(){
 			$('#dg').datagrid({
 				url:base_url+"delivered/grid"
@@ -28,21 +37,26 @@
 	<div style="margin-bottom:5px">		
 	</div>
 	<div class="fsearch">
-		<table width="500" border="0">
+		<table width="800" border="0">
 		  <tr>
-			<td>Shipment Request Order</td>
+			
+			<td>ID DO</td>
 			<td>: 
-				<select id="search" name=" " style="width:200px;">
-					<option>Pilih</option>
-					<option>Search 1</option>
-		            <option>Search 2</option>
-		            <option>Search 3</option>	
-		            <option>Search 4</option>              
-				</select>	
+				<input name="s_id_do" id="s_id_do" size="15">
 			</td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
 			<td>&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-search">Search</a></td>
+		  </tr>
+		  <tr>
+			<td>Courir</td>
+			<td>: 
+				<select id="s_id_courir" name="s_id_courir" style="width:120px;">
+					<?=$this->mdl_prosedur->OptionCourir();?>
+				</select>
+			</td>
+
+			<td>&nbsp;</td>
 		  </tr>
 		</table>
 	</div>

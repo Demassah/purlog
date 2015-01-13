@@ -37,7 +37,7 @@ class mdl_prosedur extends CI_Model {
 		//$this->db->where('status', 'A');
 		
 		# - otoritas
-		if($this->session->userdata('departement_id')!='0'){
+		if($this->session->userdata('departement_id')!=''){
 			$this->db->where('departement_id', $this->session->userdata('departement_id'));
 		}else{
 			$out = '<option value="">-- Pilih --</option>';
@@ -275,7 +275,7 @@ class mdl_prosedur extends CI_Model {
 
 	function OptionCourir($d=""){
 		$value = isset($d['value'])?$d['value']:'';
-		$out = '';
+		$out = '<option value="">-- Pilih --</option>';
 		
 		$this->db->flush_cache();
 		$this->db->from('ref_courir');

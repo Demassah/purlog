@@ -13,6 +13,10 @@ class mdl_delivered extends CI_Model {
 		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'a.id_do';  
 		$order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
 		$offset = ($page-1)*$limit;
+
+		#get filter
+		$id_do = isset($_POST['id_do']) ? strval($_POST['id_do']) : '';
+		$id_courir = isset($_POST['id_courir']) ? strval($_POST['id_courir']) : '';
 		
 		# create query
 		$this->db->flush_cache();
@@ -21,6 +25,15 @@ class mdl_delivered extends CI_Model {
 			$this->db->from('tr_do a');
 			$this->db->join('ref_courir b', 'b.id_courir = a.id_courir');
 			$this->db->join('sys_user c', 'c.user_id = a.id_user');
+
+			if($id_do != '') {
+				$this->db->like('a.id_do', $id_do);
+			}
+
+			if($id_courir != '') {
+					$this->db->like('a.id_courir', $id_courir);
+			}
+
 			$this->db->where('a.status', '2');
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
