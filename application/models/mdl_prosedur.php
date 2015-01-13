@@ -485,14 +485,14 @@ class mdl_prosedur extends CI_Model {
 		
 		$this->db->flush_cache();
 		$this->db->from('ref_barang');
-
 		$this->db->order_by('kode_barang');
-				
+		//$this->db->where('status', 'A');
+
 		$res = $this->db->get();
 		
 		foreach($res->result() as $r){
 			if(trim($r->kode_barang) == trim($value)){
-				$out .= '<option value="'.$r->kode_barang.'" selected="selected">'.$r->nama_barang.' </option>';
+				$out .= '<option value="'.$r->kode_barang.'" selected="selected">'.$r->kode_barang.' - '.$r->nama_barang.'</option>';
 			}else{
 				$out .= '<option value="'.$r->kode_barang.'">'.$r->kode_barang.' - '.$r->nama_barang.'</option>';
 			}

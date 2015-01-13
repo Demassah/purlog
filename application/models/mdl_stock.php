@@ -39,4 +39,57 @@ class mdl_stock extends CI_Model {
         return false;
     }
 
+    function getdata($plimit=true){
+        # get parameter from easy grid
+        $page = isset($_POST['page']) ? intval($_POST['page']) : 1;  
+        $limit = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
+        $sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'id_stock';  
+        $order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
+        $offset = ($page-1)*$limit;
+
+        #get filter
+        $kode_barang = isset($_POST['kode_barang']) ? strval($_POST['kode_barang']) : '';
+        
+        # create query
+        $this->db->flush_cache();
+        $this->db->start_cache();
+        $this->db->select('a.id_stock, a.kode_barang, a.qty, a.price, a.id_lokasi, a.date_create, a.status, b.nama_barang');
+        $this->db->from('tr_stock a');
+        $this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang');
+        
+        #Filter
+        if($kode_barang != ''){
+            $this->db->where('a.kode_barang', $kode_barang);
+        }
+
+        $this->db->where('a.status','1');
+        $this->db->order_by($sort, $order);
+        $this->db->stop_cache();
+        
+        # get count
+        $tmp['row_count'] = $this->db->get()->num_rows();
+        
+        # get data
+        if($plimit == true){
+            $this->db->limit($limit, $offset);
+        }
+        $tmp['row_data'] = $this->db->get();
+        return $tmp;
+    }
+
+    function togrid($data, $count){
+        $response->total = $count;
+        $response->rows = array();
+        if($count>0){
+            $i=0;
+            foreach($data->result_array() as $row){
+                foreach($row as $key => $value){
+                    $response->rows[$i][$key]=$value;
+                }
+                $i++;
+            }
+        }
+        return json_encode($response);
+    }
+
 }
