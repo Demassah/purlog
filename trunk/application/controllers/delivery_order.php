@@ -93,6 +93,21 @@ class delivery_order extends CI_Controller {
 		$this->load->view('delivery_order/detail_delivery',$data);
 	}
 
+	//Cetak DO
+	
+	 function laporan_pdf($id_do) {
+    $this->load->library('HTML2PDF');
+    $html2pdf = new HTML2PDF('L', 'A5', 'fr');
+    $html2pdf->setDefaultFont('Arial');
+    $data['data_pdf'] = $this->mdl_delivery_order->report($id_do);
+
+    $konten = $this->load->view('delivery_order/do_report', $data, true);
+
+    $html2pdf->writeHTML($konten, false);
+
+    $html2pdf->Output("do_".date('d-m-y')."_".$id_do.".pdf");
+  }
+
 	// detail sro
 	function detail_ro($id_sro='')
 	{

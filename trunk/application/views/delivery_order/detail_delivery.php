@@ -2,9 +2,9 @@
 	<div class="fsearch">
 		<table>
 			<tr>
-					<td>
-							&nbsp;&nbsp;<a href="#" onclick="Add_sro()" class="easyui-linkbutton" iconCls="icon-ok">Add</a>
-					</td>							
+					<td><a href="#" onclick="Add_sro()" class="easyui-linkbutton" iconCls="icon-ok">Add</a></td>
+					<td style="width:100%"></td>
+        <td><a href="#" onclick="back()" class="easyui-linkbutton" iconCls="icon-undo">Kembali</a></td>
 			</tr>		
 		</table>
 	</div>
@@ -48,6 +48,7 @@
 	</div>
     <br>
 	  <div align="right">
+	  		<a href="#" class="easyui-linkbutton" onclick="cetakData();" iconCls="icon-print" plain="false">Print</a>
 	      <a href="#" class="easyui-linkbutton" onclick="CancelData();" iconCls="icon-cancel" plain="false">Cancel</a>&nbsp;&nbsp;&nbsp;
 	  </div>
 
@@ -65,6 +66,10 @@
 		$(document).ready(function(){
 			$("#SRO").select2();
 		});
+
+		cetakData = function(val){    
+        window.open(base_url+'delivery_order/laporan_pdf/'+id_do);      
+    }
 
 		back = function (){
 			$('#konten').panel({

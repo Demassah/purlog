@@ -181,7 +181,7 @@ class picking_req_order_selected extends CI_Controller {
 
     /* ------------------------ Lain lain --------------------------------------------- */
 
-        function laporan_pdf() {
+        function laporan_pdf($id_ro) {
             $this->load->library('HTML2PDF');
             $html2pdf = new HTML2PDF('P', 'A4', 'fr');
             $html2pdf->setDefaultFont('Arial');
@@ -196,7 +196,7 @@ class picking_req_order_selected extends CI_Controller {
             //$data['kotaUniv'] = 'Bandung, Jawa Barat';
             
             // ambil data dari tabel
-            $data['data_pdf'] = $this->mdl_picking->get_pdf();
+            $data['data_pdf'] = $this->mdl_picking->get_pdf($id_ro);
             
             /* if (count($da['row'])==0){
             echo "Data Tidak Tersedia";
@@ -207,7 +207,7 @@ class picking_req_order_selected extends CI_Controller {
             
             $html2pdf->writeHTML($konten, false);
             
-            $html2pdf->Output('picklist.pdf');
+            $html2pdf->Output("picklist_".date('d-m-y')."_".$id_ro.".pdf");
         }
 
 }
