@@ -83,8 +83,8 @@ else {
 		</tr>
 		<tr>
 			<td >&nbsp;&nbsp;&nbsp;</td>
-			<td align="left">ID SRO</td>
-			<td align="left"> : <?php  echo $data_pdf[0]->id_sro;?></td>
+			<td align="left">ID DO</td>
+			<td align="left"> : <?php  echo $data_pdf[0]->id_do;?></td>
 		</tr> 
 	</table>
 	<br/> 
