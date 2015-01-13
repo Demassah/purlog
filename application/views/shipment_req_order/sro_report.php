@@ -63,19 +63,16 @@ else {
     </page_footer>-->
 	<!--<table style="width:100%;">-->
 <p align="center"><b>Shipment Request Order</b></p>
-<br><br>
-	<!--<p align="center"><?php  echo $data_pdf[0]->nama_tahunajaran;?></p>-->
-	<table width="100%">
+
+	<p align="center">ID SRO : <?php echo $data_pdf[0]->id_sro;?></p><br>
+	<table width="100%" class="tblbtl" align="center">
 		<tr>
-			<td >&nbsp;&nbsp;&nbsp;</td>
+			<td>&nbsp;&nbsp;&nbsp;</td>
 			<td  align="left">Requestor</td>
 			<td  align="left"> : <?php  echo $data_pdf[0]->full_name;?></td>
 			<td>&nbsp;&nbsp;&nbsp;</td>
 			<td align="left" >External Doc No </td>
 			<td align="left"> : <?php  echo $data_pdf[0]->ext_doc_no;?></td>
-			<td>&nbsp;&nbsp;&nbsp;</td>
-			<td align="left" >ID SRO</td>
-			<td align="left"> : <?php  echo $data_pdf[0]->id_sro;?></td>
 		</tr>
 		<tr>
 			<td >&nbsp;&nbsp;&nbsp;</td>

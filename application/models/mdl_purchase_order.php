@@ -54,22 +54,12 @@ class mdl_purchase_order extends CI_Model {
 	}
 
 	// detail po
-	function detail_po_qr($id_po)
+	function detail($id_po)
 	{
-		$this->db->select('a.id_vendor,a.top,a.id_po,b.name_vendor,b.address_vendor,b.contact_vendor,b.mobile_vendor,a.id_qr');
-		$this->db->join('ref_vendor b', 'b.id_vendor = a.id_vendor');
-		$this->db->where('a.id_po', $id_po);
-		$query = $this->db->get('tr_qr a');
-		return $query->row();
-	}
-
-	function detail_po_qr_detail($id_po)
-	{
-		$list = $this->mdl_purchase_order->detail_po_qr($id_po);
-		$this->db->select('d.kode_barang,c.qty,c.price,d.nama_barang');
-		$this->db->join('ref_barang d', 'd.kode_barang = c.kode_barang');
-		$this->db->where('id_qr', $list->id_qr);
-		$query=$this->db->get('tr_qr_detail c');
+		$this->db->select('a.id_vendor,a.name_vendor,a.contact_vendor,a.mobile_vendor,a.address_vendor,b.id_po,b.id_detail_pr,b.kode_barang,b.nama_barang,b.qty,b.price,b.total,b.top');
+		$this->db->where('id_po', $id_po);
+		$this->db->join('ref_vendor a', 'a.id_vendor = b.id_vendor');
+		$query = $this->db->get('v_po_detail b');
 		return $query->result();
 	}
 
@@ -159,11 +149,10 @@ class mdl_purchase_order extends CI_Model {
 	
 	function report($id_po)
 	{
-		$list = $this->mdl_purchase_order->detail_po_qr($id_po);
-		$this->db->select('d.kode_barang,c.qty,c.price,d.nama_barang');
-		$this->db->join('ref_barang d', 'd.kode_barang = c.kode_barang');
-		$this->db->where('id_qr', $list->id_qr);
-		$query=$this->db->get('tr_qr_detail c');
+		$this->db->select('a.id_vendor,a.name_vendor,a.contact_vendor,a.mobile_vendor,a.address_vendor,b.id_po,b.id_detail_pr,b.kode_barang,b.note,b.qty,b.price,b.total,b.purpose,b.ext_doc_no,b.ETD,b.top,b.nama_barang,b.full_name,b.departement_name,b.cat_req,b.date_create');
+		$this->db->where('id_po', $id_po);
+		$this->db->join('ref_vendor a', 'a.id_vendor = b.id_vendor');
+		$query = $this->db->get('v_po_detail b');
 		return $query->result();
 	}
 } //End
