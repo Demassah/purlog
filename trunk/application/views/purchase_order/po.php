@@ -73,7 +73,7 @@
 		detail_po = function (value){
 			$('#dialog_kosong').dialog({
 				title: 'Detail Purchase Order / Detail Vendor',
-				width: 580,
+				width: 700,
 				height: 490,
 				closed: true,
 				cache: false,

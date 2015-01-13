@@ -63,9 +63,9 @@ else {
     </page_footer>-->
 	<!--<table style="width:100%;">-->
 <p align="center"><b>Delivery Order</b></p>
-<br><br>
-	<!--<p align="center"><?php  echo $data_pdf[0]->nama_tahunajaran;?></p>-->
-	<table width="100%">
+
+	<p align="center">ID DO : <?php echo $data_pdf[0]->id_do;?></p><br>
+	<table width="100%" class="tblbtl" align="center">
 		<tr>
 			<td >&nbsp;&nbsp;&nbsp;</td>
 			<td  align="left">Requestor</td>
@@ -81,11 +81,6 @@ else {
 			<td align="left">Date Create</td>
 			<td align="left"> : <?php  echo $data_pdf[0]->date_create;?></td>
 		</tr>
-		<tr>
-			<td >&nbsp;&nbsp;&nbsp;</td>
-			<td align="left">ID DO</td>
-			<td align="left"> : <?php  echo $data_pdf[0]->id_do;?></td>
-		</tr> 
 	</table>
 	<br/> 
 	<div>
