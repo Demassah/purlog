@@ -4,7 +4,7 @@ class soh extends CI_Controller {
 	
 	function __construct(){
 		parent::__construct();
-		$this->load->model('mdl_soh');
+		$this->load->model('mdl_stock');
 		//$this->output->enable_profiler(TRUE);
 	}
 	
@@ -13,8 +13,8 @@ class soh extends CI_Controller {
 	}
 	
 	function grid(){
-		$data = $this->mdl_soh->getdata();
-		echo $this->mdl_soh->togrid($data['row_data'], $data['row_count']);
+		$data = $this->mdl_stock->getdata();
+		echo $this->mdl_stock->togrid($data['row_data'], $data['row_count']);
 	}
 
 }

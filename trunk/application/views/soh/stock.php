@@ -16,12 +16,10 @@
 				url:"<?=base_url()?>soh/grid"
 			});
 		});
-		
+
 		// filter
 		filter = function(){
 			$('#dg').datagrid('load',{
-				id_stock : $('#s_id_stock').val(),
-				id_lokasi : $('#s_id_lokasi').val(),
 				kode_barang : $('#s_kode_barang').val(),
 			});
 			//$('#dg').datagrid('enableFilter');
@@ -35,32 +33,15 @@
 		
 	</div>
 	<div class="fsearch">
-		<table width="700" border="0">
+		<table width="500" border="0">
 		  <tr>
-			<td>ID Stock</td>
-			<td>: 
-				<select id="s_id_stock" name="s_id_stock" class="easyui-combobox" style="width:200px;">
-					<?=$this->mdl_prosedur->OptionStock();?>
-				</select>
-			</td>
 			<td>Barang</td>
 				<td>: 
-					<select id="s_kode_barang" name="s_kode_barang" class="easyui-combobox" style="width:200px;">
+					<select id="s_kode_barang" name="s_kode_barang" style="width:200px;">
 						<?=$this->mdl_prosedur->OptionBarangs();?>
 					</select>
-				</td>
-			<td>&nbsp;</td>				
-				<td>&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-search">Filter</a></td>
-		  </tr>
-		  <tr>
-			<td>Lokasi</td>
-			<td>: 
-				<select id="s_id_lokasi" name="s_id_lokasi" class="easyui-combobox" style="width:200px;">
-					<?=$this->mdl_prosedur->OptionLokasi();?>
-				</select>
-			</td>
-			<td>&nbsp;</td>				
-				
+				</td>			
+				<td><a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-search">Filter</a></td>
 		  </tr>
 		</table>
 	</div>
