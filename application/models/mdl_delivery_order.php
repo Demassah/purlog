@@ -120,13 +120,27 @@ class mdl_delivery_order extends CI_Model {
 			$query = $this->db->get('tr_sro a');
 
 			return $query->result();
-
-		
-
 	}
 
-
 	// detail sro
+		function report($id_do)
+	{
+		$this->db->flush_cache();
+		$this->db->start_cache();
+			$this->db->select('id_sro,id_ro,id_do,date_create,id_user,a.status,b.full_name,c.departement_name');
+			$this->db->join('sys_user b', 'b.user_id = a.id_user');
+			$this->db->join('ref_departement c', 'c.departement_id = b.departement_id');
+			$this->db->where('id_do', $id_do);
+			$this->db->order_by('id_do', 'asc');
+			$this->db->stop_cache();
+
+			$query = $this->db->get('tr_sro a');
+
+			return $query->result();
+	}
+
+	// cetak Do
+	
 		function getdataadddetail()
 	{
 		$this->db->flush_cache();

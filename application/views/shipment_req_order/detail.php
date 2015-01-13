@@ -44,6 +44,7 @@
 	</div>
 	  <br>  
 	  <div align="right">
+	  		<a href="#" class="easyui-linkbutton" onclick="cetakData();" iconCls="icon-print" plain="false">Print</a>
 	      <a href="#" class="easyui-linkbutton" onclick="CancelData();" iconCls="icon-cancel" plain="false">Cancel</a>&nbsp;&nbsp;&nbsp;
 	  </div>
 </form>
@@ -54,6 +55,10 @@
 	var id_sro ='<?php echo $id_sro;?>';
 	var id_ro ='<?php echo $id_ro;?>';
 	$(document).ready(function(){
+
+ 		cetakData = function(val){    
+        window.open(base_url+'shipment_req_order/laporan_pdf/'+ id_sro+'/'+id_ro);      
+    }
 
 		Insert = function (val){
      	

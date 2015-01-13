@@ -18,6 +18,7 @@ class purchase_order extends CI_Controller {
 	}
 
 	function detail_po($id_po){
+		$data['id_po']=$id_po;
 		$data['list']=$this->mdl_purchase_order->detail_po_qr($id_po);
 		$data['item']=$this->mdl_purchase_order->detail_po_qr_detail($id_po);
 		$this->load->view('purchase_order/detail_po',$data);
@@ -82,7 +83,24 @@ class purchase_order extends CI_Controller {
     } else {
         echo json_encode(array('msg' => 'Data gagal dihapus'));
     }
-  }	
+  }
+  /* ------------------------ Report --------------------------------------------- */
+
+  function laporan_pdf($id_po) {
+      $this->load->library('HTML2PDF');
+      $html2pdf = new HTML2PDF('P', 'A4', 'fr');
+      $html2pdf->setDefaultFont('Arial');
+
+      	$data['list']=$this->mdl_purchase_order->detail_po_qr($id_po);
+      	$data['data_pdf'] = $this->mdl_purchase_order->report($id_po);
+
+      $konten = $this->load->view('purchase_order/po_report', $data, true);
+
+      $html2pdf->writeHTML($konten, false);
+
+      $html2pdf->Output("po_".date('d-m-y')."_".$id_po.".pdf");
+  }
+
 
 
 	

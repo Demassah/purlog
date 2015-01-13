@@ -158,7 +158,7 @@
 
     //Cetak
     cetakData = function(val){    
-        window.open('<?=base_url().'picking_req_order_selected/laporan_pdf/'?>');      
+        window.open(base_url + 'picking_req_order_selected/laporan_pdf/'+id_ro);      
     }
 
 		Checkbox = function(value, row, index){

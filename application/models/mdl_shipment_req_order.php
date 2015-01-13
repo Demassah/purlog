@@ -210,5 +210,24 @@ function cek_id_sro($kode)
 		}
 	}
 
+	function report($id_sro,$id_ro)
+	{
+		$this->db->flush_cache();
+		$this->db->start_cache();
+		$this->db->select('id_detail_pros,id_detail_ro,a.id_ro,id_sro,id_stock,a.kode_barang,qty,id_lokasi,a.status,c.nama_barang,,d.user_id,d.ext_doc_no,e.full_name,a.date_create,d.ETD,d.cat_req,d.purpose,f.departement_name');
+		$this->db->join('ref_barang c', 'c.kode_barang = a.kode_barang');
+		$this->db->join('tr_ro d', 'd.id_ro = a.id_ro');
+		$this->db->join('sys_user e', 'e.user_id = d.user_id');
+		$this->db->join('ref_departement f', 'f.departement_id = e.departement_id');
+		$this->db->where('a.status', 1);
+		$this->db->where('a.id_ro', $id_ro);
+		$this->db->where('id_sro', $id_sro);
+		$this->db->order_by('a.id_sro','asc' );
+		$this->db->stop_cache();
+
+		$query = $this->db->get('tr_pros_detail a');
+		return $query->result();
+	}
+
 } //End
 

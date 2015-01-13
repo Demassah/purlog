@@ -176,6 +176,21 @@ class shipment_req_order extends CI_Controller {
 		}
 	}
 
+	 /* ------------------------ Report --------------------------------------------- */
+
+  function laporan_pdf($id_sro,$id_ro) {
+      $this->load->library('HTML2PDF');
+      $html2pdf = new HTML2PDF('P', 'A4', 'fr');
+      $html2pdf->setDefaultFont('Arial');
+      $data['data_pdf'] = $this->mdl_shipment_req_order->report($id_sro,$id_ro);
+
+      $konten = $this->load->view('shipment_req_order/sro_report', $data, true);
+
+      $html2pdf->writeHTML($konten, false);
+
+      $html2pdf->Output("sro_".date('d-m-y')."_".$id_sro.".pdf");
+  }
+
 
 	
 }

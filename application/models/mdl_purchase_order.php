@@ -58,6 +58,7 @@ class mdl_purchase_order extends CI_Model {
 	{
 		$this->db->select('a.id_vendor,a.top,a.id_po,b.name_vendor,b.address_vendor,b.contact_vendor,b.mobile_vendor,a.id_qr');
 		$this->db->join('ref_vendor b', 'b.id_vendor = a.id_vendor');
+		$this->db->where('a.id_po', $id_po);
 		$query = $this->db->get('tr_qr a');
 		return $query->row();
 	}
@@ -65,10 +66,10 @@ class mdl_purchase_order extends CI_Model {
 	function detail_po_qr_detail($id_po)
 	{
 		$list = $this->mdl_purchase_order->detail_po_qr($id_po);
-		$this->db->select('a.kode_barang,a.qty,a.price,b.nama_barang');
-		$this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang');
+		$this->db->select('d.kode_barang,c.qty,c.price,d.nama_barang');
+		$this->db->join('ref_barang d', 'd.kode_barang = c.kode_barang');
 		$this->db->where('id_qr', $list->id_qr);
-		$query=$this->db->get('tr_qr_detail a');
+		$query=$this->db->get('tr_qr_detail c');
 		return $query->result();
 	}
 
@@ -153,7 +154,18 @@ class mdl_purchase_order extends CI_Model {
 				return FALSE;
 		}
 	}
+
+	//cetak laporan
 	
+	function report($id_po)
+	{
+		$list = $this->mdl_purchase_order->detail_po_qr($id_po);
+		$this->db->select('d.kode_barang,c.qty,c.price,d.nama_barang');
+		$this->db->join('ref_barang d', 'd.kode_barang = c.kode_barang');
+		$this->db->where('id_qr', $list->id_qr);
+		$query=$this->db->get('tr_qr_detail c');
+		return $query->result();
+	}
 } //End
 
 ?>

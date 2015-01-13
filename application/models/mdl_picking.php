@@ -483,7 +483,7 @@ class mdl_picking extends CI_Model {
 	}
 	//END #addProsDetail
 	
-	function get_pdf(){        
+	function get_pdf($id_ro){        
         # get data
         $this->db->flush_cache();
         $this->db->start_cache();
@@ -496,7 +496,7 @@ class mdl_picking extends CI_Model {
 			$this->db->join('tr_stock e', 'e.id_stock = a.id_stock');
 			$this->db->join('sys_user f', 'f.user_id = b.user_id');
 			$this->db->join('ref_departement g', 'g.departement_id = f.departement_id');
-
+			$this->db->where('a.id_ro', $id_ro);
 			//$this->db->where('a.id_ro', $kode);
 			$this->db->where('a.status', '1');
 			$this->db->where('a.status_picking', '1');

@@ -32,6 +32,7 @@
 			<tr>
 				<th>Kode barang</th>
 				<th>Nama Barang</th>
+				<th>Qty</th>
 				<th>Price</th>
 			</tr>
 		</thead>
@@ -41,6 +42,7 @@
 				echo " <tr>
 				<td>".$l->kode_barang."</td>
 				<td>".$l->nama_barang."</td>
+				<td>".$l->qty."</td>
 				<td>".$l->price."</td>
 			</tr>
 				";
@@ -48,5 +50,22 @@
 		?>
 		</tbody>
 	</table>
+	<table>
+			<tr>
+					
+					<td style="width:100%"></td>
+        <td><a href="#" onclick="cetakData()" class="easyui-linkbutton" iconCls="icon-print">Print</a></td>
+			</tr>		
+		</table>
 
 </div>
+<script>
+	var url;
+	var id_po ='<?php echo $id_po;?>';
+	$(document).ready(function(){
+
+ 		cetakData = function(val){    
+        window.open(base_url+'purchase_order/laporan_pdf/'+ id_po);      
+    }
+  });
+</script>
