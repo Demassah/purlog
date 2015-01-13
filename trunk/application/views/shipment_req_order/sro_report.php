@@ -73,6 +73,9 @@ else {
 			<td>&nbsp;&nbsp;&nbsp;</td>
 			<td align="left" >External Doc No </td>
 			<td align="left"> : <?php  echo $data_pdf[0]->ext_doc_no;?></td>
+			<td>&nbsp;&nbsp;&nbsp;</td>
+			<td align="left" >ID SRO</td>
+			<td align="left"> : <?php  echo $data_pdf[0]->id_sro;?></td>
 		</tr>
 		<tr>
 			<td >&nbsp;&nbsp;&nbsp;</td>
