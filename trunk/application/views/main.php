@@ -268,7 +268,7 @@ date_default_timezone_set('Asia/Jakarta');
 			<div id="dialogDetail" class="easyui-dialog" style="width:400px;height:150px" closed="true">		 
 			</div>
 			<div id="dlg-buttons-detail">
-				<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#detail_dialog').dialog('close')">Cancel</a>
+				<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#detail_dialog').dialog('close')">Close</a>
 			</div>
 		</div>
 		<div id="dialog_kosong" class="easyui-dialog" style="width:400px;height:150px;" closed="true" buttons="#dlg-buttons-kosong">
