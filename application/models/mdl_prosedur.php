@@ -37,7 +37,7 @@ class mdl_prosedur extends CI_Model {
 		//$this->db->where('status', 'A');
 		
 		# - otoritas
-		if($this->session->userdata('departement_id')!=''){
+		if($this->session->userdata('departement_id')!='0'){
 			$this->db->where('departement_id', $this->session->userdata('departement_id'));
 		}else{
 			$out = '<option value="">-- Pilih --</option>';
@@ -81,21 +81,21 @@ class mdl_prosedur extends CI_Model {
 
 	function OptionUserID($d=""){
 		$value = isset($d['value'])?$d['value']:'';
-		$out = '<option value="">-- Pilih --</option>';
+		$out = '';
 		
 		$this->db->flush_cache();
 		$this->db->from('sys_user');
 		$this->db->order_by('full_name');
-		//$this->db->where('user_level_id', '1');
-
+		//$this->db->where('status', 'A');
+		
 		# - otoritas
 		if($this->session->userdata('user_id')!=''){
 			$this->db->where('user_id', $this->session->userdata('user_id'));
 		}else{
-			$out = '<option value="">-- Pilih --</option>';
+			$out = '<option value="">- Pilih -</option>';
 		}
-		#End
-
+		#End 
+		
 		$res = $this->db->get();
 		
 		foreach($res->result() as $r){

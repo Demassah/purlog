@@ -28,11 +28,11 @@ class mdl_request_order_logistic extends CI_Model {
 			$this->db->join('ref_departement c', 'c.departement_id = b.departement_id');
 
 			#Filter
-			if($this->session->userdata('departement_id')!=''){
+			if($this->session->userdata('departement_id')!='0'){
 				$this->db->where('b.departement_id', $this->session->userdata('departement_id'));
 			}else{
 				if($departement_id != '')
-					$this->db->like('b.departement_id', $departement_id);
+					$this->db->where('b.departement_id', $departement_id);
 			}
 
 			if($id_ro != '') {

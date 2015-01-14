@@ -80,6 +80,16 @@
           col += '&nbsp;&nbsp; | &nbsp;&nbsp;<a href="#" onclick="deleteData(\''+row.id_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit"plain="false">Delete</a>';
       return col;
     }
+
+    // filter
+    filter = function(){
+      $('#dg').datagrid('load',{
+        departement_id : $('#s_departement_id').val(),
+        id_ro : $('#s_id_ro').val(),
+        id_pr : $('#s_id_pr').val(),
+      });
+      //$('#dg').datagrid('enableFilter');
+    }
     
     $(function(){ // init
       $('#dg').datagrid({url:"purchase_request/grid"});      
@@ -104,19 +114,37 @@
 });
 </script>
 
-<!-- <div id="toolbar_purchase" style="padding:5px;height:auto">
+<div id="toolbar_purchase" style="padding:5px;height:auto">
+  <div style="margin-bottom:5px">   
+  </div>
   <div class="fsearch">
-    <table>
+    <table width="650" border="0">
       <tr>
-          <td>&nbsp;&nbsp;<a href="#" onclick="detail()" class="easyui-linkbutton" iconCls="icon-detail">Detail</a>
-              &nbsp;&nbsp;<a href="#" onclick="available()" class="easyui-linkbutton" iconCls="icon-ok">Picking</a>
-              &nbsp;&nbsp;<a href="#" onclick="lock()" class="easyui-linkbutton" iconCls="icon-login">Lock</a>
-              &nbsp;&nbsp;<a href="#" onclick="pending()" class="easyui-linkbutton" iconCls="icon-redo">pending</a>
-          </td> 
+      <td>Departement</td>
+      <td>: 
+        <select id="s_departement_id" name="s_departement_id" style="width:120px;">
+          <?=$this->mdl_prosedur->OptionDepartement();?>
+        </select>
+      </td>
+      <td>ID PR</td>
+      <td>: 
+        <input name="s_id_pr" id="s_id_pr" size="15">
+      </td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-search">Search</a></td>
+      </tr>
+      <tr>
+      <td>ID RO</td>
+      <td>: 
+        <input name="s_id_ro" id="s_id_ro" size="15">
+      </td>
+
+      <td>&nbsp;</td>
       </tr>
     </table>
   </div>
-</div> -->
+</div>
 
 <table id="dg" title="Purchase Request List" data-options="
       rownumbers:true,

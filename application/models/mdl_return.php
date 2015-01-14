@@ -13,14 +13,29 @@ class mdl_return extends CI_Model {
 		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'a.id_return';  
 		$order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
 		$offset = ($page-1)*$limit;
+
+		#get filter
+		$id_return = isset($_POST['id_return']) ? strval($_POST['id_return']) : '';
+		$id_receive = isset($_POST['id_receive']) ? strval($_POST['id_receive']) : '';
+		
 		
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('a.id_return, a.id_receive, a.date_create, a.status, a.user_id');
+			$this->db->select('a.id_return, a.id_receive, a.date_create, a.status, a.user_id, c.full_name');
 			$this->db->from('tr_return a');
 			$this->db->join('tr_receive b', 'b.id_receive = a.id_receive');
-			$this->db->join('sys_user c', 'c.user_id = a.user_id');
+			$this->db->join('sys_user c', 'c.user_id = a.user_id', 'left');
+
+			#Filter
+			if($id_return != ''){
+					$this->db->like('a.id_return', $id_return);
+			}
+
+			if($id_receive != '') {
+					$this->db->like('a.id_receive', $id_receive);
+			}
+
 			$this->db->where('a.status',1);
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();

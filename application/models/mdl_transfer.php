@@ -15,7 +15,7 @@ class mdl_transfer extends CI_Model {
 		$offset = ($page-1)*$limit;
 
 		#get filter
-		//$departement_id = isset($_POST['departement_id']) ? strval($_POST['departement_id']) : '';
+		$id_transfer = isset($_POST['id_transfer']) ? strval($_POST['id_transfer']) : '';
 		
 		# create query
 		$this->db->flush_cache();
@@ -24,11 +24,9 @@ class mdl_transfer extends CI_Model {
 		$this->db->from('tr_transfer a');
 		$this->db->join('sys_user b', 'b.user_id = a.user_id');
 
-		#Filter
-		// if($departement_id != '0'){
-		// 		$this->db->where('b.departement_id', $departement_id);
-		// 	}
-		// }
+		if($id_transfer != '') {
+				$this->db->like('a.id_transfer', $id_transfer);
+		}
 
 		$this->db->where('a.status','1');
 		$this->db->order_by($sort, $order);

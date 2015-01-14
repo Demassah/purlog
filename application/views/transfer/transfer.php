@@ -131,6 +131,14 @@
 			//$('#dg').datagrid('enableFilter');
 		}
 
+		// filter
+	    filter = function(){
+	      $('#dg').datagrid('load',{
+	        id_transfer : $('#s_id_transfer').val(),
+	      });
+	      //$('#dg').datagrid('enableFilter');
+	    }
+
 		//# Tombol Bawah
 		$(function(){
 			var pager = $('#dg').datagrid().datagrid('getPager');	// get the pager of datagrid
@@ -155,23 +163,21 @@
 
 
 <div id="toolbar" style="padding:5px;height:auto">
-	<div style="margin-bottom:5px">		
-	</div>
-	<div class="fsearch">
-		<table width="500" border="0">
-		  <tr>
-			<td>Search</td>
-			<td>: 
-				<select id="s_departement_id" name="s_departement_id" style="width:200px;">
-					<?=$this->mdl_prosedur->OptionDepartement();?>
-				</select>
-			</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-search">Search</a></td>
-		  </tr>
-		</table>
-	</div>
+  <div style="margin-bottom:5px">   
+  </div>
+  <div class="fsearch">
+    <table width="400" border="0">
+      <tr>
+       <td>ID Transfer</td>
+      <td>: 
+        <input name="s_id_transfer" id="s_id_transfer" size="15">
+      </td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-search">Search</a></td>
+      </tr>
+    </table>
+  </div>
 </div>
 
 <table id="dg" title="Transfer List" data-options="
