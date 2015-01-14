@@ -1,0 +1,29 @@
+SELECT
+c.id_po AS id_po,
+a.id_detail_pr AS id_detail_pr,
+a.kode_barang AS kode_barang,
+a.note AS note,
+a.qty AS qty,
+e.price AS price,
+(`a`.`qty` * `e`.`price`) AS total,
+c.purpose,
+c.ext_doc_no,
+c.ETD,
+d.top,
+f.nama_barang,
+a.user_id,
+g.full_name,
+d.id_vendor,
+g.departement_id,
+h.departement_name,
+c.cat_req,
+c.date_create
+FROM
+((((tr_pr_detail AS a
+LEFT JOIN tr_pr AS b ON ((a.id_pr = b.id_pr)))
+LEFT JOIN tr_po AS c ON ((b.id_po = c.id_po)))
+LEFT JOIN tr_qr AS d ON (((b.id_pr = d.id_pr) AND (d.`status` = 2))))
+LEFT JOIN tr_qr_detail AS e ON (((e.id_qr = d.id_qr) AND (e.id_detail_pr = a.id_detail_pr))))
+LEFT JOIN ref_barang AS f ON f.kode_barang = a.kode_barang
+LEFT JOIN sys_user AS g ON g.user_id = a.user_id 
+LEFT JOIN ref_departement as h on h.departement_id = g.departement_id 
