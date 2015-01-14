@@ -26,9 +26,9 @@
 			<?=$item[0]->top;?>
 	</div>
 
-	<table class="tbl">
+	<table class="tbl" align="center">
 		
-		<thead>
+		<thead align="center">
 			<tr>
 				<th>ID PO</th>
 				<th>ID Detail PR</th>
@@ -42,14 +42,14 @@
 		<tbody>
 		<?php 
 			foreach ($item as $l) {
-				echo " <tr>
+				echo " <tr align='center'>
 				<td>".$l->id_po."</td>
 				<td>".$l->id_detail_pr."</td>
 				<td>".$l->kode_barang."</td>
 				<td>".$l->nama_barang."</td>
 				<td>".$l->qty."</td>
-				<td>".$l->price."</td>
-				<td>".$l->total."</td>
+				<td>Rp.".number_format($l->price,2,',','.')."</td>
+				<td>Rp.".number_format($l->total,2,',','.')."</td>
 			</tr>
 				";
 			}

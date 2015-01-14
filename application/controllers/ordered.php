@@ -18,8 +18,7 @@ class ordered extends CI_Controller {
 	}
 
 	function detail_orde($id_po){
-		$data['list']=$this->mdl_ordered->detail_orde_qr($id_po);
-		$data['item']=$this->mdl_ordered->detail_orde_qr_detail($id_po);
+		$data['item']=$this->mdl_ordered->detail($id_po);
 		$this->load->view('ordered/detail_orde',$data);
 	}
 	

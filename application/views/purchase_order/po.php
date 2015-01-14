@@ -71,16 +71,16 @@
 		}
 		//save
 		detail_po = function (value){
-			$('#dialog_kosong').dialog({
+			$('#detail_dialog').dialog({
 				title: 'Detail Purchase Order / Detail Vendor',
-				width: 700,
+				width: 800,
 				height: 490,
 				closed: true,
 				cache: false,
 				href: base_url+'purchase_order/detail_po/' + value,
 				modal: true
 			});
-			$('#dialog_kosong').dialog('open');
+			$('#detail_dialog').dialog('open');
 		}
 
 		done_po = function (val){

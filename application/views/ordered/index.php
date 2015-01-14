@@ -28,16 +28,16 @@
 	$(document).ready(function(){
 		//save
 		detail_orde = function (value){
-			$('#dialog_kosong').dialog({
+			$('#detail_dialog').dialog({
 				title: 'Detail Purchase Order / Detail Vendor / Detail ordered',
-				width: 580,
+				width: 800,
 				height: 490,
 				closed: true,
 				cache: false,
 				href: base_url+'ordered/detail_orde/' + value,
 				modal: true
 			});
-			$('#dialog_kosong').dialog('open');
+			$('#detail_dialog').dialog('open');
 		}
 
 				

@@ -54,23 +54,15 @@ class mdl_ordered extends CI_Model {
 	}
 
 	// detail po
-	function detail_orde_qr($id_po)
+	function detail($id_po)
 	{
-		$this->db->select('a.id_vendor,a.top,a.id_po,b.name_vendor,b.address_vendor,b.contact_vendor,b.mobile_vendor,a.id_qr');
-		$this->db->join('ref_vendor b', 'b.id_vendor = a.id_vendor');
-		$query = $this->db->get('tr_qr a');
-		return $query->row();
-	}
-
-	function detail_orde_qr_detail($id_po)
-	{
-		$list = $this->mdl_ordered->detail_orde_qr($id_po);
-		$this->db->select('a.kode_barang,a.qty,a.price,b.nama_barang');
-		$this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang');
-		$this->db->where('id_qr', $list->id_qr);
-		$query=$this->db->get('tr_qr_detail a');
+		$this->db->select('a.id_vendor,a.name_vendor,a.contact_vendor,a.mobile_vendor,a.address_vendor,b.id_po,b.id_detail_pr,b.kode_barang,b.nama_barang,b.qty,b.price,b.total,b.top');
+		$this->db->where('id_po', $id_po);
+		$this->db->join('ref_vendor a', 'a.id_vendor = b.id_vendor');
+		$query = $this->db->get('v_po_detail b');
 		return $query->result();
 	}
+
 
 	// function search_pr($data)
 	// {
