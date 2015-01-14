@@ -29,11 +29,11 @@ class mdl_request_order_approval extends CI_Model {
 			$this->db->join('tr_ro_detail d', 'd.id_ro = a.id_ro');
 
 			#Filter
-			if($this->session->userdata('departement_id')!=''){
+			if($this->session->userdata('departement_id')!='0'){
 				$this->db->where('b.departement_id', $this->session->userdata('departement_id'));
 			}else{
 				if($departement_id != '')
-					$this->db->like('b.departement_id', $departement_id);
+					$this->db->where('b.departement_id', $departement_id);
 			}
 
 			if($id_ro != '') {

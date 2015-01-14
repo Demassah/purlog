@@ -37,7 +37,7 @@
 	<div style="margin-bottom:5px">		
 	</div>
 	<div class="fsearch">
-		<table width="800" border="0">
+		<table width="400" border="0">
 		  <tr>
 			
 			<td>ID DO</td>

@@ -50,6 +50,15 @@
           col += '&nbsp;&nbsp; | &nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id_return+'\');" class="easyui-linkbutton" iconCls="icon-edit"plain="false">Done</a>';
       return col;
     }
+
+    // filter
+    filter = function(){
+      $('#dg').datagrid('load',{
+        id_return : $('#s_id_return').val(),
+        id_receive : $('#s_id_receive').val(),
+      });
+      //$('#dg').datagrid('enableFilter');
+    }
     
     $(function(){ // init
       $('#dg').datagrid({url:"retur/grid"});      
@@ -74,19 +83,31 @@
 });
 </script>
 
-<!-- <div id="toolbar_purchase" style="padding:5px;height:auto">
+<div id="toolbar" style="padding:5px;height:auto">
+  <div style="margin-bottom:5px">   
+  </div>
   <div class="fsearch">
-    <table>
+    <table width="400" border="0">
       <tr>
-          <td>&nbsp;&nbsp;<a href="#" onclick="detail()" class="easyui-linkbutton" iconCls="icon-detail">Detail</a>
-              &nbsp;&nbsp;<a href="#" onclick="available()" class="easyui-linkbutton" iconCls="icon-ok">Picking</a>
-              &nbsp;&nbsp;<a href="#" onclick="lock()" class="easyui-linkbutton" iconCls="icon-login">Lock</a>
-              &nbsp;&nbsp;<a href="#" onclick="pending()" class="easyui-linkbutton" iconCls="icon-redo">pending</a>
-          </td> 
+       <td>ID Return</td>
+      <td>: 
+        <input name="s_id_return" id="s_id_return" size="15">
+      </td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-search">Search</a></td>
+      </tr>
+      <tr>
+      <td>ID Receive</td>
+      <td>: 
+        <input name="s_id_receive" id="s_id_receive" size="15">
+      </td>
+
+      <td>&nbsp;</td>
       </tr>
     </table>
   </div>
-</div> -->
+</div>
 
 <table id="dg" title="Return List" data-options="
       rownumbers:true,
@@ -95,14 +116,14 @@
       pagination:true,
       pageSize:30,
       fit:true,
-      toolbar:'#toolbar_purchase',
+      toolbar:'#toolbar',
     ">    
   <thead>
     <tr>
       <th field="id_return" sortable="true" width="80" >ID Return</th>
       <th field="id_receive" sortable="true" width="80">ID Receive</th>     
       <th field="date_create" sortable="true" width="130">Date Create</th>
-      <th field="user_id" sortable="true" width="100">Requestor</th>
+      <th field="full_name" sortable="true" width="100">Requestor</th>
       <th field="status" sortable="true" width="100">Status</th>
       <th field="action" align="center" formatter="actionPurchaseRequest" width="150">Aksi</th>
     </tr>

@@ -13,14 +13,35 @@ class mdl_purchase_request extends CI_Model {
 		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'id_ro';  
 		$order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
 		$offset = ($page-1)*$limit;
+
+		#get filter
+		$departement_id = isset($_POST['departement_id']) ? strval($_POST['departement_id']) : '';
+		$id_ro = isset($_POST['id_ro']) ? strval($_POST['id_ro']) : '';
+		$id_pr = isset($_POST['id_pr']) ? strval($_POST['id_pr']) : '';
 		
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('*, b.full_name, c.departement_name');
+			$this->db->select('*, a.id_pr, a.id_ro, b.full_name, c.departement_name');
 			$this->db->from('tr_pr a');
 			$this->db->join('sys_user b', 'b.user_id = a.user_id');
 			$this->db->join('ref_departement c', 'c.departement_id = b.departement_id');
+
+			#Filter
+			if($this->session->userdata('departement_id')!='0'){
+				$this->db->where('b.departement_id', $this->session->userdata('departement_id'));
+			}else{
+				if($departement_id != '')
+					$this->db->like('b.departement_id', $departement_id);
+			}
+
+			if($id_ro != '') {
+					$this->db->like('a.id_ro', $id_ro);
+			}
+
+			if($id_pr != '') {
+					$this->db->like('a.id_pr', $id_pr);
+			}
 
 			$this->db->where('a.status','1');
 
