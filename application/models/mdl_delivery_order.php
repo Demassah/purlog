@@ -10,18 +10,28 @@ class mdl_delivery_order extends CI_Model {
 		# get parameter from easy grid
 		$page = isset($_POST['page']) ? intval($_POST['page']) : 1;  
 		$limit = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
-		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'id_do';  
+		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'a.id_do';  
 		$order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
 		$offset = ($page-1)*$limit;
+
+		#get filter
+		$id_do = isset($_POST['id_do']) ? strval($_POST['id_do']) : '';
 		
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('id_do,date_create,b.name_courir,c.full_name');
+			$this->db->select('a.id_do,a.date_create,b.name_courir,c.full_name');
 			$this->db->from('tr_do a');
 			$this->db->join('ref_courir b', 'b.id_courir = a.id_courir', 'left');
 			$this->db->join('sys_user c', 'c.user_id = a.id_user', 'left');
+			
+			#filter
+			if($id_do != '') {
+					$this->db->like('a.id_do', $id_do);
+			}
 			$this->db->where('a.status', 1);
+
+			
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
 		

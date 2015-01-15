@@ -1,4 +1,4 @@
-<table id="dg" title="Delivery Order List" data-options="
+<table id="dg_do" title="Delivery Order List" data-options="
 			rownumbers:true,
 			singleSelect:true,
 			autoRowHeight:false,
@@ -25,13 +25,7 @@
 		  <tr>
 			<td>Delivery Order</td>
 			<td>: 
-					<select class="easyui-combobox" name=" " style="width:200px;">
-						<option>Pilih</option>
-						<option>Search 1</option>
-            <option>Search 2</option>
-            <option>Search 3</option>	
-            <option>Search 4</option>              
-				</select>	
+					<input name="s_id_do" id="s_id_do" size="15">
 			</td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
@@ -86,7 +80,7 @@
               msg: 'Data Berhasil Ditambahkan ',
             });
 						$('#dialog').dialog('close');		// close the dialog
-						$('#dg').datagrid('reload');		// reload the user data
+						$('#dg_do').datagrid('reload');		// reload the user data
 					} else {
 						$.messager.show({
 							title: 'Error',
@@ -111,7 +105,7 @@
 								msg: 'Data Berhasil Dikirim'
 							});
 							// reload and close tab
-							$('#dg').datagrid('reload');
+							$('#dg_do').datagrid('reload');
 						} else {
 							$.messager.show({
 								title: 'Error',
@@ -137,7 +131,7 @@
 								msg: 'Data Berhasil Dihapus'
 							});
 							// reload and close tab
-							$('#dg').datagrid('reload');
+							$('#dg_do').datagrid('reload');
 						} else {
 							$.messager.show({
 								title: 'Error',
@@ -165,16 +159,24 @@
 
 			return col;
 		}
+
+		filter = function(){
+			$('#dg_do').datagrid('load',{
+				id_do : $('#s_id_do').val(),
+				
+			});
+			//$('#dg').datagrid('enableFilter');
+		}
 		
 		$(function(){
-			$('#dg').datagrid({
+			$('#dg_do').datagrid({
 				url:base_url+"delivery_order/grid"
 			});
 		});
 		
 		//# Tombol Bawah
 		$(function(){
-			var pager = $('#dg').datagrid().datagrid('getPager');	// get the pager of datagrid
+			var pager = $('#dg_do').datagrid().datagrid('getPager');	// get the pager of datagrid
 			pager.pagination({
 				buttons:[
 				<?if($this->mdl_auth->CekAkses(array('menu_id'=>19, 'policy'=>'ADD'))){?>

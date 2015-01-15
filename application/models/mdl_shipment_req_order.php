@@ -16,6 +16,7 @@ class mdl_shipment_req_order extends CI_Model {
 
 		#get filter
 		$id_sro = isset($_POST['id_sro']) ? strval($_POST['id_sro']) : '';
+		$id_ro = isset($_POST['id_ro']) ? strval($_POST['id_ro']) : '';
 
 		# create query
 		$this->db->flush_cache();
@@ -26,9 +27,11 @@ class mdl_shipment_req_order extends CI_Model {
 
 		#filter
 		if($id_sro != '') {
-					$this->db->like('a.id_sro', $id_sro);
+				$this->db->like('a.id_sro', $id_sro);
+			}elseif ($id_ro !='') {
+				$this->db->like('a.id_ro', $id_ro);
 			}
-			
+
 		$this->db->where('status', 1);
 		$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
