@@ -2,16 +2,21 @@
 	<div style="margin-bottom:5px">		
 	</div>
 	<div class="fsearch">
-		<table width="500" border="0">
+		<table width="600" border="0">
 		  <tr>
 			<td>ID SRO</td>
 			<td>: 
-					<input name="s_id_sro" id="s_id_sro" size="15">
+				<input name="s_id_sro" id="s_id_sro" size="15">
+			</td>
+				<td>ID RO</td>
+			<td>: 
+				<input name="s_id_ro" id="s_id_ro" size="15">
 			</td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
 			<td>&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-search">Search</a></td>
 		  </tr>
+
 		</table>
 	</div>
 </div>
@@ -166,9 +171,22 @@
 			});
 		});
 
-		filter = function(){
+		$('#s_id_ro').keyup(function(event) {
+			var id_ro = $('#s_id_ro').val();
+			$('#s_id_sro').val('');
+			filter();
+		});
+
+		$('#s_id_sro').keyup(function(event) {
+			$('#s_id_ro').val('');
+			var id_sro = $('#s_id_sro').val();
+			filter();
+		});
+
+		filter = function filter(){
 			$('#dg_sro').datagrid('load',{
 				id_sro : $('#s_id_sro').val(),
+				id_ro : $('#s_id_ro').val()
 				
 			});
 			//$('#dg').datagrid('enableFilter');
