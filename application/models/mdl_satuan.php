@@ -17,7 +17,7 @@ class mdl_satuan extends CI_Model {
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('*');
+			$this->db->select('id_satuan, nama_satuan, status');
 			$this->db->from('ref_satuan');
 			$this->db->where('status','1');
 
@@ -78,7 +78,7 @@ class mdl_satuan extends CI_Model {
 
 	function getdataedit($kode){
 		$this->db->flush_cache();
-		$this->db->select('*');
+		$this->db->select('id_satuan, nama_satuan, status');
 		$this->db->from('ref_satuan');
 		$this->db->where('id_satuan', $kode);
 		
