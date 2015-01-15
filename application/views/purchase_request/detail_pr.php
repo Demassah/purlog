@@ -67,7 +67,9 @@
 
     actionDetail = function(value, row, index){
       var col='';
+        <?php if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'DELETE'))){ ?>
           col += '<a href="#" onclick="cancel(\''+row.id_detail_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Cancel</a>';
+        <?php }?>
       return col;
     }
 	

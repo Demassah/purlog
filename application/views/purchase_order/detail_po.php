@@ -59,10 +59,10 @@
 	<table>
 			<tr>
 					
-					<td style="width:100%"></td>
+					<td style="width:95%"></td>
         <td>
-	        <?if($this->mdl_auth->CekAkses(array('menu_id'=>17, 'policy'=>'PRINT'))){?>
-	        <a href="#" onclick="cetakData()" class="easyui-linkbutton" iconCls="icon-print">Print</a>
+	        <?if($this->mdl_auth->CekAkses(array('menu_id'=>17, 'policy'=>'PDF'))){?>
+	        <a href="#" onclick="cetakData()" class="easyui-linkbutton" iconCls="icon-pdf">Export </a>
 	        <?}?>
         </td>
 			</tr>		

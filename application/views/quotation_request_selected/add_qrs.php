@@ -2,7 +2,11 @@
   <div class="fsearch">
     <table>
       <tr>
-          <td><a href="#" onclick="Add_vendor()" class="easyui-linkbutton" iconCls="icon-ok">Add</a></td>
+          <td>
+            <?php if($this->mdl_auth->CekAkses(array('menu_id'=>15, 'policy'=>'ADD'))){ ?>
+              <a href="#" onclick="Add_vendor()" class="easyui-linkbutton" iconCls="icon-ok">Add</a>
+            <?php }?>
+          </td>
           <td style="width:100%"></td>
           <td><a href="#" onclick="back()" class="easyui-linkbutton" iconCls="icon-undo">Kembali</a></td>
       </tr>
@@ -172,7 +176,7 @@
                 msg: 'Data Vendor Berhasil Dipilih'
               });
               // reload and close tab
-              $('#qrs_table').load(base_url + 'quotation_request_selected/after_select/'+id_pr).fadeIn("slow");
+              $('#qrs_table').load(base_url + 'quotation_request_selected/after_select/'+id_pr);
             } else {
               $.messager.show({
                 title: 'Error',

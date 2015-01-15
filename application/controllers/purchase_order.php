@@ -53,9 +53,9 @@ class purchase_order extends CI_Controller {
 		}else{
 			if($aksi=="add"){ // add
 			//print_r($data);
-			$result = $this->mdl_purchase_order->Insert_qrs($data);
+			$result = $this->mdl_purchase_order->Insert_po($data);
 			}else { // edit
-				// $result=$this->mdl_quotation_request_selected->cancel($data);
+			$result=$this->mdl_quotation_request_selected->cancel($data);
 			}
 		}
 		

@@ -79,7 +79,7 @@ class mdl_purchase_order extends CI_Model {
 		$query = $this->db->get('tr_qr');
 		return $query->row();
 	}
-	function Insert_qrs($data)
+	function Insert_po($data)
 	{
 		// function searc
 		$pr = $this->mdl_purchase_order->search_pr($data);
