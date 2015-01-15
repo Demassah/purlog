@@ -44,7 +44,9 @@
 	</div>
 	  <br>  
 	  <div align="right">
+	  	<?if($this->mdl_auth->CekAkses(array('menu_id'=>13, 'policy'=>'PRINT'))){?>
 	  		<a href="#" class="easyui-linkbutton" onclick="cetakData();" iconCls="icon-print" plain="false">Print</a>
+	  	<?}?>
 	      <a href="#" class="easyui-linkbutton" onclick="CancelData();" iconCls="icon-cancel" plain="false">Cancel</a>&nbsp;&nbsp;&nbsp;
 	  </div>
 </form>
