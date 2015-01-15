@@ -237,10 +237,10 @@
 			<th field="delete1" width="50" formatter="CheckboxDeleted" align="center">Delete</th>
 			<th field="select1" width="60" formatter="Checkboxselect" align="center">Select</th>
 			<th field="print1" width="50" formatter="CheckboxPrint" align="center">Print</th>
-			<th field="pdf1" width="80" formatter="CheckboxPrint" align="center">Export PDF</th>
-			<th field="excel1" width="80" formatter="CheckboxPrint" align="center">Export Excel</th>
+			<th field="pdf1" width="80" formatter="CheckboxPdf" align="center">Export PDF</th>
+			<th field="excel1" width="80" formatter="CheckboxExcel" align="center">Export Excel</th>
 			<th field="import1" width="50" formatter="CheckboxImport" align="center">Import</th>
-			<th field="approve1" width="60" formatter="CheckboxPrint" align="center">Approve</th>
+			<th field="approve1" width="60" formatter="CheckboxApprove" align="center">Approve</th>
 
 			
 			
