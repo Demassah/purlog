@@ -14,16 +14,25 @@ class mdl_shipment_req_order extends CI_Model {
 		$order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
 		$offset = ($page-1)*$limit;
 
+		#get filter
+		$id_sro = isset($_POST['id_sro']) ? strval($_POST['id_sro']) : '';
+
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-		$this->db->select('id_sro,id_ro,date_create,id_user,b.full_name');
+		$this->db->select('a.id_sro,a.id_ro,a.date_create,a.id_user,b.full_name');
 		$this->db->from('tr_sro a');
 		$this->db->join('sys_user b', 'b.user_id = a.id_user');
+
+		#filter
+		if($id_sro != '') {
+					$this->db->like('a.id_sro', $id_sro);
+			}
+			
 		$this->db->where('status', 1);
 		$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
-
+		
 		# get count
 		$tmp['row_count'] = $this->db->get()->num_rows();
 		

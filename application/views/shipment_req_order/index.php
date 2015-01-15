@@ -1,17 +1,12 @@
-<div id="toolbar" style="padding:5px;height:auto">
+<div id="toolbar_sro" style="padding:5px;height:auto">
 	<div style="margin-bottom:5px">		
 	</div>
 	<div class="fsearch">
 		<table width="500" border="0">
 		  <tr>
-			<td>ROS</td>
+			<td>ID SRO</td>
 			<td>: 
-					<select class="" name=" " style="width:200px;">
-						<option>Choose ROS</option>
-						<?php foreach($list as $l){ 
-							echo "<option value='".$l->id_ro."'>".$l->id_ro."</option>";
-						}?>            
-				</select>	
+					<input name="s_id_sro" id="s_id_sro" size="15">
 			</td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
@@ -21,14 +16,14 @@
 	</div>
 </div>
 
-<table id="dg" title="Shipment Request Order List" data-options="
+<table id="dg_sro" title="Shipment Request Order List" data-options="
 			rownumbers:true,
 			singleSelect:true,
 			autoRowHeight:false,
 			pagination:true,
 			pageSize:30,
 			fit:true,
-			toolbar:'#toolbar'
+			toolbar:'#toolbar_sro'
 			">
 	<thead>
 		<tr>
@@ -77,7 +72,7 @@
               msg: 'Data Berhasil Ditambahkan',
             });
 						$('#dialog').dialog('close');		// close the dialog
-						$('#dg').datagrid('reload');		// reload the user data
+						$('#dg_sro').datagrid('reload');		// reload the user data
 					} else {
 						$.messager.show({
 							title: 'Error',
@@ -123,7 +118,7 @@
                 msg: 'Data Berhasil Dialokasi'
               });
               // reload and close tab
-              $('#dg').datagrid('reload');
+              $('#dg_sro').datagrid('reload');
             } else {
               $.messager.show({
                 title: 'Error',
@@ -149,7 +144,7 @@
                 msg: 'Data Berhasil Dihapus'
               });
               // reload and close tab
-              $('#dg').datagrid('reload');
+              $('#dg_sro').datagrid('reload');
             } else {
               $.messager.show({
                 title: 'Error',
@@ -166,14 +161,22 @@
 		});
 		
 		$(function(){
-			$('#dg').datagrid({
+			$('#dg_sro').datagrid({
 				url:base_url+"shipment_req_order/grid"
 			});
 		});
+
+		filter = function(){
+			$('#dg_sro').datagrid('load',{
+				id_sro : $('#s_id_sro').val(),
+				
+			});
+			//$('#dg').datagrid('enableFilter');
+		}
 		
 		//# Tombol Bawah
 		$(function(){
-			var pager = $('#dg').datagrid().datagrid('getPager');	// get the pager of datagrid
+			var pager = $('#dg_sro').datagrid().datagrid('getPager');	// get the pager of datagrid
 			pager.pagination({
 				buttons:[
 				<?if($this->mdl_auth->CekAkses(array('menu_id'=>13, 'policy'=>'ADD'))){?>
