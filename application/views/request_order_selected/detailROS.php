@@ -10,43 +10,6 @@
 			});
 
 		}
-    /*
-    editData = function (val){
-        if(confirm("Apakah yakin akan mengedit data '" + val + "'?")){
-          var response = '';
-          $.ajax({ type: "GET",
-             url: base_url+'request_order_selected/edit/' + val,
-             async: false,
-             success : function(response){
-              var response = eval('('+response+')');
-              if (response.success){
-
-                 $('#dialog').dialog({
-                  title: 'Edit Data Dosen',
-                  width: 430,
-                  height: 330,
-                  closed: true,
-                  cache: false,
-                  href: base_url+'request_order_selected/edit/'+val,
-                  modal: true
-                });
-                
-                $('#dialog').dialog('open');  
-                url = base_url+'request_order_selected/save/edit';
-
-
-              } else {
-                $.messager.show({
-                  title: 'Error',
-                  msg: response.msg
-                });
-              }
-             }
-          });
-        }
-      //}
-    }
-    //end alocateData */
 
     editData = function (val){
       //var row = $('#dg').datagrid('getSelected');
@@ -124,9 +87,9 @@
     
     actionDetail = function(value, row, index){
       var col='';
-        
+        <?if($this->mdl_auth->CekAkses(array('menu_id'=>11, 'policy'=>'EDIT'))){?>
           col += '<a href="#" onclick="editData(\''+row.id_detail_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Edit</a>';
-        
+        <?}?>
       return col;
     }
 

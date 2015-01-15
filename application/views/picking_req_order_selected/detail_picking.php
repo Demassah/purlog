@@ -99,7 +99,9 @@
 
 		actiondetail = function(value, row, index){
 			var col='';
+      <?if($this->mdl_auth->CekAkses(array('menu_id'=>12, 'policy'=>'EDIT'))){?>
 					col += '<a href="#" onclick="alocateData(\''+row.id_detail_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Alocate</a>';			
+      <?}?>
 			return col;
 		}
 		
@@ -112,6 +114,7 @@
       var pager = $('#dg_detail').datagrid().datagrid('getPager'); // get the pager of datagrid
       pager.pagination({
         buttons:[
+        <?if($this->mdl_auth->CekAkses(array('menu_id'=>12, 'policy'=>'EDIT'))){?>
           {
             iconCls:'icon-all',
             text:'Alocate All',
@@ -121,6 +124,7 @@
               alocateAll(id);
             }
           },
+        <?}?>
           {
             iconCls:'icon-undo',
             text:'Kembali',

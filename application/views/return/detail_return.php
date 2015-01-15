@@ -41,6 +41,7 @@
       var pager = $('#dg').datagrid().datagrid('getPager'); // get the pager of datagrid
       pager.pagination({
         buttons:[
+        <?if($this->mdl_auth->CekAkses(array('menu_id'=>21, 'policy'=>'ADD'))){?>
           {
             iconCls:'icon-add',
             text:'Tambah Detail',
@@ -48,6 +49,7 @@
               tambahDetail();
             }
           },
+        <?}?>
            {
             iconCls:'icon-undo',
             text:'Kembali',

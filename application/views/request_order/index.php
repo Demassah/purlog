@@ -110,7 +110,10 @@
 			<?if($this->mdl_auth->CekAkses(array('menu_id'=>10, 'policy'=>'DETAIL'))){?>
 					col += '<a href="#" onclick="detailData(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
 			<?}?>
+
+			<?if($this->mdl_auth->CekAkses(array('menu_id'=>10, 'policy'=>'APPROVE'))){?>
 					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="sendData(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Send</a>';
+			<?}?>
 		
 			<?if($this->mdl_auth->CekAkses(array('menu_id'=>10, 'policy'=>'DELETE'))){?>
 					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="deleteData(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';

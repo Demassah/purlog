@@ -11,7 +11,9 @@
 
 		actionbutton = function(value, row, index){
 			var col='';
+			<?if($this->mdl_auth->CekAkses(array('menu_id'=>38, 'policy'=>'DETAIL'))){?>
 				col += '<a href="#" onclick="detailData(\''+row.id_do+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
+			<?}?>
 			return col;
 		}
 

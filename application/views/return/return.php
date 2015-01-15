@@ -45,9 +45,13 @@
   
     actionPurchaseRequest = function(value, row, index){
       var col='';
+      <?if($this->mdl_auth->CekAkses(array('menu_id'=>21, 'policy'=>'DETAIL'))){?>
           col += '<a href="#" onclick="detail_return(\''+row.id_return+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';     
+      <?}?>
 
+      <?if($this->mdl_auth->CekAkses(array('menu_id'=>21, 'policy'=>'APPROVE'))){?>
           col += '&nbsp;&nbsp; | &nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id_return+'\');" class="easyui-linkbutton" iconCls="icon-edit"plain="false">Done</a>';
+      <?}?>
       return col;
     }
 
@@ -69,13 +73,15 @@
       var pager = $('#dg').datagrid().datagrid('getPager'); // get the pager of datagrid
       pager.pagination({
         buttons:[
+        <?if($this->mdl_auth->CekAkses(array('menu_id'=>21, 'policy'=>'ADD'))){?>
           {
             iconCls:'icon-add',
             text:'Tambah Data',
             handler:function(){
               add_return();
             }
-          }            
+          }
+        <?}?>
         ]
       });     
     }); 

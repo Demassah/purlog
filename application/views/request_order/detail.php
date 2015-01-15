@@ -52,7 +52,9 @@
 
 		actionDetail = function(value, row, index){
 			var col='';
+				<?if($this->mdl_auth->CekAkses(array('menu_id'=>10, 'policy'=>'DELETE'))){?>
 					col += '<a href="#" onclick="deleteData(\''+row.id_detail_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
+				<?}?>
 			return col;
 		}
 
@@ -68,6 +70,7 @@
 			var pager = $('#dg').datagrid().datagrid('getPager');	// get the pager of datagrid
 			pager.pagination({
 				buttons:[
+				<?if($this->mdl_auth->CekAkses(array('menu_id'=>10, 'policy'=>'ADD'))){?>
 					{
 						iconCls:'icon-add',
 						text:'Tambah Detail',
@@ -75,6 +78,7 @@
 							newDetail();
 						}
 					},
+				<?}?>
 					{
 						iconCls:'icon-undo',
 						text:'Kembali',

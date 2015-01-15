@@ -178,6 +178,7 @@
       var pager = $('#dg_picking').datagrid().datagrid('getPager'); // get the pager of datagrid
       pager.pagination({
         buttons:[
+        <?if($this->mdl_auth->CekAkses(array('menu_id'=>12, 'policy'=>'EDIT'))){?>
           {
             iconCls:'icon-ok',
             text:'Save All',
@@ -185,13 +186,17 @@
               saveData();
             }
           },
+        <?}?>
+
+        <?if($this->mdl_auth->CekAkses(array('menu_id'=>12, 'policy'=>'PDF'))){?>
           {
-            iconCls:'icon-print',
+            iconCls:'icon-pdf',
             text:'Print Picklist',
             handler:function(){
               cetakData();
             }
-          }               
+          }
+        <?}?>
         ]
       });     
     });

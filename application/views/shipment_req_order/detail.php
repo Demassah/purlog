@@ -2,7 +2,9 @@
 	<div class="fsearch">
 		<table>
 			<tr>
+			<?if($this->mdl_auth->CekAkses(array('menu_id'=>13, 'policy'=>'ADD'))){?>
 				<td><a href="#" onclick="Insert()" class="easyui-linkbutton" iconCls="icon-ok">Add</a></td>
+			<?}?>
 				<td style="width:100%"></td>
         <td><a href="#" onclick="back()" class="easyui-linkbutton" iconCls="icon-undo">Kembali</a></td>
 			</tr>		
@@ -44,10 +46,13 @@
 	</div>
 	  <br>  
 	  <div align="right">
-	  	<?if($this->mdl_auth->CekAkses(array('menu_id'=>13, 'policy'=>'PRINT'))){?>
-	  		<a href="#" class="easyui-linkbutton" onclick="cetakData();" iconCls="icon-print" plain="false">Print</a>
+	  	<?if($this->mdl_auth->CekAkses(array('menu_id'=>13, 'policy'=>'PDF'))){?>
+	  		<a href="#" class="easyui-linkbutton" onclick="cetakData();" iconCls="icon-pdf" plain="false">Print</a>
 	  	<?}?>
+
+	  	<?if($this->mdl_auth->CekAkses(array('menu_id'=>13, 'policy'=>'DELETE'))){?>
 	      <a href="#" class="easyui-linkbutton" onclick="CancelData();" iconCls="icon-cancel" plain="false">Cancel</a>&nbsp;&nbsp;&nbsp;
+	    <?}?>
 	  </div>
 </form>
 
