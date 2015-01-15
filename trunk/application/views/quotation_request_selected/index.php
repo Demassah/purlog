@@ -18,7 +18,7 @@
       <th field="ext_doc_no" sortable="true" width="120">External Doc No</th>
       <th field="ETD" sortable="true" width="100">ETD</th>
       <th field="date_create" sortable="true" width="130">Date Create</th>
-      <th field="action" align="center" formatter="actionPurchaseRequest" width="150">Aksi</th>
+      <th field="action" align="center" formatter="actionQrs" width="150">Aksi</th>
     </tr>
   </thead>
 </table>
@@ -27,7 +27,7 @@
   var url;
   $(document).ready(function(){
 
-    doneData = function (val){
+    done = function (val){
         if(confirm("Apakah yakin akan mengirim data ke Purchase Order '" + val + "'?")){
           var response = '';
           $.ajax({ type: "GET",
@@ -41,7 +41,7 @@
                   msg: 'Data Berhasil Di save'
                 });
                 $('#dg_qrs').datagrid('reload');
-              } else {
+              }else{
                 $.messager.show({
                   title: 'Error',
                   msg: response.msg
@@ -58,20 +58,21 @@
       });
     }
   
-    actionPurchaseRequest = function(value, row, index){
+    actionQrs = function(value, row, index){
       var col='';
           // col += '<a href="#" onclick="detail_pr(\''+row.id_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';     
-          <?if($this->mdl_auth->CekAkses(array('menu_id'=>15, 'policy'=>'ADD'))){?>
+          <?php if($this->mdl_auth->CekAkses(array('menu_id'=>15, 'policy'=>'DETAIL'))){ ?>
           col += '<a href="#" onclick="Add_Qrs(\''+row.id_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">QRS</a>';     
-          <?}?>
-          <?if($this->mdl_auth->CekAkses(array('menu_id'=>15, 'policy'=>'ACCESS'))){?>
-          col += '&nbsp;&nbsp; | &nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit"plain="false">Done</a>';
-          <?}?>
+          <?php }?>
+          <?php if($this->mdl_auth->CekAkses(array('menu_id'=>15, 'policy'=>'APPROVE'))){ ?>
+          col += '&nbsp;&nbsp; | &nbsp;&nbsp;<a href="#" onclick="done(\''+row.id_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit"plain="false">Done</a>';
+          <?php }?>
       return col;
     }
     
     $(function(){ // init
-      $('#dg_qrs').datagrid({url:"quotation_request_selected/grid"});      
+      $('#dg_qrs').datagrid({url:"quotation_request_selected/grid"});
   });
+
 });
 </script>

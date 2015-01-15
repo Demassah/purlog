@@ -73,11 +73,15 @@
   
     actionPurchaseRequest = function(value, row, index){
       var col='';
+        <?php if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'DETAIL'))){ ?>
           col += '<a href="#" onclick="detail_pr(\''+row.id_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';     
-
+        <?php }?>
+        <?php if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'APPROVE'))){ ?>
           col += '&nbsp;&nbsp; | &nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit"plain="false">Done</a>';
-
+        <?php }?>
+        <?php if($this->mdl_auth->CekAkses(array('menu_id'=>14, 'policy'=>'DELETE'))){ ?>
           col += '&nbsp;&nbsp; | &nbsp;&nbsp;<a href="#" onclick="deleteData(\''+row.id_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit"plain="false">Delete</a>';
+        <?php }?>
       return col;
     }
 

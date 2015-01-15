@@ -20,7 +20,7 @@
 			<th field="ext_doc_no" sortable="true" width="100">Ext Document No</th>
 			<th field="ETD" sortable="true" width="100">ETD</th>
 			<th field="date_create" sortable="true" width="120">Date Create</th>
-			<th field="action" align="center" formatter="actionbutton" width="140">Aksi</th>
+			<th field="action" align="center" formatter="actionPo" width="140">Aksi</th>
 		</tr>
 	</thead>
 </table>
@@ -136,16 +136,16 @@
 		}
 
 		
-		actionbutton = function(value, row, index){
+		actionPo = function(value, row, index){
 			var col='';
 
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>10, 'policy'=>'DETAIL'))){?>
+			<?if($this->mdl_auth->CekAkses(array('menu_id'=>17, 'policy'=>'DETAIL'))){?>
 				col += '<a href="#" onclick="detail_po(\''+row.id_po+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
 			<?}?>
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>10, 'policy'=>'ACCESS'))){?>
+			<?if($this->mdl_auth->CekAkses(array('menu_id'=>17, 'policy'=>'APPROVE'))){?>
 				col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="done_po(\''+row.id_po+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
 			<?}?>
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>10, 'policy'=>'DELETE'))){?>
+			<?if($this->mdl_auth->CekAkses(array('menu_id'=>17, 'policy'=>'DELETE'))){?>
 				col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="delete_po(\''+row.id_po+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
 			<?}?>
 
@@ -163,7 +163,7 @@
 			var pager = $('#dg_po').datagrid().datagrid('getPager');	// get the pager of datagrid
 			pager.pagination({
 				buttons:[
-				<?if($this->mdl_auth->CekAkses(array('menu_id'=>10, 'policy'=>'ADD'))){?>
+				<?if($this->mdl_auth->CekAkses(array('menu_id'=>17, 'policy'=>'ADD'))){?>
 					{
 						iconCls:'icon-add',
 						text:'Tambah Data',
