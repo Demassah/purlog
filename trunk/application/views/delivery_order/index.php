@@ -156,8 +156,9 @@
 					col += '&nbsp;&nbsp; &nbsp;&nbsp;<a href="#" onclick="detailDO(\''+row.id_do+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
 			<?}?>
 			
+			<?if($this->mdl_auth->CekAkses(array('menu_id'=>19, 'policy'=>'APPROVE'))){?>
 					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id_do+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
-			
+			<?}?>
 			<?if($this->mdl_auth->CekAkses(array('menu_id'=>19, 'policy'=>'DELETE'))){?>
 					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="deletedata(\''+row.id_do+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
 			<?}?>

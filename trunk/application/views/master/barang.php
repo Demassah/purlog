@@ -93,8 +93,7 @@
 		
 		actionbutton = function(value, row, index){
 			var col='';
-			//if (row.kd_fakultas != null) {
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>8, 'policy'=>'edit'))){?>
+			<?if($this->mdl_auth->CekAkses(array('menu_id'=>8, 'policy'=>'EDIT'))){?>
 					col = '<a href="#" onclick="editData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Edit</a>';
 			<?}?>
 			<?if($this->mdl_auth->CekAkses(array('menu_id'=>8, 'policy'=>'DELETE'))){?>
@@ -126,7 +125,7 @@
 					},
 					<?}?>
 
-					<?if($this->mdl_auth->CekAkses(array('menu_id'=>8, 'policy'=>'PRINT'))){?>
+					<?if($this->mdl_auth->CekAkses(array('menu_id'=>8, 'policy'=>'PDF'))){?>
 					{
 						iconCls:'icon-pdf',
 						text:'Export PDF',

@@ -77,12 +77,17 @@
 
 		actionbutton = function(value, row, index){
 			var col='';
-			
+				<?if($this->mdl_auth->CekAkses(array('menu_id'=>37, 'policy'=>'DETAIL'))){?>
 					col += '<a href="#" onclick="DetailData(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
+				<?}?>
 
+				<?if($this->mdl_auth->CekAkses(array('menu_id'=>37, 'policy'=>'APPROVE'))){?>
 					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="doneData(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Approve</a>';
+				<?}?>
 
+				<?if($this->mdl_auth->CekAkses(array('menu_id'=>37, 'policy'=>'APPROVE'))){?>
 					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="rejectData(\''+row.id_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Reject</a>';
+				<?}?>
 			return col;
 		}
 

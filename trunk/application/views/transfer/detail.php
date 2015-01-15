@@ -50,7 +50,9 @@
 
 	actiondetail = function(value, row, index){
       var col='';
+      	<?if($this->mdl_auth->CekAkses(array('menu_id'=>43, 'policy'=>'EDIT'))){?>
           col = '<a href="#" onclick="alokasi(\''+row.id_detail_transfer+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Alocate</a>';
+       	<?}?>
       return col;
     }
 
@@ -63,6 +65,7 @@
       var pager = $('#dtgrd').datagrid().datagrid('getPager'); // get the pager of datagrid
       pager.pagination({
         buttons:[
+        <?if($this->mdl_auth->CekAkses(array('menu_id'=>43, 'policy'=>'ADD'))){?>
         	{
             iconCls:'icon-add',
             text:'Tambah Barang',
@@ -70,6 +73,7 @@
               add_detail();
             }
           },
+        <?}?>
             {
             iconCls:'icon-undo',
             text:'Kembali',

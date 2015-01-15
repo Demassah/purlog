@@ -15,7 +15,7 @@
       <th field="qty" sortable="true" width="70">Qty</th>
       <th field="ext_rec_no_detail" sortable="true" width="120">Detail Rec No</th>
       <th field="lokasi" sortable="true" width="70">Lokasi</th>
-      <th field="action" align="center" formatter="actionbutton" width="180">Aksi</th>
+      <th field="action" align="center" formatter="actionbutton" width="80">Aksi</th>
 		</tr>
 	</thead>
 </table>
@@ -131,6 +131,7 @@
       var pager = $('#dg_detail_in').datagrid().datagrid('getPager'); // get the pager of datagrid
       pager.pagination({
         buttons:[
+        <?if($this->mdl_auth->CekAkses(array('menu_id'=>41, 'policy'=>'ADD'))){?>
           {
             iconCls:'icon-add',
             text:'Tambah Detail',
@@ -138,6 +139,7 @@
               tambahDetail();
             }
           },
+        <?}?>
            {
             iconCls:'icon-undo',
             text:'Kembali',

@@ -15,7 +15,7 @@
 			<th field="type" sortable="true" width="70">Type</th>
 			<th field="date_create" sortable="true" width="130">Date Create</th>
 			<th field="full_name" sortable="true" width="120">Requestor</th>
-			<th field="action" align="center" formatter="actionbutton" width="140">Aksi</th>
+			<th field="action" align="center" formatter="actionbutton" width="160">Aksi</th>
 		</tr>
 	</thead>
 </table>
@@ -71,7 +71,7 @@
 			<?if($this->mdl_auth->CekAkses(array('menu_id'=>41, 'policy'=>'DETAIL'))){?>
 				col += '<a href="#" onclick="detail_in(\''+row.id_in+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';
 			<?}?>
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>41, 'policy'=>'ACCESS'))){?>
+			<?if($this->mdl_auth->CekAkses(array('menu_id'=>41, 'policy'=>'APPROVE'))){?>
 				col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="done_in(\''+row.id_in+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Done</a>';
 			<?}?>
 			<?if($this->mdl_auth->CekAkses(array('menu_id'=>41, 'policy'=>'DELETE'))){?>

@@ -157,7 +157,7 @@
 			<th field="position" sortable="true" width="80">Position</th>
 			<!--<th field="hide" sortable="true" width="50">hide</th>-->
 			<th field="icon_class" sortable="true" width="100">Icon</th>
-			<th field="policy" sortable="true" width="300">Policy</th>
+			<th field="policy" sortable="true" width="450">Policy</th>
 			<th field="action" align="center" formatter="actionbutton" width="100">Aksi</th>
 		</tr>
 	</thead>
