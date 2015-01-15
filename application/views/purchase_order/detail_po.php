@@ -60,7 +60,11 @@
 			<tr>
 					
 					<td style="width:100%"></td>
-        <td><a href="#" onclick="cetakData()" class="easyui-linkbutton" iconCls="icon-print">Print</a></td>
+        <td>
+	        <?if($this->mdl_auth->CekAkses(array('menu_id'=>17, 'policy'=>'PRINT'))){?>
+	        <a href="#" onclick="cetakData()" class="easyui-linkbutton" iconCls="icon-print">Print</a>
+	        <?}?>
+        </td>
 			</tr>		
 		</table>
 
