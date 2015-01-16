@@ -4,17 +4,13 @@
 	<div class="fsearch">
 		<table width="600" border="0">
 		  <tr>
-			<td>ID SRO</td>
+			<td>Search By ID SRO Or ID RO</td>
 			<td>: 
 				<input name="s_id_sro" id="s_id_sro" size="15">
 			</td>
-				<td>ID RO</td>
-			<td>: 
-				<input name="s_id_ro" id="s_id_ro" size="15">
-			</td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
-			<td>&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-search">Search</a></td>
+			<td>&nbsp;&nbsp;<a href="#" onclick="reset()" class="easyui-linkbutton" iconCls="icon-reload">Reset</a></td>
 		  </tr>
 
 		</table>
@@ -170,27 +166,32 @@
 				url:base_url+"shipment_req_order/grid"
 			});
 		});
-
-		$('#s_id_ro').keyup(function(event) {
-			var id_ro = $('#s_id_ro').val();
+	//reset datagrid
+		reset = function(){
 			$('#s_id_sro').val('');
-			filter();
-		});
-
-		$('#s_id_sro').keyup(function(event) {
-			$('#s_id_ro').val('');
-			var id_sro = $('#s_id_sro').val();
-			filter();
-		});
-
-		filter = function filter(){
 			$('#dg_sro').datagrid('load',{
-				id_sro : $('#s_id_sro').val(),
-				id_ro : $('#s_id_ro').val()
+				id_sro : $('#s_id_sro').val()
 				
 			});
-			//$('#dg').datagrid('enableFilter');
 		}
+	//autocomplete
+		$("#s_id_sro ").autocomplete({
+		 source: function(request, response) {
+       $.post("<?=base_url();?>shipment_req_order/selectsro", request, response);//Ganti menjadi fpp/selectNasabah
+ 
+		   },
+		   minLength: 1,
+		  
+		   select: function(event, result) {
+		   		$('#dg_sro').datagrid('load',{
+						id_sro : $('#s_id_sro').val()
+						
+					});
+		   }
+		}).data("ui-autocomplete")._renderItem = function(ul, item) {
+		   return $("<li>").append("<a> ID SRO " + item.label + " | ID RO " + item.id_ro + "</a>").appendTo(ul);
+		};
+
 		
 		//# Tombol Bawah
 		$(function(){

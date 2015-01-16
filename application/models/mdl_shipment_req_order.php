@@ -28,8 +28,6 @@ class mdl_shipment_req_order extends CI_Model {
 		#filter
 		if($id_sro != '') {
 				$this->db->like('a.id_sro', $id_sro);
-			}elseif ($id_ro !='') {
-				$this->db->like('a.id_ro', $id_ro);
 			}
 
 		$this->db->where('status', 1);
@@ -239,6 +237,20 @@ function cek_id_sro($kode)
 
 		$query = $this->db->get('tr_pros_detail a');
 		return $query->result();
+	}
+
+	// autocomplete
+	function searchSro($data)
+	{
+		$this->db->flush_cache();
+		$this->db->start_cache();
+			$this->db->select('id_sro as label,id_ro,status');
+			$this->db->order_by('id_sro', 'asc');
+			$this->db->like("id_sro",$data);
+			$this->db->where('status', 1);
+			$query = $this->db->get('tr_sro', 100, 0);
+			return $query->result();
+		$this->db->stop_cache();
 	}
 
 } //End

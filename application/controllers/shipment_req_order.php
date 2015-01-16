@@ -191,6 +191,15 @@ class shipment_req_order extends CI_Controller {
       $html2pdf->Output("sro_".date('d-m-y')."_".$id_sro.".pdf");
   }
 
+  // autocomplete
+  function selectsro()
+  {
+  	$data = $this->input->post('term');
+  	$query = $this->mdl_shipment_req_order->searchSro($data);
+  	header('Content-type:application/json');
+  	echo json_encode($query);
+  }
+
 
 	
 }

@@ -9,6 +9,7 @@ date_default_timezone_set('Asia/Jakarta');
 		<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/css/style.css" />
 		<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/easyui/themes/metro/easyui.css" />
 		<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/select/select2.css"/>
+		<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/autocomplete/jquery-ui.css">
 		<!--<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/easyui/themes/bootstrap/easyui.css" />-->
 		<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/easyui/themes/icon.css" />
 		<script type="text/javascript" src="<?=base_url();?>asset/easyui/jquery.min.js"></script>
@@ -22,6 +23,7 @@ date_default_timezone_set('Asia/Jakarta');
 		<script type="text/javascript" src="<?=base_url();?>asset/easyui/plugins/jquery.edatagrid.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>asset/js/numericInput.min.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>asset/currency/autoNumeric.js"></script>
+		<script type="text/javascript" src="<?=base_url();?>asset/autocomplete/jquery-ui.js"></script>
 				 
 	</head>
 	<body class="easyui-layout">

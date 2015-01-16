@@ -197,6 +197,14 @@ class delivery_order extends CI_Controller {
   </table>";
   
 	}
+	//autocomplete
+	function selectId()
+	{
+		$data = $this->input->post('term');
+		$query = $this->mdl_delivery_order->search($data);
+		header ('Content-type:application/json');
+		echo json_encode($query);
+	}
 
 
 	
