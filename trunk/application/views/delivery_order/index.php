@@ -29,7 +29,7 @@
 			</td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
-			<td>&nbsp;&nbsp;<a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-search">Search</a></td>
+			<td>&nbsp;&nbsp;<a href="#" onclick="reset()" class="easyui-linkbutton" iconCls="icon-reload">Reset</a></td>
 		  </tr>
 		</table>
 	</div>
@@ -160,13 +160,29 @@
 			return col;
 		}
 
-		filter = function(){
+		reset = function(){
+			$("#s_id_do").val('');
 			$('#dg_do').datagrid('load',{
 				id_do : $('#s_id_do').val(),
 				
 			});
 			//$('#dg').datagrid('enableFilter');
 		}
+
+		//autocomplete
+		$("#s_id_do").autocomplete({
+			source: function (request, response) {
+				$.post(base_url + "delivery_order/selectId", request, response);
+			},minLength:1,
+			select:function (event, result) {
+				$('#dg_do').datagrid('load',{
+				id_do : $('#s_id_do').val(),
+				});
+			}
+			
+		}).data("ui-autocomplete")._renderItem = function(ul, item) {
+		   return $("<li>").append("<a> ID DO " + item.label +  "</a>").appendTo(ul);
+		};
 		
 		$(function(){
 			$('#dg_do').datagrid({

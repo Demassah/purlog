@@ -223,7 +223,23 @@ class mdl_delivery_order extends CI_Model {
 
 		return $query->result();
 	}
+	//autocomplete
+	function search($data)
+	{
+		$this->db->flush_cache();
+		$this->db->start_cache();
+			$this->db->select('a.id_do as label,a.date_create,b.name_courir,c.full_name');
+			$this->db->join('ref_courir b', 'b.id_courir = a.id_courir', 'left');
+			$this->db->join('sys_user c', 'c.user_id = a.id_user', 'left');
+			$this->db->where('a.status', 1);
+			$this->db->order_by('a.id_do', 'asc');
+			$this->db->like('a.id_do',$data);
+			$this->db->or_like('b.name_courir',$data);
+			$query = $this->db->get('tr_do a', 100, 0);
+			return $query->result();
+		//$this->db->stop_cache();
 
+	}
 
 
 	
