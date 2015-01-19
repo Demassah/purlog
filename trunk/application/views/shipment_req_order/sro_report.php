@@ -37,6 +37,7 @@ else {
 		padding: 6px 6px;
 		font-size: 13px;
 	}
+
 </style>
 
 <page backtop="10mm" backbottom="10mm" backleft="1mm" backright="3mm">
@@ -129,6 +130,30 @@ else {
 			//foreach
 	 	 endforeach; ?>
 	</table>
+	<br><br>
+	<div class="class="footer"">
+		<table >
+		<tr>
+				<td width="230" align="center"></td>
+				<td width="230" align="center"></td>
+				<td width="230" align="center">Bandung,<?php echo tgl_indo(date('Y-m-d'))?></td>
+			</tr>
+			<tr>
+				<td width="230" align="center">Menyerahkan</td>
+				<td width="230" align="center">Mengetahui</td>
+				<td width="230" align="center">Menerima</td>
+			</tr>
+			<tr><td></td></tr>	<tr><td></td></tr>	<tr><td></td></tr>	<tr><td></td></tr>	<tr><td></td></tr>	<tr><td></td></tr>
+			<tr><td></td></tr>	<tr><td></td></tr>	<tr><td></td></tr> <tr><td></td></tr> <tr><td></td></tr>  <tr><td></td></tr> 
+			<tr><td></td></tr>	<tr><td></td></tr>	<tr><td></td></tr> <tr><td></td></tr> <tr><td></td></tr> 
+			<tr>
+				<td width="100" align="center">__________________</td>
+				<td width="100" align="center">__________________</td>
+				<td width="100" align="center">__________________</td>
+			</tr>
+		</table>
+	</div>
 	</div>
 </page>
+
 <?php } ?>

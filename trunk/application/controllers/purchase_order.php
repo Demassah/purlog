@@ -44,6 +44,7 @@ class purchase_order extends CI_Controller {
 		
 		# rules validasi form
 		$this->form_validation->set_rules("id_pr", 'ID purchase order', 'trim|required|xss_clean');
+		$this->form_validation->set_rules("departement_id", 'ID Departement ', 'trim|required|xss_clean');
 		# message rules
 		$this->form_validation->set_message('required', 'Field %s harus diisi.');
 
@@ -62,7 +63,7 @@ class purchase_order extends CI_Controller {
 		if($result){
 			echo json_encode(array('success'=>true));
 		}else{
-			echo json_encode(array('msg' => 'Data gagal dikirim'));
+			echo json_encode(array('msg' => 'PO atau Departement masih belum dipilih'));
 		}
 	}
 

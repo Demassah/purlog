@@ -1,5 +1,5 @@
 
-<table id="dg_in" title="Purchase Order List" data-options="
+<table id="dg_in" title="Inbound List" data-options="
 			rownumbers:true,
 			singleSelect:true,
 			autoRowHeight:false,

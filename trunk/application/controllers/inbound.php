@@ -155,6 +155,20 @@ class inbound extends CI_Controller {
 		 	echo json_encode(array('msg'=>'Data Gagal Dihapus'));
 		 }
 	}
+ /* --------------------------------Function Cetak laporan Inbound-------------------------------------- */
+	function laporan_pdf($id_in,$type) {
+      $this->load->library('HTML2PDF');
+      $html2pdf = new HTML2PDF('P', 'A4', 'fr');
+      $html2pdf->setDefaultFont('Arial');
+
+      	$data['data_pdf'] = $this->mdl_inbound->report($id_in,$type);
+
+      $konten = $this->load->view('inbound/in_report', $data, true);
+
+      $html2pdf->writeHTML($konten, false);
+
+      $html2pdf->Output("po_".date('d-m-y')."_".$id_in.".pdf");
+  }
 }
 
 /* End of file inbound.php */
