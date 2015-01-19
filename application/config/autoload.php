@@ -64,7 +64,7 @@ $autoload['libraries'] = array('database', 'session', 'form_validation','javascr
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url','utilitas');
+$autoload['helper'] = array('url','utilitas','tgl_indonesia');
 
 
 /*

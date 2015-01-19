@@ -235,7 +235,7 @@ class mdl_prosedur extends CI_Model {
 		$this->db->order_by('id_ro');
 				
 		$res = $this->db->get();
-		
+		$out = '<option value="">-- Pilih --</option>';
 		foreach($res->result() as $r){
 			if(trim($r->id_ro) == trim($value)){
 				$out .= '<option value="'.$r->id_ro.'" selected="selected">'.$r->id_ro.' </option>';

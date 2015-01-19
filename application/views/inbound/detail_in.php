@@ -82,6 +82,9 @@
       });
     }
 
+    cetakData = function(val){    
+      window.open(base_url+'inbound/laporan_pdf/'+ id_in + "/" + type);      
+    }
     back = function (){
       $('#konten').panel({
         href:base_url+'inbound/index'
@@ -146,7 +149,17 @@
             handler:function(){
               back();
             }
-          }              
+          },
+            <?if($this->mdl_auth->CekAkses(array('menu_id'=>41, 'policy'=>'PDF'))){?>
+          {
+            iconCls:'icon-pdf',
+            text:'Export Pdf',
+            handler:function(){
+              cetakData();
+            }
+          },
+          <?}?>
+                 
         ]
       });     
     }); 

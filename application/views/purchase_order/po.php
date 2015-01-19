@@ -32,7 +32,7 @@
 			$('#dialog').dialog({
 				title: 'Add Purchase Order',
 				width: 380,
-				height: 130,
+				height: 150,
 				closed: true,
 				cache: false,
 				href: base_url+'purchase_order/add',

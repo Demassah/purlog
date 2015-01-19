@@ -2,15 +2,13 @@
 	<div style="margin-bottom:5px">		
 	</div>
 	<div class="fsearch">
-		<table width="600" border="0">
+		<table width="500" border="0">
 		  <tr>
-			<td>Search By ID SRO Or ID RO</td>
+			<td>Search By ID SRO</td>
 			<td>: 
 				<input name="s_id_sro" id="s_id_sro" size="15">
 			</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;</td>
-			<td>&nbsp;&nbsp;<a href="#" onclick="reset()" class="easyui-linkbutton" iconCls="icon-reload">Reset</a></td>
+			<td><a href="#" onclick="reset()" class="easyui-linkbutton" iconCls="icon-reload">Reset</a></td>
 		  </tr>
 
 		</table>

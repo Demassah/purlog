@@ -14,11 +14,20 @@
 	<div class="fitem" >
 		<label style="width:100px">Purchase Request</label>: 
 			<select class="select" name="id_pr" style="width:200px;">
-						<option>Pilih</option>
+						<option value="">Pilih</option>
 							<?=$this->mdl_prosedur->OptionPurchaseOrder(array('value'=>$id_pr));?>
 						       
-				</select>	
+				</select>
 	</div>
+	<?if($this->mdl_auth->CekAkses(array('menu_id'=>17, 'policy'=>'SELECT'))){?>
+		<div class="fitem">
+			<label style="width:100px">Departement</label>: 
+				<select class="select" name="departement_id" style="width:200px;">
+								<?=$this->mdl_prosedur->OptionDepartement(array('value'=>$departement_id));?>
+							       
+					</select>	
+		</div>
+		<?}?>
 
 </form>
 	
