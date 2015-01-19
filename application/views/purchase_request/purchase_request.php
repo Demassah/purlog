@@ -113,7 +113,11 @@
           }            
         ]
       });     
-    }); 
+    });
+
+    cellStyler = function(value,row,index){
+        return 'background-color:#ffee00;color:red;';
+    }
 
 });
 </script>
@@ -165,7 +169,7 @@
       <th field="id_ro" sortable="true" width="60">ID RO</th>     
       <th field="full_name" sortable="true" width="130">Requestor</th>
       <th field="departement_name" sortable="true" width="130">Departement</th>
-      <th field="purpose" sortable="true" width="90">Purpose</th>
+      <th data-options="field:'purpose',width:'90',styler:cellStyler" editor="text">Purpose</th>
       <th field="cat_req" sortable="true" width="120">Category Request</th>
       <th field="ext_doc_no" sortable="true" width="120">External Doc No</th>
       <th field="ETD" sortable="true" width="100">ETD</th>

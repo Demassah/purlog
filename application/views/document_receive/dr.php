@@ -160,7 +160,7 @@
 			<th field="id_receive" sortable="true" width="100">ID Receive</th>
 			<th field="id_sro" sortable="true" width="100">ID SRO</th>
 			<th field="id_courir" sortable="true" width="100">ID Courir</th>
-			<th field="name_courir" sortable="true" width="180">Nama Kurir</th>
+			<!-- <th field="name_courir" sortable="true" width="180">Nama Kurir</th> -->
 			<th field="date_create" sortable="true" width="150">Date Create</th>
 			<th field="action" align="center" formatter="actionbutton" width="180">Aksi</th>
 		</tr>

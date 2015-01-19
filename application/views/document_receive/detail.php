@@ -163,8 +163,9 @@
 			<th field="kode_barang" sortable="true" width="100">Kode Barang</th>		
 			<th field="nama_barang" sortable="true" width="150">Nama Barang</th>		
 			<th field="qty_delivered" sortable="true" width="100">Qty Delivered</th>
-			<th data-options="field:'qty',width:'100',styler:cellStyler" editor="text">Qty Received</th> 
-			<th field="date_create" sortable="true" width="150">Date Create</th>		
+			<th data-options="field:'qty',width:'100',styler:cellStyler" editor="text">Qty Received</th>
+			<th field="qty_return" sortable="true" width="100">Qty Return</th>
+			<th field="date_create" sortable="true" width="130">Date Create</th>		
 			<!-- <th field="action" align="center" formatter="actiondetail" width="80">Aksi</th> -->
 		</tr>
 	</thead>
