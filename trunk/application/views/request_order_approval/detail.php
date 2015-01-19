@@ -154,7 +154,7 @@
 
       <?if($this->mdl_auth->CekAkses(array('menu_id'=>37, 'policy'=>'DELETE'))){?>  
           col += '&nbsp;&nbsp; | &nbsp;&nbsp; <a href="#" onclick="deleteData(\''+row.id_detail_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
-      <?]?>
+      <?}?>
       return col;
     }
 

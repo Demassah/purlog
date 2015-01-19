@@ -25,7 +25,7 @@ class mdl_request_order extends CI_Model {
 		$this->db->select('*, a.id_ro, b.full_name, c.departement_name');
 		$this->db->from('tr_ro a');
 		$this->db->join('sys_user b', 'b.user_id = a.user_id');
-		$this->db->join('ref_departement c', 'c.departement_id = b.departement_id');
+		$this->db->join('ref_departement c', 'c.departement_id = b.departement_id','left');
 
 		#Filter
 		if($this->session->userdata('departement_id')!='0'){
@@ -93,7 +93,7 @@ class mdl_request_order extends CI_Model {
         $this->db->set('cat_req', $data['cat_req']);
         $this->db->set('ext_doc_no', $data['ext_doc_no']);
         $this->db->set('ETD', FormatDateToMysql($data['ETD']));
-        $this->db->set('date_create', FormatDateToMysql($data['date_create']));
+        $this->db->set('date_create', ($data['date_create']));
         $this->db->set('status', $data['status']);
 
 		$result = $this->db->insert('tr_ro');

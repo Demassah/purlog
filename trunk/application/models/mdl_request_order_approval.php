@@ -83,10 +83,13 @@ class mdl_request_order_approval extends CI_Model {
 	}
 
 	function DoneData($kode){
+		date_default_timezone_set('Asia/Jakarta');
+		$time =  date('Y-m-d H:i:s');
 		
 		$this->db->flush_cache();
 		
 		$this->db->set('status', "3");
+		$this->db->set('date_approve', $time);
 		
 		$this->db->where('id_ro', $kode);
 		//$this->db->where('status_delete', '0');
@@ -165,10 +168,13 @@ class mdl_request_order_approval extends CI_Model {
 	}
 
 	function reject($kode){
+		date_default_timezone_set('Asia/Jakarta');
+		$time =  date('Y-m-d H:i:s');
 		
 		$this->db->flush_cache();
 		
 		$this->db->set('status', "9");
+		$this->db->set('date_reject', $time);
 		
 		$this->db->where('id_ro', $kode);
 		//$this->db->where('status_delete', '0');

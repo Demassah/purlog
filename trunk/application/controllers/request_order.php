@@ -18,6 +18,7 @@ class request_order extends CI_Controller {
 	}
 		
 	function add(){
+		date_default_timezone_set('Asia/Jakarta');
 		$data['kode'] = '';
 		$data['id_ro'] = '';
 	    $data['user_id'] = '';
@@ -25,7 +26,7 @@ class request_order extends CI_Controller {
 	    $data['cat_req'] = '';
 	    $data['ext_doc_no'] = '';
 	    $data['ETD'] = date('d/m/Y');
-	    $data['date_create'] = date('d/m/Y');
+	    $data['date_create'] =  date('Y-m-d H:i:s');
 		$data['status'] = '';
 
 		$this->load->view('request_order/form', $data);

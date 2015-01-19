@@ -26,6 +26,7 @@ class mdl_purchase_request extends CI_Model {
 			$this->db->from('tr_pr a');
 			$this->db->join('sys_user b', 'b.user_id = a.user_id');
 			$this->db->join('ref_departement c', 'c.departement_id = b.departement_id');
+			//$this->db->join('tr_ro d', 'd.id_ro = a.id_ro');
 
 			#Filter
 			if($this->session->userdata('departement_id')!='0'){

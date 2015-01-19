@@ -165,7 +165,7 @@
 			<th field="purpose" sortable="true" width="120">Purpose</th>
 			<th field="cat_req" sortable="true" width="120">Category Request</th>
 			<th field="ext_doc_no" sortable="true" width="120">External Doc No</th>
-			<th field="ETD" sortable="true" width="100">ETD</th>
+			<th field="etd" sortable="true" width="100">ETD</th>
 			<th field="date_create" sortable="true" width="130">Date Create</th>
 			<th field="action" align="center" formatter="actionbutton" width="180">Aksi</th>
 		</tr>

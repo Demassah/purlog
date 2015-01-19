@@ -28,6 +28,7 @@
 			<option value="ASSET" <?= $cat_req == 'ASSET'?'selected ="selected"':''; ?>>Asset</option>
 			<option value="ATK" <?= $cat_req == 'ATK'?'selected ="selected"':''; ?>>ATK</option>
 			<option value="SPAREPART" <?= $cat_req == 'SPAREPART'?'selected ="selected"':''; ?>>Spare Part</option>		
+			<option value="CETAKAN" <?= $cat_req == 'CETAKAN'?'selected ="selected"':''; ?>>Cetakan</option>		
 		</select></li>
 	</div>
 	<div class="fitem" >
@@ -38,9 +39,9 @@
 		<label style="width:140px">ETD </label>: 
 		<input class="easyui-datebox textbox" name="ETD" size="13" value="<?=$ETD?>" id="ETD" data-options="formatter:DateFormatter, parser:DateParser">
 	</div>
-	<div class="fitem" >
+	<div class="fitem" hidden="true" >
 		<label style="width:140px">Date Create </label>: 
-		<input class="easyui-datebox textbox" name="date_create" size="13" value="<?=$date_create?>" id="date_create" data-options="formatter:DateFormatter, parser:DateParser">
+		<input class="textbox" name="date_create" size="13" value="<?=$date_create?>" id="date_create"  data-options="formatter:DateFormatter, parser:DateParser">
 	</div>
 	<div class="fitem" hidden="true">
 		<label style="width:140px">Status request</label>: 
