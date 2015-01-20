@@ -523,6 +523,29 @@ class mdl_prosedur extends CI_Model {
 		return $out;
 	}
 
+	function OptionQrs($d="")
+	{
+		$value = isset($d['value'])?$d['value']:'';
+
+		$this->db->flush_cache();
+		$this->db->from('v_qrs_detail');
+		$this->db->where('sisa !=', 0);
+		$this->db->order_by('id_pr', 'asc');
+		$this->db->group_by('id_pr');
+
+		$res = $this->db->get();
+
+		$out = '<option value="">-- Pilih --</option>';
+		foreach ($res->result() as $r) {
+			if(trim($r->id_pr)==trim($value)){
+				$out .= '<option value="'.$r->id_pr.'" selected="selected">'.$r->id_pr.'</option>';
+			}else{
+				$out .= '<option value="'.$r->id_pr.'">'.$r->id_pr.'</option>';
+			}
+		}
+		return $out;
+	}
+
 }
 
 ?>

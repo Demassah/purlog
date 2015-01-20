@@ -1,5 +1,5 @@
 <script>
-	// search text combo
+
 		$(document).ready(function(){
 			$(".select").select2();
 		});

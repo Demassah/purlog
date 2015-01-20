@@ -121,6 +121,126 @@ class quotation_request_selected extends CI_Controller {
 		$this->load->view('quotation_request_selected/load', $data, FALSE);
 	}
 
+	//add new Qrs
+	function new_qrs()
+  {
+  	$data['id_pr'] = '';
+  	$this->load->view('quotation_request_selected/form_newqrs',$data);
+  }
+
+  function SaveNewQrs($aksi){
+		# init
+		$status = "";
+		$result = false;
+		$data['pesan_error'] = '';
+		
+		# get post data
+		foreach($_POST as $key => $value){
+			$data[$key] = $value;
+			// echo print_r($value);
+		}
+
+		
+		# rules validasi form
+		$this->form_validation->set_rules("user_id", 'ID user', 'trim|required|xss_clean');
+		$this->form_validation->set_rules("id_pr", 'ID PR', 'trim|required|xss_clean');
+		# message rules
+		$this->form_validation->set_message('required', 'Field %s harus diisi.');
+
+		$data['pesan_error'] = '';
+		if ($this->form_validation->run() == FALSE){
+			$data["pesan_error"] .= trim(validation_errors(' ',' '))==''?'':validation_errors(' ',' ');
+		}else{
+			if($aksi=="add"){ // add
+			//print_r($data);
+			$result = $this->mdl_quotation_request_selected->Insert_Qrs($data);
+			}else { // edit
+				$result=$this->mdl_quotation_request_selected->cancel($data);
+			}
+		}
+		
+		if($result){
+			echo json_encode(array('success'=>true));
+		}else{
+			echo json_encode(array('msg' => 'Data gagal dikirim'));
+		}
+	}
+
+	//detail 
+	function detail_Qrs($id_pr)
+	{
+		$data['id_pr'] = $id_pr;
+		$this->load->view('quotation_request_selected/detail_qrs',$data);
+	}
+
+	function grid_detail($id_pr){
+		$data = $this->mdl_quotation_request_selected->getQrs($id_pr);
+		echo $this->mdl_quotation_request_selected->togrid($data['row_data'], $data['row_count']);
+	}
+	//add detail qrs
+	function add_detail($id_pr)
+	{
+		$data['id_pr']= $id_pr;
+		$data['list'] = $this->mdl_quotation_request_selected->select_detail_qrs($id_pr);
+		$this->load->view('quotation_request_selected/form_add_detail_qrs',$data);
+	}
+	function SaveDetailQrs($aksi){
+		# init
+		$status = "";
+		$result = false;
+		$data['pesan_error'] = '';
+		
+		# get post data
+		foreach($_POST as $key => $value){
+			$data[$key] = $value;
+			// echo print_r($value);
+		}
+
+		
+		# rules validasi form
+		$this->form_validation->set_rules("id_detail_pr[]", 'ID user', 'trim|required|xss_clean');
+		$this->form_validation->set_rules("pick[]", 'ID PR', 'trim|required|xss_clean');
+		# message rules
+		$this->form_validation->set_message('required', 'Field %s harus diisi.');
+
+		$data['pesan_error'] = '';
+		if ($this->form_validation->run() == FALSE){
+			$data["pesan_error"] .= trim(validation_errors(' ',' '))==''?'':validation_errors(' ',' ');
+		}else{
+			if($aksi=="add"){ // add
+			//print_r($data);
+			$result = $this->mdl_quotation_request_selected->Insert_Detail_Qrs($data);
+			}else { // edit
+				$result=$this->mdl_quotation_request_selected->cancel($data);
+			}
+		}
+		
+		if($result){
+			echo json_encode(array('success'=>true));
+		}else{
+			echo json_encode(array('msg' => 'Data gagal dikirim'));
+		}
+	}
+	//notif
+	function notif()
+	{
+		$result = $this->mdl_quotation_request_selected->notif();
+		if($result>=1){
+			echo json_encode(array('success'=>true));
+		}else{
+			echo json_encode(array('msg' => 'Data gagal dikirim'));
+		}
+	}
+
+	// autocomplete
+  function selectqrs()
+  {
+  	$data = $this->input->post('term');
+  	$query = $this->mdl_quotation_request_selected->searchQrs($data);
+  	header('Content-type:application/json');
+  	echo json_encode($query);
+  }
+
 }
 
 /* End of file quotation_request_selected.php */
