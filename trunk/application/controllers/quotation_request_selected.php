@@ -70,6 +70,15 @@ class quotation_request_selected extends CI_Controller {
 		  }
   }
 
+	function delete_detail($kode)
+	{
+		$result = $this->mdl_quotation_request_selected->delete_detail($kode);
+		if($result){
+			 echo json_encode(array('success' => true));
+	    } else {
+	     echo json_encode(array('msg' => 'Data gagal dikirim'));
+		}
+	}
   function Add_vendor($id_pr)
   {
   	$data['id_pr'] = $id_pr;
@@ -137,7 +146,7 @@ class quotation_request_selected extends CI_Controller {
 		# get post data
 		foreach($_POST as $key => $value){
 			$data[$key] = $value;
-			// echo print_r($value);
+			 //echo print_r($value);
 		}
 
 		
@@ -199,7 +208,7 @@ class quotation_request_selected extends CI_Controller {
 		
 		# rules validasi form
 		$this->form_validation->set_rules("id_detail_pr[]", 'ID user', 'trim|required|xss_clean');
-		$this->form_validation->set_rules("pick[]", 'ID PR', 'trim|required|xss_clean');
+		// $this->form_validation->set_rules("pick", 'ID PR', 'trim|required|xss_clean');
 		# message rules
 		$this->form_validation->set_message('required', 'Field %s harus diisi.');
 

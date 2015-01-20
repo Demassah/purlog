@@ -76,7 +76,7 @@
               msg: 'Data Berhasil Ditambahkan ',
             });
             $('#dialog').dialog('close');   // close the dialog
-            $('#dg_do').datagrid('reload');   // reload the user data
+            $('#dg_qrs').datagrid('reload');   // reload the user data
           } else {
             $.messager.show({
               title: 'Error',
@@ -111,6 +111,7 @@
         });
       }
     }
+
     //end sendData 
     Add_Qrs = function (val){
       $('#konten').panel({

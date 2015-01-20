@@ -10,14 +10,13 @@
     ">    
   <thead>
     <tr>
-      <th field="id_detail_pr " sortable="true" width="80" >ID Detail PR</th>
-      <th field="id_pr" sortable="true" width="80" >ID PR</th>
-      <th field="id_ro" sortable="true" width="60">ID RO</th>     
-      <th field="kode_barang" sortable="true" width="130">Kode Barang</th>
+      
+      <th field="id_qrs" sortable="true" width="80" >ID PR</th>
+      <th field="id_pr" sortable="true" width="60">ID RO</th>     
+      <th field="id_detail_pr" sortable="true" width="130">ID detail PR</th>
+      <th field="kode_barang" sortable="true" width="120">Kode Barang</th>
       <th field="nama_barang" sortable="true" width="130">Nama Barang</th>
       <th field="qty" sortable="true" width="90">Qty</th>
-      <th field="pick" sortable="true" width="90">Pick</th>
-      <th field="sisa" sortable="true" width="90">Sisa</th>
       <th field="action" align="center" formatter="actionQrs" width="150">Aksi</th>
     </tr>
   </thead>
@@ -58,7 +57,7 @@ table><script >
               msg: 'Data Berhasil Ditambahkan ',
             });
             $('#dialog').dialog('close');   // close the dialog
-            $('#dg_do').datagrid('reload');   // reload the user data
+            $('#detail_dg_qrs').datagrid('reload');   // reload the user data
           } else {
             $.messager.show({
               title: 'Error',
@@ -69,11 +68,11 @@ table><script >
       });
     }
 
-   done = function (val){
-      if(confirm("Apakah yakin akan mengirim data ke Purchase Order '" + val + "'?")){
+   Del_detail = function (val){
+      if(confirm("Apakah yakin akan menghapus data  '" + val + "'?")){
         var response = '';
         $.ajax({ type: "GET",
-           url: base_url+'quotation_request_selected/Done/' + val,
+           url: base_url+'quotation_request_selected/delete_detail/' + val,
            async: false,
            success : function(response){
             var response = eval('('+response+')');
@@ -82,7 +81,7 @@ table><script >
                 title: 'Success',
                 msg: 'Data Berhasil Di save'
               });
-              $('#dg_qrs').datagrid('reload');
+              $('#detail_dg_qrs').datagrid('reload');
             }else{
               $.messager.show({
                 title: 'Error',
@@ -93,10 +92,11 @@ table><script >
         });
       }
     }
+
   actionQrs = function(value, row, index){
       var col='';
           <?php if($this->mdl_auth->CekAkses(array('menu_id'=>15, 'policy'=>'DELETE'))){ ?>
-          col += '<a href="#" onclick="del_detail(\''+row.id_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';     
+          col += '<a href="#" onclick="Del_detail(\''+row.id_detail_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';     
           <?php }?>
           
       return col;
