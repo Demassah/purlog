@@ -26,9 +26,9 @@ class mdl_quotation_request_selected extends CI_Model {
 			if($id_qrs != '') {
 					$this->db->like('a.id_qrs', $id_qrs);
 				}
-			$this->db->join('sys_user b', 'b.user_id = a.user_id');
-			$this->db->join('ref_departement c', 'c.departement_id = b.departement_id');
-			$this->db->join('tr_pr d', 'd.id_pr = a.id_pr');
+			$this->db->join('sys_user b', 'b.user_id = a.user_id','left');
+			$this->db->join('ref_departement c', 'c.departement_id = b.departement_id','left');
+			$this->db->join('tr_pr d', 'd.id_pr = a.id_pr','left');
 
 			$this->db->where('a.status','1');
 
@@ -241,21 +241,21 @@ class mdl_quotation_request_selected extends CI_Model {
 	//insert Qrs
 	function select_pr($data)
 	{
-		$this->flush_cache();
-		$this->start_cache();
+		//$this->flush_cache();
+		//$this->start_cache();
 			$this->db->select('id_pr,id_ro,status');
 			$this->db->where('id_pr', $data['id_pr']);
 			$this->db->where('status', 2);
 			$this->db->order_by('id_pr', 'asc');
 			$query = $this->db->get('tr_pr');
 			return $query->row();
-		$this->db->stop_cache();
+		// /$this->db->stop_cache();
 	}
 
 	function Insert_Qrs($data)
 	{
-		$this->db->flush_cache();
-		$this->db->start_cache();
+		//$this->db->flush_cache();
+		//$this->db->start_cache();
 			$pr = $this->mdl_quotation_request_selected->select_pr($data);
 
 			$this->db->set('id_pr',$pr->id_pr);
@@ -265,7 +265,7 @@ class mdl_quotation_request_selected extends CI_Model {
 			$this->db->set('status',$data['status']);
 
 			$result = $this->db->insert('tr_qrs');
-		$this->db->stop_cache();
+		//$this->db->stop_cache();
 
 		if($result){
 			return TRUE;
@@ -301,8 +301,8 @@ class mdl_quotation_request_selected extends CI_Model {
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('a.id_detail_pr,a.id_pr,a.id_ro,a.kode_barang,a.qty,a.pick,a.sisa,b.nama_barang');
-			$this->db->from('v_qrs_detail a');
+			$this->db->select('a.id_detail_qrs,a.id_qrs,a.id_pr,a.id_detail_pr,a.kode_barang,a.qty,b.nama_barang');
+			$this->db->from('tr_qrs_detail a');
 			$this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang');
 
 			$this->db->where('a.id_pr',$id_pr);
@@ -327,11 +327,12 @@ class mdl_quotation_request_selected extends CI_Model {
 	{
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('a.id_qrs,a.id_pr,b.id_detail_pr,b.qty,b.kode_barang,c.nama_barang');
-			$this->db->from('tr_qrs a');
-			$this->db->join('tr_pr_detail b', 'b.id_pr = a.id_pr');
-			$this->db->join('ref_barang c', 'c.kode_barang = b.kode_barang');
+			$this->db->select('a.id_detail_pr,a.id_pr,a.id_ro,a.kode_barang,a.qty,a.pick,a.sisa,c.nama_barang,b.id_qrs');
+			$this->db->from('v_qrs_detail a');
+			$this->db->join('tr_qrs b', 'b.id_pr = a.id_pr', 'left');
+			$this->db->join('ref_barang c', 'c.kode_barang = a.kode_barang');
 			$this->db->where('a.id_pr',$id_pr);
+			$this->db->where('a.sisa !=', 0);
 			return $this->db->get()->result();
 		$this->db->stop_cache();
 	}
@@ -351,8 +352,23 @@ class mdl_quotation_request_selected extends CI_Model {
 			    $this->db->set('id_detail_pr',$data['id_detail_pr'][$i]);
 			    $this->db->set('status',1);
 			    $result = $this->db->insert('tr_qrs_detail');
+
+			    // $this->db->where('id_detail_pros', $id_detail_pros);
+			    // $result = $this->db->update('tr_pros_detail',array('id_sro' =>$data['id_sro']));
 			}		
 		//return
+		if($result) {
+			return TRUE;
+		}else {
+			return FALSE;
+		}
+	}
+
+	function delete_detail($kode)
+	{
+		$this->db->where('id_detail_pr', $kode);
+		$result = $this->db->delete('tr_qrs_detail');
+
 		if($result) {
 			return TRUE;
 		}else {
