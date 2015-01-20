@@ -10,19 +10,27 @@ class mdl_quotation_request_selected extends CI_Model {
 	# get parameter from easy grid
 		$page = isset($_POST['page']) ? intval($_POST['page']) : 1;  
 		$limit = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
-		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'id_ro';  
+		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'id_qrs';  
 		$order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
 		$offset = ($page-1)*$limit;
 		
+			#get filter
+		$id_qrs = isset($_POST['id_qrs']) ? strval($_POST['id_qrs']) : '';
+
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('*, b.full_name, c.departement_name');
-			$this->db->from('tr_pr a');
+			$this->db->select('a.id_qrs,a.id_pr,a.id_ro,a.status,a.date_create,a.user_id,b.full_name, c.departement_name,d.purpose,d.cat_req,d.ext_doc_no,d.ETD');
+			$this->db->from('tr_qrs a');
+			#filter
+			if($id_qrs != '') {
+					$this->db->like('a.id_qrs', $id_qrs);
+				}
 			$this->db->join('sys_user b', 'b.user_id = a.user_id');
 			$this->db->join('ref_departement c', 'c.departement_id = b.departement_id');
+			$this->db->join('tr_pr d', 'd.id_pr = a.id_pr');
 
-			$this->db->where('a.status','2');
+			$this->db->where('a.status','1');
 
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
@@ -198,6 +206,18 @@ class mdl_quotation_request_selected extends CI_Model {
 		}
 	}
 
+	function notif()
+	{
+		$this->db->flush_cache();
+		$this->db->start_cache();
+			//$this->db->select('status');
+			$this->db->order_by('id_pr', 'asc');
+			$this->db->where('status', 2);
+			$this->db->from('tr_pr');
+			return $this->db->count_all_results();
+		$this->db->stop_cache();
+	}
+
 	function Insert_vendor($data)
 	{
 		$this->db->flush_cache();
@@ -210,6 +230,128 @@ class mdl_quotation_request_selected extends CI_Model {
 
 		$result = $this->db->insert('tr_qr');
 		
+		//return
+		if($result) {
+			return TRUE;
+		}else {
+			return FALSE;
+		}
+	}
+
+	//insert Qrs
+	function select_pr($data)
+	{
+		$this->flush_cache();
+		$this->start_cache();
+			$this->db->select('id_pr,id_ro,status');
+			$this->db->where('id_pr', $data['id_pr']);
+			$this->db->where('status', 2);
+			$this->db->order_by('id_pr', 'asc');
+			$query = $this->db->get('tr_pr');
+			return $query->row();
+		$this->db->stop_cache();
+	}
+
+	function Insert_Qrs($data)
+	{
+		$this->db->flush_cache();
+		$this->db->start_cache();
+			$pr = $this->mdl_quotation_request_selected->select_pr($data);
+
+			$this->db->set('id_pr',$pr->id_pr);
+			$this->db->set('id_ro',$pr->id_ro);
+			$this->db->set('date_create',$data['date_create']);
+			$this->db->set('user_id',$data['user_id']);
+			$this->db->set('status',$data['status']);
+
+			$result = $this->db->insert('tr_qrs');
+		$this->db->stop_cache();
+
+		if($result){
+			return TRUE;
+		}else{
+			return FALSE;
+		}
+	}
+
+	// autocomplete
+	function searchQrs($data)
+	{
+		$this->db->flush_cache();
+		$this->db->start_cache();
+			$this->db->select('id_qrs as label,id_ro,status');
+			$this->db->order_by('id_qrs', 'asc');
+			$this->db->like("id_ro",$data);
+			$this->db->where('status', 1);
+			$query = $this->db->get('tr_qrs', 100, 0);
+			return $query->result();
+		$this->db->stop_cache();
+	}
+
+	// detail qrs
+	 function getQrs($id_pr, $plimit=true){
+	# get parameter from easy grid
+		$page = isset($_POST['page']) ? intval($_POST['page']) : 1;  
+		$limit = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
+		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'a.id_pr';  
+		$order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
+		$offset = ($page-1)*$limit;
+		
+
+		# create query
+		$this->db->flush_cache();
+		$this->db->start_cache();
+			$this->db->select('a.id_detail_pr,a.id_pr,a.id_ro,a.kode_barang,a.qty,a.pick,a.sisa,b.nama_barang');
+			$this->db->from('v_qrs_detail a');
+			$this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang');
+
+			$this->db->where('a.id_pr',$id_pr);
+
+			$this->db->order_by($sort, $order);
+		$this->db->stop_cache();
+		
+		# get count
+		$tmp['row_count'] = $this->db->get()->num_rows();
+		
+		# get data
+		if($plimit == true){
+			$this->db->limit($limit, $offset);
+		}
+		$tmp['row_data'] = $this->db->get();
+		
+		return $tmp;
+	}
+
+	//select detail
+	function select_detail_qrs($id_pr)
+	{
+		$this->db->flush_cache();
+		$this->db->start_cache();
+			$this->db->select('a.id_qrs,a.id_pr,b.id_detail_pr,b.qty,b.kode_barang,c.nama_barang');
+			$this->db->from('tr_qrs a');
+			$this->db->join('tr_pr_detail b', 'b.id_pr = a.id_pr');
+			$this->db->join('ref_barang c', 'c.kode_barang = b.kode_barang');
+			$this->db->where('a.id_pr',$id_pr);
+			return $this->db->get()->result();
+		$this->db->stop_cache();
+	}
+
+	function Insert_Detail_Qrs($data)
+	{
+		$this->db->flush_cache();
+	
+		 $jumlah = count($data['id_detail_pr']);
+			for($i=0; $i < $jumlah; $i++) 
+			{
+			    $id_detail_pros=$data['id_detail_pr'][$i];
+			    $this->db->set('id_pr',$data['id_pr'][$i]);
+			    $this->db->set('kode_barang',$data['kode_barang'][$i]);
+			    $this->db->set('qty',$data['pick'][$i]);
+			    $this->db->set('id_qrs',$data['id_qrs'][$i]);
+			    $this->db->set('id_detail_pr',$data['id_detail_pr'][$i]);
+			    $this->db->set('status',1);
+			    $result = $this->db->insert('tr_qrs_detail');
+			}		
 		//return
 		if($result) {
 			return TRUE;

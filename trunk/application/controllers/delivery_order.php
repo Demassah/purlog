@@ -45,7 +45,7 @@ class delivery_order extends CI_Controller {
 		$status = "";
 		$result = false;
 		$data['pesan_error'] = '';
-		
+	
 		# get post data
 		foreach($_POST as $key => $value){
 			$data[$key] = $value;

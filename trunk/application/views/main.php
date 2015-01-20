@@ -27,6 +27,7 @@ date_default_timezone_set('Asia/Jakarta');
 				 
 	</head>
 	<body class="easyui-layout">
+
 	<input type="hide" value="<?=base_url();?>"/>
 		<script>
 			base_url = '<?=base_url();?>';
@@ -278,6 +279,6 @@ date_default_timezone_set('Asia/Jakarta');
 			</div>
 			<div id="dlg-buttons-kosong">
 			</div>
-		</div>				 
-				 
+		</div>
+
 	</body>
