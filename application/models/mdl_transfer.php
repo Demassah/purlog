@@ -65,7 +65,7 @@ class mdl_transfer extends CI_Model {
 		$this->db->flush_cache();
         $this->db->set('type_transfer', $data['type_transfer']);
         $this->db->set('note', $data['note']);
-        $this->db->set('date_create', FormatDateToMysql($data['date_create']));
+        $this->db->set('date_create', ($data['date_create']));
         $this->db->set('user_id', $data['user_id']);
         $this->db->set('status', isset($data['status'])?'1':'0');
 
@@ -276,6 +276,33 @@ class mdl_transfer extends CI_Model {
 		$this->db->where('id_detail_transfer', $id);
 		return $this->db->get('tr_transfer_detail');
 	}
+
+	function get_pdf($id_transfer){        
+        # get data
+        $this->db->flush_cache();
+        $this->db->start_cache();
+
+        	$this->db->select('a.id_detail_transfer, a.id_transfer, a.id_stock, a.kode_barang, a.qty, a.price, a.id_lokasi, a.status, b.nama_barang, c.qty AS qty_stock, c.id_lokasi AS lokasi_stock, d.type_transfer, d.date_create, e.full_name');
+			$this->db->from('tr_transfer_detail a');
+			$this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang');
+			$this->db->join('tr_stock c', 'c.id_stock = a.id_stock', 'left');
+			$this->db->join('tr_transfer d', 'd.id_transfer = a.id_transfer');
+			$this->db->join('sys_user e', 'e.user_id = d.user_id');
+			$this->db->where('a.id_transfer', $id_transfer);
+			//$this->db->where('a.id_ro', $kode);
+			$this->db->where('a.status', '1');
+
+        // proses
+            $result = $this->db->get();
+        
+	        if ($result->num_rows() > 0) {
+	            foreach ($result->result() as $data) {
+	                $data_pdf[] = $data;
+	            }
+	        return $data_pdf;           
+        }
+        
+    }
 
 }
 

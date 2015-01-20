@@ -18,9 +18,9 @@
 		<label style="width:140px;vertical-align:top;">Note </label>:
 		<textarea name="note" id="note" cols="30" rows="5"><?=$note?></textarea>
 	</div>
-	<div class="fitem" >
-		<label style="width:140px">Date Create</label>: 
-		<input class="easyui-datebox textbox" name="date_create" size="13" value="<?=$date_create?>" id="date_create" data-options="formatter:DateFormatter, parser:DateParser">
+	<div class="fitem" hidden="true" >
+		<label style="width:140px">Date Create </label>: 
+		<input class="textbox" name="date_create" size="13" value="<?=$date_create?>" id="date_create"  data-options="formatter:DateFormatter, parser:DateParser">
 	</div>
 	<div class="fitem" >
 		<label style="width:140px">Requestor</label>: 

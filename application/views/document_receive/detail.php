@@ -109,6 +109,11 @@
 	      });
 	    }
 
+	    //Cetak
+	    print = function(val){    
+	        window.open(base_url + 'document_receive/laporan_pdf/'+id_receive);      
+	    }
+
 		$(function(){ // init
 	      	$('#dtgrd').datagrid({url:"document_receive/grid_detail/<?=$id_receive?>"});  
 		});	
@@ -130,6 +135,13 @@
 		            text:'Kembali',
 		            handler:function(){
 		              back();
+		            }
+	          },
+	            {
+		            iconCls:'icon-pdf',
+		            text:'Print',
+		            handler:function(){
+		              print();
 		            }
 	          }           
 	        ]

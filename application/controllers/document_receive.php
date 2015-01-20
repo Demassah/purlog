@@ -140,6 +140,35 @@ class document_receive extends CI_Controller {
 		
 		$this->load->view('document_receive/dr_form', $data);
 	}
+
+    function laporan_pdf($id_receive) {
+        $this->load->library('HTML2PDF');
+        $html2pdf = new HTML2PDF('L', 'A4', 'fr');
+        $html2pdf->setDefaultFont('Arial');
+        
+        //filter
+        //get filter
+        //$fil['kd_prodi'] = $kd_prodi;
+        
+        //$data['nama'] = '';
+        //$data['namaUniv'] = 'STMIK BANDUNG';
+        //$data['alamatUniv'] = 'Jl.Phh.Mustofa No. 39. Grand Surapati Core (SUCORE) Blok M No.19, Telp.022 - 7207777';
+        //$data['kotaUniv'] = 'Bandung, Jawa Barat';
+        
+        // ambil data dari tabel
+        $data['data_pdf'] = $this->mdl_document_receive->get_pdf($id_receive);
+        
+        /* if (count($da['row'])==0){
+        echo "Data Tidak Tersedia";
+        return;
+        } */
+        
+        $konten = $this->load->view('document_receive/dr_laporan', $data, true);
+        
+        $html2pdf->writeHTML($konten, false);
+        
+        $html2pdf->Output("document_receive_".date('d-m-y')."_".$id_receive.".pdf");
+    }
 	
 	
 }

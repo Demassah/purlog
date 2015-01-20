@@ -268,6 +268,34 @@ class mdl_document_receive extends CI_Model {
 		}
 	}
 
+	function get_pdf($id_receive){        
+        # get data
+        $this->db->flush_cache();
+        $this->db->start_cache();
+
+			$this->db->select('a.id_detail_receive, a.id_receive, a.id_detail_pros, a.id_detail_ro, a.id_ro, a.id_sro, a.kode_barang, c.nama_barang, d.qty AS qty_delivered, a.qty AS qty, a.date_create, b.id_courir, e.name_courir, b.date_create');
+			$this->db->from('tr_receive_detail a');
+			$this->db->join('tr_receive b', 'b.id_receive = a.id_receive');
+			$this->db->join('ref_barang c', 'c.kode_barang = a.kode_barang');
+			$this->db->join('tr_pros_detail d', 'd.id_detail_pros = a.id_detail_pros');
+			$this->db->join('ref_courir e', 'e.id_courir = b.id_courir');
+			$this->db->where('a.id_receive', $id_receive);
+
+			$this->db->where('a.status', '1');
+			//$this->db->where('a.status_picking', '1');
+
+        // proses
+            $result = $this->db->get();
+
+	        if ($result->num_rows() > 0) {
+	            foreach ($result->result() as $data) {
+	                $data_pdf[] = $data;
+	            }
+	        return $data_pdf;
+        }
+        
+    }
+
 }
 
 ?>

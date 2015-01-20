@@ -169,7 +169,7 @@
       <th field="kode_barang" sortable="true" width="120">ID Barang</th>
       <th field="nama_barang" sortable="true" width="130">Nama Barang</th>
       <th field="sisa" sortable="true" width="120">Qty</th>
-      <th field="date_create" sortable="true" width="120">Date Create</th>
+      <th field="date_create" sortable="true" width="130">Date Create</th>
       <th field="action" align="center" formatter="actiondetail" width="80">Aksi</th>
     </tr>
   </thead>

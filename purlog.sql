@@ -30,11 +30,11 @@ CREATE TABLE `ref_barang` (
   `status` varchar(1) NOT NULL,
   `type` int(1) NOT NULL COMMENT '1: fast moving, 2: slow moving, 3: new item',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 /*Data for the table `ref_barang` */
 
-insert  into `ref_barang`(`id`,`id_kategori`,`id_sub_kategori`,`kode_barang`,`nama_barang`,`id_satuan`,`status`,`type`) values (1,1,1,'100','PC',5,'1',1),(2,1,2,'201','Microsoft Office',2,'1',2),(3,2,6,'301','Lampu',2,'1',2),(4,2,5,'302','Oli',6,'1',1),(5,1,1,'202','New  Item - Hardware',5,'1',3);
+insert  into `ref_barang`(`id`,`id_kategori`,`id_sub_kategori`,`kode_barang`,`nama_barang`,`id_satuan`,`status`,`type`) values (1,1,1,'100','PC',5,'1',1),(2,1,2,'201','Microsoft Office',2,'1',2),(3,2,6,'301','Lampu',2,'1',2),(4,2,5,'302','Oli',6,'1',1),(5,1,1,'202','New  Item - Hardware',5,'1',3),(6,1,1,'203','Mouse',2,'1',2);
 
 /*Table structure for table `ref_courir` */
 
@@ -61,11 +61,11 @@ CREATE TABLE `ref_departement` (
   `departement_name` varchar(25) NOT NULL,
   `status` varchar(1) NOT NULL,
   PRIMARY KEY (`departement_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 /*Data for the table `ref_departement` */
 
-insert  into `ref_departement`(`departement_id`,`departement_name`,`status`) values (1,'IT','1'),(15,'Workshop','1'),(16,'Heavy Equipment','1'),(17,'Promotion','1'),(18,'Bispar','1');
+insert  into `ref_departement`(`departement_id`,`departement_name`,`status`) values (1,'IT','1'),(15,'Workshop','1'),(16,'Heavy Equipment','1'),(17,'Promotion','1'),(18,'Bispar','1'),(19,'Other','1');
 
 /*Table structure for table `ref_kategori` */
 
@@ -170,7 +170,7 @@ CREATE TABLE `sys_user` (
 
 /*Data for the table `sys_user` */
 
-insert  into `sys_user`(`user_id`,`nik`,`user_name`,`full_name`,`passwd`,`departement_id`,`user_level_id`) values (1,1111111,'admin','administrator','21232f297a57a5a743894a0e4a801fc3',1,1),(11,1111112,'iqbal','Mochamad Iqbal','eedae20fc3c7a6e9c5b1102098771c70',15,1),(12,12345,'harry','Harry Pret','3b87c97d15e8eb11e51aa25e9a5770e9',17,1),(13,5757,'demas','Demassah','d8f08986e8072e78bf9295c294ef3bc2',1,1),(14,3453,'asd','asd','7815696ecbf1c96e6894b779456d330e',0,2),(15,56361,'tes','tes','28b662d883b6d76fd96e4ddc5e9ba780',0,1),(16,112233,'superadmin','Superadmin','17c4520f6cfd1ab53d8745e84681eb49',0,14),(17,9988,'operator','operator','4b583376b2767b923c3e1da60d10de59',NULL,1),(18,9988,'requestor','Requestor','560115e15fdc6b37096d514904104a57',0,4);
+insert  into `sys_user`(`user_id`,`nik`,`user_name`,`full_name`,`passwd`,`departement_id`,`user_level_id`) values (1,1111111,'admin','administrator','21232f297a57a5a743894a0e4a801fc3',1,1),(11,1111112,'iqbal','Mochamad Iqbal','eedae20fc3c7a6e9c5b1102098771c70',15,1),(12,12345,'harry','Harry Pret','3b87c97d15e8eb11e51aa25e9a5770e9',17,1),(13,5757,'demas','Demassah','d8f08986e8072e78bf9295c294ef3bc2',1,1),(14,3453,'asd','asd','7815696ecbf1c96e6894b779456d330e',0,2),(15,56361,'tes','tes','28b662d883b6d76fd96e4ddc5e9ba780',0,1),(16,112233,'superadmin','Superadmin','17c4520f6cfd1ab53d8745e84681eb49',19,14),(17,9988,'operator','operator','4b583376b2767b923c3e1da60d10de59',NULL,1),(18,9988,'requestor','Requestor','560115e15fdc6b37096d514904104a57',0,4);
 
 /*Table structure for table `sys_user_access` */
 
@@ -186,7 +186,7 @@ CREATE TABLE `sys_user_access` (
 
 /*Data for the table `sys_user_access` */
 
-insert  into `sys_user_access`(`user_access_id`,`menu_id`,`user_level_id`,`policy`) values (1,1,1,'ACCESS;'),(2,2,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;'),(3,3,1,'ACCESS;ADD;EDIT;DELETE;'),(4,4,1,'ACCESS;ADD;EDIT;DELETE;'),(727,5,1,'ACCESS;'),(728,6,1,'ACCESS;ADD;EDIT;DELETE;'),(729,7,1,'ACCESS;ADD;EDIT;DELETE;'),(730,8,1,'ACCESS;ADD;EDIT;DELETE;'),(731,9,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;'),(732,10,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;APPROVE;'),(733,11,1,'ACCESS;DETAIL;EDIT;DELETE;APPROVE;'),(734,12,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(735,13,1,'ACCESS;ADD;DETAIL;DELETE;PRINT;PDF;APPROVE;'),(736,14,1,'ACCESS;ADD;DETAIL;DELETE;APPROVE;'),(737,15,1,'ACCESS;ADD;DETAIL;DELETE;SELECT;APPROVE;'),(739,17,1,'ACCESS;ADD;EDIT;DELETE;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(740,18,1,'ACCESS;ADD;EDIT;DELETE;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(741,19,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;PDF;APPROVE;'),(742,20,1,''),(743,21,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;'),(744,22,1,'ACCESS;DETAIL;EDIT;DELETE;APPROVE;'),(745,23,1,'ACCESS;ADD;EDIT;DELETE;'),(746,34,1,'ACCESS;'),(747,35,1,'ACCESS;'),(748,36,1,'ACCESS;'),(749,37,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;APPROVE;'),(750,38,1,'ACCESS;DETAIL;'),(751,39,1,'ACCESS;DETAIL;'),(752,40,1,''),(753,41,1,'ACCESS;ADD;DETAIL;DELETE;PDF;APPROVE;'),(754,42,1,''),(755,43,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;'),(756,44,1,'ACCESS;ADD;EDIT;DELETE;'),(757,36,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(758,4,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(759,44,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(760,5,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(761,6,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(762,7,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(763,8,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(764,34,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(765,10,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(766,37,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(767,22,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(768,11,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(769,12,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(770,13,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(771,19,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(772,38,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(773,21,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(774,40,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(775,41,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(776,42,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(777,43,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(778,9,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(779,14,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(780,15,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(781,17,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(782,39,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(783,20,14,''),(784,18,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(785,1,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(786,23,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(787,2,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(788,3,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(789,36,4,''),(790,4,4,''),(791,44,4,''),(792,5,4,'ACCESS;'),(793,6,4,'ACCESS;'),(794,7,4,'ACCESS;'),(795,8,4,'ACCESS;'),(796,34,4,''),(797,10,4,''),(798,37,4,''),(799,22,4,''),(800,11,4,''),(801,12,4,''),(802,13,4,''),(803,19,4,''),(804,38,4,''),(805,21,4,''),(806,40,4,''),(807,41,4,''),(808,42,4,''),(809,43,4,''),(810,9,4,''),(811,14,4,''),(812,15,4,''),(813,17,4,''),(814,39,4,''),(815,20,4,''),(816,18,4,''),(817,1,4,''),(818,23,4,''),(819,2,4,''),(820,3,4,'');
+insert  into `sys_user_access`(`user_access_id`,`menu_id`,`user_level_id`,`policy`) values (1,1,1,'ACCESS;'),(2,2,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;'),(3,3,1,'ACCESS;ADD;EDIT;DELETE;'),(4,4,1,'ACCESS;ADD;EDIT;DELETE;'),(727,5,1,'ACCESS;'),(728,6,1,'ACCESS;ADD;EDIT;DELETE;'),(729,7,1,'ACCESS;ADD;EDIT;DELETE;'),(730,8,1,'ACCESS;ADD;EDIT;DELETE;'),(731,9,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;'),(732,10,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;APPROVE;'),(733,11,1,'ACCESS;DETAIL;EDIT;DELETE;APPROVE;'),(734,12,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(735,13,1,'ACCESS;ADD;DETAIL;DELETE;PRINT;PDF;APPROVE;'),(736,14,1,'ACCESS;ADD;DETAIL;DELETE;APPROVE;'),(737,15,1,'ACCESS;ADD;DETAIL;DELETE;SELECT;APPROVE;'),(739,17,1,'ACCESS;ADD;EDIT;DELETE;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(740,18,1,'ACCESS;ADD;EDIT;DELETE;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(741,19,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;PDF;APPROVE;'),(742,20,1,''),(743,21,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;'),(744,22,1,'ACCESS;DETAIL;EDIT;DELETE;APPROVE;'),(745,23,1,'ACCESS;ADD;EDIT;DELETE;'),(746,34,1,'ACCESS;'),(747,35,1,'ACCESS;'),(748,36,1,'ACCESS;'),(749,37,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;APPROVE;'),(750,38,1,'ACCESS;DETAIL;'),(751,39,1,'ACCESS;DETAIL;'),(752,40,1,'ACCESS;DETAIL;'),(753,41,1,'ACCESS;ADD;DETAIL;DELETE;PDF;APPROVE;'),(754,42,1,'ACCESS;'),(755,43,1,'ACCESS;ADD;DETAIL;EDIT;DELETE;'),(756,44,1,'ACCESS;ADD;EDIT;DELETE;'),(757,36,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(758,4,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(759,44,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(760,5,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(761,6,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(762,7,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(763,8,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(764,34,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(765,10,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(766,37,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(767,22,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(768,11,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(769,12,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(770,13,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(771,19,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(772,38,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(773,21,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(774,40,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(775,41,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(776,42,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(777,43,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(778,9,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(779,14,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(780,15,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(781,17,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(782,39,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(783,20,14,''),(784,18,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(785,1,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(786,23,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(787,2,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(788,3,14,'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),(789,36,4,''),(790,4,4,''),(791,44,4,''),(792,5,4,'ACCESS;'),(793,6,4,'ACCESS;'),(794,7,4,'ACCESS;'),(795,8,4,'ACCESS;'),(796,34,4,''),(797,10,4,''),(798,37,4,''),(799,22,4,''),(800,11,4,''),(801,12,4,''),(802,13,4,''),(803,19,4,''),(804,38,4,''),(805,21,4,''),(806,40,4,''),(807,41,4,''),(808,42,4,''),(809,43,4,''),(810,9,4,''),(811,14,4,''),(812,15,4,''),(813,17,4,''),(814,39,4,''),(815,20,4,''),(816,18,4,''),(817,1,4,''),(818,23,4,''),(819,2,4,''),(820,3,4,'');
 
 /*Table structure for table `sys_user_level` */
 
@@ -214,11 +214,11 @@ CREATE TABLE `tr_do` (
   `id_user` varchar(21) DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id_do`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `tr_do` */
 
-insert  into `tr_do`(`id_do`,`id_courir`,`date_create`,`id_user`,`status`) values (8,'430016','2015-01-09 10:34:35','1',2),(13,'420015','2015-01-09 10:57:27','1',1),(14,'430016','2015-01-09 11:05:10','1',2);
+insert  into `tr_do`(`id_do`,`id_courir`,`date_create`,`id_user`,`status`) values (1,'420015','2015-01-20 11:08:30','1',2),(2,'430016','2015-01-20 11:08:53','1',2);
 
 /*Table structure for table `tr_do_detail` */
 
@@ -286,11 +286,9 @@ CREATE TABLE `tr_po` (
   `date_create` datetime DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id_po`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `tr_po` */
-
-insert  into `tr_po`(`id_po`,`id_pr`,`id_ro`,`requestor`,`departement`,`purpose`,`cat_req`,`ext_doc_no`,`ETD`,`date_create`,`status`) values (23,9,39,'14','1','REQUEST','ASSET','ASST101','2015-01-09','2015-01-19 16:57:08',1);
 
 /*Table structure for table `tr_pr` */
 
@@ -308,11 +306,11 @@ CREATE TABLE `tr_pr` (
   `date_create` datetime DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id_pr`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tr_pr` */
 
-insert  into `tr_pr`(`id_pr`,`id_ro`,`id_po`,`user_id`,`purpose`,`cat_req`,`ext_doc_no`,`ETD`,`date_create`,`status`) values (1,1,NULL,1,'REQUEST','SPAREPART','SPK/123/2014','2014-12-23','2014-12-23 00:00:00',3),(7,37,NULL,13,'REQUEST','SPAREPART','atk101','2015-01-09','2015-01-09 00:00:00',1),(9,39,23,13,'REQUEST','ASSET','ASST101','2015-01-09','2015-01-09 00:00:00',3);
+insert  into `tr_pr`(`id_pr`,`id_ro`,`id_po`,`user_id`,`purpose`,`cat_req`,`ext_doc_no`,`ETD`,`date_create`,`status`) values (1,1,NULL,1,'REQUEST','ASSET','SPK/123','2015-01-20','2015-01-20 09:22:32',2);
 
 /*Table structure for table `tr_pr_detail` */
 
@@ -331,11 +329,11 @@ CREATE TABLE `tr_pr_detail` (
   `status` int(1) DEFAULT NULL,
   `status_delete` int(1) NOT NULL,
   PRIMARY KEY (`id_detail_pr`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tr_pr_detail` */
 
-insert  into `tr_pr_detail`(`id_detail_pr`,`id_pr`,`id_detail_ro`,`id_ro`,`kode_barang`,`qty`,`user_id`,`date_create`,`note`,`status`,`status_delete`) values (1,1,1,1,'301',5,1,'2014-12-23 23:56:02',NULL,2,0),(2,1,2,1,'302',1,1,'2014-12-23 23:56:02',NULL,2,0),(3,0,6,3,'202',12,1,'2014-12-29 18:50:31',NULL,1,0),(4,0,7,3,'201',12,1,'2014-12-29 18:50:31',NULL,1,0),(5,0,8,3,'201',45,1,'2014-12-29 18:50:31',NULL,1,0),(6,0,17,25,'301',5,1,'2014-12-29 20:30:07',NULL,1,0),(7,0,18,25,'302',15,1,'2014-12-29 20:30:07',NULL,1,0),(8,0,22,26,'301',5,1,'2014-12-30 00:11:30',NULL,1,0),(9,7,32,37,'100',6,13,'2015-01-08 18:31:42',NULL,1,0),(10,9,37,39,'100',5,13,'2015-01-08 20:04:31',NULL,2,0),(11,0,24,27,'100',10,1,'2015-01-08 22:30:49',NULL,2,0),(12,0,7,3,'201',12,1,'2015-01-19 00:11:32',NULL,1,0),(13,0,8,3,'201',45,1,'2015-01-19 00:11:32',NULL,1,0),(14,0,17,25,'301',5,1,'2015-01-19 00:11:33',NULL,1,0),(15,0,18,25,'302',15,1,'2015-01-19 00:11:33',NULL,1,0),(16,0,24,27,'100',10,1,'2015-01-19 00:11:33',NULL,1,0),(17,0,37,39,'100',5,13,'2015-01-19 00:11:36',NULL,1,0);
+insert  into `tr_pr_detail`(`id_detail_pr`,`id_pr`,`id_detail_ro`,`id_ro`,`kode_barang`,`qty`,`user_id`,`date_create`,`note`,`status`,`status_delete`) values (1,1,1,1,'100',20,1,'2015-01-19 18:30:40',NULL,2,0),(2,1,2,1,'201',10,1,'2015-01-19 18:30:40',NULL,2,0),(3,1,3,1,'203',5,1,'2015-01-19 18:30:40',NULL,2,0),(4,0,4,2,'301',1,1,'2015-01-19 20:07:18',NULL,1,0);
 
 /*Table structure for table `tr_pros_detail` */
 
@@ -355,11 +353,11 @@ CREATE TABLE `tr_pros_detail` (
   `status_receive` smallint(1) DEFAULT '0',
   `status_picking` smallint(1) DEFAULT NULL COMMENT '1: picking 2: purchase 3: return',
   PRIMARY KEY (`id_detail_pros`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `tr_pros_detail` */
 
-insert  into `tr_pros_detail`(`id_detail_pros`,`id_detail_ro`,`id_ro`,`id_sro`,`id_stock`,`kode_barang`,`qty`,`id_lokasi`,`date_create`,`status`,`status_receive`,`status_picking`) values (1,1,1,1,2,'301',10,'M','2014-12-23 23:56:01',1,1,1),(2,2,1,1,3,'302',1,'L','2014-12-23 23:56:01',1,1,1),(10,3,2,3,3,'302',10,'L','2014-12-24 00:55:51',1,1,1),(11,3,2,3,3,'302',15,'L','2014-12-29 08:59:46',1,1,1),(12,4,2,NULL,3,'302',15,'L','2014-12-29 08:59:49',1,1,1),(13,14,15,NULL,2,'301',5,'M','2014-12-28 23:09:28',1,0,1),(14,17,25,5,2,'301',45,'M','2014-12-30 11:29:35',1,1,1),(15,18,25,5,3,'302',20,'L','2014-12-30 11:29:51',1,1,1),(34,23,26,17,3,'302',15,'L','2014-12-30 00:24:17',1,0,1),(35,22,26,17,2,'301',30,'M','2014-12-30 00:24:53',1,0,1),(39,27,37,14,1,'100',6,'A','2015-01-09 09:30:47',1,1,1),(40,28,37,14,4,'201',7,'P','2015-01-09 09:30:47',1,1,1),(41,30,37,13,2,'301',8,'M','2015-01-09 09:30:47',1,1,1),(42,32,37,13,1,'100',61,'A','2015-01-09 09:30:47',1,1,1),(43,31,37,13,3,'302',8,'L','2015-01-09 09:31:50',1,1,1),(44,32,37,NULL,0,'100',5,'CROSSDOCK','2015-01-08 19:14:56',1,0,2),(45,32,37,NULL,0,'100',1,'CROSSDOCK','2015-01-08 19:14:56',1,0,2),(46,37,39,16,5,'100',40,'A','2015-01-09 11:04:28',1,1,1),(47,26,28,NULL,2,'301',2,'M','2015-01-08 23:24:54',1,0,1),(48,1,1,1,0,'301',5,'CROSSDOCK','2015-01-09 01:45:01',1,1,2),(49,2,1,1,0,'302',1,'CROSSDOCK','2015-01-09 01:45:01',1,1,2);
+insert  into `tr_pros_detail`(`id_detail_pros`,`id_detail_ro`,`id_ro`,`id_sro`,`id_stock`,`kode_barang`,`qty`,`id_lokasi`,`date_create`,`status`,`status_receive`,`status_picking`) values (1,4,2,1,1,'301',4,'Workshop','2015-01-19 20:06:59',1,1,1),(2,5,3,2,2,'302',3,'Workshop','2015-01-19 20:07:24',1,1,1);
 
 /*Table structure for table `tr_qr` */
 
@@ -374,11 +372,9 @@ CREATE TABLE `tr_qr` (
   `ETD` date DEFAULT NULL,
   `status` int(2) DEFAULT '1',
   PRIMARY KEY (`id_qr`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `tr_qr` */
-
-insert  into `tr_qr`(`id_qr`,`id_pr`,`id_vendor`,`id_po`,`top`,`ETD`,`status`) values (1,9,'V001',0,11,'2015-01-19',1),(2,9,'V002',0,12,'2015-01-19',1),(3,9,'V003',23,13,'2015-01-19',2);
 
 /*Table structure for table `tr_qr_detail` */
 
@@ -395,11 +391,46 @@ CREATE TABLE `tr_qr_detail` (
   `date_create` datetime DEFAULT NULL,
   `status` int(1) DEFAULT '1',
   PRIMARY KEY (`id_detail_qr`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `tr_qr_detail` */
 
-insert  into `tr_qr_detail`(`id_detail_qr`,`id_qr`,`id_detail_pr`,`id_pr`,`kode_barang`,`qty`,`price`,`date_create`,`status`) values (1,1,10,9,'100',5,112,'2015-01-19 01:53:44',1),(2,2,10,9,'100',5,12,'2015-01-19 01:53:56',1),(3,3,10,9,'100',5,12,'2015-01-19 01:54:03',1);
+/*Table structure for table `tr_qrs` */
+
+DROP TABLE IF EXISTS `tr_qrs`;
+
+CREATE TABLE `tr_qrs` (
+  `id_qrs` int(11) NOT NULL AUTO_INCREMENT,
+  `id_pr` int(11) DEFAULT NULL,
+  `id_ro` int(11) DEFAULT NULL,
+  `date_create` datetime DEFAULT NULL,
+  `user_id` smallint(6) DEFAULT NULL,
+  `status` smallint(1) DEFAULT NULL,
+  PRIMARY KEY (`id_qrs`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+
+/*Data for the table `tr_qrs` */
+
+insert  into `tr_qrs`(`id_qrs`,`id_pr`,`id_ro`,`date_create`,`user_id`,`status`) values (1,1,1,'2015-01-20 14:20:45',1,1);
+
+/*Table structure for table `tr_qrs_detail` */
+
+DROP TABLE IF EXISTS `tr_qrs_detail`;
+
+CREATE TABLE `tr_qrs_detail` (
+  `id_detail_qrs` int(11) NOT NULL AUTO_INCREMENT,
+  `id_qrs` int(11) DEFAULT NULL,
+  `id_pr` int(11) DEFAULT NULL,
+  `id_detail_pr` int(11) DEFAULT NULL,
+  `kode_barang` varchar(21) DEFAULT NULL,
+  `qty` int(11) DEFAULT NULL,
+  `status` smallint(1) DEFAULT NULL,
+  PRIMARY KEY (`id_detail_qrs`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+
+/*Data for the table `tr_qrs_detail` */
+
+insert  into `tr_qrs_detail`(`id_detail_qrs`,`id_qrs`,`id_pr`,`id_detail_pr`,`kode_barang`,`qty`,`status`) values (1,1,1,1,'100',10,1),(2,1,1,2,'201',9,1),(3,1,1,3,'203',4,1);
 
 /*Table structure for table `tr_receive` */
 
@@ -413,11 +444,11 @@ CREATE TABLE `tr_receive` (
   `id_user` smallint(6) DEFAULT NULL,
   `status` smallint(1) DEFAULT NULL,
   PRIMARY KEY (`id_receive`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tr_receive` */
 
-insert  into `tr_receive`(`id_receive`,`id_courir`,`id_sro`,`date_create`,`id_user`,`status`) values (6,'420015',1,'2014-12-23 00:00:00',1,2),(7,'420015',2,'2014-12-23 00:00:00',1,2),(8,'420015',3,'2014-12-29 00:00:00',1,2),(9,'420015',4,'2014-12-30 00:00:00',1,2),(11,'430016',14,'2015-01-09 00:00:00',13,2),(13,'430016',16,'2015-01-09 00:00:00',13,2),(14,'430016',1,'2014-12-23 00:00:00',1,1);
+insert  into `tr_receive`(`id_receive`,`id_courir`,`id_sro`,`date_create`,`id_user`,`status`) values (1,'420015',1,'2015-01-19 00:00:00',1,1),(2,'430016',2,'2015-01-19 00:00:00',1,2);
 
 /*Table structure for table `tr_receive_detail` */
 
@@ -435,11 +466,11 @@ CREATE TABLE `tr_receive_detail` (
   `date_create` datetime DEFAULT NULL,
   `status` smallint(1) DEFAULT NULL,
   PRIMARY KEY (`id_detail_receive`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tr_receive_detail` */
 
-insert  into `tr_receive_detail`(`id_detail_receive`,`id_receive`,`id_detail_pros`,`id_detail_ro`,`id_ro`,`id_sro`,`kode_barang`,`qty`,`date_create`,`status`) values (5,6,1,1,1,1,'301',10,'2014-12-30 01:45:36',1),(6,7,2,2,1,2,'302',1,'2014-12-31 00:02:29',1),(7,8,10,3,2,3,'302',10,'2014-12-31 00:24:23',1),(8,8,11,3,2,3,'302',5,'2014-12-31 00:24:23',1),(9,9,12,4,2,4,'302',5,'2015-01-07 18:21:05',1),(13,11,39,27,37,14,'100',6,'2015-01-08 18:40:15',1),(14,11,40,28,37,14,'201',7,'2015-01-08 18:40:15',1),(16,13,46,37,39,16,'100',30,'2015-01-08 22:29:42',1),(17,14,1,1,1,1,'301',10,'2015-01-19 00:48:40',1),(18,14,2,2,1,1,'302',1,'2015-01-19 00:48:40',1),(19,14,48,1,1,1,'301',5,'2015-01-19 00:48:40',1),(20,14,49,2,1,1,'302',1,'2015-01-19 00:48:40',1);
+insert  into `tr_receive_detail`(`id_detail_receive`,`id_receive`,`id_detail_pros`,`id_detail_ro`,`id_ro`,`id_sro`,`kode_barang`,`qty`,`date_create`,`status`) values (1,1,1,4,2,1,'301',4,'2015-01-19 20:14:10',1),(2,2,2,5,3,2,'302',3,'2015-01-19 20:14:21',1);
 
 /*Table structure for table `tr_return` */
 
@@ -452,11 +483,9 @@ CREATE TABLE `tr_return` (
   `status` smallint(1) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_return`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `tr_return` */
-
-insert  into `tr_return`(`id_return`,`id_receive`,`date_create`,`status`,`user_id`) values (4,8,'2014-12-29 00:00:00',2,1),(5,8,'2014-12-29 00:00:00',2,1),(6,13,'2015-01-09 00:00:00',1,13),(7,9,'2014-12-30 00:00:00',1,1);
 
 /*Table structure for table `tr_return_detail` */
 
@@ -475,11 +504,9 @@ CREATE TABLE `tr_return_detail` (
   `date_create` datetime DEFAULT NULL,
   `status` smallint(1) DEFAULT NULL,
   PRIMARY KEY (`id_detail_return`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `tr_return_detail` */
-
-insert  into `tr_return_detail`(`id_detail_return`,`id_return`,`id_receive`,`id_detail_receive`,`id_detail_pros`,`id_ro`,`id_detail_ro`,`kode_barang`,`qty`,`date_create`,`status`) values (2,5,8,8,11,2,3,'302',10,'2014-12-31 00:24:39',2),(3,0,13,16,46,39,37,'100',10,'2015-01-13 17:59:34',1),(4,0,9,9,12,2,4,'302',10,'2015-01-13 18:14:03',1);
 
 /*Table structure for table `tr_ro` */
 
@@ -498,11 +525,11 @@ CREATE TABLE `tr_ro` (
   `status` int(1) DEFAULT NULL COMMENT '1: RO, 2: ROA, 3:ROL, 4: ROS, 5: Picking, 6: Shipment, 7: DO, 9: Reject',
   `status_order` smallint(1) DEFAULT '1' COMMENT '1: ORDER, 2: PURCHASE, 3: RETURN',
   PRIMARY KEY (`id_ro`)
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `tr_ro` */
 
-insert  into `tr_ro`(`id_ro`,`user_id`,`purpose`,`cat_req`,`ext_doc_no`,`ETD`,`date_create`,`date_approve`,`date_reject`,`status`,`status_order`) values (1,1,'REQUEST','SPAREPART','SPK/123/2014','2014-12-23','2014-12-23 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',6,1),(2,1,'REQUEST','SPAREPART','ADI','2014-12-24','2014-12-24 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',6,1),(3,1,'REQUEST','ASSET','123/dpk/345','2014-12-28','2014-12-28 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',6,1),(14,1,'STOCK','ATK','123','2014-12-28','2014-12-28 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',2,1),(15,1,'STOCK','ASSET','432','2014-12-28','2014-12-28 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',6,1),(25,1,'REQUEST','SPAREPART','123/dpk/345','2014-12-30','2014-12-30 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',6,1),(26,1,'REQUEST','SPAREPART','123/dpk/345','2014-12-30','2014-12-30 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',6,1),(27,1,'REQUEST','ATK','5464','2014-12-30','2014-12-30 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',6,1),(28,1,'REQUEST','ASSET','89797','2014-12-30','2014-12-30 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',5,1),(30,11,'REQUEST','ASSET','100','2015-01-04','2015-01-04 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',1,1),(31,1,'REQUEST','SPAREPART','200','2015-01-04','2015-01-04 00:00:00','2015-01-19 15:11:17','0000-00-00 00:00:00',2,1),(32,12,'STOCK','SPAREPART','300','2015-01-04','2015-01-04 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',1,1),(33,11,'STOCK','ATK','400','2015-01-04','2015-01-04 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',1,1),(34,1,'STOCK','SPAREPART','500','2015-01-04','2015-01-04 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',1,1),(35,1,'REQUEST','SPAREPART','5','2014-12-24','2015-01-04 19:48:24','0000-00-00 00:00:00','0000-00-00 00:00:00',5,3),(37,13,'REQUEST','SPAREPART','atk101','2015-01-09','2015-01-09 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',6,1),(38,13,'STOCK','ASSET','asst101','2015-01-09','2015-01-09 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',9,1),(39,13,'REQUEST','ASSET','ASST101','2015-01-09','2015-01-09 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',6,1),(40,1,'REQUEST','ATK','58646','2015-01-08','2015-01-08 00:00:00','2015-01-19 15:12:58','0000-00-00 00:00:00',3,1),(41,13,'REQUEST','ASSET','87945','2015-01-08','2015-01-08 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',4,1),(42,1,'REQUEST','SPAREPART','SPK/14/2015','2015-01-13','2015-01-13 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',5,1),(43,1,'REQUEST','CETAKAN','45645','2015-01-18','2015-01-18 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',1,1),(54,16,'STOCK','CETAKAN','11223344','2015-01-19','2015-01-19 15:31:57','0000-00-00 00:00:00','0000-00-00 00:00:00',1,1),(55,1,'STOCK','CETAKAN','44332211','2015-01-19','2015-01-19 15:36:35','0000-00-00 00:00:00','0000-00-00 00:00:00',1,1);
+insert  into `tr_ro`(`id_ro`,`user_id`,`purpose`,`cat_req`,`ext_doc_no`,`ETD`,`date_create`,`date_approve`,`date_reject`,`status`,`status_order`) values (1,1,'REQUEST','ASSET','SPK/123','2015-01-20','2015-01-20 09:22:32','2015-01-20 09:26:28','0000-00-00 00:00:00',6,1),(2,1,'REQUEST','CETAKAN','112233','2015-01-20','2015-01-20 10:54:09','2015-01-20 10:56:16','0000-00-00 00:00:00',6,1),(3,1,'STOCK','SPAREPART','332211','2015-01-20','2015-01-20 10:54:49','2015-01-20 10:56:20','0000-00-00 00:00:00',6,1);
 
 /*Table structure for table `tr_ro_detail` */
 
@@ -522,11 +549,11 @@ CREATE TABLE `tr_ro_detail` (
   `status_delete` int(1) NOT NULL COMMENT '1. deleted',
   `id_sro` int(6) NOT NULL,
   PRIMARY KEY (`id_detail_ro`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tr_ro_detail` */
 
-insert  into `tr_ro_detail`(`id_detail_ro`,`id_ro`,`ext_doc_no`,`kode_barang`,`qty`,`barang_bekas`,`user_id`,`date_create`,`note`,`status`,`status_delete`,`id_sro`) values (1,1,'SPK/123/2014','301',15,1,1,'0000-00-00 00:00:00','Putih',1,0,0),(2,1,'SPK/123/2014','302',2,2,1,'0000-00-00 00:00:00','mesin',1,0,0),(3,2,'ADI','302',25,1,1,'0000-00-00 00:00:00','',1,0,0),(4,2,'ADI','302',15,1,1,'0000-00-00 00:00:00','',1,0,0),(6,3,'123/dpk/345','202',12,0,1,'0000-00-00 00:00:00','',1,1,0),(7,3,'123/dpk/345','201',12,0,1,'0000-00-00 00:00:00','adi',1,0,0),(8,3,'123/dpk/345','201',45,0,1,'0000-00-00 00:00:00','sdf',1,0,0),(9,7,'123/dpk/345','',45,0,1,'0000-00-00 00:00:00','',1,0,0),(10,7,'123/dpk/345','',1223,0,1,'0000-00-00 00:00:00','',1,0,0),(11,7,'123/dpk/345','',50,0,1,'0000-00-00 00:00:00','',1,0,0),(12,7,'123/dpk/345','201',5,1,1,'0000-00-00 00:00:00','',1,0,0),(14,15,'432','301',5,1,1,'2014-12-28 00:00:00','',1,0,0),(17,25,'123/dpk/345','301',50,2,1,'0000-00-00 00:00:00','',1,0,0),(18,25,'123/dpk/345','302',35,1,1,'0000-00-00 00:00:00','',1,0,0),(19,25,'123/dpk/345','202',15,2,1,'0000-00-00 00:00:00','',1,1,0),(20,25,'123/dpk/345','302',-5,1,1,'0000-00-00 00:00:00','',1,1,0),(21,25,'123/dpk/345','301',0,2,1,'0000-00-00 00:00:00','',1,1,0),(22,26,'123/dpk/345','301',30,1,1,'0000-00-00 00:00:00','',1,0,0),(23,26,'123/dpk/345','302',15,1,1,'0000-00-00 00:00:00','',1,0,0),(24,27,'5464','100',10,1,1,'0000-00-00 00:00:00','',1,0,0),(25,36,'5','302',10,1,1,'2015-01-04 19:54:36','',1,0,0),(26,28,'89797','301',5,2,1,'0000-00-00 00:00:00','',1,0,0),(27,37,'atk101','100',6,1,13,'0000-00-00 00:00:00','pc',1,0,0),(28,37,'atk101','201',7,1,13,'0000-00-00 00:00:00','office\n',1,0,0),(30,37,'atk101','301',8,1,13,'0000-00-00 00:00:00','lampu philip',1,0,0),(31,37,'atk101','302',8,1,13,'0000-00-00 00:00:00','oli enduro',1,0,0),(32,37,'atk101','100',67,1,13,'2015-01-09 00:00:00','keyboard logitech',1,0,0),(33,38,'asst101','100',90,2,13,'0000-00-00 00:00:00','mac book',1,1,0),(34,31,'200','202',23,1,1,'0000-00-00 00:00:00','',1,0,0),(35,38,'asst101','202',10,1,13,'0000-00-00 00:00:00','PC asus',1,0,0),(36,38,'asst101','201',10,1,13,'0000-00-00 00:00:00','office 2013',1,0,0),(37,39,'ASST101','100',45,1,13,'2015-01-09 00:00:00','pc',1,0,0),(38,40,'58646','201',5,2,1,'0000-00-00 00:00:00','-',1,0,0),(39,41,'87945','100',5,2,13,'0000-00-00 00:00:00','-',1,0,0),(40,34,'500','301',15,2,1,'0000-00-00 00:00:00','-',1,0,0),(41,42,'SPK/14/2015','302',1,1,1,'0000-00-00 00:00:00','lkoi',1,0,0);
+insert  into `tr_ro_detail`(`id_detail_ro`,`id_ro`,`ext_doc_no`,`kode_barang`,`qty`,`barang_bekas`,`user_id`,`date_create`,`note`,`status`,`status_delete`,`id_sro`) values (1,1,'SPK/123','100',20,2,1,'2015-01-20 09:22:32','adi',1,0,0),(2,1,'SPK/123','201',10,1,1,'2015-01-20 09:22:32','ida',1,0,0),(3,1,'SPK/123','203',5,1,1,'2015-01-20 09:22:32','MOuse logitech',1,0,0),(4,2,'112233','301',5,1,1,'2015-01-20 10:54:09','tes',1,0,0),(5,3,'332211','302',3,1,1,'2015-01-20 10:54:49','-',1,0,0);
 
 /*Table structure for table `tr_sro` */
 
@@ -540,11 +567,11 @@ CREATE TABLE `tr_sro` (
   `id_user` varchar(21) DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id_sro`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `tr_sro` */
 
-insert  into `tr_sro`(`id_sro`,`id_do`,`id_ro`,`date_create`,`id_user`,`status`) values (1,8,1,'2014-12-23 00:00:00','1',2),(3,NULL,2,'2014-12-29 00:00:00','1',1),(5,NULL,25,'2014-12-30 00:00:00','1',1),(6,NULL,15,'2014-12-29 00:00:00','1',1),(12,NULL,37,'2015-01-09 00:00:00','13',1),(13,NULL,37,'2015-01-09 00:00:00','13',1),(14,NULL,37,'2015-01-09 00:00:00','13',1),(16,14,39,'2015-01-09 00:00:00','13',2),(17,NULL,26,'2015-01-09 00:00:00','1',2);
+insert  into `tr_sro`(`id_sro`,`id_do`,`id_ro`,`date_create`,`id_user`,`status`) values (1,1,2,'2015-01-19 00:00:00','1',2),(2,2,3,'2015-01-19 00:00:00','1',2);
 
 /*Table structure for table `tr_stock` */
 
@@ -562,11 +589,11 @@ CREATE TABLE `tr_stock` (
   `status` int(1) DEFAULT NULL,
   `type_in` smallint(1) DEFAULT NULL COMMENT '1: in 2: transfer',
   PRIMARY KEY (`id_stock`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `tr_stock` */
 
-insert  into `tr_stock`(`id_stock`,`id_in`,`id_detail_in`,`kode_barang`,`qty`,`price`,`id_lokasi`,`date_create`,`status`,`type_in`) values (1,NULL,NULL,'100',0,5000,'A',NULL,1,NULL),(2,NULL,NULL,'301',2,100,'M',NULL,1,NULL),(3,NULL,NULL,'302',2,200,'L',NULL,1,NULL),(4,NULL,NULL,'201',0,2000,'P',NULL,1,NULL),(5,3,4,'100',0,5000,'A','2015-01-08 19:33:00',1,2);
+insert  into `tr_stock`(`id_stock`,`id_in`,`id_detail_in`,`kode_barang`,`qty`,`price`,`id_lokasi`,`date_create`,`status`,`type_in`) values (1,NULL,NULL,'301',2,1000,'Workshop','2015-01-20 10:54:09',1,NULL),(2,NULL,NULL,'302',2,500,'Workshop','2015-01-20 10:54:09',1,NULL);
 
 /*Table structure for table `tr_transfer` */
 
@@ -580,11 +607,11 @@ CREATE TABLE `tr_transfer` (
   `user_id` int(11) DEFAULT NULL,
   `status` smallint(1) DEFAULT NULL,
   PRIMARY KEY (`id_transfer`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tr_transfer` */
 
-insert  into `tr_transfer`(`id_transfer`,`type_transfer`,`note`,`date_create`,`user_id`,`status`) values (1,0,'','0000-00-00 00:00:00',1,1),(3,1,'','2015-01-23 00:00:00',1,2),(4,1,'tes','2015-01-14 00:00:00',1,1),(5,1,'-','2015-01-20 00:00:00',1,1);
+insert  into `tr_transfer`(`id_transfer`,`type_transfer`,`note`,`date_create`,`user_id`,`status`) values (1,1,'tes','2015-01-19 23:43:10',1,1),(2,1,'tes 2','2015-01-19 23:45:15',1,1);
 
 /*Table structure for table `tr_transfer_detail` */
 
@@ -600,11 +627,11 @@ CREATE TABLE `tr_transfer_detail` (
   `id_lokasi` varchar(21) DEFAULT NULL,
   `status` smallint(1) DEFAULT NULL,
   PRIMARY KEY (`id_detail_transfer`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tr_transfer_detail` */
 
-insert  into `tr_transfer_detail`(`id_detail_transfer`,`id_transfer`,`id_stock`,`kode_barang`,`qty`,`price`,`id_lokasi`,`status`) values (4,3,1,'100',40,5000,'A',1),(5,1,4,'201',7,2000,'M',1),(6,1,3,'302',10,200,'L',1),(7,1,2,'301',2,100,'A',1),(8,5,1,'100',10,5000,'A',1);
+insert  into `tr_transfer_detail`(`id_detail_transfer`,`id_transfer`,`id_stock`,`kode_barang`,`qty`,`price`,`id_lokasi`,`status`) values (1,1,1,'301',1,1000,'Workshop',1);
 
 /* Trigger structure for table `tr_do` */
 
@@ -1316,6 +1343,23 @@ DROP TABLE IF EXISTS `v_pros_detail`;
  `sisa` decimal(33,0) 
 )*/;
 
+/*Table structure for table `v_qrs_detail` */
+
+DROP TABLE IF EXISTS `v_qrs_detail`;
+
+/*!50001 DROP VIEW IF EXISTS `v_qrs_detail` */;
+/*!50001 DROP TABLE IF EXISTS `v_qrs_detail` */;
+
+/*!50001 CREATE TABLE  `v_qrs_detail`(
+ `id_detail_pr` int(11) ,
+ `id_pr` int(11) ,
+ `id_ro` int(11) ,
+ `kode_barang` varchar(21) ,
+ `qty` int(11) ,
+ `pick` decimal(32,0) ,
+ `sisa` decimal(33,0) 
+)*/;
+
 /*View structure for view v_po_detail */
 
 /*!50001 DROP TABLE IF EXISTS `v_po_detail` */;
@@ -1343,6 +1387,13 @@ DROP TABLE IF EXISTS `v_pros_detail`;
 /*!50001 DROP VIEW IF EXISTS `v_pros_detail` */;
 
 /*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_pros_detail` AS select `tr_ro_detail`.`id_detail_ro` AS `id_detail_ro`,`tr_ro_detail`.`id_ro` AS `id_ro`,`tr_ro_detail`.`kode_barang` AS `kode_barang`,`tr_ro_detail`.`qty` AS `orders`,(`tr_ro_detail`.`qty` - (`tr_ro_detail`.`qty` - coalesce(sum(`tr_pros_detail`.`qty`),0))) AS `picking`,(`tr_ro_detail`.`qty` - coalesce(sum(`tr_pros_detail`.`qty`),0)) AS `sisa` from (`tr_ro_detail` left join `tr_pros_detail` on((`tr_ro_detail`.`id_detail_ro` = `tr_pros_detail`.`id_detail_ro`))) where (`tr_ro_detail`.`status_delete` <> 1) group by `tr_ro_detail`.`id_detail_ro` */;
+
+/*View structure for view v_qrs_detail */
+
+/*!50001 DROP TABLE IF EXISTS `v_qrs_detail` */;
+/*!50001 DROP VIEW IF EXISTS `v_qrs_detail` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_qrs_detail` AS (select `a`.`id_detail_pr` AS `id_detail_pr`,`a`.`id_pr` AS `id_pr`,`a`.`id_ro` AS `id_ro`,`a`.`kode_barang` AS `kode_barang`,`a`.`qty` AS `qty`,coalesce(sum(`b`.`qty`),0) AS `pick`,(`a`.`qty` - coalesce(sum(`b`.`qty`),0)) AS `sisa` from ((`tr_pr_detail` `a` left join `tr_pr` `c` on((`a`.`id_pr` = `c`.`id_pr`))) left join `tr_qrs_detail` `b` on((`a`.`id_detail_pr` = `b`.`id_detail_pr`))) where (`c`.`status` = 2) group by `a`.`id_detail_pr`) */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
