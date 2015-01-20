@@ -70,15 +70,7 @@ class quotation_request_selected extends CI_Controller {
 		  }
   }
 
-	function delete_detail($kode)
-	{
-		$result = $this->mdl_quotation_request_selected->delete_detail($kode);
-		if($result){
-			 echo json_encode(array('success' => true));
-	    } else {
-	     echo json_encode(array('msg' => 'Data gagal dikirim'));
-		}
-	}
+
   function Add_vendor($id_pr)
   {
   	$data['id_pr'] = $id_pr;
@@ -176,14 +168,14 @@ class quotation_request_selected extends CI_Controller {
 	}
 
 	//detail 
-	function detail_Qrs($id_pr)
+	function detail_Qrs($id_qrs)
 	{
-		$data['id_pr'] = $id_pr;
+		$data['id_qrs'] = $id_qrs;
 		$this->load->view('quotation_request_selected/detail_qrs',$data);
 	}
 
-	function grid_detail($id_pr){
-		$data = $this->mdl_quotation_request_selected->getQrs($id_pr);
+	function grid_detail($id_qrs){
+		$data = $this->mdl_quotation_request_selected->getQrs($id_qrs);
 		echo $this->mdl_quotation_request_selected->togrid($data['row_data'], $data['row_count']);
 	}
 	//add detail qrs
@@ -228,6 +220,16 @@ class quotation_request_selected extends CI_Controller {
 			echo json_encode(array('success'=>true));
 		}else{
 			echo json_encode(array('msg' => 'Data gagal dikirim'));
+		}
+	}
+
+		function delete_detail($kode)
+	{
+		$result = $this->mdl_quotation_request_selected->delete_detail($kode);
+		if($result){
+			 echo json_encode(array('success' => true));
+	    } else {
+	     echo json_encode(array('msg' => 'Data gagal dikirim'));
 		}
 	}
 	//notif

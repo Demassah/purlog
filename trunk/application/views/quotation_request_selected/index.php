@@ -128,7 +128,7 @@
     actionQrs = function(value, row, index){
       var col='';
           <?php if($this->mdl_auth->CekAkses(array('menu_id'=>15, 'policy'=>'DETAIL'))){ ?>
-          col += '<a href="#" onclick="detail_Qrs(\''+row.id_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';     
+          col += '<a href="#" onclick="detail_Qrs(\''+row.id_qrs+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';     
           <?php }?>
           <?php if($this->mdl_auth->CekAkses(array('menu_id'=>15, 'policy'=>'DETAIL'))){ ?>
           col += '&nbsp;&nbsp; | &nbsp;&nbsp;<a href="#" onclick="Add_Qrs(\''+row.id_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">QRS</a>';     
