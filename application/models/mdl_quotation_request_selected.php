@@ -289,11 +289,11 @@ class mdl_quotation_request_selected extends CI_Model {
 	}
 
 	// detail qrs
-	 function getQrs($id_pr, $plimit=true){
+	 function getQrs($id_qrs, $plimit=true){
 	# get parameter from easy grid
 		$page = isset($_POST['page']) ? intval($_POST['page']) : 1;  
 		$limit = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
-		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'a.id_pr';  
+		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'id_detail_qrs';  
 		$order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
 		$offset = ($page-1)*$limit;
 		
@@ -303,9 +303,9 @@ class mdl_quotation_request_selected extends CI_Model {
 		$this->db->start_cache();
 			$this->db->select('a.id_detail_qrs,a.id_qrs,a.id_pr,a.id_detail_pr,a.kode_barang,a.qty,b.nama_barang');
 			$this->db->from('tr_qrs_detail a');
-			$this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang');
+			$this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang','left');
 
-			$this->db->where('a.id_pr',$id_pr);
+			$this->db->where('a.id_qrs',$id_qrs);
 
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
@@ -323,15 +323,15 @@ class mdl_quotation_request_selected extends CI_Model {
 	}
 
 	//select detail
-	function select_detail_qrs($id_pr)
+	function select_detail_qrs($id_qrs)
 	{
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('a.id_detail_pr,a.id_pr,a.id_ro,a.kode_barang,a.qty,a.pick,a.sisa,c.nama_barang,b.id_qrs');
+			$this->db->select('a.id_detail_pr,a.id_detail_qrs,a.id_pr,a.id_ro,a.kode_barang,a.qty,a.pick,a.sisa,b.id_qrs,c.nama_barang');
 			$this->db->from('v_qrs_detail a');
 			$this->db->join('tr_qrs b', 'b.id_pr = a.id_pr', 'left');
 			$this->db->join('ref_barang c', 'c.kode_barang = a.kode_barang');
-			$this->db->where('a.id_pr',$id_pr);
+			$this->db->where('b.id_qrs',$id_qrs);
 			$this->db->where('a.sisa !=', 0);
 			return $this->db->get()->result();
 		$this->db->stop_cache();
@@ -344,7 +344,13 @@ class mdl_quotation_request_selected extends CI_Model {
 		 $jumlah = count($data['id_detail_pr']);
 			for($i=0; $i < $jumlah; $i++) 
 			{
-			    $id_detail_pros=$data['id_detail_pr'][$i];
+				 $id_pr=$data['id_pr'][$i];
+				if($this->db->where('id_qrs', $data['id_qrs'][$i])){
+						$this->db->where('kode_barang', $data['kode_barang'][$i]);
+						$this->db->set('qty',$data['pick'][$i]);
+					 $result = $this->db->update('tr_qrs_detail');
+				}elseif($this->db->where('id_qrs !=', $data['id_qrs'][$i])){
+			    $id_detail_pr=$data['id_detail_pr'][$i];
 			    $this->db->set('id_pr',$data['id_pr'][$i]);
 			    $this->db->set('kode_barang',$data['kode_barang'][$i]);
 			    $this->db->set('qty',$data['pick'][$i]);
@@ -352,9 +358,7 @@ class mdl_quotation_request_selected extends CI_Model {
 			    $this->db->set('id_detail_pr',$data['id_detail_pr'][$i]);
 			    $this->db->set('status',1);
 			    $result = $this->db->insert('tr_qrs_detail');
-
-			    // $this->db->where('id_detail_pros', $id_detail_pros);
-			    // $result = $this->db->update('tr_pros_detail',array('id_sro' =>$data['id_sro']));
+			    }
 			}		
 		//return
 		if($result) {
@@ -366,7 +370,7 @@ class mdl_quotation_request_selected extends CI_Model {
 
 	function delete_detail($kode)
 	{
-		$this->db->where('id_detail_pr', $kode);
+		$this->db->where('id_detail_qrs', $kode);
 		$result = $this->db->delete('tr_qrs_detail');
 
 		if($result) {

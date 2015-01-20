@@ -11,7 +11,8 @@
   <thead>
     <tr>
       
-      <th field="id_qrs" sortable="true" width="80" >ID PR</th>
+      <th field="id_qrs" sortable="true" width="80" >ID QRS</th>
+      <th field="id_detail_qrs" sortable="true" width="120" >ID DETAIL QRS</th>
       <th field="id_pr" sortable="true" width="60">ID RO</th>     
       <th field="id_detail_pr" sortable="true" width="130">ID detail PR</th>
       <th field="kode_barang" sortable="true" width="120">Kode Barang</th>
@@ -23,17 +24,18 @@
 </table>
 table><script >
   var url;
-  var id_pr = '<?=$id_pr?>';
+  var id_qrs = '<?=$id_qrs?>';
+
   $(document).ready(function(){
 
-  newData = function (){
+  newData = function (val){
       $('#dialog').dialog({
         title: 'Tambah Detail QRS/PR',
         width: 780,
         height: 330,
         closed: true,
         cache: false,
-        href: base_url+'quotation_request_selected/add_detail/'+ id_pr,
+        href: base_url+'quotation_request_selected/add_detail/'+ id_qrs,
         modal: true
       });
        
@@ -96,14 +98,19 @@ table><script >
   actionQrs = function(value, row, index){
       var col='';
           <?php if($this->mdl_auth->CekAkses(array('menu_id'=>15, 'policy'=>'DELETE'))){ ?>
-          col += '<a href="#" onclick="Del_detail(\''+row.id_detail_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';     
+          col += '<a href="#" onclick="Del_detail(\''+row.id_detail_qrs+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';     
           <?php }?>
           
       return col;
     }
-    
+  back = function (){
+      $('#konten').panel({
+        href:base_url+'quotation_request_selected/index'
+      });
+    }
+
     $(function(){ // init
-      $('#detail_dg_qrs').datagrid({url:"quotation_request_selected/grid_detail/"+id_pr});
+      $('#detail_dg_qrs').datagrid({url:"quotation_request_selected/grid_detail/"+id_qrs});
   });
     //tombol bawah
  $(function(){
@@ -116,7 +123,14 @@ table><script >
             handler:function(){
               newData();
             }
-          }            
+          },
+           {
+            iconCls:'icon-undo',
+            text:'Kembali',
+            handler:function(){
+              back();
+            }
+          }               
         ]
       });     
     });
