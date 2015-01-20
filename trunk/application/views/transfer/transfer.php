@@ -6,7 +6,7 @@
 			$('#dialog').dialog({
 				title: 'Tambah Transfer',
 				width: 475,
-				height: 325,
+				height: 300,
 				closed: true,
 				cache: false,
 				href: base_url+'transfer/add',
@@ -32,7 +32,7 @@
 					return $(this).form('validate');
 				},
 				success: function(result){
-					alert(result);
+					//alert(result);
 					var result = eval('('+result+')');
 					if (result.success){
 						$('#dialog').dialog('close');		// close the dialog
@@ -196,7 +196,7 @@
 			<th field="id_transfer" sortable="true" width="80">ID Transfer</th>			
 			<th field="type_transfer" sortable="true" width="130">Tipe Transfer</th>
 			<th field="note" sortable="true" width="250">Note</th>
-			<th field="date_create" sortable="true" width="120">Date Create</th>
+			<th field="date_create" sortable="true" width="130">Date Create</th>
 			<th field="full_name" sortable="true" width="120">Requestor</th>
 			<th field="action" align="center" formatter="actionbutton" width="180">Aksi</th>
 		</tr>

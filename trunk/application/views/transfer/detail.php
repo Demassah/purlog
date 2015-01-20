@@ -56,6 +56,11 @@
       return col;
     }
 
+    //Cetak
+    print = function(val){    
+        window.open(base_url + 'transfer/laporan_pdf/'+id_transfer);      
+    }
+
 		$(function(){ // init
 			$('#dtgrd').datagrid({url:"transfer/grid_detail/<?=$id_transfer?>"});
 		});	
@@ -79,6 +84,13 @@
             text:'Kembali',
             handler:function(){
               back();
+            }
+          },
+           {
+            iconCls:'icon-pdf',
+            text:'Print',
+            handler:function(){
+              print();
             }
           }
         ]
@@ -108,10 +120,10 @@
 			<th field="kode_barang" sortable="true" width="120">Kode Barang</th>
 			<th field="nama_barang" sortable="true" width="150">Nama Barang</th>		
 			<th field="qty_stock" sortable="true" width="100">Qty Stock</th>		
-			<th data-options="field:'qty',width:'100',styler:cellStyler" editor="text">Qty Transfer</th> 
+			<th data-options="field:'qty',width:'100'," editor="text">Qty Transfer</th> 
 			<th field="price" sortable="true" width="100">Price</th>		
 			<th field="lokasi_stock" sortable="true" width="100">Lokasi Stock</th>
-			<th data-options="field:'id_lokasi',width:'100',styler:cellStyler" editor="text">Lokasi Transfer</th> 
+			<th data-options="field:'id_lokasi',width:'100'," editor="text">Lokasi Transfer</th> 
 			<th field="action" align="center" formatter="actiondetail" width="80">Aksi</th>
 		</tr>
 	</thead>

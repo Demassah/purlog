@@ -52,16 +52,16 @@ else {
                 <td style="text-align: right;   width: 10%"><?php //echo date('d/m/Y'); ?></td>
             </tr>
         </table>
-    </page_header>
+    </page_header>-->
     <page_footer>
         <table style="width: 100%; border-top: solid 1px black;">
             <tr>
-                <td style="text-align: left;    width: 50%">STMIK BANDUNG </td>
+                <td style="text-align: left;    width: 50%">PT. Cipaganti Citra Graha </td>
                 <td style="text-align: right;    width: 50%">page [[page_cu]]/[[page_nb]]</td>
             </tr>
         </table>
     </page_footer>-->
-	<!--<table style="width:100%;">-->
+	<!--<table style="width:100%;">
 <p align="center"><b>Picking List</b></p>
 <br><br>
 	<!--<p align="center"><?php  echo $data_pdf[0]->nama_tahunajaran;?></p>-->
@@ -108,12 +108,12 @@ else {
 			foreach ($data_pdf as $data):
 		?>
 	<tr>
-	<td colspan="" rowspan="" headers=""><? echo $data->id_ro; ?></td>
-	<td colspan="" rowspan="" headers=""><? echo $data->id_stock; ?></td>
-	<td colspan="" rowspan="" headers=""><? echo $data->kode_barang; ?></td>
-	<td colspan="" rowspan="" headers=""><? echo $data->nama_barang; ?></td>
-	<td colspan="" rowspan="" headers=""><? echo $data->qty; ?></td>
-	<td colspan="" rowspan="" headers=""><? echo $data->id_lokasi; ?></td>
+	<td colspan="" align="center" rowspan="" headers=""><? echo $data->id_ro; ?></td>
+	<td colspan="" align="center" rowspan="" headers=""><? echo $data->id_stock; ?></td>
+	<td colspan="" align="center" rowspan="" headers=""><? echo $data->kode_barang; ?></td>
+	<td colspan="" align="center" rowspan="" headers=""><? echo $data->nama_barang; ?></td>
+	<td colspan="" align="center" rowspan="" headers=""><? echo $data->qty; ?></td>
+	<td colspan="" align="center" rowspan="" headers=""><? echo $data->id_lokasi; ?></td>
 	</tr>
 		<? 
 			$no++;

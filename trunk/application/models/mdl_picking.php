@@ -107,11 +107,11 @@ class mdl_picking extends CI_Model {
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('a.id_detail_ro, a.id_ro, a.kode_barang, b.nama_barang, a.sisa');
+			$this->db->select('a.id_detail_ro, a.id_ro, a.kode_barang, b.nama_barang, a.sisa, c.date_create');
 			$this->db->from('v_pros_detail a');
-			//$this->db->join('tr_ro b', 'b.id_ro = a.id_ro');
 			//$this->db->join('tr_ro_detail c', 'c.id_detail_ro = a.id_detail_ro');
 			$this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang');
+			$this->db->join('tr_ro c', 'c.id_ro = a.id_ro');
 
 			$this->db->where('a.id_ro', $id_ro);
 			$this->db->where('a.sisa !=', '0');

@@ -38,7 +38,7 @@ class transfer extends CI_Controller {
 		$data['id_transfer'] = '';
 	    $data['type_transfer'] = '';
 	    $data['note'] = '';
-	    $data['date_create'] = '';
+	    $data['date_create'] =  date('Y-m-d H:i:s');
 	    $data['user_id'] = '';
 	    $data['status'] = '1';
 
@@ -229,7 +229,36 @@ class transfer extends CI_Controller {
 		} else {
 			echo json_encode(array('msg'=>'Data gagal di hapus'));
 		}
-	} 
+	}
+
+	function laporan_pdf($id_transfer) {
+            $this->load->library('HTML2PDF');
+            $html2pdf = new HTML2PDF('L', 'A4', 'fr');
+            $html2pdf->setDefaultFont('Arial');
+            
+            //filter
+            //get filter
+            //$fil['kd_prodi'] = $kd_prodi;
+            
+            //$data['nama'] = '';
+            //$data['namaUniv'] = 'STMIK BANDUNG';
+            //$data['alamatUniv'] = 'Jl.Phh.Mustofa No. 39. Grand Surapati Core (SUCORE) Blok M No.19, Telp.022 - 7207777';
+            //$data['kotaUniv'] = 'Bandung, Jawa Barat';
+            
+            // ambil data dari tabel
+            $data['data_pdf'] = $this->mdl_transfer->get_pdf($id_transfer);
+            
+            /* if (count($da['row'])==0){
+            echo "Data Tidak Tersedia";
+            return;
+            } */
+            
+            $konten = $this->load->view('transfer/transfer_laporan', $data, true);
+            
+            $html2pdf->writeHTML($konten, false);
+            
+            $html2pdf->Output("transfer_".date('d-m-y')."_".$id_transfer.".pdf");
+        }
 
 
 }
