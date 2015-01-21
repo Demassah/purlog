@@ -33,28 +33,28 @@ date_default_timezone_set('Asia/Jakarta');
 			base_url = '<?=base_url();?>';
 			$(document).ready(function(){
 				$('#konten').panel({
-								href:base_url+'main/dashboard'
+					href:base_url+'main/dashboard'
 				});			 
 				check_login = function(){
 					$.ajax({
 						url: base_url+"auth/cekstatuslogin",
 						data: { },
 						success : function(data, textStatus){
-									//alert(data);
-									if (data=="0" || data==""){
-													window.location.replace(base_url+"auth/login");
-									}
+							//alert(data);
+							if (data=="0" || data==""){
+								window.location.replace(base_url+"auth/login");
+							}
 						},
 						complete: function(xmlHttp) {
-									// xmlHttp is a XMLHttpRquest object
-									//if (xmlHttp.status==200) window.location.replace(base_url+"security/login");
+							// xmlHttp is a XMLHttpRquest object
+							//if (xmlHttp.status==200) window.location.replace(base_url+"security/login");
 						}
 					});
 				}					 
 				// cek login
 				jQuery(document).ajaxStart(function(){
-								check_login();
-				});					 
+					check_login();
+				});
 				// load menu kiri
 				$('#leftMenu').tree({
 					checkbox: false,
@@ -67,11 +67,11 @@ date_default_timezone_set('Asia/Jakarta');
 								//addTab(node.text,node.attributes.url);
 								//alert('you click '+node.attributes.url);
 								$('#konten').panel({
-										href:base_url+node.attributes.url
+									href:base_url+node.attributes.url
 								});
 							}, 100);
 						};
-					}	 
+					}
 				});
 				//var node1 = $('#leftMenu').tree('find',1);
 				// var node2 = $('#leftMenu').tree('find',16);
@@ -215,6 +215,9 @@ date_default_timezone_set('Asia/Jakarta');
 						<h1>Sistem Informasi Purchasing Logistic</h1>
 					</div>			 
 					<div class="rpanel">
+						<div class="left" style="margin-top: 10px;">
+							<h2>Notification</h2>
+						</div>
 						<div class="left" style="margin-top: 10px;">
 							<h4>Selamat Datang :</h4>
 							<!-- <p><a href="#">Administrator</a></p> -->
