@@ -4,5 +4,5 @@
 
 - transfer, pengecekan qty ?
 
-- pengecekan pros done ?
+- pengecekan pros done?
 
