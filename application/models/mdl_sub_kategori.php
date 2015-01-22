@@ -10,17 +10,17 @@ class mdl_sub_kategori extends CI_Model {
 		# get parameter from easy grid
 		$page = isset($_POST['page']) ? intval($_POST['page']) : 1;  
 		$limit = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
-		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'nama_sub_kategori';  
+		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'a.nama_sub_kategori';  
 		$order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
 		$offset = ($page-1)*$limit;
 		
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('*, a.status, b.nama_kategori');
+			$this->db->select('a.id_sub_kategori, a.nama_sub_kategori, a.id_kategori, a.status, b.nama_kategori, c.status_sub_kategori');
 			$this->db->from('ref_sub_kategori a');
 			$this->db->join('ref_kategori b', 'b.id_kategori = a.id_kategori');
-			//$this->db->where('a.status','1');
+			$this->db->join('v_status_sub_kategori c', 'c.id_sub_kategori = a.id_sub_kategori');
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
 		

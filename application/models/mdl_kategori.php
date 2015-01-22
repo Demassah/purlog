@@ -10,16 +10,16 @@ class mdl_kategori extends CI_Model {
 		# get parameter from easy grid
 		$page = isset($_POST['page']) ? intval($_POST['page']) : 1;  
 		$limit = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
-		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'nama_kategori';  
+		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'a.nama_kategori';  
 		$order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
 		$offset = ($page-1)*$limit;
 		
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('*');
-			$this->db->from('ref_kategori');
-			$this->db->where('status','1');
+			$this->db->select('a.id_kategori, a.nama_kategori, b.status_kategori');
+			$this->db->from('ref_kategori a');			
+			$this->db->join('v_status_kategori b', 'b.id_kategori = a.id_kategori');
 
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();

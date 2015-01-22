@@ -129,7 +129,7 @@
 		
 	});
 </script>
-<table id="dg" title="Kelola Data Kategori &nbsp;[ Ket Status: 1 = Aktif | 0 = Tidak Aktif ]" data-options="
+<table id="dg" title="Kelola Data Kategori " data-options="
 			rownumbers:true,
 			singleSelect:true,
 			autoRowHeight:false,
@@ -141,7 +141,7 @@
 		<tr>
 			<th field="id_kategori" sortable="true" width="150" hidden="true">ID</th>
 			<th field="nama_kategori" sortable="true" width="350">Kategori</th>
-			<th field="status" sortable="true" width="120">Status</th>
+			<th field="status_kategori" sortable="true" width="120">Status</th>
 			<th field="action" align="center" formatter="actionbutton" width="100">Aksi</th>
 		</tr>
 	</thead>
