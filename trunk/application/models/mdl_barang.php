@@ -10,18 +10,19 @@ class mdl_barang extends CI_Model {
 		# get parameter from easy grid
 		$page = isset($_POST['page']) ? intval($_POST['page']) : 1;  
 		$limit = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
-		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'nama_barang';  
+		$sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'a.nama_barang';  
 		$order = isset($_POST['order']) ? strval($_POST['order']) : 'asc';  
 		$offset = ($page-1)*$limit;
 		
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('*, a.status, b.nama_kategori, c.nama_sub_kategori, d.nama_satuan');
+			$this->db->select('*, a.status, b.nama_kategori, c.nama_sub_kategori, d.nama_satuan, e.status_barang');
 			$this->db->from('ref_barang a');
 			$this->db->join('ref_kategori b', 'b.id_kategori = a.id_kategori');
 			$this->db->join('ref_sub_kategori c', 'c.id_sub_kategori = a.id_sub_kategori');
 			$this->db->join('ref_satuan d', 'd.id_satuan = a.id_satuan');
+			$this->db->join('v_status_barang e', 'e.kode_barang = a.kode_barang');
 			//$this->db->where('a.status','1');
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();

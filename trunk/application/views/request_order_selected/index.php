@@ -133,13 +133,14 @@
 	<thead>
 		<tr>
 			<th field="id_ro" sortable="true" width="80" >ID RO</th>
-			<th field="full_name" sortable="true" width="130">Requestor</th>
-			<th field="departement_name" sortable="true" width="130">Departement</th>
-			<th field="purpose" sortable="true" width="120">Purpose</th>
+			<th field="full_name" sortable="true" width="120">Requestor</th>
+			<th field="departement_name" sortable="true" width="100">Departement</th>
+			<th field="purpose" sortable="true" width="100">Purpose</th>
 			<th field="cat_req" sortable="true" width="120">Category Request</th>
-			<th field="ext_doc_no" sortable="true" width="120">External Doc No</th>
+			<th field="ext_doc_no" sortable="true" width="100">External Doc No</th>
 			<th field="ETD" sortable="true" width="100">ETD</th>
 			<th field="date_create" sortable="true" width="130">Date Create</th>
+			<th field="date_approve" sortable="true" width="130">Date Approve</th>
 			<th field="action" align="center" formatter="actionbutton" width="150">Aksi</th>
 		</tr>
 	</thead>

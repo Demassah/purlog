@@ -94,10 +94,10 @@
 		actionbutton = function(value, row, index){
 			var col;
 			<?if($this->mdl_auth->CekAkses(array('menu_id'=>44, 'policy'=>'EDIT'))){?>
-					col = '<a href="#" onclick="editData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Edit</a>';
+					col = '<a href="#" onclick="editData(\''+row.id_satuan+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Edit</a>';
 			<?}?>
 			<?if($this->mdl_auth->CekAkses(array('menu_id'=>44, 'policy'=>'DELETE'))){?>
-					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="deleteData(\''+row.id+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
+					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="deleteData(\''+row.id_satuan+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
 			<?}?>
 			return col;
 		}
@@ -128,7 +128,7 @@
 		
 	});
 </script>
-<table id="dg" title="Kelola Data Satuan &nbsp;[ Ket Status: 1 = Aktif | 0 = Tidak Aktif ]" data-options="
+<table id="dg" title="Kelola Data Satuan" data-options="
 			rownumbers:true,
 			singleSelect:true,
 			autoRowHeight:false,
@@ -140,7 +140,7 @@
 		<tr>
 			<th field="id_satuan" sortable="true" width="150" hidden="true">ID</th>
 			<th field="nama_satuan" sortable="true" width="350">Satuan</th>
-			<th field="status" sortable="true" width="120">Status</th>
+			<th field="status_satuan" sortable="true" width="120">Status</th>
 			<th field="action" align="center" formatter="actionbutton" width="100">Aksi</th>
 		</tr>
 	</thead>

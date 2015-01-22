@@ -88,7 +88,7 @@ class mdl_request_order_selected extends CI_Model {
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('*, a.kode_barang, a.id_ro, c.full_name, d.departement_name, e.nama_barang');
+			$this->db->select('*, a.kode_barang, a.id_ro, c.full_name, d.departement_name, e.nama_barang, b.date_approve');
 			$this->db->from('tr_ro_detail a');
 			$this->db->join('tr_ro b', 'b.id_ro = a.id_ro');
 			$this->db->join('sys_user c', 'c.user_id = a.user_id');
