@@ -153,7 +153,7 @@ class quotation_request_selected extends CI_Controller {
 			$data["pesan_error"] .= trim(validation_errors(' ',' '))==''?'':validation_errors(' ',' ');
 		}else{
 			if($aksi=="add"){ // add
-			//print_r($data);
+			// /print_r($data);
 			$result = $this->mdl_quotation_request_selected->Insert_Qrs($data);
 			}else { // edit
 				$result=$this->mdl_quotation_request_selected->cancel($data);
@@ -182,6 +182,7 @@ class quotation_request_selected extends CI_Controller {
 	function add_detail($id_pr)
 	{
 		$data['id_pr']= $id_pr;
+		$data['kode_barang']='';
 		$data['list'] = $this->mdl_quotation_request_selected->select_detail_qrs($id_pr);
 		$this->load->view('quotation_request_selected/form_add_detail_qrs',$data);
 	}
@@ -194,13 +195,12 @@ class quotation_request_selected extends CI_Controller {
 		# get post data
 		foreach($_POST as $key => $value){
 			$data[$key] = $value;
-			// echo print_r($value);
 		}
-
 		
 		# rules validasi form
-		$this->form_validation->set_rules("id_detail_pr[]", 'ID user', 'trim|required|xss_clean');
-		// $this->form_validation->set_rules("pick", 'ID PR', 'trim|required|xss_clean');
+		$this->form_validation->set_rules("checkbox[]", 'ID user', 'trim|required|xss_clean');
+		// $this->form_validation->set_rules("pick[]", 'Pick', 'trim|required|xss_clean');
+		//$this->form_validation->set_rules("kode_barang[]", 'Kode barang', 'trim|required|xss_clean');
 		# message rules
 		$this->form_validation->set_message('required', 'Field %s harus diisi.');
 
@@ -209,7 +209,7 @@ class quotation_request_selected extends CI_Controller {
 			$data["pesan_error"] .= trim(validation_errors(' ',' '))==''?'':validation_errors(' ',' ');
 		}else{
 			if($aksi=="add"){ // add
-			//print_r($data);
+			// /print_r($data);
 			$result = $this->mdl_quotation_request_selected->Insert_Detail_Qrs($data);
 			}else { // edit
 				$result=$this->mdl_quotation_request_selected->cancel($data);

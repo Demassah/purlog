@@ -241,21 +241,21 @@ class mdl_quotation_request_selected extends CI_Model {
 	//insert Qrs
 	function select_pr($data)
 	{
-		//$this->flush_cache();
-		//$this->start_cache();
+		$this->flush_cache();
+		$this->start_cache();
 			$this->db->select('id_pr,id_ro,status');
 			$this->db->where('id_pr', $data['id_pr']);
 			$this->db->where('status', 2);
 			$this->db->order_by('id_pr', 'asc');
 			$query = $this->db->get('tr_pr');
 			return $query->row();
-		// /$this->db->stop_cache();
+		$this->db->stop_cache();
 	}
 
 	function Insert_Qrs($data)
 	{
-		//$this->db->flush_cache();
-		//$this->db->start_cache();
+		$this->db->flush_cache();
+		$this->db->start_cache();
 			$pr = $this->mdl_quotation_request_selected->select_pr($data);
 
 			$this->db->set('id_pr',$pr->id_pr);
@@ -265,7 +265,7 @@ class mdl_quotation_request_selected extends CI_Model {
 			$this->db->set('status',$data['status']);
 
 			$result = $this->db->insert('tr_qrs');
-		//$this->db->stop_cache();
+		$this->db->stop_cache();
 
 		if($result){
 			return TRUE;
@@ -333,39 +333,43 @@ class mdl_quotation_request_selected extends CI_Model {
 			$this->db->join('ref_barang c', 'c.kode_barang = a.kode_barang');
 			$this->db->where('b.id_qrs',$id_qrs);
 			$this->db->where('a.sisa !=', 0);
-			return $this->db->get()->result();
+			return $this->db->get()->result_array();
 		$this->db->stop_cache();
+	}
+	function cek_detail($data)
+	{
+		$this->db->select('id_detail_pr');
+		$this->db->where('id_detail_pr', $data);
+		$this->db->from('tr_qrs_detail');
+		$this->db->get()->row();
 	}
 
 	function Insert_Detail_Qrs($data)
 	{
-		$this->db->flush_cache();
-	
-		 $jumlah = count($data['id_detail_pr']);
-			for($i=0; $i < $jumlah; $i++) 
-			{
-				 $id_pr=$data['id_pr'][$i];
-				if($this->db->where('id_qrs', $data['id_qrs'][$i])){
-						$this->db->where('kode_barang', $data['kode_barang'][$i]);
-						$this->db->set('qty',$data['pick'][$i]);
-					 $result = $this->db->update('tr_qrs_detail');
-				}elseif($this->db->where('id_qrs !=', $data['id_qrs'][$i])){
-			    $id_detail_pr=$data['id_detail_pr'][$i];
-			    $this->db->set('id_pr',$data['id_pr'][$i]);
-			    $this->db->set('kode_barang',$data['kode_barang'][$i]);
-			    $this->db->set('qty',$data['pick'][$i]);
-			    $this->db->set('id_qrs',$data['id_qrs'][$i]);
-			    $this->db->set('id_detail_pr',$data['id_detail_pr'][$i]);
-			    $this->db->set('status',1);
-			    $result = $this->db->insert('tr_qrs_detail');
-			    }
-			}		
-		//return
-		if($result) {
-			return TRUE;
-		}else {
-			return FALSE;
-		}
+		//$this->db->flush_cache();
+		// 	for($i=0; $i < $jumlah; $i++) 
+		// 	{
+		// 		// if($this->db->where('id_qrs', $data['id_qrs'][$i])){
+		// 		// 		$this->db->where('kode_barang', $data['kode_barang'][$i]);
+		// 		// 		$this->db->set('qty',$data['pick'][$i]);
+		// 		// 	 $result = $this->db->update('tr_qrs_detail');
+		// 		// }else{
+		// 	    $id_detail_pr=$data['id_detail_pr'][$i];
+		// 	    $this->db->set('id_pr',$data['id_pr'][$i]);
+		// 	    $this->db->set('kode_barang',$data['kode_barang'][$i]);
+		// 	    $this->db->set('qty',$data['pick'][$i]);
+		// 	    $this->db->set('id_qrs',$data['id_qrs'][$i]);
+		// 	    $this->db->set('id_detail_pr',$data['id_detail_pr'][$i]);
+		// 	    $this->db->set('status',1);
+		// 	    $result = $this->db->insert('tr_qrs_detail');
+		// 	  //}
+		// 	}		
+		// //return
+		// if($result) {
+		// 	return TRUE;
+		// }else {
+		// 	return FALSE;
+		//}
 	}
 
 	function delete_detail($kode)
