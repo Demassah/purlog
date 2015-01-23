@@ -411,7 +411,7 @@ CREATE TABLE `tr_qrs` (
 
 /*Data for the table `tr_qrs` */
 
-insert  into `tr_qrs`(`id_qrs`,`id_pr`,`id_ro`,`date_create`,`user_id`,`status`) values (1,1,1,'2015-01-20 14:20:45',1,1);
+insert  into `tr_qrs`(`id_qrs`,`id_pr`,`id_ro`,`date_create`,`user_id`,`status`) values (1,1,1,'2015-01-20 17:20:37',14,1);
 
 /*Table structure for table `tr_qrs_detail` */
 
@@ -426,11 +426,11 @@ CREATE TABLE `tr_qrs_detail` (
   `qty` int(11) DEFAULT NULL,
   `status` smallint(1) DEFAULT NULL,
   PRIMARY KEY (`id_detail_qrs`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `tr_qrs_detail` */
 
-insert  into `tr_qrs_detail`(`id_detail_qrs`,`id_qrs`,`id_pr`,`id_detail_pr`,`kode_barang`,`qty`,`status`) values (1,1,1,1,'100',10,1),(2,1,1,2,'201',9,1),(3,1,1,3,'203',4,1);
+insert  into `tr_qrs_detail`(`id_detail_qrs`,`id_qrs`,`id_pr`,`id_detail_pr`,`kode_barang`,`qty`,`status`) values (3,1,1,1,'100',10,1),(4,1,1,2,'201',10,1);
 
 /*Table structure for table `tr_receive` */
 
@@ -525,11 +525,11 @@ CREATE TABLE `tr_ro` (
   `status` int(1) DEFAULT NULL COMMENT '1: RO, 2: ROA, 3:ROL, 4: ROS, 5: Picking, 6: Shipment, 7: DO, 9: Reject',
   `status_order` smallint(1) DEFAULT '1' COMMENT '1: ORDER, 2: PURCHASE, 3: RETURN',
   PRIMARY KEY (`id_ro`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `tr_ro` */
 
-insert  into `tr_ro`(`id_ro`,`user_id`,`purpose`,`cat_req`,`ext_doc_no`,`ETD`,`date_create`,`date_approve`,`date_reject`,`status`,`status_order`) values (1,1,'REQUEST','ASSET','SPK/123','2015-01-20','2015-01-20 09:22:32','2015-01-20 09:26:28','0000-00-00 00:00:00',6,1),(2,1,'REQUEST','CETAKAN','112233','2015-01-20','2015-01-20 10:54:09','2015-01-20 10:56:16','0000-00-00 00:00:00',6,1),(3,1,'STOCK','SPAREPART','332211','2015-01-20','2015-01-20 10:54:49','2015-01-20 10:56:20','0000-00-00 00:00:00',6,1);
+insert  into `tr_ro`(`id_ro`,`user_id`,`purpose`,`cat_req`,`ext_doc_no`,`ETD`,`date_create`,`date_approve`,`date_reject`,`status`,`status_order`) values (1,1,'REQUEST','ASSET','SPK/123','2015-01-20','2015-01-20 09:22:32','2015-01-20 09:26:28','0000-00-00 00:00:00',6,1),(2,1,'REQUEST','CETAKAN','112233','2015-01-20','2015-01-20 10:54:09','2015-01-20 10:56:16','0000-00-00 00:00:00',6,1),(3,1,'STOCK','SPAREPART','332211','2015-01-20','2015-01-20 10:54:49','2015-01-20 10:56:20','0000-00-00 00:00:00',6,1),(4,1,'REQUEST','ASSET','554433','2015-01-23','2015-01-23 13:53:19','2015-01-23 14:54:11','0000-00-00 00:00:00',4,1);
 
 /*Table structure for table `tr_ro_detail` */
 
@@ -549,11 +549,11 @@ CREATE TABLE `tr_ro_detail` (
   `status_delete` int(1) NOT NULL COMMENT '1. deleted',
   `id_sro` int(6) NOT NULL,
   PRIMARY KEY (`id_detail_ro`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tr_ro_detail` */
 
-insert  into `tr_ro_detail`(`id_detail_ro`,`id_ro`,`ext_doc_no`,`kode_barang`,`qty`,`barang_bekas`,`user_id`,`date_create`,`note`,`status`,`status_delete`,`id_sro`) values (1,1,'SPK/123','100',20,2,1,'2015-01-20 09:22:32','adi',1,0,0),(2,1,'SPK/123','201',10,1,1,'2015-01-20 09:22:32','ida',1,0,0),(3,1,'SPK/123','203',5,1,1,'2015-01-20 09:22:32','MOuse logitech',1,0,0),(4,2,'112233','301',5,1,1,'2015-01-20 10:54:09','tes',1,0,0),(5,3,'332211','302',3,1,1,'2015-01-20 10:54:49','-',1,0,0);
+insert  into `tr_ro_detail`(`id_detail_ro`,`id_ro`,`ext_doc_no`,`kode_barang`,`qty`,`barang_bekas`,`user_id`,`date_create`,`note`,`status`,`status_delete`,`id_sro`) values (1,1,'SPK/123','100',20,2,1,'2015-01-20 09:22:32','adi',1,0,0),(2,1,'SPK/123','201',10,1,1,'2015-01-20 09:22:32','ida',1,0,0),(3,1,'SPK/123','203',5,1,1,'2015-01-20 09:22:32','MOuse logitech',1,0,0),(4,2,'112233','301',5,1,1,'2015-01-20 10:54:09','tes',1,0,0),(5,3,'332211','302',3,1,1,'2015-01-20 10:54:49','-',1,0,0),(6,4,'554433','301',1,1,1,'2015-01-23 13:53:19','tes',1,0,0);
 
 /*Table structure for table `tr_sro` */
 
@@ -593,7 +593,7 @@ CREATE TABLE `tr_stock` (
 
 /*Data for the table `tr_stock` */
 
-insert  into `tr_stock`(`id_stock`,`id_in`,`id_detail_in`,`kode_barang`,`qty`,`price`,`id_lokasi`,`date_create`,`status`,`type_in`) values (1,NULL,NULL,'301',2,1000,'Workshop','2015-01-20 10:54:09',1,NULL),(2,NULL,NULL,'302',2,500,'Workshop','2015-01-20 10:54:09',1,NULL);
+insert  into `tr_stock`(`id_stock`,`id_in`,`id_detail_in`,`kode_barang`,`qty`,`price`,`id_lokasi`,`date_create`,`status`,`type_in`) values (1,NULL,NULL,'301',2,1000,'Workshop','2015-01-20 10:54:09',1,NULL),(2,NULL,NULL,'302',0,500,'Heavy Equipment','2015-01-20 10:54:09',1,NULL);
 
 /*Table structure for table `tr_transfer` */
 
@@ -627,11 +627,11 @@ CREATE TABLE `tr_transfer_detail` (
   `id_lokasi` varchar(21) DEFAULT NULL,
   `status` smallint(1) DEFAULT NULL,
   PRIMARY KEY (`id_detail_transfer`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tr_transfer_detail` */
 
-insert  into `tr_transfer_detail`(`id_detail_transfer`,`id_transfer`,`id_stock`,`kode_barang`,`qty`,`price`,`id_lokasi`,`status`) values (1,1,1,'301',1,1000,'Workshop',1);
+insert  into `tr_transfer_detail`(`id_detail_transfer`,`id_transfer`,`id_stock`,`kode_barang`,`qty`,`price`,`id_lokasi`,`status`) values (7,1,1,'301',1,1000,'Heavy Equipment',1),(8,2,2,'302',NULL,500,NULL,1);
 
 /* Trigger structure for table `tr_do` */
 
@@ -764,7 +764,7 @@ DELIMITER $$
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `after_insert_qr` */$$
 
 /*!50003 CREATE */ /*!50017 DEFINER = 'root'@'%' */ /*!50003 TRIGGER `after_insert_qr` AFTER INSERT ON `tr_qr` FOR EACH ROW BEGIN
-	CALL p_qrs_detail(new.id_pr, new.id_qr);
+	
     END */$$
 
 
@@ -1360,6 +1360,54 @@ DROP TABLE IF EXISTS `v_qrs_detail`;
  `sisa` decimal(33,0) 
 )*/;
 
+/*Table structure for table `v_status_barang` */
+
+DROP TABLE IF EXISTS `v_status_barang`;
+
+/*!50001 DROP VIEW IF EXISTS `v_status_barang` */;
+/*!50001 DROP TABLE IF EXISTS `v_status_barang` */;
+
+/*!50001 CREATE TABLE  `v_status_barang`(
+ `kode_barang` varchar(10) ,
+ `status_barang` varchar(11) 
+)*/;
+
+/*Table structure for table `v_status_kategori` */
+
+DROP TABLE IF EXISTS `v_status_kategori`;
+
+/*!50001 DROP VIEW IF EXISTS `v_status_kategori` */;
+/*!50001 DROP TABLE IF EXISTS `v_status_kategori` */;
+
+/*!50001 CREATE TABLE  `v_status_kategori`(
+ `id_kategori` int(6) ,
+ `status_kategori` varchar(11) 
+)*/;
+
+/*Table structure for table `v_status_satuan` */
+
+DROP TABLE IF EXISTS `v_status_satuan`;
+
+/*!50001 DROP VIEW IF EXISTS `v_status_satuan` */;
+/*!50001 DROP TABLE IF EXISTS `v_status_satuan` */;
+
+/*!50001 CREATE TABLE  `v_status_satuan`(
+ `id_satuan` smallint(6) ,
+ `status_satuan` varchar(11) 
+)*/;
+
+/*Table structure for table `v_status_sub_kategori` */
+
+DROP TABLE IF EXISTS `v_status_sub_kategori`;
+
+/*!50001 DROP VIEW IF EXISTS `v_status_sub_kategori` */;
+/*!50001 DROP TABLE IF EXISTS `v_status_sub_kategori` */;
+
+/*!50001 CREATE TABLE  `v_status_sub_kategori`(
+ `id_sub_kategori` int(6) ,
+ `status_sub_kategori` varchar(11) 
+)*/;
+
 /*View structure for view v_po_detail */
 
 /*!50001 DROP TABLE IF EXISTS `v_po_detail` */;
@@ -1394,6 +1442,34 @@ DROP TABLE IF EXISTS `v_qrs_detail`;
 /*!50001 DROP VIEW IF EXISTS `v_qrs_detail` */;
 
 /*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_qrs_detail` AS (select `a`.`id_detail_pr` AS `id_detail_pr`,`a`.`id_pr` AS `id_pr`,`a`.`id_ro` AS `id_ro`,`a`.`kode_barang` AS `kode_barang`,`a`.`qty` AS `qty`,coalesce(sum(`b`.`qty`),0) AS `pick`,(`a`.`qty` - coalesce(sum(`b`.`qty`),0)) AS `sisa` from ((`tr_pr_detail` `a` left join `tr_pr` `c` on((`a`.`id_pr` = `c`.`id_pr`))) left join `tr_qrs_detail` `b` on((`a`.`id_detail_pr` = `b`.`id_detail_pr`))) where (`c`.`status` = 2) group by `a`.`id_detail_pr`) */;
+
+/*View structure for view v_status_barang */
+
+/*!50001 DROP TABLE IF EXISTS `v_status_barang` */;
+/*!50001 DROP VIEW IF EXISTS `v_status_barang` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_status_barang` AS (select `ref_barang`.`kode_barang` AS `kode_barang`,(case `ref_barang`.`status` when '1' then 'Aktif' else 'Tidak Aktif' end) AS `status_barang` from `ref_barang`) */;
+
+/*View structure for view v_status_kategori */
+
+/*!50001 DROP TABLE IF EXISTS `v_status_kategori` */;
+/*!50001 DROP VIEW IF EXISTS `v_status_kategori` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_status_kategori` AS (select `ref_kategori`.`id_kategori` AS `id_kategori`,(case `ref_kategori`.`status` when '1' then 'Aktif' else 'Tidak Aktif' end) AS `status_kategori` from `ref_kategori`) */;
+
+/*View structure for view v_status_satuan */
+
+/*!50001 DROP TABLE IF EXISTS `v_status_satuan` */;
+/*!50001 DROP VIEW IF EXISTS `v_status_satuan` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_status_satuan` AS (select `ref_satuan`.`id_satuan` AS `id_satuan`,(case `ref_satuan`.`status` when '1' then 'Aktif' else 'Tidak Aktif' end) AS `status_satuan` from `ref_satuan`) */;
+
+/*View structure for view v_status_sub_kategori */
+
+/*!50001 DROP TABLE IF EXISTS `v_status_sub_kategori` */;
+/*!50001 DROP VIEW IF EXISTS `v_status_sub_kategori` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_status_sub_kategori` AS (select `ref_sub_kategori`.`id_sub_kategori` AS `id_sub_kategori`,(case `ref_sub_kategori`.`status` when '1' then 'Aktif' else 'Tidak Aktif' end) AS `status_sub_kategori` from `ref_sub_kategori`) */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

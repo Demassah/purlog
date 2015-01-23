@@ -11,7 +11,7 @@
 			  method: 'POST',
 			  data: {
 						kode 			: $('#kode').val(),
-						id_transfer 	: $('#id_transfer').val(),
+						//id_transfer 	: $('#id_transfer').val(),
 						id_stock 		: $('#id_stock').val(),
 						kode_barang 	: $('#kode_barang').val(),
 						qty 			: $('#qty').val(),
@@ -43,27 +43,12 @@
 	});
 </script>
 
-<input type="hidden" name="kode" id="kode" value="<?=$id_detail_transfer?>">
-<input type="hidden" name="id_transfer" id="id_transfer" 	value="<?=$id_transfer?>">
-<input type="hidden" name="id_stock" 	id="id_stock" 		value="<?=$id_stock?>">
+<input type="hidden" name="kode" id="kode" value="<?=$kode?>">
 <input type="hidden" name="kode_barang" id="kode_barang" 	value="<?=$kode_barang?>">
 <input type="hidden" name="price" 		id="price" 			value="<?=$price?>">
 <input type="hidden" name="status" 		id="status" 		value="<?=$status?>">
 
 <form id="form1" method="post" style="margin:10px">
-	
-	<div class="fitem" >
-		<label style="width:100px">ID Detail Transfer </label>: 
-		<a><?=$id_detail_transfer?></a>
-	</div>
-	<div class="fitem" >
-		<label style="width:100px">ID Transfer </label>: 
-		<a><?=$id_transfer?></a>
-	</div>
-	<div class="fitem" >
-		<label style="width:100px">ID Stock </label>:
-		<a><?=$id_stock?></a>
-	</div>
 	<div class="fitem" >
 		<label style="width:100px">Kode Barang </label>:
 		<a><?=$kode_barang?></a>

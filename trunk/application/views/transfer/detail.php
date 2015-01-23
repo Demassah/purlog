@@ -8,7 +8,7 @@
 			$('#dialog_kosong').dialog({
 				title: 'Alokasi',
 				width: 380,
-				height: 340,
+				height: 300,
 				closed: true,
 				cache: false,
 				href: base_url+'transfer/alokasi/' + val,
@@ -51,7 +51,7 @@
 	actiondetail = function(value, row, index){
       var col='';
       	<?if($this->mdl_auth->CekAkses(array('menu_id'=>43, 'policy'=>'EDIT'))){?>
-          col = '<a href="#" onclick="alokasi(\''+row.id_detail_transfer+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Alocate</a>';
+          col = '<a href="#" onclick="alokasi(\''+row.id_stock+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Transfer</a>';
        	<?}?>
       return col;
     }
@@ -104,7 +104,7 @@
 	});
 </script>
 
-<table id="dtgrd" title="Detail Delivered" data-options="
+<table id="dtgrd" title="Detail Transfer" data-options="
 			rownumbers:true,
 			singleSelect:false,
 			pagination:true,
@@ -114,12 +114,12 @@
 		">
 	<thead>
 		<tr>
-			<th field="id_detail_transfer" sortable="true" width="100">ID Detail Transfer</th>
+			<th field="id_detail_transfer" sortable="true" width="110">ID Detail Transfer</th>
 			<th field="id_transfer" sortable="true" width="80">ID Transfer</th>
 			<th field="id_stock" sortable="true" width="80">ID Stock</th>
 			<th field="kode_barang" sortable="true" width="120">Kode Barang</th>
 			<th field="nama_barang" sortable="true" width="150">Nama Barang</th>		
-			<th field="qty_stock" sortable="true" width="100">Qty Stock</th>		
+			<!-- <th field="qty_stock" sortable="true" width="100">Qty Stock</th>		 -->
 			<th data-options="field:'qty',width:'100'," editor="text">Qty Transfer</th> 
 			<th field="price" sortable="true" width="100">Price</th>		
 			<th field="lokasi_stock" sortable="true" width="100">Lokasi Stock</th>

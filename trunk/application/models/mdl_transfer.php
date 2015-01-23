@@ -113,7 +113,7 @@ class mdl_transfer extends CI_Model {
 
 	function getdata_transfer($dt){
 		$this->db->flush_cache();
-		$this->db->select('a.id_stock, a.kode_barang, a.qty, a.price, a.id_lokasi, a.status, b.nama_barang');
+		$this->db->select('a.id_stock, a.kode_barang, a.price, a.status, b.nama_barang');
 			$this->db->from('tr_stock a');
 			$this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang');
 			$this->db->join('tr_transfer_detail c', 'c.id_stock = a.id_stock', 'left');
@@ -136,17 +136,13 @@ class mdl_transfer extends CI_Model {
 			$out .= '  <td bgcolor="'.$color.'">'.$i;
 			$out .= '     <input type="hidden" name="data['.$i.'][id_stock]" value="'.$r->id_stock.'">';
 			$out .= '     <input type="hidden" name="data['.$i.'][kode_barang]" value="'.$r->kode_barang.'">';
-			$out .= '     <input type="hidden" name="data['.$i.'][qty]" value="'.$r->qty.'">';
 			$out .= '     <input type="hidden" name="data['.$i.'][price]" value="'.$r->price.'">';
-			$out .= '     <input type="hidden" name="data['.$i.'][id_lokasi]" value="'.$r->id_lokasi.'">';
 
 			$out .= '  </td>';
 			$out .= '  <td bgcolor="'.$color.'">'.$r->id_stock.'</td>';
 			$out .= '  <td bgcolor="'.$color.'">'.$r->kode_barang.'</td>';
 			$out .= '  <td bgcolor="'.$color.'">'.$r->nama_barang.'</td>';
-			$out .= '  <td bgcolor="'.$color.'">'.$r->qty.'</td>';
 			$out .= '  <td bgcolor="'.$color.'">'.$r->price.'</td>';
-			$out .= '  <td bgcolor="'.$color.'">'.$r->id_lokasi.'</td>';
 			$out .= '  <td bgcolor="'.$color.'" align="center">';
 			$out .= '   <label>
 									<input style="margin-top:2px;" type="checkbox" name="data['.$i.'][chk]" id="checkbox"/>';
@@ -174,9 +170,7 @@ class mdl_transfer extends CI_Model {
 				}
 				$this->db->set('id_stock', $row['id_stock']);
 				$this->db->set('kode_barang', $row['kode_barang']);
-				$this->db->set('qty', $row['qty']);
 				$this->db->set('price', $row['price']);
-				$this->db->set('id_lokasi', $row['id_lokasi']);
 				$this->db->set('status', '1');
 
 				//$this->db->where('id_detail_transfer', $row['id_detail_transfer']);
@@ -194,11 +188,11 @@ class mdl_transfer extends CI_Model {
 	function getdataedit($kode){
 		# create query
 		$this->db->flush_cache();
-		$this->db->select('a.id_detail_transfer, a.id_transfer, a.id_stock, a.kode_barang, a.qty AS qty_stock, a.qty, a.price, a.id_lokasi AS lokasi_stock, a.id_lokasi, a.status, b.nama_barang');
-		$this->db->from('tr_transfer_detail a');
+		$this->db->select('a.id_stock, a.kode_barang, a.qty AS qty_stock, a.qty, a.price, a.id_lokasi AS lokasi_stock, a.id_lokasi, a.status, b.nama_barang');
+		$this->db->from('tr_stock a');
 		$this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang');
 
-		$this->db->where('a.id_detail_transfer', $kode);
+		$this->db->where('a.id_stock', $kode);
 
 		return $this->db->get();
 	}
@@ -218,15 +212,13 @@ class mdl_transfer extends CI_Model {
 
 		# tambah data ke tabel
 		$this->db->flush_cache();
-		$this->db->set('id_transfer', $data['id_transfer']);
-		$this->db->set('id_stock', $data['id_stock']);
 		$this->db->set('kode_barang', $data['kode_barang']);
 		$this->db->set('qty', $data['qty']);
 		$this->db->set('price', $data['price']);
 		$this->db->set('id_lokasi', $data['id_lokasi']);
 		$this->db->set('status', $data['status']);
 		
-		$this->db->where('id_detail_transfer', $data['kode']);
+		$this->db->where('id_stock', $data['kode']);
 		$result = $this->db->update('tr_transfer_detail');
 
 		//return

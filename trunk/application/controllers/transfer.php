@@ -156,21 +156,19 @@ class transfer extends CI_Controller {
             }
         }
 
-        function alokasi($id){
+        function alokasi($kode){
 		// get data
-		$label  = $this->mdl_transfer->getdataedit($id);
-		$detail = $this->mdl_transfer->getDetail($label->row()->id_transfer);
+		$r  = $this->mdl_transfer->getdataedit($kode);
 
 		# hidden input
-		$data['id_detail_transfer'] = $id;
-		$data['id_transfer'] = $label->row()->id_transfer;
-		$data['id_stock'] = $label->row()->id_stock;
-		$data['kode_barang'] = $label->row()->kode_barang;
-		$data['nama_barang'] = $label->row()->nama_barang;
-		$data['qty_stock'] = $label->row()->qty_stock;
-		$data['price'] = $label->row()->price;
-		$data['lokasi_stock'] = $label->row()->lokasi_stock;
-		$data['status'] = $label->row()->status;
+		$data['kode'] = $kode;
+		//$data['id_stock'] = $label->row()->id_stock;
+		$data['kode_barang'] 	= $r->row()->kode_barang;
+		$data['nama_barang'] 	= $r->row()->nama_barang;
+		$data['qty_stock'] 		= $r->row()->qty_stock;
+		$data['price'] 			= $r->row()->price;
+		$data['lokasi_stock'] 	= $r->row()->lokasi_stock;
+		$data['status'] 		= $r->row()->status;
 
 		# data input barang
 		$data['qty'] = '';
