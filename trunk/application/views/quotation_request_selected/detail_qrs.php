@@ -45,7 +45,7 @@ table><script >
     // end newData
     saveData = function(){
       
-      $('#form1').form('submit',{
+      $('#form2').form('submit',{
         url: url,
         onSubmit: function(){
           return $(this).form('validate');
@@ -81,7 +81,7 @@ table><script >
             if (response.success){
               $.messager.show({
                 title: 'Success',
-                msg: 'Data Berhasil Di save'
+                msg: 'Data Berhasil Di Hapus'
               });
               $('#detail_dg_qrs').datagrid('reload');
             }else{
