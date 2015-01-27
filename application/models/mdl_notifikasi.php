@@ -4,7 +4,7 @@ class mdl_notifikasi extends CI_Model {
 
 	protected $table = 'tr_notifikasi';
 
-	public function getNotifications()
+	public function getAllNotifications()
 	{
 		$this->db->order_by('tanggal', 'desc');
 		return $this->get();
@@ -19,9 +19,16 @@ class mdl_notifikasi extends CI_Model {
 		$this->db->insert($this->table);
 	}
 
+	public function removeNotification($id)
+	{
+		$this->db->where('id', $id);
+		$this->db->delete($this->table); 
+	}
+
 	public function getNotification($id)
 	{
 		$this->db->where('id', $id);
+		return $this->get();
 	}
 
 	private function get()

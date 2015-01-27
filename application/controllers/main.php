@@ -7,12 +7,16 @@ class main extends CI_Controller {
 		//$this->load->model('mdl_mahasiswa');
 		//$this->load->model('mdl_dosen');
 		//$this->load->model('mdl_universitas');
+		$this->load->model('mdl_notifikasi', 'notif');
 	}
 	
 	public function index(){
 		//$data['universitas'] = $this->mdl_universitas->getsingledata();
 		//$this->load->view('main',$data);
-		$this->load->view('main');
+		$data = array(
+			'notifications' => $this->notif->getAllNotifications(),
+		);
+		$this->load->view('main', $data);
 	}
 	
 	public function dashboard(){
