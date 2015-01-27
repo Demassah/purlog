@@ -32,11 +32,12 @@
 					return $(this).form('validate');
 				},
 				success: function(result){
-					//alert(result);
+					alert(result);
 					var result = eval('('+result+')');
 					if (result.success){
 						$('#dialog').dialog('close');		// close the dialog
 						$('#dg').datagrid('reload');		// reload the user data
+						addNotif('request_order', 'Request Order Baru telah dibuat', 1, 1, 1);
 					} else {
 						$.messager.show({
 							title: 'Error',

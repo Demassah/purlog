@@ -6,12 +6,14 @@ date_default_timezone_set('Asia/Jakarta');
 		<meta charset="UTF-8">
 		<title>Sistem Informasi Purchasing Logistic</title>
 		<link rel="shortcut icon" href="<?php echo base_url();?>asset/images/favicon.png">
-		<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/css/style.css" />
 		<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/easyui/themes/metro/easyui.css" />
 		<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/select/select2.css"/>
 		<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/autocomplete/jquery-ui.css">
 		<!--<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/easyui/themes/bootstrap/easyui.css" />-->
 		<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/easyui/themes/icon.css" />
+		<link rel="stylesheet" href="<?=base_url();?>asset/font-awesome-4.3.0/css/font-awesome.css">
+		<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/css/style.css" />
+
 		<script type="text/javascript" src="<?=base_url();?>asset/easyui/jquery.min.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>asset/easyui/jquery.easyui.min.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>asset/easyui/plugins/jquery.datagrid-groupview.js"></script>
@@ -24,17 +26,50 @@ date_default_timezone_set('Asia/Jakarta');
 		<script type="text/javascript" src="<?=base_url();?>asset/js/numericInput.min.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>asset/currency/autoNumeric.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>asset/autocomplete/jquery-ui.js"></script>
-				 
+		<script type="text/javascript" src="<?=base_url();?>asset/dropy/dropy.js"></script>
 	</head>
 	<body class="easyui-layout">
 
 	<input type="hide" value="<?=base_url();?>"/>
 		<script>
 			base_url = '<?=base_url();?>';
+
+			redirectTo = function(url)
+			{
+				$('#konten').panel({
+					href:base_url+url
+				});
+			};
+
+			refreshNotif = function()
+			{
+				$.get(base_url+'notifikasi/listof').done(function(data)
+				{
+					data = eval('('+data+')');
+					$('#isinotifikasi').html(data["tampilan"]);
+					$('#jumlahNotif').html(data["jumlah"]);
+				});
+			};
+
+			addNotif = function(furl, fcontext, fbindingtype, fbindingid, ftype)
+			{
+				$.post(base_url+"notifikasi/add", {url: furl, context: fcontext, binding_type: fbindingtype, binding_id: fbindingid, type: ftype}).done(function(data)
+				{
+					refreshNotif();
+				});
+			};
+
+			refreshRegularly = function()
+			{
+				refreshNotif();
+				setTimeout('refreshRegularly()', 5*1000);
+			};
+
 			$(document).ready(function(){
 				$('#konten').panel({
 					href:base_url+'main/dashboard'
-				});			 
+				});
+				refreshRegularly();
 				check_login = function(){
 					$.ajax({
 						url: base_url+"auth/cekstatuslogin",
@@ -116,6 +151,15 @@ date_default_timezone_set('Asia/Jakarta');
 		</script>
 				 
 			<style type="text/css">
+			.panel
+			{
+				overflow: visible;
+			}
+			.layout-panel
+			{
+				overflow: visible;
+			}
+
 			#fm/*<?=$objectId;?>*/{
 				margin:0;
 				padding:10px 30px;
@@ -213,11 +257,21 @@ date_default_timezone_set('Asia/Jakarta');
 					<div class="logo" style="margin-top: 10px;"><a href="">home</a></div>
 					<div class="title" style="margin-top: 30px;">
 						<h1>Sistem Informasi Purchasing Logistic</h1>
-					</div>			 
+					</div>
+
 					<div class="rpanel">
-						<div class="left" style="margin-top: 10px;">
-							<h2>Notification</h2>
+
+						<div class="left" style="margin-top: 20px; margin-right: 20px;">
+							<ul class="notif notif-dropdown">
+								<li><a class='btn-notif' href="#">Notifikasi<div id='jumlahNotif'></div></a></li>
+							</ul>
+							<div id="notif">
+							    <div id="notif-arrow"></div>
+							    <div class='context' id='isinotifikasi'>
+								</div>
+							</div>
 						</div>
+
 						<div class="left" style="margin-top: 10px;">
 							<h4>Selamat Datang :</h4>
 							<!-- <p><a href="#">Administrator</a></p> -->
@@ -227,6 +281,7 @@ date_default_timezone_set('Asia/Jakarta');
 							<div class="right" style="margin-top: 5px;"><a href="<?=base_url()?>auth" class="logout">LOGOUT</a></div>
 							<div class="clear"></div>
 					</div>
+
 					<div class="clear"></div>
 
 				</div>
@@ -284,4 +339,12 @@ date_default_timezone_set('Asia/Jakarta');
 			</div>
 		</div>
 
+		<script type="text/javascript">
+
+			$( ".btn-notif" ).on( "click", function()
+			{
+			  $( "#notif" ).fadeToggle( "fast" );
+			});
+
+		</script>
 	</body>
