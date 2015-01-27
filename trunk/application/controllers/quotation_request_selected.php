@@ -138,7 +138,7 @@ class quotation_request_selected extends CI_Controller {
 		# get post data
 		foreach($_POST as $key => $value){
 			$data[$key] = $value;
-			 //echo print_r($value);
+			 // echo print_r($value);
 		}
 
 		
@@ -195,10 +195,11 @@ class quotation_request_selected extends CI_Controller {
 		# get post data
 		foreach($_POST as $key => $value){
 			$data[$key] = $value;
+			echo print_r($value);
 		}
 		
 		# rules validasi form
-		$this->form_validation->set_rules("checkbox[]", 'ID user', 'trim|required|xss_clean');
+		$this->form_validation->set_rules("id_detail_pr[]", 'ID Detail Qrs', 'trim|required|xss_clean');
 		// $this->form_validation->set_rules("pick[]", 'Pick', 'trim|required|xss_clean');
 		//$this->form_validation->set_rules("kode_barang[]", 'Kode barang', 'trim|required|xss_clean');
 		# message rules
@@ -209,7 +210,7 @@ class quotation_request_selected extends CI_Controller {
 			$data["pesan_error"] .= trim(validation_errors(' ',' '))==''?'':validation_errors(' ',' ');
 		}else{
 			if($aksi=="add"){ // add
-			// /print_r($data);
+			//print_r($data['id_detail_qrs']);
 			$result = $this->mdl_quotation_request_selected->Insert_Detail_Qrs($data);
 			}else { // edit
 				$result=$this->mdl_quotation_request_selected->cancel($data);

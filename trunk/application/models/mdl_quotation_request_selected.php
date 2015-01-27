@@ -333,6 +333,7 @@ class mdl_quotation_request_selected extends CI_Model {
 			$this->db->join('ref_barang c', 'c.kode_barang = a.kode_barang');
 			$this->db->where('b.id_qrs',$id_qrs);
 			$this->db->where('a.sisa !=', 0);
+			$this->db->order_by('a.id_detail_pr', 'asc');
 			return $this->db->get()->result_array();
 		$this->db->stop_cache();
 	}
@@ -346,9 +347,12 @@ class mdl_quotation_request_selected extends CI_Model {
 
 	function Insert_Detail_Qrs($data)
 	{
-		//$this->db->flush_cache();
-		// 	for($i=0; $i < $jumlah; $i++) 
-		// 	{
+		$this->db->flush_cache();
+		$jumlah = count($data['id_detail_qrs']);
+			for($i=0; $i < $jumlah; $i++) 
+			{
+				print_r($data['kode_barang'][$i]);
+			}
 		// 		// if($this->db->where('id_qrs', $data['id_qrs'][$i])){
 		// 		// 		$this->db->where('kode_barang', $data['kode_barang'][$i]);
 		// 		// 		$this->db->set('qty',$data['pick'][$i]);
