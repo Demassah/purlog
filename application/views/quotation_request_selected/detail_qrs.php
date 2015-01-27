@@ -22,7 +22,7 @@
     </tr>
   </thead>
 </table>
-table><script >
+<script >
   var url;
   var id_qrs = '<?=$id_qrs?>';
 
@@ -44,7 +44,6 @@ table><script >
     }
     // end newData
     saveData = function(){
-      
       $('#form2').form('submit',{
         url: url,
         onSubmit: function(){
