@@ -22,8 +22,8 @@
 									title: 'Success',
 									msg: 'Data Berhasil Dikirim'
 								});
-								// reload and close tab
 								$('#dg').datagrid('reload');
+								addNotif('request_order_logistic', 'Data Request Order di Approve oleh Manager', 1, 1, 1, 2, 1);
 							} else {
 								$.messager.show({
 									title: 'Error',
@@ -50,7 +50,6 @@
 									title: 'Success',
 									msg: 'Data Berhasil Di Reject'
 								});
-								// reload and close tab
 								$('#dg').datagrid('reload');
 							} else {
 								$.messager.show({

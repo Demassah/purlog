@@ -15,7 +15,6 @@
                   title: 'Success',
                   msg: 'Data Berhasil Dikirim'
                 });
-                // reload and close tab
                 $('#dg').datagrid('reload');
               } else {
                 $.messager.show({

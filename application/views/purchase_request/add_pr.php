@@ -40,9 +40,10 @@
               msg: 'Data Berhasil Disimpan'
             });
             $('#tbodypurchase').html(' ');
-			$('#konten').panel({      
+			     $('#konten').panel({
               href:base_url+'purchase_request/index/',
             });
+           addNotif('purchase_request', 'Purchase Request Baru telah dibuat', 1, 1, 3, 2, 1);
           } else {
             $.messager.show({
               title: 'Error',
