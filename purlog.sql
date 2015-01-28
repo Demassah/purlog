@@ -1,5 +1,5 @@
 /*
-SQLyog Ultimate v11.11 (64 bit)
+SQLyog Ultimate v11.11 (32 bit)
 MySQL - 5.1.41 : Database - purlog
 *********************************************************************
 */
@@ -214,11 +214,11 @@ CREATE TABLE `tr_do` (
   `id_user` varchar(21) DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id_do`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `tr_do` */
 
-insert  into `tr_do`(`id_do`,`id_courir`,`date_create`,`id_user`,`status`) values (1,'420015','2015-01-23 09:30:21','14',2);
+insert  into `tr_do`(`id_do`,`id_courir`,`date_create`,`id_user`,`status`) values (1,'420015','2015-01-20 11:08:30','1',2),(2,'430016','2015-01-20 11:08:53','1',2);
 
 /*Table structure for table `tr_do_detail` */
 
@@ -330,7 +330,7 @@ CREATE TABLE `tr_pr` (
 
 /*Data for the table `tr_pr` */
 
-insert  into `tr_pr`(`id_pr`,`id_ro`,`id_po`,`user_id`,`purpose`,`cat_req`,`ext_doc_no`,`ETD`,`date_create`,`status`) values (1,1,NULL,16,'REQUEST','ASSET','12','2015-01-23','2015-01-23 09:23:45',2);
+insert  into `tr_pr`(`id_pr`,`id_ro`,`id_po`,`user_id`,`purpose`,`cat_req`,`ext_doc_no`,`ETD`,`date_create`,`status`) values (1,1,NULL,1,'REQUEST','ASSET','SPK/123','2015-01-20','2015-01-20 09:22:32',2);
 
 /*Table structure for table `tr_pr_detail` */
 
@@ -353,7 +353,7 @@ CREATE TABLE `tr_pr_detail` (
 
 /*Data for the table `tr_pr_detail` */
 
-insert  into `tr_pr_detail`(`id_detail_pr`,`id_pr`,`id_detail_ro`,`id_ro`,`kode_barang`,`qty`,`user_id`,`date_create`,`note`,`status`,`status_delete`) values (1,1,1,1,'100',12,16,'2015-01-23 09:24:50',NULL,2,0),(2,1,2,1,'302',19,16,'2015-01-23 09:24:50',NULL,2,0),(3,0,3,2,'301',10,16,'2015-01-23 10:48:51',NULL,1,0),(4,0,4,2,'201',12,16,'2015-01-23 10:48:51',NULL,1,0);
+insert  into `tr_pr_detail`(`id_detail_pr`,`id_pr`,`id_detail_ro`,`id_ro`,`kode_barang`,`qty`,`user_id`,`date_create`,`note`,`status`,`status_delete`) values (1,1,1,1,'100',20,1,'2015-01-19 18:30:40',NULL,2,0),(2,1,2,1,'201',10,1,'2015-01-19 18:30:40',NULL,2,0),(3,1,3,1,'203',5,1,'2015-01-19 18:30:40',NULL,2,0),(4,0,4,2,'301',1,1,'2015-01-19 20:07:18',NULL,1,0);
 
 /*Table structure for table `tr_pros_detail` */
 
@@ -377,7 +377,7 @@ CREATE TABLE `tr_pros_detail` (
 
 /*Data for the table `tr_pros_detail` */
 
-insert  into `tr_pros_detail`(`id_detail_pros`,`id_detail_ro`,`id_ro`,`id_sro`,`id_stock`,`kode_barang`,`qty`,`id_lokasi`,`date_create`,`status`,`status_receive`,`status_picking`) values (1,2,1,1,2,'302',2,'Workshop','2015-01-23 09:25:05',1,1,1),(2,3,2,2,1,'301',2,'Workshop','2015-01-23 10:49:11',1,0,1);
+insert  into `tr_pros_detail`(`id_detail_pros`,`id_detail_ro`,`id_ro`,`id_sro`,`id_stock`,`kode_barang`,`qty`,`id_lokasi`,`date_create`,`status`,`status_receive`,`status_picking`) values (1,4,2,1,1,'301',4,'Workshop','2015-01-19 20:06:59',1,1,1),(2,5,3,2,2,'302',3,'Workshop','2015-01-19 20:07:24',1,1,1);
 
 /*Table structure for table `tr_qr` */
 
@@ -431,7 +431,7 @@ CREATE TABLE `tr_qrs` (
 
 /*Data for the table `tr_qrs` */
 
-insert  into `tr_qrs`(`id_qrs`,`id_pr`,`id_ro`,`date_create`,`user_id`,`status`) values (1,1,1,'2015-01-23 10:12:13',14,1);
+insert  into `tr_qrs`(`id_qrs`,`id_pr`,`id_ro`,`date_create`,`user_id`,`status`) values (1,1,1,'2015-01-20 17:20:37',14,1);
 
 /*Table structure for table `tr_qrs_detail` */
 
@@ -446,11 +446,11 @@ CREATE TABLE `tr_qrs_detail` (
   `qty` int(11) DEFAULT NULL,
   `status` smallint(1) DEFAULT NULL,
   PRIMARY KEY (`id_detail_qrs`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `tr_qrs_detail` */
 
-insert  into `tr_qrs_detail`(`id_detail_qrs`,`id_qrs`,`id_pr`,`id_detail_pr`,`kode_barang`,`qty`,`status`) values (2,NULL,NULL,1,NULL,NULL,NULL);
+insert  into `tr_qrs_detail`(`id_detail_qrs`,`id_qrs`,`id_pr`,`id_detail_pr`,`kode_barang`,`qty`,`status`) values (3,1,1,1,'100',10,1),(4,1,1,2,'201',10,1);
 
 /*Table structure for table `tr_receive` */
 
@@ -464,11 +464,11 @@ CREATE TABLE `tr_receive` (
   `id_user` smallint(6) DEFAULT NULL,
   `status` smallint(1) DEFAULT NULL,
   PRIMARY KEY (`id_receive`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tr_receive` */
 
-insert  into `tr_receive`(`id_receive`,`id_courir`,`id_sro`,`date_create`,`id_user`,`status`) values (1,'420015',1,'2015-01-23 00:00:00',16,2);
+insert  into `tr_receive`(`id_receive`,`id_courir`,`id_sro`,`date_create`,`id_user`,`status`) values (1,'420015',1,'2015-01-19 00:00:00',1,1),(2,'430016',2,'2015-01-19 00:00:00',1,2);
 
 /*Table structure for table `tr_receive_detail` */
 
@@ -486,11 +486,11 @@ CREATE TABLE `tr_receive_detail` (
   `date_create` datetime DEFAULT NULL,
   `status` smallint(1) DEFAULT NULL,
   PRIMARY KEY (`id_detail_receive`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tr_receive_detail` */
 
-insert  into `tr_receive_detail`(`id_detail_receive`,`id_receive`,`id_detail_pros`,`id_detail_ro`,`id_ro`,`id_sro`,`kode_barang`,`qty`,`date_create`,`status`) values (1,1,1,2,1,1,'302',2,'2015-01-23 09:30:28',1);
+insert  into `tr_receive_detail`(`id_detail_receive`,`id_receive`,`id_detail_pros`,`id_detail_ro`,`id_ro`,`id_sro`,`kode_barang`,`qty`,`date_create`,`status`) values (1,1,1,4,2,1,'301',4,'2015-01-19 20:14:10',1),(2,2,2,5,3,2,'302',3,'2015-01-19 20:14:21',1);
 
 /*Table structure for table `tr_return` */
 
@@ -545,11 +545,11 @@ CREATE TABLE `tr_ro` (
   `status` int(1) DEFAULT NULL COMMENT '1: RO, 2: ROA, 3:ROL, 4: ROS, 5: Picking, 6: Shipment, 7: DO, 9: Reject',
   `status_order` smallint(1) DEFAULT '1' COMMENT '1: ORDER, 2: PURCHASE, 3: RETURN',
   PRIMARY KEY (`id_ro`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `tr_ro` */
 
-insert  into `tr_ro`(`id_ro`,`user_id`,`purpose`,`cat_req`,`ext_doc_no`,`ETD`,`date_create`,`date_approve`,`date_reject`,`status`,`status_order`) values (1,16,'REQUEST','ASSET','12','2015-01-23','2015-01-23 09:23:45','2015-01-23 09:24:38','0000-00-00 00:00:00',6,1),(2,16,'STOCK','ATK','133','2015-01-23','2015-01-23 10:48:09','2015-01-23 10:48:52','0000-00-00 00:00:00',6,1);
+insert  into `tr_ro`(`id_ro`,`user_id`,`purpose`,`cat_req`,`ext_doc_no`,`ETD`,`date_create`,`date_approve`,`date_reject`,`status`,`status_order`) values (1,1,'REQUEST','ASSET','SPK/123','2015-01-20','2015-01-20 09:22:32','2015-01-20 09:26:28','0000-00-00 00:00:00',6,1),(2,1,'REQUEST','CETAKAN','112233','2015-01-20','2015-01-20 10:54:09','2015-01-20 10:56:16','0000-00-00 00:00:00',6,1),(3,1,'STOCK','SPAREPART','332211','2015-01-20','2015-01-20 10:54:49','2015-01-20 10:56:20','0000-00-00 00:00:00',6,1),(4,1,'REQUEST','ASSET','554433','2015-01-23','2015-01-23 13:53:19','2015-01-23 14:54:11','0000-00-00 00:00:00',4,1),(9,1,'REQUEST','ASSET','0987','2015-01-27','2015-01-27 16:19:34','0000-00-00 00:00:00','0000-00-00 00:00:00',1,1);
 
 /*Table structure for table `tr_ro_detail` */
 
@@ -569,11 +569,11 @@ CREATE TABLE `tr_ro_detail` (
   `status_delete` int(1) NOT NULL COMMENT '1. deleted',
   `id_sro` int(6) NOT NULL,
   PRIMARY KEY (`id_detail_ro`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tr_ro_detail` */
 
-insert  into `tr_ro_detail`(`id_detail_ro`,`id_ro`,`ext_doc_no`,`kode_barang`,`qty`,`barang_bekas`,`user_id`,`date_create`,`note`,`status`,`status_delete`,`id_sro`) values (1,1,'12','100',12,1,16,'2015-01-23 09:23:45','qqqq',1,0,0),(2,1,'12','302',21,1,16,'2015-01-23 09:23:45','qweqe',1,0,0),(3,2,'133','301',12,2,16,'2015-01-23 10:48:09','121',1,0,0),(4,2,'133','201',12,2,16,'2015-01-23 10:48:09','1212',1,0,0);
+insert  into `tr_ro_detail`(`id_detail_ro`,`id_ro`,`ext_doc_no`,`kode_barang`,`qty`,`barang_bekas`,`user_id`,`date_create`,`note`,`status`,`status_delete`,`id_sro`) values (1,1,'SPK/123','100',20,2,1,'2015-01-20 09:22:32','adi',1,0,0),(2,1,'SPK/123','201',10,1,1,'2015-01-20 09:22:32','ida',1,0,0),(3,1,'SPK/123','203',5,1,1,'2015-01-20 09:22:32','MOuse logitech',1,0,0),(4,2,'112233','301',5,1,1,'2015-01-20 10:54:09','tes',1,0,0),(5,3,'332211','302',3,1,1,'2015-01-20 10:54:49','-',1,0,0),(6,4,'554433','301',1,1,1,'2015-01-23 13:53:19','tes',1,0,0);
 
 /*Table structure for table `tr_sro` */
 
@@ -591,7 +591,7 @@ CREATE TABLE `tr_sro` (
 
 /*Data for the table `tr_sro` */
 
-insert  into `tr_sro`(`id_sro`,`id_do`,`id_ro`,`date_create`,`id_user`,`status`) values (1,1,1,'2015-01-23 00:00:00','16',2),(2,NULL,2,'2015-01-23 00:00:00','16',1);
+insert  into `tr_sro`(`id_sro`,`id_do`,`id_ro`,`date_create`,`id_user`,`status`) values (1,1,2,'2015-01-19 00:00:00','1',2),(2,2,3,'2015-01-19 00:00:00','1',2);
 
 /*Table structure for table `tr_stock` */
 
@@ -613,7 +613,7 @@ CREATE TABLE `tr_stock` (
 
 /*Data for the table `tr_stock` */
 
-insert  into `tr_stock`(`id_stock`,`id_in`,`id_detail_in`,`kode_barang`,`qty`,`price`,`id_lokasi`,`date_create`,`status`,`type_in`) values (1,NULL,NULL,'301',0,1000,'Workshop','2015-01-20 10:54:09',1,NULL),(2,NULL,NULL,'302',0,500,'Workshop','2015-01-20 10:54:09',1,NULL);
+insert  into `tr_stock`(`id_stock`,`id_in`,`id_detail_in`,`kode_barang`,`qty`,`price`,`id_lokasi`,`date_create`,`status`,`type_in`) values (1,NULL,NULL,'301',2,1000,'Workshop','2015-01-20 10:54:09',1,NULL),(2,NULL,NULL,'302',0,500,'Heavy Equipment','2015-01-20 10:54:09',1,NULL);
 
 /*Table structure for table `tr_transfer` */
 
@@ -627,9 +627,11 @@ CREATE TABLE `tr_transfer` (
   `user_id` int(11) DEFAULT NULL,
   `status` smallint(1) DEFAULT NULL,
   PRIMARY KEY (`id_transfer`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tr_transfer` */
+
+insert  into `tr_transfer`(`id_transfer`,`type_transfer`,`note`,`date_create`,`user_id`,`status`) values (1,1,'tes','2015-01-19 23:43:10',1,1),(2,1,'tes 2','2015-01-19 23:45:15',1,1);
 
 /*Table structure for table `tr_transfer_detail` */
 
@@ -645,9 +647,11 @@ CREATE TABLE `tr_transfer_detail` (
   `id_lokasi` varchar(21) DEFAULT NULL,
   `status` smallint(1) DEFAULT NULL,
   PRIMARY KEY (`id_detail_transfer`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tr_transfer_detail` */
+
+insert  into `tr_transfer_detail`(`id_detail_transfer`,`id_transfer`,`id_stock`,`kode_barang`,`qty`,`price`,`id_lokasi`,`status`) values (7,1,1,'301',1,1000,'Heavy Equipment',1),(8,2,2,'302',NULL,500,NULL,1);
 
 /* Trigger structure for table `tr_do` */
 
@@ -655,10 +659,10 @@ DELIMITER $$
 
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `after_update_do` */$$
 
-/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `after_update_do` AFTER UPDATE ON `tr_do` FOR EACH ROW BEGIN
-    IF new.status = 2 THEN
-	UPDATE tr_sro SET STATUS = 2  WHERE id_do = old.id_do;
-   END IF;
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `after_update_do` AFTER UPDATE ON `tr_do` FOR EACH ROW BEGIN
+    IF new.status = 2 THEN
+	UPDATE tr_sro SET STATUS = 2  WHERE id_do = old.id_do;
+   END IF;
     END */$$
 
 
@@ -670,8 +674,8 @@ DELIMITER $$
 
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `after_delete_do` */$$
 
-/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `after_delete_do` AFTER DELETE ON `tr_do` FOR EACH ROW BEGIN
-	UPDATE tr_sro SET id_do = NULL WHERE id_do = old.id_do;
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `after_delete_do` AFTER DELETE ON `tr_do` FOR EACH ROW BEGIN
+	UPDATE tr_sro SET id_do = NULL WHERE id_do = old.id_do;
     END */$$
 
 
@@ -683,11 +687,11 @@ DELIMITER $$
 
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `after_update_in` */$$
 
-/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `after_update_in` AFTER UPDATE ON `tr_in` FOR EACH ROW BEGIN
-	IF new.status = 2 and new.type = 1 THEN
-	CALL p_in_po(new.id_in);
-	CALL p_in_stock(new.id_in);	
-	END IF;
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'%' */ /*!50003 TRIGGER `after_update_in` AFTER UPDATE ON `tr_in` FOR EACH ROW BEGIN
+	IF new.status = 2 and new.type = 1 THEN
+	CALL p_in_po(new.id_in);
+	CALL p_in_stock(new.id_in);	
+	END IF;
     END */$$
 
 
@@ -699,8 +703,8 @@ DELIMITER $$
 
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `before_delete_inbound` */$$
 
-/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `before_delete_inbound` BEFORE DELETE ON `tr_in` FOR EACH ROW BEGIN
-	delete from tr_in_detail where id_in = old.id_in;
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'%' */ /*!50003 TRIGGER `before_delete_inbound` BEFORE DELETE ON `tr_in` FOR EACH ROW BEGIN
+	delete from tr_in_detail where id_in = old.id_in;
     END */$$
 
 
@@ -712,9 +716,9 @@ DELIMITER $$
 
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `after_insert_po` */$$
 
-/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `after_insert_po` AFTER INSERT ON `tr_po` FOR EACH ROW BEGIN
-	update tr_pr set id_po = new.id_po where id_pr = new.id_pr;
-	update tr_qr set id_po = new.id_po where id_pr = new.id_pr and status = '2'; 
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'%' */ /*!50003 TRIGGER `after_insert_po` AFTER INSERT ON `tr_po` FOR EACH ROW BEGIN
+	update tr_pr set id_po = new.id_po where id_pr = new.id_pr;
+	update tr_qr set id_po = new.id_po where id_pr = new.id_pr and status = '2'; 
     END */$$
 
 
@@ -726,8 +730,8 @@ DELIMITER $$
 
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `after_delete_po` */$$
 
-/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `after_delete_po` AFTER DELETE ON `tr_po` FOR EACH ROW BEGIN
-	update tr_pr set id_po = null where id_po = old.id_po;
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'%' */ /*!50003 TRIGGER `after_delete_po` AFTER DELETE ON `tr_po` FOR EACH ROW BEGIN
+	update tr_pr set id_po = null where id_po = old.id_po;
     END */$$
 
 
@@ -739,8 +743,8 @@ DELIMITER $$
 
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `before_delete_pr` */$$
 
-/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `before_delete_pr` BEFORE DELETE ON `tr_pr` FOR EACH ROW BEGIN
-	update tr_pr_detail set id_pr = null, status =  1 where id_pr = old.id_pr;
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'%' */ /*!50003 TRIGGER `before_delete_pr` BEFORE DELETE ON `tr_pr` FOR EACH ROW BEGIN
+	update tr_pr_detail set id_pr = null, status =  1 where id_pr = old.id_pr;
     END */$$
 
 
@@ -752,8 +756,8 @@ DELIMITER $$
 
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `after_insert_alocation` */$$
 
-/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `after_insert_alocation` AFTER INSERT ON `tr_pros_detail` FOR EACH ROW BEGIN
-	UPDATE purlog.tr_stock SET tr_stock.qty = tr_stock.qty - new.qty WHERE tr_stock.id_stock = new.id_stock;
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `after_insert_alocation` AFTER INSERT ON `tr_pros_detail` FOR EACH ROW BEGIN
+	UPDATE purlog.tr_stock SET tr_stock.qty = tr_stock.qty - new.qty WHERE tr_stock.id_stock = new.id_stock;
     END */$$
 
 
@@ -765,9 +769,9 @@ DELIMITER $$
 
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `after_update_allocate` */$$
 
-/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `after_update_allocate` AFTER UPDATE ON `tr_pros_detail` FOR EACH ROW BEGIN
-	UPDATE tr_stock SET qty = qty + (old.qty - new.qty) WHERE id_stock = old.id_stock;	
-	
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'%' */ /*!50003 TRIGGER `after_update_allocate` AFTER UPDATE ON `tr_pros_detail` FOR EACH ROW BEGIN
+	UPDATE tr_stock SET qty = qty + (old.qty - new.qty) WHERE id_stock = old.id_stock;	
+	
     END */$$
 
 
@@ -779,8 +783,8 @@ DELIMITER $$
 
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `after_insert_qr` */$$
 
-/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `after_insert_qr` AFTER INSERT ON `tr_qr` FOR EACH ROW BEGIN
-	CALL p_qrs_detail(new.id_pr, new.id_qr);
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'%' */ /*!50003 TRIGGER `after_insert_qr` AFTER INSERT ON `tr_qr` FOR EACH ROW BEGIN
+	
     END */$$
 
 
@@ -792,8 +796,8 @@ DELIMITER $$
 
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `before_delete_qr` */$$
 
-/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `before_delete_qr` BEFORE DELETE ON `tr_qr` FOR EACH ROW BEGIN
-	delete from tr_qr_detail where id_qr = old.id_qr;
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'%' */ /*!50003 TRIGGER `before_delete_qr` BEFORE DELETE ON `tr_qr` FOR EACH ROW BEGIN
+	delete from tr_qr_detail where id_qr = old.id_qr;
     END */$$
 
 
@@ -805,8 +809,8 @@ DELIMITER $$
 
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `after_insert_receive` */$$
 
-/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `after_insert_receive` AFTER INSERT ON `tr_receive` FOR EACH ROW BEGIN
-	CALL p_receive_detail(new.id_receive, new.id_sro);
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'%' */ /*!50003 TRIGGER `after_insert_receive` AFTER INSERT ON `tr_receive` FOR EACH ROW BEGIN
+	CALL p_receive_detail(new.id_receive, new.id_sro);
     END */$$
 
 
@@ -818,10 +822,10 @@ DELIMITER $$
 
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `after_update_receive` */$$
 
-/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `after_update_receive` AFTER UPDATE ON `tr_receive` FOR EACH ROW BEGIN
-	if new.status = 2 then
-	CALL p_receive_return(new.id_receive);
-	end if; 
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'%' */ /*!50003 TRIGGER `after_update_receive` AFTER UPDATE ON `tr_receive` FOR EACH ROW BEGIN
+	if new.status = 2 then
+	CALL p_receive_return(new.id_receive);
+	end if; 
     END */$$
 
 
@@ -833,9 +837,9 @@ DELIMITER $$
 
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `after_delete_receive` */$$
 
-/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `after_delete_receive` AFTER DELETE ON `tr_receive` FOR EACH ROW BEGIN
-	delete from tr_receive_detail where id_receive = old.id_receive;
-	Update tr_pros_detail set status_receive = 0  WHERE id_sro = old.id_sro;
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'%' */ /*!50003 TRIGGER `after_delete_receive` AFTER DELETE ON `tr_receive` FOR EACH ROW BEGIN
+	delete from tr_receive_detail where id_receive = old.id_receive;
+	Update tr_pros_detail set status_receive = 0  WHERE id_sro = old.id_sro;
     END */$$
 
 
@@ -847,10 +851,10 @@ DELIMITER $$
 
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `after_update_return` */$$
 
-/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `after_update_return` AFTER UPDATE ON `tr_return` FOR EACH ROW BEGIN
-	if new.status = 2 then
-	CALL p_return_order(new.id_return);	
-	end if;
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'%' */ /*!50003 TRIGGER `after_update_return` AFTER UPDATE ON `tr_return` FOR EACH ROW BEGIN
+	if new.status = 2 then
+	CALL p_return_order(new.id_return);	
+	end if;
     END */$$
 
 
@@ -862,10 +866,10 @@ DELIMITER $$
 
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `after_insert_ro` */$$
 
-/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `after_insert_ro` AFTER INSERT ON `tr_ro` FOR EACH ROW BEGIN
-	IF new.status_order = 3 THEN
-	CALL p_return_order_detail(new.ext_doc_no, new.id_ro, new.user_id);	
-	END IF;
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'%' */ /*!50003 TRIGGER `after_insert_ro` AFTER INSERT ON `tr_ro` FOR EACH ROW BEGIN
+	IF new.status_order = 3 THEN
+	CALL p_return_order_detail(new.ext_doc_no, new.id_ro, new.user_id);	
+	END IF;
     END */$$
 
 
@@ -877,10 +881,10 @@ DELIMITER $$
 
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `after_allocated` */$$
 
-/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `after_allocated` AFTER UPDATE ON `tr_ro` FOR EACH ROW BEGIN
-	IF new.status = 6 THEN
-	CALL p_allocated(old.id_ro, old.user_id);
-	END IF;
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `after_allocated` AFTER UPDATE ON `tr_ro` FOR EACH ROW BEGIN
+	IF new.status = 6 THEN
+	CALL p_allocated(old.id_ro, old.user_id);
+	END IF;
     END */$$
 
 
@@ -892,8 +896,8 @@ DELIMITER $$
 
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `after_delete_sro` */$$
 
-/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `after_delete_sro` AFTER DELETE ON `tr_sro` FOR EACH ROW BEGIN
-	UPDATE tr_pros_detail SET id_sro = NULL WHERE id_sro = old.id_sro;
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `after_delete_sro` AFTER DELETE ON `tr_sro` FOR EACH ROW BEGIN
+	UPDATE tr_pros_detail SET id_sro = NULL WHERE id_sro = old.id_sro;
     END */$$
 
 
@@ -905,10 +909,10 @@ DELIMITER $$
 
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `after_update_transfer` */$$
 
-/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `after_update_transfer` AFTER UPDATE ON `tr_transfer` FOR EACH ROW BEGIN
-	IF new.status = 2 THEN
-	CALL p_transfer(new.id_transfer);
-	END IF;
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `after_update_transfer` AFTER UPDATE ON `tr_transfer` FOR EACH ROW BEGIN
+	IF new.status = 2 THEN
+	CALL p_transfer(new.id_transfer);
+	END IF;
     END */$$
 
 
@@ -920,9 +924,9 @@ DELIMITER $$
 
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `before_delete_transfer` */$$
 
-/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `before_delete_transfer` BEFORE DELETE ON `tr_transfer` FOR EACH ROW BEGIN
-	CALL p_delete_transfer_detail(old.id_transfer);
-	
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'%' */ /*!50003 TRIGGER `before_delete_transfer` BEFORE DELETE ON `tr_transfer` FOR EACH ROW BEGIN
+	CALL p_delete_transfer_detail(old.id_transfer);
+	
     END */$$
 
 
@@ -934,9 +938,9 @@ DELIMITER $$
 
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `after_insert_transfer_detail` */$$
 
-/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `after_insert_transfer_detail` AFTER INSERT ON `tr_transfer_detail` FOR EACH ROW BEGIN
-	
-	update tr_stock set qty = (qty - new.qty) where id_stock = new.id_stock;
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'%' */ /*!50003 TRIGGER `after_insert_transfer_detail` AFTER INSERT ON `tr_transfer_detail` FOR EACH ROW BEGIN
+	
+	update tr_stock set qty = (qty - new.qty) where id_stock = new.id_stock;
     END */$$
 
 
@@ -948,9 +952,9 @@ DELIMITER $$
 
 /*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `before_delete_transfer_detail` */$$
 
-/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `before_delete_transfer_detail` BEFORE DELETE ON `tr_transfer_detail` FOR EACH ROW BEGIN
-	
-	update tr_stock set qty = (qty + old.qty) where id_stock = old.id_stock;
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'%' */ /*!50003 TRIGGER `before_delete_transfer_detail` BEFORE DELETE ON `tr_transfer_detail` FOR EACH ROW BEGIN
+	
+	update tr_stock set qty = (qty + old.qty) where id_stock = old.id_stock;
     END */$$
 
 
@@ -963,22 +967,22 @@ DELIMITER ;
 DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_allocated`(IN p_id_ro INT, IN p_user_id INT)
-BEGIN
-	DECLARE done INT DEFAULT FALSE;
-	DECLARE a, b, d INT;
-	DECLARE c VARCHAR(21);
-	DECLARE cur1 CURSOR FOR SELECT id_detail_ro, id_ro, kode_barang, sisa FROM v_pros_detail WHERE sisa != 0 AND id_ro = p_id_ro ;
-	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-		
-	OPEN cur1;
-	read_loop : LOOP
-	FETCH cur1 INTO a, b, c, d ;
-	IF done THEN 
-	LEAVE read_loop;
-	END IF;
-	INSERT INTO tr_pr_detail (id_detail_ro, id_ro, kode_barang, qty, date_create, user_id, STATUS) VALUES (a, b, c, d, CURRENT_TIMESTAMP(), p_user_id,"1");
-	END LOOP;
-	CLOSE cur1; 
+BEGIN
+	DECLARE done INT DEFAULT FALSE;
+	DECLARE a, b, d INT;
+	DECLARE c VARCHAR(21);
+	DECLARE cur1 CURSOR FOR SELECT id_detail_ro, id_ro, kode_barang, sisa FROM v_pros_detail WHERE sisa != 0 AND id_ro = p_id_ro ;
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+		
+	OPEN cur1;
+	read_loop : LOOP
+	FETCH cur1 INTO a, b, c, d ;
+	IF done THEN 
+	LEAVE read_loop;
+	END IF;
+	INSERT INTO tr_pr_detail (id_detail_ro, id_ro, kode_barang, qty, date_create, user_id, STATUS) VALUES (a, b, c, d, CURRENT_TIMESTAMP(), p_user_id,"1");
+	END LOOP;
+	CLOSE cur1; 
     END */$$
 DELIMITER ;
 
@@ -989,28 +993,28 @@ DELIMITER ;
 DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_delete_transfer_detail`(IN p_id_transfer INT)
-BEGIN
-	DECLARE done INT DEFAULT FALSE;
-	DECLARE a, b, c INT;
-	
-	DECLARE cur1 CURSOR FOR 
-	SELECT id_stock, qty, id_detail_transfer
-	FROM  tr_transfer_detail
-	WHERE id_transfer = p_id_transfer ;
-	
-	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-		
-	OPEN cur1;
-	read_loop : LOOP
-	FETCH cur1 INTO  a, b, c;
-	IF done THEN 
-	LEAVE read_loop;
-	END IF;
-	
-	UPDATE tr_stock SET qty = (qty + b) WHERE id_stock = a;	
-	DELETE FROM tr_transfer_detail WHERE id_detail_transfer = c;
-	END LOOP;
-	CLOSE cur1; 
+BEGIN
+	DECLARE done INT DEFAULT FALSE;
+	DECLARE a, b, c INT;
+	
+	DECLARE cur1 CURSOR FOR 
+	SELECT id_stock, qty, id_detail_transfer
+	FROM  tr_transfer_detail
+	WHERE id_transfer = p_id_transfer ;
+	
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+		
+	OPEN cur1;
+	read_loop : LOOP
+	FETCH cur1 INTO  a, b, c;
+	IF done THEN 
+	LEAVE read_loop;
+	END IF;
+	
+	UPDATE tr_stock SET qty = (qty + b) WHERE id_stock = a;	
+	DELETE FROM tr_transfer_detail WHERE id_detail_transfer = c;
+	END LOOP;
+	CLOSE cur1; 
 END */$$
 DELIMITER ;
 
@@ -1021,28 +1025,28 @@ DELIMITER ;
 DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_in_po`(IN p_id_in INT)
-BEGIN
-	DECLARE done INT DEFAULT FALSE;
-	DECLARE a, b, d INT;
-	DECLARE c VARCHAR(21);
-	DECLARE cur1 CURSOR FOR SELECT  b.`id_detail_ro` ,b.`id_ro`, a.kode_barang, a.qty  
-	FROM tr_in_detail a
-	LEFT JOIN tr_pr_detail b ON (a.`ext_rec_no_detail` = b.`id_detail_pr`)
-	where a.id_in = p_id_in;	
-	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-			
-	OPEN cur1;
-	read_loop : LOOP
-	FETCH cur1 INTO a, b, c, d;
-	IF done THEN 
-	LEAVE read_loop;
-	END IF;
-	
-	INSERT INTO tr_pros_detail (id_detail_ro, id_ro, id_stock, kode_barang,  qty, id_lokasi, date_create, status, status_picking ) 
-	VALUES (  a, b, 0, c, d, 'CROSSDOCK', CURRENT_TIMESTAMP(), 1, 2);
-	
-	END LOOP;
-	CLOSE cur1; 
+BEGIN
+	DECLARE done INT DEFAULT FALSE;
+	DECLARE a, b, d INT;
+	DECLARE c VARCHAR(21);
+	DECLARE cur1 CURSOR FOR SELECT  b.`id_detail_ro` ,b.`id_ro`, a.kode_barang, a.qty  
+	FROM tr_in_detail a
+	LEFT JOIN tr_pr_detail b ON (a.`ext_rec_no_detail` = b.`id_detail_pr`)
+	where a.id_in = p_id_in;	
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+			
+	OPEN cur1;
+	read_loop : LOOP
+	FETCH cur1 INTO a, b, c, d;
+	IF done THEN 
+	LEAVE read_loop;
+	END IF;
+	
+	INSERT INTO tr_pros_detail (id_detail_ro, id_ro, id_stock, kode_barang,  qty, id_lokasi, date_create, status, status_picking ) 
+	VALUES (  a, b, 0, c, d, 'CROSSDOCK', CURRENT_TIMESTAMP(), 1, 2);
+	
+	END LOOP;
+	CLOSE cur1; 
 END */$$
 DELIMITER ;
 
@@ -1053,32 +1057,32 @@ DELIMITER ;
 DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_in_stock`(IN p_id_in INT)
-BEGIN
-	DECLARE done INT DEFAULT FALSE;
-	DECLARE a, b, d, e, g INT;
-	DECLARE c, f VARCHAR(21);
-	DECLARE cur1 CURSOR FOR SELECT  a.`id_in`, a.`id_detail_in`, a.`kode_barang`, a.`qty`, f.`price` , a.`lokasi`, b.`type`
-	FROM tr_in_detail a
-	LEFT JOIN tr_in b ON a.id_in = b.id_in
-	LEFT JOIN tr_pr c ON b.`ext_rec_no` = c.`id_po`
-	LEFT JOIN tr_pr_detail d ON a.`ext_rec_no_detail` = d.`id_detail_pr`
-	LEFT JOIN tr_qr e ON c.`id_pr` = e.`id_pr` AND e.`status` = 2
-	LEFT JOIN tr_qr_detail f ON a.`ext_rec_no_detail` = f.`id_detail_pr` AND f.`id_qr` = e.`id_qr`
-	where a.id_in = p_id_in ;	
-	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-			
-	OPEN cur1;
-	read_loop : LOOP
-	FETCH cur1 INTO a, b, c, d, e, f, g;
-	IF done THEN 
-	LEAVE read_loop;
-	END IF;
-	
-	INSERT INTO tr_stock (id_in, id_detail_in, kode_barang,  qty, price, id_lokasi, date_create, status, type_in ) 
-	VALUES (  a, b, c, d, e, f, CURRENT_TIMESTAMP(), 1, g);
-	
-	END LOOP;
-	CLOSE cur1; 
+BEGIN
+	DECLARE done INT DEFAULT FALSE;
+	DECLARE a, b, d, e, g INT;
+	DECLARE c, f VARCHAR(21);
+	DECLARE cur1 CURSOR FOR SELECT  a.`id_in`, a.`id_detail_in`, a.`kode_barang`, a.`qty`, f.`price` , a.`lokasi`, b.`type`
+	FROM tr_in_detail a
+	LEFT JOIN tr_in b ON a.id_in = b.id_in
+	LEFT JOIN tr_pr c ON b.`ext_rec_no` = c.`id_po`
+	LEFT JOIN tr_pr_detail d ON a.`ext_rec_no_detail` = d.`id_detail_pr`
+	LEFT JOIN tr_qr e ON c.`id_pr` = e.`id_pr` AND e.`status` = 2
+	LEFT JOIN tr_qr_detail f ON a.`ext_rec_no_detail` = f.`id_detail_pr` AND f.`id_qr` = e.`id_qr`
+	where a.id_in = p_id_in ;	
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+			
+	OPEN cur1;
+	read_loop : LOOP
+	FETCH cur1 INTO a, b, c, d, e, f, g;
+	IF done THEN 
+	LEAVE read_loop;
+	END IF;
+	
+	INSERT INTO tr_stock (id_in, id_detail_in, kode_barang,  qty, price, id_lokasi, date_create, status, type_in ) 
+	VALUES (  a, b, c, d, e, f, CURRENT_TIMESTAMP(), 1, g);
+	
+	END LOOP;
+	CLOSE cur1; 
 END */$$
 DELIMITER ;
 
@@ -1089,38 +1093,22 @@ DELIMITER ;
 DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_qrs_detail`(IN p_id_pr INT, IN p_id_qr INT)
-BEGIN
-
-	DECLARE done INT DEFAULT FALSE;
-
-	DECLARE a, c INT;
-
-	DECLARE b VARCHAR(21);
-
-	DECLARE cur1 CURSOR FOR SELECT id_detail_pr, kode_barang, qty STATUS FROM tr_pr_detail WHERE STATUS = 2 AND id_pr = p_id_pr ;
-
-	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-
-		
-
-	OPEN cur1;
-
-	read_loop : LOOP
-
-	FETCH cur1 INTO a, b, c ;
-
-	IF done THEN 
-
-	LEAVE read_loop;
-
-	END IF;
-
-	INSERT INTO tr_qr_detail (id_qr, id_detail_pr, id_pr, kode_barang, qty, date_create) VALUES (p_id_qr, a, p_id_pr, b, c, CURRENT_TIMESTAMP());
-
-	END LOOP;
-
-	CLOSE cur1; 
-
+BEGIN
+	DECLARE done INT DEFAULT FALSE;
+	DECLARE a, c INT;
+	DECLARE b VARCHAR(21);
+	DECLARE cur1 CURSOR FOR SELECT id_detail_pr, kode_barang, qty STATUS FROM tr_pr_detail WHERE STATUS = 2 AND id_pr = p_id_pr ;
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+		
+	OPEN cur1;
+	read_loop : LOOP
+	FETCH cur1 INTO a, b, c ;
+	IF done THEN 
+	LEAVE read_loop;
+	END IF;
+	INSERT INTO tr_qr_detail (id_qr, id_detail_pr, id_pr, kode_barang, qty, date_create) VALUES (p_id_qr, a, p_id_pr, b, c, CURRENT_TIMESTAMP());
+	END LOOP;
+	CLOSE cur1; 
 END */$$
 DELIMITER ;
 
@@ -1131,25 +1119,25 @@ DELIMITER ;
 DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_receive_detail`(IN p_id_receive INT, IN p_id_sro INT)
-BEGIN
-	DECLARE done INT DEFAULT FALSE;
-	DECLARE a, b, c, e INT;
-	DECLARE d VARCHAR(21);
-	DECLARE cur1 CURSOR FOR SELECT id_detail_pros, id_detail_ro, id_ro, kode_barang, qty FROM tr_pros_detail 
-	WHERE id_sro = p_id_sro ;
-	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-		
-	OPEN cur1;
-	read_loop : LOOP
-	FETCH cur1 INTO a, b, c, d, e ;
-	IF done THEN 
-	LEAVE read_loop;
-	END IF;
-	INSERT INTO tr_receive_detail (id_receive, id_detail_pros, id_detail_ro, id_ro, id_sro, kode_barang, qty, date_create, status) 
-	VALUES (p_id_receive, a, b, c, p_id_sro, d, e, CURRENT_TIMESTAMP(), 1);
-	update tr_pros_detail set status_receive =  1 where id_detail_pros = a ;
-	END LOOP;
-	CLOSE cur1; 
+BEGIN
+	DECLARE done INT DEFAULT FALSE;
+	DECLARE a, b, c, e INT;
+	DECLARE d VARCHAR(21);
+	DECLARE cur1 CURSOR FOR SELECT id_detail_pros, id_detail_ro, id_ro, kode_barang, qty FROM tr_pros_detail 
+	WHERE id_sro = p_id_sro ;
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+		
+	OPEN cur1;
+	read_loop : LOOP
+	FETCH cur1 INTO a, b, c, d, e ;
+	IF done THEN 
+	LEAVE read_loop;
+	END IF;
+	INSERT INTO tr_receive_detail (id_receive, id_detail_pros, id_detail_ro, id_ro, id_sro, kode_barang, qty, date_create, status) 
+	VALUES (p_id_receive, a, b, c, p_id_sro, d, e, CURRENT_TIMESTAMP(), 1);
+	update tr_pros_detail set status_receive =  1 where id_detail_pros = a ;
+	END LOOP;
+	CLOSE cur1; 
 END */$$
 DELIMITER ;
 
@@ -1160,28 +1148,28 @@ DELIMITER ;
 DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_receive_return`(IN p_id_receive INT)
-BEGIN
-	DECLARE done INT DEFAULT FALSE;
-	DECLARE a, b, c, e, f INT;
-	DECLARE d VARCHAR(21);
-	DECLARE cur1 CURSOR FOR SELECT  y.id_detail_pros, y.id_ro, y.id_detail_ro, x.kode_barang, (y.qty - x.qty) as sisa, x.id_detail_receive 
-	FROM  tr_receive_detail x, tr_pros_detail y 
-	where x.id_detail_pros = y.id_detail_pros
-	and x.id_receive = p_id_receive;
-	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-		
-	OPEN cur1;
-	read_loop : LOOP
-	FETCH cur1 INTO a, b, c, d, e, f ;
-	IF done THEN 
-	LEAVE read_loop;
-	END IF;
-	if e <> 0 then
-	INSERT INTO tr_return_detail (id_receive, id_detail_receive, id_detail_pros, id_ro, id_detail_ro, kode_barang, qty, date_create, STATUS) 
-	VALUES ( p_id_receive, f, a, b, c, d, e, CURRENT_TIMESTAMP(), 1);
-	end if;
-	END LOOP;
-	CLOSE cur1; 
+BEGIN
+	DECLARE done INT DEFAULT FALSE;
+	DECLARE a, b, c, e, f INT;
+	DECLARE d VARCHAR(21);
+	DECLARE cur1 CURSOR FOR SELECT  y.id_detail_pros, y.id_ro, y.id_detail_ro, x.kode_barang, (y.qty - x.qty) as sisa, x.id_detail_receive 
+	FROM  tr_receive_detail x, tr_pros_detail y 
+	where x.id_detail_pros = y.id_detail_pros
+	and x.id_receive = p_id_receive;
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+		
+	OPEN cur1;
+	read_loop : LOOP
+	FETCH cur1 INTO a, b, c, d, e, f ;
+	IF done THEN 
+	LEAVE read_loop;
+	END IF;
+	if e <> 0 then
+	INSERT INTO tr_return_detail (id_receive, id_detail_receive, id_detail_pros, id_ro, id_detail_ro, kode_barang, qty, date_create, STATUS) 
+	VALUES ( p_id_receive, f, a, b, c, d, e, CURRENT_TIMESTAMP(), 1);
+	end if;
+	END LOOP;
+	CLOSE cur1; 
 END */$$
 DELIMITER ;
 
@@ -1192,29 +1180,29 @@ DELIMITER ;
 DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_return_order`(IN p_id_return INT)
-BEGIN
-	DECLARE done INT DEFAULT FALSE;
-	DECLARE a INT;
-	DECLARE b, c VARCHAR(21);
-	DECLARE d DATE;
-	DECLARE cur1 CURSOR FOR SELECT x.user_id, y.purpose, y.cat_req, y.ETD
-	FROM  tr_return X, tr_ro  Y, tr_receive z, tr_sro v 
-	WHERE x.id_return = p_id_return and x.id_receive = z.id_receive and z.id_sro = v.id_sro and v.id_ro = y.id_ro;
-	
-	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-		
-	OPEN cur1;
-	read_loop : LOOP
-	FETCH cur1 INTO a, b, c, d;
-	IF done THEN 
-	LEAVE read_loop;
-	END IF;
-	
-	INSERT INTO tr_ro (user_id, purpose, cat_req, ext_doc_no, ETD, date_create,  status, status_order ) 
-	VALUES (  a, b, c, p_id_return, d, CURRENT_TIMESTAMP(), 4, 3);
-	
-	END LOOP;
-	CLOSE cur1; 
+BEGIN
+	DECLARE done INT DEFAULT FALSE;
+	DECLARE a INT;
+	DECLARE b, c VARCHAR(21);
+	DECLARE d DATE;
+	DECLARE cur1 CURSOR FOR SELECT x.user_id, y.purpose, y.cat_req, y.ETD
+	FROM  tr_return X, tr_ro  Y, tr_receive z, tr_sro v 
+	WHERE x.id_return = p_id_return and x.id_receive = z.id_receive and z.id_sro = v.id_sro and v.id_ro = y.id_ro;
+	
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+		
+	OPEN cur1;
+	read_loop : LOOP
+	FETCH cur1 INTO a, b, c, d;
+	IF done THEN 
+	LEAVE read_loop;
+	END IF;
+	
+	INSERT INTO tr_ro (user_id, purpose, cat_req, ext_doc_no, ETD, date_create,  status, status_order ) 
+	VALUES (  a, b, c, p_id_return, d, CURRENT_TIMESTAMP(), 4, 3);
+	
+	END LOOP;
+	CLOSE cur1; 
 END */$$
 DELIMITER ;
 
@@ -1225,29 +1213,29 @@ DELIMITER ;
 DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_return_order_detail`(IN p_id_return INT, IN p_id_ro int, IN p_user_id INT)
-BEGIN
-	DECLARE done INT DEFAULT FALSE;
-	DECLARE b INT;
-	DECLARE a VARCHAR(21);
-	DECLARE c TEXT;
-	DECLARE cur1 CURSOR FOR SELECT x.kode_barang, x.qty, y.note
-	FROM  tr_return_detail X, tr_ro_detail  Y
-	WHERE x.id_return = p_id_return and x.id_detail_ro = y.id_detail_ro;
-	
-	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-		
-	OPEN cur1;
-	read_loop : LOOP
-	FETCH cur1 INTO a, b, c;
-	IF done THEN 
-	LEAVE read_loop;
-	END IF;
-	
-	INSERT INTO tr_ro_detail (id_ro, ext_doc_no, kode_barang,  qty, barang_bekas, user_id, date_create, note, status, status_delete ) 
-	VALUES (  p_id_ro, p_id_return, a, b, 1, p_user_id, CURRENT_TIMESTAMP(), c, 1, 0);
-	
-	END LOOP;
-	CLOSE cur1; 
+BEGIN
+	DECLARE done INT DEFAULT FALSE;
+	DECLARE b INT;
+	DECLARE a VARCHAR(21);
+	DECLARE c TEXT;
+	DECLARE cur1 CURSOR FOR SELECT x.kode_barang, x.qty, y.note
+	FROM  tr_return_detail X, tr_ro_detail  Y
+	WHERE x.id_return = p_id_return and x.id_detail_ro = y.id_detail_ro;
+	
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+		
+	OPEN cur1;
+	read_loop : LOOP
+	FETCH cur1 INTO a, b, c;
+	IF done THEN 
+	LEAVE read_loop;
+	END IF;
+	
+	INSERT INTO tr_ro_detail (id_ro, ext_doc_no, kode_barang,  qty, barang_bekas, user_id, date_create, note, status, status_delete ) 
+	VALUES (  p_id_ro, p_id_return, a, b, 1, p_user_id, CURRENT_TIMESTAMP(), c, 1, 0);
+	
+	END LOOP;
+	CLOSE cur1; 
 END */$$
 DELIMITER ;
 
@@ -1258,29 +1246,29 @@ DELIMITER ;
 DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `p_transfer`(IN p_id_transfer INT)
-BEGIN
-	DECLARE done INT DEFAULT FALSE;
-	DECLARE b, d, e INT;
-	DECLARE c, f VARCHAR(21);
-	DECLARE cur1 CURSOR FOR 
-	SELECT id_detail_transfer, kode_barang, qty, price, id_lokasi
-	FROM  tr_transfer_detail
-	WHERE id_transfer = p_id_transfer ;
-	
-	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-		
-	OPEN cur1;
-	read_loop : LOOP
-	FETCH cur1 INTO  b, c, d, e, f;
-	IF done THEN 
-	LEAVE read_loop;
-	END IF;
-	
-	INSERT INTO tr_stock ( id_in, id_detail_in, kode_barang, qty, price, id_lokasi, date_create, status, type_in ) 
-	VALUES (  p_id_transfer, b, c, d, e, f, CURRENT_TIMESTAMP(), 1, 2);
-	
-	END LOOP;
-	CLOSE cur1; 
+BEGIN
+	DECLARE done INT DEFAULT FALSE;
+	DECLARE b, d, e INT;
+	DECLARE c, f VARCHAR(21);
+	DECLARE cur1 CURSOR FOR 
+	SELECT id_detail_transfer, kode_barang, qty, price, id_lokasi
+	FROM  tr_transfer_detail
+	WHERE id_transfer = p_id_transfer ;
+	
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+		
+	OPEN cur1;
+	read_loop : LOOP
+	FETCH cur1 INTO  b, c, d, e, f;
+	IF done THEN 
+	LEAVE read_loop;
+	END IF;
+	
+	INSERT INTO tr_stock ( id_in, id_detail_in, kode_barang, qty, price, id_lokasi, date_create, status, type_in ) 
+	VALUES (  p_id_transfer, b, c, d, e, f, CURRENT_TIMESTAMP(), 1, 2);
+	
+	END LOOP;
+	CLOSE cur1; 
 END */$$
 DELIMITER ;
 
@@ -1387,10 +1375,57 @@ DROP TABLE IF EXISTS `v_qrs_detail`;
  `id_pr` int(11) ,
  `id_ro` int(11) ,
  `kode_barang` varchar(21) ,
- `id_detail_qrs` int(11) ,
  `qty` int(11) ,
  `pick` decimal(32,0) ,
  `sisa` decimal(33,0) 
+)*/;
+
+/*Table structure for table `v_status_barang` */
+
+DROP TABLE IF EXISTS `v_status_barang`;
+
+/*!50001 DROP VIEW IF EXISTS `v_status_barang` */;
+/*!50001 DROP TABLE IF EXISTS `v_status_barang` */;
+
+/*!50001 CREATE TABLE  `v_status_barang`(
+ `kode_barang` varchar(10) ,
+ `status_barang` varchar(11) 
+)*/;
+
+/*Table structure for table `v_status_kategori` */
+
+DROP TABLE IF EXISTS `v_status_kategori`;
+
+/*!50001 DROP VIEW IF EXISTS `v_status_kategori` */;
+/*!50001 DROP TABLE IF EXISTS `v_status_kategori` */;
+
+/*!50001 CREATE TABLE  `v_status_kategori`(
+ `id_kategori` int(6) ,
+ `status_kategori` varchar(11) 
+)*/;
+
+/*Table structure for table `v_status_satuan` */
+
+DROP TABLE IF EXISTS `v_status_satuan`;
+
+/*!50001 DROP VIEW IF EXISTS `v_status_satuan` */;
+/*!50001 DROP TABLE IF EXISTS `v_status_satuan` */;
+
+/*!50001 CREATE TABLE  `v_status_satuan`(
+ `id_satuan` smallint(6) ,
+ `status_satuan` varchar(11) 
+)*/;
+
+/*Table structure for table `v_status_sub_kategori` */
+
+DROP TABLE IF EXISTS `v_status_sub_kategori`;
+
+/*!50001 DROP VIEW IF EXISTS `v_status_sub_kategori` */;
+/*!50001 DROP TABLE IF EXISTS `v_status_sub_kategori` */;
+
+/*!50001 CREATE TABLE  `v_status_sub_kategori`(
+ `id_sub_kategori` int(6) ,
+ `status_sub_kategori` varchar(11) 
 )*/;
 
 /*View structure for view v_po_detail */
@@ -1426,7 +1461,35 @@ DROP TABLE IF EXISTS `v_qrs_detail`;
 /*!50001 DROP TABLE IF EXISTS `v_qrs_detail` */;
 /*!50001 DROP VIEW IF EXISTS `v_qrs_detail` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_qrs_detail` AS (select `a`.`id_detail_pr` AS `id_detail_pr`,`a`.`id_pr` AS `id_pr`,`a`.`id_ro` AS `id_ro`,`a`.`kode_barang` AS `kode_barang`,`b`.`id_detail_qrs` AS `id_detail_qrs`,`a`.`qty` AS `qty`,coalesce(sum(`b`.`qty`),0) AS `pick`,(`a`.`qty` - coalesce(sum(`b`.`qty`),0)) AS `sisa` from ((`tr_pr_detail` `a` left join `tr_pr` `c` on((`a`.`id_pr` = `c`.`id_pr`))) left join `tr_qrs_detail` `b` on((`a`.`id_detail_pr` = `b`.`id_detail_pr`))) where (`c`.`status` = 2) group by `a`.`id_detail_pr`) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_qrs_detail` AS (select `a`.`id_detail_pr` AS `id_detail_pr`,`a`.`id_pr` AS `id_pr`,`a`.`id_ro` AS `id_ro`,`a`.`kode_barang` AS `kode_barang`,`a`.`qty` AS `qty`,coalesce(sum(`b`.`qty`),0) AS `pick`,(`a`.`qty` - coalesce(sum(`b`.`qty`),0)) AS `sisa` from ((`tr_pr_detail` `a` left join `tr_pr` `c` on((`a`.`id_pr` = `c`.`id_pr`))) left join `tr_qrs_detail` `b` on((`a`.`id_detail_pr` = `b`.`id_detail_pr`))) where (`c`.`status` = 2) group by `a`.`id_detail_pr`) */;
+
+/*View structure for view v_status_barang */
+
+/*!50001 DROP TABLE IF EXISTS `v_status_barang` */;
+/*!50001 DROP VIEW IF EXISTS `v_status_barang` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_status_barang` AS (select `ref_barang`.`kode_barang` AS `kode_barang`,(case `ref_barang`.`status` when '1' then 'Aktif' else 'Tidak Aktif' end) AS `status_barang` from `ref_barang`) */;
+
+/*View structure for view v_status_kategori */
+
+/*!50001 DROP TABLE IF EXISTS `v_status_kategori` */;
+/*!50001 DROP VIEW IF EXISTS `v_status_kategori` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_status_kategori` AS (select `ref_kategori`.`id_kategori` AS `id_kategori`,(case `ref_kategori`.`status` when '1' then 'Aktif' else 'Tidak Aktif' end) AS `status_kategori` from `ref_kategori`) */;
+
+/*View structure for view v_status_satuan */
+
+/*!50001 DROP TABLE IF EXISTS `v_status_satuan` */;
+/*!50001 DROP VIEW IF EXISTS `v_status_satuan` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_status_satuan` AS (select `ref_satuan`.`id_satuan` AS `id_satuan`,(case `ref_satuan`.`status` when '1' then 'Aktif' else 'Tidak Aktif' end) AS `status_satuan` from `ref_satuan`) */;
+
+/*View structure for view v_status_sub_kategori */
+
+/*!50001 DROP TABLE IF EXISTS `v_status_sub_kategori` */;
+/*!50001 DROP VIEW IF EXISTS `v_status_sub_kategori` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_status_sub_kategori` AS (select `ref_sub_kategori`.`id_sub_kategori` AS `id_sub_kategori`,(case `ref_sub_kategori`.`status` when '1' then 'Aktif' else 'Tidak Aktif' end) AS `status_sub_kategori` from `ref_sub_kategori`) */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
