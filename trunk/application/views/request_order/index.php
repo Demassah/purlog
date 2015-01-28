@@ -63,7 +63,7 @@
 									msg: 'Data Berhasil Dikirim'
 								});
 								$('#dg').datagrid('reload');
-								addNotif('request_order_approval', 'RO telah dikirim ke RO Approval', 1, 1, 1, 2, 6);
+								addNotif('request_order_approval', 'Request Order telah dikirim ke RO Approval', 1, 1, 1, 2, 6);
 							} else {
 								$.messager.show({
 									title: 'Error',
