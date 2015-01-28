@@ -90,23 +90,23 @@ class document_receive extends CI_Controller {
 
 
         foreach($data['data_qty']['rows'] as $dt){
-            $ids[] = $dt['id_detail_pros'];
+            $ids[] = $dt['id_detail_receive'];
         }
 
         if(sizeof($ids) > 0) {
-            $prevData = $this->mdl_document_receive->getProsDetailIds  ($ids)->result();
+            $prevData = $this->mdl_document_receive->getReceiveDetailIds  ($ids)->result();
         }
 
 
         # init
         $status = "";
-        $data['pesan_error'] = 'Data gagal di realokasi';
+        $data['pesan_error'] = 'Data gagal di simpan';
        
         $error = false;
         $result = false;
 
         foreach($data['data_qty']['rows'] as $new) {
-            $prev = $this->mdl_document_receive->getProsDetail   ($new['id_detail_pros'])->row();
+            $prev = $this->mdl_document_receive->getReceiveDetail   ($new['id_detail_receive'])->row();
             if($prev->qty < $new['qty'] || $new['qty'] < 0) {
                 $error = true;
             }
