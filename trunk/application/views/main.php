@@ -51,9 +51,9 @@ date_default_timezone_set('Asia/Jakarta');
 				});
 			};
 
-			addNotif = function(furl, fcontext, fbindingtype, fbindingid, ftype)
+			addNotif = function(furl, fcontext, fbindingtype, fbindingid, ftype, flevel, fstatus, ftanggal)
 			{
-				$.post(base_url+"notifikasi/add", {url: furl, context: fcontext, binding_type: fbindingtype, binding_id: fbindingid, type: ftype}).done(function(data)
+				$.post(base_url+"notifikasi/add", {url: furl, context: fcontext, binding_type: fbindingtype, binding_id: fbindingid, type: ftype, user_level_id: flevel, status: fstatus, tanggal:ftanggal}).done(function(data)
 				{
 					refreshNotif();
 				});

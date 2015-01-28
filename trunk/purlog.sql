@@ -278,16 +278,17 @@ CREATE TABLE `tr_notifikasi` (
   `context` text,
   `url` varchar(255) DEFAULT NULL,
   `status` int(11) DEFAULT '0',
-  `tanggal` int(11) DEFAULT NULL,
+  `tanggal` date DEFAULT NULL,
   `type` int(11) DEFAULT NULL,
   `binding_type` int(11) NOT NULL,
   `binding_id` int(11) NOT NULL,
+  `user_level_id` int(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tr_notifikasi` */
 
-insert  into `tr_notifikasi`(`id`,`context`,`url`,`status`,`tanggal`,`type`,`binding_type`,`binding_id`) values (8,'RO Dummy Notification','request_order',0,2015,2,0,0),(9,'Ada yang Baru!','request_order',0,NULL,2,1,1),(10,'Ada yang Baru!','request_order',0,NULL,2,1,1),(11,'Ini adalah kamu, kamu adalah aku','request_order',0,NULL,3,12,1),(12,'Ini adalah kamu, kamu adalah aku','request_order',0,NULL,3,12,1),(13,'asasadfgsdsa','asasas',0,NULL,45,1234,45),(14,'Request Order Baru telah dibuat','request_order',0,NULL,1,1,1);
+insert  into `tr_notifikasi`(`id`,`context`,`url`,`status`,`tanggal`,`type`,`binding_type`,`binding_id`,`user_level_id`) values (14,'Request Order Baru telah dibuat','request_order',0,NULL,1,1,1,0),(15,'Request Order Baru telah dibuat','request_order',0,NULL,1,1,1,0),(20,'RO telah dikirim ke RO Approval','request_order_approval',0,NULL,1,1,1,0),(21,'RO telah dikirim ke RO Approval','request_order_approval',1,NULL,1,1,1,2),(22,'Data RO Approval Baru telah dikirim ke RO Logistic','request_order_logistic',1,NULL,1,1,1,2),(25,'Data Request Order di Approve oleh Manager','request_order_logistic',1,NULL,1,1,1,2),(26,'Purchase Request Baru telah dibuat','purchase_request',1,NULL,3,1,1,2);
 
 /*Table structure for table `tr_po` */
 
@@ -326,11 +327,11 @@ CREATE TABLE `tr_pr` (
   `date_create` datetime DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id_pr`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tr_pr` */
 
-insert  into `tr_pr`(`id_pr`,`id_ro`,`id_po`,`user_id`,`purpose`,`cat_req`,`ext_doc_no`,`ETD`,`date_create`,`status`) values (1,1,NULL,1,'REQUEST','ASSET','SPK/123','2015-01-20','2015-01-20 09:22:32',2);
+insert  into `tr_pr`(`id_pr`,`id_ro`,`id_po`,`user_id`,`purpose`,`cat_req`,`ext_doc_no`,`ETD`,`date_create`,`status`) values (1,1,NULL,1,'REQUEST','ASSET','SPK/123','2015-01-20','2015-01-20 09:22:32',2),(2,2,NULL,1,'REQUEST','CETAKAN','112233','2015-01-20','2015-01-20 10:54:09',1);
 
 /*Table structure for table `tr_pr_detail` */
 
@@ -545,11 +546,11 @@ CREATE TABLE `tr_ro` (
   `status` int(1) DEFAULT NULL COMMENT '1: RO, 2: ROA, 3:ROL, 4: ROS, 5: Picking, 6: Shipment, 7: DO, 9: Reject',
   `status_order` smallint(1) DEFAULT '1' COMMENT '1: ORDER, 2: PURCHASE, 3: RETURN',
   PRIMARY KEY (`id_ro`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `tr_ro` */
 
-insert  into `tr_ro`(`id_ro`,`user_id`,`purpose`,`cat_req`,`ext_doc_no`,`ETD`,`date_create`,`date_approve`,`date_reject`,`status`,`status_order`) values (1,1,'REQUEST','ASSET','SPK/123','2015-01-20','2015-01-20 09:22:32','2015-01-20 09:26:28','0000-00-00 00:00:00',6,1),(2,1,'REQUEST','CETAKAN','112233','2015-01-20','2015-01-20 10:54:09','2015-01-20 10:56:16','0000-00-00 00:00:00',6,1),(3,1,'STOCK','SPAREPART','332211','2015-01-20','2015-01-20 10:54:49','2015-01-20 10:56:20','0000-00-00 00:00:00',6,1),(4,1,'REQUEST','ASSET','554433','2015-01-23','2015-01-23 13:53:19','2015-01-23 14:54:11','0000-00-00 00:00:00',4,1),(9,1,'REQUEST','ASSET','0987','2015-01-27','2015-01-27 16:19:34','0000-00-00 00:00:00','0000-00-00 00:00:00',1,1);
+insert  into `tr_ro`(`id_ro`,`user_id`,`purpose`,`cat_req`,`ext_doc_no`,`ETD`,`date_create`,`date_approve`,`date_reject`,`status`,`status_order`) values (1,1,'REQUEST','ASSET','SPK/123','2015-01-20','2015-01-20 09:22:32','2015-01-20 09:26:28','0000-00-00 00:00:00',6,1),(2,1,'REQUEST','CETAKAN','112233','2015-01-20','2015-01-20 10:54:09','2015-01-20 10:56:16','0000-00-00 00:00:00',6,1),(3,1,'STOCK','SPAREPART','332211','2015-01-20','2015-01-20 10:54:49','2015-01-20 10:56:20','0000-00-00 00:00:00',6,1),(4,1,'REQUEST','ASSET','554433','2015-01-23','2015-01-23 13:53:19','2015-01-23 14:54:11','0000-00-00 00:00:00',4,1),(9,1,'REQUEST','ASSET','0987','2015-01-27','2015-01-27 16:19:34','0000-00-00 00:00:00','0000-00-00 00:00:00',1,1),(10,1,'STOCK','ASSET','987897','2015-01-28','2015-01-28 09:34:30','0000-00-00 00:00:00','2015-01-28 13:27:54',2,1),(11,1,'STOCK','ATK','546','2015-01-28','2015-01-28 10:55:38','2015-01-28 13:40:21','0000-00-00 00:00:00',3,1);
 
 /*Table structure for table `tr_ro_detail` */
 
@@ -569,11 +570,11 @@ CREATE TABLE `tr_ro_detail` (
   `status_delete` int(1) NOT NULL COMMENT '1. deleted',
   `id_sro` int(6) NOT NULL,
   PRIMARY KEY (`id_detail_ro`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tr_ro_detail` */
 
-insert  into `tr_ro_detail`(`id_detail_ro`,`id_ro`,`ext_doc_no`,`kode_barang`,`qty`,`barang_bekas`,`user_id`,`date_create`,`note`,`status`,`status_delete`,`id_sro`) values (1,1,'SPK/123','100',20,2,1,'2015-01-20 09:22:32','adi',1,0,0),(2,1,'SPK/123','201',10,1,1,'2015-01-20 09:22:32','ida',1,0,0),(3,1,'SPK/123','203',5,1,1,'2015-01-20 09:22:32','MOuse logitech',1,0,0),(4,2,'112233','301',5,1,1,'2015-01-20 10:54:09','tes',1,0,0),(5,3,'332211','302',3,1,1,'2015-01-20 10:54:49','-',1,0,0),(6,4,'554433','301',1,1,1,'2015-01-23 13:53:19','tes',1,0,0);
+insert  into `tr_ro_detail`(`id_detail_ro`,`id_ro`,`ext_doc_no`,`kode_barang`,`qty`,`barang_bekas`,`user_id`,`date_create`,`note`,`status`,`status_delete`,`id_sro`) values (1,1,'SPK/123','100',20,2,1,'2015-01-20 09:22:32','adi',1,0,0),(2,1,'SPK/123','201',10,1,1,'2015-01-20 09:22:32','ida',1,0,0),(3,1,'SPK/123','203',5,1,1,'2015-01-20 09:22:32','MOuse logitech',1,0,0),(4,2,'112233','301',5,1,1,'2015-01-20 10:54:09','tes',1,0,0),(5,3,'332211','302',3,1,1,'2015-01-20 10:54:49','-',1,0,0),(6,4,'554433','301',1,1,1,'2015-01-23 13:53:19','tes',1,0,0),(7,10,'987897','203',15,1,1,'2015-01-28 09:34:30','-',1,0,0),(8,11,'546','302',546,2,1,'2015-01-28 10:55:38','-',1,0,0);
 
 /*Table structure for table `tr_sro` */
 
