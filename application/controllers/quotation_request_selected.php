@@ -125,8 +125,8 @@ class quotation_request_selected extends CI_Controller {
 	//add new Qrs
 	function new_qrs()
   {
-  	$data['id_pr'] = '';
-  	$this->load->view('quotation_request_selected/form_newqrs',$data);
+  	//$data['id_pr'] = '';
+  	$this->load->view('quotation_request_selected/form_newqrs');
   }
 
   function SaveNewQrs($aksi){
@@ -138,10 +138,9 @@ class quotation_request_selected extends CI_Controller {
 		# get post data
 		foreach($_POST as $key => $value){
 			$data[$key] = $value;
-			 // echo print_r($value);
+			echo $value;
 		}
 
-		
 		# rules validasi form
 		$this->form_validation->set_rules("user_id", 'ID user', 'trim|required|xss_clean');
 		$this->form_validation->set_rules("id_pr", 'ID PR', 'trim|required|xss_clean');
@@ -153,7 +152,7 @@ class quotation_request_selected extends CI_Controller {
 			$data["pesan_error"] .= trim(validation_errors(' ',' '))==''?'':validation_errors(' ',' ');
 		}else{
 			if($aksi=="add"){ // add
-			// /print_r($data);
+			//print_r($data['id_pr']);
 			$result = $this->mdl_quotation_request_selected->Insert_Qrs($data);
 			}else { // edit
 				$result=$this->mdl_quotation_request_selected->cancel($data);

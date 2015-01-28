@@ -44,10 +44,9 @@
 <script >
   var url;
   $(document).ready(function(){
-
   newData = function (){
       $('#dialog').dialog({
-        title: 'Tambah Delivery Order',
+        title: 'Tambah QRS',
         width: 380,
         height: 130,
         closed: true,
@@ -61,8 +60,7 @@
     }
     // end newData
     saveData = function(){
-      
-      $('#form2').form('submit',{
+      $('#qrs').form('submit',{
         url: url,
         onSubmit: function(){
           return $(this).form('validate');
@@ -76,7 +74,7 @@
               msg: 'Data Berhasil Ditambahkan ',
             });
             $('#dialog').dialog('close');   // close the dialog
-            $('#dg_qrs').datagrid('reload');   // reload the user data
+            $('#detail_dg_qrs').datagrid('reload');   // reload the user data
           } else {
             $.messager.show({
               title: 'Error',
