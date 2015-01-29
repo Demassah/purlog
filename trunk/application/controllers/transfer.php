@@ -113,12 +113,9 @@ class transfer extends CI_Controller {
 	}
 
 	/* ------------------------------------------------ add detail ------------------------------------------------*/
-
-
 		function add_detail($id=null){
                 if($id!=null){
                         $data['id_transfer'] = $id;
-                        //$data['id_ro'] = $this->mdl_purchase_request->get_id_ro($id);
                 }
                 $this->load->view('transfer/form_detail', $data);
         }

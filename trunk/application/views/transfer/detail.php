@@ -119,8 +119,8 @@
 			<th field="id_stock" sortable="true" width="80">ID Stock</th>
 			<th field="kode_barang" sortable="true" width="120">Kode Barang</th>
 			<th field="nama_barang" sortable="true" width="150">Nama Barang</th>		
-			<!-- <th field="qty_stock" sortable="true" width="100">Qty Stock</th>		 -->
-			<th data-options="field:'qty',width:'100'," editor="text">Qty Transfer</th> 
+			<th field="qty_stock" sortable="true" width="85">Qty Stock</th>		
+			<th data-options="field:'qty',width:'85'," editor="text">Qty Transfer</th> 
 			<th field="price" sortable="true" width="100">Price</th>		
 			<th field="lokasi_stock" sortable="true" width="100">Lokasi Stock</th>
 			<th data-options="field:'id_lokasi',width:'100'," editor="text">Lokasi Transfer</th> 

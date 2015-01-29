@@ -113,16 +113,16 @@ class mdl_transfer extends CI_Model {
 
 	function getdata_transfer($dt){
 		$this->db->flush_cache();
-		$this->db->select('a.id_stock, a.kode_barang, a.price, a.status, b.nama_barang');
+		$this->db->select('a.id_stock, a.kode_barang, a.price, a.kode_barang, a.status, b.nama_barang');
 			$this->db->from('tr_stock a');
 			$this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang');
 			$this->db->join('tr_transfer_detail c', 'c.id_stock = a.id_stock', 'left');
-
+			//var_dump($dt); exit();
 			$this->db->where('a.kode_barang', $dt['kode_barang']);
+			//$this->db->where('a.status','1');
 
-		$this->db->limit($dt['jumlah'], 0);		
+		//$this->db->limit($dt['jumlah'], 0);
 		//$this->db->group_by('id_detail_pr');
-		//$this->db->group_by('id_stock');
 		$this->db->order_by('a.kode_barang', 'ASC');
 		
 		$q = $this->db->get()->result();
@@ -137,7 +137,7 @@ class mdl_transfer extends CI_Model {
 			$out .= '     <input type="hidden" name="data['.$i.'][id_stock]" value="'.$r->id_stock.'">';
 			$out .= '     <input type="hidden" name="data['.$i.'][kode_barang]" value="'.$r->kode_barang.'">';
 			$out .= '     <input type="hidden" name="data['.$i.'][price]" value="'.$r->price.'">';
-
+						  
 			$out .= '  </td>';
 			$out .= '  <td bgcolor="'.$color.'">'.$r->id_stock.'</td>';
 			$out .= '  <td bgcolor="'.$color.'">'.$r->kode_barang.'</td>';
@@ -161,6 +161,16 @@ class mdl_transfer extends CI_Model {
 		foreach($data as $row){
 			if(isset($row['chk']) && $row['chk'] == 'on'){
 				$data_kosong = false;
+
+				# update table sock
+				$this->db->flush_cache();
+				
+				//$this->db->set('id_stock', $row['id_stock']);
+				$this->db->set('kode_barang', $row['kode_barang']);
+				$this->db->set('price', $row['price']);
+				//var_dump($row); exit();
+				$this->db->where('id_stock', $row['id_stock']);
+				$this->db->update('tr_stock');
 				
 				# update table purchase request detail
 				$this->db->flush_cache();
@@ -172,8 +182,8 @@ class mdl_transfer extends CI_Model {
 				$this->db->set('kode_barang', $row['kode_barang']);
 				$this->db->set('price', $row['price']);
 				$this->db->set('status', '1');
-
-				//$this->db->where('id_detail_transfer', $row['id_detail_transfer']);
+				//var_dump($row); exit();
+				//$this->db->where('id_detail_pr', $row['id_detail_pr']);
 				$this->db->insert('tr_transfer_detail');
 			}
 		}
