@@ -3,13 +3,13 @@
 			$(".select").select2();
 		});
 </script>
-<?php date_default_timezone_set("Asia/Jakarta");?>
-<form id="qrs" method="post" style="margin:10px">
-	<input type="hidden" name="user_id" value="<?php echo  $this->session->userdata('user_level_id');?>">
-	<input type="hidden" name="date_create" value="<?php echo date('Y-m-d H:i:s');?>">
-	<input type="hidden" name="status" value="1">
+
+<form id="form_qrs" method="post" style="margin:10px">
+	<input type="hidden" name="user_id" value="<?=$user_id;?>">
+	<input type="hidden" name="date_create" value="<?=$date_create;?>">
+	<input type="hidden" name="status" value="<?=$status;?>">
 	<div class="fitem sub">
-		<label style="width:100px">ID PR </label>:
+		<label style="width:100px">ID PR</label>:
 		<select name="id_pr" class="select" >
 			<?=$this->mdl_prosedur->OptionQrs();?>
 		</select>
