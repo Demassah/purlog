@@ -220,6 +220,11 @@ class mdl_quotation_request_selected extends CI_Model {
 		$this->db->stop_cache();
 	}
 
+	function select_tr_qrs($data)
+	{
+		# code...
+	}
+
 	function Insert_vendor($data)
 	{
 		$this->db->flush_cache();

@@ -12,7 +12,7 @@
 	<input type="hidden" name="departement_id" value="<?php echo $this->session->userdata('departement_id'); ?>">
 
 	<div class="fitem" >
-		<label style="width:100px">Purchase Request</label>: 
+		<label style="width:110px">Purchase Request</label>: 
 			<select class="select" name="id_pr" style="width:200px;">
 						<option value="">Pilih</option>
 							<?=$this->mdl_prosedur->OptionPurchaseOrder(array('value'=>$id_pr));?>
@@ -21,7 +21,7 @@
 	</div>
 	<?if($this->mdl_auth->CekAkses(array('menu_id'=>17, 'policy'=>'SELECT'))){?>
 		<div class="fitem">
-			<label style="width:100px">Departement</label>: 
+			<label style="width:110px">Departement</label>: 
 				<select class="select" name="departement_id" style="width:200px;">
 								<?=$this->mdl_prosedur->OptionDepartement(array('value'=>$departement_id));?>
 							       
