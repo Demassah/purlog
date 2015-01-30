@@ -28,7 +28,7 @@
 
   $(document).ready(function(){
 
-  newData = function (val){
+  Add_detail = function (val){
       $('#dialog').dialog({
         title: 'Tambah Detail QRS/PR',
         width: 780,
@@ -44,7 +44,7 @@
     }
     // end newData
     saveData = function(){
-      $('#form2').form('submit',{
+      $('#form_add_detail').form('submit',{
         url: url,
         onSubmit: function(){
           return $(this).form('validate');
@@ -120,7 +120,7 @@
             iconCls:'icon-add',
             text:'Create',
             handler:function(){
-              newData();
+              Add_detail();
             }
           },
            {
