@@ -4,6 +4,7 @@ class shipment_req_order extends CI_Controller {
 	
 	function __construct(){
 		parent::__construct();
+		date_default_timezone_set("Asia/Jakarta");
 		$this->load->model('mdl_shipment_req_order');
 		//$this->load->helper('tgl_indonesia');
 		//$this->output->enable_profiler(TRUE);

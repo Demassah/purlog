@@ -4,6 +4,7 @@ class document_receive extends CI_Controller {
 	
 	function __construct(){
 		parent::__construct();
+        date_default_timezone_set("Asia/Jakarta");
 		$this->load->model('mdl_document_receive');
 		//$this->output->enable_profiler(TRUE);
 	}

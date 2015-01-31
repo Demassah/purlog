@@ -19,15 +19,15 @@
             foreach ($list as $d) {
             echo"
                 <tr id='check_$d[id_detail_pr]' align='center' class='checkbox'>
-                    <td align='center'><input type='checkbox' id='$d[id_detail_pr]' name='id_detail_pr[]' class='checkbox' checked='checked' value='$d[id_detail_pr]'>
+                    <td align='center'><input type='checkbox' id='$d[id_detail_pr]' name='id_detail_pr[]' class='checkbox' value='$d[id_detail_pr]'>
                     <td>$d[id_detail_pr]</td>
                     <td><input type='hidden' name='id_pr[]' value='$d[id_pr]'>$d[id_pr]</td>
                     <td><input type='hidden' name='id_qrs[]' value='$d[id_qrs]' size='3'>$d[id_qrs]</td>
                     <td><input type='hidden' name='kode_barang[]' value='$d[kode_barang]'>$d[kode_barang]</td>
                     <td>$d[nama_barang]</td>
                     <td>$d[qty]</td>
-                    <td><input type='hidden'  id='pick_qty_$d[qty]' value='$d[qty]' >$d[sisa]</td>
-                    <td id='$d[id_detail_pr]'><div id='$d[id_detail_pr]' class='qrs'><input type='text'  id='pick_input_$d[id_detail_pr]' name='pick[]' value='' size='7'></div></td>
+                    <td><input type='hidden'  id='pick_sisa_$d[id_detail_pr]' value='$d[sisa]' >$d[sisa]</td>
+                    <td id='$d[id_detail_pr]'><div id='$d[id_detail_pr]' class='qrs'><input type='text'  id='pick_input_$d[id_detail_pr]' name='pick[]' value='' size='4'></div></td>
                     </td>
                 </tr> ";
 
@@ -38,40 +38,41 @@
 </form>
 <script type="text/javascript">
     $(document).ready(function() {
-         $('input[type="checkbox"]').click(function(){
-            var id_detail = $(this).attr('id');
-                if($(this).prop("checked") == true){
-                    $("#check_"+id_detail).show();
-                }
-                else if($(this).prop("checked") == false){
-                    $("#check_"+id_detail).hide();
-                }
-            });
+         // $('input[type="checkbox"]').click(function(){
+         //    var id_detail = $(this).attr('id');
+         //        if($(this).prop("checked") == true){
+         //            $("#check_"+id_detail).show();
+         //        }
+         //        else if($(this).prop("checked") == false){
+         //            $("#check_"+id_detail).hide();
+         //        }
+         //    });
          $(function(){ //Sama jika menggunakan $(document).ready(function(){
              $("#check-all").click(function(){
                 if ( (this).checked == true ){
                    $('.checkbox').prop('checked', true);
-                   $('.checkbox').show();
+                   // $('.checkbox').show();
                 } else {
                    $('.checkbox').prop('checked', false);
-                    $('.checkbox').hide();
+                    // $('.checkbox').hide();
                 }
              });
         });
     });
 </script>
-<!--<script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function() {
-        $("td").on('click' ,'.qrs', function(event) {
+        $("div").on('click' ,'.qrs', function(event) {
           var ID_detail = $(this).attr('id');
+          $("#pick_input_"+ID_detail).numericInput();
     }).change(function(event) {
         var ID_detail = $(this).attr('id');
         var pick = $("#pick_input_"+ID_detail).val();
-        var pick_qty = $("#pick_qty_"+ID_detail).val();
+        var pick_qty = $("#pick_sisa_"+ID_detail).val();
         $(pick).numericInput();
-        if(pick => pick_qty ){
-            alert("Qty melebihi Qty yang ada");
+        if(pick > pick_qty || pick == 0){
+            alert("Nilai Melebihi sisa yang diajukan atau Nilai sama dengan Nol ");
         }
     });
 });
-</script>-->
+</script>

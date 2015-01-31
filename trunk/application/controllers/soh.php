@@ -4,6 +4,7 @@ class soh extends CI_Controller {
 	
 	function __construct(){
 		parent::__construct();
+		date_default_timezone_set("Asia/Jakarta");
 		$this->load->model('mdl_stock');
 		//$this->output->enable_profiler(TRUE);
 	}
