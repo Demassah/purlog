@@ -6,6 +6,7 @@
   $harga_set = array();
   $detail_qr = array();
   $index =0;
+  $qty = array();
   $qr_set = array();
   $status = array();
 
@@ -17,18 +18,20 @@
       array_push($top_set, $data['top']);
       array_push($qr_set,$data['id_qr']);
       array_push($detail_qr,$data['id_detail_qr']);
+      array_push($qty,$data['qty']);
       array_push($status,$data['status']);
-
       $supplier_id = $data['id_vendor'];
       $index = 0;
     }
     $harga_set[$data['nama_barang']][] = array($data['price'],$data['id_detail_qr']);
-    $barang_set[$index] = array("barang_nama" => $data['nama_barang'], "harga" => $harga_set[$data['nama_barang']]);
+    $qty_set[$data['qty']]= array($data['qty']);
+    $barang_set[$index] = array("barang_nama" => $data['nama_barang'], "harga" => $harga_set[$data['nama_barang']],"qty"=>$qty_set[$data['qty']]);
     $index++;
+    // echo print_r($qty_set);
   }
 
-  $quotation = array("supplier_nama" => $supplier_set, "top" => $top_set, "data" => $barang_set, "Selected" => $qr_set,"status"=>$status);
-
+  $quotation = array("supplier_nama" => $supplier_set, "top" => $top_set, "data" => $barang_set,"Selected" => $qr_set,"status"=>$status);
+ 
   $header = TRUE;
   $counter = 0;
   $_crossfield = array('Vendor', 'TOP');
@@ -58,13 +61,17 @@
 
     foreach ($quotation['data'] as $details) {
       echo '<tr>';
-      echo '<td>'.$quotation['data'][$data_counter]['barang_nama'].'</td>';
-
+      echo '<td>'.$quotation['data'][$data_counter]['barang_nama'].' ';
+        $data_qty = 0;
+        foreach ($quotation['data'][$data_counter]['qty'] as $qty) {
+          echo '['.$quotation['data'][$data_counter]['qty'][$data_qty].']</td>';
+          $data_qty ++;
+        }
       $harga_counter = 0;
       foreach ($quotation['data'][$data_counter]['harga'] as $harga) {
         echo '<td><div id="'.$quotation['data'][$data_counter]['harga'][$harga_counter][1].'" class="qrs">';
-          echo "<span name='harga' id='harga_".$quotation['data'][$data_counter]['harga'][$harga_counter][1]."' class='text'> Rp.".number_format($quotation['data'][$data_counter]['harga'][$harga_counter][0],2,',','.')."</span>";
-          echo "<input type='text' name='harga' value='".$quotation['data'][$data_counter]['harga'][$harga_counter][0]."' class='editbox' id='harga_input_".$quotation['data'][$data_counter]['harga'][$harga_counter][1]."'/>";
+          echo "<span name='harga' id='harga_".$quotation['data'][$data_counter]['harga'][$harga_counter][1]."' class='text'>Rp.".number_format($quotation['data'][$data_counter]['harga'][$harga_counter][0],2,',','.')."</span>";
+          echo "<input type='text'  name='harga' value='".$quotation['data'][$data_counter]['harga'][$harga_counter][0]."' class='editbox'  id='harga_input_".$quotation['data'][$data_counter]['harga'][$harga_counter][1]."'/>";
         echo"</div></td>";
         $harga_counter++;
       }
@@ -72,6 +79,7 @@
       $data_counter++;
     }
     echo "<tr><td></td>";
+
      $x=0;
       foreach ($quotation['Selected'] as $l) {
         //print_r($l);
@@ -94,6 +102,7 @@
   echo '</table>';
 ?>
 
+
 <script type="text/javascript">
   var id_pr = '<?php echo $id_pr;?>';
   $(".editbox").hide();
@@ -105,11 +114,13 @@
           $("#harga_input_"+ID_qr).focusin();
           $("#harga_input_"+ID_qr).numericInput();
           $("#harga_input_"+ID_qr).autoNumeric('init'); 
+          $("#harga_input_"+ID_qr).val(""); 
     }).change(function(event) {
       var ID_qr = $(this).attr('id');
       var harga = $("#harga_input_"+ID_qr).val();
       var dataString = 'id='+ID_qr+'&harga='+harga;
-      $("#harga_"+ID_qr).html('');
+      
+      $(harga).numericInput();
         if(harga.length > 0)
         {
           $.ajax({
@@ -125,12 +136,13 @@
                 title:'Success',
                 msg: 'Data berhasil Di Update'
               });
-            $('#qrs_table').load(base_url + 'quotation_request_selected/after_select/'+id_pr).fadeIn("slow");
+            $('#qrs_table').load(base_url + 'quotation_request_selected/after_select/'+id_pr).fadeIn("slow");  
             }
           });
         }else{
-          $('#qrs_table').load(base_url + 'quotation_request_selected/after_select/'+id_pr).fadeIn("slow");
+           $('#qrs_table').load(base_url + 'quotation_request_selected/after_select/'+id_pr).fadeIn("slow");
           alert("Harga tidak boleh null atau harga harus angka");
+
         }
     });
           $(".editbox").mouseup(function() {
@@ -142,7 +154,7 @@
           });
     // Selected
      select_vendor = function (val){
-      if(confirm("Apakah yakin akan mengirim data ke QRS '" + val + "'?")){
+      if(confirm("Apakah yakin akan Akan Memilih Vendor '" + val + "'?")){
         var response = '';
         $.ajax({ type: "GET",
            url: base_url+'quotation_request_selected/Selected/' + val +'/'+id_pr,
@@ -156,7 +168,7 @@
                 msg: 'Data Vendor Berhasil Dipilih'
               });
               // reload and close tab
-              $('#qrs_table').load(base_url + 'quotation_request_selected/after_select/'+id_pr).fadeIn("slow");
+              $('#qrs_table').load(base_url + 'quotation_request_selected/after_select/'+id_pr);
             } else {
               $.messager.show({
                 title: 'Error',
@@ -182,6 +194,7 @@
                 msg: 'Data Vendor Berhasil Di Hapus'
               });
               // reload and close tab
+              cache:false;
               $('#qrs_table').load(base_url + 'quotation_request_selected/after_select/'+id_pr).fadeIn("slow");
             } else {
               $.messager.show({
@@ -218,6 +231,7 @@
           //alert(result);
           var result = eval('('+result+')');
           if (result.success){
+            
             $('#dialog').dialog('close');   // close the dialog
             $("#qrs_table").load(base_url + 'quotation_request_selected/after_select/'+id_pr).fadeIn("slow");;  // reload the user data
             $.messager.show({
@@ -233,5 +247,10 @@
         }
       });
     }
+    back = function (val){
+      $('#konten').panel({
+        href:base_url+'quotation_request_selected/index'
+      });
+    }
   });
-</script>
+    </script>

@@ -34,8 +34,9 @@ class delivery_order extends CI_Controller {
   }	
 
   function add(){
-		$this->data['id_user'] = '';
-		$this->data['date'] = '';
+		$this->data['id_user'] = $this->session->userdata('user_id');
+		$this->data['date'] = date('Y-m-d H:i:s ');
+		$this->data['status']=1;
 		//$this->data['list'] = $this->mdl_courir->v_courir();
 		$this->load->view('delivery_order/form',$this->data);
 	}

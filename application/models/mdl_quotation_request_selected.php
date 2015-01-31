@@ -90,7 +90,7 @@ class mdl_quotation_request_selected extends CI_Model {
 
 	function list_pr($id_pr)
 	{
-		$this->db->select('a.id_qr,a.id_pr,a.id_vendor,top,a.ETD,a.status,b.kode_barang,b.price,c.nama_barang,d.name_vendor,b.id_detail_qr');
+		$this->db->select('a.id_qr,a.id_pr,a.id_vendor,top,a.ETD,a.status,b.kode_barang,b.price,c.nama_barang,d.name_vendor,b.id_detail_qr,b.qty');
 		$this->db->join('tr_qr_detail b', 'b.id_qr = a.id_qr');
 		$this->db->join('ref_barang c', 'c.kode_barang = b.kode_barang');
 		$this->db->join('ref_vendor d', 'd.id_vendor = a.id_vendor');

@@ -22,6 +22,7 @@
   $harga_set = array();
   $detail_qr = array();
   $index =0;
+  $qty = array();
   $qr_set = array();
   $status = array();
 
@@ -33,17 +34,20 @@
       array_push($top_set, $data['top']);
       array_push($qr_set,$data['id_qr']);
       array_push($detail_qr,$data['id_detail_qr']);
+      array_push($qty,$data['qty']);
       array_push($status,$data['status']);
       $supplier_id = $data['id_vendor'];
       $index = 0;
     }
     $harga_set[$data['nama_barang']][] = array($data['price'],$data['id_detail_qr']);
-    $barang_set[$index] = array("barang_nama" => $data['nama_barang'], "harga" => $harga_set[$data['nama_barang']]);
+    $qty_set[$data['qty']]= array($data['qty']);
+    $barang_set[$index] = array("barang_nama" => $data['nama_barang'], "harga" => $harga_set[$data['nama_barang']],"qty"=>$qty_set[$data['qty']]);
     $index++;
+    // echo print_r($qty_set);
   }
 
-  $quotation = array("supplier_nama" => $supplier_set, "top" => $top_set, "data" => $barang_set, "Selected" => $qr_set,"status"=>$status);
-
+  $quotation = array("supplier_nama" => $supplier_set, "top" => $top_set, "data" => $barang_set,"Selected" => $qr_set,"status"=>$status);
+ 
   $header = TRUE;
   $counter = 0;
   $_crossfield = array('Vendor', 'TOP');
@@ -73,8 +77,12 @@
 
     foreach ($quotation['data'] as $details) {
       echo '<tr>';
-      echo '<td>'.$quotation['data'][$data_counter]['barang_nama'].'</td>';
-
+      echo '<td>'.$quotation['data'][$data_counter]['barang_nama'].' ';
+        $data_qty = 0;
+        foreach ($quotation['data'][$data_counter]['qty'] as $qty) {
+          echo '['.$quotation['data'][$data_counter]['qty'][$data_qty].']</td>';
+          $data_qty ++;
+        }
       $harga_counter = 0;
       foreach ($quotation['data'][$data_counter]['harga'] as $harga) {
         echo '<td><div id="'.$quotation['data'][$data_counter]['harga'][$harga_counter][1].'" class="qrs">';
