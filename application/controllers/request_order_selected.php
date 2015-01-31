@@ -4,6 +4,7 @@ class request_order_selected extends CI_Controller {
 
 function __construct(){
 		parent::__construct();
+        date_default_timezone_set("Asia/Jakarta");
 		$this->load->model('mdl_request_order_selected');
 		//$this->output->enable_profiler(TRUE);
 	}

@@ -4,7 +4,8 @@ class alocate_return extends CI_Controller {
        
         function __construct(){
                 parent::__construct();
-        $this->load->model('mdl_alocate');
+                date_default_timezone_set("Asia/Jakarta");
+                $this->load->model('mdl_alocate');
                 $this->load->model('mdl_stock');
                 // $this->output->enable_profiler(TRUE);
         }

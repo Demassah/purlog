@@ -62,7 +62,7 @@ class mdl_quotation_request_selected extends CI_Model {
 		}
 		return json_encode($response);
 	}
-	// ---------------------------------------------------List Vendor -------------------------------------------------------------- //
+	// ---------------------------------------------------List Vendor/PR -------------------------------------------------------------- //
 
 	function check_tr_qr($id_pr)
 	{
@@ -102,7 +102,7 @@ class mdl_quotation_request_selected extends CI_Model {
 		$query = $this->db->get('tr_qr a');
 		return $query->result_array();
 	}
-
+	// --------------------------------------------------- Update Harga -------------------------------------------------------------- //
 	function update($id,$data)
 	{
 		$harga = str_replace(",","",$data);
@@ -110,13 +110,14 @@ class mdl_quotation_request_selected extends CI_Model {
 		$this->db->set('price',$harga);
 		$this->db->update('tr_qr_detail');
 	}
-	
+	// --------------------------------------------------- Update Vendor -------------------------------------------------------------- //
 	function update_qr_vendor($id_pr)
 	{
 		$this->db->set('status','1');
 		$this->db->where('id_pr', $id_pr);
 		return $this->db->update('tr_qr');
 	}
+		// --------------------------------------------------- Cek Harga -------------------------------------------------------------- //
 	function cek_price($kode)
 	{
 		$this->db->select('price,id_pr,id_detail_qr');
@@ -124,7 +125,7 @@ class mdl_quotation_request_selected extends CI_Model {
 		$query = $this->db->get('tr_qr_detail');
 		return $query->result();
 	}
-
+	// --------------------------------------------------- Select Vendor -------------------------------------------------------------- //
 	function selected($kode,$id_pr){
 		$cek = $this->mdl_quotation_request_selected->cek_price($kode);
 			foreach ($cek as $l) {
@@ -152,7 +153,7 @@ class mdl_quotation_request_selected extends CI_Model {
 				return FALSE;
 		}
 	}
-
+	// --------------------------------------------------- Delete Vendor -------------------------------------------------------------- //
 	function Delete($kode)
 	{
 		$this->db->flush_cache();
@@ -190,7 +191,7 @@ class mdl_quotation_request_selected extends CI_Model {
 			return $this->db->count_all_results();
 		$this->db->stop_cache();
 	}
-
+	// --------------------------------------------------- Done QRS -------------------------------------------------------------- //
 	function done($kode){
 		
 		$this->db->flush_cache();
@@ -207,24 +208,7 @@ class mdl_quotation_request_selected extends CI_Model {
 				return FALSE;
 		}
 	}
-
-	function notif()
-	{
-		$this->db->flush_cache();
-		$this->db->start_cache();
-			//$this->db->select('status');
-			$this->db->order_by('id_pr', 'asc');
-			$this->db->where('status', 2);
-			$this->db->from('tr_pr');
-			return $this->db->count_all_results();
-		$this->db->stop_cache();
-	}
-
-	function select_tr_qrs($data)
-	{
-		# code...
-	}
-
+	// --------------------------------------------------- Add Vendor -------------------------------------------------------------- //
 	function Insert_vendor($data)
 	{
 		$this->db->flush_cache();
@@ -347,6 +331,7 @@ class mdl_quotation_request_selected extends CI_Model {
 			return $this->db->get()->result_array();
 		$this->db->stop_cache();
 	}
+
 	function cek_detail($data)
 	{
 		$this->db->select('id_detail_pr');
@@ -381,7 +366,7 @@ class mdl_quotation_request_selected extends CI_Model {
 			return FALSE;
 		}
 	}
-
+	// --------------------------------------------------- Delete Detail QRS -------------------------------------------------------------- //
 	function delete_detail($kode)
 	{
 		$this->db->where('id_detail_qrs', $kode);
@@ -393,7 +378,7 @@ class mdl_quotation_request_selected extends CI_Model {
 			return FALSE;
 		}
 	}
-
+	// --------------------------------------------------- Delete QRS -------------------------------------------------------------- //
 	function delete_qrs($id_qrs)
 	{
 		$this->db->where('id_qrs', $id_qrs);
