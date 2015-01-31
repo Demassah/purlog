@@ -30,8 +30,9 @@ date_default_timezone_set('Asia/Jakarta');
 	</head>
 	<body class="easyui-layout">
 
-	<input type="hide" value="<?=base_url();?>"/>
-		<script>
+	<input type="hidden" value="<?=base_url();?>"/>
+
+			<script>
 			base_url = '<?=base_url();?>';
 
 			redirectTo = function(url)
@@ -62,7 +63,7 @@ date_default_timezone_set('Asia/Jakarta');
 			refreshRegularly = function()
 			{
 				refreshNotif();
-				setTimeout('refreshRegularly()', 5*1000);
+				setTimeout('refreshRegularly()', 3600*1000);
 			};
 
 			$(document).ready(function(){

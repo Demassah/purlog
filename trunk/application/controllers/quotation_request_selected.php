@@ -23,7 +23,7 @@ class quotation_request_selected extends CI_Controller {
 	function new_qrs()
   {
   	$data['id_pr'] = '';
-  	$data['user_id']=$this->session->userdata('user_level_id');
+  	$data['user_id']=$this->session->userdata('user_id');
   	$data['date_create']=date('Y-m-d H:i:s');
   	$data['status']=1;
   	$this->load->view('quotation_request_selected/form_newqrs',$data);
