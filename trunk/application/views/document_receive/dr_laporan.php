@@ -97,11 +97,10 @@ else {
 		<th width="70" align="center">ID Detail RO</th>
 		<th width="70" align="center">ID SRO</th>
 		<th width="90" align="center">Kode Barang</th>
-		<th width="165" align="center">Nama Barang</th>
+		<th width="185" align="center">Nama Barang</th>
 		<th width="50" align="center">Qty Delivered</th>
 		<th width="50" align="center">Qty Received</th>
-		<th width="50" align="center">Qty Return</th>
-		<th width="125" align="center">Date Create</th>
+		<th width="165" align="center">Date Create</th>
 		<!--td width="65">Kredit</td-->
 	  </tr>
 	  <?php 
@@ -118,7 +117,6 @@ else {
 		<td align="center"><?php echo $data->nama_barang;?></td>
 		<td align="center"><?php echo $data->qty_delivered;?></td>
 		<td align="center"><?php echo $data->qty;?></td>
-		<td align="center"> </td>
 		<td align="center"><?php echo $data->date_create;?></td>
 	  </tr>
 	  <?php 
