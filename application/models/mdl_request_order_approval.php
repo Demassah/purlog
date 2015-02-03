@@ -86,19 +86,21 @@ class mdl_request_order_approval extends CI_Model {
 		date_default_timezone_set('Asia/Jakarta');
 		$time =  date('Y-m-d H:i:s');
 		
-		$this->db->flush_cache();
-		
+		$this->db->flush_cache();		
 		$this->db->set('status', "3");
-		$this->db->set('date_approve', $time);
-		
+		$this->db->set('date_approve', $time);		
 		$this->db->where('id_ro', $kode);
-		//$this->db->where('status_delete', '0');
 		$result = $this->db->update('tr_ro');
 	   
 	   
+		$this->db->flush_cache();
+		$this->db->set('status', "0");
+		$this->db->where('id_object', $kode);
+		$result = $this->db->update('tr_notifikasi');
+	  
 		//return
 		if($result) {
-				return TRUE;
+				return $kode;
 		}else {
 				return FALSE;
 		}

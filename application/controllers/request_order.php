@@ -60,10 +60,10 @@ class request_order extends CI_Controller {
 			$result = $this->mdl_request_order->InsertOnDb($data);
 		}
 		
-		if($result){
-			echo json_encode(array('success'=>true));
-		}else{
+		if(!$result){
 			echo json_encode(array('msg'=>$data['pesan_error']));
+		}else{
+			echo json_encode(array('success'=>true, 'id_object'=>$result));
 		}
 	}
 
@@ -71,10 +71,10 @@ class request_order extends CI_Controller {
 		$result = $this->mdl_request_order->countDetail($id);
 		if($result > 0){
 			$result = $this->mdl_request_order->SendData($id);
-			if ($result){
-				echo json_encode(array('success'=>true));
-			} else {
+			if (!$result){
 				echo json_encode(array('msg'=>'Data gagal di kirim'));
+			} else {
+				echo json_encode(array('success'=>true, 'id_object'=>$result));
 			} 
 		}else{
 			echo json_encode(array('msg'=>'Detail Request Order Masih Kosong'));

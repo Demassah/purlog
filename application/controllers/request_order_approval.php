@@ -23,11 +23,11 @@ class request_order_approval extends CI_Controller {
 		$result = $this->mdl_request_order_approval->countDetail($id);
 		if($result > 0){
 			$result = $this->mdl_request_order_approval->DoneData($id);
-			if ($result){
-				echo json_encode(array('success'=>true));
+			if (!$result){
+				echo json_encode(array('msg'=>'Data gagal di kirim'));
 			} else {
-			echo json_encode(array('msg'=>'Data gagal di kirim'));
-			}
+				echo json_encode(array('success'=>true));
+			} 
 		}else{
 			echo json_encode(array('msg'=>'Detail Request Order Masih Kosong'));
 		}
