@@ -88,6 +88,7 @@ class mdl_request_order extends CI_Model {
 
 	function InsertOnDb($data){
 		$this->db->flush_cache();
+		$this->db->trans_start();
         $this->db->set('user_id', $data['user_id']);
         $this->db->set('purpose', $data['purpose']);
         $this->db->set('cat_req', $data['cat_req']);
@@ -97,10 +98,12 @@ class mdl_request_order extends CI_Model {
         $this->db->set('status', $data['status']);
 
 		$result = $this->db->insert('tr_ro');
+		$id = $this->db->insert_id();
+		$this->db->trans_complete();
 		
 		//return
 		if($result) {
-			return TRUE;
+			return $id;
 		}else {
 			return FALSE;
 		}
@@ -181,9 +184,14 @@ class mdl_request_order extends CI_Model {
 		$this->db->where('id_ro', $kode);
 		$result = $this->db->update('tr_ro');
 	  
+		$this->db->flush_cache();
+		$this->db->set('status', "0");
+		$this->db->where('id_object', $kode);
+		$result = $this->db->update('tr_notifikasi');
+	  
 		//return
 		if($result) {
-				return TRUE;
+				return $kode;
 		}else {
 				return FALSE;
 		}

@@ -7,6 +7,7 @@ class mdl_notifikasi extends CI_Model {
 	public function getAllNotifications()
 	{
 		$this->db->order_by('tanggal', 'desc');
+		$this->db->where('status !=', 0);
 		return $this->get();
 	}
 

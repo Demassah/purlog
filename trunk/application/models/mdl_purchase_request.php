@@ -151,28 +151,34 @@ class mdl_purchase_request extends CI_Model {
 				$this->db->set('status', '1');
 
 				$this->db->insert('tr_pr');
+				$id = $this->db->insert_id();
 			}
 		}
 
 		$this->db->trans_complete();
 		if($kosong) {
 			return false;
+		}else{
+			return $id;
 		}
-		return $this->db->trans_status();
+		//return $this->db->trans_status();
 	}
 
 	function done($kode){
 		
 		$this->db->flush_cache();
-
 		$this->db->set('status', "2");
-
 		$this->db->where('id_pr', $kode);
 		$result = $this->db->update('tr_pr');
 
+		$this->db->flush_cache();
+		$this->db->set('status', "0");
+		$this->db->where('id_object', $kode);
+		$result = $this->db->update('tr_notifikasi');
+	  
 		//return
 		if($result) {
-				return TRUE;
+				return $kode;
 		}else {
 				return FALSE;
 		}

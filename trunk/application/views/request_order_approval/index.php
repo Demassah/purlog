@@ -20,10 +20,9 @@
 							if (response.success){
 								$.messager.show({
 									title: 'Success',
-									msg: 'Data Berhasil Dikirim'
+									msg: 'Data Berhasil Di Approve'
 								});
 								$('#dg').datagrid('reload');
-								addNotif('request_order_logistic', 'Data Request Order di Approve oleh Manager', 1, 1, 1, 2, 1);
 							} else {
 								$.messager.show({
 									title: 'Error',

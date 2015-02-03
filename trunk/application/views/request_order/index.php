@@ -35,9 +35,10 @@
 					//alert(result);
 					var result = eval('('+result+')');
 					if (result.success){
+						console.log(result);
 						$('#dialog').dialog('close');		// close the dialog
 						$('#dg').datagrid('reload');		// reload the user data
-						addNotif('request_order', 'Request Order Baru telah dibuat', 1, 1, 1, 2, 1);
+						addNotif('request_order', 'Request Order Baru telah dibuat', 1, 1, 1, 2, 1,  Date(), result.id_object);
 					} else {
 						$.messager.show({
 							title: 'Error',
@@ -63,7 +64,7 @@
 									msg: 'Data Berhasil Dikirim'
 								});
 								$('#dg').datagrid('reload');
-								addNotif('request_order_approval', 'Request Order telah dikirim ke RO Approval', 1, 1, 1, 2, 6);
+								addNotif('request_order_approval', 'Request Order telah dikirim ke RO Approval', 1, 1, 1, 2, 1,  Date(), response.id_object);
 							} else {
 								$.messager.show({
 									title: 'Error',

@@ -46,7 +46,7 @@ class purchase_request extends CI_Controller {
                 $result=$this->mdl_purchase_request->InsertOnDB($data['data']);
                
                 if($result){
-                        echo json_encode(array('success'=>true));
+                        echo json_encode(array('success'=>true, 'id_object'=>$result));
                 }else{
                         echo json_encode(array('msg'=>$data['pesan_error']));
                 }
@@ -57,13 +57,13 @@ class purchase_request extends CI_Controller {
             $result = $this->mdl_purchase_request->countDetail($id);
             if($result > 0){
                 $result = $this->mdl_purchase_request->done($id);
-                if ($result){
-                    echo json_encode(array('success'=>true));
-                } else {
+                   if (!$result){
                     echo json_encode(array('msg'=>'Data gagal di kirim'));
+                } else {
+                    echo json_encode(array('success'=>true, 'id_object'=>$result));
                 } 
             }else{
-                echo json_encode(array('msg'=>'Detail PR Masih Kosong'));
+                echo json_encode(array('msg'=>'Detail Request Order Masih Kosong'));
             }
         }
 
