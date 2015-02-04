@@ -108,45 +108,12 @@ class quotation_request_selected extends CI_Controller {
 			$result = $this->mdl_quotation_request_selected->Insert_Detail_Qrs();
 			}else { // edit
 				$result=$this->mdl_quotation_request_selected->cancel($data);
-			}
-		// $data = explode(',',$data);
-		// foreach ($data as $data_key => $data_value) {
-		// 	print_r($data_key); 
-		// }
-		
-		// $status = "";
-		// $result = false;
-		// $data['pesan_error'] = '';
-		
-		// # get post data
-		// foreach($_POST as $key => $value){
-		// 	$data[$key] = $value;
-		// 	// echo print_r($value);
-		// }
-		
-		// # rules validasi form
-		// $this->form_validation->set_rules("id_detail_pr[]", 'ID Detail PR', 'trim|required|xss_clean');
-		// $this->form_validation->set_rules("kode_barang[]", 'Kode barang', 'trim|required|xss_clean');
-		// # message rules
-		// $this->form_validation->set_message('required', 'Field %s harus diisi.');
-
-		// $data['pesan_error'] = '';
-		// if ($this->form_validation->run() == FALSE){
-		// 	$data["pesan_error"] .= trim(validation_errors(' ',' '))==''?'':validation_errors(' ',' ');
-		// }else{
-		// 	if($aksi=="add"){ // add
-		// 	//print_r($data['id_detail_qrs']);
-		// 	$result = $this->mdl_quotation_request_selected->Insert_Detail_Qrs($data);
-		// 	}else { // edit
-		// 		$result=$this->mdl_quotation_request_selected->cancel($data);
-		// 	}
-		// }
-		
-		// if($result){
-		// 	echo json_encode(array('success'=>true));
-		// }else{
-		// 	echo json_encode(array('msg' => 'Data gagal dikirim '));
-		// }
+			}		
+		if($result){
+			echo json_encode(array('success'=>true));
+		}else{
+			echo json_encode(array('msg' => 'Data gagal dikirim '));
+		}
 	}
 
 	// --------------------------------------------------- Delete Detail QRS -------------------------------------------------------- //
@@ -172,22 +139,27 @@ class quotation_request_selected extends CI_Controller {
 
 	// ---------------------------------------------------Cek Vendor -------------------------------------------------------------- //
   function Done($kode) {
-  	$result = $this->mdl_quotation_request_selected->cek_no_vendor($kode);
-  	if($result>=3){
-  		$result = $this->mdl_quotation_request_selected->cek_pr_qr($kode);
-  		if($result>=1){
-		    $result = $this->mdl_quotation_request_selected->done($kode);
-		    if ($result) {
-		        echo json_encode(array('success' => true));
-		    } else {
-		        echo json_encode(array('msg' => 'Data gagal dikirim'));
-		    }
-		    } else {
-		    	echo json_encode(array('msg'=> 'Tidak Ada Vendor yang dipilih'));
-		    }
-		  }else{
-		    echo json_encode(array('msg'=> 'Jumlah Vendor Kurang dari 3'));
-		  }
+  	$result = $this->mdl_quotation_request_selected->cek_no_detail($kode);
+  		if($result >= 1){
+	  	$result = $this->mdl_quotation_request_selected->cek_no_vendor($kode);
+	  	if($result>=3){
+	  		$result = $this->mdl_quotation_request_selected->cek_pr_qr($kode);
+	  		if($result>=1){
+			    $result = $this->mdl_quotation_request_selected->done($kode);
+			    if ($result) {
+			        echo json_encode(array('success' => true));
+			    } else {
+			        echo json_encode(array('msg' => 'Data gagal dikirim'));
+			    }
+			    } else {
+			    	echo json_encode(array('msg'=> 'Tidak Ada Vendor yang dipilih'));
+			    }
+			  }else{
+			    echo json_encode(array('msg'=> 'Jumlah Vendor Kurang dari 3'));
+			  }
+			  }else{
+			  echo json_encode(array('msg'=> 'Detail Kosong'));	
+			  }
   }
 
 // ---------------------------------------------------CRUD Vendor -------------------------------------------------------------- //
