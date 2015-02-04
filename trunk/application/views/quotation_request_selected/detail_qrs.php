@@ -43,31 +43,73 @@
       url = base_url+'quotation_request_selected/SaveDetailQrs/add';
     }
     // end newData
-    saveData = function(){
-      $('#form_add_detail').form('submit',{
-        url: url,
-        onSubmit: function(){
-          return $(this).form('validate');
-        },
-        success: function(result){
-          //alert(result);
-          var result = eval('('+result+')');
-          if (result.success){
-            $.messager.show({
-              title: 'Succes',
-              msg: 'Data Berhasil Ditambahkan ',
-            });
-            $('#dialog').dialog('close');   // close the dialog
-            $('#detail_dg_qrs').datagrid('reload');   // reload the user data
-          } else {
-            $.messager.show({
-              title: 'Error',
-              msg: result.msg
-            });
-          }
-        }
-      });
-    }
+    saveData = function () {
+       
+        var id_qrs = $('.id_qrs').val();
+        var id_pr = $('.id_pr').val();
+         var pick = $('.pick_input').map(function(){
+            return $(this).val();
+         }).get();
+         var id_detail_pr = $('.detail_pr').map(function(){
+            return $(this).val();
+         }).get();
+
+          $.ajax({
+            url: base_url+'quotation_request_selected/SaveDetailQrs/add',
+            type  : 'POST',
+           // dataType:'json',
+            data  : 'pick='+pick+'&id_detail_pr='+id_detail_pr+'&id_qrs='+id_qrs+'&id_pr='+id_pr,
+            success: function() {
+               $('#dialog').dialog('close'); 
+               $('#detail_dg_qrs').datagrid('reload');
+             },
+          //   onSubmit: function(){
+          //    return $(this).form('validate'); 
+          //   },
+            // success: function(result){
+            //   var result = eval('('+result+')');
+            //   if (result.success){
+            //      $.messager.show({
+            //         title: 'Succes',
+            //         msg: 'Data Berhasil Ditambahkan ',
+            //       });
+            //        $('#dialog').dialog('close');   // close the dialog
+            //        $('#detail_dg_qrs').datagrid('reload');   // reload the user data
+            //    } else {
+            //     $.messager.show({
+            //       title: 'Error',
+            //       msg: result.msg
+            //     });
+            //   }
+            // },
+          });
+      }
+    
+    // saveData = function(){
+    //   $('#form_add_detail').form('submit',{
+    //     url: url,
+    //     onSubmit: function(){
+    //       return $(this).form('validate'); 
+    //     },
+    //     success: function(result){
+    //       //alert(result);
+    //       var result = eval('('+result+')');
+    //       if (result.success){
+    //         $.messager.show({
+    //           title: 'Succes',
+    //           msg: 'Data Berhasil Ditambahkan ',
+    //         });
+    //         $('#dialog').dialog('close');   // close the dialog
+    //         $('#detail_dg_qrs').datagrid('reload');   // reload the user data
+    //       } else {
+    //         $.messager.show({
+    //           title: 'Error',
+    //           msg: result.msg
+    //         });
+    //       }
+    //     }
+    //   });
+    // }
 
    Del_detail = function (val){
       if(confirm("Apakah yakin akan menghapus data  '" + val + "'?")){
