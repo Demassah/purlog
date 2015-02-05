@@ -35,7 +35,7 @@
 					//alert(result);
 					var result = eval('('+result+')');
 					if (result.success){
-						console.log(result);
+						//console.log(result);
 						$('#dialog').dialog('close');		// close the dialog
 						$('#dg').datagrid('reload');		// reload the user data
 						addNotif('request_order', 'Request Order Baru telah dibuat', 1, 1, 1, 2, 1,  Date(), result.id_object);

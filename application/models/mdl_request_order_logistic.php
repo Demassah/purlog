@@ -114,17 +114,20 @@ class mdl_request_order_logistic extends CI_Model {
 
 	function DoneData($kode){
 		
-		$this->db->flush_cache();
-		
-		$this->db->set('status', "4");
-		
+		$this->db->flush_cache();		
+		$this->db->set('status', "4");		
 		$this->db->where('id_ro', $kode);
 		$result = $this->db->update('tr_ro');
 	   
-	   
+	    
+		$this->db->flush_cache();
+		$this->db->set('status', "0");
+		$this->db->where('id_object', $kode);
+		$result = $this->db->update('tr_notifikasi');
+	  
 		//return
 		if($result) {
-				return TRUE;
+				return $kode;
 		}else {
 				return FALSE;
 		}

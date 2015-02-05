@@ -22,6 +22,7 @@
 									title: 'Success',
 									msg: 'Data Berhasil Di Approve'
 								});
+								addNotif('request_order_logistic', 'RO Approval telah dikirim ke RO Logistic', 1, 1, 1, 2, 1,  Date(), response.id_object);
 								$('#dg').datagrid('reload');
 							} else {
 								$.messager.show({

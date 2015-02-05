@@ -29,7 +29,7 @@
 									title: 'Success',
 									msg: 'Data Berhasil Dikirim Ke Proses Seleksi'
 								});
-								// reload and close tab
+								addNotif('request_order_selected', 'RO Logistic telah dikirim ke RO Selected', 1, 1, 1, 2, 1,  Date(), response.id_object);
 								$('#dg').datagrid('reload');
 							} else {
 								$.messager.show({
