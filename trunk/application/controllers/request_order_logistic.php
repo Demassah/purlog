@@ -30,11 +30,11 @@ class request_order_logistic extends CI_Controller {
 
 	function done($id){
 		$result = $this->mdl_request_order_logistic->DoneData($id);
-		if ($result){
-			echo json_encode(array('success'=>true));
-		} else {
-			echo json_encode(array('msg'=>'Data gagal di kirim'));
-		}
+		if (!$result){
+				echo json_encode(array('msg'=>'Data gagal di kirim'));
+			} else {
+				echo json_encode(array('success'=>true, 'id_object'=>$result));
+			} 
 	}
 
 	function rejected($id){

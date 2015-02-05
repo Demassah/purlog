@@ -87,7 +87,7 @@
     
     actionDetail = function(value, row, index){
       var col='';
-        <?if($this->mdl_auth->CekAkses(array('menu_id'=>11, 'policy'=>'EDIT'))){?>
+        <?if($this->mdl_auth->CekAkses(array('menu_id'=>11, 'policy'=>'EDIT'))){?> 
           col += '<a href="#" onclick="editData(\''+row.id_detail_ro+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Edit</a>';
         <?}?>
       return col;

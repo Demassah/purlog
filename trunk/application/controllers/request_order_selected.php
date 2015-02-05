@@ -46,14 +46,14 @@ function __construct(){
     	$result = $this->mdl_request_order_selected->countNewItem($kode);
 		if($result == 0){
 	        $result = $this->mdl_request_order_selected->done($kode);
-	        if ($result) {
-	            echo json_encode(array('success' => true));
-	        } else {
-	            echo json_encode(array('msg' => 'Data gagal dialokasi'));
-	        }
-	    }else{
-			echo json_encode(array('msg'=>'Detail Request Order Masih Terdapat New Item'));
-		}
+	        if (!$result){
+                echo json_encode(array('msg'=>'Data gagal di kirim'));
+            } else {
+                echo json_encode(array('success'=>true));
+            } 
+        }else{
+            echo json_encode(array('msg'=>'Detail Request Order Selected Masih Kosong'));
+        }
     }
 
     function edit($kode) {
@@ -65,7 +65,7 @@ function __construct(){
         $data['kode'] 				= $kode;
         $data['id_ro'] 				= $r->row()->id_ro;
         $data['ext_doc_no'] 		= $r->row()->ext_doc_no;
-        $data['type'] 		= $r->row()->type;
+        $data['type'] 		        = $r->row()->type;
         $data['id_kategori'] 		= $r->row()->id_kategori;
         $data['id_sub_kategori'] 	= $r->row()->id_sub_kategori;
         $data['kode_barang'] 		= $r->row()->kode_barang;
@@ -99,15 +99,26 @@ function __construct(){
             $data[$key] = $value;
         }
 
-        $result = $this->mdl_request_order_selected->UpdateOnDb($data);
+        # rules validasi form       
+        $this->form_validation->set_rules("kode_barang", 'Barang', 'trim|required|xss_clean');
 
-        if ($result) {
+        # message rules
+        $this->form_validation->set_message('required', 'Data Gagal Disimpan, Barang harus tipe New Item');
+        //$data['pesan_error'] = 'Data Gagal Disimpan';
+
+        $data['pesan_error'] = '';
+        if ($this->form_validation->run() == FALSE){
+            $data["pesan_error"] .= trim(validation_errors(' ',' '))==''?'':validation_errors(' ',' ');
+        }else{
+            $result = $this->mdl_request_order_selected->UpdateOnDb($data);
+        }
+        
+         if ($result) {
             echo json_encode(array('success' => true));
         } else {
             echo json_encode(array('msg' => $data['pesan_error']));
         }
     }
-
 
 }
 

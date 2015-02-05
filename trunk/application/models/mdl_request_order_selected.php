@@ -133,17 +133,19 @@ class mdl_request_order_selected extends CI_Model {
 
 	function done($kode){
 		
-		$this->db->flush_cache();
-		
-		$this->db->set('status', "5");
-		
+		$this->db->flush_cache();		
+		$this->db->set('status', "5");		
 		$this->db->where('id_ro', $kode);
 		$result = $this->db->update('tr_ro');
 	   
-	   
+	    $this->db->flush_cache();
+		$this->db->set('status', "0");
+		$this->db->where('id_object', $kode);
+		$result = $this->db->update('tr_notifikasi');
+	  
 		//return
 		if($result) {
-				return TRUE;
+				return $kode;
 		}else {
 				return FALSE;
 		}
@@ -181,7 +183,6 @@ class mdl_request_order_selected extends CI_Model {
 	function UpdateOnDb($data){
 		//query insert data		
 		$this->db->flush_cache();
-		//$this->db->set('id_detail_ro', $data['id_detail_ro']);
 		$this->db->set('id_ro', $data['id_ro']);
 		$this->db->set('ext_doc_no', $data['ext_doc_no']);
 		$this->db->set('kode_barang', $data['kode_barang']);

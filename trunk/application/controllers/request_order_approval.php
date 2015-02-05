@@ -26,7 +26,7 @@ class request_order_approval extends CI_Controller {
 			if (!$result){
 				echo json_encode(array('msg'=>'Data gagal di kirim'));
 			} else {
-				echo json_encode(array('success'=>true));
+				echo json_encode(array('success'=>true, 'id_object'=>$result));
 			} 
 		}else{
 			echo json_encode(array('msg'=>'Detail Request Order Masih Kosong'));
