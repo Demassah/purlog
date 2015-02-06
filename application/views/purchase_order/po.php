@@ -11,16 +11,17 @@
 		<tr>
 			<th field="" sortable="true" width="150" hidden="true">ID</th>
 			<th field="id_po" sortable="true" width="100" >ID PO</th>
-			<th field="id_pr" sortable="true" width="130">ID Purchase Request</th>
+			<th field="id_pr" sortable="true" width="150">ID Purchase Request</th>
 			<th field="id_ro" sortable="true" width="70">ID RO</th>
+			<th field="id_qrs" sortable="true" width="70">ID QRS</th>
 			<th field="full_name" sortable="true" width="130">Requestor</th>
 			<th field="departement_name" sortable="true" width="120">Departement</th>
-			<th field="purpose" sortable="true" width="70">Purpose</th>
+			<th field="purpose" sortable="true" width="90">Purpose</th>
 			<th field="cat_req" sortable="true" width="130">Cat Request</th>
-			<th field="ext_doc_no" sortable="true" width="100">Ext Document No</th>
+			<th field="ext_doc_no" sortable="true" width="130">Ext Document No</th>
 			<th field="ETD" sortable="true" width="100">ETD</th>
-			<th field="date_create" sortable="true" width="120">Date Create</th>
-			<th field="action" align="center" formatter="actionPo" width="140">Aksi</th>
+			<th field="date_create" sortable="true" width="140">Date Create</th>
+			<th field="action" align="center" formatter="actionPo" width="160">Aksi</th>
 		</tr>
 	</thead>
 </table>

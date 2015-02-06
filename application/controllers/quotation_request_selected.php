@@ -224,8 +224,8 @@ class quotation_request_selected extends CI_Controller {
 		$this->mdl_quotation_request_selected->update($id,$data);
 	}
 
-	function Selected($kode,$id_pr) {
-    $result = $this->mdl_quotation_request_selected->selected($kode,$id_pr);
+	function Selected($kode,$id_pr,$id_qrs) {
+    $result = $this->mdl_quotation_request_selected->selected($kode,$id_pr,$id_qrs);
     if ($result) {
         echo json_encode(array('success' => true));
     } else {

@@ -113,10 +113,11 @@ class mdl_quotation_request_selected extends CI_Model {
 		$this->db->update('tr_qr_detail');
 	}
 	// --------------------------------------------------- Update Vendor -------------------------------------------------------------- //
-	function update_qr_vendor($id_pr)
+	function update_qr_vendor($id_pr,$id_qrs)
 	{
 		$this->db->set('status','1');
 		$this->db->where('id_pr', $id_pr);
+		$this->db->where('id_qrs', $id_qrs);
 		return $this->db->update('tr_qr');
 	}
 		// --------------------------------------------------- Cek Harga -------------------------------------------------------------- //
@@ -128,21 +129,22 @@ class mdl_quotation_request_selected extends CI_Model {
 		return $query->result();
 	}
 	// --------------------------------------------------- Select Vendor -------------------------------------------------------------- //
-	function selected($kode,$id_pr){
+	function selected($kode,$id_pr,$id_qrs){
 		$cek = $this->mdl_quotation_request_selected->cek_price($kode);
 			foreach ($cek as $l) {
 				$price = $l->price;
 			}
 				if($price !=0)
 				{
-					$this->mdl_quotation_request_selected->update_qr_vendor($id_pr);
+					$this->mdl_quotation_request_selected->update_qr_vendor($id_pr,$id_qrs);
 					//cek id_qr dan status menjadi 2
 					$this->db->flush_cache();
 
 					$this->db->set('status', "2");
 
 					$this->db->where('id_qr', $kode);
-
+					$this->db->where('id_qrs', $id_qrs);
+	
 					$result = $this->db->update('tr_qr');
 				}else{
 					return FALSE;

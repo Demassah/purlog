@@ -55,7 +55,7 @@ else {
 			<td align="left" >ID Vendor</td>
 			<td align="left"> : <?php  echo $data_pdf[0]->id_vendor;?></td>
 			<!-- <td>&nbsp;&nbsp;&nbsp;</td> -->
-			<td align="left" >Phone (Mobile)</td>
+			<td align="left" >Phone</td>
 			<td align="left"> : <?php  echo $data_pdf[0]->mobile_vendor;?></td>
 		</tr>
 		<tr>
@@ -64,7 +64,7 @@ else {
 			<td align="left"> : <?php  echo $data_pdf[0]->departement_name;?></td>
 			<!-- <td>&nbsp;&nbsp;&nbsp;</td> -->
 			<td align="left" >ETD</td>
-			<td align="left"> : <?php  echo $data_pdf[0]->ETD;?></td>
+			<td align="left"> : <?php  echo  tgl_indo($data_pdf[0]->ETD);?></td>
 			<!-- vendor -->
 			<!-- <td>&nbsp;&nbsp;&nbsp;</td> -->
 			<td align="left" >Vendor Name</td>
@@ -83,7 +83,7 @@ else {
 			<!-- vendor -->
 			<!-- <td>&nbsp;&nbsp;&nbsp;</td> -->
 			<td align="left" >Contact Vendor</td>
-			<td align="left"> : <?php  echo $data_pdf[0]->contact_vendor;?></td>
+			<td align="left" colspan="3"> : <?php  echo $data_pdf[0]->contact_vendor;?></td>
 			
 		</tr>
 		<tr>
@@ -95,7 +95,7 @@ else {
 			<td align="left"> : <?php  echo $data_pdf[0]->id_detail_pr;?></td>
 			<!-- <td>&nbsp;&nbsp;&nbsp;</td>
  -->			<td align="left" >Address</td>
-			<td align="left"> : <?php  echo $data_pdf[0]->address_vendor;?></td>
+			<td align="left" colspan="3"> : <?php  echo $data_pdf[0]->address_vendor;?></td>
 		</tr>
 	</table>
 	<br/> 
@@ -126,6 +126,29 @@ else {
 			//foreach
 	 	 endforeach; ?>
 	</table>
+	<br><br>
+	<div class="class="footer"">
+		<table >
+		<tr>
+				<td width="230" align="center"></td>
+				<td width="230" align="center"></td>
+				<td width="230" align="center">Bandung,<?php echo tgl_indo(date('Y-m-d'))?></td>
+			</tr>
+			<tr>
+				<td width="230" align="center">Menyerahkan</td>
+				<td width="230" align="center">Mengetahui</td>
+				<td width="230" align="center">Menerima</td>
+			</tr>
+			<tr><td></td></tr>	<tr><td></td></tr>	<tr><td></td></tr>	<tr><td></td></tr>	<tr><td></td></tr>	<tr><td></td></tr>
+			<tr><td></td></tr>	<tr><td></td></tr>	<tr><td></td></tr> <tr><td></td></tr> <tr><td></td></tr>  <tr><td></td></tr> 
+			<tr><td></td></tr>	<tr><td></td></tr>	<tr><td></td></tr> <tr><td></td></tr> <tr><td></td></tr> 
+			<tr>
+				<td width="100" align="center">__________________</td>
+				<td width="100" align="center">__________________</td>
+				<td width="100" align="center">__________________</td>
+			</tr>
+		</table>
+	</div>
 	</div>
 </page>
 <?php } ?>

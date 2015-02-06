@@ -17,10 +17,11 @@ class mdl_purchase_order extends CI_Model {
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('a.id_po,a.id_pr,a.id_ro,a.requestor,a.departement,b.full_name,c.departement_name,a.purpose,a.cat_req,a.ext_doc_no,a.ETD,a.date_create,a.status');
+			$this->db->select('a.id_po,a.id_pr,a.id_ro,a.requestor,a.departement,b.full_name,c.departement_name,a.purpose,a.cat_req,a.ext_doc_no,a.ETD,a.date_create,a.status,d.id_qrs');
 			$this->db->from('tr_po a');
 			$this->db->join('sys_user b', 'b.user_id = a.requestor');
 			$this->db->join('ref_departement c', 'c.departement_id = a.departement');
+			$this->db->join('tr_qr d', 'd.id_po = a.id_po', 'left');
 			$this->db->where('a.status',1);
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
@@ -59,7 +60,7 @@ class mdl_purchase_order extends CI_Model {
 		$this->db->select('a.id_vendor,a.name_vendor,a.contact_vendor,a.mobile_vendor,a.address_vendor,b.id_po,b.id_detail_pr,b.kode_barang,b.nama_barang,b.qty,b.price,b.total,b.top');
 		$this->db->where('id_po', $id_po);
 		$this->db->join('ref_vendor a', 'a.id_vendor = b.id_vendor');
-		$query = $this->db->get('v_po_detail b');
+		$query = $this->db->get('v_po_detail_2 b');
 		return $query->result();
 	}
 
@@ -152,7 +153,7 @@ class mdl_purchase_order extends CI_Model {
 		$this->db->select('a.id_vendor,a.name_vendor,a.contact_vendor,a.mobile_vendor,a.address_vendor,b.id_po,b.id_detail_pr,b.kode_barang,b.note,b.qty,b.price,b.total,b.purpose,b.ext_doc_no,b.ETD,b.top,b.nama_barang,b.full_name,b.departement_name,b.cat_req,b.date_create');
 		$this->db->where('id_po', $id_po);
 		$this->db->join('ref_vendor a', 'a.id_vendor = b.id_vendor');
-		$query = $this->db->get('v_po_detail b');
+		$query = $this->db->get('v_po_detail_2 b');
 		return $query->result();
 	}
 } //End
