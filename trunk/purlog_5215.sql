@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50516
 File Encoding         : 65001
 
-Date: 2015-02-06 02:00:26
+Date: 2015-02-06 21:17:25
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -474,7 +474,7 @@ CREATE TABLE `tr_notifikasi` (
   `binding_id` int(11) NOT NULL,
   `user_level_id` int(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tr_notifikasi
@@ -484,6 +484,10 @@ INSERT INTO `tr_notifikasi` VALUES ('42', 'Purchase Request Baru telah dibuat', 
 INSERT INTO `tr_notifikasi` VALUES ('43', 'Request Order Baru telah dibuat', 'request_order', '20', '0', '0000-00-00', '1', '1', '1', '2');
 INSERT INTO `tr_notifikasi` VALUES ('44', 'Request Order telah dikirim ke RO Approval', 'request_order_approval', '20', '0', '0000-00-00', '1', '1', '1', '2');
 INSERT INTO `tr_notifikasi` VALUES ('45', 'Purchase Request Baru telah dibuat', 'purchase_request', '5', '0', '0000-00-00', '3', '1', '1', '3');
+INSERT INTO `tr_notifikasi` VALUES ('46', 'Request Order Baru telah dibuat', 'request_order', '21', '0', '0000-00-00', '1', '1', '1', '2');
+INSERT INTO `tr_notifikasi` VALUES ('47', 'Request Order telah dikirim ke RO Approval', 'request_order_approval', '21', '0', '0000-00-00', '1', '1', '1', '2');
+INSERT INTO `tr_notifikasi` VALUES ('48', 'RO Approval telah dikirim ke RO Logistic', 'request_order_logistic', '21', '0', '0000-00-00', '1', '1', '1', '2');
+INSERT INTO `tr_notifikasi` VALUES ('49', 'RO Logistic telah dikirim ke RO Selected', 'request_order_selected', '21', '0', '0000-00-00', '1', '1', '1', '2');
 
 -- ----------------------------
 -- Table structure for tr_po
@@ -502,7 +506,7 @@ CREATE TABLE `tr_po` (
   `date_create` datetime DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id_po`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tr_po
@@ -558,7 +562,7 @@ CREATE TABLE `tr_pros_detail` (
 -- ----------------------------
 INSERT INTO `tr_pros_detail` VALUES ('1', '4', '2', '1', '1', '301', '4', 'Workshop', '2015-01-19 20:06:59', '1', '1', '1');
 INSERT INTO `tr_pros_detail` VALUES ('2', '5', '3', '2', '2', '302', '3', 'Workshop', '2015-01-19 20:07:24', '1', '1', '1');
-INSERT INTO `tr_pros_detail` VALUES ('3', '9', '19', null, '3', '201', '3', 'Pusat', '2015-02-03 13:51:25', '1', '0', '1');
+INSERT INTO `tr_pros_detail` VALUES ('3', '9', '19', '3', '3', '201', '3', 'Pusat', '2015-02-03 13:51:25', '1', '0', '1');
 
 -- ----------------------------
 -- Table structure for tr_pr_detail
@@ -577,7 +581,7 @@ CREATE TABLE `tr_pr_detail` (
   `status` int(1) DEFAULT NULL,
   `status_delete` int(1) NOT NULL,
   PRIMARY KEY (`id_detail_pr`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tr_pr_detail
@@ -590,6 +594,7 @@ INSERT INTO `tr_pr_detail` VALUES ('5', '4', '9', '19', '201', '2', '1', '2015-0
 INSERT INTO `tr_pr_detail` VALUES ('6', '5', '10', '20', '100', '34', '1', '2015-02-04 16:29:20', null, '2', '0');
 INSERT INTO `tr_pr_detail` VALUES ('7', '5', '11', '20', '302', '12', '1', '2015-02-04 16:29:20', null, '2', '0');
 INSERT INTO `tr_pr_detail` VALUES ('8', '5', '12', '20', '100', '12', '1', '2015-02-04 16:29:20', null, '2', '0');
+INSERT INTO `tr_pr_detail` VALUES ('9', '0', '13', '21', '201', '123', '16', '2015-02-06 17:37:37', null, '1', '0');
 
 -- ----------------------------
 -- Table structure for tr_qr
@@ -610,11 +615,11 @@ CREATE TABLE `tr_qr` (
 -- ----------------------------
 -- Records of tr_qr
 -- ----------------------------
-INSERT INTO `tr_qr` VALUES ('43', '13', '1', 'V001', '0', '2', '2015-02-06', '1');
+INSERT INTO `tr_qr` VALUES ('43', '13', '1', 'V001', '5', '2', '2015-02-06', '2');
 INSERT INTO `tr_qr` VALUES ('44', '13', '1', 'V002', '0', '4', '2015-02-06', '1');
 INSERT INTO `tr_qr` VALUES ('45', '13', '1', 'V003', '0', '5', '2015-02-06', '1');
 INSERT INTO `tr_qr` VALUES ('46', '14', '1', 'V001', '0', '13', '2015-02-06', '1');
-INSERT INTO `tr_qr` VALUES ('47', '14', '1', 'V002', '0', '4', '2015-02-06', '1');
+INSERT INTO `tr_qr` VALUES ('47', '14', '1', 'V002', '5', '4', '2015-02-06', '2');
 INSERT INTO `tr_qr` VALUES ('48', '14', '1', 'V003', '0', '5', '2015-02-06', '1');
 
 -- ----------------------------
@@ -634,7 +639,7 @@ CREATE TABLE `tr_qrs` (
 -- ----------------------------
 -- Records of tr_qrs
 -- ----------------------------
-INSERT INTO `tr_qrs` VALUES ('13', '1', '1', '2015-02-06 01:58:36', '1', '1');
+INSERT INTO `tr_qrs` VALUES ('13', '1', '1', '2015-02-06 01:58:36', '1', '2');
 INSERT INTO `tr_qrs` VALUES ('14', '1', '1', '2015-02-06 01:59:06', '1', '1');
 
 -- ----------------------------
@@ -657,7 +662,7 @@ CREATE TABLE `tr_qrs_detail` (
 -- ----------------------------
 INSERT INTO `tr_qrs_detail` VALUES ('26', '13', '1', '1', '100', '4', '1');
 INSERT INTO `tr_qrs_detail` VALUES ('27', '13', '1', '2', '201', '3', '1');
-INSERT INTO `tr_qrs_detail` VALUES ('28', '13', '1', '3', '203', '2', '1');
+INSERT INTO `tr_qrs_detail` VALUES ('28', '13', '1', '3', '203', '3', '1');
 INSERT INTO `tr_qrs_detail` VALUES ('29', '14', '1', '1', '100', '4', '1');
 INSERT INTO `tr_qrs_detail` VALUES ('30', '14', '1', '2', '201', '4', '1');
 INSERT INTO `tr_qrs_detail` VALUES ('31', '14', '1', '3', '203', '1', '1');
@@ -683,9 +688,9 @@ CREATE TABLE `tr_qr_detail` (
 -- ----------------------------
 -- Records of tr_qr_detail
 -- ----------------------------
-INSERT INTO `tr_qr_detail` VALUES ('137', '43', '13', '1', '1', '100', '4', '0', '2015-02-06 01:58:54', '1');
-INSERT INTO `tr_qr_detail` VALUES ('138', '43', '13', '2', '1', '201', '3', '0', '2015-02-06 01:58:54', '1');
-INSERT INTO `tr_qr_detail` VALUES ('139', '43', '13', '3', '1', '203', '2', '0', '2015-02-06 01:58:54', '1');
+INSERT INTO `tr_qr_detail` VALUES ('137', '43', '13', '1', '1', '100', '4', '12', '2015-02-06 01:58:54', '1');
+INSERT INTO `tr_qr_detail` VALUES ('138', '43', '13', '2', '1', '201', '3', '12', '2015-02-06 01:58:54', '1');
+INSERT INTO `tr_qr_detail` VALUES ('139', '43', '13', '3', '1', '203', '2', '12', '2015-02-06 01:58:54', '1');
 INSERT INTO `tr_qr_detail` VALUES ('140', '44', '13', '1', '1', '100', '4', '0', '2015-02-06 01:58:58', '1');
 INSERT INTO `tr_qr_detail` VALUES ('141', '44', '13', '2', '1', '201', '3', '0', '2015-02-06 01:58:58', '1');
 INSERT INTO `tr_qr_detail` VALUES ('142', '44', '13', '3', '1', '203', '2', '0', '2015-02-06 01:58:58', '1');
@@ -695,9 +700,9 @@ INSERT INTO `tr_qr_detail` VALUES ('145', '45', '13', '3', '1', '203', '2', '0',
 INSERT INTO `tr_qr_detail` VALUES ('146', '46', '14', '1', '1', '100', '4', '0', '2015-02-06 01:59:29', '1');
 INSERT INTO `tr_qr_detail` VALUES ('147', '46', '14', '2', '1', '201', '4', '0', '2015-02-06 01:59:29', '1');
 INSERT INTO `tr_qr_detail` VALUES ('148', '46', '14', '3', '1', '203', '1', '0', '2015-02-06 01:59:29', '1');
-INSERT INTO `tr_qr_detail` VALUES ('149', '47', '14', '1', '1', '100', '4', '0', '2015-02-06 01:59:33', '1');
-INSERT INTO `tr_qr_detail` VALUES ('150', '47', '14', '2', '1', '201', '4', '0', '2015-02-06 01:59:33', '1');
-INSERT INTO `tr_qr_detail` VALUES ('151', '47', '14', '3', '1', '203', '1', '0', '2015-02-06 01:59:33', '1');
+INSERT INTO `tr_qr_detail` VALUES ('149', '47', '14', '1', '1', '100', '4', '23', '2015-02-06 01:59:33', '1');
+INSERT INTO `tr_qr_detail` VALUES ('150', '47', '14', '2', '1', '201', '4', '23', '2015-02-06 01:59:33', '1');
+INSERT INTO `tr_qr_detail` VALUES ('151', '47', '14', '3', '1', '203', '1', '34', '2015-02-06 01:59:33', '1');
 INSERT INTO `tr_qr_detail` VALUES ('152', '48', '14', '1', '1', '100', '4', '0', '2015-02-06 01:59:36', '1');
 INSERT INTO `tr_qr_detail` VALUES ('153', '48', '14', '2', '1', '201', '4', '0', '2015-02-06 01:59:36', '1');
 INSERT INTO `tr_qr_detail` VALUES ('154', '48', '14', '3', '1', '203', '1', '0', '2015-02-06 01:59:36', '1');
@@ -803,13 +808,14 @@ CREATE TABLE `tr_ro` (
   `status` int(1) DEFAULT NULL COMMENT '1: RO, 2: ROA, 3:ROL, 4: ROS, 5: Picking, 6: Shipment, 7: DO, 9: Reject',
   `status_order` smallint(1) DEFAULT '1' COMMENT '1: ORDER, 2: PURCHASE, 3: RETURN',
   PRIMARY KEY (`id_ro`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of tr_ro
 -- ----------------------------
 INSERT INTO `tr_ro` VALUES ('19', '1', 'REQUEST', 'ASSET', '1', '2015-02-03', '2015-02-03 12:48:48', '2015-02-03 13:46:42', '0000-00-00 00:00:00', '6', '1');
 INSERT INTO `tr_ro` VALUES ('20', '1', 'REQUEST', 'ATK', '1234', '2015-02-04', '2015-02-04 16:27:03', '2015-02-04 16:28:30', '0000-00-00 00:00:00', '6', '1');
+INSERT INTO `tr_ro` VALUES ('21', '16', 'REQUEST', 'ASSET', '12354', '2015-02-06', '2015-02-06 17:28:29', '2015-02-06 17:29:24', '0000-00-00 00:00:00', '6', '1');
 
 -- ----------------------------
 -- Table structure for tr_ro_detail
@@ -829,7 +835,7 @@ CREATE TABLE `tr_ro_detail` (
   `status_delete` int(1) NOT NULL COMMENT '1. deleted',
   `id_sro` int(6) NOT NULL,
   PRIMARY KEY (`id_detail_ro`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tr_ro_detail
@@ -846,6 +852,7 @@ INSERT INTO `tr_ro_detail` VALUES ('9', '19', '1', '201', '5', '1', '1', '2015-0
 INSERT INTO `tr_ro_detail` VALUES ('10', '20', '1234', '100', '34', '1', '1', '2015-02-04 16:27:03', 'dgfdgdf', '1', '0', '0');
 INSERT INTO `tr_ro_detail` VALUES ('11', '20', '1234', '302', '12', '1', '1', '2015-02-04 16:27:03', 'qwewqe', '1', '0', '0');
 INSERT INTO `tr_ro_detail` VALUES ('12', '20', '1234', '100', '12', '1', '1', '2015-02-04 16:27:03', 'wqeqwe', '1', '0', '0');
+INSERT INTO `tr_ro_detail` VALUES ('13', '21', '12354', '201', '123', '1', '16', '2015-02-06 17:28:29', 'sadasd', '1', '0', '0');
 
 -- ----------------------------
 -- Table structure for tr_sro
@@ -859,13 +866,14 @@ CREATE TABLE `tr_sro` (
   `id_user` varchar(21) DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id_sro`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of tr_sro
 -- ----------------------------
 INSERT INTO `tr_sro` VALUES ('1', '1', '2', '2015-01-19 00:00:00', '1', '2');
 INSERT INTO `tr_sro` VALUES ('2', '2', '3', '2015-01-19 00:00:00', '1', '2');
+INSERT INTO `tr_sro` VALUES ('3', null, '19', '2015-02-06 00:00:00', '1', '1');
 
 -- ----------------------------
 -- Table structure for tr_stock
@@ -938,7 +946,69 @@ INSERT INTO `tr_transfer_detail` VALUES ('8', '2', '2', '302', null, '500', null
 -- View structure for v_po_detail
 -- ----------------------------
 DROP VIEW IF EXISTS `v_po_detail`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER  VIEW `v_po_detail` AS select `c`.`id_po` AS `id_po`,`a`.`id_detail_pr` AS `id_detail_pr`,`a`.`kode_barang` AS `kode_barang`,`a`.`note` AS `note`,`a`.`qty` AS `qty`,`e`.`price` AS `price`,(`a`.`qty` * `e`.`price`) AS `total`,`c`.`purpose` AS `purpose`,`c`.`ext_doc_no` AS `ext_doc_no`,`c`.`ETD` AS `ETD`,`d`.`top` AS `top`,`f`.`nama_barang` AS `nama_barang`,`a`.`user_id` AS `user_id`,`g`.`full_name` AS `full_name`,`d`.`id_vendor` AS `id_vendor`,`g`.`departement_id` AS `departement_id`,`h`.`departement_name` AS `departement_name`,`c`.`cat_req` AS `cat_req`,`c`.`date_create` AS `date_create` from (((((((`tr_pr_detail` `a` left join `tr_pr` `b` on((`a`.`id_pr` = `b`.`id_pr`))) left join `tr_po` `c` on((`b`.`id_po` = `c`.`id_po`))) left join `tr_qr` `d` on(((`b`.`id_pr` = `d`.`id_pr`) and (`d`.`status` = 2)))) left join `tr_qr_detail` `e` on(((`e`.`id_qr` = `d`.`id_qr`) and (`e`.`id_detail_pr` = `a`.`id_detail_pr`)))) left join `ref_barang` `f` on((`f`.`kode_barang` = `a`.`kode_barang`))) left join `sys_user` `g` on((`g`.`user_id` = `a`.`user_id`))) left join `ref_departement` `h` on((`h`.`departement_id` = `g`.`departement_id`))) ; ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER  VIEW `v_po_detail` AS SELECT
+c.id_po AS id_po,
+a.id_detail_pr AS id_detail_pr,
+a.kode_barang AS kode_barang,
+a.note AS note,
+a.qty AS qty,
+e.price AS price,
+(`a`.`qty` * `e`.`price`) AS total,
+c.purpose AS purpose,
+c.ext_doc_no AS ext_doc_no,
+c.ETD AS ETD,
+d.top AS top,
+f.nama_barang AS nama_barang,
+a.user_id AS user_id,
+g.full_name AS full_name,
+d.id_vendor AS id_vendor,
+g.departement_id AS departement_id,
+h.departement_name AS departement_name,
+c.cat_req AS cat_req,
+c.date_create AS date_create
+from (((((((`tr_pr_detail` `a` left join `tr_pr` `b` on((`a`.`id_pr` = `b`.`id_pr`))) left join `tr_po` `c` on((`b`.`id_po` = `c`.`id_po`))) left join `tr_qr` `d` on(((`b`.`id_pr` = `d`.`id_pr`) and (`d`.`status` = 2)))) left join `tr_qr_detail` `e` on(((`e`.`id_qr` = `d`.`id_qr`) and (`e`.`id_detail_pr` = `a`.`id_detail_pr`)))) left join `ref_barang` `f` on((`f`.`kode_barang` = `a`.`kode_barang`))) left join `sys_user` `g` on((`g`.`user_id` = `a`.`user_id`))) left join `ref_departement` `h` on((`h`.`departement_id` = `g`.`departement_id`))) ;
+
+-- ----------------------------
+-- View structure for v_po_detail_2
+-- ----------------------------
+DROP VIEW IF EXISTS `v_po_detail_2`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `v_po_detail_2` AS SELECT
+tr_po.id_po,
+tr_po.requestor,
+tr_po.departement,
+tr_po.purpose,
+tr_po.cat_req,
+tr_po.ext_doc_no,
+tr_po.ETD,
+tr_po.date_create,
+tr_qr.top,
+tr_qr.id_vendor,
+tr_qr.id_pr,
+tr_qr.id_qrs,
+ref_vendor.name_vendor,
+ref_vendor.address_vendor,
+ref_vendor.contact_vendor,
+ref_vendor.mobile_vendor,
+tr_qr_detail.kode_barang,
+tr_qr_detail.qty,
+tr_qr_detail.price,
+(tr_qr_detail.qty * tr_qr_detail.price) AS total,
+tr_qr.id_qr,
+tr_qr_detail.id_detail_pr,
+sys_user.full_name,
+sys_user.departement_id,
+ref_departement.departement_name,
+ref_barang.nama_barang,
+tr_pr_detail.note
+FROM
+tr_po
+LEFT JOIN tr_qr ON tr_qr.id_po = tr_po.id_po
+LEFT JOIN ref_vendor ON tr_qr.id_vendor = ref_vendor.id_vendor
+LEFT JOIN tr_qr_detail ON tr_qr.id_qrs = tr_qr_detail.id_qrs AND tr_qr.id_pr = tr_qr_detail.id_pr AND tr_qr.id_qr = tr_qr_detail.id_qr
+LEFT JOIN sys_user ON tr_po.requestor = sys_user.user_id
+LEFT JOIN ref_departement ON sys_user.departement_id = ref_departement.departement_id
+LEFT JOIN ref_barang ON tr_qr_detail.kode_barang = ref_barang.kode_barang
+LEFT JOIN tr_pr_detail ON tr_qr_detail.id_detail_pr = tr_pr_detail.id_detail_pr ;
 
 -- ----------------------------
 -- View structure for v_po_inbound

@@ -169,7 +169,7 @@
       if(confirm("Apakah yakin akan Akan Memilih Vendor '" + val + "'?")){
         var response = '';
         $.ajax({ type: "GET",
-           url: base_url+'quotation_request_selected/Selected/' + val +'/'+id_pr,
+           url: base_url+'quotation_request_selected/Selected/' + val +'/'+id_pr+'/'+id_qrs,
            async: false,
            success : function(response){
             var response = eval('('+response+')');

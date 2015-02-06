@@ -329,9 +329,9 @@ class mdl_prosedur extends CI_Model {
 		
 		foreach($res->result() as $l){
 			if(trim($l->id_pr) == trim($value)){
-				$out .= '<option value="'.$l->id_pr.'" selected="selected">'.$l->id_pr.'</option>';
+				$out .= '<option value="'.$l->id_pr.'" selected="selected"> ID PR :'.$l->id_pr.' ID QRS :'.$l->id_qrs.'</option>';
 			}else{
-				$out .= '<option value="'.$l->id_pr.'">'.$l->id_pr.'</option>';
+				$out .= '<option value="'.$l->id_pr.'"> ID PR :'.$l->id_pr.' ID QRS :'.$l->id_qrs.'</option>';
 			}
 		}
 		
