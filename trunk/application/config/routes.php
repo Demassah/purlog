@@ -40,7 +40,7 @@
 
 //$route['default_controller'] = "portal";
 $route['default_controller'] = "auth";
-$route['404_override'] = '';
+$route['404_override'] = 'underconstruction';
 
 
 /* End of file routes.php */

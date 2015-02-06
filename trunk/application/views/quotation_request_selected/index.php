@@ -155,10 +155,10 @@
           col += '<a href="#" onclick="detail_Qrs(\''+row.id_qrs+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Detail</a>';     
           <?php }?>
           <?php if($this->mdl_auth->CekAkses(array('menu_id'=>15, 'policy'=>'DETAIL'))){ ?>
-          col += '&nbsp;&nbsp; | &nbsp;&nbsp;<a href="#" onclick="Add_Qrs(\''+row.id_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">QRS</a>';     
+          col += '&nbsp;&nbsp; | &nbsp;&nbsp;<a href="#" onclick="Add_Qrs(\''+row.id_pr+'/'+row.id_qrs+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">QRS</a>';     
           <?php }?>
           <?php if($this->mdl_auth->CekAkses(array('menu_id'=>15, 'policy'=>'APPROVE'))){ ?>
-          col += '&nbsp;&nbsp; | &nbsp;&nbsp;<a href="#" onclick="done(\''+row.id_pr+'\');" class="easyui-linkbutton" iconCls="icon-edit"plain="false">Done</a>';
+          col += '&nbsp;&nbsp; | &nbsp;&nbsp;<a href="#" onclick="done(\''+row.id_pr+'/'+row.id_qrs+'\');" class="easyui-linkbutton" iconCls="icon-edit"plain="false">Done</a>';
           <?php }?>
           <?php if($this->mdl_auth->CekAkses(array('menu_id'=>15, 'policy'=>'DELETE'))){ ?>
           col += '&nbsp;&nbsp; | &nbsp;&nbsp;<a href="#" onclick="delete_qrs(\''+row.id_qrs+'\');" class="easyui-linkbutton" iconCls="icon-edit"plain="false">Delete</a>';
