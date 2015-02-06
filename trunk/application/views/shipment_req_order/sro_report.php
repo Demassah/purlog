@@ -81,7 +81,7 @@ else {
 			<td align="left"> : <?php  echo $data_pdf[0]->departement_name;?></td>
 			<td>&nbsp;&nbsp;&nbsp;</td>
 			<td align="left">ETD </td>
-			<td align="left"> : <?php  echo $data_pdf[0]->ETD;?></td>
+			<td align="left"> : <?php  echo tgl_indo($data_pdf[0]->ETD);?></td>
 		</tr>
 		<tr>
 			<td >&nbsp;&nbsp;&nbsp;</td>
@@ -89,7 +89,7 @@ else {
 			<td align="left"> : <?php  echo $data_pdf[0]->purpose;?></td>
 			<td>&nbsp;&nbsp;&nbsp;</td>
 			<td align="left">Date Create</td>
-			<td align="left"> : <?php  echo $data_pdf[0]->date_create;?></td>
+			<td align="left"> : <?php  echo tgl_jam_indo($data_pdf[0]->date_create);?></td>
 		</tr>
 		<tr>
 			<td >&nbsp;&nbsp;&nbsp;</td>

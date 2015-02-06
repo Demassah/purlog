@@ -13,6 +13,32 @@
 		}
 	}
 
+	function multiexplode ($delimiters,$string) {
+   
+    $ready = str_replace($delimiters, $delimiters[0], $string);
+    $launch = explode($delimiters[0], $ready);
+    return  $launch;
+	}
+
+	if(! function_exists('tgl_jam_indo'))
+	{
+		function tgl_jam_indo($tgl_jam)
+		{
+			$rubah = gmdate($tgl_jam);
+			$cacah = multiexplode(array("-"," ",":"),$rubah);
+			$tanggal = $cacah[2];
+			$bulan = bulan($cacah[1]);
+			$tahun = $cacah[0];
+			$jam = $cacah[3];
+			$menit = $cacah[4];
+			$detik = $cacah[5];
+
+			return $tanggal.' '.$bulan.' '.$tahun.' '.$jam.':'.$menit.':'.$detik;
+
+		}
+	}
+
+
 	if ( ! function_exists('bulan'))
 	{
 		function bulan($bln)
