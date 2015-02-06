@@ -322,16 +322,16 @@ class mdl_prosedur extends CI_Model {
 		$this->db->flush_cache();
 		$this->db->from('tr_qrs');
 		$this->db->where('status', 2);
-		//$this->db->where('id_po', Null);
+		$this->db->where('id_po', Null);
 		$this->db->order_by('id_qrs');
 				
 		$res = $this->db->get();
 		
 		foreach($res->result() as $l){
 			if(trim($l->id_pr) == trim($value)){
-				$out .= '<option value="'.$l->id_pr.'" selected="selected"> ID PR :'.$l->id_pr.' ID QRS :'.$l->id_qrs.'</option>';
+				$out .= '<option value="'.$l->id_qrs.'" selected="selected"> ID PR :'.$l->id_pr.' ID QRS :'.$l->id_qrs.'</option>';
 			}else{
-				$out .= '<option value="'.$l->id_pr.'"> ID PR :'.$l->id_pr.' ID QRS :'.$l->id_qrs.'</option>';
+				$out .= '<option value="'.$l->id_qrs.'"> ID PR :'.$l->id_pr.' ID QRS :'.$l->id_qrs.'</option>';
 			}
 		}
 		

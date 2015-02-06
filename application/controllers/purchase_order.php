@@ -44,7 +44,7 @@ class purchase_order extends CI_Controller {
 		}
 		
 		# rules validasi form
-		$this->form_validation->set_rules("id_pr", 'ID purchase order', 'trim|required|xss_clean');
+		$this->form_validation->set_rules("id_qrs", 'ID Quotation Request Selected', 'trim|required|xss_clean');
 		$this->form_validation->set_rules("departement_id", 'ID Departement ', 'trim|required|xss_clean');
 		# message rules
 		$this->form_validation->set_message('required', 'Field %s harus diisi.');
