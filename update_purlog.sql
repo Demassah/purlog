@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50516
 File Encoding         : 65001
 
-Date: 2015-02-06 22:09:17
+Date: 2015-02-07 01:59:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -433,11 +433,13 @@ CREATE TABLE `tr_in` (
   `user_id` smallint(6) DEFAULT NULL,
   `status` smallint(1) DEFAULT NULL,
   PRIMARY KEY (`id_in`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tr_in
 -- ----------------------------
+INSERT INTO `tr_in` VALUES ('2', '19', '1', '2015-02-07 01:57:14', '16', '1');
+INSERT INTO `tr_in` VALUES ('3', '17', '1', '2015-02-07 01:57:39', '16', '1');
 
 -- ----------------------------
 -- Table structure for tr_in_detail
@@ -452,11 +454,12 @@ CREATE TABLE `tr_in_detail` (
   `lokasi` varchar(21) DEFAULT NULL,
   `status` smallint(1) DEFAULT NULL,
   PRIMARY KEY (`id_detail_in`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tr_in_detail
 -- ----------------------------
+INSERT INTO `tr_in_detail` VALUES ('6', '2', '201', '23', '9', 'Pusat', '1');
 
 -- ----------------------------
 -- Table structure for tr_notifikasi
@@ -474,7 +477,7 @@ CREATE TABLE `tr_notifikasi` (
   `binding_id` int(11) NOT NULL,
   `user_level_id` int(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tr_notifikasi
@@ -488,6 +491,7 @@ INSERT INTO `tr_notifikasi` VALUES ('46', 'Request Order Baru telah dibuat', 're
 INSERT INTO `tr_notifikasi` VALUES ('47', 'Request Order telah dikirim ke RO Approval', 'request_order_approval', '21', '0', '0000-00-00', '1', '1', '1', '2');
 INSERT INTO `tr_notifikasi` VALUES ('48', 'RO Approval telah dikirim ke RO Logistic', 'request_order_logistic', '21', '0', '0000-00-00', '1', '1', '1', '2');
 INSERT INTO `tr_notifikasi` VALUES ('49', 'RO Logistic telah dikirim ke RO Selected', 'request_order_selected', '21', '0', '0000-00-00', '1', '1', '1', '2');
+INSERT INTO `tr_notifikasi` VALUES ('50', 'Purchase Request Baru telah dibuat', 'purchase_request', '6', '0', '0000-00-00', '3', '1', '1', '3');
 
 -- ----------------------------
 -- Table structure for tr_po
@@ -507,12 +511,14 @@ CREATE TABLE `tr_po` (
   `date_create` datetime DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id_po`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tr_po
 -- ----------------------------
-INSERT INTO `tr_po` VALUES ('14', '13', '1', '1', '14', '19', 'REQUEST', 'ASSET', 'SPK/123', '2015-01-20', '2015-02-06 22:08:42', '1');
+INSERT INTO `tr_po` VALUES ('17', '13', '1', '1', '16', '19', 'REQUEST', 'ASSET', 'SPK/123', '2015-01-20', '2015-02-06 22:21:31', '2');
+INSERT INTO `tr_po` VALUES ('18', '14', '1', '1', '16', '19', 'REQUEST', 'ASSET', 'SPK/123', '2015-01-20', '2015-02-06 22:26:10', '1');
+INSERT INTO `tr_po` VALUES ('19', '16', '6', '21', '16', '19', 'REQUEST', 'ASSET', '12354', '2015-02-06', '2015-02-07 01:01:24', '2');
 
 -- ----------------------------
 -- Table structure for tr_pr
@@ -530,7 +536,7 @@ CREATE TABLE `tr_pr` (
   `date_create` datetime DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id_pr`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tr_pr
@@ -538,6 +544,7 @@ CREATE TABLE `tr_pr` (
 INSERT INTO `tr_pr` VALUES ('1', '1', null, '1', 'REQUEST', 'ASSET', 'SPK/123', '2015-01-20', '2015-01-20 09:22:32', '2');
 INSERT INTO `tr_pr` VALUES ('4', '19', null, '1', 'REQUEST', 'ASSET', '1', '2015-02-03', '2015-02-03 12:48:48', '2');
 INSERT INTO `tr_pr` VALUES ('5', '20', null, '1', 'REQUEST', 'ATK', '1234', '2015-02-04', '2015-02-04 16:27:03', '2');
+INSERT INTO `tr_pr` VALUES ('6', '21', null, '16', 'REQUEST', 'ASSET', '12354', '2015-02-06', '2015-02-06 17:28:29', '2');
 
 -- ----------------------------
 -- Table structure for tr_pros_detail
@@ -596,7 +603,7 @@ INSERT INTO `tr_pr_detail` VALUES ('5', '4', '9', '19', '201', '2', '1', '2015-0
 INSERT INTO `tr_pr_detail` VALUES ('6', '5', '10', '20', '100', '34', '1', '2015-02-04 16:29:20', null, '2', '0');
 INSERT INTO `tr_pr_detail` VALUES ('7', '5', '11', '20', '302', '12', '1', '2015-02-04 16:29:20', null, '2', '0');
 INSERT INTO `tr_pr_detail` VALUES ('8', '5', '12', '20', '100', '12', '1', '2015-02-04 16:29:20', null, '2', '0');
-INSERT INTO `tr_pr_detail` VALUES ('9', '0', '13', '21', '201', '123', '16', '2015-02-06 17:37:37', null, '1', '0');
+INSERT INTO `tr_pr_detail` VALUES ('9', '6', '13', '21', '201', '123', '16', '2015-02-06 17:37:37', null, '2', '0');
 
 -- ----------------------------
 -- Table structure for tr_qr
@@ -612,17 +619,20 @@ CREATE TABLE `tr_qr` (
   `ETD` date DEFAULT NULL,
   `status` int(2) DEFAULT '1',
   PRIMARY KEY (`id_qr`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of tr_qr
 -- ----------------------------
-INSERT INTO `tr_qr` VALUES ('43', '13', '1', 'V001', '14', '2', '2015-02-06', '2');
+INSERT INTO `tr_qr` VALUES ('43', '13', '1', 'V001', '17', '2', '2015-02-06', '2');
 INSERT INTO `tr_qr` VALUES ('44', '13', '1', 'V002', '0', '4', '2015-02-06', '1');
 INSERT INTO `tr_qr` VALUES ('45', '13', '1', 'V003', '0', '5', '2015-02-06', '1');
 INSERT INTO `tr_qr` VALUES ('46', '14', '1', 'V001', '0', '13', '2015-02-06', '1');
-INSERT INTO `tr_qr` VALUES ('47', '14', '1', 'V002', '0', '4', '2015-02-06', '1');
+INSERT INTO `tr_qr` VALUES ('47', '14', '1', 'V002', '18', '4', '2015-02-06', '2');
 INSERT INTO `tr_qr` VALUES ('48', '14', '1', 'V003', '0', '5', '2015-02-06', '1');
+INSERT INTO `tr_qr` VALUES ('49', '16', '6', 'V001', '0', '12', '2015-02-07', '1');
+INSERT INTO `tr_qr` VALUES ('50', '16', '6', 'V002', '19', '2', '2015-02-07', '2');
+INSERT INTO `tr_qr` VALUES ('51', '16', '6', 'V003', '0', '3', '2015-02-07', '1');
 
 -- ----------------------------
 -- Table structure for tr_qrs
@@ -637,13 +647,15 @@ CREATE TABLE `tr_qrs` (
   `user_id` smallint(6) DEFAULT NULL,
   `status` smallint(1) DEFAULT NULL,
   PRIMARY KEY (`id_qrs`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of tr_qrs
 -- ----------------------------
-INSERT INTO `tr_qrs` VALUES ('13', '14', '1', '1', '2015-02-06 01:58:36', '1', '2');
-INSERT INTO `tr_qrs` VALUES ('14', null, '1', '1', '2015-02-06 01:59:06', '1', '1');
+INSERT INTO `tr_qrs` VALUES ('13', '17', '1', '1', '2015-02-06 01:58:36', '1', '2');
+INSERT INTO `tr_qrs` VALUES ('14', '18', '1', '1', '2015-02-06 01:59:06', '1', '2');
+INSERT INTO `tr_qrs` VALUES ('16', '19', '6', '21', '2015-02-07 00:59:54', '16', '2');
+INSERT INTO `tr_qrs` VALUES ('17', null, '6', '21', '2015-02-07 01:00:11', '16', '1');
 
 -- ----------------------------
 -- Table structure for tr_qrs_detail
@@ -658,7 +670,7 @@ CREATE TABLE `tr_qrs_detail` (
   `qty` int(11) DEFAULT NULL,
   `status` smallint(1) DEFAULT NULL,
   PRIMARY KEY (`id_detail_qrs`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of tr_qrs_detail
@@ -669,6 +681,8 @@ INSERT INTO `tr_qrs_detail` VALUES ('28', '13', '1', '3', '203', '3', '1');
 INSERT INTO `tr_qrs_detail` VALUES ('29', '14', '1', '1', '100', '4', '1');
 INSERT INTO `tr_qrs_detail` VALUES ('30', '14', '1', '2', '201', '4', '1');
 INSERT INTO `tr_qrs_detail` VALUES ('31', '14', '1', '3', '203', '1', '1');
+INSERT INTO `tr_qrs_detail` VALUES ('32', '16', '6', '9', '201', '100', '1');
+INSERT INTO `tr_qrs_detail` VALUES ('33', '17', '6', '9', '201', '23', '1');
 
 -- ----------------------------
 -- Table structure for tr_qr_detail
@@ -686,7 +700,7 @@ CREATE TABLE `tr_qr_detail` (
   `date_create` datetime DEFAULT NULL,
   `status` int(1) DEFAULT '1',
   PRIMARY KEY (`id_detail_qr`)
-) ENGINE=InnoDB AUTO_INCREMENT=155 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=158 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of tr_qr_detail
@@ -709,6 +723,9 @@ INSERT INTO `tr_qr_detail` VALUES ('151', '47', '14', '3', '1', '203', '1', '34'
 INSERT INTO `tr_qr_detail` VALUES ('152', '48', '14', '1', '1', '100', '4', '0', '2015-02-06 01:59:36', '1');
 INSERT INTO `tr_qr_detail` VALUES ('153', '48', '14', '2', '1', '201', '4', '0', '2015-02-06 01:59:36', '1');
 INSERT INTO `tr_qr_detail` VALUES ('154', '48', '14', '3', '1', '203', '1', '0', '2015-02-06 01:59:36', '1');
+INSERT INTO `tr_qr_detail` VALUES ('155', '49', '16', '9', '6', '201', '100', '0', '2015-02-07 01:00:40', '1');
+INSERT INTO `tr_qr_detail` VALUES ('156', '50', '16', '9', '6', '201', '100', '1000000', '2015-02-07 01:00:45', '1');
+INSERT INTO `tr_qr_detail` VALUES ('157', '51', '16', '9', '6', '201', '100', '0', '2015-02-07 01:00:48', '1');
 
 -- ----------------------------
 -- Table structure for tr_receive
@@ -894,7 +911,7 @@ CREATE TABLE `tr_stock` (
   `status` int(1) DEFAULT NULL,
   `type_in` smallint(1) DEFAULT NULL COMMENT '1: in 2: transfer',
   PRIMARY KEY (`id_stock`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of tr_stock
@@ -902,6 +919,7 @@ CREATE TABLE `tr_stock` (
 INSERT INTO `tr_stock` VALUES ('1', null, null, '301', '2', '1000', 'Workshop', '2015-01-20 10:54:09', '1', null);
 INSERT INTO `tr_stock` VALUES ('2', null, null, '302', '0', '500', 'Heavy Equipment', '2015-01-20 10:54:09', '1', null);
 INSERT INTO `tr_stock` VALUES ('3', null, null, '201', '0', '250', 'Pusat', '2015-01-20 10:54:09', '1', '0');
+INSERT INTO `tr_stock` VALUES ('4', null, null, '100', '2', '210', 'IT', '2015-02-07 01:33:33', '1', null);
 
 -- ----------------------------
 -- Table structure for tr_transfer
@@ -1017,13 +1035,44 @@ LEFT JOIN tr_pr_detail ON tr_qr_detail.id_detail_pr = tr_pr_detail.id_detail_pr 
 -- View structure for v_po_inbound
 -- ----------------------------
 DROP VIEW IF EXISTS `v_po_inbound`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER  VIEW `v_po_inbound` AS select `x`.`id_detail_pr` AS `id_detail_pr`,`x`.`id_pr` AS `id_pr`,`z`.`id_po` AS `id_po`,`x`.`kode_barang` AS `kode_barang`,`x`.`qty` AS `asal`,coalesce(sum(`y`.`qty`),0) AS `receive`,(`x`.`qty` - coalesce(sum(`y`.`qty`),0)) AS `sisa`,`a`.`nama_barang` AS `nama_barang` from (((`tr_pr_detail` `x` left join `tr_in_detail` `y` on((`x`.`id_detail_pr` = `y`.`ext_rec_no_detail`))) left join `tr_pr` `z` on((`x`.`id_pr` = `z`.`id_pr`))) left join `ref_barang` `a` on((`x`.`kode_barang` = `a`.`kode_barang`))) where (`z`.`id_po` <> '') group by `x`.`id_detail_pr` ; ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER  VIEW `v_po_inbound` AS select 
+`x`.`id_detail_pr` AS `id_detail_pr`,
+`x`.`id_pr` AS `id_pr`,
+`z`.`id_po` AS `id_po`,
+`x`.`kode_barang` AS `kode_barang`,
+`x`.`qty` AS `asal`,
+coalesce(sum(`y`.`qty`),0) AS `receive`,
+(`x`.`qty` - coalesce(sum(`y`.`qty`),0)) AS `sisa`,
+`a`.`nama_barang` AS `nama_barang` 
+from (((`tr_pr_detail` `x` left join `tr_in_detail` `y` on((`x`.`id_detail_pr` = `y`.`ext_rec_no_detail`))) 
+			left join `tr_pr` `z` on((`x`.`id_pr` = `z`.`id_pr`))) left join `ref_barang` `a` on((`x`.`kode_barang` = `a`.`kode_barang`))) 
+where (`z`.`id_po` <> '') group by `x`.`id_detail_pr` ;
+
+-- ----------------------------
+-- View structure for v_po_inbound_2
+-- ----------------------------
+DROP VIEW IF EXISTS `v_po_inbound_2`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `v_po_inbound_2` AS SELECT
+x.id_detail_pr,
+x.id_pr,
+z.id_po,
+x.kode_barang,
+x.qty AS asal,
+coalesce(sum(`y`.`qty`),0) AS `receive`,
+(`x`.`qty` - coalesce(sum(`y`.`qty`),0)) AS `sisa`,
+a.nama_barang
+FROM
+tr_qrs_detail AS x
+LEFT JOIN tr_in_detail AS y ON x.id_detail_pr = y.ext_rec_no_detail
+LEFT JOIN tr_qrs AS z ON x.id_pr = z.id_pr
+LEFT JOIN ref_barang AS a ON x.kode_barang = a.kode_barang 
+where (`z`.`id_po` <> '') group by `x`.`id_detail_pr` ;
 
 -- ----------------------------
 -- View structure for v_print_inbound
 -- ----------------------------
 DROP VIEW IF EXISTS `v_print_inbound`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER  VIEW `v_print_inbound` AS select `a`.`id_in` AS `id_in`,`a`.`type` AS `type`,`b`.`id_po` AS `id_po`,`b`.`id_pr` AS `id_pr`,`b`.`id_ro` AS `id_ro`,`b`.`requestor` AS `requestor`,`b`.`departement` AS `departement`,`b`.`purpose` AS `purpose`,`b`.`cat_req` AS `cat_req`,`a`.`date_create` AS `date_create`,`c`.`id_detail_in` AS `id_detail_in`,`c`.`kode_barang` AS `kode_barang`,`c`.`qty` AS `qty`,`c`.`lokasi` AS `lokasi`,`d`.`nama_barang` AS `nama_barang`,`f`.`full_name` AS `full_name`,`g`.`departement_name` AS `departement_name`,`b`.`ext_doc_no` AS `ext_doc_no` from (((((`tr_in` `a` left join `tr_po` `b` on((`a`.`ext_rec_no` = `b`.`id_po`))) left join `tr_in_detail` `c` on((`a`.`id_in` = `c`.`id_in`))) left join `ref_barang` `d` on((`c`.`kode_barang` = convert(`d`.`kode_barang` using utf8)))) left join `sys_user` `f` on((`a`.`user_id` = `f`.`user_id`))) left join `ref_departement` `g` on((`b`.`departement` = `g`.`departement_id`))) where (`a`.`id_in` = 5) ; ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER  VIEW `v_print_inbound` AS select `a`.`id_in` AS `id_in`,`a`.`type` AS `type`,`b`.`id_po` AS `id_po`,`b`.`id_pr` AS `id_pr`,`b`.`id_ro` AS `id_ro`,`b`.`requestor` AS `requestor`,`b`.`departement` AS `departement`,`b`.`purpose` AS `purpose`,`b`.`cat_req` AS `cat_req`,`a`.`date_create` AS `date_create`,`c`.`id_detail_in` AS `id_detail_in`,`c`.`kode_barang` AS `kode_barang`,`c`.`qty` AS `qty`,`c`.`lokasi` AS `lokasi`,`d`.`nama_barang` AS `nama_barang`,`f`.`full_name` AS `full_name`,`g`.`departement_name` AS `departement_name`,`b`.`ext_doc_no` AS `ext_doc_no` from (((((`tr_in` `a` left join `tr_po` `b` on((`a`.`ext_rec_no` = `b`.`id_po`))) left join `tr_in_detail` `c` on((`a`.`id_in` = `c`.`id_in`))) left join `ref_barang` `d` on((`c`.`kode_barang` = convert(`d`.`kode_barang` using utf8)))) left join `sys_user` `f` on((`a`.`user_id` = `f`.`user_id`))) left join `ref_departement` `g` on((`b`.`departement` = `g`.`departement_id`))) ;
 
 -- ----------------------------
 -- View structure for v_pros_detail
@@ -3572,11 +3621,15 @@ CREATE TRIGGER `after_delete_do` AFTER DELETE ON `tr_do` FOR EACH ROW BEGIN
 DELIMITER ;
 DROP TRIGGER IF EXISTS `after_update_in`;
 DELIMITER ;;
-CREATE TRIGGER `after_update_in` AFTER UPDATE ON `tr_in` FOR EACH ROW BEGIN
-	IF new.status = 2 and new.type = 1 THEN
-	CALL p_in_po(new.id_in);
-	CALL p_in_stock(new.id_in);	
-	END IF;
+CREATE TRIGGER `after_update_in` AFTER UPDATE ON `tr_in` FOR EACH ROW BEGIN
+IF new.status = 2 and new.type = 1 THEN
+CALL p_in_po(new.id_in);
+CALL p_in_stock(new.id_in);	
+END IF;
+
+
+
+
     END
 ;;
 DELIMITER ;

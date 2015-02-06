@@ -56,11 +56,11 @@ class mdl_inbound extends CI_Model {
 		if($id_po_re == 1){
 			$this->db->flush_cache();
 			$this->db->start_cache();
-				$this->db->select('id_po,id_pr,id_po,sisa');
+				$this->db->select('id_po,id_pr,sisa');
 				$this->db->where('sisa !=', 0);
 				$this->db->group_by('id_pr');
 				$this->db->order_by('id_pr', 'asc');
-				$res = $this->db->get('v_po_inbound');
+				$res = $this->db->get('v_po_inbound_2');
 			$this->db->stop_cache();
 
 			$out = '<option value="">-- Pilih ID --</option>';
@@ -201,7 +201,7 @@ class mdl_inbound extends CI_Model {
 			$this->db->where('c.sisa !=', 0);
 			$this->db->where('a.id_in', $id_in);
 			$this->db->join('tr_stock b', 'b.kode_barang = c.kode_barang');
-			$query = $this->db->get('v_po_inbound c,tr_in a');
+			$query = $this->db->get('v_po_inbound_2 c,tr_in a');
 			$query->result();
 			return $query->result();
 
