@@ -44,7 +44,7 @@
 
       $('#dialog').dialog({
         title: 'Tambah Detail inbound',
-        width: 600,
+        width: 800,
         height: 200,
         closed: true,
         cache: false,
