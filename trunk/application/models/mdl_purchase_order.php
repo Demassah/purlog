@@ -92,7 +92,7 @@ class mdl_purchase_order extends CI_Model {
 		$this->db->set('id_pr',$pr->id_pr);
 		$this->db->set('id_qrs',$data['id_qrs']);
 		$this->db->set('id_ro',$pr->id_ro);
-		$this->db->set('requestor',$data['user_id']);
+		$this->db->set('requestor',$pr->user_id);
 		$this->db->set('departement',$data['departement_id']);
 		$this->db->set('purpose',$pr->purpose);
 		$this->db->set('cat_req',$pr->cat_req);
