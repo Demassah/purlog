@@ -19,7 +19,7 @@
 						       
 				</select>
 	</div>
-	<?if($this->mdl_auth->CekAkses(array('menu_id'=>17, 'policy'=>'SELECT'))){?>
+<!-- 	<?if($this->mdl_auth->CekAkses(array('menu_id'=>17, 'policy'=>'SELECT'))){?>
 		<div class="fitem">
 			<label style="width:110px">Departement</label>: 
 				<select class="select" name="departement_id" style="width:200px;">
@@ -28,7 +28,7 @@
 					</select>	
 		</div>
 		<?}?>
-
+ -->
 </form>
 	
 

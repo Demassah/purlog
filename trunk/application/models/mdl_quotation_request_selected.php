@@ -172,14 +172,15 @@ class mdl_quotation_request_selected extends CI_Model {
 
 
 	// --------------------------------------------------- Done QRS -------------------------------------------------------------- //
-	function done($kode){
+	function done($kode,$id_qrs){
 		
 		$this->db->flush_cache();
 
-		$this->db->set('status', "3");
+		$this->db->set('status', "2");
 
 		$this->db->where('id_pr', $kode);
-		$result = $this->db->update('tr_pr');
+		$this->db->where('id_qrs', $id_qrs);
+		$result = $this->db->update('tr_qrs');
 
 		//return
 		if($result) {
