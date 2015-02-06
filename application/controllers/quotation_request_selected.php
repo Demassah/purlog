@@ -146,7 +146,7 @@ class quotation_request_selected extends CI_Controller {
 	  	if($result>=3){
 	  		$result = $this->mdl_quotation_request_selected->cek_pr_qr($kode,$id_qrs);
 	  		if($result>=1){
-			    $result = $this->mdl_quotation_request_selected->done($kode);
+			    $result = $this->mdl_quotation_request_selected->done($kode,$id_qrs);
 			    if ($result) {
 			        echo json_encode(array('success' => true));
 			    } else {
