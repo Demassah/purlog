@@ -91,7 +91,7 @@
 	                data_qty : $('#dtgrd').datagrid('getData')
 	              },
 	        success : function(response, textStatus){
-	        //alert(response);
+	        alert(response);
 	        var response = eval('('+response+')');
 	        if(response.success){
 	          $.messager.show({
