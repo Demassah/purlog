@@ -268,6 +268,18 @@ class mdl_document_receive extends CI_Model {
 		}
 	}
 
+	function DeleteDetailOnDB($kode){		
+		$this->db->where('id_detail_receive', $kode);
+		$result = $this->db->delete('tr_receive_detail');
+		
+		//return
+		if($result) {
+				return TRUE;
+		}else {
+				return FALSE;
+		}
+	}
+
 	function get_pdf($id_receive){        
         # get data
         $this->db->flush_cache();
