@@ -64,18 +64,18 @@ class mdl_purchase_order extends CI_Model {
 		return $query->result();
 	}
 
-	function search_pr($data)
+	function search_pr($id_pr)
 	{
 		$this->db->select('*');
-		$this->db->where('id_pr', $data['id_pr']);
+		$this->db->where('id_pr', $id_pr);
 		$query = $this->db->get('tr_pr');
 		return $query->row();
 
 	}
 	function search_qr($data)
 	{
-		$this->db->select('id_qr');
-		$this->db->where('id_pr', $data['id_pr']);
+		$this->db->select('id_qr,id_pr');
+		$this->db->where('id_qrs', $data['id_qrs']);
 		$this->db->where('status', 2);
 		$query = $this->db->get('tr_qr');
 		return $query->row();
@@ -83,11 +83,14 @@ class mdl_purchase_order extends CI_Model {
 	function Insert_po($data)
 	{
 		// function searc
-		$pr = $this->mdl_purchase_order->search_pr($data);
 		$qr = $this->mdl_purchase_order->search_qr($data);
+		$id_pr = $qr->id_pr;
+		$pr = $this->mdl_purchase_order->search_pr($id_pr);
+		
 
 		// function select
 		$this->db->set('id_pr',$pr->id_pr);
+		$this->db->set('id_qrs',$data['id_qrs']);
 		$this->db->set('id_ro',$pr->id_ro);
 		$this->db->set('requestor',$data['user_id']);
 		$this->db->set('departement',$data['departement_id']);

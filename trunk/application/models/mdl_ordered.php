@@ -59,7 +59,7 @@ class mdl_ordered extends CI_Model {
 		$this->db->select('a.id_vendor,a.name_vendor,a.contact_vendor,a.mobile_vendor,a.address_vendor,b.id_po,b.id_detail_pr,b.kode_barang,b.nama_barang,b.qty,b.price,b.total,b.top');
 		$this->db->where('id_po', $id_po);
 		$this->db->join('ref_vendor a', 'a.id_vendor = b.id_vendor');
-		$query = $this->db->get('v_po_detail b');
+		$query = $this->db->get('v_po_detail_2 b');
 		return $query->result();
 	}
 
