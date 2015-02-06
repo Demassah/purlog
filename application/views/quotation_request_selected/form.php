@@ -7,6 +7,7 @@
 <?php date_default_timezone_set("Asia/Jakarta");?>
 <form id="form2" method="post" style="margin:10px">
 	<input type="hidden" name="id_pr" value="<?php echo $id_pr;?>">
+	<input type="hidden" name="id_qrs" value="<?php echo $id_qrs;?>">
 	<input type="hidden" name="date_create" value="<?php echo date('Y-m-d');?>">
 	<input type="hidden" name="status" value="1">
 	<div class="fitem" >

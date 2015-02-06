@@ -129,21 +129,22 @@ class quotation_request_selected extends CI_Controller {
 	}
 
 	// ---------------------------------------------------Add QRS Vendor ------------------------------------------------------------ //
-	function add_qrs($id_pr)
+	function add_qrs($id_pr,$id_qrs)
 	{
 		$data['id_pr'] = $id_pr;
-		$data['list'] = $this->mdl_quotation_request_selected->list_pr($id_pr);
+		$data['id_qrs'] = $id_qrs;
+		$data['list'] = $this->mdl_quotation_request_selected->list_pr($id_pr,$id_qrs);
 
 		$this->load->view('quotation_request_selected/add_qrs', $data, FALSE);
 	}
 
 	// ---------------------------------------------------Cek Vendor -------------------------------------------------------------- //
-  function Done($kode) {
-  	$result = $this->mdl_quotation_request_selected->cek_no_detail($kode);
+  function Done($kode,$id_qrs) {
+  	$result = $this->mdl_quotation_request_selected->cek_no_detail($kode,$id_qrs);
   		if($result >= 1){
-	  	$result = $this->mdl_quotation_request_selected->cek_no_vendor($kode);
+	  	$result = $this->mdl_quotation_request_selected->cek_no_vendor($kode,$id_qrs);
 	  	if($result>=3){
-	  		$result = $this->mdl_quotation_request_selected->cek_pr_qr($kode);
+	  		$result = $this->mdl_quotation_request_selected->cek_pr_qr($kode,$id_qrs);
 	  		if($result>=1){
 			    $result = $this->mdl_quotation_request_selected->done($kode);
 			    if ($result) {
@@ -164,10 +165,11 @@ class quotation_request_selected extends CI_Controller {
 
 // ---------------------------------------------------CRUD Vendor -------------------------------------------------------------- //
 
-  function Add_vendor($id_pr)
+  function Add_vendor($id_pr,$id_qrs)
   {
   	$data['id_pr'] = $id_pr;
-  	$data['list'] = $this->mdl_quotation_request_selected->list_vendor($id_pr);
+  	$data['id_qrs'] = $id_qrs;
+  	$data['list'] = $this->mdl_quotation_request_selected->list_vendor($id_pr,$id_qrs);
   	$this->load->view('quotation_request_selected/form', $data);
   }
 
@@ -207,10 +209,11 @@ class quotation_request_selected extends CI_Controller {
 		}
 	}
 	
-	function after_select($id_pr)
+	function after_select($id_pr,$id_qrs)
 	{
 		$data['id_pr'] = $id_pr;
-		$data['list'] = $this->mdl_quotation_request_selected->list_pr($id_pr);
+  	$data['id_qrs'] = $id_qrs;
+		$data['list'] = $this->mdl_quotation_request_selected->list_pr($id_pr,$id_qrs);
 
 		$this->load->view('quotation_request_selected/load', $data, FALSE);
 	}

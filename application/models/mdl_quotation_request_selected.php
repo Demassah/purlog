@@ -64,18 +64,19 @@ class mdl_quotation_request_selected extends CI_Model {
 	}
 	// ---------------------------------------------------List Vendor/PR -------------------------------------------------------------- //
 
-	function check_tr_qr($id_pr)
+	function check_tr_qr($id_pr,$id_qrs)
 	{
-		$this->db->select('b.id_vendor,b.id_pr');
+		$this->db->select('b.id_vendor,b.id_pr,b.id_qrs');
 		$this->db->where('b.id_pr', $id_pr);
+		$this->db->where('b.id_qrs', $id_qrs);
 		$query = $this->db->get('tr_qr b');
 		return $query->result();
 
 	}
 
-	function list_vendor($id_pr)
+	function list_vendor($id_pr,$id_qrs)
 	{
-		$id_vendor = $this->mdl_quotation_request_selected->check_tr_qr($id_pr);
+		$id_vendor = $this->mdl_quotation_request_selected->check_tr_qr($id_pr,$id_qrs);
 		$item ='';
 		foreach ($id_vendor as $l) {
 			$item = $l->id_vendor;
@@ -88,15 +89,16 @@ class mdl_quotation_request_selected extends CI_Model {
 		return $query->result();
 	}
 
-	function list_pr($id_pr)
+	function list_pr($id_pr,$id_qrs)
 	{
-		$this->db->select('a.id_qr,a.id_pr,a.id_vendor,top,a.ETD,a.status,b.kode_barang,b.price,c.nama_barang,d.name_vendor,b.id_detail_qr,b.qty');
+		$this->db->select('a.id_qr,a.id_qrs,a.id_pr,a.id_vendor,top,a.ETD,a.status,b.kode_barang,b.price,c.nama_barang,d.name_vendor,b.id_detail_qr,b.id_detail_pr,b.qty');
 		$this->db->join('tr_qr_detail b', 'b.id_qr = a.id_qr');
 		$this->db->join('ref_barang c', 'c.kode_barang = b.kode_barang');
 		$this->db->join('ref_vendor d', 'd.id_vendor = a.id_vendor');
 		$this->db->join('tr_pr e', 'e.id_pr = a.id_pr');
 		$this->db->order_by('a.id_vendor asc,  b.kode_barang asc');
 		$this->db->where('e.id_pr',$id_pr);
+		$this->db->where('a.id_qrs',$id_qrs);
 		$this->db->where('e.status', 2);
 
 		$query = $this->db->get('tr_qr a');
@@ -187,7 +189,7 @@ class mdl_quotation_request_selected extends CI_Model {
 		}
 	}
 
-	function cek_no_vendor($kode)
+	function cek_no_vendor($kode,$id_qrs)
 	{
 		$this->db->flush_cache();
 		$this->db->start_cache();
@@ -195,11 +197,12 @@ class mdl_quotation_request_selected extends CI_Model {
 			$this->db->order_by('x.id_pr', 'asc');
 			$this->db->from('tr_qr x');
 			$this->db->where('id_pr', $kode);
+			$this->db->where('id_qrs', $id_qrs);
 			return $this->db->count_all_results();
 		$this->db->stop_cache();
 	}
 
-	function cek_no_detail($kode)
+	function cek_no_detail($kode,$id_qrs)
 	{
 		$this->db->flush_cache();
 		$this->db->start_cache();
@@ -207,11 +210,12 @@ class mdl_quotation_request_selected extends CI_Model {
 			$this->db->order_by('id_pr', 'asc');
 			$this->db->from('tr_qrs_detail');
 			$this->db->where('id_pr', $kode);
+			$this->db->where('id_qrs', $id_qrs);
 			return $this->db->count_all_results();
 		$this->db->stop_cache();
 	}
 
-	function cek_pr_qr($kode)
+	function cek_pr_qr($kode,$id_qrs)
 	{
 		$this->db->flush_cache();
 		$this->db->start_cache();
@@ -219,6 +223,7 @@ class mdl_quotation_request_selected extends CI_Model {
 			$this->db->order_by('id_pr', 'asc');
 			$this->db->from('tr_qr');
 			$this->db->where('id_pr', $kode);
+			$this->db->where('id_qrs', $id_qrs);
 			$this->db->where('status', 2);
 			return $this->db->count_all_results();
 		$this->db->stop_cache();
@@ -231,6 +236,7 @@ class mdl_quotation_request_selected extends CI_Model {
 		$this->db->flush_cache();
 		// insert data
     $this->db->set('id_pr', $data['id_pr']);
+    $this->db->set('id_qrs', $data['id_qrs']);
     $this->db->set('id_vendor',$data['id_vendor']);
     $this->db->set('top',$data['top']);
     $this->db->set('ETD', $data['date_create']);
