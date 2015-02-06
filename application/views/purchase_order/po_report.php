@@ -79,7 +79,7 @@ else {
 			<td align="left"> : <?php  echo $data_pdf[0]->purpose;?></td>
 		<!-- 	<td>&nbsp;&nbsp;&nbsp;</td> -->
 			<td align="left" >Date Create</td>
-			<td align="left"> : <?php  echo $data_pdf[0]->date_create;?></td>
+			<td align="left"> : <?php  echo tgl_jam_indo($data_pdf[0]->date_create);?></td>
 			<!-- vendor -->
 			<!-- <td>&nbsp;&nbsp;&nbsp;</td> -->
 			<td align="left" >Contact Vendor</td>
@@ -151,4 +151,5 @@ else {
 	</div>
 	</div>
 </page>
+
 <?php } ?>
