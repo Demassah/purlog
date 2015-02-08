@@ -6,7 +6,7 @@ class inbound extends CI_Controller {
 		parent::__construct();
 		date_default_timezone_set("Asia/Jakarta");
 		$this->load->model('mdl_inbound');
-	// $this->output->enable_profiler(TRUE);
+	//$this->output->enable_profiler(TRUE);
 	}
 	/* --------------------------------list -------------------------------------- */
 	function index(){

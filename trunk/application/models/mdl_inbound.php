@@ -201,6 +201,7 @@ class mdl_inbound extends CI_Model {
 			$this->db->where('c.sisa !=', 0);
 			$this->db->where('a.id_in', $id_in);
 			$this->db->join('tr_stock b', 'b.kode_barang = c.kode_barang');
+			// $this->db->group_by('id_po');
 			$query = $this->db->get('v_po_inbound_2 c,tr_in a');
 			$query->result();
 			return $query->result();
