@@ -108,7 +108,8 @@ class document_receive extends CI_Controller {
 
         foreach($data['data_qty']['rows'] as $new) {
             $prev = $this->mdl_document_receive->getReceiveDetail   ($new['id_detail_receive'])->row();
-            if($prev->qty < $new['qty'] ||  $new['qty'] < 1) {
+            //if($prev->qty < $new['qty'] ||  $new['qty'] < 1) {
+            if($new['qty'] < 1) {
                 $error = true;
             }
         }
