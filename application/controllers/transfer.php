@@ -37,11 +37,11 @@ class transfer extends CI_Controller {
 	function add(){
 		$data['kode'] = '';
 		$data['id_transfer'] = '';
-	    $data['type_transfer'] = '';
-	    $data['note'] = '';
-	    $data['date_create'] =  date('Y-m-d H:i:s');
-	    $data['user_id'] = '';
-	    $data['status'] = '1';
+    $data['type_transfer'] = '';
+    $data['note'] = '';
+    $data['date_create'] =  date('Y-m-d H:i:s');
+    $data['user_id'] = '';
+    $data['status'] = '1';
 
 		$this->load->view('transfer/form', $data);
 	}
@@ -200,13 +200,13 @@ class transfer extends CI_Controller {
 		if ($this->form_validation->run() == FALSE){
 			$data["pesan_error"] .= trim(validation_errors(' ',' '))==''?'':validation_errors(' ',' ');
 		}else{
+			// print_r($data['qty']);
+			// print_r($data['id_lokasi']);
 			$result = $this->mdl_transfer->Alokasi_insert($data);
 		}
 		
 		if($result){
-			print_r($data['qty']);
-			print_r($data['id_lokasi']);
-			//echo json_encode(array('success'=>true));
+			echo json_encode(array('success'=>true));
 		}else{
 			echo json_encode(array('msg'=>$data['pesan_error']));
 		}

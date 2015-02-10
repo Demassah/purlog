@@ -19,7 +19,7 @@
 		}
 		// end newData
 
-		saveTransfer = function(){
+		saveData = function(){
 	      $('#form1').form('submit',{
 	        url: url,
 	        onSubmit: function(){
