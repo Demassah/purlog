@@ -1,6 +1,4 @@
-
 <form id="form1" method="post" style="margin:10px">
-
 	<input type="hidden" name="kode" id="kode" value="<?=$kode?>">
 	<input type="hidden" name="kode_barang" id="kode_barang" 	value="<?=$kode_barang?>">
 	<input type="hidden" name="price" 		id="price" 			value="<?=$price?>">
