@@ -92,7 +92,9 @@
         <th width="" bgcolor="#F4F4F4">ID Stock</th>
         <th width="" bgcolor="#F4F4F4">Kode Barang</th>
         <th width="" bgcolor="#F4F4F4">Nama Barang</th>
+        <th width="" bgcolor="#F4F4F4">Qty</th>
         <th width="" bgcolor="#F4F4F4">Price</th>
+        <th width="" bgcolor="#F4F4F4">Lokasi</th>
         <th width="80px" align="center" bgcolor="#F4F4F4">Aksi</th>
       </tr>
     </thead>
