@@ -222,8 +222,7 @@ class mdl_transfer extends CI_Model {
 		$this->db->trans_start();
 
 		$result = true;
-
-		# tambah data ke tabel
+		// tambah data ke tabel
 		$this->db->flush_cache();
 		$this->db->set('kode_barang', $data['kode_barang']);
 		$this->db->set('qty', $data['qty']);
