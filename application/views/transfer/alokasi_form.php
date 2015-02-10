@@ -1,47 +1,4 @@
-<script>
-	$(document).ready(function(){
 
-		tutup = function (){
-	      $('#dialog_kosong').dialog('close');      
-	    }
-
-		save_detail = function(){			
-			$.ajax({
-			  url: base_url+"transfer/save_transfer/",
-			  method: 'POST',
-			  data: {
-						kode 			: $('#kode').val(),
-						//id_transfer 	: $('#id_transfer').val(),
-						id_stock 		: $('#id_stock').val(),
-						kode_barang 	: $('#kode_barang').val(),
-						qty 			: $('#qty').val(),
-						price 			: $('#price').val(),
-						id_lokasi		: $('#id_lokasi').val(),
-						status			: $('#status').val(),
-					},
-			  success : function(response, textStatus){
-				//alert(response);
-				var response = eval('('+response+')');
-				if(response.success){
-					$.messager.show({
-						title: 'Success',
-						msg: 'Data Berhasil Disimpan'
-					});
-					$('#dialog_kosong').dialog('close');
-					$('#dtgrd').datagrid('reload');
-				}else{
-					$.messager.show({
-						title: 'Error',
-						msg: response.msg
-					});
-				}
-			  }
-			});
-		}
-
-		
-	});
-</script>
 
 <input type="hidden" name="kode" id="kode" value="<?=$kode?>">
 <input type="hidden" name="kode_barang" id="kode_barang" 	value="<?=$kode_barang?>">
@@ -87,9 +44,9 @@
 	</div>
 </form>
 <br>
-<div align="right">
+<!-- <div align="right">
   <a href="#" class="easyui-linkbutton" onclick="save_detail();" iconCls="icon-save" plain="false">Save</a>
   <a href="#" class="easyui-linkbutton" onclick="tutup();" iconCls="icon-cancel" plain="false">Cancel</a>
   &nbsp;&nbsp;&nbsp;
 </div>
-
+ -->

@@ -5,8 +5,8 @@
 	var id_transfer = <?php echo $id_transfer;?>;
 
 		alokasi = function (val){
-			$('#dialog_kosong').dialog({
-				title: 'Alokasi',
+			$('#dialog').dialog({
+				title: 'Alokasi Transfer',
 				width: 380,
 				height: 300,
 				closed: true,
@@ -14,10 +14,37 @@
 				href: base_url+'transfer/alokasi/' + val,
 				modal: true
 			});			 
-			$('#dialog_kosong').dialog('open');
+			$('#dialog').dialog('open');
 			url = base_url+'transfer/save_transfer/add';
 		}
 		// end newData
+
+		saveTransfer = function(){
+	      $('#form1').form('submit',{
+	        url: url,
+	        onSubmit: function(){
+	          return $(this).form('validate');
+	        },
+	        success: function(result){
+	          alert(result);
+	          var result = eval('('+result+')');
+	          if (result.success){
+	            $.messager.show({
+	              title: 'Success',
+	              msg: 'Data Berhasil Disimpan'
+	            });
+	            $('#dialog').dialog('close');   // close the dialog
+	            $('#dtgrd').datagrid('reload');    // reload the user data
+	          } else {
+	            $.messager.show({
+	              title: 'Error',
+	              msg: result.msg
+	            });
+	          }
+	        }
+	      });
+	    }
+	    //end saveData
 
 	    add_detail = function (val){
 	        if(val==null){
@@ -40,6 +67,35 @@
 	    }
 	    // end newData
 
+	 deleteData = function (val){
+				if(confirm("Apakah yakin akan menghapus data '" + val + "'?")){
+					var response = '';
+					$.ajax({ type: "GET",
+						 url: base_url+'transfer/deleteDetail/' + val,
+						 async: false,
+						 success : function(response){
+						 	alert(response);
+							var response = eval('('+response+')');
+							if (response.success){
+								$.messager.show({
+									title: 'Success',
+									msg: 'Data Berhasil Dihapus'
+								});
+								// reload and close tab
+								$('#dtgrd').datagrid('reload');
+							} else {
+								$.messager.show({
+									title: 'Error',
+									msg: response.msg
+								});
+							}
+						 }
+					});
+				}
+			//}
+		}
+		//end deleteData
+
 
 	back = function (val){
 		  //detail
@@ -51,8 +107,9 @@
 	actiondetail = function(value, row, index){
       var col='';
       	<?if($this->mdl_auth->CekAkses(array('menu_id'=>43, 'policy'=>'EDIT'))){?>
-          col = '<a href="#" onclick="alokasi(\''+row.id_stock+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Transfer</a>';
+          col = '<a href="#" onclick="alokasi(\''+row.id_detail_transfer+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Transfer</a>';
        	<?}?>
+       	col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="deleteData(\''+row.id_detail_transfer+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
       return col;
     }
 
@@ -124,7 +181,7 @@
 			<th field="price" sortable="true" width="100">Price</th>		
 			<th field="lokasi_stock" sortable="true" width="100">Lokasi Stock</th>
 			<th data-options="field:'id_lokasi',width:'100'," editor="text">Lokasi Transfer</th> 
-			<th field="action" align="center" formatter="actiondetail" width="80">Aksi</th>
+			<th field="action" align="center" formatter="actiondetail" width="120">Aksi</th>
 		</tr>
 	</thead>
 </table>

@@ -94,7 +94,7 @@ class transfer extends CI_Controller {
 	}
 
 	function deleteDetail($id){
-		$result = $this->mdl_transfer->DeleteDetail($id);
+		$result = $this->mdl_transfer->DeleteDetailOnDb($id);
 		if ($result){
 			echo json_encode(array('success'=>true));
 		} else {
@@ -160,17 +160,18 @@ class transfer extends CI_Controller {
 
 		# hidden input
 		$data['kode'] = $kode;
-		//$data['id_stock'] = $label->row()->id_stock;
 		$data['kode_barang'] 	= $r->row()->kode_barang;
 		$data['nama_barang'] 	= $r->row()->nama_barang;
 		$data['qty_stock'] 		= $r->row()->qty_stock;
+		$data['qty'] 			= $r->row()->qty;
 		$data['price'] 			= $r->row()->price;
 		$data['lokasi_stock'] 	= $r->row()->lokasi_stock;
+		$data['id_lokasi'] 	= $r->row()->id_lokasi;
 		$data['status'] 		= $r->row()->status;
 
-		# data input barang
-		$data['qty'] = '';
-		$data['id_lokasi'] = '';
+		// # data input barang
+		//  $data['qty'] = '';
+		//  $data['id_lokasi'] = '';
 
 		$this->load->view('transfer/alokasi_form', $data);
 	}
@@ -203,7 +204,9 @@ class transfer extends CI_Controller {
 		}
 		
 		if($result){
-			echo json_encode(array('success'=>true));
+			print_r($data['qty']);
+			print_r($data['id_lokasi']);
+			//echo json_encode(array('success'=>true));
 		}else{
 			echo json_encode(array('msg'=>$data['pesan_error']));
 		}
@@ -219,13 +222,27 @@ class transfer extends CI_Controller {
 	}
 
 	function done($id){
-		$result = $this->mdl_transfer->done($id);
-		if ($result){
-			echo json_encode(array('success'=>true));
-		} else {
-			echo json_encode(array('msg'=>'Data gagal di hapus'));
+		$result = $this->mdl_transfer->countDetail($id);
+		if($result > 0){
+			$result = $this->mdl_transfer->done($id);
+			if (!$result){
+				echo json_encode(array('msg'=>'Data gagal di kirim'));
+			} else {
+				echo json_encode(array('success'=>true));
+			} 
+		}else{
+			echo json_encode(array('msg'=>'Detail Transfer Ada yang Masih Kosong atau Qty stock kosong'));
 		}
 	}
+
+	// function done($id){
+	// 	$result = $this->mdl_transfer->done($id);
+	// 	if ($result){
+	// 		echo json_encode(array('success'=>true));
+	// 	} else {
+	// 		echo json_encode(array('msg'=>'Data gagal di hapus'));
+	// 	}
+	// }
 
 	function laporan_pdf($id_transfer) {
             $this->load->library('HTML2PDF');

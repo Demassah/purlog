@@ -469,6 +469,7 @@ class mdl_prosedur extends CI_Model {
 		$this->db->from('tr_stock');
 
 		$this->db->order_by('id_lokasi');
+		$this->db->group_by('id_lokasi');
 				
 		$res = $this->db->get();
 		
