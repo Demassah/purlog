@@ -343,11 +343,15 @@ class mdl_prosedur extends CI_Model {
             $out = '';
            
             $this->db->flush_cache();
-            $this->db->from('tr_pros_detail');
-            $this->db->where('id_sro !=','0');
-            $this->db->where('status_receive','0');
-            $this->db->group_by('id_sro');
-            $this->db->order_by('id_sro');
+            $this->db->select('a.id_sro,a.status_receive,b.id_do,c.status');
+            $this->db->from('tr_pros_detail a');
+            $this->db->join('tr_sro b', 'b.id_sro = a.id_sro', 'left');
+            $this->db->join('tr_do c', 'c.id_do = b.id_do', 'left');
+            $this->db->where('a.id_sro !=','0');
+            $this->db->where('a.status_receive','0');
+            $this->db->where('c.status ', 2 );
+            $this->db->group_by('a.id_sro');
+            $this->db->order_by('a.id_sro');
                            
             $res = $this->db->get();
            
