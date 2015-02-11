@@ -4,17 +4,17 @@
 	
 		newData = function (){
 			$('#dialog').dialog({
-				title: 'Tambah Kurir',
+				title: 'Tambah Lokasi',
 				width: 380,
-				height: 160,
+				height: 195,
 				closed: true,
 				cache: false,
-				href: base_url+'courir/add',
+				href: base_url+'lokasi/add',
 				modal: true
 			});
 			 
 			$('#dialog').dialog('open');
-			url = base_url+'courir/save/add';
+			url = base_url+'lokasi/save/add';
 		}
 		// end newData
 		
@@ -22,17 +22,17 @@
 			// var row = $('#dg').datagrid('getSelected');
 			// if (row){
 				$('#dialog').dialog({
-					title: 'Edit Kurir',
+					title: 'Edit Lokasi',
 					width: 380,
-					height: 160,
+					height: 195,
 					closed: true,
 					cache: false,
-					href: base_url+'courir/edit/'+val,
+					href: base_url+'lokasi/edit/'+val,
 					modal: true
 				});
 				
 				$('#dialog').dialog('open');  
-				url = base_url+'courir/save/edit';
+				url = base_url+'lokasi/save/edit';
 			// }
 		}
 		//end editData
@@ -43,7 +43,7 @@
 				if(confirm("Apakah yakin akan menghapus data '" + val + "'?")){
 					var response = '';
 					$.ajax({ type: "GET",
-						 url: base_url+'courir/delete/' + val,
+						 url: base_url+'lokasi/delete/' + val,
 						 async: false,
 						 success : function(response){
 							var response = eval('('+response+')');
@@ -75,7 +75,7 @@
 					return $(this).form('validate');
 				},
 				success: function(result){
-					//alert(result);
+					alert(result);
 					var result = eval('('+result+')');
 					if (result.success){
 						$('#dialog').dialog('close');		// close the dialog
@@ -92,20 +92,19 @@
 		//end saveData
 		
 		actionbutton = function(value, row, index){
-			var col;
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>45, 'policy'=>'EDIT'))){?>
-				col = '<a href="#" onclick="editData(\''+row. 	id_courir+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Edit</a>';
+			var col='';
+			<?if($this->mdl_auth->CekAkses(array('menu_id'=>46, 'policy'=>'EDIT'))){?>
+					col = '<a href="#" onclick="editData(\''+row.id_lks+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Edit</a>';
 			<?}?>
-
-			<?if($this->mdl_auth->CekAkses(array('menu_id'=>45, 'policy'=>'DELETE'))){?>
-				col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="deleteData(\''+row. 	id_courir+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
+			<?if($this->mdl_auth->CekAkses(array('menu_id'=>46, 'policy'=>'DELETE'))){?>
+					col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="deleteData(\''+row.id_lks+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
 			<?}?>
 			return col;
 		}
 		
 		$(function(){
 			$('#dg').datagrid({
-				url:"<?=base_url()?>courir/grid"
+				url:"<?=base_url()?>lokasi/grid"
 			});
 		});
 		
@@ -114,7 +113,7 @@
 			var pager = $('#dg').datagrid().datagrid('getPager');	// get the pager of datagrid
 			pager.pagination({
 				buttons:[
-				<?if($this->mdl_auth->CekAkses(array('menu_id'=>45, 'policy'=>'ADD'))){?>
+				<?if($this->mdl_auth->CekAkses(array('menu_id'=>46, 'policy'=>'ADD'))){?>
 					{
 						iconCls:'icon-add',
 						text:'Tambah Data',
@@ -122,14 +121,14 @@
 							newData();
 						}
 					}
-				<?}?>	
+				<?}?>
 				]
 			});			
 		});
 		
 	});
 </script>
-<table id="dg" title="Kelola Data Kategori " data-options="
+<table id="dg" title="Kelola Data Lokasi" data-options="
 			rownumbers:true,
 			singleSelect:true,
 			autoRowHeight:false,
@@ -139,10 +138,10 @@
 			">
 	<thead>
 		<tr>
-			<th field="id_courir" sortable="true" width="150" hidden="true">ID</th>
-			<th field="name_courir" sortable="true" width="150">Nama Courir</th>
-			<th field="contact" sortable="true" width="150">Contact</th>
-			<th field="status_courir" sortable="true" width="120">Status</th>
+			<!-- <th field="id" sortable="true" width="150" hidden="true">ID</th> -->
+			<th field="id_lokasi" sortable="true" width="250">Lokasi</th>
+			<th field="type" sortable="true" width="150">Type</th>
+			<th field="storage" sortable="true" width="150">Storage</th>
 			<th field="action" align="center" formatter="actionbutton" width="100">Aksi</th>
 		</tr>
 	</thead>
