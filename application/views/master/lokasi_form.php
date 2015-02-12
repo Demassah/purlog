@@ -18,6 +18,7 @@
 			<option value="">-- Pilih --</option>
 			<option value="1" <?= $storage == '1'?'selected ="selected"':''; ?>>Available</option>
 			<option value="2" <?= $storage == '2'?'selected ="selected"':''; ?>>Hold</option>
+			<option value="3" <?= $storage == '3'?'selected ="selected"':''; ?>>Damage</option>
 		</select></li>
 	</div>
 	<div class="fitem" >
