@@ -5,8 +5,8 @@ class mdl_lokasi extends CI_Model {
 	function __construct(){
         parent::__construct();
     }
-
-  function getdata($plimit=true){
+	
+	function getdata($plimit=true){
 		# get parameter from easy grid
 		$page = isset($_POST['page']) ? intval($_POST['page']) : 1;  
 		$limit = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
@@ -17,13 +17,12 @@ class mdl_lokasi extends CI_Model {
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('a.id_lokasi, a.type, a.storage');
+			$this->db->select('a.*, b.type_lokasi, b.storage_lokasi, b.status_lokasi');
 			$this->db->from('ref_lokasi a');
-			//$this->db->join('v_status_lokasi b', 'b.id = a.id');
-
+			$this->db->join('v_lokasi b', 'b.id_lks = a.id_lks');
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
-
+		
 		# get count
 		$tmp['row_count'] = $this->db->get()->num_rows();
 		
@@ -35,7 +34,16 @@ class mdl_lokasi extends CI_Model {
 		
 		return $tmp;
 	}
-
+	
+	function getdataedit($kode){
+		$this->db->flush_cache();
+		$this->db->select('*');
+		$this->db->from('ref_lokasi');
+		$this->db->where('id_lks', $kode);
+		
+		return $this->db->get();
+	}
+	
 	function togrid($data, $count){
 		$response->total = $count;
 		$response->rows = array();
@@ -51,23 +59,13 @@ class mdl_lokasi extends CI_Model {
 		return json_encode($response);
 	}
 	
-	function getsingledata(){
-		$this->db->flush_cache();
-		$this->db->select('DISTINCT *',false);
-		$this->db->from('ref_lokasi');		
-		
-		return $this->db->get()->row();
-	}
-
 	function InsertOnDb($data){
-		//query insert data		
 		$this->db->flush_cache();
-		$this->db->set('id_lokasi', $data['id_lokasi']);
-		$this->db->set('type', $data['type']);
-		$this->db->set('storage', $data['storage']);
-		$this->db->set('status', isset($data['status'])?'1':'0');
+        $this->db->set('id_lokasi', $data['id_lokasi']);
+        $this->db->set('type', $data['type']);
+        $this->db->set('storage', $data['storage']);
+        $this->db->set('status', isset($data['status'])?'1':'0');
 
-		
 		$result = $this->db->insert('ref_lokasi');
 		
 		//return
@@ -77,24 +75,14 @@ class mdl_lokasi extends CI_Model {
 			return FALSE;
 		}
 	}
-
-	function getdataedit($kode){
-		$this->db->flush_cache();
-		$this->db->select('*');
-		$this->db->from('ref_lokasi');
-		$this->db->where('id_lks', $kode);
-		
-		return $this->db->get();
-	}
-
+	
 	function UpdateOnDb($data){
 		//query insert data		
 		$this->db->flush_cache();
-		$this->db->set('id_lokasi', $data['id_lokasi']);
-		$this->db->set('type', $data['type']);
-		$this->db->set('storage', $data['storage']);
-		$this->db->set('status', isset($data['status'])?'1':'0');
-
+		 $this->db->set('id_lokasi', $data['id_lokasi']);
+        $this->db->set('type', $data['type']);
+        $this->db->set('storage', $data['storage']);
+        $this->db->set('status', isset($data['status'])?'1':'0');
 		
 		$this->db->where('id_lks', $data['kode']);
 		$result = $this->db->update('ref_lokasi');
@@ -106,7 +94,7 @@ class mdl_lokasi extends CI_Model {
 			return FALSE;
 		}
 	}
-
+	
 
 	function DeleteOnDb($kode){
 		

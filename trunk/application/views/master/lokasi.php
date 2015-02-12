@@ -75,7 +75,7 @@
 					return $(this).form('validate');
 				},
 				success: function(result){
-					alert(result);
+					//alert(result);
 					var result = eval('('+result+')');
 					if (result.success){
 						$('#dialog').dialog('close');		// close the dialog
@@ -140,8 +140,9 @@
 		<tr>
 			<!-- <th field="id" sortable="true" width="150" hidden="true">ID</th> -->
 			<th field="id_lokasi" sortable="true" width="250">Lokasi</th>
-			<th field="type" sortable="true" width="150">Type</th>
-			<th field="storage" sortable="true" width="150">Storage</th>
+			<th field="type_lokasi" sortable="true" width="150">Type</th>
+			<th field="storage_lokasi" sortable="true" width="150">Storage</th>
+			<th field="status_lokasi" sortable="true" width="150">Status</th>
 			<th field="action" align="center" formatter="actionbutton" width="100">Aksi</th>
 		</tr>
 	</thead>

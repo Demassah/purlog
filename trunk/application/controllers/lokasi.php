@@ -21,22 +21,24 @@ class lokasi extends CI_Controller {
 	function add(){
 		$data['kode'] = '';
 		$data['id_lks'] = '';
-		$data['id_lokasi'] = '';
-		$data['type'] = '';
-		$data['storage'] = '';
-		$data['status'] = '1';
+	    $data['id_lokasi'] = '';
+	    $data['type'] = '';
+	    $data['storage'] = '';
+	    $data['status'] = '1';
 		
 		$this->load->view('master/lokasi_form', $data);
 	}
 	
 	function edit($kode){
 		$r = $this->mdl_lokasi->getdataedit($kode);
-    	$data['id_lokasi'] 	= $r->row()->id_lokasi;
-    	$data['type'] 		= $r->row()->type;
-    	$data['storage'] 	= $r->row()->storage;
-    
-		$data['kode'] = $kode;	
-
+		
+	    $data['id_lokasi'] = $r->row()->id_lokasi;
+	    $data['type'] = $r->row()->type;
+	    $data['storage'] = $r->row()->storage;
+	    $data['status'] = $r->row()->status;
+	    
+		$data['kode'] = $kode;
+		
 		$this->load->view('master/lokasi_form', $data);
 	}
 	
@@ -52,11 +54,9 @@ class lokasi extends CI_Controller {
 		}
 		
 		# rules validasi form
-		$this->form_validation->set_rules("id_lokasi", 'ID lokasi', 'trim|required|xss_clean');
+		$this->form_validation->set_rules("id_lokasi", 'ID Lokasi', 'trim|required|xss_clean');
 		$this->form_validation->set_rules("type", 'Type', 'trim|required|xss_clean');
 		$this->form_validation->set_rules("storage", 'Storage', 'trim|required|xss_clean');
-
-
 		# message rules
 		$this->form_validation->set_message('required', 'Field %s harus diisi.');
 
