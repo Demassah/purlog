@@ -216,6 +216,32 @@ class mdl_request_order_selected extends CI_Model {
 		return $this->db->count_all_results();
 	}
 
+	function get_pdf($id_ro){        
+        # get data
+        $this->db->flush_cache();
+        $this->db->start_cache();
+
+        	$this->db->select('a.id_detail_ro, a.id_ro, a.ext_doc_no, a.kode_barang, a.qty, a.barang_bekas, a.date_create, a.note, a.status, c.nama_barang, b.purpose, b.cat_req, b.ext_doc_no, b.etd, b.date_create, d.full_name');
+			$this->db->from('tr_ro_detail a');
+			$this->db->join('tr_ro b', 'b.id_ro = a.id_ro');
+			$this->db->join('ref_barang c', 'c.kode_barang = a.kode_barang');
+			$this->db->join('sys_user d', 'd.user_id = a.user_id');
+			$this->db->where('a.id_ro', $id_ro);
+			//$this->db->where('a.id_ro', $kode);
+			$this->db->where('a.status', '1');
+
+        // proses
+            $result = $this->db->get();
+        
+	        if ($result->num_rows() > 0) {
+	            foreach ($result->result() as $data) {
+	                $data_pdf[] = $data;
+	            }
+	        return $data_pdf;           
+        }
+        
+    }
+
 }
 
 ?>

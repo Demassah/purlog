@@ -52,14 +52,14 @@ else {
             </tr>
         </table>
     </page_header>
-    <page_footer>
+    <!-- <page_footer>
         <table style="width: 100%; border-top: solid 1px black;">
             <tr>
                 <td style="text-align: left;    width: 50%">PT. Cipaganti Citra Graha </td>
                 <td style="text-align: right;    width: 50%">page [[page_cu]]/[[page_nb]]</td>
             </tr>
         </table>
-    </page_footer>
+    </page_footer> -->
 	<!--<table style="width:100%;">-->
 <h4 align="center"><b>Picking List</b></h4>
 <p></p>
@@ -125,6 +125,29 @@ else {
 	//foreach
 	  endforeach; ?>
 	</table>
+	<br><br>
+	<div class="class="footer"">
+		<table >
+		<tr>
+				<td width="230" align="center"></td>
+				<td width="230" align="center"></td>
+				<td width="230" align="center">Bandung,<?php echo tgl_indo(date('Y-m-d'))?></td>
+			</tr>
+			<tr>
+				<td width="230" align="center">Mengajukan</td>
+				<td width="230" align="center">Mengetahui</td>
+				<td width="230" align="center">Menerima</td>
+			</tr>
+			<tr><td></td></tr>	<tr><td></td></tr>	<tr><td></td></tr>	<tr><td></td></tr>	<tr><td></td></tr>	<tr><td></td></tr>
+			<tr><td></td></tr>	<tr><td></td></tr>	<tr><td></td></tr> <tr><td></td></tr> <tr><td></td></tr>  <tr><td></td></tr> 
+			<tr><td></td></tr>	<tr><td></td></tr>	<tr><td></td></tr> <tr><td></td></tr> <tr><td></td></tr> 
+			<tr>
+				<td width="100" align="center">__________________</td>
+				<td width="100" align="center">__________________</td>
+				<td width="100" align="center">__________________</td>
+			</tr>
+		</table>
+	</div>
 	</div>
 </page>
 <?php } ?>
