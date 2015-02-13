@@ -203,14 +203,14 @@ class mdl_document_receive extends CI_Model {
 
 	function getReceiveDetailIds($ids) {
 		$this->db->flush_cache();
-		$this->db->where_in('id_detail_receive', $ids);
-		return $this->db->get('tr_receive_detail');
+		$this->db->where_in('id_detail_pros', $ids);
+		return $this->db->get('tr_pros_detail');
 	}
 
 	function getReceiveDetail($id) {
 		$this->db->flush_cache();
-		$this->db->where('id_detail_receive', $id);
-		return $this->db->get('tr_receive_detail');
+		$this->db->where('id_detail_pros', $id);
+		return $this->db->get('tr_pros_detail');
 	}
 
 	function update_qty($data){
