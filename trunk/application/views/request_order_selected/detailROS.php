@@ -115,17 +115,7 @@
 						handler:function(){
 							kembali();
 						}
-					},
-
-        <?if($this->mdl_auth->CekAkses(array('menu_id'=>11, 'policy'=>'PDF'))){?>
-          {
-            iconCls:'icon-pdf',
-            text:'Print RO Selected',
-            handler:function(){
-              cetakData();
-            }
-          }
-        <?}?>
+					}
 
 				]
 			});			
