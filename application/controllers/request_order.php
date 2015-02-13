@@ -185,4 +185,33 @@ class request_order extends CI_Controller {
 		}
 	}
 
+	function laporan_pdf($id_ro) {
+            $this->load->library('HTML2PDF');
+            $html2pdf = new HTML2PDF('P', 'A4', 'fr');
+            $html2pdf->setDefaultFont('Arial');
+            
+            //filter
+            //get filter
+            //$fil['kd_prodi'] = $kd_prodi;
+            
+            //$data['nama'] = '';
+            //$data['namaUniv'] = 'STMIK BANDUNG';
+            //$data['alamatUniv'] = 'Jl.Phh.Mustofa No. 39. Grand Surapati Core (SUCORE) Blok M No.19, Telp.022 - 7207777';
+            //$data['kotaUniv'] = 'Bandung, Jawa Barat';
+            
+            // ambil data dari tabel
+            $data['data_pdf'] = $this->mdl_request_order->get_pdf($id_ro);
+            
+            /* if (count($da['row'])==0){
+            echo "Data Tidak Tersedia";
+            return;
+            } */
+            
+            $konten = $this->load->view('request_order/ro_laporan', $data, true);
+            
+            $html2pdf->writeHTML($konten, false);
+            
+            $html2pdf->Output("ros_".date('d-m-y')."_".$id_ro.".pdf");
+        }
+
 }
