@@ -1,7 +1,13 @@
 <script>
 	
 	var url;
-	$(document).ready(function(){
+  $(document).ready(function(){
+  var id_ro = <?php echo $id_ro;?>;
+
+    //Cetak
+    cetakData = function(val){    
+        window.open(base_url + 'request_order_selected/laporan_pdf/'+id_ro);      
+    }
 
 		kembali = function (){
 			//detail
@@ -109,7 +115,18 @@
 						handler:function(){
 							kembali();
 						}
-					}
+					},
+
+        <?if($this->mdl_auth->CekAkses(array('menu_id'=>11, 'policy'=>'PDF'))){?>
+          {
+            iconCls:'icon-pdf',
+            text:'Print RO Selected',
+            handler:function(){
+              cetakData();
+            }
+          }
+        <?}?>
+
 				]
 			});			
 		});
