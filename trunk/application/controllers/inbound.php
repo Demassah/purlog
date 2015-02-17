@@ -171,7 +171,12 @@ class inbound extends CI_Controller {
       $html2pdf->Output("in_".date('d-m-y')."_".$id_in.".pdf");
   }
 
-   public function laporan_excel($id_in,$type) {
+		public function laporan_excel2($id_in,$type) {
+        $data['data_pdf'] = $this->mdl_inbound->report($id_in,$type);
+        $this->load->view('inbound/in_report_excel', $data, FALSE);
+    }
+
+   public function laporan_excel1($id_in,$type) {
         $query = $this->mdl_inbound->report_excel($id_in,$type);
         $this->excel_generator->set_query($query);
         $this->excel_generator->set_header(array('ID Detail In', 'Kode Barang', 'Nama Barang', 'Qty', 'Lokasi'));
@@ -179,6 +184,104 @@ class inbound extends CI_Controller {
         $this->excel_generator->set_width(array(25, 15, 30, 15, 15));
         $this->excel_generator->exportTo2007("in_".date('d-m-y')."_".$id_in);
     }
+
+    public function laporan_excel($id_in,$type)
+        {
+            //load librarynya terlebih dahulu
+            //jika digunakan terus menerus lebih baik load ini ditaruh di auto load
+            $this->load->library("PHPExcel/PHPExcel");
+ 						$file = "in_".date('d-m-y')."_".$id_in;
+            //membuat objek PHPExcel
+            $objPHPExcel = new PHPExcel();
+ 						$data_pdf = $this->mdl_inbound->report($id_in,$type);
+            //set Sheet yang akan diolah 
+            $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(1);
+            $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(1);
+            $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(16);
+            $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(11.25);
+            $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(12);
+            $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(16);
+            //Mengeset Syle nya
+							//Mengeset Syle nya
+
+
+
+            $objPHPExcel->setActiveSheetIndex(0)
+                    //mengisikan value pada tiap-tiap cell, A1 itu alamat cellnya 
+                    //Header
+                    										->setCellValue('E1', 'Inbound')
+                                        ->setCellValue('D2', 'ID IN')
+                                        ->setCellValue('E2',':')
+                                        ->setCellValue('F2',$data_pdf[0]->id_in)
+                    //Detail Info
+                    										->setCellValue('B3','Requestor')
+                    										->setCellValue('C3',':')
+                    										->setCellValue('D3',$data_pdf[0]->full_name)
+                    										->setCellValue('F3','Requestor')
+                    										->setCellValue('G3',':')
+                    										->setCellValue('H3',$data_pdf[0]->ext_doc_no)
+
+                    										->setCellValue('B4','Departement')
+                    										->setCellValue('C4',':')
+                    										->setCellValue('D4',$data_pdf[0]->departement_name)
+                    										->setCellValue('F4','Date Create')
+                    										->setCellValue('G4',':')
+                    										->setCellValue('H4',$data_pdf[0]->date_create)
+
+                    										->setCellValue('B5','Purpose')
+                    										->setCellValue('C5',':')
+                    										->setCellValue('D5',$data_pdf[0]->purpose)
+                    										->setCellValue('F5','ID PR')
+                    										->setCellValue('G5',':')
+                    										->setCellValue('H5',$data_pdf[0]->id_pr)
+
+                    										->setCellValue('B6','Category Request')
+                    										->setCellValue('C6',':')
+                    										->setCellValue('D6',$data_pdf[0]->cat_req)
+                    										->setCellValue('F6','ID RO')
+                    										->setCellValue('G6',':')
+                    										->setCellValue('H6',$data_pdf[0]->id_ro)
+
+                    										->setCellValue('B8','ID Detail In')
+                    										->setCellValue('D8','Kode Barang')
+                    										->setCellValue('E8','Nama Barang')
+                    										->setCellValue('F8','Qty')
+                    										->setCellValue('H8','Lokasi');
+             $baris  = 9;
+             foreach ($data_pdf as $data){
+             		$objPHPExcel->setActiveSheetIndex(0)
+             														->setCellValue('B'.$baris,$data->id_detail_in)
+                    										->setCellValue('D'.$baris,$data->kode_barang)
+                    										->setCellValue('E'.$baris,$data->nama_barang)
+                    										->setCellValue('F'.$baris,$data->qty)
+                    										->setCellValue('H'.$baris,$data->lokasi);
+                $baris++;    										
+              };
+							
+							
+            //set title pada sheet (me rename nama sheet)
+            $objPHPExcel->getActiveSheet()->setTitle('Report Inbound_'.$file);
+ 
+            //mulai menyimpan excel format xlsx, kalau ingin xls ganti Excel2007 menjadi Excel5          
+            $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+ 
+            //sesuaikan headernya 
+            header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+            header("Cache-Control: no-store, no-cache, must-revalidate");
+            header("Cache-Control: post-check=0, pre-check=0", false);
+            header("Pragma: no-cache");
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            //ubah nama file saat diunduh
+
+            header('Content-Disposition: attachment;filename='.$file.'.xlsx');
+            //unduh file
+            $objWriter->save("php://output");
+ 
+            //Mulai dari create object PHPExcel itu ada dokumentasi lengkapnya di PHPExcel, 
+            // Folder Documentation dan Example
+            // untuk belajar lebih jauh mengenai PHPExcel silakan buka disitu
+ 
+        }
 
 }
 
