@@ -6,11 +6,11 @@
 		  <tr>
 			<td>Search By Date</td>
 			<td>: 
-				<input name="date_1" class="easyui-datebox textbox" id="date_1" size="5">
+				<input class="easyui" name="id_in"  id="id_in" size="5">
 			</td>
 			<td>To</td>
 			<td>
-				<!-- <input name="date_2" class="easyui-datebox textbox" id="date_2" size="5"> -->
+				<input name="date_2" class="easyui-datebox" id="date_2" size="5">
 			</td>
 			<td><a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-search">Search</a></td>
 			<td></td>
@@ -38,7 +38,7 @@
 			<th field="type" sortable="true" width="70">Type</th>
 			<th field="date_create" sortable="true" width="130">Date Create</th>
 			<th field="full_name" sortable="true" width="120">Requestor</th>
-			<th field="action" align="center" formatter="actionbutton" width="160">Aksi</th>
+	
 		</tr>
 	</thead>
 </table>
@@ -49,18 +49,18 @@
 
 		// reset 
 		reset = function(){
-			$('#date_1').val('');
-			// $('#date_2').val('');
+			$('#id_in').val('');
+			$('#date_2').val('');
 			$('#dg_report_in').datagrid('load',{
-				date_1 : $('#date_1').val(),
-				date_2 : $('#date_2').val()
+				tgl : $('#date_1').val(),
+				
 				
 			});
 		}
 
 		filter = function(){
 			$('#dg_report_in').datagrid('load',{
-				date_1 : $('#date_1').val(),
+				id_in : $('#id_in').val(),
 				date_2 : $('#date_2').val()
 			});
 			//$('#dg').datagrid('enableFilter');
