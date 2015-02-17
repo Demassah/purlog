@@ -13,6 +13,8 @@ date_default_timezone_set('Asia/Jakarta');
 		<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/easyui/themes/icon.css" />
 		<link rel="stylesheet" href="<?=base_url();?>asset/font-awesome-4.3.0/css/font-awesome.css">
 		<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/css/style.css" />
+		<!-- datepicker -->
+		<link rel="stylesheet" type="text/css" href="<?=base_url();?>asset/datepicker/jquery.datepick.css"> 
 
 		<script type="text/javascript" src="<?=base_url();?>asset/easyui/jquery.min.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>asset/easyui/jquery.easyui.min.js"></script>
@@ -27,6 +29,9 @@ date_default_timezone_set('Asia/Jakarta');
 		<script type="text/javascript" src="<?=base_url();?>asset/currency/autoNumeric.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>asset/autocomplete/jquery-ui.js"></script>
 		<script type="text/javascript" src="<?=base_url();?>asset/dropy/dropy.js"></script>
+		<!-- datepicker -->
+		<script type="text/javascript" src="<?=base_url();?>asset/datepicker/jquery.plugin.js"></script> 
+		<script type="text/javascript" src="<?=base_url();?>asset/datepicker/jquery.datepick.js"></script>
 	</head>
 	<body class="easyui-layout">
 

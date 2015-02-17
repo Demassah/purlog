@@ -2,15 +2,15 @@
 	<div style="margin-bottom:5px">		
 	</div>
 	<div class="fsearch">
-		<table width="550" border="0">
+		<table width="650" border="0">
 		  <tr>
 			<td>Search By Date</td>
 			<td>: 
-				<input class="easyui" name="id_in"  id="id_in" size="5">
+				<input class="date" name="date_1"  id="date_1" size="15">
 			</td>
 			<td>To</td>
 			<td>
-				<input name="date_2" class="easyui-datebox" id="date_2" size="5">
+				<input name="date_2" class="date" id="date_2" size="15">
 			</td>
 			<td><a href="#" onclick="filter()" class="easyui-linkbutton" iconCls="icon-search">Search</a></td>
 			<td></td>
@@ -32,12 +32,18 @@
 			">
 	<thead>
 		<tr>
-			<th field="" sortable="true" width="150" hidden="true">ID</th>
-			<th field="id_in" sortable="true" width="100" >ID IN</th>
+			<th field="" sortable="true" width="150" hidden="true"></th>
+			<th field="id_in" sortable="true" width="50" >ID IN</th>
 			<th field="ext_rec_no" sortable="true" width="130">Ext Rec No</th>
 			<th field="type" sortable="true" width="70">Type</th>
 			<th field="date_create" sortable="true" width="130">Date Create</th>
 			<th field="full_name" sortable="true" width="120">Requestor</th>
+			<th field="id_detail_in" sortable="true" width="120">Detail In</th>
+			<th field="kode_barang" sortable="true" width="120">Kode Barang</th>
+			<th field="nama_barang" sortable="true" width="120">Nama Barang</th>
+			<th field="qty" sortable="true" width="50">Qty</th>
+			<th field="lokasi" sortable="true" width="120">Lokasi</th>
+
 	
 		</tr>
 	</thead>
@@ -47,12 +53,15 @@
 	var url;
 	$(document).ready(function(){
 
+	
+		$('.date').datepick({dateFormat: 'yyyy-mm-dd'});
+
 		// reset 
 		reset = function(){
-			$('#id_in').val('');
+			$('#date_1').val('');
 			$('#date_2').val('');
 			$('#dg_report_in').datagrid('load',{
-				tgl : $('#date_1').val(),
+				tgl : $('#date_create').val(),
 				
 				
 			});
@@ -60,15 +69,28 @@
 
 		filter = function(){
 			$('#dg_report_in').datagrid('load',{
-				id_in : $('#id_in').val(),
+				date_1 : $('#date_1').val(),
 				date_2 : $('#date_2').val()
 			});
 			//$('#dg').datagrid('enableFilter');
 		}
 
+		ExportExcel = function(val){
+			var date_1 = $('#date_1').val();
+			var date_2 = $('#date_2').val();
+      window.open(base_url+'laporan_inbound/laporan_excel/'+ date_1 + "/" + date_2);      
+    }
+
+    ExportPdf = function(val){
+			var date_1 = $('#date_1').val();
+			var date_2 = $('#date_2').val();
+      window.open(base_url+'laporan_inbound/laporan_pdf/'+ date_1 + "/" + date_2);      
+    }
+
+
 		$(function(){
 			$('#dg_report_in').datagrid({
-				url:"<?=base_url()?>inbound/grid"
+				url:"<?=base_url()?>laporan_inbound/grid"
 			});
 		});
 		
