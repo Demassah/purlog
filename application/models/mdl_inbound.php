@@ -309,8 +309,8 @@ class mdl_inbound extends CI_Model {
 			$this->db->join('sys_user b', 'b.user_id = a.user_id');
 
 				#filter
-			if($date_1 != '') {
-				$this->db->like('a.date_create', $date_1);
+			if($id_in != '') {
+				$this->db->like('a.id_in', $id_in);
 			}
 
 			$this->db->where('a.status', '1');
