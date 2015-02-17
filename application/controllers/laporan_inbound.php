@@ -32,14 +32,10 @@ class laporan_inbound extends CI_Controller {
       $this->load->library('HTML2PDF');
       $html2pdf = new HTML2PDF('L', 'A4', 'fr');
       $html2pdf->setDefaultFont('Arial');
-
       	$data['data_pdf'] = $this->mdl_report->report_in_pdf($date_1,$date_2);
-
-      $konten = $this->load->view('report_inbound/in_report', $data, true);
-
-      $html2pdf->writeHTML($konten, false);
-
-      $html2pdf->Output("Report_in_".$date_1." To ".$date_2.".pdf");
+      	$konten = $this->load->view('report_inbound/in_report', $data, true);
+     		$html2pdf->writeHTML($konten, false);
+    	$html2pdf->Output("Report_in_".$date_1." To ".$date_2.".pdf");
   }
 
 
