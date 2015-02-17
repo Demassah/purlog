@@ -85,6 +85,9 @@
     cetakData = function(val){    
       window.open(base_url+'inbound/laporan_pdf/'+ id_in + "/" + type);      
     }
+    cetakDataExcel = function(val){    
+      window.open(base_url+'inbound/laporan_excel/'+ id_in + "/" + type);      
+    }
     back = function (){
       $('#konten').panel({
         href:base_url+'inbound/index'
@@ -158,6 +161,15 @@
               cetakData();
             }
           },
+          <?}?>
+          <?if($this->mdl_auth->CekAkses(array('menu_id'=>41, 'policy'=>'PDF'))){?>
+          {
+            iconCls:'icon-excel',
+            text:'Export Excel',
+            handler:function(){
+              cetakDataExcel();
+            }
+          }
           <?}?>
                  
         ]
