@@ -168,8 +168,18 @@ class inbound extends CI_Controller {
 
       $html2pdf->writeHTML($konten, false);
 
-      $html2pdf->Output("po_".date('d-m-y')."_".$id_in.".pdf");
+      $html2pdf->Output("in_".date('d-m-y')."_".$id_in.".pdf");
   }
+
+   public function laporan_excel($id_in,$type) {
+        $query = $this->mdl_inbound->report_excel($id_in,$type);
+        $this->excel_generator->set_query($query);
+        $this->excel_generator->set_header(array('ID Detail In', 'Kode Barang', 'Nama Barang', 'Qty', 'Lokasi'));
+        $this->excel_generator->set_column(array('id_detail_in', 'kode_barang', 'nama_barang', 'qty', 'lokasi'));
+        $this->excel_generator->set_width(array(25, 15, 30, 15, 15));
+        $this->excel_generator->exportTo2007("in_".date('d-m-y')."_".$id_in);
+    }
+
 }
 
 /* End of file inbound.php */

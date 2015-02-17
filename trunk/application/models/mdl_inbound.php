@@ -283,8 +283,25 @@ class mdl_inbound extends CI_Model {
 		$this->db->start_cache();
 		if($type == 1){
 			$this->db->select('id_in,full_name,departement_name,purpose,cat_req,ext_doc_no,date_create,id_pr,id_ro,id_detail_in,kode_barang,nama_barang,qty,lokasi');
+			$this->db->from('v_print_inbound');
 			$this->db->where('id_in', $id_in);
-			return $this->db->get('v_print_inbound')->result();
+			return $this->db->get()->result();
+		}else{
+			echo "type 2";
+		}
+		$this->db->stop_cache();
+		
+	}
+
+	function report_excel($id_in,$type)
+	{
+		$this->db->flush_cache();
+		$this->db->start_cache();
+		if($type == 1){
+			$this->db->select('id_in,full_name,departement_name,purpose,cat_req,ext_doc_no,date_create,id_pr,id_ro,id_detail_in,kode_barang,nama_barang,qty,lokasi');
+			$this->db->from('v_print_inbound');
+			$this->db->where('id_in', $id_in);
+			return $this->db->get();
 		}else{
 			echo "type 2";
 		}
