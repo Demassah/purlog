@@ -1,4 +1,4 @@
-<div id="toolbar_report_picking" style="padding:5px;height:auto">
+<div id="toolbar_report_order" style="padding:5px;height:auto">
 	<div style="margin-bottom:5px">		
 	</div>
 	<div class="fsearch">
@@ -21,14 +21,14 @@
 	</div>
 </div>
 
-<table id="dg_report_picking" title="Report Picking" data-options="
+<table id="dg_report_order" title="Report Order" data-options="
 			rownumbers:true,
 			singleSelect:true,
 			autoRowHeight:false,
 			pagination:true,
 			pageSize:30,
 			fit:true,
-			toolbar:'#toolbar_report_picking'
+			toolbar:'#toolbar_report_order'
 			">
 	<thead>
 		<tr>
@@ -59,7 +59,7 @@
 		reset = function(){
 			$('#date_1').val('');
 			$('#date_2').val('');
-			$('#dg_report_picking').datagrid('load',{
+			$('#dg_report_order').datagrid('load',{
 				tgl : $('#date_create').val(),
 				
 				
@@ -67,7 +67,7 @@
 		}
 
 		filter = function(){
-			$('#dg_report_picking').datagrid('load',{
+			$('#dg_report_order').datagrid('load',{
 				date_1 : $('#date_1').val(),
 				date_2 : $('#date_2').val()
 			});
@@ -79,7 +79,7 @@
 			var date_2 = $('#date_2').val();
      		
      		if (date_1 != '' && date_2 != ''){
-				window.open('<?=base_url().'laporan_picking/laporan_excel/'?>'+date_1+'/'+date_2);
+				window.open('<?=base_url().'laporan_order/laporan_excel/'?>'+date_1+'/'+date_2);
 			}else{
 				$.messager.show({
 				title: 'Warning',
@@ -93,7 +93,7 @@
 			var date_2 = $('#date_2').val();
       		
       		if (date_1 != '' && date_2 != ''){
-				window.open('<?=base_url().'laporan_picking/laporan_pdf/'?>'+date_1+'/'+date_2);
+				window.open('<?=base_url().'laporan_order/laporan_pdf/'?>'+date_1+'/'+date_2);
 			}else{
 				$.messager.show({
 				title: 'Warning',
@@ -104,17 +104,17 @@
 
 
 		$(function(){
-			$('#dg_report_picking').datagrid({
-				url:"<?=base_url()?>laporan_picking/grid"
+			$('#dg_report_order').datagrid({
+				url:"<?=base_url()?>laporan_order/grid"
 			});
 		});
 		
 		//# Tombol Bawah
 		$(function(){
-			var pager = $('#dg_report_picking').datagrid().datagrid('getPager');	// get the pager of datagrid
+			var pager = $('#dg_report_order').datagrid().datagrid('getPager');	// get the pager of datagrid
 			pager.pagination({
 				buttons:[
-				<?if($this->mdl_auth->CekAkses(array('menu_id'=>48, 'policy'=>'ACCESS'))){?>
+				<?if($this->mdl_auth->CekAkses(array('menu_id'=>54, 'policy'=>'ACCESS'))){?>
 					{
 						iconCls:'icon-excel',
 						text:'Export Excel',
@@ -123,7 +123,7 @@
 						}
 					},
 				<?}?>
-				<?if($this->mdl_auth->CekAkses(array('menu_id'=>48, 'policy'=>'ACCESS'))){?>
+				<?if($this->mdl_auth->CekAkses(array('menu_id'=>54, 'policy'=>'ACCESS'))){?>
 					{
 						iconCls:'icon-pdf',
 						text:'Export PDF',
