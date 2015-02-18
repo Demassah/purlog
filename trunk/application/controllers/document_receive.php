@@ -170,6 +170,15 @@ class document_receive extends CI_Controller {
         
         $html2pdf->Output("document_receive_".date('d-m-y')."_".$id_receive.".pdf");
     }
+
+    public function laporan_excel($id_receive) {
+        $query = $this->mdl_document_receive->report_excel($id_receive);
+        $this->excel_generator->set_query($query);
+        $this->excel_generator->set_header(array('ID Detail Receive', 'Kode Barang', 'Nama Barang', 'Qty', 'Date Create'));
+        $this->excel_generator->set_column(array('id_detail_receive', 'kode_barang', 'nama_barang', 'qty', 'date_create'));
+        $this->excel_generator->set_width(array(25, 15, 30, 15, 20));
+        $this->excel_generator->exportTo2007("document_receive_".date('d-m-y')."_".$id_receive);
+    }
 	
 	
 }

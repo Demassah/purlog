@@ -308,6 +308,23 @@ class mdl_document_receive extends CI_Model {
         
     }
 
+
+    function report_excel($id_receive)
+		{
+			$this->db->flush_cache();
+			$this->db->start_cache();
+				$this->db->select('a.id_detail_receive, a.id_receive, a.id_detail_pros, a.id_detail_ro, a.id_ro, a.id_sro, a.kode_barang, c.nama_barang, d.qty AS qty_delivered, a.qty AS qty, a.date_create');
+				$this->db->from('tr_receive_detail a');
+				$this->db->join('tr_receive b', 'b.id_receive = a.id_receive');
+				$this->db->join('ref_barang c', 'c.kode_barang = a.kode_barang');
+				$this->db->join('tr_pros_detail d', 'd.id_detail_pros = a.id_detail_pros');
+				$this->db->where('a.id_receive', $id_receive);
+				
+				return $this->db->get();
+			$this->db->stop_cache();
+			
+		}
+
 }
 
 ?>
