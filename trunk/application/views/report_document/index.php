@@ -1,4 +1,4 @@
-<div id="toolbar_report_picking" style="padding:5px;height:auto">
+<div id="toolbar_report_document" style="padding:5px;height:auto">
 	<div style="margin-bottom:5px">		
 	</div>
 	<div class="fsearch">
@@ -21,27 +21,27 @@
 	</div>
 </div>
 
-<table id="dg_report_picking" title="Report Picking" data-options="
+<table id="dg_report_document" title="Report Document Receive" data-options="
 			rownumbers:true,
 			singleSelect:true,
 			autoRowHeight:false,
 			pagination:true,
 			pageSize:30,
 			fit:true,
-			toolbar:'#toolbar_report_picking'
+			toolbar:'#toolbar_report_document'
 			">
 	<thead>
 		<tr>
 			<th field="" sortable="true" width="150" hidden="true"></th>
-			<th field="id_ro" sortable="true" width="50" >ID RO</th>
-			<th field="ext_doc_no" sortable="true" width="130">Ext Doc No</th>
-			<th field="date_create" sortable="true" width="130">Date Create</th>
-			<th field="full_name" sortable="true" width="120">Requestor</th>
-			<th field="id_detail_ro" sortable="true" width="120">Detail RO</th>
+			<th field="id_receive" sortable="true" width="50" >ID DR</th>
+			<th field="id_detail_receive" sortable="true" width="130">ID Detail DR</th>
+			<th field="id_ro" sortable="true" width="130">ID RO</th>
+			<th field="id_sro" sortable="true" width="120">ID SRO</th>
 			<th field="kode_barang" sortable="true" width="120">Kode Barang</th>
 			<th field="nama_barang" sortable="true" width="120">Nama Barang</th>
-			<th field="qty" sortable="true" width="50">Qty</th>
-			<th field="id_lokasi" sortable="true" width="120">Lokasi</th>
+			<th field="qty_delivered" sortable="true" width="50">Qty Delivered</th>
+			<th field="qty" sortable="true" width="120">Qty Received</th>
+			<th field="date_create" sortable="true" width="120">Date Create</th>
 
 	
 		</tr>
@@ -59,7 +59,7 @@
 		reset = function(){
 			$('#date_1').val('');
 			$('#date_2').val('');
-			$('#dg_report_picking').datagrid('load',{
+			$('#dg_report_document').datagrid('load',{
 				tgl : $('#date_create').val(),
 				
 				
@@ -67,7 +67,7 @@
 		}
 
 		filter = function(){
-			$('#dg_report_picking').datagrid('load',{
+			$('#dg_report_document').datagrid('load',{
 				date_1 : $('#date_1').val(),
 				date_2 : $('#date_2').val()
 			});
@@ -79,7 +79,7 @@
 			var date_2 = $('#date_2').val();
      		
      		if (date_1 != '' && date_2 != ''){
-				window.open('<?=base_url().'laporan_picking/laporan_excel/'?>'+date_1+'/'+date_2);
+				window.open('<?=base_url().'laporan_document/laporan_excel/'?>'+date_1+'/'+date_2);
 			}else{
 				$.messager.show({
 				title: 'Warning',
@@ -93,7 +93,7 @@
 			var date_2 = $('#date_2').val();
       		
       		if (date_1 != '' && date_2 != ''){
-				window.open('<?=base_url().'laporan_picking/laporan_pdf/'?>'+date_1+'/'+date_2);
+				window.open('<?=base_url().'laporan_document/laporan_pdf/'?>'+date_1+'/'+date_2);
 			}else{
 				$.messager.show({
 				title: 'Warning',
@@ -104,17 +104,17 @@
 
 
 		$(function(){
-			$('#dg_report_picking').datagrid({
-				url:"<?=base_url()?>laporan_picking/grid"
+			$('#dg_report_document').datagrid({
+				url:"<?=base_url()?>laporan_document/grid"
 			});
 		});
 		
 		//# Tombol Bawah
 		$(function(){
-			var pager = $('#dg_report_picking').datagrid().datagrid('getPager');	// get the pager of datagrid
+			var pager = $('#dg_report_document').datagrid().datagrid('getPager');	// get the pager of datagrid
 			pager.pagination({
 				buttons:[
-				<?if($this->mdl_auth->CekAkses(array('menu_id'=>48, 'policy'=>'ACCESS'))){?>
+				<?if($this->mdl_auth->CekAkses(array('menu_id'=>50, 'policy'=>'ACCESS'))){?>
 					{
 						iconCls:'icon-excel',
 						text:'Export Excel',
@@ -123,7 +123,7 @@
 						}
 					},
 				<?}?>
-				<?if($this->mdl_auth->CekAkses(array('menu_id'=>48, 'policy'=>'ACCESS'))){?>
+				<?if($this->mdl_auth->CekAkses(array('menu_id'=>50, 'policy'=>'ACCESS'))){?>
 					{
 						iconCls:'icon-pdf',
 						text:'Export PDF',
