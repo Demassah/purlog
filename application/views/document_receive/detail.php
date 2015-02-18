@@ -115,6 +115,10 @@
 	        window.open(base_url + 'document_receive/laporan_pdf/'+id_receive);      
 	    }
 
+	    cetakDataExcel = function(val){    
+	      window.open(base_url+'document_receive/laporan_excel/'+ id_receive);      
+	    }
+
 		$(function(){ // init
 	      	$('#dtgrd').datagrid({url:"document_receive/grid_detail/<?=$id_receive?>"});  
 		});	
@@ -144,6 +148,13 @@
 		            handler:function(){
 		              print();
 		            }
+	          },
+	          {
+		            iconCls:'icon-excel',
+		            text:'Export Excel',
+		            handler:function(){
+		            cetakDataExcel();
+	            }
 	          }           
 	        ]
 	      });     
