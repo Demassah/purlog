@@ -78,14 +78,28 @@
 		ExportExcel = function(val){
 			var date_1 = $('#date_1').val();
 			var date_2 = $('#date_2').val();
+			if(date_1 != '' && date_2 != ''){
       window.open(base_url+'laporan_inbound/laporan_excel/'+ date_1 + "/" + date_2);      
+      }else{
+				$.messager.show({
+				title: 'Warning',
+				msg: 'Harap Isi Filter Terlabih Dahulu'
+				});
+			}
     }
 
     ExportPdf = function(val){
 			var date_1 = $('#date_1').val();
 			var date_2 = $('#date_2').val();
+			if(date_1 != '' && date_2 != ''){
       window.open(base_url+'laporan_inbound/laporan_pdf/'+ date_1 + "/" + date_2);      
-    }
+    }else{
+				$.messager.show({
+				title: 'Warning',
+				msg: 'Harap Isi Filter Terlabih Dahulu'
+				});
+			}
+		}
 
 
 		$(function(){
@@ -99,7 +113,7 @@
 			var pager = $('#dg_report_in').datagrid().datagrid('getPager');	// get the pager of datagrid
 			pager.pagination({
 				buttons:[
-				<?if($this->mdl_auth->CekAkses(array('menu_id'=>52, 'policy'=>'ACCESS'))){?>
+				<?if($this->mdl_auth->CekAkses(array('menu_id'=>52, 'policy'=>'EXCEL'))){?>
 					{
 						iconCls:'icon-excel',
 						text:'Export Excel',
@@ -108,7 +122,7 @@
 						}
 					},
 				<?}?>
-				<?if($this->mdl_auth->CekAkses(array('menu_id'=>52, 'policy'=>'ACCESS'))){?>
+				<?if($this->mdl_auth->CekAkses(array('menu_id'=>52, 'policy'=>'PDF'))){?>
 					{
 						iconCls:'icon-pdf',
 						text:'Export PDF',

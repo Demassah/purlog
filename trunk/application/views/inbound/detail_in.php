@@ -161,15 +161,7 @@
               cetakData();
             }
           },
-          <?}?>
-          <?if($this->mdl_auth->CekAkses(array('menu_id'=>41, 'policy'=>'PDF'))){?>
-          {
-            iconCls:'icon-excel',
-            text:'Export Excel',
-            handler:function(){
-              cetakDataExcel();
-            }
-          }
+         
           <?}?>
                  
         ]
