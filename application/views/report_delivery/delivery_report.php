@@ -102,7 +102,7 @@ else {
 	<td colspan="" rowspan=""  align="center" headers=""><? echo $data->id_sro; ?></td>
 	<td colspan="" rowspan=""  align="center" headers=""><? echo $data->id_ro; ?></td>
 	<td colspan="" rowspan=""  align="center" headers=""><? echo $data->id_do; ?></td>
-	<td colspan="" rowspan=""  align="center" headers=""><? echo $data->date_create; ?></td>
+	<td colspan="" rowspan=""  align="center" headers=""><? echo date('d-m-Y',strtotime($data->date_create)); ?></td>
 	<td colspan="" rowspan=""  align="center" headers=""><? echo $data->departement_name; ?></td>
 
 	</tr>

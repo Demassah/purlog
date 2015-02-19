@@ -73,7 +73,7 @@ else {
 			<td colspan="" rowspan=""  align="center" headers=""><? echo $data->id_in; ?></td>
 			<td colspan="" rowspan=""  align="center" headers=""><? echo $data->ext_rec_no; ?></td>
 			<td colspan="" rowspan=""  align="center" headers=""><? echo $data->type; ?></td>
-			<td colspan="" rowspan=""  align="center" headers=""><? echo $data->date_create; ?></td>
+			<td colspan="" rowspan=""  align="center" headers=""><? echo date('d-m-Y',strtotime($data->date_create)); ?></td>
 			<td colspan="" rowspan=""  align="center" headers=""><? echo $data->full_name; ?></td>
 			<td colspan="" rowspan=""  align="center" headers=""><? echo $data->id_detail_in; ?></td>
 			<td colspan="" rowspan=""  align="center" headers=""><? echo $data->kode_barang; ?></td>
