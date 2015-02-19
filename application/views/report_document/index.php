@@ -114,7 +114,7 @@
 			var pager = $('#dg_report_document').datagrid().datagrid('getPager');	// get the pager of datagrid
 			pager.pagination({
 				buttons:[
-				<?if($this->mdl_auth->CekAkses(array('menu_id'=>50, 'policy'=>'ACCESS'))){?>
+				<?if($this->mdl_auth->CekAkses(array('menu_id'=>50, 'policy'=>'EXCEL'))){?>
 					{
 						iconCls:'icon-excel',
 						text:'Export Excel',
@@ -123,7 +123,7 @@
 						}
 					},
 				<?}?>
-				<?if($this->mdl_auth->CekAkses(array('menu_id'=>50, 'policy'=>'ACCESS'))){?>
+				<?if($this->mdl_auth->CekAkses(array('menu_id'=>50, 'policy'=>'PDF'))){?>
 					{
 						iconCls:'icon-pdf',
 						text:'Export PDF',
