@@ -83,6 +83,7 @@ class mdl_report_in extends CI_Model {
 			$this->db->where($cari);
 			// $this->db->where('a.date_create  >=', $date_1);
 			// $this->db->where('a.date_create  <=', $date_2);
+			$this->db->where('a.status', 1);
 			$this->db->order_by('a.id_in', 'asc');
 			return $this->db->get();
 		$this->db->stop_cache();
@@ -102,6 +103,7 @@ class mdl_report_in extends CI_Model {
 			$this->db->where($cari);
 			// $this->db->where('a.date_create  >=', $date_1);
 			// $this->db->where('a.date_create  <=', $date_2);
+			$this->db->where('a.status', 1);
 			$this->db->order_by('a.id_in', 'asc');
 			return $this->db->get()->result();
 		$this->db->stop_cache();
