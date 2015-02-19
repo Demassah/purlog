@@ -74,12 +74,12 @@ class mdl_inbound extends CI_Model {
 		}elseif($id_po_re == 2){
 			$this->db->flush_cache();
 			$this->db->start_cache();
-				$list = $this->mdl_inbound->select_return();
-				$id = '';
-					foreach ($list as $l) {
-						$id = $l->id_return();
-						$this->db->where('id_return =', $id);
-					}
+				// $list = $this->mdl_inbound->select_return();
+				// $id = '';
+				// 	foreach ($list as $l) {
+				// 		$id = $l->id_return();
+				// 		$this->db->where('id_return =', $id);
+				// 	}
 				$this->db->select('id_return');
 				$this->db->order_by('id_return', 'asc');
 				$res = $this->db->get('tr_return');
