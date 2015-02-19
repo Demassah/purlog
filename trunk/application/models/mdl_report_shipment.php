@@ -78,6 +78,7 @@ class mdl_report_shipment extends CI_Model {
 			$this->db->where($cari);
 			// $this->db->where('a.date_create  >=', $date_1);
 			// $this->db->where('a.date_create  <=', $date_2);
+			$this->db->where('a.status', 2);
 			$this->db->order_by('a.id_sro', 'asc');
 			return $this->db->get();
 		$this->db->stop_cache();
@@ -97,6 +98,7 @@ class mdl_report_shipment extends CI_Model {
 			$this->db->where($cari);
 			// $this->db->where('a.date_create  >=', $date_1);
 			// $this->db->where('a.date_create  <=', $date_2);
+			$this->db->where('a.status', 2);
 			$this->db->order_by('a.id_sro', 'asc');
 			return $this->db->get()->result();
 		$this->db->stop_cache();
