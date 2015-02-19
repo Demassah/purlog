@@ -109,7 +109,7 @@ else {
 		<td align="center"><?php echo $data->nama_barang;?></td>
 		<td align="center"><?php echo $data->qty_delivered;?></td>
 		<td align="center"><?php echo $data->qty;?></td>
-		<td align="center"><?php echo $data->date_create;?></td>
+		<td align="center"><?php echo date('d-m-Y',strtotime($data->date_create));?></td>
 	  </tr>
 	  <?php 
 		$no++;

@@ -81,7 +81,7 @@ else {
 			<td colspan="" rowspan=""  align="center" headers=""><? echo $data->qty; ?></td>
 			<td colspan="" rowspan=""  align="center" headers=""><? echo $data->id_stock; ?></td>
 			<td colspan="" rowspan=""  align="center" headers=""><? echo $data->id_lokasi; ?></td>
-			<td colspan="" rowspan=""  align="center" headers=""><? echo $data->date_create; ?></td>
+			<td colspan="" rowspan=""  align="center" headers=""><? echo date('d-m-Y',strtotime($data->date_create)); ?></td>
 
 
 		</tr>
