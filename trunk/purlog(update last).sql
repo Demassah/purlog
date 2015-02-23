@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.5
+-- version 3.2.4
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 19, 2015 at 08:26 AM
--- Server version: 5.5.16
--- PHP Version: 5.3.8
+-- Generation Time: Feb 23, 2015 at 04:15 PM
+-- Server version: 5.1.41
+-- PHP Version: 5.3.1
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -19,2015 +18,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `purlog`
 --
-
-DELIMITER $$
---
--- Procedures
---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `p_allocated`(IN p_id_ro INT, IN p_user_id INT)
-BEGIN
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE done INT DEFAULT FALSE;
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE a, b, d INT;
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE c VARCHAR(21);
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE cur1 CURSOR FOR SELECT id_detail_ro, id_ro, kode_barang, sisa FROM v_pros_detail WHERE sisa != 0 AND id_ro = p_id_ro ;
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-
-
-
-
-
-
-
-
-
-
-
-		
-
-
-
-
-
-
-
-
-
-
-
-	OPEN cur1;
-
-
-
-
-
-
-
-
-
-
-
-	read_loop : LOOP
-
-
-
-
-
-
-
-
-
-
-
-	FETCH cur1 INTO a, b, c, d ;
-
-
-
-
-
-
-
-
-
-
-
-	IF done THEN 
-
-
-
-
-
-
-
-
-
-
-
-	LEAVE read_loop;
-
-
-
-
-
-
-
-
-
-
-
-	END IF;
-
-
-
-
-
-
-
-
-
-
-
-	INSERT INTO tr_pr_detail (id_detail_ro, id_ro, kode_barang, qty, date_create, user_id, STATUS) VALUES (a, b, c, d, CURRENT_TIMESTAMP(), p_user_id,"1");
-
-
-
-
-
-
-
-
-
-
-
-	END LOOP;
-
-
-
-
-
-
-
-
-
-
-
-	CLOSE cur1; 
-
-
-
-
-
-
-
-
-
-
-
-    END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `p_delete_transfer_detail`(IN p_id_transfer INT)
-BEGIN
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE done INT DEFAULT FALSE;
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE a, b, c INT;
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE cur1 CURSOR FOR 
-
-
-
-
-
-
-
-
-
-
-
-	SELECT id_stock, qty, id_detail_transfer
-
-
-
-
-
-
-
-
-
-
-
-	FROM  tr_transfer_detail
-
-
-
-
-
-
-
-
-
-
-
-	WHERE id_transfer = p_id_transfer ;
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-
-
-
-
-
-
-
-
-
-
-
-		
-
-
-
-
-
-
-
-
-
-
-
-	OPEN cur1;
-
-
-
-
-
-
-
-
-
-
-
-	read_loop : LOOP
-
-
-
-
-
-
-
-
-
-
-
-	FETCH cur1 INTO  a, b, c;
-
-
-
-
-
-
-
-
-
-
-
-	IF done THEN 
-
-
-
-
-
-
-
-
-
-
-
-	LEAVE read_loop;
-
-
-
-
-
-
-
-
-
-
-
-	END IF;
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
-	UPDATE tr_stock SET qty = (qty + b) WHERE id_stock = a;	
-
-
-
-
-
-
-
-
-
-
-
-	DELETE FROM tr_transfer_detail WHERE id_detail_transfer = c;
-
-
-
-
-
-
-
-
-
-
-
-	END LOOP;
-
-
-
-
-
-
-
-
-
-
-
-	CLOSE cur1; 
-
-
-
-
-
-
-
-
-
-
-
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `p_id_qrs`(IN `p_id_pr` int,IN `p_id_qr` int,IN `p_id_qrs` int)
-BEGIN
-	DECLARE done INT DEFAULT FALSE;
-	DECLARE a, c INT;
-	DECLARE b VARCHAR(21);
-	DECLARE cur1 CURSOR FOR SELECT id_detail_pr,kode_barang, qty FROM tr_qrs_detail WHERE id_pr = p_id_pr  AND id_qrs = p_id_qrs;
-	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-	OPEN cur1;
-		read_loop : LOOP
-			FETCH cur1 INTO a, b, c ;
-			IF done THEN 
-				LEAVE read_loop;
-			END IF;
-			INSERT INTO tr_qr_detail (id_qr, id_qrs, id_detail_pr, id_pr, kode_barang, qty, date_create)
-			VALUES (p_id_qr, p_id_qrs, a, p_id_pr, b, c, CURRENT_TIMESTAMP());
-		END LOOP;
-	CLOSE cur1; 
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `p_in_po`(IN p_id_in INT)
-BEGIN
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE done INT DEFAULT FALSE;
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE a, b, d INT;
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE c VARCHAR(21);
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE cur1 CURSOR FOR SELECT  b.`id_detail_ro` ,b.`id_ro`, a.kode_barang, a.qty  
-
-
-
-
-
-
-
-
-
-
-
-	FROM tr_in_detail a
-
-
-
-
-
-
-
-
-
-
-
-	LEFT JOIN tr_pr_detail b ON (a.`ext_rec_no_detail` = b.`id_detail_pr`)
-
-
-
-
-
-
-
-
-
-
-
-	where a.id_in = p_id_in;	
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-
-
-
-
-
-
-
-
-
-
-
-			
-
-
-
-
-
-
-
-
-
-
-
-	OPEN cur1;
-
-
-
-
-
-
-
-
-
-
-
-	read_loop : LOOP
-
-
-
-
-
-
-
-
-
-
-
-	FETCH cur1 INTO a, b, c, d;
-
-
-
-
-
-
-
-
-
-
-
-	IF done THEN 
-
-
-
-
-
-
-
-
-
-
-
-	LEAVE read_loop;
-
-
-
-
-
-
-
-
-
-
-
-	END IF;
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
-	INSERT INTO tr_pros_detail (id_detail_ro, id_ro, id_stock, kode_barang,  qty, id_lokasi, date_create, status, status_picking ) 
-
-
-
-
-
-
-
-
-
-
-
-	VALUES (  a, b, 0, c, d, 'CROSSDOCK', CURRENT_TIMESTAMP(), 1, 2);
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
-	END LOOP;
-
-
-
-
-
-
-
-
-
-
-
-	CLOSE cur1; 
-
-
-
-
-
-
-
-
-
-
-
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `p_in_stock`(IN p_id_in INT)
-BEGIN
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE done INT DEFAULT FALSE;
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE a, b, d, e, g INT;
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE c, f VARCHAR(21);
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE cur1 CURSOR FOR SELECT  a.`id_in`, a.`id_detail_in`, a.`kode_barang`, a.`qty`, f.`price` , a.`lokasi`, b.`type`
-
-
-
-
-
-
-
-
-
-
-
-	FROM tr_in_detail a
-
-
-
-
-
-
-
-
-
-
-
-	LEFT JOIN tr_in b ON a.id_in = b.id_in
-
-
-
-
-
-
-
-
-
-
-
-	LEFT JOIN tr_pr c ON b.`ext_rec_no` = c.`id_po`
-
-
-
-
-
-
-
-
-
-
-
-	LEFT JOIN tr_pr_detail d ON a.`ext_rec_no_detail` = d.`id_detail_pr`
-
-
-
-
-
-
-
-
-
-
-
-	LEFT JOIN tr_qr e ON c.`id_pr` = e.`id_pr` AND e.`status` = 2
-
-
-
-
-
-
-
-
-
-
-
-	LEFT JOIN tr_qr_detail f ON a.`ext_rec_no_detail` = f.`id_detail_pr` AND f.`id_qr` = e.`id_qr`
-
-
-
-
-
-
-
-
-
-
-
-	where a.id_in = p_id_in ;	
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-
-
-
-
-
-
-
-
-
-
-
-			
-
-
-
-
-
-
-
-
-
-
-
-	OPEN cur1;
-
-
-
-
-
-
-
-
-
-
-
-	read_loop : LOOP
-
-
-
-
-
-
-
-
-
-
-
-	FETCH cur1 INTO a, b, c, d, e, f, g;
-
-
-
-
-
-
-
-
-
-
-
-	IF done THEN 
-
-
-
-
-
-
-
-
-
-
-
-	LEAVE read_loop;
-
-
-
-
-
-
-
-
-
-
-
-	END IF;
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
-	INSERT INTO tr_stock (id_in, id_detail_in, kode_barang,  qty, price, id_lokasi, date_create, status, type_in ) 
-
-
-
-
-
-
-
-
-
-
-
-	VALUES (  a, b, c, d, e, f, CURRENT_TIMESTAMP(), 1, g);
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
-	END LOOP;
-
-
-
-
-
-
-
-
-
-
-
-	CLOSE cur1; 
-
-
-
-
-
-
-
-
-
-
-
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `p_qrs_detail`(IN p_id_pr INT, IN p_id_qr INT, IN p_id_qrs INT)
-BEGIN
-	DECLARE done INT DEFAULT FALSE;
-	DECLARE a, c INT;
-	DECLARE b VARCHAR(21);
-	DECLARE cur1 CURSOR FOR SELECT id_detail_pr,kode_barang, qty FROM tr_qrs_detail WHERE id_pr = p_id_pr  AND id_qrs = p_id_qrs;
-	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-	OPEN cur1;
-		read_loop : LOOP
-			FETCH cur1 INTO a, b, c ;
-			IF done THEN 
-				LEAVE read_loop;
-			END IF;
-			INSERT INTO tr_qr_detail (id_qr, id_qrs, id_detail_pr, id_pr, kode_barang, qty, date_create)
-			VALUES (p_id_qr, p_id_qrs, a, p_id_pr, b, c, CURRENT_TIMESTAMP());
-		END LOOP;
-	CLOSE cur1; 
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `p_receive_detail`(IN p_id_receive INT, IN p_id_sro INT)
-BEGIN
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE done INT DEFAULT FALSE;
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE a, b, c, e INT;
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE d VARCHAR(21);
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE cur1 CURSOR FOR SELECT id_detail_pros, id_detail_ro, id_ro, kode_barang, qty FROM tr_pros_detail 
-
-
-
-
-
-
-
-
-
-
-
-	WHERE id_sro = p_id_sro ;
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-
-
-
-
-
-
-
-
-
-
-
-		
-
-
-
-
-
-
-
-
-
-
-
-	OPEN cur1;
-
-
-
-
-
-
-
-
-
-
-
-	read_loop : LOOP
-
-
-
-
-
-
-
-
-
-
-
-	FETCH cur1 INTO a, b, c, d, e ;
-
-
-
-
-
-
-
-
-
-
-
-	IF done THEN 
-
-
-
-
-
-
-
-
-
-
-
-	LEAVE read_loop;
-
-
-
-
-
-
-
-
-
-
-
-	END IF;
-
-
-
-
-
-
-
-
-
-
-
-	INSERT INTO tr_receive_detail (id_receive, id_detail_pros, id_detail_ro, id_ro, id_sro, kode_barang, qty, date_create, status) 
-
-
-
-
-
-
-
-
-
-
-
-	VALUES (p_id_receive, a, b, c, p_id_sro, d, e, CURRENT_TIMESTAMP(), 1);
-
-
-
-
-
-
-
-
-
-
-
-	update tr_pros_detail set status_receive =  1 where id_detail_pros = a ;
-
-
-
-
-
-
-
-
-
-
-
-	END LOOP;
-
-
-
-
-
-
-
-
-
-
-
-	CLOSE cur1; 
-
-
-
-
-
-
-
-
-
-
-
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `p_receive_return`(IN p_id_receive INT)
-BEGIN
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE done INT DEFAULT FALSE;
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE a, b, c, e, f INT;
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE d VARCHAR(21);
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE cur1 CURSOR FOR SELECT  y.id_detail_pros, y.id_ro, y.id_detail_ro, x.kode_barang, (y.qty - x.qty) as sisa, x.id_detail_receive 
-
-
-
-
-
-
-
-
-
-
-
-	FROM  tr_receive_detail x, tr_pros_detail y 
-
-
-
-
-
-
-
-
-
-
-
-	where x.id_detail_pros = y.id_detail_pros
-
-
-
-
-
-
-
-
-
-
-
-	and x.id_receive = p_id_receive;
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-
-
-
-
-
-
-
-
-
-
-
-		
-
-
-
-
-
-
-
-
-
-
-
-	OPEN cur1;
-
-
-
-
-
-
-
-
-
-
-
-	read_loop : LOOP
-
-
-
-
-
-
-
-
-
-
-
-	FETCH cur1 INTO a, b, c, d, e, f ;
-
-
-
-
-
-
-
-
-
-
-
-	IF done THEN 
-
-
-
-
-
-
-
-
-
-
-
-	LEAVE read_loop;
-
-
-
-
-
-
-
-
-
-
-
-	END IF;
-
-
-
-
-
-
-
-
-
-
-
-	if e <> 0 then
-
-
-
-
-
-
-
-
-
-
-
-	INSERT INTO tr_return_detail (id_receive, id_detail_receive, id_detail_pros, id_ro, id_detail_ro, kode_barang, qty, date_create, STATUS) 
-
-
-
-
-
-
-
-
-
-
-
-	VALUES ( p_id_receive, f, a, b, c, d, e, CURRENT_TIMESTAMP(), 1);
-
-
-
-
-
-
-
-
-
-
-
-	end if;
-
-
-
-
-
-
-
-
-
-
-
-	END LOOP;
-
-
-
-
-
-
-
-
-
-
-
-	CLOSE cur1; 
-
-
-
-
-
-
-
-
-
-
-
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `p_return_order`(IN p_id_return INT)
-BEGIN
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE done INT DEFAULT FALSE;
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE a INT;
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE b, c VARCHAR(21);
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE d DATE;
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE cur1 CURSOR FOR SELECT x.user_id, y.purpose, y.cat_req, y.ETD
-
-
-
-
-
-
-
-
-
-
-
-	FROM  tr_return X, tr_ro  Y, tr_receive z, tr_sro v 
-
-
-
-
-
-
-
-
-
-
-
-	WHERE x.id_return = p_id_return and x.id_receive = z.id_receive and z.id_sro = v.id_sro and v.id_ro = y.id_ro;
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
-	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-
-
-
-
-
-
-
-
-
-
-
-		
-
-
-
-
-
-
-
-
-
-
-
-	OPEN cur1;
-
-
-
-
-
-
-
-
-
-
-
-	read_loop : LOOP
-
-
-
-
-
-
-
-
-
-
-
-	FETCH cur1 INTO a, b, c, d;
-
-
-
-
-
-
-
-
-
-
-
-	IF done THEN 
-
-
-
-
-
-
-
-
-
-
-
-	LEAVE read_loop;
-
-
-
-
-
-
-
-
-
-
-
-	END IF;
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
-	INSERT INTO tr_ro (user_id, purpose, cat_req, ext_doc_no, ETD, date_create,  status, status_order ) 
-
-
-
-
-
-
-
-
-
-
-
-	VALUES (  a, b, c, p_id_return, d, CURRENT_TIMESTAMP(), 4, 3);
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
-	END LOOP;
-
-
-
-
-
-
-
-
-
-
-
-	CLOSE cur1; 
-
-
-
-
-
-
-
-
-
-
-
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `p_return_order_detail`(IN p_id_return INT, IN p_id_ro int, IN p_user_id INT)
-BEGIN
-
-
-	DECLARE done INT DEFAULT FALSE;
-
-
-	DECLARE b INT;
-
-
-	DECLARE a VARCHAR(21);
-
-
-	DECLARE c TEXT;
-
-
-	DECLARE cur1 CURSOR FOR SELECT x.kode_barang, x.qty, y.note
-
-
-	FROM  tr_return_detail X, tr_ro_detail  Y
-
-
-	WHERE x.id_return = p_id_return and x.id_detail_ro = y.id_detail_ro;
-
-
-	
-
-
-	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-
-
-		
-
-
-	OPEN cur1;
-
-
-	read_loop : LOOP
-
-
-	FETCH cur1 INTO a, b, c;
-
-
-	IF done THEN 
-
-
-	LEAVE read_loop;
-
-
-	END IF;
-
-
-	
-
-
-	INSERT INTO tr_ro_detail (id_ro, ext_doc_no, kode_barang,  qty, barang_bekas, user_id, date_create, note, status, status_delete ) 
-
-
-	VALUES (  p_id_ro, p_id_return, a, b, 1, p_user_id, CURRENT_TIMESTAMP(), c, 1, 0);
-
-
-	
-
-
-	END LOOP;
-
-
-	CLOSE cur1; 
-
-
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `p_transfer`(IN p_id_transfer INT)
-BEGIN
-
-
-	DECLARE done INT DEFAULT FALSE;
-
-
-	DECLARE b, d, e INT;
-
-
-	DECLARE c, f VARCHAR(21);
-
-
-	DECLARE cur1 CURSOR FOR 
-
-
-	SELECT id_detail_transfer, kode_barang, qty, price, id_lokasi
-
-
-	FROM  tr_transfer_detail
-
-
-	WHERE id_transfer = p_id_transfer ;
-
-
-	
-
-
-	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-
-
-		
-
-
-	OPEN cur1;
-
-
-	read_loop : LOOP
-
-
-	FETCH cur1 INTO  b, c, d, e, f;
-
-
-	IF done THEN 
-
-
-	LEAVE read_loop;
-
-
-	END IF;
-
-
-	
-
-
-	INSERT INTO tr_stock ( id_in, id_detail_in, kode_barang, qty, price, id_lokasi, date_create, status, type_in ) 
-
-
-	VALUES (  p_id_transfer, b, c, d, e, f, CURRENT_TIMESTAMP(), 1, 2);
-
-
-	
-
-
-	END LOOP;
-
-
-	CLOSE cur1; 
-
-
-END$$
-
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -2354,7 +344,7 @@ INSERT INTO `sys_user_access` (`user_access_id`, `menu_id`, `user_level_id`, `po
 (729, 7, 1, 'ACCESS;ADD;EDIT;DELETE;'),
 (730, 8, 1, 'ACCESS;ADD;EDIT;DELETE;'),
 (731, 9, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;'),
-(732, 10, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PDF;APPROVE;'),
+(732, 10, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;APPROVE;'),
 (733, 11, 1, 'ACCESS;DETAIL;EDIT;DELETE;APPROVE;'),
 (734, 12, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),
 (735, 13, 1, 'ACCESS;ADD;DETAIL;DELETE;PRINT;PDF;APPROVE;'),
@@ -2445,12 +435,12 @@ INSERT INTO `sys_user_access` (`user_access_id`, `menu_id`, `user_level_id`, `po
 (821, 45, 1, 'ACCESS;ADD;EDIT;DELETE;'),
 (822, 46, 1, 'ACCESS;ADD;EDIT;DELETE;'),
 (823, 47, 1, 'ACCESS;'),
-(824, 48, 1, 'ACCESS;'),
-(825, 49, 1, 'ACCESS;'),
-(826, 50, 1, 'ACCESS;'),
-(827, 51, 1, 'ACCESS;'),
-(828, 52, 1, 'ACCESS;'),
-(829, 53, 1, 'ACCESS;');
+(824, 48, 1, 'ACCESS;PDF;EXCEL;'),
+(825, 49, 1, 'ACCESS;PDF;EXCEL;'),
+(826, 51, 1, 'ACCESS;PDF;EXCEL;'),
+(827, 50, 1, 'ACCESS;PDF;EXCEL;'),
+(828, 52, 1, 'ACCESS;PDF;EXCEL;'),
+(829, 53, 1, 'ACCESS;PDF;EXCEL;');
 
 -- --------------------------------------------------------
 
@@ -2498,7 +488,7 @@ CREATE TABLE IF NOT EXISTS `tr_do` (
   `id_user` varchar(21) DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id_do`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `tr_do`
@@ -2507,11 +497,7 @@ CREATE TABLE IF NOT EXISTS `tr_do` (
 INSERT INTO `tr_do` (`id_do`, `id_courir`, `date_create`, `id_user`, `status`) VALUES
 (1, 1, '2015-01-20 11:08:30', '1', 2),
 (2, 2, '2015-01-20 11:08:53', '1', 2),
-(4, 1, '2015-02-10 14:32:43', '16', 2),
-(5, 1, '2015-02-13 08:56:15', '1', 2),
-(6, 1, '2015-02-13 11:23:51', '1', 2),
-(7, 1, '2015-02-13 11:25:59', '1', 2),
-(8, 3, '2015-02-18 10:02:53', '1', 1);
+(4, 1, '2015-02-10 14:32:43', '16', 2);
 
 --
 -- Triggers `tr_do`
@@ -2519,19 +505,17 @@ INSERT INTO `tr_do` (`id_do`, `id_courir`, `date_create`, `id_user`, `status`) V
 DROP TRIGGER IF EXISTS `after_update_do`;
 DELIMITER //
 CREATE TRIGGER `after_update_do` AFTER UPDATE ON `tr_do`
- FOR EACH ROW BEGIN
-    IF new.status = 2 THEN
-	UPDATE tr_sro SET STATUS = 2  WHERE id_do = old.id_do;
-   END IF;
+ FOR EACH ROW BEGIN
+    IF new.status = 2 THEN
+	UPDATE tr_sro SET STATUS = 2  WHERE id_do = old.id_do;
+   END IF;
     END
 //
 DELIMITER ;
 DROP TRIGGER IF EXISTS `after_delete_do`;
 DELIMITER //
 CREATE TRIGGER `after_delete_do` AFTER DELETE ON `tr_do`
- FOR EACH ROW BEGIN
-	UPDATE tr_sro SET id_do = NULL WHERE id_do = old.id_do;
-    END
+ FOR EACH ROW BEGIN	UPDATE tr_sro SET id_do = NULL WHERE id_do = old.id_do;    END
 //
 DELIMITER ;
 
@@ -2551,6 +535,11 @@ CREATE TABLE IF NOT EXISTS `tr_do_detail` (
   PRIMARY KEY (`id_do_detail`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=1 ;
 
+--
+-- Dumping data for table `tr_do_detail`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -2565,14 +554,14 @@ CREATE TABLE IF NOT EXISTS `tr_in` (
   `user_id` smallint(6) DEFAULT NULL,
   `status` smallint(1) DEFAULT NULL,
   PRIMARY KEY (`id_in`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `tr_in`
 --
 
 INSERT INTO `tr_in` (`id_in`, `ext_rec_no`, `type`, `date_create`, `user_id`, `status`) VALUES
-(5, 19, '1', '2015-02-07 02:17:40', 16, 1);
+(10, 17, '1', '2015-02-12 10:24:42', 16, 1);
 
 --
 -- Triggers `tr_in`
@@ -2580,23 +569,23 @@ INSERT INTO `tr_in` (`id_in`, `ext_rec_no`, `type`, `date_create`, `user_id`, `s
 DROP TRIGGER IF EXISTS `after_update_in`;
 DELIMITER //
 CREATE TRIGGER `after_update_in` AFTER UPDATE ON `tr_in`
- FOR EACH ROW BEGIN
-IF new.status = 2 and new.type = 1 THEN
-CALL p_in_po(new.id_in);
-CALL p_in_stock(new.id_in);	
-END IF;
-
-
-
-
+ FOR EACH ROW BEGIN
+IF new.status = 2 and new.type = 1 THEN
+CALL p_in_po(new.id_in);
+CALL p_in_stock(new.id_in);	
+END IF;
+
+
+
+
     END
 //
 DELIMITER ;
 DROP TRIGGER IF EXISTS `before_delete_inbound`;
 DELIMITER //
 CREATE TRIGGER `before_delete_inbound` BEFORE DELETE ON `tr_in`
- FOR EACH ROW BEGIN
-	delete from tr_in_detail where id_in = old.id_in;
+ FOR EACH ROW BEGIN
+	delete from tr_in_detail where id_in = old.id_in;
     END
 //
 DELIMITER ;
@@ -2616,14 +605,16 @@ CREATE TABLE IF NOT EXISTS `tr_in_detail` (
   `lokasi` varchar(21) DEFAULT NULL,
   `status` smallint(1) DEFAULT NULL,
   PRIMARY KEY (`id_detail_in`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=64 ;
 
 --
 -- Dumping data for table `tr_in_detail`
 --
 
 INSERT INTO `tr_in_detail` (`id_detail_in`, `id_in`, `kode_barang`, `qty`, `ext_rec_no_detail`, `lokasi`, `status`) VALUES
-(1, 5, '201', 2, 9, 'Pusat', 1);
+(61, 10, '203', 2, 28, 'A100', 1),
+(62, 10, '203', 1, 28, 'A100', 1),
+(63, 10, '201', 3, 27, 'A100', 1);
 
 -- --------------------------------------------------------
 
@@ -2643,7 +634,7 @@ CREATE TABLE IF NOT EXISTS `tr_notifikasi` (
   `binding_id` int(11) NOT NULL,
   `user_level_id` int(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=64 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=56 ;
 
 --
 -- Dumping data for table `tr_notifikasi`
@@ -2664,15 +655,7 @@ INSERT INTO `tr_notifikasi` (`id`, `context`, `url`, `id_object`, `status`, `tan
 (52, 'Request Order Baru telah dibuat', 'request_order', 23, 0, '0000-00-00', 1, 1, 1, 2),
 (53, 'Request Order telah dikirim ke RO Approval', 'request_order_approval', 23, 0, '0000-00-00', 1, 1, 1, 2),
 (54, 'RO Approval telah dikirim ke RO Logistic', 'request_order_logistic', 23, 0, '0000-00-00', 1, 1, 1, 2),
-(55, 'RO Logistic telah dikirim ke RO Selected', 'request_order_selected', 23, 0, '0000-00-00', 1, 1, 1, 2),
-(56, 'Request Order Baru telah dibuat', 'request_order', 24, 0, '0000-00-00', 1, 1, 1, 2),
-(57, 'Request Order telah dikirim ke RO Approval', 'request_order_approval', 24, 0, '0000-00-00', 1, 1, 1, 2),
-(58, 'RO Approval telah dikirim ke RO Logistic', 'request_order_logistic', 24, 0, '0000-00-00', 1, 1, 1, 2),
-(59, 'RO Logistic telah dikirim ke RO Selected', 'request_order_selected', 24, 0, '0000-00-00', 1, 1, 1, 2),
-(60, 'Request Order telah dikirim ke RO Approval', 'request_order_approval', 24, 0, '0000-00-00', 1, 1, 1, 2),
-(61, 'RO Approval telah dikirim ke RO Logistic', 'request_order_logistic', 24, 0, '0000-00-00', 1, 1, 1, 2),
-(62, 'RO Logistic telah dikirim ke RO Selected', 'request_order_selected', 24, 1, '0000-00-00', 1, 1, 1, 2),
-(63, 'Purchase Request Baru telah dibuat', 'purchase_request', 7, 1, '0000-00-00', 3, 1, 1, 3);
+(55, 'RO Logistic telah dikirim ke RO Selected', 'request_order_selected', 23, 1, '0000-00-00', 1, 1, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -2694,7 +677,7 @@ CREATE TABLE IF NOT EXISTS `tr_po` (
   `date_create` datetime DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id_po`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `tr_po`
@@ -2703,7 +686,8 @@ CREATE TABLE IF NOT EXISTS `tr_po` (
 INSERT INTO `tr_po` (`id_po`, `id_qrs`, `id_pr`, `id_ro`, `requestor`, `departement`, `purpose`, `cat_req`, `ext_doc_no`, `ETD`, `date_create`, `status`) VALUES
 (17, 13, 1, 1, '16', '19', 'REQUEST', 'ASSET', 'SPK/123', '2015-01-20', '2015-02-06 22:21:31', 2),
 (18, 14, 1, 1, '16', '19', 'REQUEST', 'ASSET', 'SPK/123', '2015-01-20', '2015-02-06 22:26:10', 1),
-(19, 16, 6, 21, '16', '19', 'REQUEST', 'ASSET', '12354', '2015-02-06', '2015-02-07 01:01:24', 2);
+(19, 16, 6, 21, '16', '19', 'REQUEST', 'ASSET', '12354', '2015-02-06', '2015-02-07 01:01:24', 2),
+(20, 17, 6, 21, '16', '19', 'REQUEST', 'ASSET', '12354', '2015-02-06', '2015-02-12 09:46:36', 2);
 
 --
 -- Triggers `tr_po`
@@ -2711,18 +695,18 @@ INSERT INTO `tr_po` (`id_po`, `id_qrs`, `id_pr`, `id_ro`, `requestor`, `departem
 DROP TRIGGER IF EXISTS `after_insert_po`;
 DELIMITER //
 CREATE TRIGGER `after_insert_po` AFTER INSERT ON `tr_po`
- FOR EACH ROW BEGIN 
-   update tr_qrs set id_po = new.id_po where id_qrs = new.id_qrs;
-   update tr_qr set id_po = new.id_po where id_qrs  = new.id_qrs and status = '2'; 
+ FOR EACH ROW BEGIN 
+   update tr_qrs set id_po = new.id_po where id_qrs = new.id_qrs;
+   update tr_qr set id_po = new.id_po where id_qrs  = new.id_qrs and status = '2'; 
 END
 //
 DELIMITER ;
 DROP TRIGGER IF EXISTS `after_delete_po`;
 DELIMITER //
 CREATE TRIGGER `after_delete_po` AFTER DELETE ON `tr_po`
- FOR EACH ROW BEGIN
-  update tr_qr set id_po = 0 where id_po = old.id_po;
-update tr_qrs set id_po = null where id_po = old.id_po;
+ FOR EACH ROW BEGIN
+  update tr_qr set id_po = 0 where id_po = old.id_po;
+update tr_qrs set id_po = null where id_po = old.id_po;
 END
 //
 DELIMITER ;
@@ -2745,7 +729,7 @@ CREATE TABLE IF NOT EXISTS `tr_pr` (
   `date_create` datetime DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id_pr`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `tr_pr`
@@ -2755,8 +739,7 @@ INSERT INTO `tr_pr` (`id_pr`, `id_ro`, `id_po`, `user_id`, `purpose`, `cat_req`,
 (1, 1, NULL, 1, 'REQUEST', 'ASSET', 'SPK/123', '2015-01-20', '2015-01-20 09:22:32', 2),
 (4, 19, NULL, 1, 'REQUEST', 'ASSET', '1', '2015-02-03', '2015-02-03 12:48:48', 2),
 (5, 20, NULL, 1, 'REQUEST', 'ATK', '1234', '2015-02-04', '2015-02-04 16:27:03', 2),
-(6, 21, NULL, 16, 'REQUEST', 'ASSET', '12354', '2015-02-06', '2015-02-06 17:28:29', 2),
-(7, 19, NULL, 1, 'REQUEST', 'ASSET', '1', '2015-02-03', '2015-02-03 12:48:48', 1);
+(6, 21, NULL, 16, 'REQUEST', 'ASSET', '12354', '2015-02-06', '2015-02-06 17:28:29', 2);
 
 --
 -- Triggers `tr_pr`
@@ -2764,8 +747,8 @@ INSERT INTO `tr_pr` (`id_pr`, `id_ro`, `id_po`, `user_id`, `purpose`, `cat_req`,
 DROP TRIGGER IF EXISTS `before_delete_pr`;
 DELIMITER //
 CREATE TRIGGER `before_delete_pr` BEFORE DELETE ON `tr_pr`
- FOR EACH ROW BEGIN
-	update tr_pr_detail set id_pr = null, status =  1 where id_pr = old.id_pr;
+ FOR EACH ROW BEGIN
+	update tr_pr_detail set id_pr = null, status =  1 where id_pr = old.id_pr;
     END
 //
 DELIMITER ;
@@ -2790,7 +773,7 @@ CREATE TABLE IF NOT EXISTS `tr_pros_detail` (
   `status_receive` smallint(1) DEFAULT '0',
   `status_picking` smallint(1) DEFAULT NULL COMMENT '1: picking 2: purchase 3: return',
   PRIMARY KEY (`id_detail_pros`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `tr_pros_detail`
@@ -2800,21 +783,8 @@ INSERT INTO `tr_pros_detail` (`id_detail_pros`, `id_detail_ro`, `id_ro`, `id_sro
 (1, 4, 2, 1, 1, '301', 4, 'Workshop', '2015-01-19 20:06:59', 1, 1, 1),
 (2, 5, 3, 2, 2, '302', 3, 'Workshop', '2015-01-19 20:07:24', 1, 1, 1),
 (3, 9, 19, 3, 3, '201', 3, 'Pusat', '2015-02-03 13:51:25', 1, 1, 1),
-(4, 13, 21, 4, 0, '201', 23, 'CROSSDOCK', '2015-02-07 02:02:53', 1, 1, 2),
-(5, 13, 21, 5, 0, '201', 54, 'CROSSDOCK', '2015-02-07 02:02:53', 1, 1, 2),
-(6, 15, 23, 8, 2, '302', 5, 'Heavy Equipment', '2015-02-13 08:56:43', 1, 0, 1),
-(7, 16, 24, 6, 1, '301', 4, 'Workshop', '2015-02-13 11:22:55', 1, 1, 1),
-(8, 16, 24, 6, 7, '301', 1, 'IT', '2015-02-13 11:22:55', 1, 1, 1),
-(9, 16, 24, 7, 8, '301', 1, 'IT', '2015-02-13 11:22:55', 1, 0, 1),
-(10, 16, 24, 7, 9, '301', 1, 'IT', '2015-02-13 11:22:55', 1, 0, 1),
-(11, 16, 24, NULL, 7, '301', 43, 'IT', '2015-02-13 14:11:31', 1, 0, 1),
-(12, 16, 24, NULL, 8, '301', 43, 'IT', '2015-02-13 14:11:31', 1, 0, 1),
-(13, 16, 24, NULL, 9, '301', 43, 'IT', '2015-02-13 14:11:31', 1, 0, 1),
-(14, 9, 19, NULL, 3, '201', 2, 'Pusat', '2015-02-18 10:58:19', 1, 0, 1),
-(15, 9, 19, NULL, 5, '201', 2, 'Pusat', '2015-02-18 10:58:19', 1, 0, 1),
-(16, 9, 19, NULL, 6, '201', 2, 'Pusat', '2015-02-18 10:58:19', 1, 0, 1),
-(17, 10, 20, NULL, 4, '100', 15, 'IT', '2015-02-18 11:41:42', 1, 0, 1),
-(18, 11, 20, NULL, 2, '302', 5, 'Heavy Equipment', '2015-02-18 11:41:46', 1, 0, 1);
+(4, 13, 21, NULL, 0, '201', 23, 'CROSSDOCK', '2015-02-07 02:02:53', 1, 0, 2),
+(5, 13, 21, NULL, 0, '201', 54, 'CROSSDOCK', '2015-02-07 02:02:53', 1, 0, 2);
 
 --
 -- Triggers `tr_pros_detail`
@@ -2822,17 +792,17 @@ INSERT INTO `tr_pros_detail` (`id_detail_pros`, `id_detail_ro`, `id_ro`, `id_sro
 DROP TRIGGER IF EXISTS `after_insert_alocation`;
 DELIMITER //
 CREATE TRIGGER `after_insert_alocation` AFTER INSERT ON `tr_pros_detail`
- FOR EACH ROW BEGIN
-	UPDATE purlog.tr_stock SET tr_stock.qty = tr_stock.qty - new.qty WHERE tr_stock.id_stock = new.id_stock;
+ FOR EACH ROW BEGIN
+	UPDATE purlog.tr_stock SET tr_stock.qty = tr_stock.qty - new.qty WHERE tr_stock.id_stock = new.id_stock;
     END
 //
 DELIMITER ;
 DROP TRIGGER IF EXISTS `after_update_allocate`;
 DELIMITER //
 CREATE TRIGGER `after_update_allocate` AFTER UPDATE ON `tr_pros_detail`
- FOR EACH ROW BEGIN
-	UPDATE tr_stock SET qty = qty + (old.qty - new.qty) WHERE id_stock = old.id_stock;	
-	
+ FOR EACH ROW BEGIN
+	UPDATE tr_stock SET qty = qty + (old.qty - new.qty) WHERE id_stock = old.id_stock;	
+	
     END
 //
 DELIMITER ;
@@ -2856,7 +826,7 @@ CREATE TABLE IF NOT EXISTS `tr_pr_detail` (
   `status` int(1) DEFAULT NULL,
   `status_delete` int(1) NOT NULL,
   PRIMARY KEY (`id_detail_pr`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `tr_pr_detail`
@@ -2871,10 +841,7 @@ INSERT INTO `tr_pr_detail` (`id_detail_pr`, `id_pr`, `id_detail_ro`, `id_ro`, `k
 (6, 5, 10, 20, '100', 34, 1, '2015-02-04 16:29:20', NULL, 2, 0),
 (7, 5, 11, 20, '302', 12, 1, '2015-02-04 16:29:20', NULL, 2, 0),
 (8, 5, 12, 20, '100', 12, 1, '2015-02-04 16:29:20', NULL, 2, 0),
-(9, 6, 13, 21, '201', 123, 16, '2015-02-06 17:37:37', NULL, 2, 0),
-(10, 0, 16, 24, '301', 50, 1, '2015-02-12 20:21:44', NULL, 1, 0),
-(11, 0, 16, 24, '301', 43, 1, '2015-02-12 20:22:34', NULL, 1, 0),
-(12, 7, 9, 19, '201', -4, 1, '2015-02-17 19:57:58', NULL, 2, 0);
+(9, 6, 13, 21, '201', 123, 16, '2015-02-06 17:37:37', NULL, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -2892,7 +859,7 @@ CREATE TABLE IF NOT EXISTS `tr_qr` (
   `ETD` date DEFAULT NULL,
   `status` int(2) DEFAULT '1',
   PRIMARY KEY (`id_qr`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=52 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=55 ;
 
 --
 -- Dumping data for table `tr_qr`
@@ -2907,7 +874,10 @@ INSERT INTO `tr_qr` (`id_qr`, `id_qrs`, `id_pr`, `id_vendor`, `id_po`, `top`, `E
 (48, 14, 1, 'V003', 0, 5, '2015-02-06', 1),
 (49, 16, 6, 'V001', 0, 12, '2015-02-07', 1),
 (50, 16, 6, 'V002', 19, 2, '2015-02-07', 2),
-(51, 16, 6, 'V003', 0, 3, '2015-02-07', 1);
+(51, 16, 6, 'V003', 0, 3, '2015-02-07', 1),
+(52, 17, 6, 'V001', 0, 12, '2015-02-12', 1),
+(53, 17, 6, 'V002', 20, 2, '2015-02-12', 2),
+(54, 17, 6, 'V003', 0, 4, '2015-02-12', 1);
 
 --
 -- Triggers `tr_qr`
@@ -2915,16 +885,16 @@ INSERT INTO `tr_qr` (`id_qr`, `id_qrs`, `id_pr`, `id_vendor`, `id_po`, `top`, `E
 DROP TRIGGER IF EXISTS `after_insert_qr`;
 DELIMITER //
 CREATE TRIGGER `after_insert_qr` AFTER INSERT ON `tr_qr`
- FOR EACH ROW BEGIN
-    CALL p_qrs_detail(new.id_pr, new.id_qr,new.id_qrs);
+ FOR EACH ROW BEGIN
+    CALL p_qrs_detail(new.id_pr, new.id_qr,new.id_qrs);
 END
 //
 DELIMITER ;
 DROP TRIGGER IF EXISTS `before_delete_qr`;
 DELIMITER //
 CREATE TRIGGER `before_delete_qr` BEFORE DELETE ON `tr_qr`
- FOR EACH ROW BEGIN
-	delete from tr_qr_detail where id_qr = old.id_qr;
+ FOR EACH ROW BEGIN
+	delete from tr_qr_detail where id_qr = old.id_qr;
     END
 //
 DELIMITER ;
@@ -2944,7 +914,7 @@ CREATE TABLE IF NOT EXISTS `tr_qrs` (
   `user_id` smallint(6) DEFAULT NULL,
   `status` smallint(1) DEFAULT NULL,
   PRIMARY KEY (`id_qrs`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `tr_qrs`
@@ -2954,7 +924,8 @@ INSERT INTO `tr_qrs` (`id_qrs`, `id_po`, `id_pr`, `id_ro`, `date_create`, `user_
 (13, 17, 1, 1, '2015-02-06 01:58:36', 1, 2),
 (14, 18, 1, 1, '2015-02-06 01:59:06', 1, 2),
 (16, 19, 6, 21, '2015-02-07 00:59:54', 16, 2),
-(17, NULL, 6, 21, '2015-02-07 01:00:11', 16, 1);
+(17, 20, 6, 21, '2015-02-07 01:00:11', 16, 2),
+(18, NULL, 5, 20, '2015-02-12 10:18:21', 16, 1);
 
 --
 -- Triggers `tr_qrs`
@@ -2962,10 +933,10 @@ INSERT INTO `tr_qrs` (`id_qrs`, `id_po`, `id_pr`, `id_ro`, `date_create`, `user_
 DROP TRIGGER IF EXISTS `before_delete_qrs`;
 DELIMITER //
 CREATE TRIGGER `before_delete_qrs` BEFORE DELETE ON `tr_qrs`
- FOR EACH ROW BEGIN
-  delete from tr_qrs_detail where id_qrs = old.id_qrs;
-  delete from tr_qr where id_pr = old.id_pr and id_qrs=old.id_qrs;
-  delete from tr_qr_detail where id_pr = old.id_pr and id_qrs = old.id_qrs;
+ FOR EACH ROW BEGIN
+  delete from tr_qrs_detail where id_qrs = old.id_qrs;
+  delete from tr_qr where id_pr = old.id_pr and id_qrs=old.id_qrs;
+  delete from tr_qr_detail where id_pr = old.id_pr and id_qrs = old.id_qrs;
 END
 //
 DELIMITER ;
@@ -3019,7 +990,7 @@ CREATE TABLE IF NOT EXISTS `tr_qr_detail` (
   `date_create` datetime DEFAULT NULL,
   `status` int(1) DEFAULT '1',
   PRIMARY KEY (`id_detail_qr`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=158 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=161 ;
 
 --
 -- Dumping data for table `tr_qr_detail`
@@ -3046,7 +1017,10 @@ INSERT INTO `tr_qr_detail` (`id_detail_qr`, `id_qr`, `id_qrs`, `id_detail_pr`, `
 (154, 48, 14, 3, 1, '203', 1, 0, '2015-02-06 01:59:36', 1),
 (155, 49, 16, 9, 6, '201', 100, 0, '2015-02-07 01:00:40', 1),
 (156, 50, 16, 9, 6, '201', 100, 1000000, '2015-02-07 01:00:45', 1),
-(157, 51, 16, 9, 6, '201', 100, 0, '2015-02-07 01:00:48', 1);
+(157, 51, 16, 9, 6, '201', 100, 0, '2015-02-07 01:00:48', 1),
+(158, 52, 17, 9, 6, '201', 23, 34, '2015-02-12 09:45:09', 1),
+(159, 53, 17, 9, 6, '201', 23, 12, '2015-02-12 09:45:13', 1),
+(160, 54, 17, 9, 6, '201', 23, 4, '2015-02-12 09:45:17', 1);
 
 -- --------------------------------------------------------
 
@@ -3062,7 +1036,7 @@ CREATE TABLE IF NOT EXISTS `tr_receive` (
   `id_user` smallint(6) DEFAULT NULL,
   `status` smallint(1) DEFAULT NULL,
   PRIMARY KEY (`id_receive`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `tr_receive`
@@ -3071,10 +1045,7 @@ CREATE TABLE IF NOT EXISTS `tr_receive` (
 INSERT INTO `tr_receive` (`id_receive`, `id_courir`, `id_sro`, `date_create`, `id_user`, `status`) VALUES
 (1, 1, 1, '2015-01-19 00:00:00', 1, 1),
 (2, 2, 2, '2015-01-19 00:00:00', 1, 2),
-(3, 1, 3, '2015-02-06 00:00:00', 1, 1),
-(8, 1, 4, '2015-02-13 00:00:00', 16, 1),
-(9, 1, 5, '2015-02-13 00:00:00', 16, 1),
-(10, 1, 6, '2015-02-13 00:00:00', 1, 1);
+(3, 1, 3, '2015-02-06 00:00:00', 1, 1);
 
 --
 -- Triggers `tr_receive`
@@ -3082,27 +1053,27 @@ INSERT INTO `tr_receive` (`id_receive`, `id_courir`, `id_sro`, `date_create`, `i
 DROP TRIGGER IF EXISTS `after_insert_receive`;
 DELIMITER //
 CREATE TRIGGER `after_insert_receive` AFTER INSERT ON `tr_receive`
- FOR EACH ROW BEGIN
-	CALL p_receive_detail(new.id_receive, new.id_sro);
+ FOR EACH ROW BEGIN
+	CALL p_receive_detail(new.id_receive, new.id_sro);
     END
 //
 DELIMITER ;
 DROP TRIGGER IF EXISTS `after_update_receive`;
 DELIMITER //
 CREATE TRIGGER `after_update_receive` AFTER UPDATE ON `tr_receive`
- FOR EACH ROW BEGIN
-	if new.status = 2 then
-	CALL p_receive_return(new.id_receive);
-	end if; 
+ FOR EACH ROW BEGIN
+	if new.status = 2 then
+	CALL p_receive_return(new.id_receive);
+	end if; 
     END
 //
 DELIMITER ;
 DROP TRIGGER IF EXISTS `after_delete_receive`;
 DELIMITER //
 CREATE TRIGGER `after_delete_receive` AFTER DELETE ON `tr_receive`
- FOR EACH ROW BEGIN
-	delete from tr_receive_detail where id_receive = old.id_receive;
-	Update tr_pros_detail set status_receive = 0  WHERE id_sro = old.id_sro;
+ FOR EACH ROW BEGIN
+	delete from tr_receive_detail where id_receive = old.id_receive;
+	Update tr_pros_detail set status_receive = 0  WHERE id_sro = old.id_sro;
     END
 //
 DELIMITER ;
@@ -3125,7 +1096,7 @@ CREATE TABLE IF NOT EXISTS `tr_receive_detail` (
   `date_create` datetime DEFAULT NULL,
   `status` smallint(1) DEFAULT NULL,
   PRIMARY KEY (`id_detail_receive`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `tr_receive_detail`
@@ -3134,11 +1105,7 @@ CREATE TABLE IF NOT EXISTS `tr_receive_detail` (
 INSERT INTO `tr_receive_detail` (`id_detail_receive`, `id_receive`, `id_detail_pros`, `id_detail_ro`, `id_ro`, `id_sro`, `kode_barang`, `qty`, `date_create`, `status`) VALUES
 (1, 1, 1, 4, 2, 1, '301', 4, '2015-01-19 20:14:10', 1),
 (2, 2, 2, 5, 3, 2, '302', 3, '2015-01-19 20:14:21', 1),
-(3, 3, 3, 9, 19, 3, '201', 3, '2015-02-10 01:43:15', 1),
-(8, 8, 4, 13, 21, 4, '201', 23, '2015-02-12 20:18:27', 1),
-(9, 9, 5, 13, 21, 5, '201', 54, '2015-02-12 20:24:59', 1),
-(10, 10, 7, 16, 24, 6, '301', 5, '2015-02-12 20:26:00', 1),
-(11, 10, 8, 16, 24, 6, '301', 1, '2015-02-12 20:26:00', 1);
+(3, 3, 3, 9, 19, 3, '201', 3, '2015-02-10 01:43:15', 1);
 
 -- --------------------------------------------------------
 
@@ -3156,15 +1123,20 @@ CREATE TABLE IF NOT EXISTS `tr_return` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
+-- Dumping data for table `tr_return`
+--
+
+
+--
 -- Triggers `tr_return`
 --
 DROP TRIGGER IF EXISTS `after_update_return`;
 DELIMITER //
 CREATE TRIGGER `after_update_return` AFTER UPDATE ON `tr_return`
- FOR EACH ROW BEGIN
-	if new.status = 2 then
-	CALL p_return_order(new.id_return);	
-	end if;
+ FOR EACH ROW BEGIN
+	if new.status = 2 then
+	CALL p_return_order(new.id_return);	
+	end if;
     END
 //
 DELIMITER ;
@@ -3190,6 +1162,11 @@ CREATE TABLE IF NOT EXISTS `tr_return_detail` (
   PRIMARY KEY (`id_detail_return`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- Dumping data for table `tr_return_detail`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -3209,19 +1186,18 @@ CREATE TABLE IF NOT EXISTS `tr_ro` (
   `status` int(1) DEFAULT NULL COMMENT '1: RO, 2: ROA, 3:ROL, 4: ROS, 5: Picking, 6: Shipment, 7: DO, 9: Reject',
   `status_order` smallint(1) DEFAULT '1' COMMENT '1: ORDER, 2: PURCHASE, 3: RETURN',
   PRIMARY KEY (`id_ro`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=24 ;
 
 --
 -- Dumping data for table `tr_ro`
 --
 
 INSERT INTO `tr_ro` (`id_ro`, `user_id`, `purpose`, `cat_req`, `ext_doc_no`, `ETD`, `date_create`, `date_approve`, `date_reject`, `status`, `status_order`) VALUES
-(19, 1, 'REQUEST', 'ASSET', '1', '2015-02-03', '2015-02-03 12:48:48', '2015-02-03 13:46:42', '0000-00-00 00:00:00', 5, 1),
-(20, 1, 'REQUEST', 'ATK', '1234', '2015-02-04', '2015-02-04 16:27:03', '2015-02-04 16:28:30', '0000-00-00 00:00:00', 5, 1),
-(21, 16, 'REQUEST', 'ASSET', '12354', '2015-02-06', '2015-02-06 17:28:29', '2015-02-06 17:29:24', '0000-00-00 00:00:00', 5, 1),
+(19, 1, 'REQUEST', 'ASSET', '1', '2015-02-03', '2015-02-03 12:48:48', '2015-02-03 13:46:42', '0000-00-00 00:00:00', 6, 1),
+(20, 1, 'REQUEST', 'ATK', '1234', '2015-02-04', '2015-02-04 16:27:03', '2015-02-04 16:28:30', '0000-00-00 00:00:00', 6, 1),
+(21, 16, 'REQUEST', 'ASSET', '12354', '2015-02-06', '2015-02-06 17:28:29', '2015-02-06 17:29:24', '0000-00-00 00:00:00', 6, 1),
 (22, 16, 'REQUEST', 'ASSET', '89898', '2015-02-07', '2015-02-07 14:15:47', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
-(23, 1, 'REQUEST', 'ATK', '123', '2015-02-10', '2015-02-10 14:25:17', '2015-02-10 14:25:57', '0000-00-00 00:00:00', 1, 1),
-(24, 1, 'REQUEST', 'ATK', '6', '2015-02-13', '2015-02-13 11:21:17', '2015-02-13 14:57:00', '0000-00-00 00:00:00', 4, 1);
+(23, 1, 'REQUEST', 'ATK', '123', '2015-02-10', '2015-02-10 14:25:17', '2015-02-10 14:25:57', '0000-00-00 00:00:00', 4, 1);
 
 --
 -- Triggers `tr_ro`
@@ -3229,21 +1205,17 @@ INSERT INTO `tr_ro` (`id_ro`, `user_id`, `purpose`, `cat_req`, `ext_doc_no`, `ET
 DROP TRIGGER IF EXISTS `after_insert_ro`;
 DELIMITER //
 CREATE TRIGGER `after_insert_ro` AFTER INSERT ON `tr_ro`
- FOR EACH ROW BEGIN
-	IF new.status_order = 3 THEN
-	CALL p_return_order_detail(new.ext_doc_no, new.id_ro, new.user_id);	
-	END IF;
+ FOR EACH ROW BEGIN
+	IF new.status_order = 3 THEN
+	CALL p_return_order_detail(new.ext_doc_no, new.id_ro, new.user_id);	
+	END IF;
     END
 //
 DELIMITER ;
 DROP TRIGGER IF EXISTS `after_allocated`;
 DELIMITER //
 CREATE TRIGGER `after_allocated` AFTER UPDATE ON `tr_ro`
- FOR EACH ROW BEGIN
-	IF new.status = 6 THEN
-	CALL p_allocated(old.id_ro, old.user_id);
-	END IF;
-    END
+ FOR EACH ROW BEGIN	IF new.status = 6 THEN	CALL p_allocated(old.id_ro, old.user_id);	END IF;    END
 //
 DELIMITER ;
 
@@ -3267,7 +1239,7 @@ CREATE TABLE IF NOT EXISTS `tr_ro_detail` (
   `status_delete` int(1) NOT NULL COMMENT '1. deleted',
   `id_sro` int(6) NOT NULL,
   PRIMARY KEY (`id_detail_ro`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `tr_ro_detail`
@@ -3288,8 +1260,7 @@ INSERT INTO `tr_ro_detail` (`id_detail_ro`, `id_ro`, `ext_doc_no`, `kode_barang`
 (12, 20, '1234', '100', 12, 1, 1, '2015-02-04 16:27:03', 'wqeqwe', 1, 0, 0),
 (13, 21, '12354', '201', 123, 1, 16, '2015-02-06 17:28:29', 'sadasd', 1, 0, 0),
 (14, 22, '89898', '100', 12, 1, 16, '2015-02-07 14:15:47', 'adsd', 1, 0, 0),
-(15, 23, '123', '302', 5, 2, 1, '2015-02-10 14:25:17', '-', 1, 0, 0),
-(16, 24, '6', '301', 50, 1, 1, '2015-02-13 11:21:17', '-', 1, 0, 0);
+(15, 23, '123', '302', 5, 2, 1, '2015-02-10 14:25:17', '-', 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -3305,7 +1276,7 @@ CREATE TABLE IF NOT EXISTS `tr_sro` (
   `id_user` varchar(21) DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id_sro`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `tr_sro`
@@ -3314,12 +1285,7 @@ CREATE TABLE IF NOT EXISTS `tr_sro` (
 INSERT INTO `tr_sro` (`id_sro`, `id_do`, `id_ro`, `date_create`, `id_user`, `status`) VALUES
 (1, 1, 2, '2015-01-19 00:00:00', '1', 2),
 (2, 2, 3, '2015-01-19 00:00:00', '1', 2),
-(3, 4, 19, '2015-02-06 00:00:00', '1', 2),
-(4, 5, 21, '2015-02-13 00:00:00', '16', 2),
-(5, 6, 21, '2015-02-13 00:00:00', '16', 2),
-(6, 7, 24, '2015-02-13 00:00:00', '1', 2),
-(7, 7, 24, '2015-02-13 00:00:00', '1', 2),
-(8, 8, 23, '2015-02-13 00:00:00', '1', 2);
+(3, 4, 19, '2015-02-06 00:00:00', '1', 2);
 
 --
 -- Triggers `tr_sro`
@@ -3327,8 +1293,8 @@ INSERT INTO `tr_sro` (`id_sro`, `id_do`, `id_ro`, `date_create`, `id_user`, `sta
 DROP TRIGGER IF EXISTS `after_delete_sro`;
 DELIMITER //
 CREATE TRIGGER `after_delete_sro` AFTER DELETE ON `tr_sro`
- FOR EACH ROW BEGIN
-	UPDATE tr_pros_detail SET id_sro = NULL WHERE id_sro = old.id_sro;
+ FOR EACH ROW BEGIN
+	UPDATE tr_pros_detail SET id_sro = NULL WHERE id_sro = old.id_sro;
     END
 //
 DELIMITER ;
@@ -3358,15 +1324,15 @@ CREATE TABLE IF NOT EXISTS `tr_stock` (
 --
 
 INSERT INTO `tr_stock` (`id_stock`, `id_in`, `id_detail_in`, `kode_barang`, `qty`, `price`, `id_lokasi`, `date_create`, `status`, `type_in`) VALUES
-(1, NULL, NULL, '301', 0, 1000, 'Workshop', '2015-01-20 10:54:09', 1, NULL),
-(2, NULL, NULL, '302', 0, 500, 'Heavy Equipment', '2015-01-20 10:54:09', 1, NULL),
-(3, NULL, NULL, '201', 8, 250, 'Pusat', '2015-01-20 10:54:09', 1, 0),
-(4, NULL, NULL, '100', 0, 210, 'IT', '2015-02-07 01:33:33', 1, NULL),
-(5, 2, 6, '201', 8, 100, 'Pusat', '2015-02-07 02:02:53', 1, 1),
-(6, 2, 7, '201', 72, 100, 'Pusat', '2015-02-07 02:02:53', 1, 1),
-(7, 2, 10, '301', 57, 1000, 'IT', '2015-02-09 22:28:31', 1, 2),
-(8, 1, 7, '301', 57, 1000, 'IT', '2015-02-09 22:40:49', 1, 2),
-(9, 1, 7, '301', 57, 1000, 'IT', '2015-02-09 22:42:43', 1, 2);
+(1, NULL, NULL, '301', 4, 1000, 'Workshop', '2015-01-20 10:54:09', 1, NULL),
+(2, NULL, NULL, '302', 10, 500, 'Heavy Equipment', '2015-01-20 10:54:09', 1, NULL),
+(3, NULL, NULL, '201', 10, 250, 'Pusat', '2015-01-20 10:54:09', 1, 0),
+(4, NULL, NULL, '100', 15, 210, 'IT', '2015-02-07 01:33:33', 1, NULL),
+(5, 2, 6, '201', 10, 100, 'Pusat', '2015-02-07 02:02:53', 1, 1),
+(6, 2, 7, '201', 74, 100, 'Pusat', '2015-02-07 02:02:53', 1, 1),
+(7, 2, 10, '301', 1, 1000, 'IT', '2015-02-09 22:28:31', 1, 2),
+(8, 1, 7, '301', 1, 1000, 'IT', '2015-02-09 22:40:49', 1, 2),
+(9, 1, 7, '301', 1, 1000, 'IT', '2015-02-09 22:42:43', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -3399,19 +1365,19 @@ INSERT INTO `tr_transfer` (`id_transfer`, `type_transfer`, `note`, `date_create`
 DROP TRIGGER IF EXISTS `after_update_transfer`;
 DELIMITER //
 CREATE TRIGGER `after_update_transfer` AFTER UPDATE ON `tr_transfer`
- FOR EACH ROW BEGIN
-	IF new.status = 2 THEN
-	CALL p_transfer(new.id_transfer);
-	END IF;
+ FOR EACH ROW BEGIN
+	IF new.status = 2 THEN
+	CALL p_transfer(new.id_transfer);
+	END IF;
     END
 //
 DELIMITER ;
 DROP TRIGGER IF EXISTS `before_delete_transfer`;
 DELIMITER //
 CREATE TRIGGER `before_delete_transfer` BEFORE DELETE ON `tr_transfer`
- FOR EACH ROW BEGIN
-	CALL p_delete_transfer_detail(old.id_transfer);
-	
+ FOR EACH ROW BEGIN
+	CALL p_delete_transfer_detail(old.id_transfer);
+	
     END
 //
 DELIMITER ;
@@ -3449,9 +1415,9 @@ INSERT INTO `tr_transfer_detail` (`id_detail_transfer`, `id_transfer`, `id_stock
 DROP TRIGGER IF EXISTS `before_delete_transfer_detail`;
 DELIMITER //
 CREATE TRIGGER `before_delete_transfer_detail` BEFORE DELETE ON `tr_transfer_detail`
- FOR EACH ROW BEGIN
-	
-	update tr_stock set qty = (qty + old.qty) where id_stock = old.id_stock;
+ FOR EACH ROW BEGIN
+	
+	update tr_stock set qty = (qty + old.qty) where id_stock = old.id_stock;
     END
 //
 DELIMITER ;
@@ -3459,325 +1425,265 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `v_lokasi`
+-- Table structure for table `v_lokasi`
 --
-CREATE TABLE IF NOT EXISTS `v_lokasi` (
-`id_lks` int(11)
-,`type` tinyint(1)
-,`type_lokasi` varchar(11)
-,`Storage` tinyint(1)
-,`storage_lokasi` varchar(9)
-,`status` tinyint(1)
-,`status_lokasi` varchar(11)
-);
--- --------------------------------------------------------
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `purlog`.`v_lokasi` AS (select `purlog`.`ref_lokasi`.`id_lks` AS `id_lks`,`purlog`.`ref_lokasi`.`type` AS `type`,(case `purlog`.`ref_lokasi`.`type` when '1' then 'Fast Moving' when '2' then 'Slow Moving' end) AS `type_lokasi`,`purlog`.`ref_lokasi`.`storage` AS `Storage`,(case `purlog`.`ref_lokasi`.`storage` when '1' then 'Available' when '2' then 'Hold' when '3' then 'Damage' end) AS `storage_lokasi`,`purlog`.`ref_lokasi`.`status` AS `status`,(case `purlog`.`ref_lokasi`.`status` when '1' then 'Aktif' when '0' then 'Tidak Aktif' end) AS `status_lokasi` from `purlog`.`ref_lokasi`);
 
 --
--- Stand-in structure for view `v_po_detail`
+-- Dumping data for table `v_lokasi`
 --
-CREATE TABLE IF NOT EXISTS `v_po_detail` (
-`id_po` int(11)
-,`id_detail_pr` int(11)
-,`kode_barang` varchar(21)
-,`note` text
-,`qty` int(11)
-,`price` bigint(12)
-,`total` bigint(30)
-,`purpose` varchar(21)
-,`ext_doc_no` varchar(21)
-,`ETD` date
-,`top` int(3)
-,`nama_barang` varchar(30)
-,`user_id` smallint(6)
-,`full_name` varchar(100)
-,`id_vendor` varchar(21)
-,`departement_id` smallint(6)
-,`departement_name` varchar(25)
-,`cat_req` varchar(21)
-,`date_create` datetime
-);
--- --------------------------------------------------------
 
---
--- Stand-in structure for view `v_po_detail_2`
---
-CREATE TABLE IF NOT EXISTS `v_po_detail_2` (
-`id_po` int(11)
-,`requestor` varchar(21)
-,`departement` varchar(21)
-,`purpose` varchar(21)
-,`cat_req` varchar(21)
-,`ext_doc_no` varchar(21)
-,`ETD` date
-,`date_create` datetime
-,`top` int(3)
-,`id_vendor` varchar(21)
-,`id_pr` int(11)
-,`id_qrs` int(11)
-,`name_vendor` varchar(60)
-,`address_vendor` text
-,`contact_vendor` varchar(25)
-,`mobile_vendor` varchar(25)
-,`kode_barang` varchar(21)
-,`qty` int(11)
-,`price` bigint(12)
-,`total` bigint(30)
-,`id_qr` int(11)
-,`id_detail_pr` int(11)
-,`full_name` varchar(100)
-,`departement_id` smallint(6)
-,`departement_name` varchar(25)
-,`nama_barang` varchar(30)
-,`note` text
-);
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `v_po_inbound`
---
-CREATE TABLE IF NOT EXISTS `v_po_inbound` (
-`id_detail_pr` int(11)
-,`id_pr` int(11)
-,`id_po` int(11)
-,`kode_barang` varchar(21)
-,`asal` int(11)
-,`receive` decimal(32,0)
-,`sisa` decimal(33,0)
-,`nama_barang` varchar(30)
-);
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `v_po_inbound_2`
---
-CREATE TABLE IF NOT EXISTS `v_po_inbound_2` (
-`id_detail_pr` int(11)
-,`id_pr` int(11)
-,`id_po` int(11)
-,`kode_barang` varchar(21)
-,`asal` int(11)
-,`receive` bigint(11)
-,`sisa` bigint(12)
-,`nama_barang` varchar(30)
-,`id_in` int(11)
-,`ext_rec_no` int(11)
-,`id_in_asal` int(11)
-,`id_lokasi` varchar(21)
-);
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `v_print_inbound`
---
-CREATE TABLE IF NOT EXISTS `v_print_inbound` (
-`id_in` int(11)
-,`type` varchar(21)
-,`id_po` int(11)
-,`id_pr` int(11)
-,`id_ro` int(11)
-,`requestor` varchar(21)
-,`departement` varchar(21)
-,`purpose` varchar(21)
-,`cat_req` varchar(21)
-,`date_create` datetime
-,`id_detail_in` int(11)
-,`kode_barang` varchar(21)
-,`qty` int(11)
-,`lokasi` varchar(21)
-,`nama_barang` varchar(30)
-,`full_name` varchar(100)
-,`departement_name` varchar(25)
-,`ext_doc_no` varchar(21)
-);
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `v_pros_detail`
---
-CREATE TABLE IF NOT EXISTS `v_pros_detail` (
-`id_detail_ro` int(11)
-,`id_ro` int(11)
-,`kode_barang` varchar(21)
-,`orders` int(11)
-,`picking` decimal(34,0)
-,`sisa` decimal(33,0)
-);
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `v_qrs_detail`
---
-CREATE TABLE IF NOT EXISTS `v_qrs_detail` (
-`id_detail_pr` int(11)
-,`id_pr` int(11)
-,`id_ro` int(11)
-,`id_detail_qrs` int(11)
-,`kode_barang` varchar(21)
-,`qty` int(11)
-,`pick` decimal(32,0)
-,`sisa` decimal(33,0)
-);
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `v_status_barang`
---
-CREATE TABLE IF NOT EXISTS `v_status_barang` (
-`kode_barang` varchar(21)
-,`status_barang` varchar(11)
-);
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `v_status_courir`
---
-CREATE TABLE IF NOT EXISTS `v_status_courir` (
-`id_courir` int(11)
-,`status_courir` varchar(11)
-);
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `v_status_kategori`
---
-CREATE TABLE IF NOT EXISTS `v_status_kategori` (
-`id_kategori` int(6)
-,`status_kategori` varchar(11)
-);
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `v_status_satuan`
---
-CREATE TABLE IF NOT EXISTS `v_status_satuan` (
-`id_satuan` smallint(6)
-,`status_satuan` varchar(11)
-);
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `v_status_sub_kategori`
---
-CREATE TABLE IF NOT EXISTS `v_status_sub_kategori` (
-`id_sub_kategori` int(6)
-,`status_sub_kategori` varchar(11)
-);
--- --------------------------------------------------------
-
---
--- Structure for view `v_lokasi`
---
-DROP TABLE IF EXISTS `v_lokasi`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_lokasi` AS (select `ref_lokasi`.`id_lks` AS `id_lks`,`ref_lokasi`.`type` AS `type`,(case `ref_lokasi`.`type` when '1' then 'Fast Moving' when '2' then 'Slow Moving' end) AS `type_lokasi`,`ref_lokasi`.`storage` AS `Storage`,(case `ref_lokasi`.`storage` when '1' then 'Available' when '2' then 'Hold' when '3' then 'Damage' end) AS `storage_lokasi`,`ref_lokasi`.`status` AS `status`,(case `ref_lokasi`.`status` when '1' then 'Aktif' when '0' then 'Tidak Aktif' end) AS `status_lokasi` from `ref_lokasi`);
+INSERT INTO `v_lokasi` (`id_lks`, `type`, `type_lokasi`, `Storage`, `storage_lokasi`, `status`, `status_lokasi`) VALUES
+(1, 1, 'Fast Moving', 1, 'Available', 1, 'Aktif'),
+(2, 2, 'Slow Moving', 2, 'Hold', 1, 'Aktif'),
+(3, 2, 'Slow Moving', 3, 'Damage', 1, 'Aktif');
 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v_po_detail`
+-- Table structure for table `v_po_detail`
 --
-DROP TABLE IF EXISTS `v_po_detail`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_po_detail` AS select `c`.`id_po` AS `id_po`,`a`.`id_detail_pr` AS `id_detail_pr`,`a`.`kode_barang` AS `kode_barang`,`a`.`note` AS `note`,`a`.`qty` AS `qty`,`e`.`price` AS `price`,(`a`.`qty` * `e`.`price`) AS `total`,`c`.`purpose` AS `purpose`,`c`.`ext_doc_no` AS `ext_doc_no`,`c`.`ETD` AS `ETD`,`d`.`top` AS `top`,`f`.`nama_barang` AS `nama_barang`,`a`.`user_id` AS `user_id`,`g`.`full_name` AS `full_name`,`d`.`id_vendor` AS `id_vendor`,`g`.`departement_id` AS `departement_id`,`h`.`departement_name` AS `departement_name`,`c`.`cat_req` AS `cat_req`,`c`.`date_create` AS `date_create` from (((((((`tr_pr_detail` `a` left join `tr_pr` `b` on((`a`.`id_pr` = `b`.`id_pr`))) left join `tr_po` `c` on((`b`.`id_po` = `c`.`id_po`))) left join `tr_qr` `d` on(((`b`.`id_pr` = `d`.`id_pr`) and (`d`.`status` = 2)))) left join `tr_qr_detail` `e` on(((`e`.`id_qr` = `d`.`id_qr`) and (`e`.`id_detail_pr` = `a`.`id_detail_pr`)))) left join `ref_barang` `f` on((`f`.`kode_barang` = `a`.`kode_barang`))) left join `sys_user` `g` on((`g`.`user_id` = `a`.`user_id`))) left join `ref_departement` `h` on((`h`.`departement_id` = `g`.`departement_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `purlog`.`v_po_detail` AS select `c`.`id_po` AS `id_po`,`a`.`id_detail_pr` AS `id_detail_pr`,`a`.`kode_barang` AS `kode_barang`,`a`.`note` AS `note`,`a`.`qty` AS `qty`,`e`.`price` AS `price`,(`a`.`qty` * `e`.`price`) AS `total`,`c`.`purpose` AS `purpose`,`c`.`ext_doc_no` AS `ext_doc_no`,`c`.`ETD` AS `ETD`,`d`.`top` AS `top`,`f`.`nama_barang` AS `nama_barang`,`a`.`user_id` AS `user_id`,`g`.`full_name` AS `full_name`,`d`.`id_vendor` AS `id_vendor`,`g`.`departement_id` AS `departement_id`,`h`.`departement_name` AS `departement_name`,`c`.`cat_req` AS `cat_req`,`c`.`date_create` AS `date_create` from (((((((`purlog`.`tr_pr_detail` `a` left join `purlog`.`tr_pr` `b` on((`a`.`id_pr` = `b`.`id_pr`))) left join `purlog`.`tr_po` `c` on((`b`.`id_po` = `c`.`id_po`))) left join `purlog`.`tr_qr` `d` on(((`b`.`id_pr` = `d`.`id_pr`) and (`d`.`status` = 2)))) left join `purlog`.`tr_qr_detail` `e` on(((`e`.`id_qr` = `d`.`id_qr`) and (`e`.`id_detail_pr` = `a`.`id_detail_pr`)))) left join `purlog`.`ref_barang` `f` on((`f`.`kode_barang` = `a`.`kode_barang`))) left join `purlog`.`sys_user` `g` on((`g`.`user_id` = `a`.`user_id`))) left join `purlog`.`ref_departement` `h` on((`h`.`departement_id` = `g`.`departement_id`)));
+
+--
+-- Dumping data for table `v_po_detail`
+--
+
+INSERT INTO `v_po_detail` (`id_po`, `id_detail_pr`, `kode_barang`, `note`, `qty`, `price`, `total`, `purpose`, `ext_doc_no`, `ETD`, `top`, `nama_barang`, `user_id`, `full_name`, `id_vendor`, `departement_id`, `departement_name`, `cat_req`, `date_create`) VALUES
+(NULL, 1, '100', NULL, 20, 12, 240, NULL, NULL, NULL, 2, 'PC', 1, 'administrator', 'V001', 1, 'IT', NULL, NULL),
+(NULL, 1, '100', NULL, 20, 23, 460, NULL, NULL, NULL, 4, 'PC', 1, 'administrator', 'V002', 1, 'IT', NULL, NULL),
+(NULL, 2, '201', NULL, 10, 12, 120, NULL, NULL, NULL, 2, 'Microsoft Office', 1, 'administrator', 'V001', 1, 'IT', NULL, NULL),
+(NULL, 2, '201', NULL, 10, 23, 230, NULL, NULL, NULL, 4, 'Microsoft Office', 1, 'administrator', 'V002', 1, 'IT', NULL, NULL),
+(NULL, 3, '203', NULL, 5, 12, 60, NULL, NULL, NULL, 2, 'Mouse', 1, 'administrator', 'V001', 1, 'IT', NULL, NULL),
+(NULL, 3, '203', NULL, 5, 34, 170, NULL, NULL, NULL, 4, 'Mouse', 1, 'administrator', 'V002', 1, 'IT', NULL, NULL),
+(NULL, 4, '301', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Lampu', 1, 'administrator', NULL, 1, 'IT', NULL, NULL),
+(NULL, 5, '201', NULL, 2, NULL, NULL, NULL, NULL, NULL, NULL, 'Microsoft Office', 1, 'administrator', NULL, 1, 'IT', NULL, NULL),
+(NULL, 6, '100', NULL, 34, NULL, NULL, NULL, NULL, NULL, NULL, 'PC', 1, 'administrator', NULL, 1, 'IT', NULL, NULL),
+(NULL, 7, '302', NULL, 12, NULL, NULL, NULL, NULL, NULL, NULL, 'Oli', 1, 'administrator', NULL, 1, 'IT', NULL, NULL),
+(NULL, 8, '100', NULL, 12, NULL, NULL, NULL, NULL, NULL, NULL, 'PC', 1, 'administrator', NULL, 1, 'IT', NULL, NULL),
+(NULL, 9, '201', NULL, 123, 1000000, 123000000, NULL, NULL, NULL, 2, 'Microsoft Office', 16, 'Superadmin', 'V002', 19, 'Other', NULL, NULL),
+(NULL, 9, '201', NULL, 123, 12, 1476, NULL, NULL, NULL, 2, 'Microsoft Office', 16, 'Superadmin', 'V002', 19, 'Other', NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v_po_detail_2`
+-- Table structure for table `v_po_detail_2`
 --
-DROP TABLE IF EXISTS `v_po_detail_2`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_po_detail_2` AS select `tr_po`.`id_po` AS `id_po`,`tr_po`.`requestor` AS `requestor`,`tr_po`.`departement` AS `departement`,`tr_po`.`purpose` AS `purpose`,`tr_po`.`cat_req` AS `cat_req`,`tr_po`.`ext_doc_no` AS `ext_doc_no`,`tr_po`.`ETD` AS `ETD`,`tr_po`.`date_create` AS `date_create`,`tr_qr`.`top` AS `top`,`tr_qr`.`id_vendor` AS `id_vendor`,`tr_qr`.`id_pr` AS `id_pr`,`tr_qr`.`id_qrs` AS `id_qrs`,`ref_vendor`.`name_vendor` AS `name_vendor`,`ref_vendor`.`address_vendor` AS `address_vendor`,`ref_vendor`.`contact_vendor` AS `contact_vendor`,`ref_vendor`.`mobile_vendor` AS `mobile_vendor`,`tr_qr_detail`.`kode_barang` AS `kode_barang`,`tr_qr_detail`.`qty` AS `qty`,`tr_qr_detail`.`price` AS `price`,(`tr_qr_detail`.`qty` * `tr_qr_detail`.`price`) AS `total`,`tr_qr`.`id_qr` AS `id_qr`,`tr_qr_detail`.`id_detail_pr` AS `id_detail_pr`,`sys_user`.`full_name` AS `full_name`,`sys_user`.`departement_id` AS `departement_id`,`ref_departement`.`departement_name` AS `departement_name`,`ref_barang`.`nama_barang` AS `nama_barang`,`tr_pr_detail`.`note` AS `note` from (((((((`tr_po` left join `tr_qr` on((`tr_qr`.`id_po` = `tr_po`.`id_po`))) left join `ref_vendor` on((`tr_qr`.`id_vendor` = convert(`ref_vendor`.`id_vendor` using utf8)))) left join `tr_qr_detail` on(((`tr_qr`.`id_qrs` = `tr_qr_detail`.`id_qrs`) and (`tr_qr`.`id_pr` = `tr_qr_detail`.`id_pr`) and (`tr_qr`.`id_qr` = `tr_qr_detail`.`id_qr`)))) left join `sys_user` on((`tr_po`.`requestor` = `sys_user`.`user_id`))) left join `ref_departement` on((`sys_user`.`departement_id` = `ref_departement`.`departement_id`))) left join `ref_barang` on((`tr_qr_detail`.`kode_barang` = convert(`ref_barang`.`kode_barang` using utf8)))) left join `tr_pr_detail` on((`tr_qr_detail`.`id_detail_pr` = `tr_pr_detail`.`id_detail_pr`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `purlog`.`v_po_detail_2` AS select `purlog`.`tr_po`.`id_po` AS `id_po`,`purlog`.`tr_po`.`requestor` AS `requestor`,`purlog`.`tr_po`.`departement` AS `departement`,`purlog`.`tr_po`.`purpose` AS `purpose`,`purlog`.`tr_po`.`cat_req` AS `cat_req`,`purlog`.`tr_po`.`ext_doc_no` AS `ext_doc_no`,`purlog`.`tr_po`.`ETD` AS `ETD`,`purlog`.`tr_po`.`date_create` AS `date_create`,`purlog`.`tr_qr`.`top` AS `top`,`purlog`.`tr_qr`.`id_vendor` AS `id_vendor`,`purlog`.`tr_qr`.`id_pr` AS `id_pr`,`purlog`.`tr_qr`.`id_qrs` AS `id_qrs`,`purlog`.`ref_vendor`.`name_vendor` AS `name_vendor`,`purlog`.`ref_vendor`.`address_vendor` AS `address_vendor`,`purlog`.`ref_vendor`.`contact_vendor` AS `contact_vendor`,`purlog`.`ref_vendor`.`mobile_vendor` AS `mobile_vendor`,`purlog`.`tr_qr_detail`.`kode_barang` AS `kode_barang`,`purlog`.`tr_qr_detail`.`qty` AS `qty`,`purlog`.`tr_qr_detail`.`price` AS `price`,(`purlog`.`tr_qr_detail`.`qty` * `purlog`.`tr_qr_detail`.`price`) AS `total`,`purlog`.`tr_qr`.`id_qr` AS `id_qr`,`purlog`.`tr_qr_detail`.`id_detail_pr` AS `id_detail_pr`,`purlog`.`sys_user`.`full_name` AS `full_name`,`purlog`.`sys_user`.`departement_id` AS `departement_id`,`purlog`.`ref_departement`.`departement_name` AS `departement_name`,`purlog`.`ref_barang`.`nama_barang` AS `nama_barang`,`purlog`.`tr_pr_detail`.`note` AS `note` from (((((((`purlog`.`tr_po` left join `purlog`.`tr_qr` on((`purlog`.`tr_qr`.`id_po` = `purlog`.`tr_po`.`id_po`))) left join `purlog`.`ref_vendor` on((`purlog`.`tr_qr`.`id_vendor` = convert(`purlog`.`ref_vendor`.`id_vendor` using utf8)))) left join `purlog`.`tr_qr_detail` on(((`purlog`.`tr_qr`.`id_qrs` = `purlog`.`tr_qr_detail`.`id_qrs`) and (`purlog`.`tr_qr`.`id_pr` = `purlog`.`tr_qr_detail`.`id_pr`) and (`purlog`.`tr_qr`.`id_qr` = `purlog`.`tr_qr_detail`.`id_qr`)))) left join `purlog`.`sys_user` on((`purlog`.`tr_po`.`requestor` = `purlog`.`sys_user`.`user_id`))) left join `purlog`.`ref_departement` on((`purlog`.`sys_user`.`departement_id` = `purlog`.`ref_departement`.`departement_id`))) left join `purlog`.`ref_barang` on((`purlog`.`tr_qr_detail`.`kode_barang` = convert(`purlog`.`ref_barang`.`kode_barang` using utf8)))) left join `purlog`.`tr_pr_detail` on((`purlog`.`tr_qr_detail`.`id_detail_pr` = `purlog`.`tr_pr_detail`.`id_detail_pr`)));
+
+--
+-- Dumping data for table `v_po_detail_2`
+--
+
+INSERT INTO `v_po_detail_2` (`id_po`, `requestor`, `departement`, `purpose`, `cat_req`, `ext_doc_no`, `ETD`, `date_create`, `top`, `id_vendor`, `id_pr`, `id_qrs`, `name_vendor`, `address_vendor`, `contact_vendor`, `mobile_vendor`, `kode_barang`, `qty`, `price`, `total`, `id_qr`, `id_detail_pr`, `full_name`, `departement_id`, `departement_name`, `nama_barang`, `note`) VALUES
+(17, '16', '19', 'REQUEST', 'ASSET', 'SPK/123', '2015-01-20', '2015-02-06 22:21:31', 2, 'V001', 1, 13, 'Adi', 'aa', '12', '34', '100', 4, 12, 48, 43, 1, 'Superadmin', 19, 'Other', 'PC', NULL),
+(17, '16', '19', 'REQUEST', 'ASSET', 'SPK/123', '2015-01-20', '2015-02-06 22:21:31', 2, 'V001', 1, 13, 'Adi', 'aa', '12', '34', '201', 3, 12, 36, 43, 2, 'Superadmin', 19, 'Other', 'Microsoft Office', NULL),
+(17, '16', '19', 'REQUEST', 'ASSET', 'SPK/123', '2015-01-20', '2015-02-06 22:21:31', 2, 'V001', 1, 13, 'Adi', 'aa', '12', '34', '203', 2, 12, 24, 43, 3, 'Superadmin', 19, 'Other', 'Mouse', NULL),
+(18, '16', '19', 'REQUEST', 'ASSET', 'SPK/123', '2015-01-20', '2015-02-06 22:26:10', 4, 'V002', 1, 14, 'iqbal', 'bb', '23', '45', '100', 4, 23, 92, 47, 1, 'Superadmin', 19, 'Other', 'PC', NULL),
+(18, '16', '19', 'REQUEST', 'ASSET', 'SPK/123', '2015-01-20', '2015-02-06 22:26:10', 4, 'V002', 1, 14, 'iqbal', 'bb', '23', '45', '201', 4, 23, 92, 47, 2, 'Superadmin', 19, 'Other', 'Microsoft Office', NULL),
+(18, '16', '19', 'REQUEST', 'ASSET', 'SPK/123', '2015-01-20', '2015-02-06 22:26:10', 4, 'V002', 1, 14, 'iqbal', 'bb', '23', '45', '203', 1, 34, 34, 47, 3, 'Superadmin', 19, 'Other', 'Mouse', NULL),
+(19, '16', '19', 'REQUEST', 'ASSET', '12354', '2015-02-06', '2015-02-07 01:01:24', 2, 'V002', 6, 16, 'iqbal', 'bb', '23', '45', '201', 100, 1000000, 100000000, 50, 9, 'Superadmin', 19, 'Other', 'Microsoft Office', NULL),
+(20, '16', '19', 'REQUEST', 'ASSET', '12354', '2015-02-06', '2015-02-12 09:46:36', 2, 'V002', 6, 17, 'iqbal', 'bb', '23', '45', '201', 23, 12, 276, 53, 9, 'Superadmin', 19, 'Other', 'Microsoft Office', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v_po_inbound`
+-- Table structure for table `v_po_inbound`
 --
-DROP TABLE IF EXISTS `v_po_inbound`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_po_inbound` AS select `x`.`id_detail_pr` AS `id_detail_pr`,`x`.`id_pr` AS `id_pr`,`z`.`id_po` AS `id_po`,`x`.`kode_barang` AS `kode_barang`,`x`.`qty` AS `asal`,coalesce(sum(`y`.`qty`),0) AS `receive`,(`x`.`qty` - coalesce(sum(`y`.`qty`),0)) AS `sisa`,`a`.`nama_barang` AS `nama_barang` from (((`tr_pr_detail` `x` left join `tr_in_detail` `y` on((`x`.`id_detail_pr` = `y`.`ext_rec_no_detail`))) left join `tr_pr` `z` on((`x`.`id_pr` = `z`.`id_pr`))) left join `ref_barang` `a` on((`x`.`kode_barang` = `a`.`kode_barang`))) where (`z`.`id_po` <> '') group by `x`.`id_detail_pr`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `purlog`.`v_po_inbound` AS select `a`.`id_detail_qrs` AS `id_detail_qrs`,`a`.`id_detail_pr` AS `id_detail_pr`,`b`.`id_qrs` AS `id_qrs`,`b`.`id_pr` AS `id_pr`,`b`.`id_po` AS `id_po`,`a`.`kode_barang` AS `kode_barang`,`a`.`qty` AS `qty`,coalesce(sum(`d`.`qty`),0) AS `receive`,(`a`.`qty` - sum(coalesce(`d`.`qty`,0))) AS `sisa` from (((`purlog`.`tr_qrs_detail` `a` left join `purlog`.`tr_qrs` `b` on((`a`.`id_qrs` = `b`.`id_qrs`))) left join `purlog`.`tr_po` `c` on((`b`.`id_po` = `c`.`id_po`))) left join `purlog`.`tr_in_detail` `d` on((`a`.`id_detail_qrs` = `d`.`ext_rec_no_detail`))) where (`c`.`status` = 2) group by `a`.`id_detail_qrs` order by `a`.`id_qrs`;
+
+--
+-- Dumping data for table `v_po_inbound`
+--
+
+INSERT INTO `v_po_inbound` (`id_detail_qrs`, `id_detail_pr`, `id_qrs`, `id_pr`, `id_po`, `kode_barang`, `qty`, `receive`, `sisa`) VALUES
+(27, 2, 13, 1, 17, '201', 3, '3', '0'),
+(26, 1, 13, 1, 17, '100', 4, '0', '4'),
+(28, 3, 13, 1, 17, '203', 3, '3', '0'),
+(32, 9, 16, 6, 19, '201', 100, '0', '100'),
+(36, 9, 17, 6, 20, '201', 23, '0', '23');
 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v_po_inbound_2`
+-- Table structure for table `v_po_inbound_2`
 --
-DROP TABLE IF EXISTS `v_po_inbound_2`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_po_inbound_2` AS select `x`.`id_detail_pr` AS `id_detail_pr`,`x`.`id_pr` AS `id_pr`,`z`.`id_po` AS `id_po`,`x`.`kode_barang` AS `kode_barang`,`x`.`qty` AS `asal`,coalesce(`y`.`qty`,0) AS `receive`,(`x`.`qty` - coalesce(`y`.`qty`,0)) AS `sisa`,`a`.`nama_barang` AS `nama_barang`,`y`.`id_in` AS `id_in`,`tr_in`.`ext_rec_no` AS `ext_rec_no`,`tr_in`.`id_in` AS `id_in_asal`,`tr_stock`.`id_lokasi` AS `id_lokasi` from (((((`tr_qrs_detail` `x` left join `tr_in_detail` `y` on((`x`.`id_detail_pr` = `y`.`ext_rec_no_detail`))) left join `tr_qrs` `z` on((`x`.`id_pr` = `z`.`id_pr`))) left join `ref_barang` `a` on(((`x`.`kode_barang` = convert(`a`.`kode_barang` using utf8)) and (`x`.`kode_barang` = convert(`a`.`kode_barang` using utf8))))) left join `tr_in` on((`z`.`id_po` = `tr_in`.`ext_rec_no`))) left join `tr_stock` on((`x`.`kode_barang` = `tr_stock`.`kode_barang`))) group by `x`.`id_detail_pr`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `purlog`.`v_po_inbound_2` AS select `x`.`id_detail_pr` AS `id_detail_pr`,`x`.`id_pr` AS `id_pr`,`z`.`id_po` AS `id_po`,`x`.`kode_barang` AS `kode_barang`,`x`.`qty` AS `asal`,coalesce(`y`.`qty`,0) AS `receive`,(`x`.`qty` - coalesce(`y`.`qty`,0)) AS `sisa`,`a`.`nama_barang` AS `nama_barang`,`y`.`id_in` AS `id_in`,`purlog`.`tr_in`.`ext_rec_no` AS `ext_rec_no`,`purlog`.`tr_in`.`id_in` AS `id_in_asal`,`purlog`.`tr_stock`.`id_lokasi` AS `id_lokasi` from (((((`purlog`.`tr_qrs_detail` `x` left join `purlog`.`tr_in_detail` `y` on((`x`.`id_detail_pr` = `y`.`ext_rec_no_detail`))) left join `purlog`.`tr_qrs` `z` on((`x`.`id_pr` = `z`.`id_pr`))) left join `purlog`.`ref_barang` `a` on(((`x`.`kode_barang` = convert(`a`.`kode_barang` using utf8)) and (`x`.`kode_barang` = convert(`a`.`kode_barang` using utf8))))) left join `purlog`.`tr_in` on((`z`.`id_po` = `purlog`.`tr_in`.`ext_rec_no`))) left join `purlog`.`tr_stock` on((`x`.`kode_barang` = `purlog`.`tr_stock`.`kode_barang`))) group by `x`.`id_detail_pr`;
+
+--
+-- Dumping data for table `v_po_inbound_2`
+--
+
+INSERT INTO `v_po_inbound_2` (`id_detail_pr`, `id_pr`, `id_po`, `kode_barang`, `asal`, `receive`, `sisa`, `nama_barang`, `id_in`, `ext_rec_no`, `id_in_asal`, `id_lokasi`) VALUES
+(1, 1, 17, '100', 4, 0, 4, 'PC', NULL, 17, 10, 'IT'),
+(2, 1, 17, '201', 3, 0, 3, 'Microsoft Office', NULL, 17, 10, 'Pusat'),
+(3, 1, 17, '203', 3, 0, 3, 'Mouse', NULL, 17, 10, NULL),
+(9, 6, 19, '201', 100, 0, 100, 'Microsoft Office', NULL, NULL, NULL, 'Pusat');
 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v_print_inbound`
+-- Table structure for table `v_print_inbound`
 --
-DROP TABLE IF EXISTS `v_print_inbound`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_print_inbound` AS select `a`.`id_in` AS `id_in`,`a`.`type` AS `type`,`b`.`id_po` AS `id_po`,`b`.`id_pr` AS `id_pr`,`b`.`id_ro` AS `id_ro`,`b`.`requestor` AS `requestor`,`b`.`departement` AS `departement`,`b`.`purpose` AS `purpose`,`b`.`cat_req` AS `cat_req`,`a`.`date_create` AS `date_create`,`c`.`id_detail_in` AS `id_detail_in`,`c`.`kode_barang` AS `kode_barang`,`c`.`qty` AS `qty`,`c`.`lokasi` AS `lokasi`,`d`.`nama_barang` AS `nama_barang`,`f`.`full_name` AS `full_name`,`g`.`departement_name` AS `departement_name`,`b`.`ext_doc_no` AS `ext_doc_no` from (((((`tr_in` `a` left join `tr_po` `b` on((`a`.`ext_rec_no` = `b`.`id_po`))) left join `tr_in_detail` `c` on((`a`.`id_in` = `c`.`id_in`))) left join `ref_barang` `d` on((`c`.`kode_barang` = convert(`d`.`kode_barang` using utf8)))) left join `sys_user` `f` on((`a`.`user_id` = `f`.`user_id`))) left join `ref_departement` `g` on((`b`.`departement` = `g`.`departement_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `purlog`.`v_print_inbound` AS select `a`.`id_in` AS `id_in`,`a`.`type` AS `type`,`b`.`id_po` AS `id_po`,`b`.`id_pr` AS `id_pr`,`b`.`id_ro` AS `id_ro`,`b`.`requestor` AS `requestor`,`b`.`departement` AS `departement`,`b`.`purpose` AS `purpose`,`b`.`cat_req` AS `cat_req`,`a`.`date_create` AS `date_create`,`c`.`id_detail_in` AS `id_detail_in`,`c`.`kode_barang` AS `kode_barang`,`c`.`qty` AS `qty`,`c`.`lokasi` AS `lokasi`,`d`.`nama_barang` AS `nama_barang`,`f`.`full_name` AS `full_name`,`g`.`departement_name` AS `departement_name`,`b`.`ext_doc_no` AS `ext_doc_no` from (((((`purlog`.`tr_in` `a` left join `purlog`.`tr_po` `b` on((`a`.`ext_rec_no` = `b`.`id_po`))) left join `purlog`.`tr_in_detail` `c` on((`a`.`id_in` = `c`.`id_in`))) left join `purlog`.`ref_barang` `d` on((`c`.`kode_barang` = convert(`d`.`kode_barang` using utf8)))) left join `purlog`.`sys_user` `f` on((`a`.`user_id` = `f`.`user_id`))) left join `purlog`.`ref_departement` `g` on((`b`.`departement` = `g`.`departement_id`)));
+
+--
+-- Dumping data for table `v_print_inbound`
+--
+
+INSERT INTO `v_print_inbound` (`id_in`, `type`, `id_po`, `id_pr`, `id_ro`, `requestor`, `departement`, `purpose`, `cat_req`, `date_create`, `id_detail_in`, `kode_barang`, `qty`, `lokasi`, `nama_barang`, `full_name`, `departement_name`, `ext_doc_no`) VALUES
+(10, '1', 17, 1, 1, '16', '19', 'REQUEST', 'ASSET', '2015-02-12 10:24:42', 61, '203', 2, 'A100', 'Mouse', 'Superadmin', 'Other', 'SPK/123'),
+(10, '1', 17, 1, 1, '16', '19', 'REQUEST', 'ASSET', '2015-02-12 10:24:42', 62, '203', 1, 'A100', 'Mouse', 'Superadmin', 'Other', 'SPK/123'),
+(10, '1', 17, 1, 1, '16', '19', 'REQUEST', 'ASSET', '2015-02-12 10:24:42', 63, '201', 3, 'A100', 'Microsoft Office', 'Superadmin', 'Other', 'SPK/123');
 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v_pros_detail`
+-- Table structure for table `v_pros_detail`
 --
-DROP TABLE IF EXISTS `v_pros_detail`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_pros_detail` AS select `tr_ro_detail`.`id_detail_ro` AS `id_detail_ro`,`tr_ro_detail`.`id_ro` AS `id_ro`,`tr_ro_detail`.`kode_barang` AS `kode_barang`,`tr_ro_detail`.`qty` AS `orders`,(`tr_ro_detail`.`qty` - (`tr_ro_detail`.`qty` - coalesce(sum(`tr_pros_detail`.`qty`),0))) AS `picking`,(`tr_ro_detail`.`qty` - coalesce(sum(`tr_pros_detail`.`qty`),0)) AS `sisa` from (`tr_ro_detail` left join `tr_pros_detail` on((`tr_ro_detail`.`id_detail_ro` = `tr_pros_detail`.`id_detail_ro`))) where (`tr_ro_detail`.`status_delete` <> 1) group by `tr_ro_detail`.`id_detail_ro`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `purlog`.`v_pros_detail` AS select `purlog`.`tr_ro_detail`.`id_detail_ro` AS `id_detail_ro`,`purlog`.`tr_ro_detail`.`id_ro` AS `id_ro`,`purlog`.`tr_ro_detail`.`kode_barang` AS `kode_barang`,`purlog`.`tr_ro_detail`.`qty` AS `orders`,(`purlog`.`tr_ro_detail`.`qty` - (`purlog`.`tr_ro_detail`.`qty` - coalesce(sum(`purlog`.`tr_pros_detail`.`qty`),0))) AS `picking`,(`purlog`.`tr_ro_detail`.`qty` - coalesce(sum(`purlog`.`tr_pros_detail`.`qty`),0)) AS `sisa` from (`purlog`.`tr_ro_detail` left join `purlog`.`tr_pros_detail` on((`purlog`.`tr_ro_detail`.`id_detail_ro` = `purlog`.`tr_pros_detail`.`id_detail_ro`))) where (`purlog`.`tr_ro_detail`.`status_delete` <> 1) group by `purlog`.`tr_ro_detail`.`id_detail_ro`;
+
+--
+-- Dumping data for table `v_pros_detail`
+--
+
+INSERT INTO `v_pros_detail` (`id_detail_ro`, `id_ro`, `kode_barang`, `orders`, `picking`, `sisa`) VALUES
+(1, 1, '100', 20, '0', '20'),
+(2, 1, '201', 10, '0', '10'),
+(3, 1, '203', 5, '0', '5'),
+(4, 2, '301', 5, '4', '1'),
+(5, 3, '302', 3, '3', '0'),
+(6, 4, '301', 1, '0', '1'),
+(7, 10, '203', 15, '0', '15'),
+(8, 11, '302', 546, '0', '546'),
+(9, 19, '201', 5, '3', '2'),
+(10, 20, '100', 34, '0', '34'),
+(11, 20, '302', 12, '0', '12'),
+(12, 20, '100', 12, '0', '12'),
+(13, 21, '201', 123, '77', '46'),
+(14, 22, '100', 12, '0', '12'),
+(15, 23, '302', 5, '0', '5');
 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v_qrs_detail`
+-- Table structure for table `v_qrs_detail`
 --
-DROP TABLE IF EXISTS `v_qrs_detail`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_qrs_detail` AS (select `a`.`id_detail_pr` AS `id_detail_pr`,`a`.`id_pr` AS `id_pr`,`a`.`id_ro` AS `id_ro`,`b`.`id_detail_qrs` AS `id_detail_qrs`,`a`.`kode_barang` AS `kode_barang`,`a`.`qty` AS `qty`,coalesce(sum(`b`.`qty`),0) AS `pick`,(`a`.`qty` - coalesce(sum(`b`.`qty`),0)) AS `sisa` from ((`tr_pr_detail` `a` left join `tr_pr` `c` on((`a`.`id_pr` = `c`.`id_pr`))) left join `tr_qrs_detail` `b` on((`a`.`id_detail_pr` = `b`.`id_detail_pr`))) where (`c`.`status` = 2) group by `a`.`id_detail_pr`);
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `purlog`.`v_qrs_detail` AS (select `a`.`id_detail_pr` AS `id_detail_pr`,`a`.`id_pr` AS `id_pr`,`a`.`id_ro` AS `id_ro`,`b`.`id_detail_qrs` AS `id_detail_qrs`,`a`.`kode_barang` AS `kode_barang`,`a`.`qty` AS `qty`,coalesce(sum(`b`.`qty`),0) AS `pick`,(`a`.`qty` - coalesce(sum(`b`.`qty`),0)) AS `sisa` from ((`purlog`.`tr_pr_detail` `a` left join `purlog`.`tr_pr` `c` on((`a`.`id_pr` = `c`.`id_pr`))) left join `purlog`.`tr_qrs_detail` `b` on((`a`.`id_detail_pr` = `b`.`id_detail_pr`))) where (`c`.`status` = 2) group by `a`.`id_detail_pr`);
+
+--
+-- Dumping data for table `v_qrs_detail`
+--
+
+INSERT INTO `v_qrs_detail` (`id_detail_pr`, `id_pr`, `id_ro`, `id_detail_qrs`, `kode_barang`, `qty`, `pick`, `sisa`) VALUES
+(1, 1, 1, 26, '100', 20, '8', '12'),
+(2, 1, 1, 27, '201', 10, '7', '3'),
+(3, 1, 1, 28, '203', 5, '4', '1'),
+(5, 4, 19, NULL, '201', 2, '0', '2'),
+(6, 5, 20, NULL, '100', 34, '0', '34'),
+(7, 5, 20, NULL, '302', 12, '0', '12'),
+(8, 5, 20, NULL, '100', 12, '0', '12'),
+(9, 6, 21, 32, '201', 123, '123', '0');
 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v_status_barang`
+-- Table structure for table `v_status_barang`
 --
-DROP TABLE IF EXISTS `v_status_barang`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_status_barang` AS (select `ref_barang`.`kode_barang` AS `kode_barang`,(case `ref_barang`.`status` when '1' then 'Aktif' else 'Tidak Aktif' end) AS `status_barang` from `ref_barang`);
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `purlog`.`v_status_barang` AS (select `purlog`.`ref_barang`.`kode_barang` AS `kode_barang`,(case `purlog`.`ref_barang`.`status` when '1' then 'Aktif' else 'Tidak Aktif' end) AS `status_barang` from `purlog`.`ref_barang`);
+
+--
+-- Dumping data for table `v_status_barang`
+--
+
+INSERT INTO `v_status_barang` (`kode_barang`, `status_barang`) VALUES
+('100', 'Aktif'),
+('201', 'Aktif'),
+('301', 'Aktif'),
+('302', 'Aktif'),
+('202', 'Aktif'),
+('203', 'Aktif');
 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v_status_courir`
+-- Table structure for table `v_status_courir`
 --
-DROP TABLE IF EXISTS `v_status_courir`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_status_courir` AS (select `ref_courir`.`id_courir` AS `id_courir`,(case `ref_courir`.`status` when '1' then 'Aktif' else 'Tidak Aktif' end) AS `status_courir` from `ref_courir`);
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `purlog`.`v_status_courir` AS (select `purlog`.`ref_courir`.`id_courir` AS `id_courir`,(case `purlog`.`ref_courir`.`status` when '1' then 'Aktif' else 'Tidak Aktif' end) AS `status_courir` from `purlog`.`ref_courir`);
+
+--
+-- Dumping data for table `v_status_courir`
+--
+
+INSERT INTO `v_status_courir` (`id_courir`, `status_courir`) VALUES
+(1, 'Aktif'),
+(2, 'Aktif'),
+(3, 'Tidak Aktif');
 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v_status_kategori`
+-- Table structure for table `v_status_kategori`
 --
-DROP TABLE IF EXISTS `v_status_kategori`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_status_kategori` AS (select `ref_kategori`.`id_kategori` AS `id_kategori`,(case `ref_kategori`.`status` when '1' then 'Aktif' else 'Tidak Aktif' end) AS `status_kategori` from `ref_kategori`);
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `purlog`.`v_status_kategori` AS (select `purlog`.`ref_kategori`.`id_kategori` AS `id_kategori`,(case `purlog`.`ref_kategori`.`status` when '1' then 'Aktif' else 'Tidak Aktif' end) AS `status_kategori` from `purlog`.`ref_kategori`);
+
+--
+-- Dumping data for table `v_status_kategori`
+--
+
+INSERT INTO `v_status_kategori` (`id_kategori`, `status_kategori`) VALUES
+(1, 'Aktif'),
+(2, 'Aktif'),
+(3, 'Aktif');
 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v_status_satuan`
+-- Table structure for table `v_status_satuan`
 --
-DROP TABLE IF EXISTS `v_status_satuan`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_status_satuan` AS (select `ref_satuan`.`id_satuan` AS `id_satuan`,(case `ref_satuan`.`status` when '1' then 'Aktif' else 'Tidak Aktif' end) AS `status_satuan` from `ref_satuan`);
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `purlog`.`v_status_satuan` AS (select `purlog`.`ref_satuan`.`id_satuan` AS `id_satuan`,(case `purlog`.`ref_satuan`.`status` when '1' then 'Aktif' else 'Tidak Aktif' end) AS `status_satuan` from `purlog`.`ref_satuan`);
+
+--
+-- Dumping data for table `v_status_satuan`
+--
+
+INSERT INTO `v_status_satuan` (`id_satuan`, `status_satuan`) VALUES
+(1, 'Aktif'),
+(2, 'Aktif'),
+(3, 'Aktif'),
+(4, 'Aktif'),
+(5, 'Aktif'),
+(6, 'Tidak Aktif');
 
 -- --------------------------------------------------------
 
 --
--- Structure for view `v_status_sub_kategori`
+-- Table structure for table `v_status_sub_kategori`
 --
-DROP TABLE IF EXISTS `v_status_sub_kategori`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `v_status_sub_kategori` AS (select `ref_sub_kategori`.`id_sub_kategori` AS `id_sub_kategori`,(case `ref_sub_kategori`.`status` when '1' then 'Aktif' else 'Tidak Aktif' end) AS `status_sub_kategori` from `ref_sub_kategori`);
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `purlog`.`v_status_sub_kategori` AS (select `purlog`.`ref_sub_kategori`.`id_sub_kategori` AS `id_sub_kategori`,(case `purlog`.`ref_sub_kategori`.`status` when '1' then 'Aktif' else 'Tidak Aktif' end) AS `status_sub_kategori` from `purlog`.`ref_sub_kategori`);
+
+--
+-- Dumping data for table `v_status_sub_kategori`
+--
+
+INSERT INTO `v_status_sub_kategori` (`id_sub_kategori`, `status_sub_kategori`) VALUES
+(1, 'Aktif'),
+(2, 'Aktif'),
+(5, 'Aktif'),
+(6, 'Aktif');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
