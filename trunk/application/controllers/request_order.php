@@ -26,6 +26,8 @@ class request_order extends CI_Controller {
 	    $data['purpose'] = '';
 	    $data['cat_req'] = '';
 	    $data['ext_doc_no'] = '';
+	    $data['no_rangka'] = '';
+	    $data['no_polisi'] = '';
 	    $data['ETD'] = date('d/m/Y');
 	    $data['date_create'] =  date('Y-m-d H:i:s');
 		$data['status'] = '';
@@ -49,7 +51,8 @@ class request_order extends CI_Controller {
 		$this->form_validation->set_rules("purpose", 'Purpose', 'trim|required|xss_clean');
 		$this->form_validation->set_rules("cat_req", 'category Req', 'trim|required|xss_clean');
 		$this->form_validation->set_rules("ext_doc_no", 'Ext Document No', 'trim|required|xss_clean');
-
+		$this->form_validation->set_rules("no_rangka", 'No. Rangka', 'trim|required|xss_clean');
+		$this->form_validation->set_rules("no_polisi", 'No. Polisi', 'trim|required|xss_clean');
 		# message rules
 		$this->form_validation->set_message('required', 'Field %s harus diisi.');
 

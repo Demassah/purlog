@@ -93,6 +93,8 @@ class mdl_request_order extends CI_Model {
         $this->db->set('purpose', $data['purpose']);
         $this->db->set('cat_req', $data['cat_req']);
         $this->db->set('ext_doc_no', $data['ext_doc_no']);
+        $this->db->set('no_rangka', $data['no_rangka']);
+        $this->db->set('no_polisi', $data['no_polisi']);
         $this->db->set('ETD', FormatDateToMysql($data['ETD']));
         $this->db->set('date_create', ($data['date_create']));
         $this->db->set('status', $data['status']);
