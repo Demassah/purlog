@@ -36,6 +36,14 @@
 		<input name="ext_doc_no" size="20" class="easyui-validatebox textbox" data-options="required:false">
 	</div>
 	<div class="fitem" >
+		<label style="width:140px">No. Rangka</label>: 
+		<input name="no_rangka" size="20" class="easyui-validatebox textbox" data-options="required:false">
+	</div>
+	<div class="fitem" >
+		<label style="width:140px">No. Polisi</label>: 
+		<input name="no_polisi" size="20" class="easyui-validatebox textbox" data-options="required:false">
+	</div>
+	<div class="fitem" >
 		<label style="width:140px">ETD </label>: 
 		<input class="easyui-datebox textbox" name="ETD" size="13" value="<?=$ETD?>" id="ETD" data-options="formatter:DateFormatter, parser:DateParser">
 	</div>
