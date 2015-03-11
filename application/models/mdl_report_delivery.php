@@ -88,7 +88,7 @@ class mdl_report_delivery extends CI_Model {
 		$this->db->stop_cache();
 	}
 
-	function report_delivery_pdf($date_1,$date_2)
+	function report_delivery_pdf_kode($date_1,$date_2)
 	{
 		$this->db->flush_cache();
 		$this->db->start_cache();
