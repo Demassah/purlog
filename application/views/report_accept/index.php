@@ -32,7 +32,7 @@
 	</div>
 </div>
 
-<table id="dg_report_buy" title="Report Pembelian" data-options="
+<table id="dg_report_accept" title="Report Pembelian" data-options="
 			rownumbers:true,
 			singleSelect:true,
 			autoRowHeight:false,
@@ -48,7 +48,8 @@
 			<th field="name_vendor" sortable="true" width="130">Supplier</th>
 			<th field="kode_barang" sortable="true" width="130">Kode Barang</th>
 			<th field="nama_barang" sortable="true" width="180">Nama Barang</th>
-			<th field="qty" sortable="true" width="120">Qty</th>
+			<th field="dipesan" sortable="true" width="120">Qty Dipesan</th>
+			<th field="diterima" sortable="true" width="120">Qty Diterima</th>
 			<th field="price" sortable="true" width="120">price</th>
 			<th field="total" sortable="true" width="120">Total</th>
 			<th field="date_create" sortable="true" width="180">Date Create</th>
@@ -71,7 +72,7 @@
 			$('#date_2').val('');
 			$('#supplier').val('');
 			$('#kode_barang').val('');
-			$('#dg_report_buy').datagrid('load',{
+			$('#dg_report_accept').datagrid('load',{
 				tgl : $('#date_create').val(),
 				
 				
@@ -79,7 +80,7 @@
 		}
 
 		filter = function(){
-			$('#dg_report_buy').datagrid('load',{
+			$('#dg_report_accept').datagrid('load',{
 				date_1 : $('#date_1').val(),
 				date_2 : $('#date_2').val(),
 				supplier : $('#supplier').val(),
@@ -94,13 +95,13 @@
 			var supplier = $('#supplier').val();
 			var kode_barang = $('#kode_barang').val();
       		if (date_1 != '' && date_2 != ''){
-				window.open('<?=base_url().'laporan_pembelian/laporan_pdf/'?>'+date_1+'/'+date_2);
+				window.open('<?=base_url().'laporan_penerimaan/laporan_pdf/'?>'+date_1+'/'+date_2);
 			}else{
 				if(supplier !=''){
-					window.open('<?=base_url().'laporan_pembelian/laporan_pdf_supp/'?>'+supplier);
+					window.open('<?=base_url().'laporan_penerimaan/laporan_pdf_supp/'?>'+supplier);
 				}else{
 					if(kode_barang !=''){
-						window.open('<?=base_url().'laporan_pembelian/laporan_pdf_kode/'?>'+kode_barang);
+						window.open('<?=base_url().'laporan_penerimaan/laporan_pdf_kode/'?>'+kode_barang);
 					}else{
 						$.messager.show({
 						title: 'Warning',
@@ -113,14 +114,14 @@
 
 
 		$(function(){
-			$('#dg_report_buy').datagrid({
-				url:"<?=base_url()?>laporan_pembelian/grid"
+			$('#dg_report_accept').datagrid({
+				url:"<?=base_url()?>laporan_penerimaan/grid"
 			});
 		});
 		
 		//# Tombol Bawah
 		$(function(){
-			var pager = $('#dg_report_buy').datagrid().datagrid('getPager');	// get the pager of datagrid
+			var pager = $('#dg_report_accept').datagrid().datagrid('getPager');	// get the pager of datagrid
 			pager.pagination({
 				buttons:[
 				<?if($this->mdl_auth->CekAkses(array('menu_id'=>54, 'policy'=>'PDF'))){?>
