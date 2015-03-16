@@ -44,12 +44,7 @@ function __construct(){
 							$this->db->where('c.kode_barang', $kode_barang);
 						}
 				}
-
-
-			//$this->db->where($cari);
-			// $this->db->where('a.date_create  >=', $date_1);
-			// $this->db->where('a.date_create  <=', $date_2);	
-		}
+			}
 
 		$this->db->where('x.status','2');
 		$this->db->order_by($sort, $order);
@@ -117,7 +112,6 @@ function __construct(){
 			$this->db->join('sys_user y', 'y.user_id = a.requestor');
 			$this->db->join('ref_departement z', 'z .departement_id = a.departement');
 
-			// $cari = "a.date_create between '$date_1' and '$date_2'";
 			$this->db->where('b.name_vendor',$supplier);
 			$this->db->order_by('a.id_po', 'asc');
 			return $this->db->get()->result();
@@ -138,10 +132,10 @@ function __construct(){
 			$this->db->join('sys_user y', 'y.user_id = a.requestor');
 			$this->db->join('ref_departement z', 'z .departement_id = a.departement');
 
-      // $cari = "a.date_create between '$date_1' and '$date_2'";
-$this->db->where('c.kode_barang',$kode_barang);
-$this->db->order_by('a.id_po', 'asc');       return
-$this->db->get()->result();     $this->db->stop_cache();   }
+			$this->db->where('c.kode_barang',$kode_barang);
+			$this->db->order_by('a.id_po', 'asc');       return
+			$this->db->get()->result();     $this->db->stop_cache();   
+	}
 
 }
 

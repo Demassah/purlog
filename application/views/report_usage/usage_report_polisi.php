@@ -76,14 +76,14 @@ else {
 	<div>
 	<table width= "100%" border="0.5" bordercolor="#000000" class='' cellspacing=0 cellpadding=0>
 		<tr>
-			<td width="50" align="center" colspan="" rowspan="" headers=""><b>ID PO</b></td>
-			<td width="160" align="center" colspan="" rowspan="" headers=""><b>Supplier</b></td>
-			<td width="100" align="center" colspan="" rowspan="" headers=""><b>Kode Barang</b></td>
-			<td width="180" align="center" colspan="" rowspan="" headers=""><b>Nama Barang</b></td>
-			<td width="60" align="center" colspan="" rowspan="" headers=""><b>Qty</b></td>
+			<td width="100" align="center" colspan="" rowspan="" headers=""><b>ID Pros Detail</b></td>
+			<td width="140" align="center" colspan="" rowspan="" headers=""><b>No Rangka</b></td>
+			<td width="80" align="center" colspan="" rowspan="" headers=""><b>No Polisi</b></td>
+			<td width="90" align="center" colspan="" rowspan="" headers=""><b>Kode Barang</b></td>
+			<td width="150" align="center" colspan="" rowspan="" headers=""><b>Nama Barang</b></td>
 			<td width="150" align="center" colspan="" rowspan="" headers=""><b>Harga</b></td>
 			<td width="150" align="center" colspan="" rowspan="" headers=""><b>Total</b></td>
-			<td width="180" align="center" colspan="" rowspan="" headers=""><b>Date Create</b></td>
+			<td width="170" align="center" colspan="" rowspan="" headers=""><b>Date Create</b></td>
 		</tr>
 		<?php 
 			$no = 1;
@@ -91,11 +91,11 @@ else {
 			foreach ($data_pdf as $data):
 		?>
 		<tr>
-			<td colspan="" rowspan=""  align="center" headers=""><? echo $data->id_po; ?></td>
-			<td colspan="" rowspan=""  align="center" headers=""><? echo $data->name_vendor; ?></td>
-			<td colspan="" rowspan=""  align="center" headers=""><? echo $data->kode_barang; ?></td>
-			<td colspan="" rowspan=""  align="center" headers=""><? echo $data->nama_barang ?></td>
-			<td colspan="" rowspan=""  align="center" headers=""><? echo $data->qty; ?></td>
+			<td colspan="" rowspan=""  align="center" headers=""><? echo $data->id_detail_pros; ?></td>
+			<td colspan="" rowspan=""  align="center" headers=""><? echo $data->no_rangka; ?></td>
+			<td colspan="" rowspan=""  align="center" headers=""><? echo $data->no_polisi; ?></td>
+			<td colspan="" rowspan=""  align="center" headers=""><? echo $data->kode_barang ?></td>
+			<td colspan="" rowspan=""  align="center" headers=""><? echo $data->nama_barang; ?></td>
 			<td colspan="" rowspan=""  align="center" headers=""><? echo "Rp." . number_format($data->price,2,',','.'); ?></td>
 			<td colspan="" rowspan=""  align="center" headers=""><? echo "Rp." . number_format($data->total,2,',','.'); ?></td>
 			<td colspan="" rowspan=""  align="center" headers=""><? echo  date('d-m-Y',strtotime($data->date_create)); ?></td>

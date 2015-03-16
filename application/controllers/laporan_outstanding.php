@@ -19,7 +19,7 @@ class laporan_outstanding extends CI_Controller {
 		$data = $this->mdl_report_outstanding->getdata_report_outstanding();
 		echo $this->mdl_report_outstanding->togrid($data['row_data'], $data['row_count']);
 	}
-
+/* --------------------------------Report -------------------------------------- */
   function laporan_pdf($date_1,$date_2) {
     $this->load->library('HTML2PDF');
     $html2pdf = new HTML2PDF('L', 'A4', 'fr');
