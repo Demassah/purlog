@@ -24,15 +24,15 @@ class mdl_report_outstanding extends CI_Model {
 		$this->db->start_cache();
 		$this->db->select('a.id_po, g.name_vendor, f.kode_barang, h.nama_barang, d.qty dipesan, f.qty diterima, d.price, a.date_create,(d.qty-f.qty) outstanding,((d.qty-f.qty)*d.price) total');
 		$this->db->from('tr_po a');
-		$this->db->join('tr_qrs b', 'b.id_po = a.id_po', 'left');
+		$this->db->join('tr_qrs b', 'b.id_po = a.id_po');
 			$join_qr = "c.id_qrs = b.id_qrs and c.id_po = b.id_po";
-		$this->db->join('tr_qr c', $join_qr, 'left');
-		$this->db->join('tr_qr_detail d', 'd.id_qr = c.id_qr', 'left');
-		$this->db->join('tr_in e', 'e.ext_rec_no = c.id_po', 'left');
+		$this->db->join('tr_qr c', $join_qr);
+		$this->db->join('tr_qr_detail d', 'd.id_qr = c.id_qr');
+		$this->db->join('tr_in e', 'e.ext_rec_no = c.id_po');
 			$join = "f.id_in = e.id_in and f.kode_barang = d.kode_barang";
 		$this->db->join('tr_in_detail f', $join, 'left');
-		$this->db->join('ref_vendor g', 'g.id_vendor = c.id_vendor', 'left');
-		$this->db->join('ref_barang h', 'h.kode_barang = f.kode_barang', 'left');
+		$this->db->join('ref_vendor g', 'g.id_vendor = c.id_vendor');
+		$this->db->join('ref_barang h', 'h.kode_barang = f.kode_barang');
 
 			if($date_1 != '' && $date_2 != '') {
 			$cari = "a.date_create between '$date_1' and '$date_2'";
