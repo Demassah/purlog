@@ -22,7 +22,7 @@ class mdl_report_outstanding extends CI_Model {
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-		$this->db->select('a.id_po, g.name_vendor, f.kode_barang, h.nama_barang, d.qty dipesan, f.qty diterima, d.price, a.date_create, (f.qty*d.price) total,(d.qty-f.qty) outstanding');
+		$this->db->select('a.id_po, g.name_vendor, f.kode_barang, h.nama_barang, d.qty dipesan, f.qty diterima, d.price, a.date_create,(d.qty-f.qty) outstanding,((d.qty-f.qty)*d.price) total');
 		$this->db->from('tr_po a');
 		$this->db->join('tr_qrs b', 'b.id_po = a.id_po', 'left');
 			$join_qr = "c.id_qrs = b.id_qrs and c.id_po = b.id_po";

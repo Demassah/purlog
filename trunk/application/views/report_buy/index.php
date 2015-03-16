@@ -123,7 +123,7 @@
 			var pager = $('#dg_report_buy').datagrid().datagrid('getPager');	// get the pager of datagrid
 			pager.pagination({
 				buttons:[
-				<?if($this->mdl_auth->CekAkses(array('menu_id'=>54, 'policy'=>'PDF'))){?>
+				<?if($this->mdl_auth->CekAkses(array('menu_id'=>59, 'policy'=>'PDF'))){?>
 					{
 						iconCls:'icon-pdf',
 						text:'Export PDF',
