@@ -6,7 +6,7 @@
 			$('#dialog').dialog({
 				title: 'Tambah Request Order',
 				width: 380,
-				height: 235,
+				height: 280,
 				closed: true,
 				cache: false,
 				href: base_url+'request_order/add',
