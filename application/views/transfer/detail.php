@@ -74,7 +74,7 @@
 						 url: base_url+'transfer/deleteDetail/' + val,
 						 async: false,
 						 success : function(response){
-						 	alert(response);
+						 	//alert(response);
 							var response = eval('('+response+')');
 							if (response.success){
 								$.messager.show({

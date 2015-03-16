@@ -55,7 +55,7 @@
 						 url: base_url+'transfer/delete/' + val,
 						 async: false,
 						 success : function(response){
-						 	alert(response);
+						 //	alert(response);
 							var response = eval('('+response+')');
 							if (response.success){
 								$.messager.show({
