@@ -76,8 +76,8 @@ function __construct(){
 		}
 		return json_encode($response);
 	}
-
-	function report_delivery_pdf($date_1,$date_2)
+	/* --------------------------------Report PDF -------------------------------------- */
+	function report_buy_pdf($date_1,$date_2)
 	{
 		$this->db->flush_cache();
 		$this->db->start_cache();
@@ -98,7 +98,7 @@ function __construct(){
 		$this->db->stop_cache();
 	}
 
-	function report_delivery_pdf_supp($supplier)
+	function report_buy_pdf_supp($supplier)
 	{
 		$this->db->flush_cache();
 		$this->db->start_cache();
@@ -118,7 +118,7 @@ function __construct(){
 		$this->db->stop_cache();
 	}
 
-	function report_delivery_pdf_kode($kode_barang)
+	function report_buy_pdf_kode($kode_barang)
 	{
 		$this->db->flush_cache();
 		$this->db->start_cache();
@@ -133,9 +133,64 @@ function __construct(){
 			$this->db->join('ref_departement z', 'z .departement_id = a.departement');
 
 			$this->db->where('c.kode_barang',$kode_barang);
-			$this->db->order_by('a.id_po', 'asc');       return
-			$this->db->get()->result();     $this->db->stop_cache();   
+			$this->db->order_by('a.id_po', 'asc');       
+			return $this->db->get()->result();     
+		$this->db->stop_cache();   
 	}
+
+	 /* --------------------------------Report Excel -------------------------------------- */
+	 function report_buy_excel($date_1,$date_2)
+	{
+		$this->db->flush_cache();
+		$this->db->start_cache();
+			$this->db->select('a.id_po,b.name_vendor,c.kode_barang,d.nama_barang,c.qty,c.price,a.date_create,(c.qty*c.price) total');
+			$this->db->from('tr_po a');
+			$this->db->join('tr_qr x', 'x.id_po = a.id_po', 'left');
+			$this->db->join('ref_vendor b', 'b.id_vendor = x.id_vendor', 'left');
+			$this->db->join('tr_qr_detail c', 'c.id_qr = x.id_qr', 'left');
+			$this->db->join('ref_barang d', 'd.kode_barang = c.kode_barang', 'left');
+
+			$cari = "a.date_create between '$date_1' and '$date_2'";
+			$this->db->where($cari);
+			$this->db->order_by('a.id_po', 'asc');
+			return $this->db->get();
+		$this->db->stop_cache();
+	}
+
+	function report_buy_excel_supp($supplier)
+	{
+		$this->db->flush_cache();
+		$this->db->start_cache();
+			$this->db->select('a.id_po,b.name_vendor,c.kode_barang,d.nama_barang,c.qty,c.price,a.date_create,(c.qty*c.price) total');
+			$this->db->from('tr_po a');
+			$this->db->join('tr_qr x', 'x.id_po = a.id_po', 'left');
+			$this->db->join('ref_vendor b', 'b.id_vendor = x.id_vendor', 'left');
+			$this->db->join('tr_qr_detail c', 'c.id_qr = x.id_qr', 'left');
+			$this->db->join('ref_barang d', 'd.kode_barang = c.kode_barang', 'left');
+
+			$this->db->where('b.name_vendor',$supplier);
+			$this->db->order_by('a.id_po', 'asc');
+			return $this->db->get();
+		$this->db->stop_cache();
+	}
+
+	function report_buy_excel_kode($kode_barang)
+	{
+		$this->db->flush_cache();
+		$this->db->start_cache();
+			$this->db->select('a.id_po,b.name_vendor,c.kode_barang,d.nama_barang,c.qty,c.price,a.date_create,(c.qty*c.price) total');
+			$this->db->from('tr_po a');
+			$this->db->join('tr_qr x', 'x.id_po = a.id_po', 'left');
+			$this->db->join('ref_vendor b', 'b.id_vendor = x.id_vendor', 'left');
+			$this->db->join('tr_qr_detail c', 'c.id_qr = x.id_qr', 'left');
+			$this->db->join('ref_barang d', 'd.kode_barang = c.kode_barang', 'left');
+
+			$this->db->where('c.kode_barang',$kode_barang);
+			$this->db->order_by('a.id_po', 'asc');       
+			return 	$this->db->get();     
+		$this->db->stop_cache();   
+	}
+
 
 }
 

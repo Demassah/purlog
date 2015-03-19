@@ -113,6 +113,29 @@
 			}
     }
 
+    ExportExcel = function(val){
+			var date_1 = $('#date_1').val();
+			var date_2 = $('#date_2').val();
+			var supplier = $('#supplier').val();
+			var kode_barang = $('#kode_barang').val();
+      		if (date_1 != '' && date_2 != ''){
+				window.open('<?=base_url().'laporan_outstanding/laporan_excel/'?>'+date_1+'/'+date_2);
+			}else{
+				if(supplier !=''){
+					window.open('<?=base_url().'laporan_outstanding/laporan_excel_supp/'?>'+supplier);
+				}else{
+					if(kode_barang !=''){
+						window.open('<?=base_url().'laporan_outstanding/laporan_excel_kode/'?>'+kode_barang);
+					}else{
+						$.messager.show({
+						title: 'Warning',
+						msg: 'Harap Isi Filter Terlabih Dahulu'
+						});
+					}
+				}
+			}
+    }
+
 
 		$(function(){
 			$('#dg_report_outstanding').datagrid({
@@ -125,7 +148,16 @@
 			var pager = $('#dg_report_outstanding').datagrid().datagrid('getPager');	// get the pager of datagrid
 			pager.pagination({
 				buttons:[
-				<?if($this->mdl_auth->CekAkses(array('menu_id'=>60, 'policy'=>'PDF'))){?>
+				<?if($this->mdl_auth->CekAkses(array('menu_id'=>55, 'policy'=>'EXCEL'))){?>
+					{
+						iconCls:'icon-excel',
+						text:'Export Excel',
+						handler:function(){
+							ExportExcel();
+						}
+					},
+				<?}?>
+				<?if($this->mdl_auth->CekAkses(array('menu_id'=>55, 'policy'=>'PDF'))){?>
 					{
 						iconCls:'icon-pdf',
 						text:'Export PDF',

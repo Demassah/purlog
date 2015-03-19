@@ -73,8 +73,8 @@ function __construct(){
 		}
 		return json_encode($response);
 	}
-	
-		function report_delivery_pdf($date_1,$date_2)
+/* --------------------------------Report PDF -------------------------------------- */
+	function report_usage_pdf($date_1,$date_2)
 	{
 		$this->db->flush_cache();
 		$this->db->start_cache();
@@ -95,7 +95,7 @@ function __construct(){
 		$this->db->stop_cache();
 	}
 
-	function report_delivery_pdf_rangka($no_rangka)
+	function report_usage_pdf_rangka($no_rangka)
 	{
 		$this->db->flush_cache();
 		$this->db->start_cache();
@@ -116,7 +116,7 @@ function __construct(){
 		$this->db->stop_cache();
 	}
 
-	function report_delivery_pdf_polisi($no_polisi)
+	function report_usage_pdf_polisi($no_polisi)
 	{
 		$this->db->flush_cache();
 		$this->db->start_cache();
@@ -137,7 +137,7 @@ function __construct(){
 		$this->db->stop_cache();
 	}
 
-	function report_delivery_pdf_kode($kode_barang)
+	function report_usage_pdf_kode($kode_barang)
 	{
 		$this->db->flush_cache();
 		$this->db->start_cache();
@@ -152,9 +152,83 @@ function __construct(){
 			$this->db->join('ref_departement z', 'z .departement_id = y.departement_id');
 
       // $cari = "a.date_create between '$date_1' and '$date_2'";
-		$this->db->where('a.kode_barang',$kode_barang);
-		$this->db->order_by('a.id_detail_pros', 'asc');       return
-		$this->db->get()->result();     $this->db->stop_cache();   
+			$this->db->where('a.kode_barang',$kode_barang);
+			$this->db->order_by('a.id_detail_pros', 'asc');      
+			return $this->db->get()->result();     
+		$this->db->stop_cache();   
+
+	}
+/* --------------------------------Report PDF -------------------------------------- */
+function report_usage_excel($date_1,$date_2)
+	{
+		$this->db->flush_cache();
+		$this->db->start_cache();
+			$this->db->select('a.id_detail_pros,a.kode_barang,e.nama_barang,a.qty,d.price,a.date_create,(a.qty*d.price) total,c.no_rangka,c.no_polisi');
+			$this->db->from('tr_pros_detail a');
+			$this->db->join('tr_sro b', 'b.id_sro = a.id_sro');
+			$this->db->join('tr_ro c', 'c.id_ro = a.id_ro');
+			$this->db->join('tr_stock d', 'd.id_stock = a.id_stock');
+			$this->db->join('ref_barang e', 'e.kode_barang = a.kode_barang');
+
+			$cari = "b.date_create between '$date_1' and '$date_2'";
+			$this->db->where($cari);
+			$this->db->order_by('a.id_detail_pros', 'asc');
+			return $this->db->get();
+		$this->db->stop_cache();
+	}
+
+	function report_usage_excel_rangka($no_rangka)
+	{
+		$this->db->flush_cache();
+		$this->db->start_cache();
+			$this->db->select('a.id_detail_pros,a.kode_barang,e.nama_barang,a.qty,d.price,a.date_create,(a.qty*d.price) total,c.no_rangka,c.no_polisi');
+			$this->db->from('tr_pros_detail a');
+			$this->db->join('tr_sro b', 'b.id_sro = a.id_sro');
+			$this->db->join('tr_ro c', 'c.id_ro = a.id_ro');
+			$this->db->join('tr_stock d', 'd.id_stock = a.id_stock');
+			$this->db->join('ref_barang e', 'e.kode_barang = a.kode_barang');
+
+			// $cari = "a.date_create between '$date_1' and '$date_2'";
+			$this->db->where('c.no_rangka',$no_rangka);
+			$this->db->order_by('a.id_detail_pros', 'asc');
+			return $this->db->get();
+		$this->db->stop_cache();
+	}
+
+	function report_usage_excel_polisi($no_polisi)
+	{
+		$this->db->flush_cache();
+		$this->db->start_cache();
+			$this->db->select('a.id_detail_pros,a.kode_barang,e.nama_barang,a.qty,d.price,a.date_create,(a.qty*d.price) total,c.no_rangka,c.no_polisi');
+			$this->db->from('tr_pros_detail a');
+			$this->db->join('tr_sro b', 'b.id_sro = a.id_sro');
+			$this->db->join('tr_ro c', 'c.id_ro = a.id_ro');
+			$this->db->join('tr_stock d', 'd.id_stock = a.id_stock');
+			$this->db->join('ref_barang e', 'e.kode_barang = a.kode_barang');
+
+			// $cari = "a.date_create between '$date_1' and '$date_2'";
+			$this->db->where('c.no_polisi',$no_polisi);
+			$this->db->order_by('a.id_detail_pros', 'asc');
+			return $this->db->get();
+		$this->db->stop_cache();
+	}
+
+	function report_usage_excel_kode($kode_barang)
+	{
+		$this->db->flush_cache();
+		$this->db->start_cache();
+			$this->db->select('a.id_detail_pros,a.kode_barang,e.nama_barang,a.qty,d.price,a.date_create,(a.qty*d.price) total,c.no_rangka,c.no_polisi');
+			$this->db->from('tr_pros_detail a');
+			$this->db->join('tr_sro b', 'b.id_sro = a.id_sro');
+			$this->db->join('tr_ro c', 'c.id_ro = a.id_ro');
+			$this->db->join('tr_stock d', 'd.id_stock = a.id_stock');
+			$this->db->join('ref_barang e', 'e.kode_barang = a.kode_barang');
+
+      // $cari = "a.date_create between '$date_1' and '$date_2'";
+			$this->db->where('a.kode_barang',$kode_barang);
+			$this->db->order_by('a.id_detail_pros', 'asc');      
+			return $this->db->get();     
+		$this->db->stop_cache();   
 
 	}
 
