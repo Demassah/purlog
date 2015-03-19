@@ -79,22 +79,22 @@ class mdl_report_accept extends CI_Model {
 		}
 		return json_encode($response);
 	}
-
-	function report_delivery_pdf($date_1,$date_2)
+/* --------------------------------Report PDF -------------------------------------- */
+	function report_accept_pdf($date_1,$date_2)
 	{
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('a.id_po,a.purpose,a.cat_req,a.ext_doc_no,a.ETD,y.full_name,z.departement_name,g.name_vendor,f.kode_barang,h.nama_barang,d.qty diterima,f.qty dipesan,d.price,a.date_create,(f.qty*d.price) total');
+			$this->db->select('a.id_po,a.purpose,a.cat_req,a.ext_doc_no,a.ETD,y.full_name,z.departement_name,g.name_vendor,f.kode_barang,h.nama_barang,d.qty dipesan,f.qty diterima,d.price,a.date_create,(f.qty*d.price) total');
 			$this->db->from('tr_po a');
-			$this->db->join('tr_qrs b', 'b.id_po = a.id_po', 'left');
+			$this->db->join('tr_qrs b', 'b.id_po = a.id_po');
 			$join_qr = "c.id_qrs = b.id_qrs and c.id_po = b.id_po";
-			$this->db->join('tr_qr c', $join_qr, 'left');
-			$this->db->join('tr_qr_detail d', 'd.id_qr = c.id_qr', 'left');
-			$this->db->join('tr_in e', 'e.ext_rec_no = c.id_po', 'left');
+			$this->db->join('tr_qr c', $join_qr);
+			$this->db->join('tr_qr_detail d', 'd.id_qr = c.id_qr');
+			$this->db->join('tr_in e', 'e.ext_rec_no = c.id_po');
 				$join = "f.id_in = e.id_in and f.kode_barang = d.kode_barang";
-			$this->db->join('tr_in_detail f', $join, 'left');
-			$this->db->join('ref_vendor g', 'g.id_vendor = c.id_vendor', 'left');
-			$this->db->join('ref_barang h', 'h.kode_barang = f.kode_barang', 'left');
+			$this->db->join('tr_in_detail f', $join);
+			$this->db->join('ref_vendor g', 'g.id_vendor = c.id_vendor');
+			$this->db->join('ref_barang h', 'h.kode_barang = f.kode_barang');
 
 			$this->db->join('sys_user y', 'y.user_id = a.requestor');
 			$this->db->join('ref_departement z', 'z .departement_id = a.departement');
@@ -106,22 +106,21 @@ class mdl_report_accept extends CI_Model {
 		$this->db->stop_cache();
 	}
 
-	function report_delivery_pdf_supp($supplier)
+	function report_accept_pdf_supp($supplier)
 	{
 		$this->db->flush_cache();
 		$this->db->start_cache();
-
-			$this->db->select('a.id_po,a.purpose,a.cat_req,a.ext_doc_no,a.ETD,y.full_name,z.departement_name,g.name_vendor,f.kode_barang,h.nama_barang,d.qty diterima,f.qty dipesan,d.price,a.date_create,(f.qty*d.price) total');
+			$this->db->select('a.id_po,a.purpose,a.cat_req,a.ext_doc_no,a.ETD,y.full_name,z.departement_name,g.name_vendor,f.kode_barang,h.nama_barang,d.qty dipesan,f.qty diterima,d.price,a.date_create,(f.qty*d.price) total');
 			$this->db->from('tr_po a');
-			$this->db->join('tr_qrs b', 'b.id_po = a.id_po', 'left');
-				$join_qr = "c.id_qrs = b.id_qrs and c.id_po = b.id_po";
-			$this->db->join('tr_qr c', $join_qr, 'left');
-			$this->db->join('tr_qr_detail d', 'd.id_qr = c.id_qr', 'left');
-			$this->db->join('tr_in e', 'e.ext_rec_no = c.id_po', 'left');
+			$this->db->join('tr_qrs b', 'b.id_po = a.id_po');
+			$join_qr = "c.id_qrs = b.id_qrs and c.id_po = b.id_po";
+			$this->db->join('tr_qr c', $join_qr);
+			$this->db->join('tr_qr_detail d', 'd.id_qr = c.id_qr');
+			$this->db->join('tr_in e', 'e.ext_rec_no = c.id_po');
 				$join = "f.id_in = e.id_in and f.kode_barang = d.kode_barang";
-			$this->db->join('tr_in_detail f', $join, 'left');
-			$this->db->join('ref_vendor g', 'g.id_vendor = c.id_vendor', 'left');
-			$this->db->join('ref_barang h', 'h.kode_barang = f.kode_barang', 'left');
+			$this->db->join('tr_in_detail f', $join);
+			$this->db->join('ref_vendor g', 'g.id_vendor = c.id_vendor');
+			$this->db->join('ref_barang h', 'h.kode_barang = f.kode_barang');
 
 			$this->db->join('sys_user y', 'y.user_id = a.requestor');
 			$this->db->join('ref_departement z', 'z .departement_id = a.departement');
@@ -132,29 +131,100 @@ class mdl_report_accept extends CI_Model {
 		$this->db->stop_cache();
 	}
 
-	function report_delivery_pdf_kode($kode_barang)
+	function report_accept_pdf_kode($kode_barang)
 	{
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('a.id_po,a.purpose,a.cat_req,a.ext_doc_no,a.ETD,y.full_name,z.departement_name,g.name_vendor,f.kode_barang,h.nama_barang,d.qty diterima,f.qty dipesan,d.price,a.date_create,(f.qty*d.price) total');
+			$this->db->select('a.id_po,a.purpose,a.cat_req,a.ext_doc_no,a.ETD,y.full_name,z.departement_name,g.name_vendor,f.kode_barang,h.nama_barang,d.qty dipesan,f.qty diterima,d.price,a.date_create,(f.qty*d.price) total');
 			$this->db->from('tr_po a');
-			$this->db->join('tr_qrs b', 'b.id_po = a.id_po', 'left');
-				$join_qr = "c.id_qrs = b.id_qrs and c.id_po = b.id_po";
-			$this->db->join('tr_qr c', $join_qr, 'left');
-			$this->db->join('tr_qr_detail d', 'd.id_qr = c.id_qr', 'left');
-			$this->db->join('tr_in e', 'e.ext_rec_no = c.id_po', 'left');
+			$this->db->join('tr_qrs b', 'b.id_po = a.id_po');
+			$join_qr = "c.id_qrs = b.id_qrs and c.id_po = b.id_po";
+			$this->db->join('tr_qr c', $join_qr);
+			$this->db->join('tr_qr_detail d', 'd.id_qr = c.id_qr');
+			$this->db->join('tr_in e', 'e.ext_rec_no = c.id_po');
 				$join = "f.id_in = e.id_in and f.kode_barang = d.kode_barang";
-			$this->db->join('tr_in_detail f', $join, 'left');
-			$this->db->join('ref_vendor g', 'g.id_vendor = c.id_vendor', 'left');
-			$this->db->join('ref_barang h', 'h.kode_barang = f.kode_barang', 'left');
+			$this->db->join('tr_in_detail f', $join);
+			$this->db->join('ref_vendor g', 'g.id_vendor = c.id_vendor');
+			$this->db->join('ref_barang h', 'h.kode_barang = f.kode_barang');
 
 			$this->db->join('sys_user y', 'y.user_id = a.requestor');
 			$this->db->join('ref_departement z', 'z .departement_id = a.departement');
 
 
 		$this->db->where('f.kode_barang',$kode_barang);
-		$this->db->order_by('a.id_po', 'asc');       return
-		$this->db->get()->result();     $this->db->stop_cache();   
+		$this->db->order_by('a.id_po', 'asc');      
+		return	$this->db->get()->result();     
+	$this->db->stop_cache();   
+
+	}
+
+	/* --------------------------------Report Excel -------------------------------------- */
+	function report_accept_excel($date_1,$date_2)
+	{
+		$this->db->flush_cache();
+		$this->db->start_cache();
+			$this->db->select('a.id_po,f.kode_barang,h.nama_barang,d.qty dipesan,f.qty diterima,d.price,a.date_create,(f.qty*d.price) total,g.name_vendor');
+			$this->db->from('tr_po a');
+			$this->db->join('tr_qrs b', 'b.id_po = a.id_po');
+			$join_qr = "c.id_qrs = b.id_qrs and c.id_po = b.id_po";
+			$this->db->join('tr_qr c', $join_qr);
+			$this->db->join('tr_qr_detail d', 'd.id_qr = c.id_qr');
+			$this->db->join('tr_in e', 'e.ext_rec_no = c.id_po');
+				$join = "f.id_in = e.id_in and f.kode_barang = d.kode_barang";
+			$this->db->join('tr_in_detail f', $join);
+			$this->db->join('ref_vendor g', 'g.id_vendor = c.id_vendor');
+			$this->db->join('ref_barang h', 'h.kode_barang = f.kode_barang');
+
+			$cari = "e.date_create between '$date_1' and '$date_2'";
+			$this->db->where($cari);
+			$this->db->order_by('a.id_po', 'asc');
+			return $this->db->get();
+		$this->db->stop_cache();
+	}
+
+	function report_accept_excel_supp($supplier)
+	{
+		$this->db->flush_cache();
+		$this->db->start_cache();
+			$this->db->select('a.id_po,f.kode_barang,h.nama_barang,d.qty dipesan,f.qty diterima,d.price,a.date_create,(f.qty*d.price) total,g.name_vendor');
+			$this->db->from('tr_po a');
+			$this->db->join('tr_qrs b', 'b.id_po = a.id_po');
+			$join_qr = "c.id_qrs = b.id_qrs and c.id_po = b.id_po";
+			$this->db->join('tr_qr c', $join_qr);
+			$this->db->join('tr_qr_detail d', 'd.id_qr = c.id_qr');
+			$this->db->join('tr_in e', 'e.ext_rec_no = c.id_po');
+				$join = "f.id_in = e.id_in and f.kode_barang = d.kode_barang";
+			$this->db->join('tr_in_detail f', $join);
+			$this->db->join('ref_vendor g', 'g.id_vendor = c.id_vendor');
+			$this->db->join('ref_barang h', 'h.kode_barang = f.kode_barang');
+
+			$this->db->where('g.name_vendor',$supplier);
+			$this->db->order_by('a.id_po', 'asc');
+			return $this->db->get();
+		$this->db->stop_cache();
+	}
+
+	function report_accept_excel_kode($kode_barang)
+	{
+		$this->db->flush_cache();
+		$this->db->start_cache();
+			$this->db->select('a.id_po,f.kode_barang,h.nama_barang,d.qty dipesan,f.qty diterima,d.price,a.date_create,(f.qty*d.price) total,g.name_vendor');
+			$this->db->from('tr_po a');
+			$this->db->join('tr_qrs b', 'b.id_po = a.id_po');
+			$join_qr = "c.id_qrs = b.id_qrs and c.id_po = b.id_po";
+			$this->db->join('tr_qr c', $join_qr);
+			$this->db->join('tr_qr_detail d', 'd.id_qr = c.id_qr');
+			$this->db->join('tr_in e', 'e.ext_rec_no = c.id_po');
+				$join = "f.id_in = e.id_in and f.kode_barang = d.kode_barang";
+			$this->db->join('tr_in_detail f', $join);
+			$this->db->join('ref_vendor g', 'g.id_vendor = c.id_vendor');
+			$this->db->join('ref_barang h', 'h.kode_barang = f.kode_barang');
+
+
+		$this->db->where('f.kode_barang',$kode_barang);
+		$this->db->order_by('a.id_po', 'asc');      
+		return	$this->db->get();     
+	$this->db->stop_cache();   
 
 	}
 
