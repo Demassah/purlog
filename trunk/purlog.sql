@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 20, 2015 at 05:01 AM
+-- Generation Time: Mar 21, 2015 at 01:22 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -6083,7 +6083,7 @@ CREATE TABLE IF NOT EXISTS `ref_lokasi` (
   `storage` tinyint(1) DEFAULT NULL COMMENT '1. available 2. hold 3. damage',
   `status` tinyint(1) DEFAULT NULL COMMENT '1. active 2. inactive',
   PRIMARY KEY (`id_lks`,`id_lokasi`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `ref_lokasi`
@@ -6237,7 +6237,7 @@ INSERT INTO `sys_menu` (`menu_id`, `menu_group`, `menu_name`, `menu_parent`, `ur
 (55, 'Laporan', 'Laporan Outstanding Supply', 47, 'laporan_outstanding', 8, 0, 'icon-po', 'PDF;EXCEL;'),
 (56, 'Laporan', 'Laporan Penerimaan ', 47, 'laporan_penerimaan', 9, 0, 'icon-po', 'PDF;EXCEL;'),
 (57, 'Laporan', 'Laporan Pemakaian', 47, 'laporan_usage', 10, 0, 'icon-po', 'PDF;EXCEL;'),
-(58, 'Laporan ', 'Laporan Persediaan', 47, 'laporan_persediaan', 11, 0, 'icon-po', 'PDF;EXCEL;');
+(58, 'Laporan', 'Laporan Persediaan', 47, 'laporan_persediaan', 11, 0, 'icon-po', 'PDF;EXCEL;');
 
 -- --------------------------------------------------------
 
@@ -6283,7 +6283,7 @@ CREATE TABLE IF NOT EXISTS `sys_user_access` (
   `user_level_id` smallint(6) NOT NULL DEFAULT '0',
   `policy` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`user_access_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=835 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=849 ;
 
 --
 -- Dumping data for table `sys_user_access`
@@ -6305,7 +6305,7 @@ INSERT INTO `sys_user_access` (`user_access_id`, `menu_id`, `user_level_id`, `po
 (735, 13, 1, 'ACCESS;ADD;DETAIL;DELETE;PRINT;PDF;APPROVE;'),
 (736, 14, 1, 'ACCESS;ADD;DETAIL;DELETE;APPROVE;'),
 (737, 15, 1, 'ACCESS;ADD;DETAIL;DELETE;SELECT;APPROVE;'),
-(739, 17, 1, 'ACCESS;ADD;EDIT;DELETE;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),
+(739, 17, 1, 'ACCESS;ADD;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),
 (740, 18, 1, 'ACCESS;ADD;EDIT;DELETE;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),
 (741, 19, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;PRINT;PDF;APPROVE;'),
 (742, 20, 1, 'ACCESS;ADD;DETAIL;EDIT;DELETE;'),
@@ -6349,7 +6349,7 @@ INSERT INTO `sys_user_access` (`user_access_id`, `menu_id`, `user_level_id`, `po
 (780, 15, 14, 'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),
 (781, 17, 14, 'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),
 (782, 39, 14, 'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),
-(783, 20, 14, ''),
+(783, 20, 14, 'ACCESS;ADD;DETAIL;EDIT;DELETE;'),
 (784, 18, 14, 'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),
 (785, 1, 14, 'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),
 (786, 23, 14, 'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),
@@ -6400,7 +6400,21 @@ INSERT INTO `sys_user_access` (`user_access_id`, `menu_id`, `user_level_id`, `po
 (831, 55, 1, 'ACCESS;PDF;EXCEL;'),
 (832, 56, 1, 'ACCESS;PDF;EXCEL;'),
 (833, 57, 1, 'ACCESS;PDF;EXCEL;'),
-(834, 58, 1, 'ACCESS;PDF;EXCEL;');
+(834, 58, 1, 'ACCESS;PDF;EXCEL;'),
+(835, 45, 14, 'ACCESS;ADD;EDIT;DELETE;'),
+(836, 46, 14, 'ACCESS;ADD;EDIT;DELETE;'),
+(837, 47, 14, 'ACCESS;'),
+(838, 48, 14, 'ACCESS;PDF;EXCEL;'),
+(839, 49, 14, 'ACCESS;PDF;EXCEL;'),
+(840, 51, 14, 'ACCESS;PDF;EXCEL;'),
+(841, 50, 14, 'ACCESS;PDF;EXCEL;'),
+(842, 52, 14, 'ACCESS;PDF;EXCEL;'),
+(843, 53, 14, 'ACCESS;PDF;EXCEL;'),
+(844, 54, 14, 'ACCESS;PDF;EXCEL;'),
+(845, 55, 14, 'ACCESS;PDF;EXCEL;'),
+(846, 56, 14, 'ACCESS;PDF;EXCEL;'),
+(847, 57, 14, 'ACCESS;PDF;EXCEL;'),
+(848, 58, 14, 'ACCESS;PDF;EXCEL;');
 
 -- --------------------------------------------------------
 
@@ -6448,7 +6462,7 @@ CREATE TABLE IF NOT EXISTS `tr_do` (
   `id_user` varchar(21) DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id_do`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `tr_do`
@@ -6457,7 +6471,8 @@ CREATE TABLE IF NOT EXISTS `tr_do` (
 INSERT INTO `tr_do` (`id_do`, `id_courir`, `date_create`, `id_user`, `status`) VALUES
 (1, 1, '2015-01-20 11:08:30', '1', 2),
 (2, 2, '2015-01-20 11:08:53', '1', 2),
-(4, 1, '2015-02-10 14:32:43', '16', 2);
+(4, 1, '2015-02-10 14:32:43', '16', 2),
+(5, 1, '2015-03-20 13:43:30', '1', 2);
 
 --
 -- Triggers `tr_do`
@@ -6509,14 +6524,18 @@ CREATE TABLE IF NOT EXISTS `tr_in` (
   `user_id` smallint(6) DEFAULT NULL,
   `status` smallint(1) DEFAULT NULL,
   PRIMARY KEY (`id_in`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `tr_in`
 --
 
 INSERT INTO `tr_in` (`id_in`, `ext_rec_no`, `type`, `date_create`, `user_id`, `status`) VALUES
-(10, 17, '1', '2015-02-12 10:24:42', 16, 2);
+(1, 17, '1', '2015-02-01 10:24:42', 16, 2),
+(2, 19, '1', '2015-02-02 13:44:44', 1, 2),
+(3, 20, '1', '2015-02-03 15:42:57', NULL, NULL),
+(4, 21, '1', '2015-02-04 15:43:03', NULL, NULL),
+(5, 22, '1', '2015-02-05 15:43:09', NULL, NULL);
 
 --
 -- Triggers `tr_in`
@@ -6560,16 +6579,19 @@ CREATE TABLE IF NOT EXISTS `tr_in_detail` (
   `lokasi` varchar(21) DEFAULT NULL,
   `status` smallint(1) DEFAULT NULL,
   PRIMARY KEY (`id_detail_in`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=64 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=70 ;
 
 --
 -- Dumping data for table `tr_in_detail`
 --
 
 INSERT INTO `tr_in_detail` (`id_detail_in`, `id_in`, `kode_barang`, `qty`, `ext_rec_no_detail`, `lokasi`, `status`) VALUES
-(61, 10, '203', 2, 28, 'A100', 1),
-(62, 10, '203', 1, 28, 'A100', 1),
-(63, 10, '201', 3, 27, 'A100', 1);
+(1, 1, '201', 20, 9, 'Pusat', 1),
+(2, 2, '201', 10, 8, 'Pusat', 1),
+(3, 3, '202', 5, 7, NULL, 1),
+(4, 4, '202', 5, 77, NULL, 1),
+(5, 5, '203', 10, 7, NULL, 1),
+(69, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -6589,7 +6611,7 @@ CREATE TABLE IF NOT EXISTS `tr_notifikasi` (
   `binding_id` int(11) NOT NULL,
   `user_level_id` int(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=56 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=68 ;
 
 --
 -- Dumping data for table `tr_notifikasi`
@@ -6606,11 +6628,23 @@ INSERT INTO `tr_notifikasi` (`id`, `context`, `url`, `id_object`, `status`, `tan
 (48, 'RO Approval telah dikirim ke RO Logistic', 'request_order_logistic', 21, 0, '0000-00-00', 1, 1, 1, 2),
 (49, 'RO Logistic telah dikirim ke RO Selected', 'request_order_selected', 21, 0, '0000-00-00', 1, 1, 1, 2),
 (50, 'Purchase Request Baru telah dibuat', 'purchase_request', 6, 0, '0000-00-00', 3, 1, 1, 3),
-(51, 'Request Order Baru telah dibuat', 'request_order', 22, 1, '0000-00-00', 1, 1, 1, 2),
+(51, 'Request Order Baru telah dibuat', 'request_order', 22, 0, '0000-00-00', 1, 1, 1, 2),
 (52, 'Request Order Baru telah dibuat', 'request_order', 23, 0, '0000-00-00', 1, 1, 1, 2),
 (53, 'Request Order telah dikirim ke RO Approval', 'request_order_approval', 23, 0, '0000-00-00', 1, 1, 1, 2),
 (54, 'RO Approval telah dikirim ke RO Logistic', 'request_order_logistic', 23, 0, '0000-00-00', 1, 1, 1, 2),
-(55, 'RO Logistic telah dikirim ke RO Selected', 'request_order_selected', 23, 1, '0000-00-00', 1, 1, 1, 2);
+(55, 'RO Logistic telah dikirim ke RO Selected', 'request_order_selected', 23, 1, '0000-00-00', 1, 1, 1, 2),
+(56, 'Request Order Baru telah dibuat', 'request_order', 24, 0, '0000-00-00', 1, 1, 1, 2),
+(57, 'Request Order telah dikirim ke RO Approval', 'request_order_approval', 24, 0, '0000-00-00', 1, 1, 1, 2),
+(58, 'RO Approval telah dikirim ke RO Logistic', 'request_order_logistic', 24, 0, '0000-00-00', 1, 1, 1, 2),
+(59, 'RO Logistic telah dikirim ke RO Selected', 'request_order_selected', 24, 0, '0000-00-00', 1, 1, 1, 2),
+(60, 'Request Order Baru telah dibuat', 'request_order', 25, 0, '0000-00-00', 1, 1, 1, 2),
+(61, 'Request Order telah dikirim ke RO Approval', 'request_order_approval', 25, 0, '0000-00-00', 1, 1, 1, 2),
+(62, 'RO Approval telah dikirim ke RO Logistic', 'request_order_logistic', 25, 0, '0000-00-00', 1, 1, 1, 2),
+(63, 'RO Logistic telah dikirim ke RO Selected', 'request_order_selected', 25, 0, '0000-00-00', 1, 1, 1, 2),
+(64, 'Purchase Request Baru telah dibuat', 'purchase_request', 7, 0, '0000-00-00', 3, 1, 1, 3),
+(65, 'Request Order telah dikirim ke RO Approval', 'request_order_approval', 22, 0, '0000-00-00', 1, 1, 1, 2),
+(66, 'RO Approval telah dikirim ke RO Logistic', 'request_order_logistic', 22, 0, '0000-00-00', 1, 1, 1, 2),
+(67, 'RO Logistic telah dikirim ke RO Selected', 'request_order_selected', 22, 0, '0000-00-00', 1, 1, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -6684,7 +6718,7 @@ CREATE TABLE IF NOT EXISTS `tr_pr` (
   `date_create` datetime DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id_pr`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `tr_pr`
@@ -6694,7 +6728,8 @@ INSERT INTO `tr_pr` (`id_pr`, `id_ro`, `id_po`, `user_id`, `purpose`, `cat_req`,
 (1, 1, NULL, 1, 'REQUEST', 'ASSET', 'SPK/123', '2015-01-20', '2015-01-20 09:22:32', 2),
 (4, 19, NULL, 1, 'REQUEST', 'ASSET', '1', '2015-02-03', '2015-02-03 12:48:48', 2),
 (5, 20, NULL, 1, 'REQUEST', 'ATK', '1234', '2015-02-04', '2015-02-04 16:27:03', 2),
-(6, 21, NULL, 16, 'REQUEST', 'ASSET', '12354', '2015-02-06', '2015-02-06 17:28:29', 2);
+(6, 21, NULL, 16, 'REQUEST', 'ASSET', '12354', '2015-02-06', '2015-02-06 17:28:29', 2),
+(7, 25, NULL, 16, 'STOCK', 'ASSET', '123', '2015-03-21', '2015-03-21 15:29:53', 2);
 
 --
 -- Triggers `tr_pr`
@@ -6728,21 +6763,20 @@ CREATE TABLE IF NOT EXISTS `tr_pros_detail` (
   `status_receive` smallint(1) DEFAULT '0',
   `status_picking` smallint(1) DEFAULT NULL COMMENT '1: picking 2: purchase 3: return',
   PRIMARY KEY (`id_detail_pros`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `tr_pros_detail`
 --
 
 INSERT INTO `tr_pros_detail` (`id_detail_pros`, `id_detail_ro`, `id_ro`, `id_sro`, `id_stock`, `kode_barang`, `qty`, `id_lokasi`, `date_create`, `status`, `status_receive`, `status_picking`) VALUES
-(1, 4, 2, 1, 1, '301', 4, 'Workshop', '2015-01-19 20:06:59', 1, 1, 1),
-(2, 5, 3, 2, 2, '302', 3, 'Workshop', '2015-01-19 20:07:24', 1, 1, 1),
-(3, 9, 19, 3, 3, '201', 3, 'Pusat', '2015-02-03 13:51:25', 1, 1, 1),
-(4, 13, 21, NULL, 0, '201', 23, 'CROSSDOCK', '2015-02-07 02:02:53', 1, 0, 2),
-(5, 13, 21, NULL, 0, '201', 54, 'CROSSDOCK', '2015-02-07 02:02:53', 1, 0, 2),
-(6, NULL, NULL, NULL, 0, '203', 2, 'CROSSDOCK', '2015-03-20 10:15:55', 1, 0, 2),
-(7, NULL, NULL, NULL, 0, '203', 1, 'CROSSDOCK', '2015-03-20 10:15:55', 1, 0, 2),
-(8, NULL, NULL, NULL, 0, '201', 3, 'CROSSDOCK', '2015-03-20 10:15:55', 1, 0, 2);
+(1, 4, 2, 1, 11, '201', 4, 'Workshop', '2015-02-01 20:06:59', 1, 1, 1),
+(2, 5, 3, 2, 11, '201', 3, 'Workshop', '2015-02-02 20:07:24', 1, 1, 1),
+(3, 9, 19, 3, 11, '201', 3, 'Pusat', '2015-02-03 13:51:25', 1, 1, 1),
+(15, 12, 20, NULL, 0, '201', 10, 'CROSSDOCK', '2015-03-21 15:42:08', 1, 0, 2),
+(16, 13, 21, NULL, 0, '201', 20, 'CROSSDOCK', '2015-03-21 15:42:20', 1, 0, 2),
+(17, 11, 20, NULL, 0, '202', 5, 'CROSSDOCK', '2015-03-21 15:42:20', 1, 0, 2),
+(18, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL);
 
 --
 -- Triggers `tr_pros_detail`
@@ -6784,7 +6818,7 @@ CREATE TABLE IF NOT EXISTS `tr_pr_detail` (
   `status` int(1) DEFAULT NULL,
   `status_delete` int(1) NOT NULL,
   PRIMARY KEY (`id_detail_pr`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `tr_pr_detail`
@@ -6804,7 +6838,9 @@ INSERT INTO `tr_pr_detail` (`id_detail_pr`, `id_pr`, `id_detail_ro`, `id_ro`, `k
 (11, 0, 10, 20, '100', 34, 1, '2015-03-20 10:45:48', NULL, 1, 0),
 (12, 0, 11, 20, '302', 12, 1, '2015-03-20 10:45:48', NULL, 1, 0),
 (13, 0, 12, 20, '100', 12, 1, '2015-03-20 10:45:48', NULL, 1, 0),
-(14, 0, 13, 21, '201', 46, 16, '2015-03-20 10:46:00', NULL, 1, 0);
+(14, 0, 13, 21, '201', 46, 16, '2015-03-20 10:46:00', NULL, 1, 0),
+(15, 0, 17, 24, '203', 20, 1, '2015-03-20 13:42:50', NULL, 1, 0),
+(16, 7, 18, 25, '100', 12, 16, '2015-03-21 15:32:09', NULL, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -7006,9 +7042,9 @@ CREATE TABLE IF NOT EXISTS `tr_receive` (
 --
 
 INSERT INTO `tr_receive` (`id_receive`, `id_courir`, `id_sro`, `date_create`, `id_user`, `status`) VALUES
-(1, 1, 1, '2015-01-19 00:00:00', 1, 1),
+(1, 1, 1, '2015-01-19 00:00:00', 1, 2),
 (2, 2, 2, '2015-01-19 00:00:00', 1, 2),
-(3, 1, 3, '2015-02-06 00:00:00', 1, 1);
+(3, 1, 3, '2015-02-06 00:00:00', 1, 2);
 
 --
 -- Triggers `tr_receive`
@@ -7141,7 +7177,7 @@ CREATE TABLE IF NOT EXISTS `tr_ro` (
   `status` int(1) DEFAULT NULL COMMENT '1: RO, 2: ROA, 3:ROL, 4: ROS, 5: Picking, 6: Shipment, 7: DO, 9: Reject',
   `status_order` smallint(1) DEFAULT '1' COMMENT '1: ORDER, 2: PURCHASE, 3: RETURN',
   PRIMARY KEY (`id_ro`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=24 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `tr_ro`
@@ -7151,8 +7187,10 @@ INSERT INTO `tr_ro` (`id_ro`, `user_id`, `purpose`, `cat_req`, `ext_doc_no`, `ET
 (19, 1, 'REQUEST', 'ASSET', '1', '2015-02-03', '2015-02-03 12:48:48', '2015-02-03 13:46:42', '0000-00-00 00:00:00', 'aaaaabbbb12', 'D12DD', 6, 1),
 (20, 1, 'REQUEST', 'ATK', '1234', '2015-02-04', '2015-02-04 16:27:03', '2015-02-04 16:28:30', '0000-00-00 00:00:00', 'bbbbbcccc12', 'D13DE', 6, 1),
 (21, 16, 'REQUEST', 'ASSET', '12354', '2015-02-06', '2015-02-06 17:28:29', '2015-02-06 17:29:24', '0000-00-00 00:00:00', 'ccccccddddd12', 'D14DF', 6, 1),
-(22, 16, 'REQUEST', 'ASSET', '89898', '2015-02-07', '2015-02-07 14:15:47', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'ddddeeee12', 'D15DG', 1, 1),
-(23, 1, 'REQUEST', 'ATK', '123', '2015-02-10', '2015-02-10 14:25:17', '2015-02-10 14:25:57', '0000-00-00 00:00:00', 'ffgggg12', 'D16DH', 4, 1);
+(22, 16, 'STOCK', 'ASSET', '89898', '2015-02-07', '2015-02-07 14:15:47', '2015-03-21 15:34:15', '0000-00-00 00:00:00', 'ddddeeee12', 'D15DG', 5, 1),
+(23, 1, 'REQUEST', 'ATK', '123', '2015-02-10', '2015-02-10 14:25:17', '2015-02-10 14:25:57', '0000-00-00 00:00:00', 'ffgggg12', 'D16DH', 4, 1),
+(24, 1, 'STOCK', 'ASSET', '11111', '2015-03-20', '2015-03-20 13:40:39', '2015-03-20 13:41:54', '0000-00-00 00:00:00', 'qw11111', 'D2345FG', 6, 1),
+(25, 16, 'STOCK', 'ASSET', '123', '2015-03-21', '2015-03-21 15:29:53', '2015-03-21 15:31:29', '0000-00-00 00:00:00', 'asd3432', 'dff45345', 6, 1);
 
 --
 -- Triggers `tr_ro`
@@ -7194,7 +7232,7 @@ CREATE TABLE IF NOT EXISTS `tr_ro_detail` (
   `status_delete` int(1) NOT NULL COMMENT '1. deleted',
   `id_sro` int(6) NOT NULL,
   PRIMARY KEY (`id_detail_ro`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `tr_ro_detail`
@@ -7215,7 +7253,10 @@ INSERT INTO `tr_ro_detail` (`id_detail_ro`, `id_ro`, `ext_doc_no`, `kode_barang`
 (12, 20, '1234', '100', 12, 1, 1, '2015-02-04 16:27:03', 'wqeqwe', 1, 0, 0),
 (13, 21, '12354', '201', 123, 1, 16, '2015-02-06 17:28:29', 'sadasd', 1, 0, 0),
 (14, 22, '89898', '100', 12, 1, 16, '2015-02-07 14:15:47', 'adsd', 1, 0, 0),
-(15, 23, '123', '302', 5, 2, 1, '2015-02-10 14:25:17', '-', 1, 0, 0);
+(15, 23, '123', '302', 5, 2, 1, '2015-02-10 14:25:17', '-', 1, 0, 0),
+(16, 24, '11111', '100', 12, 1, 1, '2015-03-20 13:40:39', 'PC unit', 1, 0, 0),
+(17, 24, '11111', '203', 23, 2, 1, '2015-03-20 13:40:39', 'Mouse', 1, 0, 0),
+(18, 25, '123', '100', 12, 1, 16, '2015-03-21 15:29:53', 'asdsad', 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -7231,7 +7272,7 @@ CREATE TABLE IF NOT EXISTS `tr_sro` (
   `id_user` varchar(21) DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id_sro`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `tr_sro`
@@ -7240,7 +7281,8 @@ CREATE TABLE IF NOT EXISTS `tr_sro` (
 INSERT INTO `tr_sro` (`id_sro`, `id_do`, `id_ro`, `date_create`, `id_user`, `status`) VALUES
 (1, 1, 2, '2015-01-19 00:00:00', '1', 2),
 (2, 2, 3, '2015-01-19 00:00:00', '1', 2),
-(3, 4, 19, '2015-02-06 00:00:00', '1', 2);
+(3, 4, 19, '2015-02-06 00:00:00', '1', 2),
+(5, 5, 24, '2015-03-20 00:00:00', '1', 2);
 
 --
 -- Triggers `tr_sro`
@@ -7272,25 +7314,18 @@ CREATE TABLE IF NOT EXISTS `tr_stock` (
   `status` int(1) DEFAULT NULL,
   `type_in` smallint(1) DEFAULT NULL COMMENT '1: in 2: transfer',
   PRIMARY KEY (`id_stock`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=25 ;
 
 --
 -- Dumping data for table `tr_stock`
 --
 
 INSERT INTO `tr_stock` (`id_stock`, `id_in`, `id_detail_in`, `kode_barang`, `qty`, `price`, `id_lokasi`, `date_create`, `status`, `type_in`) VALUES
-(1, NULL, NULL, '301', 4, 1000, 'Workshop', '2015-01-20 10:54:09', 1, NULL),
-(2, NULL, NULL, '302', 10, 500, 'Heavy Equipment', '2015-01-20 10:54:09', 1, NULL),
-(3, NULL, NULL, '201', 10, 250, 'Pusat', '2015-01-20 10:54:09', 1, 0),
-(4, NULL, NULL, '100', 15, 210, 'IT', '2015-02-07 01:33:33', 1, NULL),
-(5, 2, 6, '201', 10, 100, 'Pusat', '2015-02-07 02:02:53', 1, 1),
-(6, 2, 7, '201', 74, 100, 'Pusat', '2015-02-07 02:02:53', 1, 1),
-(7, 2, 10, '301', 1, 1000, 'IT', '2015-02-09 22:28:31', 1, 2),
-(8, 1, 7, '301', 1, 1000, 'IT', '2015-02-09 22:40:49', 1, 2),
-(9, 1, 7, '301', 1, 1000, 'IT', '2015-02-09 22:42:43', 1, 2),
-(10, 10, 61, '203', 2, NULL, 'A100', '2015-03-20 10:15:55', 1, 1),
-(11, 10, 62, '203', 1, NULL, 'A100', '2015-03-20 10:15:55', 1, 1),
-(12, 10, 63, '201', 3, NULL, 'A100', '2015-03-20 10:15:55', 1, 1);
+(11, 1, 1, '201', 0, 250, 'Pusat', '2015-02-01 10:54:09', 1, 0),
+(12, 2, 2, '201', 20, 450, 'Pusat', '2015-02-02 15:16:55', 1, 1),
+(13, 3, 3, '202', 5, 100, NULL, '2015-02-03 15:41:25', NULL, NULL),
+(14, 4, 4, '202', 5, 200, NULL, '2015-02-04 15:41:29', NULL, NULL),
+(15, 5, 5, '203', 10, 200, NULL, '2015-03-05 15:41:46', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -7313,7 +7348,7 @@ CREATE TABLE IF NOT EXISTS `tr_transfer` (
 --
 
 INSERT INTO `tr_transfer` (`id_transfer`, `type_transfer`, `note`, `date_create`, `user_id`, `status`) VALUES
-(1, 1, 'tes', '2015-01-19 23:43:10', 1, 1),
+(1, 1, 'tes', '2015-01-19 23:43:10', 1, 2),
 (2, 1, 'tes 2', '2015-01-19 23:45:15', 1, 1),
 (3, 1, '-', '2015-02-10 13:33:58', 1, 1);
 
@@ -7356,16 +7391,24 @@ CREATE TABLE IF NOT EXISTS `tr_transfer_detail` (
   `id_lokasi` varchar(21) DEFAULT NULL,
   `status` smallint(1) DEFAULT NULL,
   PRIMARY KEY (`id_detail_transfer`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
 
 --
 -- Dumping data for table `tr_transfer_detail`
 --
 
 INSERT INTO `tr_transfer_detail` (`id_detail_transfer`, `id_transfer`, `id_stock`, `kode_barang`, `qty`, `price`, `id_lokasi`, `status`) VALUES
-(7, 1, 1, '301', 1, 1000, 'IT', 1),
+(7, 1, 1, '301', 1, 1000, 'A100', 1),
 (10, 2, 1, '301', 2, 1000, 'Workshop', 1),
-(15, 3, 2, '302', 7, 500, 'Pusat', 1);
+(15, 3, 2, '302', 7, 500, 'Pusat', 1),
+(16, 2, 3, '201', NULL, 250, NULL, 1),
+(17, 2, 5, '201', NULL, 100, NULL, 1),
+(18, 2, 6, '201', NULL, 100, NULL, 1),
+(19, 2, 12, '201', NULL, 0, NULL, 1),
+(20, 2, 3, '201', NULL, 250, NULL, 1),
+(21, 2, 5, '201', NULL, 100, NULL, 1),
+(22, 2, 6, '201', NULL, 100, NULL, 1),
+(23, 2, 12, '201', NULL, 0, NULL, 1);
 
 --
 -- Triggers `tr_transfer_detail`
