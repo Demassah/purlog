@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 21, 2015 at 01:22 PM
+-- Generation Time: Mar 21, 2015 at 01:31 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -6227,17 +6227,17 @@ INSERT INTO `sys_menu` (`menu_id`, `menu_group`, `menu_name`, `menu_parent`, `ur
 (45, 'Master Data', 'Kurir', 5, 'courir', 5, 0, 'icon-po', 'ACCESS;ADD;EDIT;DELETE;'),
 (46, 'Master Data', 'Lokasi', 5, 'lokasi', 6, 0, 'icon-otoritas', 'ACCESS;ADD;EDIT;DELETE;'),
 (47, 'Laporan', 'Laporan', 0, '#', 5, 0, 'icon-ordered', 'ACCESS;'),
-(48, 'Laporan', 'Laporan Picking', 47, 'laporan_picking', 1, 0, 'icon-po', 'PDF;EXCEL;'),
-(49, 'Laporan', 'Laporan Delivery Order', 47, 'laporan_delivery', 2, 0, 'icon-po', 'PDF;EXCEL;'),
-(50, 'Laporan', 'Laporan Document Receive', 47, 'laporan_document', 4, 0, 'icon-po', 'PDF;EXCEL;'),
-(51, 'Laporan', 'Laporan Shipment', 47, 'laporan_shipment', 3, 0, 'icon-po', 'PDF;EXCEL;'),
-(52, 'Laporan', 'Laporan Inbound', 47, 'laporan_inbound', 5, 0, 'icon-po', 'PDF;EXCEL;'),
-(53, 'Laporan', 'Laporan Purchase', 47, 'laporan_purchase', 6, 0, 'icon-po', 'PDF;EXCEL;'),
-(54, 'Laporan', 'Laporan Pembelian', 47, 'laporan_pembelian', 7, 0, 'icon-po', 'PDF;EXCEL;'),
-(55, 'Laporan', 'Laporan Outstanding Supply', 47, 'laporan_outstanding', 8, 0, 'icon-po', 'PDF;EXCEL;'),
-(56, 'Laporan', 'Laporan Penerimaan ', 47, 'laporan_penerimaan', 9, 0, 'icon-po', 'PDF;EXCEL;'),
-(57, 'Laporan', 'Laporan Pemakaian', 47, 'laporan_usage', 10, 0, 'icon-po', 'PDF;EXCEL;'),
-(58, 'Laporan', 'Laporan Persediaan', 47, 'laporan_persediaan', 11, 0, 'icon-po', 'PDF;EXCEL;');
+(48, 'Laporan', 'Laporan Picking', 47, 'laporan_picking', 1, 0, 'icon-po', 'ACCESS;PDF;EXCEL;'),
+(49, 'Laporan', 'Laporan Delivery Order', 47, 'laporan_delivery', 2, 0, 'icon-po', 'ACCESS;PDF;EXCEL;'),
+(50, 'Laporan', 'Laporan Document Receive', 47, 'laporan_document', 4, 0, 'icon-po', 'ACCESS;PDF;EXCEL;'),
+(51, 'Laporan', 'Laporan Shipment', 47, 'laporan_shipment', 3, 0, 'icon-po', 'ACCESS;PDF;EXCEL;'),
+(52, 'Laporan', 'Laporan Inbound', 47, 'laporan_inbound', 5, 0, 'icon-po', 'ACCESS;PDF;EXCEL;'),
+(53, 'Laporan', 'Laporan Purchase', 47, 'laporan_purchase', 6, 0, 'icon-po', 'ACCESS;PDF;EXCEL;'),
+(54, 'Laporan', 'Laporan Pembelian', 47, 'laporan_pembelian', 7, 0, 'icon-po', 'ACCESS;PDF;EXCEL;'),
+(55, 'Laporan', 'Laporan Outstanding Supply', 47, 'laporan_outstanding', 8, 0, 'icon-po', 'ACCESS;PDF;EXCEL;'),
+(56, 'Laporan', 'Laporan Penerimaan ', 47, 'laporan_penerimaan', 9, 0, 'icon-po', 'ACCESS;PDF;EXCEL;'),
+(57, 'Laporan', 'Laporan Pemakaian', 47, 'laporan_usage', 10, 0, 'icon-po', 'ACCESS;PDF;EXCEL;'),
+(58, 'Laporan', 'Laporan Persediaan', 47, 'laporan_persediaan', 11, 0, 'icon-po', 'ACCESS;PDF;EXCEL;');
 
 -- --------------------------------------------------------
 
@@ -6349,7 +6349,7 @@ INSERT INTO `sys_user_access` (`user_access_id`, `menu_id`, `user_level_id`, `po
 (780, 15, 14, 'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),
 (781, 17, 14, 'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),
 (782, 39, 14, 'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),
-(783, 20, 14, 'ACCESS;ADD;DETAIL;EDIT;DELETE;'),
+(783, 20, 14, ''),
 (784, 18, 14, 'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),
 (785, 1, 14, 'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),
 (786, 23, 14, 'ACCESS;ADD;DETAIL;EDIT;DELETE;SELECT;PRINT;PDF;EXCEL;IMPORT;APPROVE;'),
@@ -6404,17 +6404,17 @@ INSERT INTO `sys_user_access` (`user_access_id`, `menu_id`, `user_level_id`, `po
 (835, 45, 14, 'ACCESS;ADD;EDIT;DELETE;'),
 (836, 46, 14, 'ACCESS;ADD;EDIT;DELETE;'),
 (837, 47, 14, 'ACCESS;'),
-(838, 48, 14, 'ACCESS;PDF;EXCEL;'),
-(839, 49, 14, 'ACCESS;PDF;EXCEL;'),
-(840, 51, 14, 'ACCESS;PDF;EXCEL;'),
-(841, 50, 14, 'ACCESS;PDF;EXCEL;'),
-(842, 52, 14, 'ACCESS;PDF;EXCEL;'),
-(843, 53, 14, 'ACCESS;PDF;EXCEL;'),
+(838, 48, 14, ''),
+(839, 49, 14, ''),
+(840, 51, 14, ''),
+(841, 50, 14, ''),
+(842, 52, 14, ''),
+(843, 53, 14, ''),
 (844, 54, 14, 'ACCESS;PDF;EXCEL;'),
 (845, 55, 14, 'ACCESS;PDF;EXCEL;'),
 (846, 56, 14, 'ACCESS;PDF;EXCEL;'),
 (847, 57, 14, 'ACCESS;PDF;EXCEL;'),
-(848, 58, 14, 'ACCESS;PDF;EXCEL;');
+(848, 58, 14, 'ACCESS;PDF;');
 
 -- --------------------------------------------------------
 
