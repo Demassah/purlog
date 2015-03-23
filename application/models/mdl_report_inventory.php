@@ -18,46 +18,15 @@ class mdl_report_inventory extends CI_Model {
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-		$query = $this->db->query("select a.id_detail_in, a.id_in, c.id_stock, a.kode_barang, a.qty as masuk, coalesce(sum(d.qty),0) as keluar, (a.qty - coalesce(sum(d.qty),0)) as stock, c.price, c.id_lokasi, x.nama_barang
-			from tr_in_detail a
-			JOIN ref_barang x	on x.kode_barang = a.kode_barang
-			LEFT JOIN tr_in b	on a.id_in = b.id_in
-			LEFT JOIN tr_stock c	on a.id_detail_in = c.id_detail_in
-			LEFT JOIN tr_pros_detail d on c.id_stock = d.id_stock and DATE_FORMAT(d.date_create,'%Y-%m-%d') BETWEEN '$date_1' and NOW()
-
-			where DATE_FORMAT(b.date_create,'%Y-%m-%d') BETWEEN '$date_1' and NOW()
-			GROUP BY id_detail_in ASC;");
-		// $this->db->select(' a.id_detail_in, a.id_in, c.id_stock, a.kode_barang, x.nama_barang, c.price, c.id_lokasi, a.qty masuk, sum(d.qty) keluar, (a.qty - sum(d.qty)) stock,b.date_create');
-		// $this->db->from('tr_in_detail a');
-		// $this->db->join('ref_barang x', 'x.kode_barang = a.kode_barang', 'left');
-		// $this->db->join('tr_in b', 'b.id_in = a.id_in', 'left');
-		// $this->db->join('tr_stock c', 'c.id_detail_in = a.id_detail_in', 'left');
-
-
-		// if($date_1 != '') {
-		// 	$date_2 = '2015-02-03';
-		// 	$cari = "d.id_stock = c.id_stock and d.date_create between '$date_1' and '$date_2'";
-		// 	$this->db->join('tr_pros_detail d',$cari,'left');
-		// 	//$cari = "d.id_stock = c.id_stock and d.date_create between '$date_1' and now()";
-		// 	$cari2 = "b.date_create between '$date_1' and '$date_2'";
-		// 	$this->db->where($cari2);
-		// 	}else{
-		// 		// if ($supplier !='') {
-		// 		// 	$cari = "g.name_vendor = '$supplier'";
-		// 		// 	$this->db->where($cari);
-		// 		// 	}else{
-		// 				if($kode_barang !=''){
-		// 					$this->db->where('a.kode_barang', $kode_barang);
-		// 				}else{
-		// 					$this->db->join('tr_pros_detail d', 'd.id_stock = c.id_stock', 'left');
-		// 				}
-		// 		//}
-		// 	}
-
-		
-		// $this->db->where('a.status','1');
-		// $this->db->group_by('id_detail_in asc');
-		// $this->db->order_by($sort, $order);
+		$query = $this->db->query("select a.id_stock, a.kode_barang, d.nama_barang, a.price, a.id_lokasi, a.qty as soh, 
+			coalesce(sum(b.qty),0) as keluar, coalesce(c.qty,0) as masuk, ((a.qty + coalesce(sum(b.qty),0))- coalesce(c.qty,0)) as stock
+			FROM tr_stock a
+			left join tr_pros_detail b on a.id_stock = b.id_stock and date_format(b.date_create, '%Y-%m-%d') between '$date_1' and now()
+			left join tr_in_detail c on a.id_detail_in = c.id_detail_in and date_format(c.date_create, '%Y-%m-%d') between '$date_1' and now()
+			join ref_barang d on a.kode_barang = d.kode_barang
+			group by a.id_stock
+			HAVING stock <> 0 ;");
+				
 		$this->db->stop_cache();
 		
 		# get count
@@ -92,15 +61,15 @@ function report_inventory_excel_kode($date_1)
 	{
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$query = $this->db->query("select a.id_detail_in, a.id_in, c.id_stock, a.kode_barang, a.qty as masuk, coalesce(sum(d.qty),0) as keluar, (a.qty - coalesce(sum(d.qty),0)) as stock, c.price, c.id_lokasi, x.nama_barang,b.date_create
-			from tr_in_detail a
-			JOIN ref_barang x	on x.kode_barang = a.kode_barang
-			LEFT JOIN tr_in b	on a.id_in = b.id_in
-			LEFT JOIN tr_stock c	on a.id_detail_in = c.id_detail_in
-			LEFT JOIN tr_pros_detail d on c.id_stock = d.id_stock and DATE_FORMAT(d.date_create,'%Y-%m-%d') BETWEEN '$date_1' and NOW()
-
-			where DATE_FORMAT(b.date_create,'%Y-%m-%d') BETWEEN '$date_1' and NOW()
-			GROUP BY id_detail_in ASC;");
+			$query = $this->db->query("select a.id_stock, a.kode_barang, d.nama_barang, a.price, a.id_lokasi, a.qty as soh, 
+			coalesce(sum(b.qty),0) as keluar, coalesce(c.qty,0) as masuk, ((a.qty + coalesce(sum(b.qty),0))- coalesce(c.qty,0)) as stock
+			FROM tr_stock a
+			left join tr_pros_detail b on a.id_stock = b.id_stock and date_format(b.date_create, '%Y-%m-%d') between '$date_1' and now()
+			left join tr_in_detail c on a.id_detail_in = c.id_detail_in and date_format(c.date_create, '%Y-%m-%d') between '$date_1' and now()
+			join ref_barang d on a.kode_barang = d.kode_barang
+			group by a.id_stock
+			HAVING stock <> 0
+			;");
 		return	$query;     
 	$this->db->stop_cache();   
 

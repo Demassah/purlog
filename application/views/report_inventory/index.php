@@ -32,9 +32,7 @@
 			<th field="id_stock" sortable="true" width="100" >ID Stock</th>
 			<th field="kode_barang" sortable="true" width="130">Kode Barang</th>
 			<th field="nama_barang" sortable="true" width="130">Nama Barang</th>
-			<th field="masuk" sortable="true" width="90">Qty In</th>
-			<th field="keluar" sortable="true" width="90">Qty Out</th>
-			<th field="stock" sortable="true" width="90">Qty Stock</th>
+			<th field="stock" sortable="true" width="90">Qty</th>
 			<th field="price" sortable="true" width="120">price</th>
 			<th field="id_lokasi" sortable="true" width="120">Lokasi</th>
 			
