@@ -106,10 +106,7 @@
 
 	actiondetail = function(value, row, index){
       var col='';
-      	<?if($this->mdl_auth->CekAkses(array('menu_id'=>43, 'policy'=>'EDIT'))){?>
-          col = '<a href="#" onclick="alokasi(\''+row.id_detail_transfer+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Transfer</a>';
-       	<?}?>
-       	col += '&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="deleteData(\''+row.id_detail_transfer+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
+				col += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="deleteData(\''+row.id_detail_transfer+'\');" class="easyui-linkbutton" iconCls="icon-edit" plain="false">Delete</a>';
       return col;
     }
 
@@ -161,6 +158,8 @@
 	});
 </script>
 
+
+
 <table id="dtgrd" title="Detail Transfer" data-options="
 			rownumbers:true,
 			singleSelect:false,
@@ -186,3 +185,22 @@
 	</thead>
 </table>
 
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("div").on('change' ,'.D_Transfer', function(event) {
+          var ID_detail = $(this).attr('id');
+          $("#qty_input_"+ID_detail).numericInput();
+    }).change(function(event) {
+        var ID_detail = $(this).attr('id');
+        var pick = parseInt($("#qty_input_"+ID_detail).val());
+        var pick_qty = parseInt($("#qty_sisa_"+ID_detail).val());
+        console.log(pick +' '+ pick_qty);
+        if(pick > pick_qty || pick == 0 ){
+             $("#qty_input_"+ID_detail).val("");
+            alert("Nilai Melebihi sisa yang diajukan atau Nilai sama dengan Nol ");
+        }
+    });
+
+
+});
+</script>

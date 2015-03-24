@@ -53,6 +53,7 @@
 
   });
 </script>
+
 <form name="form3" id="form3" method="post">
   <table border="0" cellpadding="1" cellspacing="1" width="100%">
     <tr>
@@ -95,6 +96,7 @@
         <th width="" bgcolor="#F4F4F4">Qty</th>
         <th width="" bgcolor="#F4F4F4">Price</th>
         <th width="" bgcolor="#F4F4F4">Lokasi</th>
+        <th width="" bgcolor="#F4F4F4">Qty Transfer</th>
         <th width="80px" align="center" bgcolor="#F4F4F4">Aksi</th>
       </tr>
     </thead>
