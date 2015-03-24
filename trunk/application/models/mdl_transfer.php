@@ -295,8 +295,8 @@ class mdl_transfer extends CI_Model {
         
     }
 
-    function countDetail($qty){
-		$this->db->where('qty', $qty);
+    function countDetail($id_transfer){
+		$this->db->where('id_transfer', $id_transfer);
 		$this->db->from('tr_transfer_detail');
 		
 		return $this->db->count_all_results();
