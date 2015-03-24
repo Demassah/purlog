@@ -115,8 +115,8 @@ class mdl_transfer extends CI_Model {
 		$this->db->flush_cache();
 		$this->db->select('a.id_stock, a.kode_barang, a.price, a.kode_barang, a.status, b.nama_barang, a.qty, a.id_lokasi');
 			$this->db->from('tr_stock a');
-			$this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang');
-			$this->db->join('tr_transfer_detail c', 'c.id_stock = a.id_stock', 'left');
+			$this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang','left');
+			//$this->db->join('tr_transfer_detail c', 'c.id_stock = a.id_stock', 'left');
 			//var_dump($dt); exit();
 			$this->db->where('a.kode_barang', $data['kode_barang']);
 			//$this->db->where('a.status','1');
