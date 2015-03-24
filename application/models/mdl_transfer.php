@@ -111,49 +111,22 @@ class mdl_transfer extends CI_Model {
 		return $tmp;
 	}
 
-	function getdata_transfer($dt){
+	function getdata_transfer($data){
 		$this->db->flush_cache();
 		$this->db->select('a.id_stock, a.kode_barang, a.price, a.kode_barang, a.status, b.nama_barang, a.qty, a.id_lokasi');
 			$this->db->from('tr_stock a');
 			$this->db->join('ref_barang b', 'b.kode_barang = a.kode_barang');
 			$this->db->join('tr_transfer_detail c', 'c.id_stock = a.id_stock', 'left');
 			//var_dump($dt); exit();
-			$this->db->where('a.kode_barang', $dt['kode_barang']);
+			$this->db->where('a.kode_barang', $data['kode_barang']);
 			//$this->db->where('a.status','1');
 
 		//$this->db->limit($dt['jumlah'], 0);
 		//$this->db->group_by('id_detail_pr');
 		$this->db->order_by('a.kode_barang', 'ASC');
 		
-		$q = $this->db->get()->result();
-		
-		$out = '';
-		$i=1;
-		$color = '';
-		foreach($q as $r){
-			$color = ($i % 2 == 0)?'#FFFFFF':'#e6e6e6';
-			$out .= '<tr>';
-			$out .= '  <td bgcolor="'.$color.'">'.$i;
-			$out .= '     <input type="hidden" name="data['.$i.'][id_stock]" value="'.$r->id_stock.'">';
-			$out .= '     <input type="hidden" name="data['.$i.'][kode_barang]" value="'.$r->kode_barang.'">';
-			$out .= '     <input type="hidden" name="data['.$i.'][price]" value="'.$r->price.'">';
-						  
-			$out .= '  </td>';
-			$out .= '  <td bgcolor="'.$color.'">'.$r->id_stock.'</td>';
-			$out .= '  <td bgcolor="'.$color.'">'.$r->kode_barang.'</td>';
-			$out .= '  <td bgcolor="'.$color.'">'.$r->nama_barang.'</td>';
-			$out .= '  <td bgcolor="'.$color.'">'.$r->qty.'</td>';
-			$out .= '  <td bgcolor="'.$color.'">'.$r->price.'</td>';
-			$out .= '  <td bgcolor="'.$color.'">'.$r->id_lokasi.'</td>';
-			$out .= '  <td bgcolor="'.$color.'" align="center">';
-			$out .= '   <label>
-									<input style="margin-top:2px;" type="checkbox" name="data['.$i.'][chk]" id="checkbox"/>';
-			$out .= '  </td>';
-			$out .= '</tr>';
-			$i++;
-		}
-		
-		return $out;
+		return  $q = $this->db->get()->result();
+	
 	}
 
 	function InsertDetailOnDB($data){
@@ -183,6 +156,8 @@ class mdl_transfer extends CI_Model {
 				$this->db->set('id_stock', $row['id_stock']);
 				$this->db->set('kode_barang', $row['kode_barang']);
 				$this->db->set('price', $row['price']);
+				$this->db->set('id_lokasi', $row['lokasi']);
+				$this->db->set('qty', $row['qty_trans']);
 				$this->db->set('status', '1');
 				//var_dump($row); exit();
 				//$this->db->where('id_detail_pr', $row['id_detail_pr']);

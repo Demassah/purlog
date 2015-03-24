@@ -125,8 +125,9 @@ class transfer extends CI_Controller {
                 // get post
                 $data['kode_barang'] = $this->input->post('kode_barang');
                 $data['jumlah'] = $this->input->post('jumlah');
-               
-                echo $this->mdl_transfer->getdata_transfer($data);
+                $list['q'] = $this->mdl_transfer->getdata_transfer($data);
+                $this->load->view('transfer/list_detail', $list);
+                //echo $this->mdl_transfer->getdata_transfer($data);
         }
 
         function saveDetail($id=null) {

@@ -11,7 +11,8 @@ class mdl_report_inventory extends CI_Model {
 		$offset = ($page-1)*$limit;
 
 		#get filter
-		$date_1 = isset($_POST['date_1']) ? strval($_POST['date_1']) : '';
+	   $date_1 = isset($_POST['date_1']) ? strval($_POST['date_1']) : '';
+		 $date = $this->mdl_report_inventory->adddate($date_1,"+1 day");
 		//$date_2 = isset($_POST['date_2']) ? strval($_POST['date_2']) : '';
 		$supplier = isset($_POST['supplier']) ? strval($_POST['supplier']) : '';
 		$kode_barang = isset($_POST['kode_barang']) ? strval($_POST['kode_barang']) : '';
@@ -21,8 +22,8 @@ class mdl_report_inventory extends CI_Model {
 		$query = $this->db->query("select a.id_stock, a.kode_barang, d.nama_barang, a.price, a.id_lokasi, a.qty as soh, 
 			coalesce(sum(b.qty),0) as keluar, coalesce(c.qty,0) as masuk, ((a.qty + coalesce(sum(b.qty),0))- coalesce(c.qty,0)) as stock
 			FROM tr_stock a
-			left join tr_pros_detail b on a.id_stock = b.id_stock and date_format(b.date_create, '%Y-%m-%d') between '$date_1' and now()
-			left join tr_in_detail c on a.id_detail_in = c.id_detail_in and date_format(c.date_create, '%Y-%m-%d') between '$date_1' and now()
+			left join tr_pros_detail b on a.id_stock = b.id_stock and date_format(b.date_create, '%Y-%m-%d') between '$date' and now()
+			left join tr_in_detail c on a.id_detail_in = c.id_detail_in and date_format(c.date_create, '%Y-%m-%d') between '$date' and now()
 			join ref_barang d on a.kode_barang = d.kode_barang
 			group by a.id_stock
 			HAVING stock <> 0 ;");
@@ -39,6 +40,17 @@ class mdl_report_inventory extends CI_Model {
 		$tmp['row_data'] = $query;
 		return $tmp;
 
+	}
+
+	function adddate($vardate,$added)
+	{
+
+		$data = explode("-", $vardate);
+		$date = new DateTime();
+		$date->setDate($data[0], $data[1], $data[2]);
+		$date->modify("".$added."");
+		$day= $date->format("Y-m-d");
+		return $day;
 	}
 
 	function togrid($data, $count){
