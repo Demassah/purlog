@@ -224,7 +224,7 @@ class transfer extends CI_Controller {
 
 	function done($id){
 		$result = $this->mdl_transfer->countDetail($id);
-		if($result > 0){
+		if($result->id_detail_transfer > 0){
 			$result = $this->mdl_transfer->done($id);
 			if (!$result){
 				echo json_encode(array('msg'=>'Data gagal di kirim'));

@@ -17,6 +17,7 @@
 			echo '  <td bgcolor="'.$color.'">'.$r->nama_barang.'</td>';
 			echo '  <td bgcolor="'.$color.'"><input type="hidden" id="qty_sisa_'.$i.'" value='.$r->qty.'>'.$r->qty.'</td>';
 			echo '  <td bgcolor="'.$color.'">'.$r->price.'</td>';
+			echo '  <td bgcolor="'.$color.'">'.$r->id_lokasi.'</td>';
 			echo '  <td bgcolor="'.$color.'"><select id="id_lokasi" name="data['.$i.'][lokasi]" style="width:100px;">'
 									.$this->mdl_prosedur->OptionLokasi().
 								'</select></td>';
