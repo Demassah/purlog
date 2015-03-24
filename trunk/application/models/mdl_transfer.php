@@ -299,7 +299,7 @@ class mdl_transfer extends CI_Model {
 		$this->db->where('id_transfer', $id_transfer);
 		$this->db->from('tr_transfer_detail');
 		
-		return $this->db->row_result();
+		return $this->db->count_all_results();
 	}
 
 }
