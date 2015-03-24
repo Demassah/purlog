@@ -58,6 +58,7 @@ class mdl_inbound extends CI_Model {
 			$this->db->start_cache();
 				$this->db->select('id_po,id_pr,sisa');
 				$this->db->where('sisa !=', 0);
+				$this->db->where('statuspo ', 2);
 				$this->db->group_by('id_pr');
 				$this->db->order_by('id_pr', 'asc');
 				$res = $this->db->get('v_po_inbound_2');
