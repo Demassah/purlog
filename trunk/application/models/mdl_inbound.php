@@ -218,27 +218,59 @@ class mdl_inbound extends CI_Model {
 	}
 /*---------------------Insert Detail Inbound--------------------------------------- */
 	
-		function Insert_detail()
+		function Insert_detail($data)
 		{
-			//echo $kode_barang = $this->input->post('kode_barang');
-			// $ext_rec_no = $this->input->post('ext_rec_no');
-			// $id_pr = $this->input->post('id_pr');
-			// $detail = $this->input->post('id_detail_pr');
-			//print_r( $kode_barang = explode(',',$kode_barang));
-			// $pick = explode(',',$pick);
-			// $jumlah = count($data['detail_id']);
-			// for($i=0;$i<$jumlah;$i++){
-			// 	 $id_lokasis = $data['lokasi'][$i];
-					
-					
-				
-				
-			// }
+			echo "test";
+			// echo $jumlah = count($data['ext_rec_no']);
+			// 	for($i=0;$i<$jumlah;$i++){
+			// 		echo $data['lokasi'][$i];
+			// 	}
+		// 	$id_in = $this->input->post('id_in');
+		// 	$id_detail_qrs = $this->input->post('id_detail_qrs');
+		// 	$kode_barang = $this->input->post('kode_barang');
+		// 	$lokasi = $this->input->post('lokasi');
+		// 	$sisa_input = $this->input->post('sisa_input');
 
-		
+		// 	$id_in = explode(',',$id_in);
+		// 	$id_detail_qrs = explode(',',$id_detail_qrs);
+		// 	$kode_barang = explode(',',$kode_barang);
+		// 	$lokasi = explode(',',$lokasi);
+		// 	$sisa_input = explode(',',$sisa_input);
 
-				
-			//$kode = $this->mdl_inbound->cek_lokasi($lokasi);
+		// 	$z=0;
+		// 	foreach ($kode_barang as $detail_key => $detail_value) {
+		// 		//print_r($pick[$z]);
+		// 		if($pick[$z] != 0){
+		// 			$item_list = $this->mdl_quotation_request_selected->cek_qty($detail_value,$id_qrs);
+		// 			// if($detail_value === $item_id->id_detail_pr && $id_qrs === $item_id->id_qrs){
+		// 			if($item_list > 0 ){
+		// 				$item_id = $this->mdl_quotation_request_selected->cek_id_pr($detail_value,$id_qrs);
+		// 				$this->db->where('id_detail_pr', $item_id->id_detail_pr);
+		// 				$this->db->where('id_qrs', $item_id->id_qrs);
+		// 				$total[$z] = $pick[$z] + $item_id->qty;
+		// 				$this->db->set('qty',$total[$z]);
+		// 				$result = $this->db->update('tr_qrs_detail');
+		// 				}else{
+		// 			$item = $this->mdl_quotation_request_selected->cek_detail($detail_value);
+		// 				$this->db->set('id_detail_pr',$item->id_detail_pr);
+		// 				$this->db->set('kode_barang',$item->kode_barang);
+		// 				$this->db->set('qty',$pick[$z]);
+		// 				$this->db->set('id_qrs',$id_qrs);
+		// 				$this->db->set('id_pr',$id_pr);
+		// 				$this->db->set('status',1);
+		// 				$result = $this->db->insert('tr_qrs_detail',$item);
+		// 			}
+		// 		}
+		// 		$z++;
+		// 	}
+		// 	//return
+		// 	if($result) {
+		// 		return TRUE;
+		// 	}else {
+		// 		return FALSE;
+		// }
+
+		//$kode = $this->mdl_inbound->cek_lokasi($lokasi);
 				// for($i=0;$i<$jumlah;$i++){
 				// 		if($data['lokasi']== $kode->lokasi){
 				// 			$this->db->set('id_in',$data['id_in'][$i]);

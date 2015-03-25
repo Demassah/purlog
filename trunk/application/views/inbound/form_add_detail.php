@@ -25,7 +25,7 @@
 							<input type="hidden" class="kode_barang" name="kode_barang[]" value="'.$l->kode_barang.'">
 					</td>
 					<td>'.$l->nama_barang.'
-							<input type="hidden" class="ext_rec_no" name="ext_rec_no[]" value="'.$l->id_detail_qrs.'">
+							<input type="hidden" class="id_detail_qrs" name="ext_rec_no[]" value="'.$l->id_detail_qrs.'">
 					</td>
 					<td><select id="id_lokasi" class="lokasi" name="lokasi[]" style="width:100px;">'.$this->mdl_prosedur->OptionLokasi().'
 								
@@ -40,7 +40,7 @@
 					<td><div id="'.$l->id_detail_qrs.'" class="inbound">
 							<span id="sisa_"'.$l->id_detail_qrs.'">'.$l->sisa.'</span>
 							<input type="hidden" value="'.$l->sisa.'" id="sisa_'.$l->id_detail_qrs.'" size="2">
-							<input type="text" name="sisa[]" value="" id="sisa_input_'.$l->id_detail_qrs.'" size="2">
+							<input type="text" name="sisa[]" value="" id="sisa_input_'.$l->id_detail_qrs.'" class="sisa_input" size="2">
 							<input type="hidden" name="id_in[]" value="'.$l->id_in_asal.'">
 							</div>
 					</td>
