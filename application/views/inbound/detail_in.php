@@ -55,38 +55,70 @@
       url = base_url+'inbound/save_detail/add';
     }
     // end newData
-    saveData = function () {
-      var id_qrs = $('.id_qrs').val();
-      var id_pr = $('.id_pr').val();
-      var pick = $('.pick_input').map(function(){
-          return $(this).val();
-         }).get();
-      var id_detail_pr = $('.detail_pr').map(function(){
-          return $(this).val();
-         }).get();
-      $.ajax({
-        url: base_url+'inbound/save_detail/add',
-        type  : 'POST',
-        data  : 'pick='+pick+'&id_detail_pr='+id_detail_pr+'&id_qrs='+id_qrs+'&id_pr='+id_pr,
-        success : function(response, textStatus){
-         //alert(response);
-         var response = eval('('+response+')');
-         if(response.success){
+    saveData = function(){
+      $('#form2').form('submit',{
+        url: url,
+        onSubmit: function(){
+          return $(this).form('validate');
+        },
+        success: function(result){
+          //alert(result);
+          var result = eval('('+result+')');
+          if (result.success){
+            
+            $('#dialog').dialog('close');   // close the dialog
             $.messager.show({
-              title: 'Success',
-              msg: 'Data Berhasil Disimpan'
+              title: 'Succes',
+              msg: 'Data Berhasil Ditambahkan  ',
             });
-            $('#dialog').dialog('close');
-            $('#detail_dg_qrs').datagrid('reload');
-          }else{
+            $('#dg_detail_in').datagrid('reload');
+          } else {
             $.messager.show({
               title: 'Error',
-              msg: response.msg
+              msg: result.msg
             });
           }
         }
       });
     }
+
+    // saveData = function () {
+    //   var id_in = $('.id_in').val();
+    //   var id_detail_qrs =$('.id_detail_qrs').map(function(){
+    //       return $(this).val();
+    //      }).get();
+    //   var kode_barang =$('.kode_barang').map(function(){
+    //       return $(this).val();
+    //      }).get();
+    //   var lokasi = $('.lokasi').map(function(){
+    //       return $(this).val();
+    //      }).get();
+    //   var sisa_input = $('.sisa_input').map(function(){
+    //       return $(this).val();
+    //      }).get();
+    //   $.ajax({
+    //     url: base_url+'inbound/save_detail/add',
+    //     type  : 'POST',
+    //     data  : 'id_in='+id_in+'&id_detail_qrs='+id_detail_qrs+'&kode_barang='+kode_barang+'&lokasi='+lokasi+'&sisa_input='+sisa_input,
+    //     success : function(response, textStatus){
+    //      //alert(response);
+    //      var response = eval('('+response+')');
+    //      if(response.success){
+    //         $.messager.show({
+    //           title: 'Success',
+    //           msg: 'Data Berhasil Disimpan'
+    //         });
+    //         $('#dialog').dialog('close');
+    //         $('#detail_dg_qrs').datagrid('reload');
+    //       }else{
+    //         $.messager.show({
+    //           title: 'Error',
+    //           msg: response.msg
+    //         });
+    //       }
+    //     }
+    //   });
+    // }
 
     cetakData = function(val){    
       window.open(base_url+'inbound/laporan_pdf/'+ id_in + "/" + type);      

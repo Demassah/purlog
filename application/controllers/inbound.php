@@ -109,54 +109,54 @@ class inbound extends CI_Controller {
   	$this->load->view('inbound/form_add_detail', $data, FALSE);
   }
 
-  function save_detail($aksi){
+  //function save_detail($aksi){
 		# init
 			
-		$status = "";
-		$result = false;
-		$data['pesan_error'] = '';
-
-			if($aksi=="add"){ // add
-			//print_r($data['id_detail_qrs']);
-			$result = $this->mdl_quotation_request_selected->Insert_detail();
-			}else { // edit
-				$result=$this->mdl_quotation_request_selected->cancel($data);
-			}		
-		if($result){
-			echo json_encode(array('success'=>true));
-		}else{
-			echo json_encode(array('msg' => 'Data gagal dikirim '));
-		}
-	
-
-
-  // function save_detail($aksi){
-		// # init
 		// $status = "";
 		// $result = false;
 		// $data['pesan_error'] = '';
+
+		// 	if($aksi=="add"){ // add
+		// 	//print_r($data['id_detail_qrs']);
+		// 	$result = $this->mdl_inbound->Insert_detail();
+		// 	}else { // edit
+		// 		$result=$this->mdl_inbound->cancel($data);
+		// 	}		
+		// if($result){
+		// 	echo json_encode(array('success'=>true));
+		// }else{
+		// 	echo json_encode(array('msg' => 'Data gagal dikirim '));
+	//	}
+	
+
+
+  function save_detail($aksi){
+		# init
+		$status = "";
+		$result = false;
+		$data['pesan_error'] = '';
 		
-		// # get post data
-		// foreach($_POST as $key => $value){
-		// 	$data[$key] = $value;
-		// }
+		# get post data
+		foreach($_POST as $key => $value){
+			$data[$key] = $value;
+		}
 		
 		// # rules validasi form
 		// $this->form_validation->set_rules("detail_id[]", 'receive', 'trim|required|xss_clean');
 		// # message rules
 		// $this->form_validation->set_message('required', 'Field %s harus diisi.');
 
-		// $data['pesan_error'] = '';
-		// if ($this->form_validation->run() == FALSE){
-		// 	$data["pesan_error"] .= trim(validation_errors(' ',' '))==''?'':validation_errors(' ',' ');
-		// }else{
-		// 	if($aksi=="add"){ // add
-		// 	//print_r($data);
-		// 	$result = $this->mdl_inbound->Insert_detail($data);
-		// 	}else { // edit
-		// 		$result=$this->mdl_inbound->cancel($data);
-		// 	}
-		// }
+		$data['pesan_error'] = '';
+		if ($this->form_validation->run() == FALSE){
+			$data["pesan_error"] .= trim(validation_errors(' ',' '))==''?'':validation_errors(' ',' ');
+		}else{
+			if($aksi=="add"){ // add
+			//print_r($data);
+			$result = $this->mdl_inbound->Insert_detail($data);
+			}else { // edit
+				$result=$this->mdl_inbound->cancel($data);
+			}
+		}
 
 	}
 	
