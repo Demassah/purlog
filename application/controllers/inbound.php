@@ -1,4 +1,4 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+	<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class inbound extends CI_Controller {
 	public function __construct()
@@ -111,37 +111,53 @@ class inbound extends CI_Controller {
 
   function save_detail($aksi){
 		# init
+			
 		$status = "";
 		$result = false;
 		$data['pesan_error'] = '';
-		
-		# get post data
-		foreach($_POST as $key => $value){
-			$data[$key] = $value;
-		}
-		
-		# rules validasi form
-		$this->form_validation->set_rules("detail_id[]", 'receive', 'trim|required|xss_clean');
-		# message rules
-		$this->form_validation->set_message('required', 'Field %s harus diisi.');
 
-		$data['pesan_error'] = '';
-		if ($this->form_validation->run() == FALSE){
-			$data["pesan_error"] .= trim(validation_errors(' ',' '))==''?'':validation_errors(' ',' ');
-		}else{
 			if($aksi=="add"){ // add
-			//print_r($data);
-			$result = $this->mdl_inbound->Insert_detail($data);
+			//print_r($data['id_detail_qrs']);
+			$result = $this->mdl_quotation_request_selected->Insert_detail();
 			}else { // edit
-				$result=$this->mdl_inbound->cancel($data);
-			}
-		}
-		
+				$result=$this->mdl_quotation_request_selected->cancel($data);
+			}		
 		if($result){
 			echo json_encode(array('success'=>true));
 		}else{
-			echo json_encode(array('msg' => 'Data gagal dikirim'));
+			echo json_encode(array('msg' => 'Data gagal dikirim '));
 		}
+	
+
+
+  // function save_detail($aksi){
+		// # init
+		// $status = "";
+		// $result = false;
+		// $data['pesan_error'] = '';
+		
+		// # get post data
+		// foreach($_POST as $key => $value){
+		// 	$data[$key] = $value;
+		// }
+		
+		// # rules validasi form
+		// $this->form_validation->set_rules("detail_id[]", 'receive', 'trim|required|xss_clean');
+		// # message rules
+		// $this->form_validation->set_message('required', 'Field %s harus diisi.');
+
+		// $data['pesan_error'] = '';
+		// if ($this->form_validation->run() == FALSE){
+		// 	$data["pesan_error"] .= trim(validation_errors(' ',' '))==''?'':validation_errors(' ',' ');
+		// }else{
+		// 	if($aksi=="add"){ // add
+		// 	//print_r($data);
+		// 	$result = $this->mdl_inbound->Insert_detail($data);
+		// 	}else { // edit
+		// 		$result=$this->mdl_inbound->cancel($data);
+		// 	}
+		// }
+
 	}
 	
 

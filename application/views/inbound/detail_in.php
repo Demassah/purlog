@@ -55,27 +55,33 @@
       url = base_url+'inbound/save_detail/add';
     }
     // end newData
-    saveData = function(){
-      $('#form2').form('submit',{
-        url: url,
-        onSubmit: function(){
-          return $(this).form('validate');
-        },
-        success: function(result){
-          //alert(result);
-          var result = eval('('+result+')');
-          if (result.success){
-            
-            $('#dialog').dialog('close');   // close the dialog
+    saveData = function () {
+      var id_qrs = $('.id_qrs').val();
+      var id_pr = $('.id_pr').val();
+      var pick = $('.pick_input').map(function(){
+          return $(this).val();
+         }).get();
+      var id_detail_pr = $('.detail_pr').map(function(){
+          return $(this).val();
+         }).get();
+      $.ajax({
+        url: base_url+'inbound/save_detail/add',
+        type  : 'POST',
+        data  : 'pick='+pick+'&id_detail_pr='+id_detail_pr+'&id_qrs='+id_qrs+'&id_pr='+id_pr,
+        success : function(response, textStatus){
+         //alert(response);
+         var response = eval('('+response+')');
+         if(response.success){
             $.messager.show({
-              title: 'Succes',
-              msg: 'Data Berhasil Ditambahkan  ',
+              title: 'Success',
+              msg: 'Data Berhasil Disimpan'
             });
-            $('#dg_detail_in').datagrid('reload');
-          } else {
+            $('#dialog').dialog('close');
+            $('#detail_dg_qrs').datagrid('reload');
+          }else{
             $.messager.show({
               title: 'Error',
-              msg: result.msg
+              msg: response.msg
             });
           }
         }

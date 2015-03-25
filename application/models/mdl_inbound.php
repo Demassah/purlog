@@ -197,7 +197,7 @@ class mdl_inbound extends CI_Model {
 	function get_iddetail($id,$type,$id_in)
 	{
 		if($type == 1){
-			$this->db->select('c.id_detail_qrs,c.id_po,c.kode_barang,c.asal,c.receive,c.sisa,c.nama_barang,c.id_in_asal,c.ext_rec_no,c.id_lokasi');
+			$this->db->select('c.id_detail_qrs,c.id_po,c.kode_barang,c.asal,c.receive,c.sisa,c.nama_barang,c.id_in_asal,c.id_in,c.ext_rec_no,c.id_lokasi');
 			$this->db->where('c.id_po', $id);
 			$this->db->where('c.sisa !=', 0);
 			$this->db->where('c.id_in_asal', $id_in);
@@ -218,8 +218,14 @@ class mdl_inbound extends CI_Model {
 	}
 /*---------------------Insert Detail Inbound--------------------------------------- */
 	
-		function Insert_detail($data)
+		function Insert_detail()
 		{
+			//echo $kode_barang = $this->input->post('kode_barang');
+			// $ext_rec_no = $this->input->post('ext_rec_no');
+			// $id_pr = $this->input->post('id_pr');
+			// $detail = $this->input->post('id_detail_pr');
+			//print_r( $kode_barang = explode(',',$kode_barang));
+			// $pick = explode(',',$pick);
 			// $jumlah = count($data['detail_id']);
 			// for($i=0;$i<$jumlah;$i++){
 			// 	 $id_lokasis = $data['lokasi'][$i];
@@ -228,8 +234,7 @@ class mdl_inbound extends CI_Model {
 				
 				
 			// }
-	echo $this->mdl_inbound->cek_lokasi();
-	echo 'as';
+
 		
 
 				
@@ -267,20 +272,6 @@ class mdl_inbound extends CI_Model {
 		
 	}
 
-function cek_lokasi($id_lokasi)
-	{
-		//echo 'test '.$lokasi;
-		echo 'a';
-		//$this->db->flush_cache();
-		//$this->db->start_cache();			
-			//$this->db->where('id_lokasi',$id_lokasi);
-			
-			//$this->db->select('id_lokasi');
-			//$query = $this->db->get('ref_lokasi');
-			//return $query->row();
-		//$this->db->stop_cache();
-
-	}
 
 /*---------------------Delete Inbound--------------------------------------- */
 	function delete($kode)
