@@ -139,28 +139,44 @@ class quotation_request_selected extends CI_Controller {
 	}
 
 	// ---------------------------------------------------Cek Vendor -------------------------------------------------------------- //
-  function Done($kode,$id_qrs) {
+  // function Done($kode,$id_qrs) {
+  // 	$result = $this->mdl_quotation_request_selected->cek_no_detail($kode,$id_qrs);
+  // 		if($result >= 1){
+	 //  	$result = $this->mdl_quotation_request_selected->cek_no_vendor($kode,$id_qrs);
+	 //  	if($result>=3){
+	 //  		$result = $this->mdl_quotation_request_selected->cek_pr_qr($kode,$id_qrs);
+	 //  		if($result>=1){
+		// 	    $result = $this->mdl_quotation_request_selected->done($kode,$id_qrs);
+		// 	    if ($result) {
+		// 	        echo json_encode(array('success' => true));
+		// 	    } else {
+		// 	        echo json_encode(array('msg' => 'Data gagal dikirim'));
+		// 	    }
+		// 	    } else {
+		// 	    	echo json_encode(array('msg'=> 'Tidak Ada Vendor yang dipilih'));
+		// 	    }
+		// 	  }else{
+		// 	    echo json_encode(array('msg'=> 'Jumlah Vendor Kurang dari 3'));
+		// 	  }
+		// 	  }else{
+		// 	  echo json_encode(array('msg'=> 'Detail Kosong'));	
+		// 	  }
+  // }
+
+  function Done($kode,$id_qrs)
+  {
   	$result = $this->mdl_quotation_request_selected->cek_no_detail($kode,$id_qrs);
-  		if($result >= 1){
-	  	$result = $this->mdl_quotation_request_selected->cek_no_vendor($kode,$id_qrs);
-	  	if($result>=3){
-	  		$result = $this->mdl_quotation_request_selected->cek_pr_qr($kode,$id_qrs);
-	  		if($result>=1){
-			    $result = $this->mdl_quotation_request_selected->done($kode,$id_qrs);
-			    if ($result) {
-			        echo json_encode(array('success' => true));
-			    } else {
-			        echo json_encode(array('msg' => 'Data gagal dikirim'));
-			    }
-			    } else {
-			    	echo json_encode(array('msg'=> 'Tidak Ada Vendor yang dipilih'));
-			    }
-			  }else{
-			    echo json_encode(array('msg'=> 'Jumlah Vendor Kurang dari 3'));
-			  }
-			  }else{
-			  echo json_encode(array('msg'=> 'Detail Kosong'));	
-			  }
+  	if($result >= 1){
+  		$result = $this->mdl_quotation_request_selected->done($kode,$id_qrs);
+	  	if($result)
+	  	{
+	  		echo json_encode(array('success' => true));
+	  	}else{
+	  		echo json_encode(array('msg'=> 'Empty Details'));	
+	  	}
+	  }else{
+	  	echo json_encode(array('msg'=> 'Empty Details'));	
+	  }
   }
 
 // ---------------------------------------------------CRUD Vendor -------------------------------------------------------------- //

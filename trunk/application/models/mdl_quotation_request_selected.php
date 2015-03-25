@@ -21,7 +21,7 @@ class mdl_quotation_request_selected extends CI_Model {
 		# create query
 		$this->db->flush_cache();
 		$this->db->start_cache();
-			$this->db->select('a.id_qrs,a.id_pr,a.id_ro,a.status,a.date_create,a.user_id,b.full_name,c.departement_name,d.purpose,d.cat_req,d.ext_doc_no,d.ETD');
+			$this->db->select('a.id_qrs,a.id_pr,a.id_ro,a.status,a.status_qrs,a.date_create,a.user_id,b.full_name,c.departement_name,d.purpose,d.cat_req,d.ext_doc_no,d.ETD');
 			$this->db->from('tr_qrs a');
 			#filter
 			if($id_qrs != '') {
@@ -31,7 +31,8 @@ class mdl_quotation_request_selected extends CI_Model {
 			$this->db->join('ref_departement c', 'c.departement_id = b.departement_id','left');
 			$this->db->join('tr_pr d', 'd.id_pr = a.id_pr','left');
 
-			$this->db->where('a.status','1');
+			$where = "a.status = 1 and a.status_qrs = 1";
+			$this->db->where($where);
 
 			$this->db->order_by($sort, $order);
 		$this->db->stop_cache();
@@ -178,7 +179,7 @@ class mdl_quotation_request_selected extends CI_Model {
 		
 		$this->db->flush_cache();
 
-		$this->db->set('status', "2");
+		$this->db->set('status_qrs', "2");
 
 		$this->db->where('id_pr', $kode);
 		$this->db->where('id_qrs', $id_qrs);
@@ -279,6 +280,7 @@ class mdl_quotation_request_selected extends CI_Model {
 			$this->db->set('date_create',$data['date_create']);
 			$this->db->set('user_id',$data['user_id']);
 			$this->db->set('status',$data['status']);
+			$this->db->set('status_qrs',$data['status_qrs']);
 
 			$result = $this->db->insert('tr_qrs');
 		$this->db->stop_cache();

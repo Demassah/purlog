@@ -197,12 +197,12 @@ class mdl_inbound extends CI_Model {
 	function get_iddetail($id,$type,$id_in)
 	{
 		if($type == 1){
-			$this->db->select('c.id_detail_pr,c.id_pr,c.id_po,c.kode_barang,c.asal,c.receive,c.sisa,c.nama_barang,c.id_in_asal,c.ext_rec_no,c.id_lokasi');
+			$this->db->select('c.id_detail_qrs,c.id_po,c.kode_barang,c.asal,c.receive,c.sisa,c.nama_barang,c.id_in_asal,c.ext_rec_no,c.id_lokasi');
 			$this->db->where('c.id_po', $id);
 			$this->db->where('c.sisa !=', 0);
 			$this->db->where('c.id_in_asal', $id_in);
 			//$this->db->join('tr_stock b', 'b.kode_barang = c.kode_barang');
-			$this->db->group_by('c.id_detail_pr');
+			$this->db->group_by('c.id_detail_qrs');
 			$query = $this->db->get('v_po_inbound_2 c');
 			$query->result();
 			return $query->result();
@@ -216,33 +216,71 @@ class mdl_inbound extends CI_Model {
 			return $query->result();
 		}
 	}
-
+/*---------------------Insert Detail Inbound--------------------------------------- */
+	
 		function Insert_detail($data)
 		{
-			$jumlah = count($data['detail_id']);
-				for($i=0;$i<$jumlah;$i++){
-					if($data['sisa'][$i]!=0){
-						$this->db->set('id_in',$data['id_in'][$i]);
-						$this->db->set('kode_barang',$data['kode_barang'][$i]);
-						$this->db->set('ext_rec_no_detail',$data['ext_rec_no'][$i]);
-						$this->db->set('qty',$data['sisa'][$i]);
-						$this->db->set('lokasi',$data['lokasi'][$i]);
-						$this->db->set('status',1);
+			// $jumlah = count($data['detail_id']);
+			// for($i=0;$i<$jumlah;$i++){
+			// 	 $id_lokasis = $data['lokasi'][$i];
+					
+					
+				
+				
+			// }
+	echo $this->mdl_inbound->cek_lokasi();
+	echo 'as';
+		
 
-						$result = $this->db->insert('tr_in_detail');
-					}else{
-						return FALSE;	
-					}
-				}
+				
+			//$kode = $this->mdl_inbound->cek_lokasi($lokasi);
+				// for($i=0;$i<$jumlah;$i++){
+				// 		if($data['lokasi']== $kode->lokasi){
+				// 			$this->db->set('id_in',$data['id_in'][$i]);
+				// 			$this->db->set('kode_barang',$data['kode_barang'][$i]);
+				// 			$this->db->set('ext_rec_no_detail',$data['ext_rec_no'][$i]);
+				// 			$this->db->set('qty',$data['sisa'][$i]);
+				// 			//$this->db->set('lokasi',$data['lokasi'][$i]);
+				// 			$this->db->set('status',1);
+				// 			$this->db->where('lokasi', $data['lokasi'][$i]);
 
-		if($result) {
-			return TRUE;
-		}else {
-			return FALSE;
-		}
+				// 			$result = $this->db->update('tr_in_detail');
+				// 		}else{
+				// 		if($data['sisa'][$i]!=0){
+				// 			$this->db->set('id_in',$data['id_in'][$i]);
+				// 			$this->db->set('kode_barang',$data['kode_barang'][$i]);
+				// 			$this->db->set('ext_rec_no_detail',$data['ext_rec_no'][$i]);
+				// 			$this->db->set('qty',$data['sisa'][$i]);
+				// 			$this->db->set('lokasi',$data['lokasi'][$i]);
+				// 			$this->db->set('status',1);
+
+				// 			$result = $this->db->insert('tr_in_detail');
+				// 		}
+				// 	}
+				// }
+
+		// if($result) {
+		// 	return TRUE;
+		// }else {
+		// 	return FALSE;
+		// }
 		
 	}
 
+function cek_lokasi($id_lokasi)
+	{
+		//echo 'test '.$lokasi;
+		echo 'a';
+		//$this->db->flush_cache();
+		//$this->db->start_cache();			
+			//$this->db->where('id_lokasi',$id_lokasi);
+			
+			//$this->db->select('id_lokasi');
+			//$query = $this->db->get('ref_lokasi');
+			//return $query->row();
+		//$this->db->stop_cache();
+
+	}
 
 /*---------------------Delete Inbound--------------------------------------- */
 	function delete($kode)
