@@ -217,91 +217,74 @@ class mdl_inbound extends CI_Model {
 		}
 	}
 /*---------------------Insert Detail Inbound--------------------------------------- */
+	function cek_kode($lokasi,$id_in,$kode_barang)
+	{
+		$this->db->flush_cache();
+		$this->db->start_cache();
+			$this->db->select('kode_barang,id_in,qty,lokasi');
+			$this->db->where('lokasi', $lokasi);
+			$this->db->where('id_in', $id_in);
+			$this->db->where('kode_barang', $kode_barang);
+			$this->db->order_by('id_detail_in', 'asc');
+			$query = $this->db->get('tr_in_detail');
+			//$query = $this->db->get('v_po_inbound_2 a');
+			return $this->db->count_all_results();
+		$this->db->stop_cache();	
+	}
+
+	function cek_lokasi($lokasi,$id_in,$kode_barang)
+	{
+		$this->db->flush_cache();
+		$this->db->start_cache();
+			$this->db->select('kode_barang,id_in,qty,lokasi');
+			$this->db->where('lokasi', $lokasi);
+			$this->db->where('id_in', $id_in);
+			$this->db->where('kode_barang', $kode_barang);
+			$this->db->order_by('id_detail_in', 'asc');
+			$query = $this->db->get('tr_in_detail');
+			return $query->row();
+		$this->db->stop_cache();	
+	}
 	
-		function Insert_detail($data)
-		{
-			echo "test";
-			// echo $jumlah = count($data['ext_rec_no']);
-			// 	for($i=0;$i<$jumlah;$i++){
-			// 		echo $data['lokasi'][$i];
-			// 	}
-		// 	$id_in = $this->input->post('id_in');
-		// 	$id_detail_qrs = $this->input->post('id_detail_qrs');
-		// 	$kode_barang = $this->input->post('kode_barang');
-		// 	$lokasi = $this->input->post('lokasi');
-		// 	$sisa_input = $this->input->post('sisa_input');
-
-		// 	$id_in = explode(',',$id_in);
-		// 	$id_detail_qrs = explode(',',$id_detail_qrs);
-		// 	$kode_barang = explode(',',$kode_barang);
-		// 	$lokasi = explode(',',$lokasi);
-		// 	$sisa_input = explode(',',$sisa_input);
-
-		// 	$z=0;
-		// 	foreach ($kode_barang as $detail_key => $detail_value) {
-		// 		//print_r($pick[$z]);
-		// 		if($pick[$z] != 0){
-		// 			$item_list = $this->mdl_quotation_request_selected->cek_qty($detail_value,$id_qrs);
-		// 			// if($detail_value === $item_id->id_detail_pr && $id_qrs === $item_id->id_qrs){
-		// 			if($item_list > 0 ){
-		// 				$item_id = $this->mdl_quotation_request_selected->cek_id_pr($detail_value,$id_qrs);
-		// 				$this->db->where('id_detail_pr', $item_id->id_detail_pr);
-		// 				$this->db->where('id_qrs', $item_id->id_qrs);
-		// 				$total[$z] = $pick[$z] + $item_id->qty;
-		// 				$this->db->set('qty',$total[$z]);
-		// 				$result = $this->db->update('tr_qrs_detail');
-		// 				}else{
-		// 			$item = $this->mdl_quotation_request_selected->cek_detail($detail_value);
-		// 				$this->db->set('id_detail_pr',$item->id_detail_pr);
-		// 				$this->db->set('kode_barang',$item->kode_barang);
-		// 				$this->db->set('qty',$pick[$z]);
-		// 				$this->db->set('id_qrs',$id_qrs);
-		// 				$this->db->set('id_pr',$id_pr);
-		// 				$this->db->set('status',1);
-		// 				$result = $this->db->insert('tr_qrs_detail',$item);
-		// 			}
-		// 		}
-		// 		$z++;
-		// 	}
-		// 	//return
-		// 	if($result) {
-		// 		return TRUE;
-		// 	}else {
-		// 		return FALSE;
-		// }
-
-		//$kode = $this->mdl_inbound->cek_lokasi($lokasi);
-				// for($i=0;$i<$jumlah;$i++){
-				// 		if($data['lokasi']== $kode->lokasi){
-				// 			$this->db->set('id_in',$data['id_in'][$i]);
-				// 			$this->db->set('kode_barang',$data['kode_barang'][$i]);
-				// 			$this->db->set('ext_rec_no_detail',$data['ext_rec_no'][$i]);
-				// 			$this->db->set('qty',$data['sisa'][$i]);
-				// 			//$this->db->set('lokasi',$data['lokasi'][$i]);
-				// 			$this->db->set('status',1);
-				// 			$this->db->where('lokasi', $data['lokasi'][$i]);
-
-				// 			$result = $this->db->update('tr_in_detail');
-				// 		}else{
-				// 		if($data['sisa'][$i]!=0){
-				// 			$this->db->set('id_in',$data['id_in'][$i]);
-				// 			$this->db->set('kode_barang',$data['kode_barang'][$i]);
-				// 			$this->db->set('ext_rec_no_detail',$data['ext_rec_no'][$i]);
-				// 			$this->db->set('qty',$data['sisa'][$i]);
-				// 			$this->db->set('lokasi',$data['lokasi'][$i]);
-				// 			$this->db->set('status',1);
-
-				// 			$result = $this->db->insert('tr_in_detail');
-				// 		}
-				// 	}
-				// }
-
-		// if($result) {
-		// 	return TRUE;
-		// }else {
-		// 	return FALSE;
-		// }
-		
+	function Insert_detail($data)
+	{
+		$id_detail_qrs = explode(',',$data['id_detail_qrs']);
+		$id_in = $data['id_in'];
+		$kode_barang = explode(',',$data['kode_barang']);
+		$lokasi = explode(',',$data['lokasi']);
+		$input = explode(',',$data['sisa_input']);
+		$ext_rec_no = $data['ext_rec_no'];
+		//echo $data['kode_barang'];
+		$x = 0;
+		foreach ($id_detail_qrs as $detail_key => $detail_value) {
+			if($lokasi[$x] !='' || $input == ''){
+				$item_list = $this->mdl_inbound->cek_kode($lokasi[$x],$id_in,$kode_barang[$x]);
+				if($item_list > 0){
+					$item = $this->mdl_inbound->cek_lokasi($lokasi[$x],$id_in,$kode_barang[$x]);
+					$this->db->where('kode_barang',$item->kode_barang);
+					$total[$x] = $input[$x] + $item->qty;
+					$this->db->set('qty',$total[$x]);
+					$result = $this->db->update('tr_in_detail');
+				}else{
+					$this->db->set('id_in',$id_in);
+					$this->db->set('kode_barang',$kode_barang[$x]);
+					$this->db->set('qty',$input[$x]);
+					$this->db->set('lokasi',$lokasi[$x]);
+					$this->db->set('ext_rec_no_detail',$detail_value);
+					$this->db->set('status',1);
+					$result = $this->db->insert('tr_in_detail');
+				}
+			}else{
+					$result = FALSE;
+				}
+			$x++;
+		}
+		if($result) {
+			return TRUE;
+		}else {
+			return FALSE;
+		}
+	
 	}
 
 

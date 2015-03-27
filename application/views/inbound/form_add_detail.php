@@ -20,12 +20,13 @@
 		<?php
 			foreach ($list as $l) {
 			echo '
-				<tr><input type="hidden" class="id_in" name="detail_id[]" value="'.$l->id_in.'">
+				<tr><input type="hidden" class="id_in" name="detail_id[]" value="'.$l->id_in_asal.'">
+						<input type="hidden" class="id_detail_qrs" name="id_detail_qrs[]" value="'.$l->id_detail_qrs.'">
 					<td>'.$l->kode_barang.'
 							<input type="hidden" class="kode_barang" name="kode_barang[]" value="'.$l->kode_barang.'">
 					</td>
 					<td>'.$l->nama_barang.'
-							<input type="hidden" class="id_detail_qrs" name="ext_rec_no[]" value="'.$l->id_detail_qrs.'">
+							<input type="hidden" class="ext_rec_no" name="ext_rec_no[]" value="'.$l->ext_rec_no.'">
 					</td>
 					<td><select id="id_lokasi" class="lokasi" name="lokasi[]" style="width:100px;">'.$this->mdl_prosedur->OptionLokasi().'
 								
