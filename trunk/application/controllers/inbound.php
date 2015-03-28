@@ -121,8 +121,8 @@ class inbound extends CI_Controller {
 			if($aksi=="add"){ // add
 			//print_r($data);
 			$result = $this->mdl_inbound->Insert_detail($data);
-			}else { // edit
-				$result=$this->mdl_inbound->cancel($data);
+			// }else { // edit
+			// 	$result=$this->mdl_inbound->cancel($data);
 			}		
 		if($result){
 			echo json_encode(array('success'=>true));

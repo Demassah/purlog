@@ -404,25 +404,27 @@ class mdl_quotation_request_selected extends CI_Model {
 		$z=0;
 		foreach ($data as $detail_key => $detail_value) {
 			//print_r($pick[$z]);
-			if($pick[$z] != 0){
-				$item_list = $this->mdl_quotation_request_selected->cek_qty($detail_value,$id_qrs);
-				// if($detail_value === $item_id->id_detail_pr && $id_qrs === $item_id->id_qrs){
-				if($item_list > 0 ){
-					$item_id = $this->mdl_quotation_request_selected->cek_id_pr($detail_value,$id_qrs);
-					$this->db->where('id_detail_pr', $item_id->id_detail_pr);
-					$this->db->where('id_qrs', $item_id->id_qrs);
-					$total[$z] = $pick[$z] + $item_id->qty;
-					$this->db->set('qty',$total[$z]);
-					$result = $this->db->update('tr_qrs_detail');
-					}else{
-				$item = $this->mdl_quotation_request_selected->cek_detail($detail_value);
-					$this->db->set('id_detail_pr',$item->id_detail_pr);
-					$this->db->set('kode_barang',$item->kode_barang);
-					$this->db->set('qty',$pick[$z]);
-					$this->db->set('id_qrs',$id_qrs);
-					$this->db->set('id_pr',$id_pr);
-					$this->db->set('status',1);
-					$result = $this->db->insert('tr_qrs_detail',$item);
+			if($pick[$z] != '' || $pick[$z] != 0){
+				// $result = FALSE;
+				// }else{
+					$item_list = $this->mdl_quotation_request_selected->cek_qty($detail_value,$id_qrs);
+					// if($detail_value === $item_id->id_detail_pr && $id_qrs === $item_id->id_qrs){
+					if($item_list > 0 ){
+						$item_id = $this->mdl_quotation_request_selected->cek_id_pr($detail_value,$id_qrs);
+						$this->db->where('id_detail_pr', $item_id->id_detail_pr);
+						$this->db->where('id_qrs', $item_id->id_qrs);
+						$total[$z] = $pick[$z] + $item_id->qty;
+						$this->db->set('qty',$total[$z]);
+						$result = $this->db->update('tr_qrs_detail');
+						}else{
+					$item = $this->mdl_quotation_request_selected->cek_detail($detail_value);
+						$this->db->set('id_detail_pr',$item->id_detail_pr);
+						$this->db->set('kode_barang',$item->kode_barang);
+						$this->db->set('qty',$pick[$z]);
+						$this->db->set('id_qrs',$id_qrs);
+						$this->db->set('id_pr',$id_pr);
+						$this->db->set('status',1);
+						$result = $this->db->insert('tr_qrs_detail',$item);
 				}
 			}
 			$z++;

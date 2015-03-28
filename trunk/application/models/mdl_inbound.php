@@ -248,43 +248,43 @@ class mdl_inbound extends CI_Model {
 	
 	function Insert_detail($data)
 	{
-		$id_detail_qrs = explode(',',$data['id_detail_qrs']);
-		$id_in = $data['id_in'];
-		$kode_barang = explode(',',$data['kode_barang']);
-		$lokasi = explode(',',$data['lokasi']);
-		$input = explode(',',$data['sisa_input']);
-		$ext_rec_no = $data['ext_rec_no'];
-		//echo $data['kode_barang'];
-		$x = 0;
-		foreach ($id_detail_qrs as $detail_key => $detail_value) {
-			if($lokasi[$x] !='' || $input == ''){
-				$item_list = $this->mdl_inbound->cek_kode($lokasi[$x],$id_in,$kode_barang[$x]);
-				if($item_list > 0){
-					$item = $this->mdl_inbound->cek_lokasi($lokasi[$x],$id_in,$kode_barang[$x]);
-					$this->db->where('kode_barang',$item->kode_barang);
-					$total[$x] = $input[$x] + $item->qty;
-					$this->db->set('qty',$total[$x]);
-					$result = $this->db->update('tr_in_detail');
-				}else{
-					$this->db->set('id_in',$id_in);
-					$this->db->set('kode_barang',$kode_barang[$x]);
-					$this->db->set('qty',$input[$x]);
-					$this->db->set('lokasi',$lokasi[$x]);
-					$this->db->set('ext_rec_no_detail',$detail_value);
-					$this->db->set('status',1);
-					$result = $this->db->insert('tr_in_detail');
-				}
-			}else{
+
+			$id_detail_qrs = explode(',',$data['id_detail_qrs']);
+			$id_in = $data['id_in'];
+			$kode_barang = explode(',',$data['kode_barang']);
+			$lokasi = explode(',',$data['lokasi']);
+			$input = explode(',',$data['sisa_input']);
+			$ext_rec_no = $data['ext_rec_no'];
+			//echo $data['kode_barang'];
+			$x = 0;
+			foreach ($id_detail_qrs as $detail_key => $detail_value) {
+				if($lokasi[$x] == '' ||  $input[$x] == ''){
 					$result = FALSE;
+				}else{
+					$item_list = $this->mdl_inbound->cek_kode($lokasi[$x],$id_in,$kode_barang[$x]);
+					if($item_list > 0){
+						$item = $this->mdl_inbound->cek_lokasi($lokasi[$x],$id_in,$kode_barang[$x]);
+						$this->db->where('kode_barang',$item->kode_barang);
+						$total[$x] = $input[$x] + $item->qty;
+						$this->db->set('qty',$total[$x]);
+						$result = $this->db->update('tr_in_detail');
+					}else{
+						$this->db->set('id_in',$id_in);
+						$this->db->set('kode_barang',$kode_barang[$x]);
+						$this->db->set('qty',$input[$x]);
+						$this->db->set('lokasi',$lokasi[$x]);
+						$this->db->set('ext_rec_no_detail',$detail_value);
+						$this->db->set('status',1);
+						$result = $this->db->insert('tr_in_detail');
+					}	
 				}
-			$x++;
-		}
+				$x++;
+			}
 		if($result) {
 			return TRUE;
 		}else {
 			return FALSE;
 		}
-	
 	}
 
 
