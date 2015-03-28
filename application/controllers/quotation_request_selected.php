@@ -106,8 +106,8 @@ class quotation_request_selected extends CI_Controller {
 			if($aksi=="add"){ // add
 			//print_r($data['id_detail_qrs']);
 			$result = $this->mdl_quotation_request_selected->Insert_Detail_Qrs();
-			}else { // edit
-				$result=$this->mdl_quotation_request_selected->cancel($data);
+			// }else { // edit
+			// 	$result=$this->mdl_quotation_request_selected->cancel($data);
 			}		
 		if($result){
 			echo json_encode(array('success'=>true));

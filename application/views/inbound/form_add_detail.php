@@ -70,8 +70,9 @@
 			var masuk = parseInt($("#sisa_input_"+id_inbound).val());
 			var sisa = parseInt($("#sisa_"+id_inbound).val());
 			 console.log(masuk +' '+ sisa);
-			if(masuk > sisa){
+			if(masuk > sisa || masuk == 0){
 				alert("Data Tidak Boleh Kosong atau melebihi data yang ada");
+				$("#sisa_input_"+id_inbound).val('');
 			}
 			
 
