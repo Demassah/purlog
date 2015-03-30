@@ -258,9 +258,9 @@ class mdl_inbound extends CI_Model {
 			//echo $data['kode_barang'];
 			$x = 0;
 			foreach ($id_detail_qrs as $detail_key => $detail_value) {
-				if($lokasi[$x] == '' ||  $input[$x] == ''){
-					$result = FALSE;
-				}else{
+				if(!empty($lokasi[$x]) ||  !empty($input[$x])){
+				// 	$result = FALSE;
+				// }else{
 					$item_list = $this->mdl_inbound->cek_kode($lokasi[$x],$id_in,$kode_barang[$x]);
 					if($item_list > 0){
 						$item = $this->mdl_inbound->cek_lokasi($lokasi[$x],$id_in,$kode_barang[$x]);
@@ -278,6 +278,9 @@ class mdl_inbound extends CI_Model {
 						$result = $this->db->insert('tr_in_detail');
 					}	
 				}
+				// if(empty($lokasi[$x]) ||  empty($input[$x])){
+				// 	//return FALSE;
+				// }
 				$x++;
 			}
 		if($result) {
