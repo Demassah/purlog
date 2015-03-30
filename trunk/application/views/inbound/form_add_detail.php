@@ -7,12 +7,13 @@
 	<table class="tbl">
 		<thead>
 			<tr>
-				<th width="120">Kode Barang</th>
-				<th width="120">Nama Barang</th>
-				<th width="120">Lokasi</th>
-				<th width="120">Qty</th>
-				<th width="120">Receive</th>
-				<th width="120">remaining</th>
+				<th width="">Kode Barang</th>
+				<th width="">Nama Barang</th>
+				<th width="">Lokasi</th>
+				<th width="">Qty</th>
+				<th width="">Receive</th>
+				<th width="">remaining</th>
+				<th width="">Input</th>
 
 			</tr>
 		</thead>
@@ -38,8 +39,12 @@
 					<td>
 								<span class="text" value="'.$l->receive.'" id="receive_'.$l->id_detail_qrs.'">'.$l->receive.'</span>
 					</td>
-					<td><div id="'.$l->id_detail_qrs.'" class="inbound">
-							<span id="sisa_"'.$l->id_detail_qrs.'">'.$l->sisa.'</span>
+					<td>
+					<span>'.$l->sisa.'</span>
+					</td>
+					<td>
+							<div id="'.$l->id_detail_qrs.'" class="inbound">
+							<span  id="sisa_"'.$l->id_detail_qrs.'"></span>
 							<input type="hidden" value="'.$l->sisa.'" id="sisa_'.$l->id_detail_qrs.'" size="2">
 							<input type="text" name="sisa[]" value="" id="sisa_input_'.$l->id_detail_qrs.'" class="sisa_input" size="2">
 							<input type="hidden" name="id_in[]" value="'.$l->id_in_asal.'">
